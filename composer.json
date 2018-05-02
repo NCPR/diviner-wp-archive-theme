@@ -1,6 +1,6 @@
 {
-  "name": "tonik/theme",
-  "description": "Tonik is a WordPress Starter Theme which aims to modernize, organize and enhance some aspects of WordPress theme development.",
+  "name": "Diviner Theme",
+  "description": "Based on Tonik, a WordPress Starter Theme ",
   "keywords": ["tonik", "theme", "gin", "wordpress", "wordpress-starter-theme", "wordpress-theme"],
   "license": "MIT",
   "type": "wordpress-theme",
