@@ -1,6 +1,9 @@
 {
   "rules": {
-    "indent": ["error", 2]
+    "indent": [
+      "error",
+      "tab"
+    ],
   },
   "parserOptions": {
     "ecmaVersion": 6,

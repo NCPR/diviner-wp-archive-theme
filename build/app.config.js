@@ -26,7 +26,10 @@ module.exports = merge({
    *
    * @type {Array}
    */
-  assets: [],
+  assets: {
+    admin:  "./resources/assets/js/admin.js",
+    app:  "./resources/assets/js/app.js",
+  },
 
   /**
    * List of filename schemas for different

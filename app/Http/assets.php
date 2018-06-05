@@ -46,6 +46,16 @@ function register_editor_stylesheets() {
 add_action('admin_init', 'Tonik\Theme\App\Http\register_editor_stylesheets');
 
 /**
+ * Registers admin script files.
+ *
+ * @return void
+ */
+function register_admin_scripts() {
+	wp_enqueue_script('diviner_admin', asset_path('js/admin.js'), [], null, true);
+}
+add_action('admin_enqueue_scripts', 'Tonik\Theme\App\Http\register_admin_scripts');
+
+/**
  * Moves front-end jQuery script to the footer.
  *
  * @param  \WP_Scripts $wp_scripts

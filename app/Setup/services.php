@@ -38,4 +38,4 @@ function bind_books_service()
         ]);
     });
 }
-add_action('init', 'Tonik\Theme\App\Setup\bind_books_service');
+// add_action('init', 'Tonik\Theme\App\Setup\bind_books_service');

@@ -44,4 +44,4 @@ function register_book_post_type()
         ],
     ]);
 }
-add_action('init', 'Tonik\Theme\App\Structure\register_book_post_type');
+// add_action('init', 'Tonik\Theme\App\Structure\register_book_post_type');
