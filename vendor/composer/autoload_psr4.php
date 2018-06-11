@@ -12,5 +12,7 @@ return array(
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'League\\CLImate\\' => array($vendorDir . '/league/climate/src'),
+    'Carbon_Fields\\' => array($vendorDir . '/htmlburger/carbon-fields/core'),
 );

@@ -6,7 +6,9 @@
   "type": "wordpress-theme",
   "require": {
     "php": ">=7.0",
-    "tonik/gin": "dev-develop"
+    "tonik/gin": "dev-develop",
+    "htmlburger/carbon-fields": "^2.2",
+    "pimple/pimple": "^3.2"
   },
   "require-dev": {
     "tonik/cli": "dev-develop"
