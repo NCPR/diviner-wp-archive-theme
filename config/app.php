@@ -71,7 +71,12 @@ return [
     |
     */
     'autoload' => [
-        'helpers.php',
+		'main.php',
+    	'helpers.php',
+		'CarbonFields/Boot.php',
+		'Post_Types/Archive_Item/Archive_Item.php',
+		'Post_Types/Diviner_Field/Diviner_Field.php',
+		'Post_Types/Diviner_Field/PostMeta.php',
         'Http/assets.php',
         'Http/ajaxes.php',
         'Setup/actions.php',
@@ -86,5 +91,6 @@ return [
         'Structure/taxonomies.php',
         'Structure/shortcodes.php',
         'Structure/thumbnails.php',
+
     ],
 ];

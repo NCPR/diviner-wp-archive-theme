@@ -2,6 +2,9 @@
 
 namespace Tonik\Theme\App\Setup;
 
+use Pimple\Container;
+use Diviner\CarbonFields\Boot;
+
 /*
 |-----------------------------------------------------------
 | Theme Filters
@@ -40,3 +43,14 @@ function modify_excerpt_length()
     return 60;
 }
 add_filter('excerpt_length', 'Tonik\Theme\App\Setup\modify_excerpt_length');
+
+
+$container = \Tonik\Theme\App\Main::instance()->container();
+
+$container[ 'carbonfields.boot' ] = function ( Container $container ) {
+	return new Boot();
+};
+
+add_action( 'after_setup_theme', function () use ( $container ) {
+	$container[ 'carbonfields.boot' ]->after_setup_theme();
+}, 10, 0 );
