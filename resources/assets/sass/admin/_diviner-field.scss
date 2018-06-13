@@ -1,3 +1,25 @@
 .post-type-diviner_field {
-  background-color: yellow;
 }
+
+.wrap-diviner--preset {
+
+  .wp-list-table {
+    .column-id {
+      width: 5%;
+    }
+    .column-title {
+      width: 50%;
+    }
+    .column-description {
+      width: 40%;
+    }
+  }
+}
+
+/*
+.wp-list-table .column-id { width: 5%; }';
+  echo '.wp-list-table .column-booktitle { width: 40%; }';
+  echo '.wp-list-table .column-author { width: 35%; }';
+  echo '.wp-list-table .column-isbn { width: 20%; }';
+  */
+

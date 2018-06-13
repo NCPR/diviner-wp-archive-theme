@@ -20,6 +20,8 @@ const externalImagesRule = require('./rules/external.images')
 
 const config = require('./app.config')
 
+console.log(config);
+
 module.exports = {
   /**
    * Should the source map be generated?
