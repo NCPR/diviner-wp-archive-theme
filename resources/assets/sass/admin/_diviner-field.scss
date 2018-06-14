@@ -16,10 +16,22 @@
   }
 }
 
-/*
-.wp-list-table .column-id { width: 5%; }';
-  echo '.wp-list-table .column-booktitle { width: 40%; }';
-  echo '.wp-list-table .column-author { width: 35%; }';
-  echo '.wp-list-table .column-isbn { width: 20%; }';
-  */
+.post-edit--diviner_field {
+}
+
+#carbon_fields_container_date_field_variables {
+  display: none !important;
+
+  .post-field-type--diviner_date_field & {
+    display: block !important;
+  }
+}
+
+#carbon_fields_container_taxonomy_field_variables {
+  display: none !important;
+
+  .post-field-type--diviner_taxonomy_field & {
+    display: block !important;
+  }
+}
 

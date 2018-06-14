@@ -6,7 +6,16 @@ namespace Diviner\Post_Types\Diviner_Field;
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
+use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
+use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
+
 class PostMeta {
+
+	const FIELD_ACTIVE = 'div_field_active';
+	const FIELD_TYPE = 'div_field_type';
 
 	const FIELD_LABEL_TITLE = 'div_field_label_title';
 	const FIELD_BROWSE_HELPER_TEXT = 'div_field_browse_helper';
@@ -39,7 +48,7 @@ class PostMeta {
 
 	const PLACEMENT_OPTIONS_NONE = 'none';
 	const PLACEMENT_OPTIONS_TOP = 'top';
-	const PLACEMENT_OPTIONS_LEFT = 'top';
+	const PLACEMENT_OPTIONS_LEFT = 'left';
 	const PLACEMENT_OPTIONS = [
 		self::PLACEMENT_OPTIONS_NONE  => 'None',
 		self::PLACEMENT_OPTIONS_TOP   => 'Top',
@@ -57,6 +66,8 @@ class PostMeta {
 		$this->container = Container::make( 'post_meta', 'Field Variables' )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
+				$this->get_field_types(),
+				$this->get_field_active(),
 				$this->get_field_label_field(),
 				$this->get_field_browser_helper_text(),
 				$this->get_field_browser_placement(),
@@ -103,7 +114,25 @@ class PostMeta {
 	public function get_field_is_custom() {
 		return Field::make( 'checkbox', self::FIELD_IS_DEFAULT, 'Is Default Field' )
 			->set_option_value( true )
-			->set_required( true )
+			->set_required( false );
+	}
+
+	public function get_field_types() {
+		$types = [
+			Text_Field::NAME => Text_Field::TITLE,
+			Date_Field::NAME => Date_Field::TITLE,
+			Taxonomy_Field::NAME => Taxonomy_Field::TITLE,
+			Select_Field::NAME => Select_Field::TITLE,
+			CPT_Field::NAME => CPT_Field::TITLE,
+		];
+		return Field::make( 'select', self::FIELD_TYPE, 'Type of field' )
+			->add_options($types)
+			->set_help_text( 'What kind of field is this' );
+	}
+
+	public function get_field_active() {
+		return Field::make( 'checkbox', self::FIELD_ACTIVE, 'Is Field Active?' )
+			->set_option_value( true )
 			->set_required( false );
 	}
 
