@@ -23,10 +23,10 @@ class Default_Fields_List_Table extends \WP_List_Table
 		$hidden = $this->get_hidden_columns();
 		$sortable = $this->get_sortable_columns();
 		$data = $this->table_data();
-		usort( $data, array( &$this, 'sort_data' ) );
-		$perPage = 2;
-		$currentPage = $this->get_pagenum();
-		$data = array_slice($data,(($currentPage-1)*$perPage),$perPage);
+		// usort( $data, array( &$this, 'sort_data' ) );
+		// $perPage = 2;
+		// $currentPage = $this->get_pagenum();
+		// $data = array_slice($data,(($currentPage-1)*$perPage),$perPage);
 		$this->_column_headers = array($columns, $hidden, $sortable);
 		$this->items = $data;
 	}

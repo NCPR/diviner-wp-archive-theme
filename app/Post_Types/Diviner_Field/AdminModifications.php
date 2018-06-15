@@ -10,6 +10,29 @@ class AdminModifications {
 	public function hooks() {
 		add_action( 'admin_menu', array( &$this,'rc_scd_register_menu') );
 		add_filter( 'admin_body_class', array( &$this,'admin_body_class') );
+		add_filter( 'gettext', array( &$this,'change_excerpt_text'), 10, 2 );
+
+	}
+
+
+	function change_excerpt_text( $translation, $original ){
+		global $post;
+		if( !empty($post) && $post->post_type !== Diviner_Field::NAME) {
+			return $translation;
+		}
+		if ( 'Excerpt' == $original )
+		{
+			return 'Description'; //Change here to what you want Excerpt box to be called
+		}else
+		{
+			$pos = strpos($original, 'Excerpts are optional hand-crafted summaries of your');
+
+			if ($pos !== false)
+			{
+				return  'Description for field';
+			}
+		}
+		return $translation;
 	}
 
 	/**
@@ -51,7 +74,7 @@ class AdminModifications {
 
 	function rc_scd_register_menu() {
 
-		add_menu_page( 'Diviner Fields', 'Diviner Fields Custom', 'manage_options', 'diviner-manage-fields', array( &$this,'rc_scd_create_dashboard'), 'dashicons-admin-generic', 30 );
+		add_menu_page( 'Diviner Fields', 'Manage Diviner Fields', 'manage_options', 'diviner-manage-fields', array( &$this,'rc_scd_create_dashboard'), 'dashicons-admin-generic', 30 );
 
 	}
 

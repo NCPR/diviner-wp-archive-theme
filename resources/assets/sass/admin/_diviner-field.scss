@@ -16,6 +16,20 @@
   }
 }
 
+.wrap-diviner--default {
+  .wp-list-table {
+    .column-id {
+      width: 5%;
+    }
+    .column-title {
+      width: 50%;
+    }
+    .column-description {
+      width: 40%;
+    }
+  }
+}
+
 .post-edit--diviner_field {
 }
 
