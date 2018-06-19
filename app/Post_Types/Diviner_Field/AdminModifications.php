@@ -74,7 +74,7 @@ class AdminModifications {
 
 	function rc_scd_register_menu() {
 
-		add_menu_page( 'Diviner Fields', 'Manage Diviner Fields', 'manage_options', 'diviner-manage-fields', array( &$this,'rc_scd_create_dashboard'), 'dashicons-admin-generic', 30 );
+		add_menu_page( 'Diviner Fields', 'Manage	 Diviner Fields', 'manage_options', 'diviner-manage-fields', array( &$this,'rc_scd_create_dashboard'), 'dashicons-admin-generic', 30 );
 
 	}
 
@@ -118,7 +118,10 @@ class AdminModifications {
 			</div>
 			<div class="wrap">
 				<?php $presetFieldTable->display(); ?>
+				<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Submit Form"></p>
+
 			</div>
+
 
 		</div>
 

@@ -11,6 +11,7 @@ use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
 use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
 class PostMeta {
 
@@ -121,6 +122,7 @@ class PostMeta {
 		$types = [
 			Text_Field::NAME => Text_Field::TITLE,
 			Date_Field::NAME => Date_Field::TITLE,
+			Related_Field::NAME => Related_Field::TITLE,
 			Taxonomy_Field::NAME => Taxonomy_Field::TITLE,
 			Select_Field::NAME => Select_Field::TITLE,
 			CPT_Field::NAME => CPT_Field::TITLE,

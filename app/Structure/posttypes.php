@@ -15,6 +15,9 @@ namespace Tonik\Theme\App\Structure;
 
 use function Tonik\Theme\App\config;
 use \Pimple\Container;
+use \Diviner\Post_Types\Archive_Item\Archive_Item;
+use \Diviner\Post_Types\Archive_Item\Post_Meta;
+use \Diviner\Post_Types\Archive_Item\AdminModifications as ArchiveItemAdminModifications;
 use \Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use \Diviner\Post_Types\Diviner_Field\PostMeta;
 use \Diviner\Post_Types\Diviner_Field\AdminModifications;
@@ -23,12 +26,27 @@ use \Diviner\Post_Types\Diviner_Field\AdminModifications;
 $container = \Tonik\Theme\App\Main::instance()->container();
 
 $container[ 'post_types.archive_item' ] = function ( Container $container ) {
-	return new \Diviner\Post_Types\Archive_Item\Archive_Item();
+	return new Archive_Item();
 };
 
 add_action( 'init', function() use ( $container ) {
 	$container[ 'post_types.archive_item' ]->register();
 }, 0, 0 );
+
+
+$container[ 'post_types.archive_item.postmeta' ] = function ( Container $container ) {
+	return new Post_Meta();
+};
+add_action( 'init', function() use ( $container ) {
+	$container[ 'post_types.archive_item.postmeta' ]->add_post_meta();
+}, 0, 0 );
+
+$container[ 'post_types.archive_item.admin_modifications' ] = function ( Container $container ) {
+	return new ArchiveItemAdminModifications();
+};
+$container[ 'post_types.archive_item.admin_modifications' ]->hooks();
+
+
 
 $container[ 'post_types.diviner_field.diviner_field' ] = function ( Container $container ) {
 	return new Diviner_Field();
