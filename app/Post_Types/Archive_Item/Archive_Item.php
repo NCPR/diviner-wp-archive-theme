@@ -3,6 +3,7 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
+use function Tonik\Theme\App\config;
 
 class Archive_Item {
 
@@ -34,10 +35,11 @@ class Archive_Item {
 	public function get_labels() {
 		return [
 			'labels' => [
-				'singular' => __( 'Archive Item', 'tribe' ),
-				'plural'   => __( 'Archive Items', 'tribe' ),
-				'slug'     => _x( 'archive-item', 'post type slug', 'tribe' ),
-				'name'     => _x( 'Archive Items', 'post type general name')
+				'singular' => __( 'Archive Item', config('textdomain') ),
+				'plural'   => __( 'Archive Items', config('textdomain') ),
+				'slug'     => _x( 'archive-item', 'post type slug', config('textdomain') ),
+				'name'     => _x( 'Archive Items', 'post type general name'),
+				'add_new_item' => __( 'Add New Archive Item', config('textdomain') ),
 			]
 		];
 	}

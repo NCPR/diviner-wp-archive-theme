@@ -2,10 +2,33 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
+use function Tonik\Theme\App\config;
+
 class AdminModifications {
 
 	public function hooks() {
 		add_action( 'admin_menu', array( &$this,'register_menu_links') );
+		add_filter( 'admin_body_class', array( &$this,'admin_body_class') );
+	}
+
+	/**
+	 * Adds one or more classes to the body tag in the dashboard.
+	 *
+	 * @param  String $classes Current body classes.
+	 * @return String          Altered body classes.
+	 */
+	function admin_body_class( $classes ) {
+		global $post;
+		global $pagenow;
+
+		if (!$pagenow || !$post) {
+			return;
+		}
+		// what type of class is this
+		$type = carbon_get_the_post_meta( Post_Meta::FIELD_TYPE );
+		$classes .= sprintf( ' archive-item-edit--%s', $type );
+
+		return $classes;
 	}
 
 	function register_menu_links() {

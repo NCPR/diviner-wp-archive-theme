@@ -68,7 +68,7 @@ class Post_Meta {
 			))
 			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', 'Audio' )
+		$this->container = Container::make( 'post_meta', 'Video' )
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( array(
 				$this->get_field_video_oembed()
@@ -98,7 +98,7 @@ class Post_Meta {
 
 	public function get_field_video_oembed()
 	{
-		return Field::make( 'oembed', self::FIELD_VIDEO_OEMBED );
+		return Field::make( 'oembed', self::FIELD_VIDEO_OEMBED, 'Any oembed video url' );
 	}
 
 	public function get_field_audio()
@@ -110,12 +110,12 @@ class Post_Meta {
 
 	public function get_field_audio_oembed()
 	{
-		return Field::make( 'oembed', self::FIELD_AUDIO_OEMBED );
+		return Field::make( 'oembed', self::FIELD_AUDIO_OEMBED, 'Any oembed audio file' );
 	}
 
 	public function get_field_related()
 	{
-		return Field::make('association', self::FIELD_RELATED)
+		return Field::make('association', self::FIELD_RELATED, 'Related Items')
 			->set_types(array(
 				array(
 					'type' => 'post',

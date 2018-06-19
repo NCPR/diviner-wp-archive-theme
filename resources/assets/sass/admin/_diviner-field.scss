@@ -2,50 +2,48 @@
 }
 
 .wrap-diviner--preset {
-
-  .wp-list-table {
-    .column-id {
-      width: 5%;
-    }
-    .column-title {
-      width: 50%;
-    }
-    .column-description {
-      width: 40%;
-    }
-  }
+	.wp-list-table {
+		.column-id {
+			width: 5%;
+		}
+		.column-title {
+			width: 50%;
+		}
+		.column-description {
+			width: 40%;
+		}
+	}
 }
 
 .wrap-diviner--default {
-  .wp-list-table {
-    .column-id {
-      width: 5%;
-    }
-    .column-title {
-      width: 50%;
-    }
-    .column-description {
-      width: 40%;
-    }
-  }
+	.wp-list-table {
+		.column-id {
+			width: 5%;
+		}
+		.column-title {
+			width: 50%;
+		}
+		.column-description {
+			width: 40%;
+		}
+	}
 }
 
 .post-edit--diviner_field {
 }
 
 #carbon_fields_container_date_field_variables {
-  display: none !important;
+	display: none !important;
 
-  .post-field-type--diviner_date_field & {
-    display: block !important;
-  }
+	.post-field-type--diviner_date_field & {
+		display: block !important;
+	}
 }
 
 #carbon_fields_container_taxonomy_field_variables {
-  display: none !important;
-
-  .post-field-type--diviner_taxonomy_field & {
-    display: block !important;
-  }
+	display: none !important;
+	.post-field-type--diviner_taxonomy_field & {
+		display: block !important;
+	}
 }
 
