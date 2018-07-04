@@ -12,5 +12,10 @@
   },
   "require-dev": {
     "tonik/cli": "dev-develop"
+  },
+  "autoload":{
+    "psr-4": {
+     "Diviner\\" : "app/"
+    }
   }
 }
