@@ -11,6 +11,7 @@
 |
 */
 
+/** @var \Tonik\Gin\Foundation\Theme $theme */
 $theme = Tonik\Gin\Foundation\Theme::getInstance();
 
 
@@ -25,7 +26,7 @@ $theme = Tonik\Gin\Foundation\Theme::getInstance();
  |
  */
 
-$config = require __DIR__ . '/../config/app.php';
+$config = require __DIR__ . '/../config/theme-app.php';
 
 $theme->bind('config', function () use ($config) {
     return new Tonik\Gin\Foundation\Config($config);
