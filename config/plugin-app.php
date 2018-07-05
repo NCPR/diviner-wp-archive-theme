@@ -11,7 +11,7 @@ return [
 	| be in sync with `Text Domain:` entry inside plugin.php plugin file.
 	|
 	*/
-	'textdomain' => 'ncpr-diviner',
+	'textdomain'  => 'ncpr-diviner',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -23,8 +23,8 @@ return [
 	| from controllers, but you are free to change it however you like.
 	|
 	*/
-	'templates' => [
-		'extension' => '.tpl.php'
+	'templates'   => [
+		'extension' => '.tpl.php',
 	],
 
 	/*
@@ -35,7 +35,7 @@ return [
 	| This values determines the "root" paths of your plugin.
 	|
 	*/
-	'paths' => [
+	'paths'       => [
 		'directory' => dirname( __DIR__ . '/../plugin.php' ),
 		'uri'       => plugins_url( '', __DIR__ . '/../plugin.php' ),
 	],
@@ -53,9 +53,9 @@ return [
 	'directories' => [
 		'languages' => 'resources/languages',
 		'templates' => 'resources/templates',
-		'assets' => 'resources/assets',
-		'public' => 'public',
-		'app' => 'app',
+		'assets'    => 'resources/assets',
+		'public'    => 'public',
+		'app'       => 'app',
 	],
 
 	/*
@@ -68,8 +68,7 @@ return [
 	| own files to this array which you would like to autoload.
 	|
 	*/
-	'autoload' => [
-		// @todo review this list to load, for the plugin, only what is needed
+	'autoload'    => [
 		'main.php',
 		'helpers.php',
 		'CarbonFields/Boot.php',
@@ -92,16 +91,12 @@ return [
 		'Http/ajaxes.php',
 		'Setup/actions.php',
 		'Setup/filters.php',
-		'Setup/supports.php',
+		'Setup/language.php',
 		'Setup/services.php',
-		'Structure/navs.php',
 		'Structure/widgets.php',
-		'Structure/sidebars.php',
-		'Structure/templates.php',
 		'Structure/posttypes.php',
 		'Structure/admin.php',
 		'Structure/taxonomies.php',
 		'Structure/shortcodes.php',
-		'Structure/thumbnails.php',
 	],
 ];
