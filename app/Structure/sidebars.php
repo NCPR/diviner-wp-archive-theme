@@ -24,8 +24,8 @@ function register_widget_areas()
 {
     register_sidebar([
         'id' => 'sidebar',
-        'name' => __('Sidebar', config('textdomain')),
-        'description' => __('Website sidebar', config('textdomain')),
+        'name' => __('Sidebar', 'ncpr-diviner'),
+        'description' => __('Website sidebar', 'ncpr-diviner'),
         'before_title' => '<h5>',
         'after_title' => '</h5>',
     ]);
