@@ -5,7 +5,17 @@ namespace Diviner\Post_Types\Archive_Item;
 
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
+use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
+use Diviner\CarbonFields\Helper;
 
+use Diviner\Post_Types\Diviner_Field\PostMeta;
+use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
+use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
 class Post_Meta {
 
@@ -36,7 +46,20 @@ class Post_Meta {
 
 	protected $container;
 
-	public function add_post_meta() {
+	static public function get_type_label_from_id($id)
+	{
+		return isset(self::FIELD_TYPE_OPTIONS[$id]) ? self::FIELD_TYPE_OPTIONS[$id] : '';
+	}
+
+	public function add_post_meta()
+	{
+		$this->add_permanent_fields();
+		$this->add_dynamic_fields();
+
+	}
+
+	public function add_permanent_fields()
+	{
 		$this->container = Container::make( 'post_meta', 'Type' )
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( array(
@@ -50,7 +73,7 @@ class Post_Meta {
 			->add_fields( array(
 				$this->get_date_field(),
 			))
-			->set_priority( 'high' );
+			->set_priority( 'default' );
 
 
 		$this->container = Container::make( 'post_meta', 'Related Items' )
@@ -58,7 +81,7 @@ class Post_Meta {
 			->add_fields( array(
 				$this->get_field_related(),
 			))
-			->set_priority( 'high' );
+			->set_priority( 'default' );
 
 		$this->container = Container::make( 'post_meta', 'Audio' )
 			->where( 'post_type', '=', Archive_Item::NAME )
@@ -66,21 +89,92 @@ class Post_Meta {
 				$this->get_field_audio(),
 				$this->get_field_audio_oembed()
 			))
-			->set_priority( 'high' );
+			->set_priority( 'default' );
 
 		$this->container = Container::make( 'post_meta', 'Video' )
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( array(
 				$this->get_field_video_oembed()
 			))
-			->set_priority( 'high' );
+			->set_priority( 'default' );
 
 		$this->container = Container::make( 'post_meta', 'Document' )
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( array(
 				$this->get_field_document()
 			))
-			->set_priority( 'high' );
+			->set_priority( 'default' );
+
+	}
+
+	/**
+	 * Adds one or more classes to the body tag in the dashboard.
+	 *
+	 * @param  \WP_Post $post Current field post.
+	 * @return String          Class name.
+	 */
+	public function get_class( $post ) {
+		$type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
+		$name = null;
+		switch ($type) {
+			case Text_Field::NAME:
+				$name = Text_Field::class;
+				break;
+			case Date_Field::NAME:
+				$name = Date_Field::class;
+				break;
+			case CPT_Field::NAME:
+				$name = CPT_Field::class;
+				break;
+		}
+		return $name;
+	}
+
+	public function get_field($type) {
+		$id = carbon_get_the_post_meta( FieldPostMeta::FIELD_ID );
+		$label = carbon_get_the_post_meta( FieldPostMeta::FIELD_LABEL_TITLE );
+		$helper = carbon_get_the_post_meta( FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
+		$static_function_name = sprintf(
+			'%s::render',
+			$type
+		);
+		if ( method_exists( $type, 'render' ) ) {
+			$static_call_name = sprintf(
+				'%s::render',
+				$type
+			);
+			return call_user_func($static_call_name, $id, $label, $helper);
+		}
+
+		// To do: is_callable??
+		return NULL;
+	}
+
+	public function add_dynamic_fields(){
+		$field_query = new \WP_Query( array(
+			'post_type' => Diviner_Field::NAME,
+			'meta_query'=> array(
+				array(
+					'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
+					'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
+				),
+			),
+		) );
+
+		$dyn_fields = [];
+
+		// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
+		while( $field_query->have_posts() ) : $field_query->the_post();
+			// add fields
+			$type = $this->get_class( get_post() );
+			$dyn_fields[] = $this->get_field( $type );
+		endwhile;
+		wp_reset_postdata();
+
+		$dyn_fields_container = Container::make( 'post_meta', 'Additional Fields' )
+			->where( 'post_type', '=', Archive_Item::NAME )
+			->add_fields( $dyn_fields )
+			->set_priority( 'default' );
 
 	}
 

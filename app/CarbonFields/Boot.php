@@ -18,13 +18,11 @@ class Boot {
 	 * @action init
 	 */
 	public function hook() {
-
-		// add_filter( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
-
+		add_filter( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
 	}
 
 	/**
-	 * Example
+	 * Boot carbon fields after theme setup
 	 */
 	public function after_setup_theme() {
 		Carbon_Fields::boot();

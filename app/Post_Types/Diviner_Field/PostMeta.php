@@ -15,8 +15,13 @@ use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
 class PostMeta {
 
+	const CONTAINER_FIELDS = 'div_container_fields';
+
 	const FIELD_ACTIVE = 'div_field_active';
+	const FIELD_CHECKBOX_VALUE = '1';
 	const FIELD_TYPE = 'div_field_type';
+
+	const FIELD_ID = 'div_field_id';
 
 	const FIELD_LABEL_TITLE = 'div_field_label_title';
 	const FIELD_BROWSE_HELPER_TEXT = 'div_field_browse_helper';
@@ -58,16 +63,13 @@ class PostMeta {
 
 	protected $container;
 
-	public function register() {
-		$args = wp_parse_args( $this->get_args(), $this->get_labels() );
-		register_post_type( self::NAME, $args );
-	}
-
 	public function add_post_meta() {
+		// var_dump('PostMeta add_post_meta');
 		$this->container = Container::make( 'post_meta', 'Field Variables' )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_types(),
+				$this->get_field_id(),
 				$this->get_field_active(),
 				$this->get_field_label_field(),
 				$this->get_field_browser_helper_text(),
@@ -114,7 +116,7 @@ class PostMeta {
 
 	public function get_field_is_custom() {
 		return Field::make( 'checkbox', self::FIELD_IS_DEFAULT, 'Is Default Field' )
-			->set_option_value( true )
+			->set_option_value( self::FIELD_CHECKBOX_VALUE )
 			->set_required( false );
 	}
 
@@ -132,10 +134,14 @@ class PostMeta {
 			->set_help_text( 'What kind of field is this' );
 	}
 
+	public function get_field_id() {
+		return Field::make( 'text', self::FIELD_ID, 'Field ID (use only lower case with underscores)' )
+			->set_required( true );;
+	}
+
 	public function get_field_active() {
 		return Field::make( 'checkbox', self::FIELD_ACTIVE, 'Is Field Active?' )
-			->set_option_value( true )
-			->set_required( false );
+			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 
 	public function get_field_label_field() {
@@ -159,12 +165,12 @@ class PostMeta {
 
 	public function get_field_include_search() {
 		return Field::make( 'checkbox', self::FIELD_BROWSE_INCLUDE_SEARCH, 'Include in search' )
-			->set_option_value( 'yes' );
+			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 
 	public function get_field_display() {
 		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, 'Appear in Modal Overlay' )
-			->set_option_value( 'yes' );
+			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 
 }

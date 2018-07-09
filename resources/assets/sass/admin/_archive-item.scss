@@ -2,7 +2,8 @@
 #carbon_fields_container_audio {
 	display: none !important;
 
-	.archive-item-edit--div_ai_field_audio {
+	.archive-item-edit--div_ai_field_audio &,
+	.archive-item-edit--div_ai_field_mixed & {
 		display: block !important;
 	}
 }
@@ -11,7 +12,8 @@
 #carbon_fields_container_video {
 	display: none !important;
 
-	.archive-item-edit--div_ai_field_video {
+	.archive-item-edit--div_ai_field_video &,
+	.archive-item-edit--div_ai_field_mixed & {
 		display: block !important;
 	}
 }
@@ -19,7 +21,8 @@
 #carbon_fields_container_document{
 	display: none !important;
 
-	.archive-item-edit--div_ai_field_document {
+	.archive-item-edit--div_ai_field_document &,
+	.archive-item-edit--div_ai_field_mixed & {
 		display: block !important;
 	}
 }
