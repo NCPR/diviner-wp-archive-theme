@@ -8,6 +8,7 @@ use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
+use Diviner\CarbonFields\Errors\UndefinedType;
 
 use Diviner\Post_Types\Diviner_Field\PostMeta;
 use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
@@ -114,40 +115,32 @@ class Post_Meta {
 	 * @return String          Class name.
 	 */
 	public function get_class( $post ) {
-		$type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
-		$name = null;
-		switch ($type) {
-			case Text_Field::NAME:
-				$name = Text_Field::class;
-				break;
-			case Date_Field::NAME:
-				$name = Date_Field::class;
-				break;
-			case CPT_Field::NAME:
-				$name = CPT_Field::class;
-				break;
+		$field_type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
+		$map = [
+			Text_Field::NAME        => Text_Field::class,
+			Date_Field::NAME        => Date_Field::class,
+		];
+
+		if( !array_key_exists( $field_type, $map ) ){
+			// developer-land exception, let's make it clear
+			throw UndefinedType("{$field_type} is not a valid field type");
 		}
-		return $name;
+
+		return $map[$field_type];
 	}
 
 	public function get_field($type) {
 		$id = carbon_get_the_post_meta( FieldPostMeta::FIELD_ID );
 		$label = carbon_get_the_post_meta( FieldPostMeta::FIELD_LABEL_TITLE );
 		$helper = carbon_get_the_post_meta( FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
-		$static_function_name = sprintf(
+
+		// return call_user_func([$type, 'render']);
+
+		$static_call_name = sprintf(
 			'%s::render',
 			$type
 		);
-		if ( method_exists( $type, 'render' ) ) {
-			$static_call_name = sprintf(
-				'%s::render',
-				$type
-			);
-			return call_user_func($static_call_name, $id, $label, $helper);
-		}
-
-		// To do: is_callable??
-		return NULL;
+		return call_user_func($static_call_name, $id, $label, $helper);
 	}
 
 	public function add_dynamic_fields(){
@@ -160,14 +153,15 @@ class Post_Meta {
 				),
 			),
 		) );
-
 		$dyn_fields = [];
 
 		// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
 		while( $field_query->have_posts() ) : $field_query->the_post();
 			// add fields
 			$type = $this->get_class( get_post() );
-			$dyn_fields[] = $this->get_field( $type );
+			if ( $type ) {
+				$dyn_fields[] = $this->get_field( $type );
+			}
 		endwhile;
 		wp_reset_postdata();
 

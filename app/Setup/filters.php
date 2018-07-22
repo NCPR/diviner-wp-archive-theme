@@ -50,7 +50,4 @@ $container = \Tonik\Theme\App\Main::instance()->container();
 $container[ 'carbonfields.boot' ] = function ( Container $container ) {
 	return new Boot();
 };
-
-add_action( 'after_setup_theme', function () use ( $container ) {
-	$container[ 'carbonfields.boot' ]->after_setup_theme();
-}, 0, 0 );
+$container[ 'carbonfields.boot' ]->hook();

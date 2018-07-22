@@ -10,5 +10,15 @@ class Related_Field extends FieldType  {
 
 	const NAME = 'diviner_elated_field';
 	const TITLE = 'Related Items Field';
+	const TYPE = 'related';
+
+	static public function render( $id, $field_label, $helper = '') {
+		$field =  Field::make( static::TYPE, $id, $field_label );
+		if ( ! empty( $helper ) ) {
+			$field->help_text($helper);
+		}
+		return $field;
+	}
+
 
 }
