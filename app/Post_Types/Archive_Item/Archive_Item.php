@@ -26,7 +26,7 @@ class Archive_Item {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'page-attributes' ),
+			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 			'map_meta_cap'       => true,
 			// 'has_archive'     => _x( 'archive-item', 'post archive slug', 'tribe' ),
 		];

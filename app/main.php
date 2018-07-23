@@ -19,6 +19,7 @@ class Main {
 	}
 
 	public function init() {
+		// var_dump('init asdljjlhds jl adsljad sjlads jla sdjl asdjl adsjl adsjldsalj');
 		//$this->providers();
 	}
 

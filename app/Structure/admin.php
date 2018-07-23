@@ -13,4 +13,4 @@ $container[ 'admin.settings' ] = function ( Container $container ) {
 
 add_action( 'carbon_fields_register_fields', function () use ( $container ) {
 	$container[ 'admin.settings' ]->crb_attach_theme_options();
-}, 10, 0 );
+}, 0, 0 );

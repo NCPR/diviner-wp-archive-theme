@@ -71,7 +71,9 @@ return [
 	'autoload'    => [
 		'main.php',
 		'helpers.php',
+		'CarbonFields/Errors/UndefinedType.php',
 		'CarbonFields/Boot.php',
+		'CarbonFields/Helper.php',
 		'Admin/Settings.php',
 		'Post_Types/Archive_Item/Archive_Item.php',
 		'Post_Types/Archive_Item/AdminModifications.php',
@@ -81,6 +83,8 @@ return [
 		'Post_Types/Diviner_Field/AdminModifications.php',
 		'Post_Types/Diviner_Field/Preset_Fields_List_Table.php',
 		'Post_Types/Diviner_Field/Default_Fields_List_Table.php',
+		'Post_Types/Diviner_Field/Types/iField.php',
+		'Post_Types/Diviner_Field/Types/FieldType.php',
 		'Post_Types/Diviner_Field/Types/Text_Field.php',
 		'Post_Types/Diviner_Field/Types/Date_Field.php',
 		'Post_Types/Diviner_Field/Types/Taxonomy_Field.php',
