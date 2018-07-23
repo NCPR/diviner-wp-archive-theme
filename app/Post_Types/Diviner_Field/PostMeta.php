@@ -32,6 +32,10 @@ class PostMeta {
 
 	const FIELD_IS_DEFAULT     = 'div_field_default';
 
+	const FIELD_CPT_LABEL = 'div_field_cpt_label';
+	const FIELD_CPT_ID = 'div_field_cpt_id';
+	const FIELD_CPT_SLUG = 'div_field_cpt_slug';
+
 	const FIELD_TAXONOMY_TYPE = 'div_field_taxonomy_type';
 	const FIELD_TAXONOMY_TYPE_TAG = 'div_field_taxonomy_type_tag';
 	const FIELD_TAXONOMY_TYPE_CATEGORY= 'div_field_taxonomy_type_category';
@@ -100,6 +104,27 @@ class PostMeta {
 				$this->get_field_taxonomy_type(),
 			))
 			->set_priority( 'low' );
+
+		$this->container = Container::make( 'post_meta', 'Custom Post Type Field Variables' )
+			->where( 'post_type', '=', Diviner_Field::NAME )
+			->add_fields( array(
+				$this->get_field_CPT_ID(),
+				$this->get_field_CPT_Label(),
+				$this->get_field_CPT_SLUG(),
+			))
+			->set_priority( 'low' );
+	}
+
+	public function get_field_CPT_ID() {
+		return Field::make( 'text', self::FIELD_CPT_ID, 'Custom Post Type ID (use only lower case with underscores)' );
+	}
+
+	public function get_field_CPT_Label() {
+		return Field::make( 'text', self::FIELD_CPT_LABEL, 'Custom Post Label' );
+	}
+
+	public function get_field_CPT_SLUG() {
+		return Field::make( 'text', self::FIELD_CPT_SLUG, 'Custom Post Label (use only lower case with dashes)' );
 	}
 
 	public function get_field_taxonomy_type() {

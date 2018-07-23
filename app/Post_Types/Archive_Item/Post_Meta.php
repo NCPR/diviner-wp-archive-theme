@@ -158,9 +158,14 @@ class Post_Meta {
 		// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
 		while( $field_query->have_posts() ) : $field_query->the_post();
 			// add fields
-			$type = $this->get_class( get_post() );
+			$field_type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
+			$type = Diviner_Field::get_class( $field_type );
 			if ( $type ) {
-				$dyn_fields[] = $this->get_field( $type );
+				$field_rendered = $this->get_field( $type );
+				if ( ! empty( $field_rendered ) ) {
+					$dyn_fields[] = $field_rendered;
+				}
+
 			}
 		endwhile;
 		wp_reset_postdata();

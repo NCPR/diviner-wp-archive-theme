@@ -12,4 +12,7 @@ abstract class FieldType implements iField {
 		return $field;
 	}
 
+	static public function setup() {
+
+	}
 }
