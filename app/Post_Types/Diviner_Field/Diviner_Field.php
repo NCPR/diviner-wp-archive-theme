@@ -53,13 +53,11 @@ class Diviner_Field {
 			Text_Field::NAME        => Text_Field::class,
 			Date_Field::NAME        => Date_Field::class,
 			CPT_Field::NAME         => CPT_Field::class,
+			Related_Field::NAME     => Related_Field::class,
 		];
-
 		if( !array_key_exists( $field_type, $map ) ){
-			// developer-land exception, let's make it clear
 			throw UndefinedType("{$field_type} is not a valid field type");
 		}
-
 		return $map[$field_type];
 	}
 

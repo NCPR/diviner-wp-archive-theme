@@ -4,10 +4,6 @@
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
 use Carbon_Fields\Field;
-use Carbon_Fields\Container;
-
-use Diviner\Post_Types\Archive_Item\Archive_Item;
-use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 
 class CPT_Field extends FieldType {
@@ -25,16 +21,19 @@ class CPT_Field extends FieldType {
 		$field_slug = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_SLUG );
 
 		if ( empty( $field_id ) ) {
-			$field_id = 'diviner_cpt_id';
+			// $field_id = 'diviner_cpt_id';
+			// set up based on field ID
+			$field_id = sprintf('div_cpt_name_%s', get_the_ID() );
 		}
 
 		if ( empty( $field_label ) ) {
-			$field_label = 'Diviner CPT';
+			$field_label = 'Diviner Custom Post Type';
 		}
 		$field_labels = sprintf('%ss', $field_label);
 
 		if ( empty( $field_slug ) ) {
-			$field_slug = 'diviner-cpt';
+			// $field_slug = 'diviner-cpt';
+			$field_slug = sanitize_title( $field_label );
 		}
 
 		// registering the custom post type
@@ -64,7 +63,7 @@ class CPT_Field extends FieldType {
 		$args = wp_parse_args( $args, $labels );
 		register_post_type( $field_id, $args );
 
-		// set up additional field?? Unnecessary for now
+		// You could set up additional field here...
 		/*
 		$container = Container::make( 'post_meta', 'Creator Fields' )
 			->where( 'post_type', '=', Diviner_Field::NAME )
@@ -77,8 +76,6 @@ class CPT_Field extends FieldType {
 	}
 
 	static public function render( $id, $field_label, $helper = '') {
-		// $field =  Field::make( static::TYPE, $id, $field_label );
-
 		$field_cpt_id = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_ID );
 		if ( empty($field_cpt_id) ) {
 			return null;
