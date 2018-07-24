@@ -17,11 +17,11 @@ class AdminModifications {
 		add_filter( 'admin_body_class', array( &$this,'admin_body_class') );
 		add_filter( 'manage_edit-diviner_archive_item_columns', [ $this, 'archival_item_columns' ] );
 		add_action( 'manage_diviner_archive_item_posts_custom_column', [ $this, 'manage_diviner_archive_item_posts_custom_column' ], 10, 2 );
-		add_action( 'carbon_fields_register_fields', [ $this, 'carbon_fields_register_fields' ], 3, 0 );
-
+		add_action( 'carbon_fields_register_fields', [ $this, 'active_field_setup' ], 3, 0 );
 	}
 
-	function carbon_fields_register_fields(  ) {
+	function active_field_setup(  ) {
+		// get active fields
 		$field_query = new \WP_Query( array(
 			'post_type' => Diviner_Field::NAME,
 			'meta_query'=> array(
@@ -31,14 +31,8 @@ class AdminModifications {
 				),
 			),
 		) );
-		$dyn_fields = [];
-		// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
+		// call setup on active fields
 		while( $field_query->have_posts() ) : $field_query->the_post();
-			// add fields
-			// $type = $this->get_class( get_post() );
-			// if ( $type ) {
-			//	$dyn_fields[] = $this->get_field( $type );
-			// }
 			$field_type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
 			$field = Diviner_Field::get_class( $field_type );
 			$static_call_name = sprintf(
@@ -124,9 +118,6 @@ class AdminModifications {
 		);
 
 		remove_submenu_page( 'edit.php?post_type=diviner_archive_item', 	'post-new.php?post_type=diviner_archive_item' );
-
-		//add_menu_page( 'Diviner Fields', 'Manage	 Diviner Fields', 'manage_options', 'diviner-manage-fields', array( &$this,'rc_scd_create_dashboard'), 'dashicons-admin-generic', 30 );
-
 	}
 
 }

@@ -20,22 +20,19 @@ class CPT_Field extends FieldType {
 		$field_label = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_LABEL );
 		$field_slug = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_SLUG );
 
+		// default values
 		if ( empty( $field_id ) ) {
-			// $field_id = 'diviner_cpt_id';
-			// set up based on field ID
 			$field_id = sprintf('div_cpt_name_%s', get_the_ID() );
 		}
-
 		if ( empty( $field_label ) ) {
 			$field_label = 'Diviner Custom Post Type';
 		}
 		$field_labels = sprintf('%ss', $field_label);
-
 		if ( empty( $field_slug ) ) {
-			// $field_slug = 'diviner-cpt';
 			$field_slug = sanitize_title( $field_label );
 		}
-
+		// ToDo: make some of the other cpt labels/config editable
+		// has_archive etc etc
 		// registering the custom post type
 		$args = [
 			'public'             => true,
@@ -50,7 +47,6 @@ class CPT_Field extends FieldType {
 			'menu_position'      => null,
 			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 			'map_meta_cap'       => true,
-			// 'has_archive'     => _x( 'archive-item', 'post archive slug', 'tribe' ),
 		];
 		$labels = [
 			'labels' => [
