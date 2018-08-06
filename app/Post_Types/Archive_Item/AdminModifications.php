@@ -21,27 +21,23 @@ class AdminModifications {
 	}
 
 	function active_field_setup(  ) {
-		// get active fields
-		$field_query = new \WP_Query( array(
-			'post_type' => Diviner_Field::NAME,
-			'meta_query'=> array(
-				array(
-					'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
-					'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-				),
+		$meta_query = array(
+			array(
+				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
+				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
 			),
-		) );
-		// call setup on active fields
-		while( $field_query->have_posts() ) : $field_query->the_post();
-			$field_type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
-			$field = Diviner_Field::get_class( $field_type );
-			$static_call_name = sprintf(
-				'%s::setup',
-				$field
-			);
-			call_user_func($static_call_name);
-		endwhile;
-		wp_reset_postdata();
+		);
+		$args = array(
+			'fields' => 'ids',
+			'post_type' => Diviner_Field::NAME,
+			'meta_query' => $meta_query
+		);
+		$posts_ids = get_posts($args);
+		foreach($posts_ids as $post_id) {
+			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			$field = Diviner_Field::get_class($field_type);
+			call_user_func(array($field, 'setup'), $post_id);
+		}
 	}
 
 	function manage_diviner_archive_item_posts_custom_column( $colname, $cptid  ) {

@@ -14,15 +14,15 @@ class CPT_Field extends FieldType {
 
 	const FIELD_CPT_TYPE_FIELD_ID = 'diviner_cpt_type_field';
 
-	static public function setup () {
+	static public function setup ( $post_id ) {
 		// set up CPT
-		$field_id = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_ID );
-		$field_label = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_LABEL );
-		$field_slug = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_SLUG );
+		$field_id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
+		$field_label = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL );
+		$field_slug = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG );
 
 		// default values
 		if ( empty( $field_id ) ) {
-			$field_id = sprintf('div_cpt_name_%s', get_the_ID() );
+			$field_id = sprintf('div_cpt_name_%s', $post_id );
 		}
 		if ( empty( $field_label ) ) {
 			$field_label = 'Diviner Custom Post Type';
@@ -59,6 +59,7 @@ class CPT_Field extends FieldType {
 		$args = wp_parse_args( $args, $labels );
 		register_post_type( $field_id, $args );
 
+
 		// You could set up additional field here...
 		/*
 		$container = Container::make( 'post_meta', 'Creator Fields' )
@@ -71,8 +72,8 @@ class CPT_Field extends FieldType {
 
 	}
 
-	static public function render( $id, $field_label, $helper = '') {
-		$field_cpt_id = carbon_get_the_post_meta( FieldPostMeta::FIELD_CPT_ID );
+	static public function render( $post_id, $id, $field_label, $helper = '') {
+		$field_cpt_id = carbon_get_post_meta( $post_id,FieldPostMeta::FIELD_CPT_ID );
 		if ( empty($field_cpt_id) ) {
 			return null;
 		}

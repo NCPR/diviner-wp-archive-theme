@@ -11,7 +11,7 @@ class Related_Field extends FieldType  {
 	const TITLE = 'Related Items Field';
 	const TYPE = 'association';
 
-	static public function render( $id, $field_label, $helper = '') {
+	static public function render( $post_id, $id, $field_label, $helper = '') {
 
 		$field = Field::make(static::TYPE, $id, $field_label)
 			->set_types(array(
