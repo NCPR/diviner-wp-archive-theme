@@ -47,6 +47,10 @@ class PostMeta {
 		self::FIELD_TAXONOMY_TYPE_CATEGORY   => 'Category'
 	];
 
+	const FIELD_SELECT_OPTIONS        = 'div_field_select_options';
+	const FIELD_SELECT_OPTIONS_LABEL  = 'div_field_select_options_label';
+	const FIELD_SELECT_OPTIONS_VALUE  = 'div_field_select_options_value';
+
 	const FIELD_DATE_TYPE      = 'div_field_date_type';
 	const FIELD_DATE_TYPE_CENTURY = 'div_field_date_type_century';
 	const FIELD_DATE_TYPE_DECADE = 'div_field_date_type_decade';
@@ -119,6 +123,20 @@ class PostMeta {
 				$this->get_field_CPT_SLUG(),
 			))
 			->set_priority( 'low' );
+
+		$this->container = Container::make( 'post_meta', 'Select Field Variables' )
+			->where( 'post_type', '=', Diviner_Field::NAME )
+			->add_fields( array(
+				$this->get_field_select_options(),
+			))
+			->set_priority( 'low' );
+	}
+
+	public function get_field_select_options() {
+		return Field::make( 'complex', self::FIELD_SELECT_OPTIONS )
+			->add_fields( array(
+				Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, 'Drop down label' ),
+			) );
 	}
 
 	public function get_field_CPT_ID() {

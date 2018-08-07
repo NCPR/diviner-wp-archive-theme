@@ -55,6 +55,7 @@ class Diviner_Field {
 			CPT_Field::NAME         => CPT_Field::class,
 			Related_Field::NAME     => Related_Field::class,
 			Taxonomy_Field::NAME    => Taxonomy_Field::class,
+			Select_Field::NAME    => Select_Field::class,
 		];
 		if( !array_key_exists( $field_type, $map ) ){
 			throw UndefinedType("{$field_type} is not a valid field type");

@@ -54,6 +54,13 @@
 	}
 }
 
+#carbon_fields_container_select_field_variables {
+	display: none !important;
+	.post-field-type--diviner_select_field & {
+		display: block !important;
+	}
+}
+
 #minor-publishing {
 	.post-edit--diviner_field & {
 		display: none;
