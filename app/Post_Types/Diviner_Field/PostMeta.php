@@ -36,6 +36,9 @@ class PostMeta {
 	const FIELD_CPT_ID = 'div_field_cpt_id';
 	const FIELD_CPT_SLUG = 'div_field_cpt_slug';
 
+	const FIELD_TAXONOMY_SLUG = 'div_field_taxonomy_slug';
+	const FIELD_TAXONOMY_SINGULAR_LABEL = 'div_field_taxonomy_sing_label';
+	const FIELD_TAXONOMY_PLURAL_LABEL = 'div_field_taxonomy_plural_label';
 	const FIELD_TAXONOMY_TYPE = 'div_field_taxonomy_type';
 	const FIELD_TAXONOMY_TYPE_TAG = 'div_field_taxonomy_type_tag';
 	const FIELD_TAXONOMY_TYPE_CATEGORY= 'div_field_taxonomy_type_category';
@@ -102,6 +105,9 @@ class PostMeta {
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_taxonomy_type(),
+				$this->get_field_taxonomy_singular_label(),
+				$this->get_field_taxonomy_plural_label(),
+				$this->get_field_taxonomy_slug(),
 			))
 			->set_priority( 'low' );
 
@@ -125,6 +131,21 @@ class PostMeta {
 
 	public function get_field_CPT_SLUG() {
 		return Field::make( 'text', self::FIELD_CPT_SLUG, 'Custom Post Label (use only lower case with dashes)' );
+	}
+
+	public function get_field_taxonomy_slug() {
+		return Field::make( 'text', self::FIELD_TAXONOMY_SLUG, 'Taxonomy Slug' )
+			->set_help_text( 'no spaces or underscores' );
+	}
+
+	public function get_field_taxonomy_singular_label() {
+		return Field::make( 'text', self::FIELD_TAXONOMY_SINGULAR_LABEL, 'Singular Taxonomy Label' )
+			->set_help_text( 'ex: Type of Work' );
+	}
+
+	public function get_field_taxonomy_plural_label() {
+		return Field::make( 'text', self::FIELD_TAXONOMY_PLURAL_LABEL, 'Plural Taxonomy Label' )
+			->set_help_text( 'ex: Types of Work' );
 	}
 
 	public function get_field_taxonomy_type() {
