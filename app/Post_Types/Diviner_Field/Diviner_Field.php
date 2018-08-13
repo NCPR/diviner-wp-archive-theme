@@ -40,8 +40,8 @@ class Diviner_Field {
 	public function get_labels() {
 		return [
 			'labels' => [
-				'singular' => __( 'Diviner Field', 'tribe' ),
-				'plural'   => __( 'Diviner Fields', 'tribe' ),
+				'singular' => __( 'Diviner Field', 'ncpr-diviner' ),
+				'plural'   => __( 'Diviner Fields', 'ncpr-diviner' ),
 				'slug'     => _x( 'diviner-field', 'post type slug', 'diviner' ),
 				'name'     => _x( 'Diviner Fields', 'post type general name')
 			]
@@ -54,6 +54,8 @@ class Diviner_Field {
 			Date_Field::NAME        => Date_Field::class,
 			CPT_Field::NAME         => CPT_Field::class,
 			Related_Field::NAME     => Related_Field::class,
+			Taxonomy_Field::NAME    => Taxonomy_Field::class,
+			Select_Field::NAME    => Select_Field::class,
 		];
 		if( !array_key_exists( $field_type, $map ) ){
 			throw UndefinedType("{$field_type} is not a valid field type");

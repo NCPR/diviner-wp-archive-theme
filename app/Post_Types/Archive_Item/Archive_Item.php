@@ -28,7 +28,6 @@ class Archive_Item {
 			'menu_position'      => null,
 			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 			'map_meta_cap'       => true,
-			// 'has_archive'     => _x( 'archive-item', 'post archive slug', 'tribe' ),
 		];
 	}
 

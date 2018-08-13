@@ -36,6 +36,9 @@ class PostMeta {
 	const FIELD_CPT_ID = 'div_field_cpt_id';
 	const FIELD_CPT_SLUG = 'div_field_cpt_slug';
 
+	const FIELD_TAXONOMY_SLUG = 'div_field_taxonomy_slug';
+	const FIELD_TAXONOMY_SINGULAR_LABEL = 'div_field_taxonomy_sing_label';
+	const FIELD_TAXONOMY_PLURAL_LABEL = 'div_field_taxonomy_plural_label';
 	const FIELD_TAXONOMY_TYPE = 'div_field_taxonomy_type';
 	const FIELD_TAXONOMY_TYPE_TAG = 'div_field_taxonomy_type_tag';
 	const FIELD_TAXONOMY_TYPE_CATEGORY= 'div_field_taxonomy_type_category';
@@ -43,6 +46,10 @@ class PostMeta {
 		self::FIELD_TAXONOMY_TYPE_TAG  => 'Tag',
 		self::FIELD_TAXONOMY_TYPE_CATEGORY   => 'Category'
 	];
+
+	const FIELD_SELECT_OPTIONS        = 'div_field_select_options';
+	const FIELD_SELECT_OPTIONS_LABEL  = 'div_field_select_options_label';
+	const FIELD_SELECT_OPTIONS_VALUE  = 'div_field_select_options_value';
 
 	const FIELD_DATE_TYPE      = 'div_field_date_type';
 	const FIELD_DATE_TYPE_CENTURY = 'div_field_date_type_century';
@@ -102,29 +109,61 @@ class PostMeta {
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_taxonomy_type(),
+				$this->get_field_taxonomy_singular_label(),
+				$this->get_field_taxonomy_plural_label(),
+				$this->get_field_taxonomy_slug(),
 			))
 			->set_priority( 'low' );
 
 		$this->container = Container::make( 'post_meta', 'Custom Post Type Field Variables' )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
-				$this->get_field_CPT_ID(),
-				$this->get_field_CPT_Label(),
-				$this->get_field_CPT_SLUG(),
+				$this->get_field_cpt_id(),
+				$this->get_field_cpt_label(),
+				$this->get_field_cpt_slug(),
+			))
+			->set_priority( 'low' );
+
+		$this->container = Container::make( 'post_meta', 'Select Field Variables' )
+			->where( 'post_type', '=', Diviner_Field::NAME )
+			->add_fields( array(
+				$this->get_field_select_options(),
 			))
 			->set_priority( 'low' );
 	}
 
-	public function get_field_CPT_ID() {
+	public function get_field_select_options() {
+		return Field::make( 'complex', self::FIELD_SELECT_OPTIONS )
+			->add_fields( array(
+				Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, 'Drop down label' ),
+			) );
+	}
+
+	public function get_field_cpt_id() {
 		return Field::make( 'text', self::FIELD_CPT_ID, 'Custom Post Type ID (use only lower case with underscores)' );
 	}
 
-	public function get_field_CPT_Label() {
+	public function get_field_cpt_label() {
 		return Field::make( 'text', self::FIELD_CPT_LABEL, 'Custom Post Label' );
 	}
 
-	public function get_field_CPT_SLUG() {
+	public function get_field_cpt_slug() {
 		return Field::make( 'text', self::FIELD_CPT_SLUG, 'Custom Post Label (use only lower case with dashes)' );
+	}
+
+	public function get_field_taxonomy_slug() {
+		return Field::make( 'text', self::FIELD_TAXONOMY_SLUG, 'Taxonomy Slug' )
+			->set_help_text( 'no spaces or underscores' );
+	}
+
+	public function get_field_taxonomy_singular_label() {
+		return Field::make( 'text', self::FIELD_TAXONOMY_SINGULAR_LABEL, 'Singular Taxonomy Label' )
+			->set_help_text( 'ex: Type of Work' );
+	}
+
+	public function get_field_taxonomy_plural_label() {
+		return Field::make( 'text', self::FIELD_TAXONOMY_PLURAL_LABEL, 'Plural Taxonomy Label' )
+			->set_help_text( 'ex: Types of Work' );
 	}
 
 	public function get_field_taxonomy_type() {

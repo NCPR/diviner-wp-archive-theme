@@ -153,7 +153,6 @@ class Post_Meta {
 		foreach($posts_ids as $post_id) {
 			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$type = Diviner_Field::get_class( $field_type );
-			// call_user_func(array($field, 'setup'), $post_id);
 			if ( $type ) {
 				$field_rendered = $this->get_field( $post_id,  $type );
 				if ( ! empty( $field_rendered ) ) {
@@ -162,36 +161,6 @@ class Post_Meta {
 
 			}
 		}
-
-
-		/*
-		$field_query = new \WP_Query( array(
-			'post_type' => Diviner_Field::NAME,
-			'meta_query'=> array(
-				array(
-					'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
-					'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-				),
-			),
-		) );
-		$dyn_fields = [];
-
-		// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
-		while( $field_query->have_posts() ) : $field_query->the_post();
-			// add fields
-			$field_type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
-			$type = Diviner_Field::get_class( $field_type );
-			if ( $type ) {
-				$field_rendered = $this->get_field( get_the_ID(),  $type );
-				if ( ! empty( $field_rendered ) ) {
-					$dyn_fields[] = $field_rendered;
-				}
-
-			}
-		endwhile;
-		wp_reset_postdata();
-		*/
-
 		$dyn_fields_container = Container::make( 'post_meta', 'Additional Fields' )
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( $dyn_fields )
