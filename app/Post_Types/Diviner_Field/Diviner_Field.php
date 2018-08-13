@@ -3,6 +3,13 @@
 
 namespace Diviner\Post_Types\Diviner_Field;
 
+use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
+use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
+use Diviner\CarbonFields\Errors\UndefinedType;
 
 class Diviner_Field {
 
@@ -40,4 +47,18 @@ class Diviner_Field {
 			]
 		];
 	}
+
+	static public function get_class( $field_type ) {
+		$map = [
+			Text_Field::NAME        => Text_Field::class,
+			Date_Field::NAME        => Date_Field::class,
+			CPT_Field::NAME         => CPT_Field::class,
+			Related_Field::NAME     => Related_Field::class,
+		];
+		if( !array_key_exists( $field_type, $map ) ){
+			throw UndefinedType("{$field_type} is not a valid field type");
+		}
+		return $map[$field_type];
+	}
+
 }

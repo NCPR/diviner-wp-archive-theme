@@ -47,3 +47,16 @@
 	}
 }
 
+#carbon_fields_container_custom_post_type_field_variables {
+	display: none !important;
+	.post-field-type--diviner_cpt_field & {
+		display: block !important;
+	}
+}
+
+#minor-publishing {
+	.post-edit--diviner_field & {
+		display: none;
+	}
+}
+

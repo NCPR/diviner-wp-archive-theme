@@ -12,7 +12,7 @@ class Select_Field extends FieldType {
 	const TITLE = 'Select Field';
 	const TYPE = 'select';
 
-	static public function render( $id, $field_label, $helper = '') {
+	static public function render( $post_id, $id, $field_label, $helper = '') {
 		$field =  Field::make( static::TYPE, $id, $field_label );
 		if ( ! empty( $helper ) ) {
 			$field->help_text($helper);

@@ -3,6 +3,10 @@
 namespace Diviner\Post_Types\Archive_Item;
 
 use function Tonik\Theme\App\config;
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
+use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
+use Diviner\CarbonFields\Helper;
+use Diviner\CarbonFields\Errors\UndefinedType;
 
 class AdminModifications {
 
@@ -13,6 +17,27 @@ class AdminModifications {
 		add_filter( 'admin_body_class', array( &$this,'admin_body_class') );
 		add_filter( 'manage_edit-diviner_archive_item_columns', [ $this, 'archival_item_columns' ] );
 		add_action( 'manage_diviner_archive_item_posts_custom_column', [ $this, 'manage_diviner_archive_item_posts_custom_column' ], 10, 2 );
+		add_action( 'carbon_fields_register_fields', [ $this, 'active_field_setup' ], 3, 0 );
+	}
+
+	function active_field_setup(  ) {
+		$meta_query = array(
+			array(
+				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
+				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
+			),
+		);
+		$args = array(
+			'fields' => 'ids',
+			'post_type' => Diviner_Field::NAME,
+			'meta_query' => $meta_query
+		);
+		$posts_ids = get_posts($args);
+		foreach($posts_ids as $post_id) {
+			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			$field = Diviner_Field::get_class($field_type);
+			call_user_func(array($field, 'setup'), $post_id);
+		}
 	}
 
 	function manage_diviner_archive_item_posts_custom_column( $colname, $cptid  ) {
@@ -89,9 +114,6 @@ class AdminModifications {
 		);
 
 		remove_submenu_page( 'edit.php?post_type=diviner_archive_item', 	'post-new.php?post_type=diviner_archive_item' );
-
-		//add_menu_page( 'Diviner Fields', 'Manage	 Diviner Fields', 'manage_options', 'diviner-manage-fields', array( &$this,'rc_scd_create_dashboard'), 'dashicons-admin-generic', 30 );
-
 	}
 
 }
