@@ -118,9 +118,9 @@ class PostMeta {
 		$this->container = Container::make( 'post_meta', 'Custom Post Type Field Variables' )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
-				$this->get_field_CPT_ID(),
-				$this->get_field_CPT_Label(),
-				$this->get_field_CPT_SLUG(),
+				$this->get_field_cpt_id(),
+				$this->get_field_cpt_label(),
+				$this->get_field_cpt_slug(),
 			))
 			->set_priority( 'low' );
 
@@ -139,15 +139,15 @@ class PostMeta {
 			) );
 	}
 
-	public function get_field_CPT_ID() {
+	public function get_field_cpt_id() {
 		return Field::make( 'text', self::FIELD_CPT_ID, 'Custom Post Type ID (use only lower case with underscores)' );
 	}
 
-	public function get_field_CPT_Label() {
+	public function get_field_cpt_label() {
 		return Field::make( 'text', self::FIELD_CPT_LABEL, 'Custom Post Label' );
 	}
 
-	public function get_field_CPT_SLUG() {
+	public function get_field_cpt_slug() {
 		return Field::make( 'text', self::FIELD_CPT_SLUG, 'Custom Post Label (use only lower case with dashes)' );
 	}
 

@@ -41,7 +41,7 @@ class Taxonomy_Field extends FieldType {
 
 		if ( empty( $field_label_plural ) ) {
 			$field_label_plural = sprintf(
-				'Taxonomies %d',
+				__( 'Taxonomies %d', 'ncpr-diviner' ),
 				$post_id
 			);
 		}
@@ -50,14 +50,14 @@ class Taxonomy_Field extends FieldType {
 		$labels = array(
 			'name'              => $field_label_plural,
 			'singular_name'     => $field_label_singular,
-			'search_items'      => sprintf( 'Search %s' , $field_label_plural ),
-			'all_items'         => sprintf( 'All %s' , $field_label_plural ),
-			'parent_item'       => sprintf( 'Parent %s' , $field_label_singular ),
-			'parent_item_colon' => sprintf( 'Parent %s:' , $field_label_singular ),
-			'edit_item'         => sprintf( 'Edit %s' , $field_label_singular ),
-			'update_item'       => sprintf( 'Update %s' , $field_label_singular ),
-			'add_new_item'      => sprintf( 'Add %s' , $field_label_singular ),
-			'new_item_name'     => sprintf( 'New %s' , $field_label_singular ),
+			'search_items'      => sprintf( __( 'Search %s', 'ncpr-diviner' ), $field_label_plural ),
+			'all_items'         => sprintf( __( 'All %s', 'ncpr-diviner' ), $field_label_plural ),
+			'parent_item'       => sprintf( __( 'Parent %s', 'ncpr-diviner' ), $field_label_singular ),
+			'parent_item_colon' => sprintf( __( 'Parent %s:', 'ncpr-diviner' ), $field_label_singular ),
+			'edit_item'         => sprintf( __( 'Edit %s', 'ncpr-diviner' ), $field_label_singular ),
+			'update_item'       => sprintf( __( 'Update %s', 'ncpr-diviner' ), $field_label_singular ),
+			'add_new_item'      => sprintf( __( 'Add %s', 'ncpr-diviner' ), $field_label_singular ),
+			'new_item_name'     => sprintf( __( 'New %s', 'ncpr-diviner' ), $field_label_singular ),
 			'menu_name'         => $field_label_singular,
 		);
 

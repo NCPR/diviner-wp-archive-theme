@@ -40,8 +40,8 @@ class Diviner_Field {
 	public function get_labels() {
 		return [
 			'labels' => [
-				'singular' => __( 'Diviner Field', 'tribe' ),
-				'plural'   => __( 'Diviner Fields', 'tribe' ),
+				'singular' => __( 'Diviner Field', 'ncpr-diviner' ),
+				'plural'   => __( 'Diviner Fields', 'ncpr-diviner' ),
 				'slug'     => _x( 'diviner-field', 'post type slug', 'diviner' ),
 				'name'     => _x( 'Diviner Fields', 'post type general name')
 			]

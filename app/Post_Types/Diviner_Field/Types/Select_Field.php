@@ -19,9 +19,7 @@ class Select_Field extends FieldType {
 			return '';
 		}
 		$field =  Field::make( static::TYPE, $id, $field_label );
-		$filtered_options = array_map( function ($a) {
-			return $a['div_field_select_options_label'];
-		}, $options);
+		$filtered_options = array_column($options, 'div_field_select_options_label');
 		$field->add_options( $filtered_options );
 		if ( ! empty( $helper ) ) {
 			$field->help_text($helper);
