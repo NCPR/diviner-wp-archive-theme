@@ -68,22 +68,6 @@ class Post_Meta {
 			))
 			->set_priority( 'high' );
 
-
-		$this->container = Container::make( 'post_meta', 'Date' )
-			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
-				$this->get_date_field(),
-			))
-			->set_priority( 'default' );
-
-
-		$this->container = Container::make( 'post_meta', 'Related Items' )
-			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
-				$this->get_field_related(),
-			))
-			->set_priority( 'default' );
-
 		$this->container = Container::make( 'post_meta', 'Audio' )
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( array(
@@ -144,6 +128,7 @@ class Post_Meta {
 			),
 		);
 		$args = array(
+			'posts_per_page' => -1,
 			'fields' => 'ids',
 			'post_type' => Diviner_Field::NAME,
 			'meta_query' => $meta_query
@@ -168,12 +153,6 @@ class Post_Meta {
 
 	}
 
-	public function get_date_field()
-	{
-		return Field::make( 'date', self::FIELD_DATE , 'The date the archive item was created or written or recorded' );
-
-	}
-
 	public function get_field_document()
 	{
 		return Field::make( 'file', self::FIELD_DOCUMENT , 'Any other document not an image or video or audio. Ex: PDF ' );
@@ -195,17 +174,6 @@ class Post_Meta {
 	public function get_field_audio_oembed()
 	{
 		return Field::make( 'oembed', self::FIELD_AUDIO_OEMBED, 'Any oembed audio file' );
-	}
-
-	public function get_field_related()
-	{
-		return Field::make('association', self::FIELD_RELATED, 'Related Items')
-			->set_types(array(
-				array(
-					'type' => 'post',
-					'post_type' => Archive_Item::NAME,
-				),
-			));
 	}
 
 	public function get_field_types() {

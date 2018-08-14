@@ -28,6 +28,7 @@ class AdminModifications {
 			),
 		);
 		$args = array(
+			'posts_per_page' => -1,
 			'fields' => 'ids',
 			'post_type' => Diviner_Field::NAME,
 			'meta_query' => $meta_query
