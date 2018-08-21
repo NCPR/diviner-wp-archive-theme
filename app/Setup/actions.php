@@ -33,3 +33,18 @@ function diviner_admin_style() {
 	// wp_enqueue_style('admin-styles', get_template_directory_uri().'/public/css/admin.css');
 }
 add_action('admin_enqueue_scripts', 'Tonik\Theme\App\Setup\diviner_admin_style');
+
+
+function diviner_scripts() {
+	$version = date( 'Y.m.d' );
+	$app_scripts    = 'browse-app/dist/master.js';
+	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
+		$app_scripts = apply_filters( 'browse_js_dev_path', $app_scripts );
+	}
+	wp_enqueue_script( 'core-app-browse', $app_scripts, [  ], $version, true );
+
+}
+add_action('wp_enqueue_scripts', 'Tonik\Theme\App\Setup\diviner_scripts');
+
+
+

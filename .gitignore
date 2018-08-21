@@ -10,3 +10,6 @@ Thumbs.db
 public
 
 .env
+
+**/node_modules/
+**/bower_components/

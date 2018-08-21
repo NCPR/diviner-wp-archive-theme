@@ -1,0 +1,9 @@
+export const CONFIG = window.modern_tribe_config || {};
+export const API_CONFIG = CONFIG.store_locator || {};
+export const LOCATIONS = API_CONFIG.locations || [];
+export const CITIES = API_CONFIG.cities || [];
+export const STATES = API_CONFIG.states || [];
+export const API_KEY = API_CONFIG.api_key || '';
+export const CURRENT_SITE_ID = API_CONFIG.current_site_id;
+export const I18N = window.modern_tribe_i18n.locator || {};
+export const BASE_PATH = API_CONFIG.base_path;
