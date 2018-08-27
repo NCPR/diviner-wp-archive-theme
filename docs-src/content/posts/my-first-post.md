@@ -1,7 +1,7 @@
 ---
 title: "My First Post"
 date: 2018-08-27T10:21:12-04:00
-draft: true
+draft: false
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor neque, volutpat eget varius sed, accumsan ut massa. Sed nec vestibulum tortor. Nulla mattis tempor justo, eu sodales lorem elementum eget. Ut vel auctor urna. Nunc a risus vel risus condimentum convallis. Nulla ut dolor nisi. Phasellus sagittis vel leo vel pharetra. Curabitur euismod sapien sagittis risus volutpat, a vehicula nisi faucibus. Integer eleifend massa ac est sagittis, sed lacinia massa facilisis. Nunc at pharetra ante.
