@@ -1,0 +1,5 @@
+baseURL = "https://ncpr.github.io/diviner-wp-archive-theme/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+publishDir = "../docs"
+theme = "hugo-bootstrap"
