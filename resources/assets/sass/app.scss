@@ -2,7 +2,7 @@
 @import 'utilities/variables';
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 
@@ -51,8 +51,8 @@ body {
   max-width: 25%;
 
   ul {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
   }
 }
 
@@ -60,11 +60,11 @@ body {
   padding-top: 1em;
 
   ul {
-    padding: 0;
+	padding: 0;
 
-    & > * + * { margin-left: 0.5em; }
+	& > * + * { margin-left: 0.5em; }
 
-    li { display: inline-block; }
+	li { display: inline-block; }
   }
 }
 

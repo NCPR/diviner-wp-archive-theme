@@ -2,7 +2,9 @@
 
 namespace Tonik\Theme\App;
 
+use Diviner\Plugin\Plugin;
 use Tonik\Gin\Asset\Asset;
+use Tonik\Gin\Foundation\Exception\BindingResolutionException;
 use Tonik\Gin\Foundation\Theme;
 use Tonik\Gin\Template\Template;
 
@@ -37,6 +39,41 @@ function config($key = null)
     }
 
     return theme('config');
+}
+
+/**
+ * Gets plugin instance.
+ *
+ * @param string|null $key
+ * @param array $parameters
+ *
+ * @return Plugin|mixed
+ */
+function plugin($key = null, $parameters = [])
+{
+	if (null !== $key) {
+		return Plugin::getInstance()->get($key, $parameters);
+	}
+
+	return Plugin::getInstance();
+}
+
+/**
+ * Gets plugin config instance.
+ *
+ * @param string|null $key
+ *
+ * @return array
+ *
+ * @throws BindingResolutionException If the config is not bound.
+ */
+function plugin_config($key = null)
+{
+	if (null !== $key) {
+		return plugin('config')->get($key);
+	}
+
+	return plugin('config');
 }
 
 /**

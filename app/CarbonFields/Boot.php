@@ -19,14 +19,18 @@ class Boot {
 	 */
 	public function hook() {
 
-		// add_filter( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
+		$action = 'after_setup_theme';
+		if ( DIVINER_IS_PLUGIN ) {
+			$action = 'plugins_loaded';
+		}
 
+		add_filter( $action, [ $this, 'boot_carbon_fields' ] );
 	}
 
 	/**
-	 * Example
+	 * Boot carbon fields after theme setup
 	 */
-	public function after_setup_theme() {
+	public function boot_carbon_fields() {
 		Carbon_Fields::boot();
 	}
 

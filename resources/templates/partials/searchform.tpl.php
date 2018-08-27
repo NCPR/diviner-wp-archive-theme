@@ -5,7 +5,7 @@
             type="text"
             name="s"
             value="<?php the_search_query(); ?>"
-            placeholder="<?= __('Searching for...', Tonik\Theme\App\config('textdomain')) ?>"
+            placeholder="<?= __('Searching for...', 'ncpr-diviner'); ?>"
         >
     </label>
 

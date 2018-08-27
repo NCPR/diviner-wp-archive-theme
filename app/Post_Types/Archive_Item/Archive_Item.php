@@ -3,6 +3,7 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
+use function Tonik\Theme\App\config;
 
 class Archive_Item {
 
@@ -25,19 +26,19 @@ class Archive_Item {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'page-attributes' ),
+			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 			'map_meta_cap'       => true,
-			// 'has_archive'     => _x( 'archive-item', 'post archive slug', 'tribe' ),
 		];
 	}
 
 	public function get_labels() {
 		return [
 			'labels' => [
-				'singular' => __( 'Archive Item', 'tribe' ),
-				'plural'   => __( 'Archive Items', 'tribe' ),
-				'slug'     => _x( 'archive-item', 'post type slug', 'tribe' ),
-				'name'     => _x( 'Archive Items', 'post type general name')
+				'singular' => __( 'Archive Item', 'ncpr-diviner' ),
+				'plural'   => __( 'Archive Items', 'ncpr-diviner' ),
+				'slug'     => _x( 'archive-item', 'post type slug', 'ncpr-diviner' ),
+				'name'     => _x( 'Archive Items', 'post type general name'),
+				'add_new_item' => __( 'Add New Archive Item', 'ncpr-diviner' ),
 			]
 		];
 	}

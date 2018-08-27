@@ -2,24 +2,68 @@
 }
 
 .wrap-diviner--preset {
-
-  .wp-list-table {
-    .column-id {
-      width: 5%;
-    }
-    .column-title {
-      width: 50%;
-    }
-    .column-description {
-      width: 40%;
-    }
-  }
+	.wp-list-table {
+		.column-id {
+			width: 5%;
+		}
+		.column-title {
+			width: 50%;
+		}
+		.column-description {
+			width: 40%;
+		}
+	}
 }
 
-/*
-.wp-list-table .column-id { width: 5%; }';
-  echo '.wp-list-table .column-booktitle { width: 40%; }';
-  echo '.wp-list-table .column-author { width: 35%; }';
-  echo '.wp-list-table .column-isbn { width: 20%; }';
-  */
+.wrap-diviner--default {
+	.wp-list-table {
+		.column-id {
+			width: 5%;
+		}
+		.column-title {
+			width: 50%;
+		}
+		.column-description {
+			width: 40%;
+		}
+	}
+}
+
+.post-edit--diviner_field {
+}
+
+#carbon_fields_container_date_field_variables {
+	display: none !important;
+
+	.post-field-type--diviner_date_field & {
+		display: block !important;
+	}
+}
+
+#carbon_fields_container_taxonomy_field_variables {
+	display: none !important;
+	.post-field-type--diviner_taxonomy_field & {
+		display: block !important;
+	}
+}
+
+#carbon_fields_container_custom_post_type_field_variables {
+	display: none !important;
+	.post-field-type--diviner_cpt_field & {
+		display: block !important;
+	}
+}
+
+#carbon_fields_container_select_field_variables {
+	display: none !important;
+	.post-field-type--diviner_select_field & {
+		display: block !important;
+	}
+}
+
+#minor-publishing {
+	.post-edit--diviner_field & {
+		display: none;
+	}
+}
 
