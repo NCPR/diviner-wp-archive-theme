@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>What is DIVINER? on Diviner</title>
+    <link>https://ncpr.github.io/diviner-wp-archive-theme/</link>
+    <description>Recent content in What is DIVINER? on Diviner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>NCPR Copyright 2018</copyright>
+    <lastBuildDate>Mon, 27 Aug 2018 10:21:12 -0400</lastBuildDate>
+    
+	<atom:link href="https://ncpr.github.io/diviner-wp-archive-theme/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DIVINER is...</title>
+      <link>https://ncpr.github.io/diviner-wp-archive-theme/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ncpr.github.io/diviner-wp-archive-theme/about/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor neque, volutpat eget varius sed, accumsan ut massa. Sed nec vestibulum tortor. Nulla mattis tempor justo, eu sodales lorem elementum eget. Ut vel auctor urna. Nunc a risus vel risus condimentum convallis. Nulla ut dolor nisi. Phasellus sagittis vel leo vel pharetra. Curabitur euismod sapien sagittis risus volutpat, a vehicula nisi faucibus. Integer eleifend massa ac est sagittis, sed lacinia massa facilisis.</description>
+    </item>
+    
+    <item>
+      <title>Documentation</title>
+      <link>https://ncpr.github.io/diviner-wp-archive-theme/documentation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ncpr.github.io/diviner-wp-archive-theme/documentation/</guid>
+      <description>Curabitur tristique efficitur metus, nec consectetur nisl auctor malesuada. Curabitur imperdiet facilisis felis, nec eleifend felis pellentesque sit amet. Proin eget dictum ipsum. Vivamus sed risus in sapien tempor vehicula. Vestibulum facilisis ultrices nunc in placerat. Mauris cursus gravida neque, non vulputate nunc fringilla sit amet. Sed imperdiet consectetur sodales.
+Maecenas nec augue sit amet lacus lacinia varius. Donec eu nibh at leo cursus lobortis porttitor vel erat. Phasellus vel ultricies dolor.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started</title>
+      <link>https://ncpr.github.io/diviner-wp-archive-theme/getting-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ncpr.github.io/diviner-wp-archive-theme/getting-started/</guid>
+      <description>How the three pines shake! Pines are the hardest sort of tree to live when shifted to any other soil, and here there&amp;rsquo;s none but the crew&amp;rsquo;s cursed clay. Steady, helmsman! steady. This is the sort of weather when brave hearts snap ashore, and keeled hulls split at sea. Our captain has his birthmark; look yonder, boys, there&amp;rsquo;s another in the sky&amp;mdash;lurid-like, ye see, all else pitch black.
+I blame no one  &amp;ldquo;I blame no one,&amp;rdquo; returned Phileas Fogg, with perfect calmness.</description>
+    </item>
+    
+    <item>
+      <title>Workbook: Is Diviner right for you?</title>
+      <link>https://ncpr.github.io/diviner-wp-archive-theme/workbook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ncpr.github.io/diviner-wp-archive-theme/workbook/</guid>
+      <description>Maecenas nec augue sit amet lacus lacinia varius. Donec eu nibh at leo cursus lobortis porttitor vel erat. Phasellus vel ultricies dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pharetra felis odio, quis hendrerit metus vehicula eu. Vestibulum suscipit feugiat molestie. Sed nibh dolor, rutrum at convallis at, placerat id risus. Praesent vitae ipsum vitae eros blandit tincidunt. Mauris pulvinar, risus et mattis aliquet, neque massa commodo lectus, ut imperdiet nibh odio faucibus leo.</description>
+    </item>
+    
+  </channel>
+</rss>
