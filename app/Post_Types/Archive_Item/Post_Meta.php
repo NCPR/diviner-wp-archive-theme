@@ -115,7 +115,7 @@ class Post_Meta {
 
 	public function get_field( $post_id, $type ) {
 		$id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_ID );
-		$label = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_LABEL_TITLE );
+		$label = get_the_title( $post_id );
 		$helper = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
 		return call_user_func( array($type, 'render'), $post_id, $id, $label, $helper);
 	}

@@ -67,11 +67,30 @@ class AdminModifications {
 		global $pagenow;
 
 		if (!$pagenow || !$post) {
-			return;
+			return $classes;
 		}
 		// what type of class is this
-		$type = carbon_get_the_post_meta( Post_Meta::FIELD_TYPE );
-		$classes .= sprintf( ' archive-item-edit--%s', $type );
+		if ( get_post_type() !== Archive_Item::NAME ) {
+			return $classes;
+		}
+
+		if ( get_the_ID() ) {
+
+		}
+
+		$type = carbon_get_post_meta( get_the_ID(), Post_Meta::FIELD_TYPE );
+		if ( ! empty( $type ) ) {
+			$classes .= sprintf( ' archive-item-edit--%s', $type );
+		} else {
+			// pseudo code
+			// check the query
+			if ( !empty( $_GET[ 'type' ] ) ) {
+				$type = $_GET[ 'type' ];
+				if ( ! empty( $type ) ) {
+					// $classes .= sprintf( ' archive-item-edit--%s', $field_type );
+				}
+			}
+		}
 
 		return $classes;
 	}

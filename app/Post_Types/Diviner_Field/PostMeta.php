@@ -23,7 +23,6 @@ class PostMeta {
 
 	const FIELD_ID = 'div_field_id';
 
-	const FIELD_LABEL_TITLE = 'div_field_label_title';
 	const FIELD_BROWSE_HELPER_TEXT = 'div_field_browse_helper';
 	const FIELD_ADMIN_HELPER_TEXT = 'div_field_admin_helper';
 	const FIELD_BROWSE_PLACEMENT = 'div_field_browse_placement';
@@ -82,7 +81,6 @@ class PostMeta {
 				$this->get_field_types(),
 				$this->get_field_id(),
 				$this->get_field_active(),
-				$this->get_field_label_field(),
 				$this->get_field_browser_helper_text(),
 				$this->get_field_browser_placement(),
 				$this->get_field_include_search(),
@@ -193,23 +191,49 @@ class PostMeta {
 			Select_Field::NAME => Select_Field::TITLE,
 			CPT_Field::NAME => CPT_Field::TITLE,
 		];
-		return Field::make( 'select', self::FIELD_TYPE, 'Type of field' )
+		$field =  Field::make( 'select', self::FIELD_TYPE, 'Type of field' )
+			->set_classes( self::FIELD_TYPE )
 			->add_options($types)
 			->set_help_text( 'What kind of field is this' );
+
+		if ( !empty( $_GET[ 'field_type' ] ) ) {
+			$default_value = $_GET[ 'field_type' ];
+			$field->set_default_value( $default_value );
+		}
+		return $field;
+	}
+
+	public function get_field_type() {
+		$type = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
+		if ( ! empty($type) ) {
+			return $type;
+		}
+		if ( !empty( $_GET[ 'field_type' ] ) ) {
+			return $_GET[ 'field_type' ];
+		}
+		return null;
 	}
 
 	public function get_field_id() {
-		return Field::make( 'text', self::FIELD_ID, 'Field ID (use only lower case with underscores)' )
-			->set_required( true );;
+		$field = Field::make( 'text', self::FIELD_ID, 'Field ID (for reference only)' )
+			->set_required( true )->set_classes( self::FIELD_ID );
+
+		$id = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_ID );
+
+		if ( empty($id) ) {
+			$type = $this->get_field_type();
+			$default_value = uniqid( sprintf('%s_', $type ) );
+			$field->set_default_value( $default_value );
+		}
+
+		// ->set_default_value( $default_value );
+
+		return $field;
 	}
 
 	public function get_field_active() {
 		return Field::make( 'checkbox', self::FIELD_ACTIVE, 'Is Field Active?' )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
-	}
-
-	public function get_field_label_field() {
-		return Field::make( 'text', self::FIELD_LABEL_TITLE, 'Field Label' );
 	}
 
 	public function get_field_browser_helper_text() {
