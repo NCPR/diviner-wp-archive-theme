@@ -1,5 +1,41 @@
 baseURL = "https://ncpr.github.io/diviner-wp-archive-theme/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Diviner"
 publishDir = "../docs"
 theme = "hugo-bootstrap"
+
+copyright = "NCPR Copyright 2018"
+
+
+[menu]
+
+  [[menu.main]]
+    identifier = "diviner"
+    name = "What is diviner?"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "about"
+    weight = -110
+
+  [[menu.main]]
+    identifier = "workbook"
+    name = "Workbook"
+    pre = "<i class='fa fa-road'></i>"
+    url = "workbook"
+    weight = -100
+
+  [[menu.main]]
+      identifier = "getting-started"
+      name = "Getting Started"
+      pre = "<i class='fa fa-road'></i>"
+      url = "getting-started"
+      weight = -90
+
+  [[menu.main]]
+      identifier = "documentation"
+      name = "Documentation"
+      pre = "<i class='fa fa-road'></i>"
+      url = "documentation"
+      weight = -80
+
+
+

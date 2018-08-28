@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+<header>
+    <h2 class="blog-post-title">
+        <a class="text-dark" href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+    </h2>
+    <hr>
+</header>
+<article class="blog-post">
+    {{ .Content }}
+</article>
+
+{{ end }}
