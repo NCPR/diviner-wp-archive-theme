@@ -125,14 +125,27 @@ class AdminModifications {
 			<h2>Select a Field Type</h2>
 
 			<p>
-				<?php _e('Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.' ); ?>
+				So you have a bunch of photos/videos/documents….but how do you want your audience to be able to find them? Whether it’s by date, location, or subject matter, this is where you simultaneously
+			</p>
+
+			<ul>
+				<li>
+					Design your uploading experience by choosing what information will be assigned to each archive item, and
+				</li>
+				<li>
+					Design the browse page of your archive.
+				</li>
+			</ul>
+
+			<p>
+				There are five kinds of fields:
 			</p>
 
 
 			<div class="field-select-wrap">
 				<h2>Text Field</h2>
 				<p>
-					<?php _e('Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.' ); ?>
+					<?php _e('Add a text field for a type of information you wish to assign to EACH archive item, but which will be completely different for each archive item. Example: serial number, catalog number, internal title, etc.' ); ?>
 				</p>
 				<a href="post-new.php?post_type=diviner_field&field_type=<?php echo CPT_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Text Field
@@ -141,9 +154,9 @@ class AdminModifications {
 
 
 			<div class="field-select-wrap">
-				<h2>Date Field</h2>
+				<h2>Date</h2>
 				<p>
-					<?php _e('Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.' ); ?>
+					<?php _e('Add a date field if you would like your audience to be able to filter by a date range, by year, decade, or by century. Ex: if you want to sort a collection of a thousand photos from the 20th century into decades  ' ); ?>
 				</p>
 				<a href="post-new.php?post_type=diviner_field&field_type=<?php echo Date_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Date Field
@@ -151,9 +164,9 @@ class AdminModifications {
 			</div>
 
 			<div class="field-select-wrap">
-				<h2>Taxonomy Field</h2>
+				<h2>Taxonomy (Category/Tags/Keywords)</h2>
 				<p>
-					<?php _e('Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.' ); ?>
+					<?php _e('Add a taxonomy field for categories you want to sort your materials by (ex: by location, such as by county, by neighborhood, or by room in a museum). You will have to create the choices in this category (ex: by county; Clinton, Essex, Warren, and Jefferson). Taxonomy fields are best suited to a category with fewer than twenty choices, which do not need further explanation to a viewer.' ); ?>
 				</p>
 				<a href="post-new.php?post_type=diviner_field&field_type=<?php echo Taxonomy_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Taxonomy Field
@@ -163,7 +176,9 @@ class AdminModifications {
 			<div class="field-select-wrap">
 				<h2>Custom Post Type Field</h2>
 				<p>
-					<?php _e('Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.' ); ?>
+					<?php _e('For categories with many choices (20+) and which you would like to be able to elaborate on and attach auxiliary information, use the CPT field. A good example would be if you wished to sort your materials by their creator (photographer, author, etc.) – for each creator, this type of field allows you to create an “entry” for that creator. Other examples: donor, institution.
+
+' ); ?>
 				</p>
 				<a href="post-new.php?post_type=diviner_field&field_type=<?php echo CPT_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Custom Post Type Field
@@ -173,7 +188,7 @@ class AdminModifications {
 			<div class="field-select-wrap">
 				<h2>Select Field</h2>
 				<p>
-					<?php _e('Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.' ); ?>
+					<?php _e('Add a select field to assign a piece of information that comes from a very small list of pre-set choices to each of your archive item. Examples: Art Format, with the choices being Painting, Sculpture, or Digital.  ' ); ?>
 				</p>
 				<a href="post-new.php?post_type=diviner_field&field_type=select" class="button button-primary button-hero">
 					Add a New Select Field
@@ -204,55 +219,46 @@ class AdminModifications {
 		?>
 
 		<div class="wrap wrap-diviner wrap-diviner--default">
-			<?php
-			$defaultTable = new Default_Fields_List_Table();
-			$defaultTable ->prepare_items();
-			?>
-			<h2>Default Fields</h2>
-			<div class="about-text">
-				<?php _e('These fields are always preset on all archive items. They are part of the standard wordpress experience.' ); ?>
-			</div>
-			<div class="wrap">
-				<?php $defaultTable ->display(); ?>
-			</div>
+            <?php
+            $presetFieldTable = new Preset_Fields_List_Table();
+            $presetFieldTable->prepare_items();
+            ?>
+			<h2>Manage Your Archive Item</h2>
+
+			<?php if ( $presetFieldTable->is_empty() ) { ?>
+
+                <div class="about-text">
+                    <p>
+                        You have not custom fields currently active on your your archive items. That probably means you have just installed the plugin for the first time and are getting set up. Please refer to the documentation at <a href="https://ncpr.github.io/diviner-wp-archive-theme/">https://ncpr.github.io/diviner-wp-archive-theme/</a>.
+                    </p>
+
+                    <p>
+                        Click thru the below link to add more fields to your archive item.
+                    </p>
+                </div>
+
+            <?php } else { ?>
+
+                <div class="about-text">
+                    <?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item. ' ); ?>
+                </div>
+
+
+                <div>
+                    <?php $presetFieldTable->display(); ?>
+                    <input type="submit" name="submit" id="submit" class="button" value="Toggle Field Activattion">
+                </div>
+
+            <?php } ?>
 
 		</div>
-
-		<div class="wrap wrap-diviner wrap-diviner--preset" id="wrap-diviner--preset">
-			<?php
-			$presetFieldTable = new Preset_Fields_List_Table();
-			$presetFieldTable->prepare_items();
-			?>
-			<h2>Preset Configurable Fields</h2>
-			<div class="about-text">
-				<?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item. ' ); ?>
-			</div>
-			<div>
-				<?php $presetFieldTable->display(); ?>
-				<input type="submit" name="submit" id="submit" class="button" value="Toggle Field Activattion">
-			</div>
-
-		</div>
-
 
 		<div class="wrap wrap-diviner wrap-diviner--light">
-
-			<h3>
-				<?php _e('Click the below button to add more fields.' ); ?>
-			</h3>
-
+            <h4>Build out your archive item!</h4>
 			<a href="index.php?page=<?php echo self::SLUG_WIZARD; ?>" class="button button-primary button-hero">
 				Add a New Field
 			</a>
-
-
 		</div>
-
-
-
-
-
-
 
 		<?php
 	}

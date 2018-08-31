@@ -3,7 +3,7 @@ title: "Getting Started"
 draft: false
 ---
 
-**How the three pines shake!** Pines are the hardest sort of tree to live when shifted to any other soil, and here there's none but the crew's cursed clay. _Steady, helmsman! steady._ This is the sort of weather when brave hearts snap ashore, and keeled hulls split at sea. Our captain has his birthmark; look yonder, boys, [there's another in the sky&mdash;lurid-like](#), ye see, all else pitch black.
+**How the three pines shake asdhkhasdhkas!** Pines are the hardest sort of tree to live when shifted to any other soil, and here there's none but the crew's cursed clay. _Steady, helmsman! steady._ This is the sort of weather when brave hearts snap ashore, and keeled hulls split at sea. Our captain has his birthmark; look yonder, boys, [there's another in the sky&mdash;lurid-like](#), ye see, all else pitch black.
 
 ## I blame no one
 

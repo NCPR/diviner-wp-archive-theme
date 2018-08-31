@@ -252,12 +252,12 @@ class PostMeta {
 	}
 
 	public function get_field_include_search() {
-		return Field::make( 'checkbox', self::FIELD_BROWSE_INCLUDE_SEARCH, 'Include in search' )
+		return Field::make( 'checkbox', self::FIELD_BROWSE_INCLUDE_SEARCH, 'Include in Search' )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 
 	public function get_field_display() {
-		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, 'Appear in Modal Overlay' )
+		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, 'Appear in Popup' )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 
