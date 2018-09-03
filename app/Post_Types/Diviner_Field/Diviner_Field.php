@@ -40,11 +40,12 @@ class Diviner_Field {
 	public function get_labels() {
 		return [
 			'labels' => [
-				'singular' => __( 'Diviner Field', 'ncpr-diviner' ),
-				'plural'   => __( 'Diviner Fields', 'ncpr-diviner' ),
-				'slug'     => _x( 'diviner-field', 'post type slug', 'diviner' ),
-				'name'     => _x( 'Diviner Fields', 'post type general name'),
+				'singular'     => __( 'Diviner Field', 'ncpr-diviner' ),
+				'plural'       => __( 'Diviner Fields', 'ncpr-diviner' ),
+				'slug'         => _x( 'diviner-field', 'post type slug', 'diviner' ),
+				'name'         => _x( 'Diviner Fields', 'post type general name'),
 				'add_new_item' => __( 'Add New Diviner Field', 'ncpr-diviner' ),
+				'edit_item'    => __( 'Edit Diviner Field', 'ncpr-diviner' ),
 			]
 		];
 	}

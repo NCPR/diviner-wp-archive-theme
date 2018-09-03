@@ -34,7 +34,8 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	public function get_fields()
 	{
 		$args = [
-			'post_type' => \Diviner\Post_Types\Diviner_Field\Diviner_Field::NAME
+			'post_type' => \Diviner\Post_Types\Diviner_Field\Diviner_Field::NAME,
+            'posts_per_page' => -1,
 		];
 
 		// The Query

@@ -26,7 +26,6 @@ class PostMeta {
 	const FIELD_BROWSE_HELPER_TEXT = 'div_field_browse_helper';
 	const FIELD_ADMIN_HELPER_TEXT = 'div_field_admin_helper';
 	const FIELD_BROWSE_PLACEMENT = 'div_field_browse_placement';
-	const FIELD_BROWSE_INCLUDE_SEARCH = 'div_field_include_search';
 	const FIELD_BROWSE_DISPLAY = 'div_field_display';
 
 	const FIELD_IS_DEFAULT     = 'div_field_default';
@@ -79,13 +78,12 @@ class PostMeta {
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_types(),
-				$this->get_field_id(),
 				$this->get_field_active(),
 				$this->get_field_browser_helper_text(),
 				$this->get_field_browser_placement(),
-				$this->get_field_include_search(),
-				$this->get_field_display(),
+				$this->get_field_display_popup(),
 				$this->get_field_admin_helper_text(),
+                $this->get_field_id(),
 			))
 			->set_priority( 'high' );
 
@@ -232,7 +230,7 @@ class PostMeta {
 	}
 
 	public function get_field_active() {
-		return Field::make( 'checkbox', self::FIELD_ACTIVE, 'Is Field Active?' )
+		return Field::make( 'checkbox', self::FIELD_ACTIVE, 'Is Field Active and Should it be Added to each Archive Item? ' )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 
@@ -242,22 +240,17 @@ class PostMeta {
 
 	public function get_field_admin_helper_text() {
 		return Field::make( 'text', self::FIELD_ADMIN_HELPER_TEXT, 'Admin Experience Helper Text' )
-			->set_help_text( 'Appears in the admin page' );;
+			->set_help_text( 'Appears in the admin page' );
 	}
 
 	public function get_field_browser_placement() {
-		return Field::make( 'select', self::FIELD_BROWSE_PLACEMENT, 'Placement in the Browse Page' )
+		return Field::make( 'select', self::FIELD_BROWSE_PLACEMENT, 'Browse Page Placement' )
 			->add_options(self::PLACEMENT_OPTIONS)
-			->set_help_text( 'Top left or none' );
+			->set_help_text( 'Where this field appears in the browse page (top left or none)' );
 	}
 
-	public function get_field_include_search() {
-		return Field::make( 'checkbox', self::FIELD_BROWSE_INCLUDE_SEARCH, 'Include in Search' )
-			->set_option_value( self::FIELD_CHECKBOX_VALUE );
-	}
-
-	public function get_field_display() {
-		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, 'Appear in Popup' )
+	public function get_field_display_popup() {
+		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, 'Ensure the Field Appears in Popup Overlay After a User Clicks a Thumbnail in the Search Returns Grid' )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 

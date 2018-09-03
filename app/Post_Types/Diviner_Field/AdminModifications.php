@@ -21,6 +21,17 @@ class AdminModifications {
 		add_filter( 'admin_body_class', array( &$this,'admin_body_class') );
 		add_filter( 'gettext', array( &$this,'change_excerpt_text'), 10, 2 );
 
+		add_action( 'edit_form_after_title', array( &$this,'add_helper_text') );
+
+
+	}
+
+	function add_helper_text(){
+		global $post;
+		if( !empty($post) && $post->post_type !== Diviner_Field::NAME) {
+			return;
+		}
+		echo '<div>Label appearing on the Archive item Edit Screen</div>';
 	}
 
 
@@ -219,42 +230,42 @@ class AdminModifications {
 		?>
 
 		<div class="wrap wrap-diviner wrap-diviner--default">
-            <?php
-            $presetFieldTable = new Preset_Fields_List_Table();
-            $presetFieldTable->prepare_items();
-            ?>
+			<?php
+			$presetFieldTable = new Preset_Fields_List_Table();
+			$presetFieldTable->prepare_items();
+			?>
 			<h2>Manage Your Archive Item</h2>
 
 			<?php if ( $presetFieldTable->is_empty() ) { ?>
 
-                <div class="about-text">
-                    <p>
-                        You have not custom fields currently active on your your archive items. That probably means you have just installed the plugin for the first time and are getting set up. Please refer to the documentation at <a href="https://ncpr.github.io/diviner-wp-archive-theme/">https://ncpr.github.io/diviner-wp-archive-theme/</a>.
-                    </p>
+				<div class="about-text">
+					<p>
+						You have not custom fields currently active on your your archive items. That probably means you have just installed the plugin for the first time and are getting set up. Please refer to the documentation at <a href="https://ncpr.github.io/diviner-wp-archive-theme/">https://ncpr.github.io/diviner-wp-archive-theme/</a>.
+					</p>
 
-                    <p>
-                        Click thru the below link to add more fields to your archive item.
-                    </p>
-                </div>
+					<p>
+						Click thru the below link to add more fields to your archive item.
+					</p>
+				</div>
 
-            <?php } else { ?>
+			<?php } else { ?>
 
-                <div class="about-text">
-                    <?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item. ' ); ?>
-                </div>
+				<div class="about-text">
+					<?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item. ' ); ?>
+				</div>
 
 
-                <div>
-                    <?php $presetFieldTable->display(); ?>
-                    <input type="submit" name="submit" id="submit" class="button" value="Toggle Field Activattion">
-                </div>
+				<div>
+					<?php $presetFieldTable->display(); ?>
+					<input type="submit" name="submit" id="submit" class="button" value="Toggle Field Activattion">
+				</div>
 
-            <?php } ?>
+			<?php } ?>
 
 		</div>
 
-		<div class="wrap wrap-diviner wrap-diviner--light">
-            <h4>Build out your archive item!</h4>
+		<div class="wrap wrap-diviner wrap-diviner--auto-width wrap-diviner--light">
+			<h2>Build out your archive item!</h2>
 			<a href="index.php?page=<?php echo self::SLUG_WIZARD; ?>" class="button button-primary button-hero">
 				Add a New Field
 			</a>

@@ -146,6 +146,19 @@ class Post_Meta {
 
 			}
 		}
+
+		// add the related field
+		$related = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_RELATED_FIELD);
+		if ( $related ) {
+			$field = \Diviner\Post_Types\Diviner_Field\Types\Related_Field::render(
+				0,
+				'diviner_related',
+				'Related Archive Items',
+				'Appears on each archive item single page as a slider'
+			);
+			$dyn_fields[] = $field;
+		}
+
 		$dyn_fields_container = Container::make( 'post_meta', 'Additional Fields' )
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( $dyn_fields )

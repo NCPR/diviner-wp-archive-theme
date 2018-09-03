@@ -79,6 +79,7 @@ class AdminModifications {
 		}
 
 		$type = carbon_get_post_meta( get_the_ID(), Post_Meta::FIELD_TYPE );
+        $classes .= ' archive-item-edit';
 		if ( ! empty( $type ) ) {
 			$classes .= sprintf( ' archive-item-edit--%s', $type );
 		} else {

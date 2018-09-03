@@ -19,6 +19,7 @@ class Settings {
 	const FIELD_GENERAL_GOOGLE_ID = 'diviner_field_general_google_id';
 	const FIELD_GENERAL_BROWSE_MODAL = 'diviner_field_general_browse_modal';
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
+	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
 
 	protected $theme_options;
 
@@ -35,7 +36,8 @@ class Settings {
 				$this->browse_field(),
 				$this->browse_modal_field(),
 				$this->google_field(),
-				$this->help_page_field()
+				$this->help_page_field(),
+				$this->related_field(),
 			)
 		);
 
@@ -57,6 +59,11 @@ class Settings {
 	public function browse_modal_field() {
 		return Field::make( 'checkbox', self::FIELD_GENERAL_BROWSE_MODAL, 'Activate Modal in browse page on click' )
 			->set_help_text( 'Modal displays by default mid size image, title, and copyright information' );
+	}
+
+	public function related_field() {
+		return Field::make( 'checkbox', self::FIELD_GENERAL_RELATED_FIELD, 'Activate Related Items Field on Archive Items' )
+			->set_help_text( 'Allows you to manually associate archive items to each other' );
 	}
 
 	public function get_pages() {

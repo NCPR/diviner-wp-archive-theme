@@ -1,4 +1,11 @@
 
+.archive-item-edit {
+	.page-title-action {
+		display: none;
+	}
+}
+
+
 #carbon_fields_container_audio {
 	display: none !important;
 
@@ -7,7 +14,6 @@
 		display: block !important;
 	}
 }
-
 
 #carbon_fields_container_video {
 	display: none !important;

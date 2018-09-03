@@ -1,13 +1,26 @@
 
 .wrap-diviner {
 
-  ul {
-    margin: 15px 0;
+	ul {
+		margin: 15px 0;
 
-    li {
-      margin-left: 13px;
-      margin-bottom: 10px;
-    }
-  }
+		li {
+			margin-left: 13px;
+			margin-bottom: 10px;
+		}
+	}
 
+	h2 {
+		margin-bottom: 15px;
+
+		&:first-of-type {
+			margin-bottom: 15px;
+		}
+	}
+
+}
+
+.wrap-diviner--auto-width {
+	display: inline-block;
+	width: autos;
 }
