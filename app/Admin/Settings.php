@@ -63,7 +63,7 @@ class Settings {
 
 	public function related_field() {
 		return Field::make( 'checkbox', self::FIELD_GENERAL_RELATED_FIELD, __( 'Activate Related Items Field on Archive Items', 'ncpr-diviner' ) )
-			->set_help_text( __( 'Allows you to manually associate archive items to each other', 'ncpr-diviner' ) );
+			->set_help_text( __( 'Related Items – add related items if you want to be able to manually connect your items to one another. For example, you might choose to link a sculpture to a series of paintings, or a video of a downtown area to pictures of downtown businesses. You add related items ONCE only, and it will work for your entire collection. ', 'ncpr-diviner' ) );
 	}
 
 	public function get_pages() {
