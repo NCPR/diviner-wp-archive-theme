@@ -1,6 +1,13 @@
 .post-type-diviner_field {
 }
 
+.wrap-diviner--light {
+	background-color: $color_white;
+	margin: 30px 0;
+	padding: 20px;
+	max-width: 750px;
+}
+
 .wrap-diviner--preset {
 	.wp-list-table {
 		.column-id {
@@ -29,7 +36,25 @@
 	}
 }
 
+.wrap-diviner--limited {
+	max-width: 850px;
+}
+
 .post-edit--diviner_field {
+}
+
+.field-select-wrap {
+	background-color: $color_white;
+	margin: 30px 0;
+	padding: 20px;
+
+	h2 {
+		font-size: 20px;
+	}
+
+	p {
+		font-size: 120%;
+	}
 }
 
 #carbon_fields_container_date_field_variables {
@@ -67,3 +92,27 @@
 	}
 }
 
+.carbon-field.div_field_id {
+	input {
+		pointer-events: none;
+		color: $color_grey_dark;
+		background-color: $color_grey_light;
+	}
+	label {
+		color: $color_grey_dark;
+	}
+}
+
+#carbon_fields_container_hidden_field_variables {
+	display: none !important;
+}
+
+.carbon-field.div_field_type {
+	display: none;
+}
+
+.post-edit--diviner_field {
+	.page-title-action {
+		display: none;
+	}
+}

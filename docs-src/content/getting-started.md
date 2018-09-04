@@ -3,24 +3,36 @@ title: "Getting Started"
 draft: false
 ---
 
-**How the three pines shake!** Pines are the hardest sort of tree to live when shifted to any other soil, and here there's none but the crew's cursed clay. _Steady, helmsman! steady._ This is the sort of weather when brave hearts snap ashore, and keeled hulls split at sea. Our captain has his birthmark; look yonder, boys, [there's another in the sky&mdash;lurid-like](#), ye see, all else pitch black.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula eu lectus vel egestas. Mauris eu molestie leo. Mauris lobortis risus nec luctus consectetur. Pellentesque vestibulum leo id turpis faucibus malesuada. Donec velit libero, fermentum in aliquet eu, euismod eget turpis. Quisque imperdiet eleifend lectus, eget consequat purus. Sed imperdiet dolor ac suscipit vulputate. Nam convallis risus non ipsum efficitur volutpat.
 
-## I blame no one
+## TECHNICAL REQUIREMENTS:
+    
+   - server to install it in with a version of WordPress – a web server with a database with x amount of gigs
+   - optional installs: elastic search
+   - additional optional plug-ins
+   - back-up system for your server
 
-> "I blame no one," returned Phileas Fogg, with perfect calmness.  "Go!" Passepartout left the room, and went to find Aouda, to whom he delivered his master's message. "Madam," he added, "I can do nothing myself&mdash;nothing!  I have no influence over my master; but you, perhaps&mdash;" "What influence could I have?" replied Aouda.  "Mr. Fogg is influenced by no one.  Has he ever understood that my gratitude to him is overflowing?  Has he ever read my heart?
+## INSTALL
+    
+    
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula eu lectus vel egestas. Mauris eu molestie leo. Mauris lobortis risus nec luctus consectetur. Pellentesque vestibulum leo id turpis faucibus malesuada. Donec velit libero, fermentum in aliquet eu, euismod eget turpis. Quisque imperdiet eleifend lectus, eget consequat purus. Sed imperdiet dolor ac suscipit vulputate. Nam convallis risus non ipsum efficitur volutpat.
+  
+   > 
+   > 1.   This is the first list item.
+   > 2.   This is the second list item.
+   > 
+   > 
 
-    return shell_exec("echo $input | $markdown_script");
+   
+   
+   **Search facets:**
+    
+    
+   1. Download, Install, and activate the DIVINER plug-in and open your administration experience. 
+   2. Set DIVINER General Settings
+   3. Activate fields to design archive item and browse page experiences. READ MORE ABOUT FIELDS HERE: What’s a field and why do I need one? 
+   4. Assign your labels to the fields, and choose where they will express on the Browse page. 
+   5.      
+   6. Once your fields are configured, start adding archive items
 
-- Lorem ipsum dolor sit amet
-- consectetuer adipiscing elit
-- Aenean commodo ligula eget dolor
-- Aenean massa
-
-> ## This is a header.
-> 
-> 1.   This is the first list item.
-> 2.   This is the second list item.
-> 
-> Here's some example code:
-> 
->     return shell_exec("echo $input | $markdown_script");
+  
