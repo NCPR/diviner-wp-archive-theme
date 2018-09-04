@@ -23,11 +23,9 @@ class PostMeta {
 
 	const FIELD_ID = 'div_field_id';
 
-	const FIELD_LABEL_TITLE = 'div_field_label_title';
 	const FIELD_BROWSE_HELPER_TEXT = 'div_field_browse_helper';
 	const FIELD_ADMIN_HELPER_TEXT = 'div_field_admin_helper';
 	const FIELD_BROWSE_PLACEMENT = 'div_field_browse_placement';
-	const FIELD_BROWSE_INCLUDE_SEARCH = 'div_field_include_search';
 	const FIELD_BROWSE_DISPLAY = 'div_field_display';
 
 	const FIELD_IS_DEFAULT     = 'div_field_default';
@@ -76,36 +74,34 @@ class PostMeta {
 
 	public function add_post_meta() {
 		// var_dump('PostMeta add_post_meta');
-		$this->container = Container::make( 'post_meta', 'Field Variables' )
+		$this->container = Container::make( 'post_meta', __( 'Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_types(),
-				$this->get_field_id(),
 				$this->get_field_active(),
-				$this->get_field_label_field(),
 				$this->get_field_browser_helper_text(),
 				$this->get_field_browser_placement(),
-				$this->get_field_include_search(),
-				$this->get_field_display(),
+				$this->get_field_display_popup(),
 				$this->get_field_admin_helper_text(),
+                $this->get_field_id(),
 			))
 			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', 'Hidden Field Variables' )
+		$this->container = Container::make( 'post_meta', __( 'Hidden Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_is_custom(),
 			))
 			->set_priority( 'low' );
 
-		$this->container = Container::make( 'post_meta', 'Date Field Variables' )
+		$this->container = Container::make( 'post_meta', __( 'Date Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_date_type(),
 			))
 			->set_priority( 'low' );
 
-		$this->container = Container::make( 'post_meta', 'Taxonomy Field Variables' )
+		$this->container = Container::make( 'post_meta', __( 'Taxonomy Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_taxonomy_type(),
@@ -115,7 +111,7 @@ class PostMeta {
 			))
 			->set_priority( 'low' );
 
-		$this->container = Container::make( 'post_meta', 'Custom Post Type Field Variables' )
+		$this->container = Container::make( 'post_meta', __( 'Custom Post Type Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_cpt_id(),
@@ -124,7 +120,7 @@ class PostMeta {
 			))
 			->set_priority( 'low' );
 
-		$this->container = Container::make( 'post_meta', 'Select Field Variables' )
+		$this->container = Container::make( 'post_meta', __( 'Select Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
 				$this->get_field_select_options(),
@@ -135,51 +131,51 @@ class PostMeta {
 	public function get_field_select_options() {
 		return Field::make( 'complex', self::FIELD_SELECT_OPTIONS )
 			->add_fields( array(
-				Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, 'Drop down label' ),
+				Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, __( 'Drop down label', 'ncpr-diviner' ) ),
 			) );
 	}
 
 	public function get_field_cpt_id() {
-		return Field::make( 'text', self::FIELD_CPT_ID, 'Custom Post Type ID (use only lower case with underscores)' );
+		return Field::make( 'text', self::FIELD_CPT_ID, __( 'Custom Post Type ID (use only lower case with underscores)', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_cpt_label() {
-		return Field::make( 'text', self::FIELD_CPT_LABEL, 'Custom Post Label' );
+		return Field::make( 'text', self::FIELD_CPT_LABEL, __( 'Custom Post Label', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_cpt_slug() {
-		return Field::make( 'text', self::FIELD_CPT_SLUG, 'Custom Post Label (use only lower case with dashes)' );
+		return Field::make( 'text', self::FIELD_CPT_SLUG, __( 'Custom Post Slug (use only lower case with dashes)', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_taxonomy_slug() {
-		return Field::make( 'text', self::FIELD_TAXONOMY_SLUG, 'Taxonomy Slug' )
-			->set_help_text( 'no spaces or underscores' );
+		return Field::make( 'text', self::FIELD_TAXONOMY_SLUG, __( 'Taxonomy Slug', 'ncpr-diviner' ) )
+			->set_help_text( __( 'No spaces or underscores', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_taxonomy_singular_label() {
-		return Field::make( 'text', self::FIELD_TAXONOMY_SINGULAR_LABEL, 'Singular Taxonomy Label' )
-			->set_help_text( 'ex: Type of Work' );
+		return Field::make( 'text', self::FIELD_TAXONOMY_SINGULAR_LABEL, __( 'Singular Taxonomy Label', 'ncpr-diviner' ) )
+			->set_help_text( __( 'ex: Type of Work', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_taxonomy_plural_label() {
-		return Field::make( 'text', self::FIELD_TAXONOMY_PLURAL_LABEL, 'Plural Taxonomy Label' )
-			->set_help_text( 'ex: Types of Work' );
+		return Field::make( 'text', self::FIELD_TAXONOMY_PLURAL_LABEL, __( 'Plural Taxonomy Label', 'ncpr-diviner' ) )
+			->set_help_text( __( 'ex: Types of Work', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_taxonomy_type() {
-		return Field::make( 'select', self::FIELD_TAXONOMY_TYPE, 'Type of taxonomy field' )
+		return Field::make( 'select', self::FIELD_TAXONOMY_TYPE, __( 'Type of taxonomy field', 'ncpr-diviner' ) )
 			->add_options(self::FIELD_TAXONOMY_TYPE_OPTIONS)
-			->set_help_text( 'Tag or category' );
+			->set_help_text( __( 'Tag or category', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_date_type() {
-		return Field::make( 'select', self::FIELD_DATE_TYPE, 'Type of date field' )
+		return Field::make( 'select', self::FIELD_DATE_TYPE, __( 'Type of date field', 'ncpr-diviner' ) )
 			->add_options(self::FIELD_DATE_TYPE_OPTIONS)
-			->set_help_text( 'Century slider, Decade slider, Year slider, and two date min max selector' );
+			->set_help_text( __( 'Century slider, Decade slider, Year slider, and two date min max selector', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_is_custom() {
-		return Field::make( 'checkbox', self::FIELD_IS_DEFAULT, 'Is Default Field' )
+		return Field::make( 'checkbox', self::FIELD_IS_DEFAULT, __( 'Is Default Field', 'ncpr-diviner' ) )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE )
 			->set_required( false );
 	}
@@ -193,47 +189,68 @@ class PostMeta {
 			Select_Field::NAME => Select_Field::TITLE,
 			CPT_Field::NAME => CPT_Field::TITLE,
 		];
-		return Field::make( 'select', self::FIELD_TYPE, 'Type of field' )
+		$field =  Field::make( 'select', self::FIELD_TYPE, __( 'Type of field', 'ncpr-diviner' ) )
+			->set_classes( self::FIELD_TYPE )
 			->add_options($types)
-			->set_help_text( 'What kind of field is this' );
+			->set_help_text( __( 'What kind of field is this', 'ncpr-diviner' ) );
+
+		if ( !empty( $_GET[ 'field_type' ] ) ) {
+			$default_value = $_GET[ 'field_type' ];
+			$field->set_default_value( $default_value );
+		}
+		return $field;
+	}
+
+	public function get_field_type() {
+		$type = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
+		if ( ! empty($type) ) {
+			return $type;
+		}
+		if ( !empty( $_GET[ 'field_type' ] ) ) {
+			return $_GET[ 'field_type' ];
+		}
+		return null;
 	}
 
 	public function get_field_id() {
-		return Field::make( 'text', self::FIELD_ID, 'Field ID (use only lower case with underscores)' )
-			->set_required( true );;
+		$field = Field::make( 'text', self::FIELD_ID, __( 'Field ID (for reference only)', 'ncpr-diviner' ) )
+			->set_required( true )->set_classes( self::FIELD_ID );
+
+		$id = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_ID );
+
+		if ( empty($id) ) {
+			$type = $this->get_field_type();
+			$default_value = uniqid( sprintf('%s_', $type ) );
+			$field->set_default_value( $default_value );
+		}
+
+		// ->set_default_value( $default_value );
+
+		return $field;
 	}
 
 	public function get_field_active() {
-		return Field::make( 'checkbox', self::FIELD_ACTIVE, 'Is Field Active?' )
+		return Field::make( 'checkbox', self::FIELD_ACTIVE, __( 'Is Field Active and Should it be Added to each Archive Item?', 'ncpr-diviner' ) )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
-	}
-
-	public function get_field_label_field() {
-		return Field::make( 'text', self::FIELD_LABEL_TITLE, 'Field Label' );
 	}
 
 	public function get_field_browser_helper_text() {
-		return Field::make( 'text', self::FIELD_BROWSE_HELPER_TEXT, 'Browse Page Filter Helper Text' );
+		return Field::make( 'text', self::FIELD_BROWSE_HELPER_TEXT, __( 'Browse Page Filter Helper Text', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_admin_helper_text() {
-		return Field::make( 'text', self::FIELD_ADMIN_HELPER_TEXT, 'Admin Experience Helper Text' )
-			->set_help_text( 'Appears in the admin page' );;
+		return Field::make( 'text', self::FIELD_ADMIN_HELPER_TEXT, __( 'Admin Experience Helper Text', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Select Field Variables', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_browser_placement() {
-		return Field::make( 'select', self::FIELD_BROWSE_PLACEMENT, 'Placement in the Browse Page' )
+		return Field::make( 'select', self::FIELD_BROWSE_PLACEMENT, __( 'Browse Page Placement', 'ncpr-diviner' ) )
 			->add_options(self::PLACEMENT_OPTIONS)
-			->set_help_text( 'Top left or none' );
+			->set_help_text( __( 'Where this field appears in the browse page (top left or none)', 'ncpr-diviner' ) );
 	}
 
-	public function get_field_include_search() {
-		return Field::make( 'checkbox', self::FIELD_BROWSE_INCLUDE_SEARCH, 'Include in search' )
-			->set_option_value( self::FIELD_CHECKBOX_VALUE );
-	}
-
-	public function get_field_display() {
-		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, 'Appear in Modal Overlay' )
+	public function get_field_display_popup() {
+		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, __( 'Ensure the Field Appears in Popup Overlay After a User Clicks a Thumbnail in the Search Returns Grid', 'ncpr-diviner' ) )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 
