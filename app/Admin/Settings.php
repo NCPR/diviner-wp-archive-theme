@@ -29,7 +29,7 @@ class Settings {
 	public function crb_attach_theme_options() {
 		$this->theme_options = Container::make(
 			'theme_options',
-			__( 'Diviner Settings', 'crb' )
+			__( 'Diviner Settings', 'ncpr-diviner' )
 		)->add_fields(
 			array(
 				$this->permissions_field(),
@@ -44,26 +44,26 @@ class Settings {
 	}
 
 	public function permissions_field() {
-		return Field::make( 'rich_text', self::FIELD_GENERAL_PERMISSIONS, 'Permissions/Rights Note on Archive item' );
+		return Field::make( 'rich_text', self::FIELD_GENERAL_PERMISSIONS, __( 'Permissions/Rights Note on Archive item', 'ncpr-diviner' ) );
 	}
 
 	public function browse_field() {
-		return Field::make( 'text', self::FIELD_GENERAL_BROWSE_TITLE, 'Browse Page Title' )
-			->set_help_text( 'Ex: Explore Photos' );
+		return Field::make( 'text', self::FIELD_GENERAL_BROWSE_TITLE, __( 'Browse Page Title', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Ex: Explore Photos','ncpr-diviner' ) );
 	}
 
 	public function google_field() {
-		return Field::make( 'text', self::FIELD_GENERAL_GOOGLE_ID, 'Google Analytics ID' );
+		return Field::make( 'text', self::FIELD_GENERAL_GOOGLE_ID, __( 'Google Analytics ID', 'ncpr-diviner' ) );
 	}
 
 	public function browse_modal_field() {
-		return Field::make( 'checkbox', self::FIELD_GENERAL_BROWSE_MODAL, 'Activate Modal in browse page on click' )
-			->set_help_text( 'Modal displays by default mid size image, title, and copyright information' );
+		return Field::make( 'checkbox', self::FIELD_GENERAL_BROWSE_MODAL, __( 'Activate Modal in browse page on click', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Modal displays by default mid size image, title, and copyright information', 'ncpr-diviner' ) );
 	}
 
 	public function related_field() {
-		return Field::make( 'checkbox', self::FIELD_GENERAL_RELATED_FIELD, 'Activate Related Items Field on Archive Items' )
-			->set_help_text( 'Allows you to manually associate archive items to each other' );
+		return Field::make( 'checkbox', self::FIELD_GENERAL_RELATED_FIELD, __( 'Activate Related Items Field on Archive Items', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Allows you to manually associate archive items to each other', 'ncpr-diviner' ) );
 	}
 
 	public function get_pages() {
@@ -82,8 +82,8 @@ class Settings {
 	}
 
 	public function help_page_field() {
-		return Field::make( 'select', self::FIELD_GENERAL_HELP_PAGE, 'Help Page' )
+		return Field::make( 'select', self::FIELD_GENERAL_HELP_PAGE, __( 'Help Page', 'ncpr-diviner' ) )
 			->add_options( [ $this, 'get_pages' ] )
-			->set_help_text( 'Appears on the browse page in the upper right' );
+			->set_help_text( __( 'Appears on the browse page in the upper right', 'ncpr-diviner' ) );
 	}
 }

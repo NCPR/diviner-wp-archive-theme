@@ -2,6 +2,8 @@
 
 namespace Diviner\Post_Types\Diviner_Field;
 
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
+
 // WP_List_Table is not loaded automatically so we need to load it in our application
 if( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
@@ -34,7 +36,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	public function get_fields()
 	{
 		$args = [
-			'post_type' => \Diviner\Post_Types\Diviner_Field\Diviner_Field::NAME,
+			'post_type' => Diviner_Field::NAME,
             'posts_per_page' => -1,
 		];
 
