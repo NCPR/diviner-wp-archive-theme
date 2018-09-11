@@ -13,7 +13,7 @@
   </url>
   
   <url>
-    <loc>https://ncpr.github.io/diviner-wp-archive-theme/about/</loc>
+    <loc>https://ncpr.github.io/diviner-wp-archive-theme/contact/</loc>
   </url>
   
   <url>
@@ -25,12 +25,16 @@
   </url>
   
   <url>
-    <loc>https://ncpr.github.io/diviner-wp-archive-theme/tags/</loc>
-    <priority>0</priority>
+    <loc>https://ncpr.github.io/diviner-wp-archive-theme/is-diviner-for-you/</loc>
   </url>
   
   <url>
-    <loc>https://ncpr.github.io/diviner-wp-archive-theme/workbook/</loc>
+    <loc>https://ncpr.github.io/diviner-wp-archive-theme/question-answer/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ncpr.github.io/diviner-wp-archive-theme/tags/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>

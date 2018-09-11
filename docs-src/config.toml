@@ -10,17 +10,10 @@ copyright = "NCPR Copyright 2018"
 [menu]
 
   [[menu.main]]
-    identifier = "diviner"
-    name = "What is diviner?"
-    pre = "<i class='fa fa-heart'></i>"
-    url = "about"
-    weight = -110
-
-  [[menu.main]]
-    identifier = "workbook"
-    name = "Workbook"
+    identifier = "is-diviner-for-you"
+    name = "Is Diviner Right For You?"
     pre = "<i class='fa fa-road'></i>"
-    url = "workbook"
+    url = "is-diviner-for-you"
     weight = -100
 
   [[menu.main]]
@@ -37,5 +30,17 @@ copyright = "NCPR Copyright 2018"
       url = "documentation"
       weight = -80
 
+  [[menu.main]]
+      identifier = "question-answer"
+      name = "Question & Answer"
+      pre = "<i class='fa fa-road'></i>"
+      url = "question-answer"
+      weight = -70
 
+  [[menu.main]]
+      identifier = "contact"
+      name = "Contact"
+      pre = "<i class='fa fa-road'></i>"
+      url = "contact"
+      weight = -50
 
