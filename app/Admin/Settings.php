@@ -19,6 +19,7 @@ class Settings {
 	const FIELD_GENERAL_GOOGLE_ID = 'diviner_field_general_google_id';
 	const FIELD_GENERAL_BROWSE_MODAL = 'diviner_field_general_browse_modal';
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
+	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
 
 	protected $theme_options;
 
@@ -28,35 +29,41 @@ class Settings {
 	public function crb_attach_theme_options() {
 		$this->theme_options = Container::make(
 			'theme_options',
-			__( 'Diviner Settings', 'crb' )
+			__( 'Diviner Settings', 'ncpr-diviner' )
 		)->add_fields(
 			array(
 				$this->permissions_field(),
 				$this->browse_field(),
 				$this->browse_modal_field(),
 				$this->google_field(),
-				$this->help_page_field()
+				$this->help_page_field(),
+				$this->related_field(),
 			)
 		);
 
 	}
 
 	public function permissions_field() {
-		return Field::make( 'rich_text', self::FIELD_GENERAL_PERMISSIONS, 'Permissions/Rights Note on Archive item' );
+		return Field::make( 'rich_text', self::FIELD_GENERAL_PERMISSIONS, __( 'Permissions/Rights Note on Archive item', 'ncpr-diviner' ) );
 	}
 
 	public function browse_field() {
-		return Field::make( 'text', self::FIELD_GENERAL_BROWSE_TITLE, 'Browse Page Title' )
-			->set_help_text( 'Ex: Explore Photos' );
+		return Field::make( 'text', self::FIELD_GENERAL_BROWSE_TITLE, __( 'Browse Page Title', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Ex: Explore Photos','ncpr-diviner' ) );
 	}
 
 	public function google_field() {
-		return Field::make( 'text', self::FIELD_GENERAL_GOOGLE_ID, 'Google Analytics ID' );
+		return Field::make( 'text', self::FIELD_GENERAL_GOOGLE_ID, __( 'Google Analytics ID', 'ncpr-diviner' ) );
 	}
 
 	public function browse_modal_field() {
-		return Field::make( 'checkbox', self::FIELD_GENERAL_BROWSE_MODAL, 'Activate Modal in browse page on click' )
-			->set_help_text( 'Modal displays by default mid size image, title, and copyright information' );
+		return Field::make( 'checkbox', self::FIELD_GENERAL_BROWSE_MODAL, __( 'Activate Modal in browse page on click', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Modal displays by default mid size image, title, and copyright information', 'ncpr-diviner' ) );
+	}
+
+	public function related_field() {
+		return Field::make( 'checkbox', self::FIELD_GENERAL_RELATED_FIELD, __( 'Activate Related Items Field on Archive Items', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Related Items – add related items if you want to be able to manually connect your items to one another. For example, you might choose to link a sculpture to a series of paintings, or a video of a downtown area to pictures of downtown businesses. You add related items ONCE only, and it will work for your entire collection. ', 'ncpr-diviner' ) );
 	}
 
 	public function get_pages() {
@@ -75,8 +82,8 @@ class Settings {
 	}
 
 	public function help_page_field() {
-		return Field::make( 'select', self::FIELD_GENERAL_HELP_PAGE, 'Help Page' )
+		return Field::make( 'select', self::FIELD_GENERAL_HELP_PAGE, __( 'Help Page', 'ncpr-diviner' ) )
 			->add_options( [ $this, 'get_pages' ] )
-			->set_help_text( 'Appears on the browse page in the upper right' );
+			->set_help_text( __( 'Appears on the browse page in the upper right', 'ncpr-diviner' ) );
 	}
 }

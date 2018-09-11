@@ -34,11 +34,12 @@ class Archive_Item {
 	public function get_labels() {
 		return [
 			'labels' => [
-				'singular' => __( 'Archive Item', 'ncpr-diviner' ),
-				'plural'   => __( 'Archive Items', 'ncpr-diviner' ),
-				'slug'     => _x( 'archive-item', 'post type slug', 'ncpr-diviner' ),
-				'name'     => _x( 'Archive Items', 'post type general name'),
+				'singular'     => __( 'Archive Item', 'ncpr-diviner' ),
+				'plural'       => __( 'Archive Items', 'ncpr-diviner' ),
+				'slug'         => _x( 'archive-item', 'post type slug', 'ncpr-diviner' ),
+				'name'         => _x( 'Archive Items', 'post type general name'),
 				'add_new_item' => __( 'Add New Archive Item', 'ncpr-diviner' ),
+				'edit_item'    => __( 'Edit Archive Item', 'ncpr-diviner' ),
 			]
 		];
 	}

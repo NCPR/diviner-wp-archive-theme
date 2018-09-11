@@ -2,6 +2,8 @@
 
 namespace Diviner\Post_Types\Diviner_Field;
 
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
+
 // WP_List_Table is not loaded automatically so we need to load it in our application
 if( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
@@ -12,25 +14,30 @@ if( ! class_exists( 'WP_List_Table' ) ) {
  */
 class Preset_Fields_List_Table extends \WP_List_Table
 {
-	/**
-	 * Prepare the items for the table to process
-	 *
-	 * @return Void
-	 */
-	public function prepare_items()
-	{
-		$columns = $this->get_columns();
-		$hidden = $this->get_hidden_columns();
-		$sortable = $this->get_sortable_columns();
-		$fields = $this->get_fields();
-		$this->_column_headers = array($columns, $hidden, $sortable);
-		$this->items = $fields;
-	}
+    /**
+     * Prepare the items for the table to process
+     *
+     * @return Void
+     */
+    public function prepare_items()
+    {
+        $columns = $this->get_columns();
+        $hidden = $this->get_hidden_columns();
+        $sortable = $this->get_sortable_columns();
+        $fields = $this->get_fields();
+        $this->_column_headers = array($columns, $hidden, $sortable);
+        $this->items = $fields;
+    }
+
+    public function is_empty() {
+        return (bool) ( isset( $fields ) && count( $fields ) > 0 );
+    }
 
 	public function get_fields()
 	{
 		$args = [
-			'post_type' => \Diviner\Post_Types\Diviner_Field\Diviner_Field::NAME
+			'post_type' => Diviner_Field::NAME,
+            'posts_per_page' => -1,
 		];
 
 		// The Query
