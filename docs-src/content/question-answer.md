@@ -1,13 +1,11 @@
 ---
-title: "Workbook: Is Diviner right for you?"
+title: "Questions & Answers"
 draft: false
 ---
 
 Maecenas nec augue sit amet lacus lacinia varius. Donec eu nibh at leo cursus lobortis porttitor vel erat. Phasellus vel ultricies dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pharetra felis odio, quis hendrerit metus vehicula eu. Vestibulum suscipit feugiat molestie. Sed nibh dolor, rutrum at convallis at, placerat id risus. Praesent vitae ipsum vitae eros blandit tincidunt. Mauris pulvinar, risus et mattis aliquet, neque massa commodo lectus, ut imperdiet nibh odio faucibus leo. Duis iaculis nisl sed ligula eleifend luctus. Quisque gravida, diam sit amet mollis maximus, urna elit volutpat velit, nec venenatis sapien nisi non tortor. Nullam at purus consectetur, auctor nisl nec, elementum velit. Donec facilisis, felis non sodales euismod, nunc purus tempor tortor, eu tincidunt nunc sapien id libero. Ut ut nunc fringilla magna iaculis ultrices. Suspendisse dignissim erat ante, eget ultrices odio varius luctus. Nullam justo ex, elementum vitae ex quis, aliquet ultricies urna.
 
 > "I blame no one," returned Phileas Fogg, with perfect calmness.  "Go!" Passepartout left the room, and went to find Aouda, to whom he delivered his master's message. "Madam," he added, "I can do nothing myself&mdash;nothing!  I have no influence over my master; but you, perhaps&mdash;" "What influence could I have?" replied Aouda.  "Mr. Fogg is influenced by no one.  Has he ever understood that my gratitude to him is overflowing?  Has he ever read my heart?
-
-    return shell_exec("echo $input | $markdown_script");
 
 - Lorem ipsum dolor sit amet
 - consectetuer adipiscing elit

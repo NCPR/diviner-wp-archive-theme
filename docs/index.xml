@@ -13,11 +13,11 @@
     
     
     <item>
-      <title>DIVINER is...</title>
-      <link>https://ncpr.github.io/diviner-wp-archive-theme/about/</link>
+      <title>Contact</title>
+      <link>https://ncpr.github.io/diviner-wp-archive-theme/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://ncpr.github.io/diviner-wp-archive-theme/about/</guid>
+      <guid>https://ncpr.github.io/diviner-wp-archive-theme/contact/</guid>
       <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor neque, volutpat eget varius sed, accumsan ut massa. Sed nec vestibulum tortor. Nulla mattis tempor justo, eu sodales lorem elementum eget. Ut vel auctor urna. Nunc a risus vel risus condimentum convallis. Nulla ut dolor nisi. Phasellus sagittis vel leo vel pharetra. Curabitur euismod sapien sagittis risus volutpat, a vehicula nisi faucibus. Integer eleifend massa ac est sagittis, sed lacinia massa facilisis.</description>
     </item>
     
@@ -38,15 +38,24 @@ Maecenas nec augue sit amet lacus lacinia varius. Donec eu nibh at leo cursus lo
       
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/getting-started/</guid>
       <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula eu lectus vel egestas. Mauris eu molestie leo. Mauris lobortis risus nec luctus consectetur. Pellentesque vestibulum leo id turpis faucibus malesuada. Donec velit libero, fermentum in aliquet eu, euismod eget turpis. Quisque imperdiet eleifend lectus, eget consequat purus. Sed imperdiet dolor ac suscipit vulputate. Nam convallis risus non ipsum efficitur volutpat.
-TECHNICAL REQUIREMENTS:  server to install it in with a version of WordPress – a web server with a database with x amount of gigs optional installs: elastic search additional optional plug-ins back-up system for your server  INSTALL Lorem ipsum dolor sit amet, consectetur adipiscing elit.</description>
+Technical Requirements:  server to install it in with a version of WordPress – a web server with a database with x amount of gigs optional installs: elastic search additional optional plug-ins back-up system for your server  Installation of Diviner Lorem ipsum dolor sit amet, consectetur adipiscing elit.</description>
     </item>
     
     <item>
-      <title>Workbook: Is Diviner right for you?</title>
-      <link>https://ncpr.github.io/diviner-wp-archive-theme/workbook/</link>
+      <title>Is DIVINER right for you?</title>
+      <link>https://ncpr.github.io/diviner-wp-archive-theme/is-diviner-for-you/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://ncpr.github.io/diviner-wp-archive-theme/workbook/</guid>
+      <guid>https://ncpr.github.io/diviner-wp-archive-theme/is-diviner-for-you/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor neque, volutpat eget varius sed, accumsan ut massa. Sed nec vestibulum tortor. Nulla mattis tempor justo, eu sodales lorem elementum eget. Ut vel auctor urna. Nunc a risus vel risus condimentum convallis. Nulla ut dolor nisi. Phasellus sagittis vel leo vel pharetra. Curabitur euismod sapien sagittis risus volutpat, a vehicula nisi faucibus. Integer eleifend massa ac est sagittis, sed lacinia massa facilisis.</description>
+    </item>
+    
+    <item>
+      <title>Questions &amp; Answers</title>
+      <link>https://ncpr.github.io/diviner-wp-archive-theme/question-answer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ncpr.github.io/diviner-wp-archive-theme/question-answer/</guid>
       <description>Maecenas nec augue sit amet lacus lacinia varius. Donec eu nibh at leo cursus lobortis porttitor vel erat. Phasellus vel ultricies dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce pharetra felis odio, quis hendrerit metus vehicula eu. Vestibulum suscipit feugiat molestie. Sed nibh dolor, rutrum at convallis at, placerat id risus. Praesent vitae ipsum vitae eros blandit tincidunt. Mauris pulvinar, risus et mattis aliquet, neque massa commodo lectus, ut imperdiet nibh odio faucibus leo.</description>
     </item>
     
