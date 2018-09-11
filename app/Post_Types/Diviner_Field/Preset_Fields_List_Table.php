@@ -14,6 +14,7 @@ if( ! class_exists( 'WP_List_Table' ) ) {
  */
 class Preset_Fields_List_Table extends \WP_List_Table
 {
+
     /**
      * Prepare the items for the table to process
      *
@@ -24,13 +25,12 @@ class Preset_Fields_List_Table extends \WP_List_Table
         $columns = $this->get_columns();
         $hidden = $this->get_hidden_columns();
         $sortable = $this->get_sortable_columns();
-        $fields = $this->get_fields();
+		$this->items = $this->get_fields();
         $this->_column_headers = array($columns, $hidden, $sortable);
-        $this->items = $fields;
     }
 
     public function is_empty() {
-        return (bool) ( isset( $fields ) && count( $fields ) > 0 );
+        return (bool) ( isset( $this->items ) || count( $this->items ) === 0 );
     }
 
 	public function get_fields()
