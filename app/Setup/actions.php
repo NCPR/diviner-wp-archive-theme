@@ -2,6 +2,8 @@
 
 namespace Tonik\Theme\App\Setup;
 
+use Diviner\Setup\JS_Config;
+
 /*
 |-----------------------------------------------------------
 | Theme Actions
@@ -37,10 +39,16 @@ add_action('admin_enqueue_scripts', 'Tonik\Theme\App\Setup\diviner_admin_style')
 
 function diviner_scripts() {
 	$version = date( 'Y.m.d' );
+
 	$app_scripts    = 'browse-app/dist/master.js';
 	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
 		$app_scripts = apply_filters( 'browse_js_dev_path', $app_scripts );
 	}
+	wp_register_script( 'core-app-browse', $app_scripts );
+
+	$js_config = new JS_Config();
+	wp_localize_script( 'core-app-browse', 'diviner_config', $js_config->get_data() );
+
 	wp_enqueue_script( 'core-app-browse', $app_scripts, [  ], $version, true );
 
 }

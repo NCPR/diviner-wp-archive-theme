@@ -22,5 +22,5 @@ const configDefault = {
 	permission_notice: ''
 };
 
-export const CONFIG = window.ncaw_config || configDefault; // eslint-disable-line camelcase
+export const CONFIG = window.diviner_config || configDefault; // eslint-disable-line camelcase
 

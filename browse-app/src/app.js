@@ -14,18 +14,18 @@ import Main from './containers/main';
  * The main container
  */
 
+console.log('CONFIG', CONFIG);
 
 class App extends Component {
 
 	render() {
-		console.log('App render');
 		return (
 			<div>
 				<BrowserRouter history={history}>
 					<Route path={`${CONFIG.base_browse_url}`} component={Main} />
 				</BrowserRouter>
 			</div>
-	);
+		);
 	}
 }
 
