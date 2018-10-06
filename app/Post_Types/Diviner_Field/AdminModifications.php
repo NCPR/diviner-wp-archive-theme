@@ -116,6 +116,7 @@ class AdminModifications {
 			array( &$this,'rc_scd_create_wizard') // -> To render the page
 		);
 
+
 	}
 
 	function rc_scd_create_wizard() {
@@ -148,7 +149,7 @@ class AdminModifications {
 				<p>
 					<?php _e('Add a text field for a type of information you wish to assign to EACH archive item, but which will be completely different for each archive item. Example: serial number, catalog number, internal title, etc.' ); ?>
 				</p>
-				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo CPT_Field::NAME; ?>" class="button button-primary button-hero">
+				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo Text_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Text Field
 				</a>
 			</div>
@@ -235,7 +236,13 @@ class AdminModifications {
 		</div>
 
 		<div class="wrap wrap-diviner wrap-diviner--auto-width wrap-diviner--light">
-			<h2>Build out your archive item!</h2>
+			<h2>
+			<?php if ( $presetFieldTable->is_empty() ) {
+				_e( 'Build out your archive item!', 'ncpr-diviner' );
+			} else {
+				_e( 'Add meta data to your archive item', 'ncpr-diviner' );
+			} ?>
+			</h2>
 			<a href="index.php?page=<?php echo self::SLUG_WIZARD; ?>" class="button button-primary button-hero">
 				Add a New Field
 			</a>
