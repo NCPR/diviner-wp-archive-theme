@@ -1,0 +1,18 @@
+
+.a-item {
+	margin-bottom: 20px;
+
+	@include g-grid( 12 );
+
+	@include g-state( sm ) {
+		@include g-grid( 4 );
+	}
+
+	@include g-state( md ) {
+		@include g-grid( 3 );
+	}
+	@include g-state( lg ) {
+		@include g-grid( 2 );
+	}
+
+}

@@ -3,7 +3,7 @@ const WPAPI = require('wpapi');
 import _ from 'lodash';
 import history from '../utils/data/history';
 
-import stateToParameters from '../../utils/stateToParameters';
+import stateToParameters from '../utils/stateToParameters';
 import { SETTINGS } from '../config/settings';
 import { CONFIG } from '../globals/config';
 import objectToParameters from '../utils/data/object-to-params';
@@ -34,10 +34,12 @@ site.archivalItems = site.registerRoute(
 	}
 );
 
-WPAPI.discover('/')
-	.then((siteDetails) => {
+if (process.env.NODE_ENV!=='production') {
+	WPAPI.discover('/')
+		.then((siteDetails) => {
 		console.info('siteDetails', siteDetails);
 	});
+}
 
 
 export const INVALIDATE_SEARCH_QUERY = 'INVALIDATE_SEARCH_QUERY';

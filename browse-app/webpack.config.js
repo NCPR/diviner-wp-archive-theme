@@ -23,6 +23,7 @@ const plugins = [
 				require('postcss-inline-comment'),
 				require('postcss-import'),
 				require('postcss-custom-media'),
+				require('postcss-for'),
 				require('postcss-quantity-queries'),
 				require('postcss-aspect-ratio'),
 				require('postcss-cssnext')({ browsers: ['last 3 versions', 'ie 11'] }),
