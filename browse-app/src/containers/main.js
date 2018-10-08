@@ -7,11 +7,17 @@ import SearchFacets from '../components/searchfacets';
 import Controls from '../components/controls';
 import Grid from '../components/grid';
 
+import { startApp } from '../actions';
+
 /**
  * The main container
  */
 
 class Main extends Component {
+
+	componentDidMount() {
+		this.props.startApp(this.props.location);
+	}
 
 	render() {
 		return (
@@ -34,5 +40,5 @@ class Main extends Component {
 	}
 }
 
-export default Main;
-// export default connect(null, { startApp })(Main);
+//export default Main;
+export default connect(null, { startApp })(Main);

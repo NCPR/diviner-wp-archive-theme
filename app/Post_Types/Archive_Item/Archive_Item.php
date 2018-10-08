@@ -28,6 +28,9 @@ class Archive_Item {
 			'menu_position'      => null,
 			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 			'map_meta_cap'       => true,
+			'show_in_rest'       => true,
+			'rest_base'          => 'archival-items',
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
 		];
 	}
 

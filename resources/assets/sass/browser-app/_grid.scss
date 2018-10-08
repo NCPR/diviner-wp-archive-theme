@@ -4,15 +4,19 @@
 
 	@include g-grid( 12 );
 
-	@include g-state( sm ) {
+	@include g-state( small ) {
+		@include g-grid( 6 );
+	}
+
+	@include g-state( medium ) {
 		@include g-grid( 4 );
 	}
 
-	@include g-state( md ) {
+	@include g-state( full ) {
 		@include g-grid( 3 );
 	}
-	@include g-state( lg ) {
+
+	@include g-state( large ) {
 		@include g-grid( 2 );
 	}
-
 }

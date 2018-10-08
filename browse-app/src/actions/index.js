@@ -225,6 +225,7 @@ function fetchPosts(cacheKey) {
 		// change URL
 		const obj = {};
 
+		/*
 		if (getState().orderBy) {
 			archivalQuery.custom_order(getState().orderBy);
 			obj.pOrder = getState().orderBy;
@@ -258,6 +259,8 @@ function fetchPosts(cacheKey) {
 			archivalQuery.donor(getState().donorFilter);
 			obj.pDonor = getState().donorFilter;
 		}
+		*/
+
 		if (getState().queryString.length) {
 			archivalQuery.search(getState().queryString);
 			obj.search = getState().queryString;
@@ -269,12 +272,14 @@ function fetchPosts(cacheKey) {
 
 		obj.pPage = getState().page;
 
+		/*
 		if (getState().tagsFilter.length) {
 			// get IDs
 			const tagIDs = _.map(getState().tagsFilter, (item) => item.value);
 			archivalQuery.tags(tagIDs);
 			obj.tags = tagIDs;
 		}
+		*/
 
 		const param = objectToParameters(obj);
 		const path = `/browse/?${param}`;
@@ -322,6 +327,7 @@ export function initiateSearch() {
 
 export function startApp(location) {
 	return (dispatch) => {
+		/*
 		if (location.search && location.search.length && location.search.indexOf('?') === 0) {
 			const params = location.search.substr(1);
 			const obj = getParams(params);
@@ -395,6 +401,7 @@ export function startApp(location) {
 				dispatch(setPage(parseInt(obj.pPage, 10)));
 			}
 		}
+		*/
 
 		dispatch(initiateSearch());
 	};

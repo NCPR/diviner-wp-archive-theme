@@ -79,6 +79,7 @@ return [
 		'Post_Types/Archive_Item/Archive_Item.php',
 		'Post_Types/Archive_Item/AdminModifications.php',
 		'Post_Types/Archive_Item/Post_Meta.php',
+		'Post_Types/Archive_Item/Rest.php',
 		'Post_Types/Diviner_Field/Diviner_Field.php',
 		'Post_Types/Diviner_Field/PostMeta.php',
 		'Post_Types/Diviner_Field/AdminModifications.php',
