@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import { setPopupArchiveItem, setPopupVisible, setPage, initiateSearch } from '../actions';
 
@@ -27,8 +27,8 @@ class Grid extends Component {
 	getImage(post) {
 		let featuredimage = null;
 		if (post.feature_image && post.feature_image.sizes) {
-			if (post.feature_image.sizes['ncaw-thumb'] && post.feature_image.sizes['ncaw-thumb'].url) {
-				featuredimage = post.feature_image.sizes['ncaw-thumb'].url;
+			if (post.feature_image.sizes['thumbnail'] && post.feature_image.sizes['thumbnail'].url) {
+				featuredimage = post.feature_image.sizes['thumbnail'].url;
 			} else if (post.feature_image.sizes.full && post.feature_image.sizes.full.url) {
 				featuredimage = post.feature_image.sizes.full.url;
 			}
@@ -37,6 +37,8 @@ class Grid extends Component {
 	}
 
 	createItem(post, i) {
+		const image = this.getImage(post);
+		console.log('image', image)
 		return (
 			<Item
 				key={i}
@@ -44,7 +46,8 @@ class Grid extends Component {
 				XhasAudio={post.has_audio}
 				hasAudio={false}
 				title={post.title.rendered}
-				image={post.image}>
+				onSelectItem={this.onSelectItem}
+				image={image}>
 			</Item>
 		);
 	}
@@ -52,7 +55,7 @@ class Grid extends Component {
 	getItems() {
 		return this.props.posts.map(
 			(post, i) => this.createItem(post, i)
-	);
+		);
 	}
 
 	getItemsStatic() {
@@ -116,24 +119,44 @@ class Grid extends Component {
 	}
 
 	render() {
-
-		console.log('render this.props.posts', this.props.posts);
+		const showPagination = !this.props.isFetching &&
+			(this.props.posts._paging && parseInt(this.props.posts._paging.totalPages, 10) > 1);
+		let totalPages = 0;
+		const currentPage = this.props.page - 1;
+		if (showPagination) {
+			totalPages = parseInt(this.props.posts._paging.totalPages, 10);
+		}
+		let label = 'Happy searching!!';
+		if (this.props.isFetching) {
+			label = 'Loading';
+		} else if (this.props.posts.length === 0 && !this.props.posts._paging) {
+			label = 'No results found';
+		}
 
 		return (
 			<div className="a-grid-wrap">
-				<div className="row a-grid">{this.getItems()}</div>
-				<ReactPaginate
-					previousLabel={"previous"}
-					nextLabel={"next"}
-					breakLabel={<a href="">...</a>}
-					breakClassName={"break-me"}
-					pageCount={5}
-					marginPagesDisplayed={2}
-					forcePage={1}
-					pageRangeDisplayed={4}
-					//onPageChange={this.handlePageClick}
-					containerClassName={"react-pagination"}
-					activeClassName={"active"} />
+				{
+					(this.props.posts.length > 0)
+						? <div className="a-grid">{this.getItems()}</div>
+						: <div>{label}</div>
+				}
+				{
+					(showPagination)
+						? <ReactPaginate
+							previousLabel={"previous"}
+							nextLabel={"next"}
+							breakLabel={<a href="">...</a>}
+							breakClassName={"break-me"}
+							pageCount={totalPages}
+							marginPagesDisplayed={2}
+							forcePage={currentPage}
+							pageRangeDisplayed={4}
+							onPageChange={this.handlePageClick}
+							containerClassName={"react-pagination"}
+							xsubContainerClassName={"pages pagination"}
+							activeClassName={"active"} />
+						: null
+					}
 			</div>
 		);
 	}

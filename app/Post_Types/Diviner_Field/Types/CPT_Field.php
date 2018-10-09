@@ -91,4 +91,16 @@ class CPT_Field extends FieldType {
 		}
 		return $field;
 	}
+
+	static public function get_blueprint( $post_id ) {
+		$blueprint = parent::get_blueprint( $post_id );
+		$additional_vars = [
+			'cpt_field_id'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID ),
+			'cpt_field_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL ),
+			'cpt_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG ),
+		];
+		// get all the CPT items
+		// Is this the best approach here? Should the Select always pull dynamically??
+		return array_merge($blueprint, $additional_vars);
+	}
 }

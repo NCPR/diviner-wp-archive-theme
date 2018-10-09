@@ -20,5 +20,4 @@ class Text_Field extends FieldType {
 		return $field;
 	}
 
-
 }

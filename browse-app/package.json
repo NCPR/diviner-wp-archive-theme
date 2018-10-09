@@ -31,6 +31,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.4",
+    "react-lazy-load": "^3.0.13",
     "react-paginate": "^5.2.4",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

@@ -8,7 +8,8 @@
     "watch": "npm run development -- --watch && webpack-dev-server --progress --colors"
   },
   "dependencies": {
-    "coffeekraken-gridle": "^3.0.1"
+    "coffeekraken-gridle": "^3.0.1",
+    "lazysizes": "^4.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",

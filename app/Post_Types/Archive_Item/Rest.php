@@ -15,6 +15,7 @@ class Rest {
 		register_rest_field( Archive_Item::NAME, 'feature_image', array(
 			'get_callback' => function( $arr ) {
 				$post_thumbnail_id = get_post_thumbnail_id( $arr['id'] );
+				// return $post_thumbnail_id;
 				return $this->get_image_data_for_api($post_thumbnail_id);
 			}
 		) );
@@ -22,6 +23,12 @@ class Rest {
 		register_rest_field( Archive_Item::NAME, 'permalink', array(
 			'get_callback' => function( $arr ) {
 				return get_the_permalink($arr['id']);
+			}
+		) );
+
+		register_rest_field( Archive_Item::NAME, 'test', array(
+			'get_callback' => function( $arr ) {
+				return 'helloe world';
 			}
 		) );
 	}

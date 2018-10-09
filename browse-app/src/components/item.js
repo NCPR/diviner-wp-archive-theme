@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import LazyLoad from 'react-lazy-load';
+import LazyLoad from 'react-lazy-load';
 
-console.log('PropTypes', PropTypes);
 
 class Item extends Component {
 
@@ -36,17 +35,19 @@ class Item extends Component {
 
 		return (
 			<div className={itemClass}>
-				<button className="a-item__action" onClick={this.onClick}>
+				<div className="a-item__action" onClick={this.onClick}>
 					<div className="a-item__figure">
 						<div className="a-item__img">
-							<img data-src={this.props.image} className="lazyload" />
+							<LazyLoad>
+								<img src={this.props.image} />
+							</LazyLoad>
 						</div>
 						<div
 							className="a-item__figure-caption"
 							dangerouslySetInnerHTML={{ __html: this.props.title }}>
 						</div>
 					</div>
-				</button>
+				</div>
 			</div>
 		);
 	}

@@ -1,4 +1,8 @@
 
+.a-grid {
+	@include g-row();
+}
+
 .a-item {
 	margin-bottom: 20px;
 
@@ -18,5 +22,20 @@
 
 	@include g-state( large ) {
 		@include g-grid( 2 );
+	}
+}
+
+.a-item__img {
+	position: relative;
+	background-color: $color_grey_light;
+	height: 0;
+	padding-top: 100%;
+
+	img {
+		width: 100%;
+		height: auto;
+		display: block;
+		position: absolute;
+		top: 0;
 	}
 }

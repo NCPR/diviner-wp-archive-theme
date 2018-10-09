@@ -19,7 +19,9 @@ const configDefault = {
 	year_choices: [],  // contains all the years
 	help_page: undefined,
 	base_browse_url: 'TESTURL',
-	permission_notice: ''
+	permission_notice: '',
+	taxonomies: [],
+	fields: []
 };
 
 export const CONFIG = window.diviner_config || configDefault; // eslint-disable-line camelcase

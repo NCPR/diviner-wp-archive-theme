@@ -84,4 +84,20 @@ class Taxonomy_Field extends FieldType {
 			$post_id
 		);
 	}
+
+	static public function get_blueprint( $post_id ) {
+		$blueprint = parent::get_blueprint( $post_id );
+		$additional_vars = [
+			'taxonomy_field_type'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE),
+			'taxonomy_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG),
+			'taxonomy_field_singular_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL),
+			'taxonomy_field_plural_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL),
+			'taxonomy_field_name'   => self::get_taxonomy_name( $post_id ),
+		];
+		// add all taxonomy terms
+		// should this be done asynchronisely
+
+
+		return array_merge($blueprint, $additional_vars);
+	}
 }
