@@ -109,7 +109,7 @@ class AdminModifications {
 			null,           // -> Set to null - will hide menu link
 			'Diviner Field Wizard',    // -> Page Title
 			'Diviner Field Wizard',   // -> Title that would otherwise appear in the menu
-			'manage-options', // -> Capability level
+			'manage_options', // -> Capability level
 			self::SLUG_WIZARD,   // -> Still accessible via admin.php?page=menu_handle
 			array( &$this,'rc_scd_create_wizard') // -> To render the page
 		);
