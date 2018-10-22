@@ -208,33 +208,24 @@ class AdminModifications {
 			<h2>Manage Your Archive Item</h2>
 
 			<?php if ( $presetFieldTable->is_empty() ) { ?>
-
 				<div class="about-text">
 					<p>
 						You have not custom fields currently active on your your archive items. That probably means you have just installed the plugin for the first time and are getting set up. Please refer to the documentation at <a href="https://ncpr.github.io/diviner-wp-archive-theme/">https://ncpr.github.io/diviner-wp-archive-theme/</a>.
 					</p>
-
 					<p>
 						Click thru the below link to add more fields to your archive item.
 					</p>
 				</div>
-
 			<?php } else { ?>
-
 				<div class="about-text">
 					<?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item. ' ); ?>
 				</div>
-
-
 				<div>
 					<?php $presetFieldTable->display(); ?>
 					<input type="submit" name="submit" id="submit" class="button" value="Toggle Field Activattion">
 				</div>
-
 			<?php } ?>
-
 		</div>
-
 		<div class="wrap wrap-diviner wrap-diviner--auto-width wrap-diviner--light">
 			<h2>
 			<?php if ( $presetFieldTable->is_empty() ) {
@@ -247,7 +238,6 @@ class AdminModifications {
 				Add a New Field
 			</a>
 		</div>
-
 		<?php
 	}
 
