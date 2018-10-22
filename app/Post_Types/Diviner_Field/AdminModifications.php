@@ -8,6 +8,8 @@ use Diviner\Admin\Settings;
 use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 
 class AdminModifications {
 
