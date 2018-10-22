@@ -12,8 +12,6 @@ class CPT_Field extends FieldType {
 	const TITLE = 'CPT Field';
 	const TYPE = 'association';
 
-	const FIELD_CPT_TYPE_FIELD_ID = 'diviner_cpt_type_field';
-
 	static public function setup ( $post_id ) {
 		// set up CPT
 		$field_id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
@@ -58,17 +56,6 @@ class CPT_Field extends FieldType {
 		];
 		$args = wp_parse_args( $args, $labels );
 		register_post_type( $field_id, $args );
-
-
-		// You could set up additional field here...
-		/*
-		$container = Container::make( 'post_meta', 'Creator Fields' )
-			->where( 'post_type', '=', Diviner_Field::NAME )
-			->add_fields( array(
-				Field::make( 'text', self::FIELD_CPT_TYPE_FIELD_ID, 'CPT Type Field ID' )
-			))
-			->set_priority( 'default' );
-		*/
 
 	}
 

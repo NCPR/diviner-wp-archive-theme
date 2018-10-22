@@ -16,6 +16,8 @@ class Diviner_Field {
 
 	const NAME = 'diviner_field';
 
+	public function __construct() {
+	}
 
 	public function hooks() {
 		add_action( 'init', array( &$this,'register'), 0, 0 );

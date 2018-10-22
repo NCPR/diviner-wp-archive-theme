@@ -47,15 +47,22 @@ class SearchFacets extends Component {
 		console.log('onChangeCptField', e, _this.props.fieldData);
 		const newData = _.cloneDeep(_this.props.fieldData);
 		console.log('newData', newData);
-		newData[this['data-id']] = e;
+		if (e === null) {
+			newData[this['data-id']] = '';
+		} else {
+			newData[this['data-id']] = e.value;
+		}
 		_this.props.onChangeFacets(newData);
 	}
 
 	onChangeTaxobomyField(e) {
 		console.log('onChangeTaxobomyField', e, _this.props.fieldData);
 		const newData = _.cloneDeep(_this.props.fieldData);
-		newData[this['data-id']] = e;
-		console.log('newData', newData);
+		if (e === null) {
+			newData[this['data-id']] = '';
+		} else {
+			newData[this['data-id']] = e.value;
+		}
 		_this.props.onChangeFacets(newData);
 	}
 
@@ -65,14 +72,24 @@ class SearchFacets extends Component {
 		);
 	}
 
+	getTaxonomyItemFromId(taxId, id) {
+		return _.find(CONFIG.taxonomies[taxId], { 'value': id })
+	}
+
+	getCptSelectItemFromId(cptId, id) {
+		return _.find(CONFIG.cpt_posts[cptId], { 'value': id })
+	}
+
 	createCptField(field) {
+		console.log('createCptField ', field	);
 		if (!CONFIG.cpt_posts[field.cpt_field_id]) {
 			return '';
 		}
 		const options = postsToSelectOptions(CONFIG.cpt_posts[field.cpt_field_id]);
 		const value = this.props.fieldData[field.field_id];
-		console.log('createCptField value', value);
+		const valueItem = this.getCptSelectItemFromId(field.cpt_field_id, value);
 		const clearText = 'Clear '+field.taxonomy_field_singular_label;
+		const isClearable = true;
 		return (
 			<Select
 				name={field.cpt_field_id}
@@ -80,20 +97,25 @@ class SearchFacets extends Component {
 				data-type={FIELD_TYPE_CPT}
 				data-id={field.field_id}
 				options={options}
+				isClearable={isClearable}
 				onChange={this.onChangeCptField}
-				value={value}
+				value={valueItem}
 				></Select>
 		);
 	}
 
 	createTaxonomyField(field) {
+		console.log('createTaxonomyField ', field);
 		if (!CONFIG.taxonomies[field.taxonomy_field_name]) {
 			return '';
 		}
 		const options = termsToSelectOptions(CONFIG.taxonomies[field.taxonomy_field_name]);
 		const value = this.props.fieldData[field.field_id];
+		const valueItem = this.getTaxonomyItemFromId(field.taxonomy_field_name, value);
+
 		console.log('createTaxonomyField value', value);
-		const clearText = 'Clear '+field.cpt_field_label;
+		const clearText = 'Clear';
+		const isClearable = true; 
 		return (
 			<Select
 				name={field.taxonomy_field_name}
@@ -101,8 +123,9 @@ class SearchFacets extends Component {
 				data-id={field.field_id}
 				clearValueText={clearText}
 				options={options}
+				isClearable={isClearable}
 				onChange={this.onChangeTaxobomyField}
-				value={value}
+				value={valueItem}
 			></Select>
 		);
 	}
@@ -152,7 +175,6 @@ class SearchFacets extends Component {
 		}
 
 		const fieldsOnLeft = this.filterFields(CONFIG.fields);
-		console.log('fieldsOnLeft', fieldsOnLeft);
 
 		return (
 			<div className="a-facets">

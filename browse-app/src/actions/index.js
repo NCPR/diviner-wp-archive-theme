@@ -188,12 +188,12 @@ function fetchPosts(cacheKey) {
 		*/
 
 		const fieldData = getState().fieldData;
-		console.log('fieldData', fieldData);
+		// console.log('fieldData', fieldData);
 
 		if (!_.isEmpty(fieldData)) {
 
 
-			console.log('archivalQuery', archivalQuery);
+			// console.log('archivalQuery', archivalQuery);
 
 			_.forOwn(getState().fieldData, (value, key) => {
 				console.log('field Data state', value, key);
