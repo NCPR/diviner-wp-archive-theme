@@ -93,26 +93,41 @@ class Diviner_Field {
 		return $map[$field_type];
 	}
 
-	public function get_field_taxonomy_terms() {
+	public function get_field_taxonomy_terms( $field_id, $field_name ) {
+		return get_terms( $field_name );
+	}
 
+	public function get_field_cpt_posts( $field_id, $field_cpt_id ) {
+		$args = array(
+			'posts_per_page' => -1,
+			'post_type' => $field_cpt_id,
+		);
+		return get_posts($args);
 	}
 
 	public function custom_diviner_js_config( $data  ) {
 		$taxonomy_terms = [];
+		$cpt_posts = [];
 		$return = [];
 		$fields = $this->get_active_fields();
 		foreach($fields as $field_id) {
 			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$field = Diviner_Field::get_class($field_type);
 			$blueprint = call_user_func(array($field, 'get_blueprint'), $field_id);
+			$blueprint['field_type'] = $field_type;
 			$return[] = $blueprint;
 			// add to taxonomy
 			if ($field_type===Taxonomy_Field::NAME) {
-				$taxonomy_terms[$blueprint['taxonomy_field_name']] = get_terms($blueprint['taxonomy_field_name']);
+				$taxonomy_terms[$blueprint['taxonomy_field_name']] = $this->get_field_taxonomy_terms( $field_id, $blueprint['taxonomy_field_name']);
+			}
+			// add CPT posts
+			if ($field_type===CPT_Field::NAME) {
+				$cpt_posts[$blueprint['cpt_field_id']] = $this->get_field_cpt_posts( $field_id, $blueprint['cpt_field_id']);
 			}
 		}
 		$data['fields'] = $return;
 		$data['taxonomies'] = $taxonomy_terms;
+		$data['cpt_posts'] = $cpt_posts;
 		return $data;
 
 	}

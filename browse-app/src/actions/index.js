@@ -14,23 +14,22 @@ const site = new WPAPI({
 	endpoint: '/wp-json'
 });
 
+
+const params = [];
+CONFIG.fields.forEach((field)=> {
+	params.push(field.field_id);
+});
+
+params.push('test');
+
+console.log('params', params);
+
 site.archivalItems = site.registerRoute(
 	'wp/v2',
 	'/archival-items/(?P<query>)', {
 		// Listing any of these parameters will assign the built-in
 		// chaining method that handles the parameter:
-		params: [
-			'decade',
-			'workType',
-			'county',
-			'location',
-			'institution',
-			'donor',
-			'year',
-			'custom_order',
-			'date_range',
-			'tags'
-		]
+		params: params
 	}
 );
 
@@ -45,11 +44,6 @@ if (process.env.NODE_ENV!=='production') {
 export const INVALIDATE_SEARCH_QUERY = 'INVALIDATE_SEARCH_QUERY';
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export const SET_DECADE_FILTER = 'SET_DECADE_FILTER';
-export const SET_WORK_TYPE_FILTER = 'SET_WORK_TYPE_FILTER';
-export const SET_COUNTY_FILTER = 'SET_COUNTY_FILTER';
-export const SET_LOCATION_FILTER = 'SET_LOCATION_FILTER';
-export const SET_INSTITUTION_FILTER = 'SET_INSTITUTION_FILTER';
 export const SET_QUERY_STRING = 'SET_QUERY_STRING';
 export const SET_CACHE_KEY = 'SET_CACHE_KEY';
 export const SET_POPUP_ID = 'SET_POPUP_ID';
@@ -62,6 +56,14 @@ export const SET_DONOR_FILTER = 'SET_DONOR_FILTER';
 export const SET_PAGE = 'SET_PAGE';
 export const CLEAR_FACETS = 'CLEAR_FACETS';
 export const SET_MOBILE_FILTER_OPEN = 'SET_MOBILE_FILTER_OPEN';
+export const SET_FIELD_DATA = 'SET_FIELD_DATA';
+
+export function setFieldData(value) {
+	return {
+		type: SET_FIELD_DATA,
+		value
+	};
+}
 
 export function setMobileFilter(value) {
 	return {
@@ -79,20 +81,6 @@ export function toggleClick() {
 export function setPage(value) {
 	return {
 		type: SET_PAGE,
-		value
-	};
-}
-
-export function setDateFilter(value) {
-	return {
-		type: SET_DATE_FILTER,
-		value
-	};
-}
-
-export function setTagsFilter(value) {
-	return {
-		type: SET_TAG_FILTER,
 		value
 	};
 }
@@ -151,40 +139,6 @@ export function setCacheKey(value) {
 	};
 }
 
-export function setWorkTypeFilter(value) {
-	return {
-		type: SET_WORK_TYPE_FILTER,
-		value
-	};
-}
-
-export function setCountyFilter(value) {
-	return {
-		type: SET_COUNTY_FILTER,
-		value
-	};
-}
-
-export function setDonorFilter(value) {
-	return {
-		type: SET_DONOR_FILTER,
-		value
-	};
-}
-
-export function setInstitutionFilter(value) {
-	return {
-		type: SET_INSTITUTION_FILTER,
-		value
-	};
-}
-
-export function setLocationFilter(value) {
-	return {
-		type: SET_LOCATION_FILTER,
-		value
-	};
-}
 
 export function setQueryString(value) {
 	return {
@@ -218,6 +172,7 @@ function receivePosts(cacheKey, json) {
 
 // items: store.getState().otherReducer.items,
 function fetchPosts(cacheKey) {
+	console.log('fetchPosts', cacheKey);
 	return (dispatch, getState) => {
 		dispatch(requestPosts(cacheKey));
 		const archivalQuery = site.archivalItems();
@@ -230,7 +185,33 @@ function fetchPosts(cacheKey) {
 			archivalQuery.custom_order(getState().orderBy);
 			obj.pOrder = getState().orderBy;
 		}
+		*/
 
+		const fieldData = getState().fieldData;
+		console.log('fieldData', fieldData);
+
+		if (!_.isEmpty(fieldData)) {
+
+
+			console.log('archivalQuery', archivalQuery);
+
+			_.forOwn(getState().fieldData, (value, key) => {
+				console.log('field Data state', value, key);
+				archivalQuery[key](value);
+				obj[key] = value;
+			});
+
+			// getState().fieldData.forEach((fieldData) => {
+				// to do... change the query
+			//})
+
+			// const countyIDs = _.map(getState().countyFilter, (item) => item.value);
+			// archivalQuery.county(countyIDs);
+			// obj.pCounty = countyIDs;
+		}
+
+
+		/*
 		if (getState().dateFilter.length) {
 			archivalQuery.date_range(getState().dateFilter);
 			obj.pDate = getState().dateFilter;
@@ -261,6 +242,8 @@ function fetchPosts(cacheKey) {
 		}
 		*/
 
+		archivalQuery.test('something');
+
 		if (getState().queryString.length) {
 			archivalQuery.search(getState().queryString);
 			obj.search = getState().queryString;
@@ -272,22 +255,14 @@ function fetchPosts(cacheKey) {
 
 		obj.pPage = getState().page;
 
-		/*
-		if (getState().tagsFilter.length) {
-			// get IDs
-			const tagIDs = _.map(getState().tagsFilter, (item) => item.value);
-			archivalQuery.tags(tagIDs);
-			obj.tags = tagIDs;
-		}
-
-		*/
-
 		const param = objectToParameters(obj);
 		const path = `/browse/?${param}`;
 		history.push(path);
 
+		console.log('obj', obj);
+
 		archivalQuery.then((data) => {
-			// console.log('data', data);
+			console.log('data', data);
 			// console.log('header: ' , data.headers['x-wp-totalpages']);
 			dispatch(receivePosts(cacheKey, data));
 		}).catch((err) => {
@@ -320,6 +295,7 @@ export function initiateSearch() {
 	// create cache path from parameters
 	return (dispatch, getState) => {
 		const key = stateToParameters(getState());
+		console.log('key', key);
 		dispatch(setCacheKey(key));
 		// dispatch(invalidateSearchQuery(key));
 		dispatch(fetchPostsIfNeeded(key));
@@ -410,12 +386,8 @@ export function startApp(location) {
 
 export function clearFacets() {
 	return (dispatch) => {
-		dispatch(setCountyFilter([]));
-		dispatch(setWorkTypeFilter([]));
-		dispatch(setLocationFilter(null));
-		dispatch(setDonorFilter(null));
-		dispatch(setTagsFilter([]));
-		dispatch(setInstitutionFilter(null));
+		// reset facets
+		dispatch(setFieldData({}));
 		dispatch(setPage(1));
 		dispatch(initiateSearch());
 	};

@@ -58,62 +58,6 @@ class Grid extends Component {
 		);
 	}
 
-	getItemsStatic() {
-		const posts = [
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			},
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			},
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			},
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			},
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			},
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			},
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			},
-			{
-				id: 1,
-				hasAudio: true,
-				title: 'asdh hk adshkas dhksa',
-				image: 'http://fpoimg.com/300x250',
-			}
-		];
-		return posts.map(
-			(post, i) => this.createItem(post, i)
-		);
-	}
-
 	handlePageClick(e) {
 		this.props.onChangePage(e.selected + 1);
 	}

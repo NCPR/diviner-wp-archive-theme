@@ -21,7 +21,8 @@ const configDefault = {
 	base_browse_url: 'TESTURL',
 	permission_notice: '',
 	taxonomies: [],
-	fields: []
+	fields: [],
+	cpt_posts: [],
 };
 
 export const CONFIG = window.diviner_config || configDefault; // eslint-disable-line camelcase
