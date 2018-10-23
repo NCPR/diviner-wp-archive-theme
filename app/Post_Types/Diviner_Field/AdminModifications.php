@@ -2,21 +2,22 @@
 
 namespace Diviner\Post_Types\Diviner_Field;
 
-use Diviner\Post_Types\Diviner_Field\Preset_Fields_List_Table;
-
+use Carbon_Fields\Container\Container;
+use Carbon_Fields\Field;
+use Diviner\Admin\Settings;
 use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
-use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
-use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
-use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
+use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 
 class AdminModifications {
 
 	const SLUG_WIZARD = 'diviner_wizard';
 
 	public function hooks() {
-		add_action( 'admin_menu', array( &$this,'rc_scd_register_menu') );
+	    // Hook on 11 to go after the main options page is hooked.
+		add_action( 'admin_menu', array( &$this,'rc_scd_register_menu'), 11 );
 		add_filter( 'admin_body_class', array( &$this,'admin_body_class') );
 		add_filter( 'gettext', array( &$this,'change_excerpt_text'), 10, 2 );
 		add_action( 'edit_form_after_title', array( &$this,'add_helper_text') );
@@ -97,21 +98,20 @@ class AdminModifications {
 
 	function rc_scd_register_menu() {
 
-		add_menu_page(
-			'Diviner Fields',
-			'Manage Diviner Fields',
-			'manage_options',
-			'diviner-manage-fields',
-			array( &$this,'rc_scd_create_dashboard'),
-			'dashicons-admin-generic',
-			30
-		);
+        add_submenu_page(
+            Settings::menu_slug(),
+            'Diviner Fields',
+            'Manage Diviner Fields',
+            'manage_options',
+            'diviner-manage-fields',
+            array( $this, 'rc_scd_create_dashboard' )
+        );
 
 		add_submenu_page(
 			null,           // -> Set to null - will hide menu link
 			'Diviner Field Wizard',    // -> Page Title
 			'Diviner Field Wizard',   // -> Title that would otherwise appear in the menu
-			'administrator', // -> Capability level
+			'manage_options', // -> Capability level
 			self::SLUG_WIZARD,   // -> Still accessible via admin.php?page=menu_handle
 			array( &$this,'rc_scd_create_wizard') // -> To render the page
 		);
@@ -208,33 +208,24 @@ class AdminModifications {
 			<h2>Manage Your Archive Item</h2>
 
 			<?php if ( $presetFieldTable->is_empty() ) { ?>
-
 				<div class="about-text">
 					<p>
 						You have not custom fields currently active on your your archive items. That probably means you have just installed the plugin for the first time and are getting set up. Please refer to the documentation at <a href="https://ncpr.github.io/diviner-wp-archive-theme/">https://ncpr.github.io/diviner-wp-archive-theme/</a>.
 					</p>
-
 					<p>
 						Click thru the below link to add more fields to your archive item.
 					</p>
 				</div>
-
 			<?php } else { ?>
-
 				<div class="about-text">
 					<?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item. ' ); ?>
 				</div>
-
-
 				<div>
 					<?php $presetFieldTable->display(); ?>
 					<input type="submit" name="submit" id="submit" class="button" value="Toggle Field Activattion">
 				</div>
-
 			<?php } ?>
-
 		</div>
-
 		<div class="wrap wrap-diviner wrap-diviner--auto-width wrap-diviner--light">
 			<h2>
 			<?php if ( $presetFieldTable->is_empty() ) {
@@ -247,7 +238,6 @@ class AdminModifications {
 				Add a New Field
 			</a>
 		</div>
-
 		<?php
 	}
 
