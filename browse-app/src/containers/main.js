@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styles from './main.pcss';
-import gridStyles from '../styles/grid.pcss';
 
 import SearchFacets from '../components/searchfacets';
 import Controls from '../components/controls';
@@ -13,6 +11,7 @@ import { startApp } from '../actions';
  * The main container
  */
 
+
 class Main extends Component {
 
 	componentDidMount() {
@@ -21,7 +20,7 @@ class Main extends Component {
 
 	render() {
 		return (
-			<div className={styles.main}>
+			<div className='a-main'>
 				<div className="row">
 					<div className="gr-12">
 						<Controls />
