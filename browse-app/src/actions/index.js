@@ -4,20 +4,28 @@ import _ from 'lodash';
 import history from '../utils/data/history';
 
 import stateToParameters from '../utils/stateToParameters';
-import { SETTINGS } from '../config/settings';
+import { SETTINGS, FIELD_PROP_FIELD_ID, FIELD_PROP_FIELD_TYPE, FIELD_TYPE_TAXONOMY, FIELD_PROP_TAXONOMY_NAME } from '../config/settings';
 import { CONFIG } from '../globals/config';
 import objectToParameters from '../utils/data/object-to-params';
 import getParams from '../utils/data/query-to-obj';
 import { termsToSelectOptions } from '../utils/wp/termsToSelectOptions';
+import { getFieldTypeFromId } from '../utils/data/field-utils';
 
 const site = new WPAPI({
 	endpoint: '/wp-json'
 });
 
 
-const params = [];
+const params = [
+	'taxonomyThing'
+];
 CONFIG.fields.forEach((field)=> {
-	params.push(field.field_id);
+	if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
+		params.push(field[FIELD_PROP_TAXONOMY_NAME]);
+	} else {
+		params.push(field[FIELD_PROP_FIELD_ID]);
+	}
+
 });
 
 params.push('test');
@@ -188,16 +196,41 @@ function fetchPosts(cacheKey) {
 		*/
 
 		const fieldData = getState().fieldData;
-		// console.log('fieldData', fieldData);
+		console.log('fieldData', fieldData);
 
 		if (!_.isEmpty(fieldData)) {
-
-
 			// console.log('archivalQuery', archivalQuery);
-
 			_.forOwn(getState().fieldData, (value, key) => {
 				console.log('field Data state', value, key);
-				archivalQuery[key](value);
+				// if taxonomy or multi select then create array of IDs
+				const field = getFieldTypeFromId(key);
+				console.log('field', field);
+				if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
+					//const tagIDs = _.map(value, (item) => item.value);
+					const taxName = field[FIELD_PROP_TAXONOMY_NAME];
+					console.log('taxName', taxName);
+					console.log('key', key);
+					archivalQuery[taxName](value);
+					// archivalQuery['divinerTaxonomyField152'](value);
+
+					// archivalQuery.diviner_taxonomy_field_152(value);
+
+
+					//archivalQuery[key](value);
+
+					// archivalQuery['taxonomyThing'](value);
+
+
+					/*
+					console.log(Object.getOwnPropertyNames(archivalQuery).filter(function (p) {
+						return typeof archivalQuery[p] === 'function';
+					}));
+					*/
+
+				} else {
+					archivalQuery[key](value);
+				}
+
 				obj[key] = value;
 			});
 

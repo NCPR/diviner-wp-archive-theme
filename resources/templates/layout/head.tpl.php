@@ -8,6 +8,11 @@
     </head>
     <body <?php body_class(); ?>>
         <main id="app" class="app">
-            <nav>
-                <a href="<?= get_home_url(); ?>"><h1>WordPress Starter Theme</h1></a>
-            </nav>
+			<header>
+				<h1>
+					<a href="<?= get_home_url(); ?>">Diviner</a>
+				</h1>
+
+				<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+
+			</header>

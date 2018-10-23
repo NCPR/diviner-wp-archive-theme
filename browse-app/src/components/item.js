@@ -53,29 +53,6 @@ class Item extends Component {
 	}
 }
 
-/*
- <div data-sizes="auto" className="lazyload a-item__image" data-src={this.props.image}></div>
-
- <LazyLoad>
- <img src={this.props.image} />
- </LazyLoad>
-
-
- <div className="a-item__image" style={ sectionStyle }></div>
-
- <LazyLoad>
- <img src={this.props.image} />
- </LazyLoad>
-
-
- data-sizes="auto"
- data-src="http://img.release.1yd.me/Fnq3JmmOan-yAHtJHk-n9-o3Qqbr"
- className="lazyload"
-
- <div data-sizes="auto" className="lazyload a-item__image" data-src={this.props.image}></div>
-
- */
-
 Item.propTypes = {
 	id: PropTypes.number,
 	title: PropTypes.string,

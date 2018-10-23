@@ -38,7 +38,6 @@ class Grid extends Component {
 
 	createItem(post, i) {
 		const image = this.getImage(post);
-		console.log('image', image)
 		return (
 			<Item
 				key={i}

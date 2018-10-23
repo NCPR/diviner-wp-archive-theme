@@ -61,6 +61,8 @@ class Taxonomy_Field extends FieldType {
 			'menu_name'         => $field_label_singular,
 		);
 
+		$taxonomy_name = self::get_taxonomy_name( $post_id );
+
 		// args
 		$args = array(
 			'hierarchical'      => ( $field_tax_type === FieldPostMeta::FIELD_TAXONOMY_TYPE_CATEGORY ) ? true : false,
@@ -72,8 +74,9 @@ class Taxonomy_Field extends FieldType {
 				'slug' => $field_slug
 			),
 			'show_in_rest'      => true,
+			'rest_base'         => $taxonomy_name,
 		);
-		register_taxonomy( self::get_taxonomy_name( $post_id ), array( Archive_Item::NAME ), $args );
+		register_taxonomy( $taxonomy_name, array( Archive_Item::NAME ), $args );
 
 	}
 

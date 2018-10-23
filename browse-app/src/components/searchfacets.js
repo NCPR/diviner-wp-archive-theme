@@ -11,6 +11,7 @@ import { FIELD_TYPE_TAXONOMY, FIELD_TYPE_CPT, FIELD_TYPE_TEXT } from '../config/
 
 import { termsToSelectOptions } from '../utils/wp/termsToSelectOptions';
 import { postsToSelectOptions } from '../utils/wp/postsToSelectOptions';
+import { getTaxonomyItemsFromTermIds } from '../utils/data/field-utils';
 
 import {
 	setOrderBy,
@@ -59,9 +60,11 @@ class SearchFacets extends Component {
 		console.log('onChangeTaxobomyField', e, _this.props.fieldData);
 		const newData = _.cloneDeep(_this.props.fieldData);
 		if (e === null) {
-			newData[this['data-id']] = '';
+			newData[this['data-id']] = [];
 		} else {
-			newData[this['data-id']] = e.value;
+			// save as array of IDs
+			const ids = _.map(e, (item) => item.value);
+			newData[this['data-id']] = ids;
 		}
 		_this.props.onChangeFacets(newData);
 	}
@@ -70,10 +73,6 @@ class SearchFacets extends Component {
 		return fields.map(
 			(field, i) => this.createFieldUI(field, i)
 		);
-	}
-
-	getTaxonomyItemFromId(taxId, id) {
-		return _.find(CONFIG.taxonomies[taxId], { 'value': id })
 	}
 
 	getCptSelectItemFromId(cptId, id) {
@@ -86,8 +85,10 @@ class SearchFacets extends Component {
 			return '';
 		}
 		const options = postsToSelectOptions(CONFIG.cpt_posts[field.cpt_field_id]);
-		const value = this.props.fieldData[field.field_id];
+		const value = this.props.fieldData[field.field_id]; // as a single ID
 		const valueItem = this.getCptSelectItemFromId(field.cpt_field_id, value);
+
+
 		const clearText = 'Clear '+field.taxonomy_field_singular_label;
 		const isClearable = true;
 		return (
@@ -105,13 +106,14 @@ class SearchFacets extends Component {
 	}
 
 	createTaxonomyField(field) {
-		console.log('createTaxonomyField ', field);
+		console.log('createTaxonomyField ', field, this.props.fieldData[field.field_id]);
 		if (!CONFIG.taxonomies[field.taxonomy_field_name]) {
 			return '';
 		}
 		const options = termsToSelectOptions(CONFIG.taxonomies[field.taxonomy_field_name]);
-		const value = this.props.fieldData[field.field_id];
-		const valueItem = this.getTaxonomyItemFromId(field.taxonomy_field_name, value);
+		const value = this.props.fieldData[field.field_id]; // as array id IDs
+		const valueItems = termsToSelectOptions(getTaxonomyItemsFromTermIds(field.taxonomy_field_name, value));
+		console.log('valueItems', valueItems);
 
 		console.log('createTaxonomyField value', value);
 		const clearText = 'Clear';
@@ -122,10 +124,11 @@ class SearchFacets extends Component {
 				data-type={FIELD_TYPE_TAXONOMY}
 				data-id={field.field_id}
 				clearValueText={clearText}
+				isMulti={true}
 				options={options}
 				isClearable={isClearable}
 				onChange={this.onChangeTaxobomyField}
-				value={valueItem}
+				value={valueItems}
 			></Select>
 		);
 	}
