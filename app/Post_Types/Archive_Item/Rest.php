@@ -105,38 +105,53 @@ class Rest {
 		return $args;
 	}
 
-	public function rest_api_filter_add_vars( $args, $request ) {
-		$fields = $this->get_fields();
-		foreach($fields as $field) {
-			if ($field[self::FIELD_INDEX_TYPE	] === CPT_Field::NAME) {
-				$args = $this->decorate_cpt_args($field, $args, $request );
-			}
-			if ($field[self::FIELD_INDEX_TYPE	] === Taxonomy_Field::NAME) {
-				$args = $this->decorate_taxonomy_args($field, $args, $request );
-			}
+	public function decorate_date_args($field, $args, $request )
+	{
+		if (empty($request[$field[self::FIELD_INDEX_FIELD_ID]])) {
+			return $args;
 		}
+		$range = $request[$field[self::FIELD_INDEX_FIELD_ID]];
 
-		// FIELD_ID
+		$start_time = mktime(0, 0, 0, 0 , 0, $range[0]);
+		$start_date = date('Ymd', $start_time);
 
-		// $location = $request['location'];
+		$end_time = mktime(0, 0, 0, 0 , 0, $range[1]);
+		$end_date = date('Ymd', $end_time);
 
-		// error_log(print_r( $location, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-
-		// global $wp;
-		// $vars = apply_filters( 'query_vars', $wp->public_query_vars );
-
-		/*
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
 				'relation'		=> 'AND',
 			];
 		}
+
 		$args[ 'meta_query' ][] = [
-			'key'		=> 'field_archival_item_location',
-			'value'		=> $location,
-			'compare'	=> '='
+			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+			'compare'	=> '>=',
+			'value'		=> $start_date,
 		];
-		*/
+
+		$args[ 'meta_query' ][] = [
+			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+			'compare'	=> '<=',
+			'value'		=> $end_date,
+		];
+
+		return $args;
+	}
+
+	public function rest_api_filter_add_vars( $args, $request ) {
+		$fields = $this->get_fields();
+		foreach($fields as $field) {
+			if ($field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME) {
+				$args = $this->decorate_cpt_args($field, $args, $request );
+			}
+			if ($field[self::FIELD_INDEX_TYPE] === Taxonomy_Field::NAME) {
+				$args = $this->decorate_taxonomy_args($field, $args, $request );
+			}
+			if ($field[self::FIELD_INDEX_TYPE] === Date_Field::NAME) {
+				$args = $this->decorate_date_args($field, $args, $request );
+			}
+		}
 
 		// error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 

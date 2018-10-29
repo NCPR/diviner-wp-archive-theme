@@ -1,11 +1,5 @@
 // ncaw_config for data coming from BE
 const configDefault = {
-	counties: [],
-	donors: [],
-	locations: [],
-	institutions: [],
-	decades: [],
-	work_types: [],
 	years: {
 		min: 1850,
 		max: 2017,

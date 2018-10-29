@@ -4,10 +4,22 @@ import _ from 'lodash';
 import Select from 'react-select';
 import autobind from 'autobind-decorator';
 import { connect } from 'react-redux';
+import Slider from 'rc-slider';
+import ASlider from './aslider';
+// import styles from 'rc-slider/assets/index.css';
+
 
 // CONFIG
 import { CONFIG } from '../globals/config';
-import { FIELD_TYPE_TAXONOMY, FIELD_TYPE_CPT, FIELD_TYPE_TEXT } from '../config/settings';
+import { FIELD_TYPE_TAXONOMY,
+			FIELD_TYPE_CPT,
+			FIELD_TYPE_TEXT,
+			FIELD_TYPE_DATE,
+			FIELD_DATE_TYPE,
+			FIELD_DATE_START,
+			FIELD_DATE_END,
+			FIELD_DATE_TYPE_CENTURY
+} from '../config/settings';
 
 import { termsToSelectOptions } from '../utils/wp/termsToSelectOptions';
 import { postsToSelectOptions } from '../utils/wp/postsToSelectOptions';
@@ -40,12 +52,10 @@ class SearchFacets extends Component {
 
 	@autobind
 	onToggleClick() {
-		console.log('onToggleClick');
 		this.props.onToggleClick();
 	}
 
 	onChangeCptField(e) {
-		console.log('onChangeCptField', e, _this.props.fieldData);
 		const newData = _.cloneDeep(_this.props.fieldData);
 		console.log('newData', newData);
 		if (e === null) {
@@ -57,7 +67,6 @@ class SearchFacets extends Component {
 	}
 
 	onChangeTaxobomyField(e) {
-		console.log('onChangeTaxobomyField', e, _this.props.fieldData);
 		const newData = _.cloneDeep(_this.props.fieldData);
 		if (e === null) {
 			newData[this['data-id']] = [];
@@ -67,6 +76,14 @@ class SearchFacets extends Component {
 			newData[this['data-id']] = ids;
 		}
 		_this.props.onChangeFacets(newData);
+	}
+
+	@autobind
+	onChangeDateField(e) {
+		console.log('onChangeDateField', e);
+		const newData = _.cloneDeep(_this.props.fieldData);
+		newData[e.id] = e.value;
+		this.props.onChangeFacets(newData);
 	}
 
 	createFields(fields) {
@@ -80,7 +97,6 @@ class SearchFacets extends Component {
 	}
 
 	createCptField(field) {
-		console.log('createCptField ', field	);
 		if (!CONFIG.cpt_posts[field.cpt_field_id]) {
 			return '';
 		}
@@ -106,16 +122,12 @@ class SearchFacets extends Component {
 	}
 
 	createTaxonomyField(field) {
-		console.log('createTaxonomyField ', field, this.props.fieldData[field.field_id]);
 		if (!CONFIG.taxonomies[field.taxonomy_field_name]) {
 			return '';
 		}
 		const options = termsToSelectOptions(CONFIG.taxonomies[field.taxonomy_field_name]);
 		const value = this.props.fieldData[field.field_id]; // as array id IDs
 		const valueItems = termsToSelectOptions(getTaxonomyItemsFromTermIds(field.taxonomy_field_name, value));
-		console.log('valueItems', valueItems);
-
-		console.log('createTaxonomyField value', value);
 		const clearText = 'Clear';
 		const isClearable = true; 
 		return (
@@ -133,6 +145,87 @@ class SearchFacets extends Component {
 		);
 	}
 
+	createDateField(field) {
+		let step = 1;
+		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
+			step = 10;
+		}
+		let min = 1800;
+		let max = 2018;
+		if (field[FIELD_DATE_START]) {
+			// const start = field[FIELD_DATE_START].substring(0, 4);
+			const startDate = new Date(field[FIELD_DATE_START].substring(0, 4));
+			min = startDate.getFullYear();
+		}
+		if (field[FIELD_DATE_END]) {
+			// const end = field[FIELD_DATE_END].substring(0, 4);
+			const endDate = new Date(field[FIELD_DATE_END].substring(0, 4));
+			max = endDate.getFullYear();
+		}
+
+		let value = this.props.fieldData[field.field_id];
+		if (!value.length) {
+			value = [min, max];
+		}
+
+		console.log('min',min);
+		console.log('max',max);
+		console.log('step',step);
+
+		return (
+			<ASlider
+				id={field.field_id}
+				min={min}
+				max={max}
+				step={step}
+				value={value}
+				onAfterChange={this.onChangeDateField}
+				>
+			</ASlider>
+		);
+	}
+
+	createDateFieldOld(field) {
+		console.log('createDateField', field);
+		const RangeWithToolTip = Slider.createSliderWithTooltip(Slider.Range);
+		let step = 1;
+		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
+			step = 10;
+		}
+		let min = 1800;
+		let max = 2018;
+		if (field[FIELD_DATE_START]) {
+			// const start = field[FIELD_DATE_START].substring(0, 4);
+			const startDate = new Date(field[FIELD_DATE_START].substring(0, 4));
+			min = startDate.getFullYear();
+		}
+		if (field[FIELD_DATE_END]) {
+			// const end = field[FIELD_DATE_END].substring(0, 4);
+			const endDate = new Date(field[FIELD_DATE_END].substring(0, 4));
+			max = endDate.getFullYear();
+		}
+
+		const defaultValue = [min, max];
+
+		console.log('min',min);
+		console.log('max',max);
+		console.log('step',step);
+
+		return (
+			<div>
+				<RangeWithToolTip
+					className="a-rc-slider"
+					min={min}
+					max={max}
+					step={step}
+					defaultValue={defaultValue}
+					onAfterChange={this.onChangeDateField}
+					>
+						</RangeWithToolTip>
+			</div>
+		);
+	}
+
 	createFieldUI(field, i) {
 		console.log(field);
 		if (!field) {
@@ -146,10 +239,14 @@ class SearchFacets extends Component {
 						? <div className="a-field-input a-field-input--taxonomy">{this.createTaxonomyField(field)}</div>
 						: ''
 				}
-
 				{
 					(field.field_type === FIELD_TYPE_CPT )
 						? <div className="a-field-input a-field-input--cpt">{this.createCptField(field)}</div>
+						: ''
+				}
+				{
+					(field.field_type === FIELD_TYPE_DATE )
+						? <div className="a-field-input a-field-input--date">{this.createDateField(field)}</div>
 						: ''
 				}
 				<small className="a-input-description">{ field.helper }</small>

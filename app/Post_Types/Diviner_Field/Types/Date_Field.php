@@ -24,6 +24,8 @@ class Date_Field extends FieldType  {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
 			'date_field_type'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_DATE_TYPE),
+			'date_field_start' => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_DATE_START),
+			'date_field_end'   => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_DATE_END),
 		];
 		return array_merge($blueprint, $additional_vars);
 	}

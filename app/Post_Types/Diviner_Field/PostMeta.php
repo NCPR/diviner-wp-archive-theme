@@ -6,12 +6,14 @@ namespace Diviner\Post_Types\Diviner_Field;
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
+use Diviner\CarbonFields\Helper;
 use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
 use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
+
 
 class PostMeta {
 
@@ -61,6 +63,9 @@ class PostMeta {
 		self::FIELD_DATE_TYPE_TWO_DATE  => 'Two Date Selector'
 	];
 
+	const FIELD_DATE_START = 'div_field_date_start';
+	const FIELD_DATE_END = 'div_field_date_end';
+
 	const PLACEMENT_OPTIONS_NONE = 'none';
 	const PLACEMENT_OPTIONS_TOP = 'top';
 	const PLACEMENT_OPTIONS_LEFT = 'left';
@@ -73,6 +78,9 @@ class PostMeta {
 	protected $container;
 
 	public function add_post_meta() {
+		global $typenow;
+		global $current_screen;
+
 		// var_dump('PostMeta add_post_meta');
 		$this->container = Container::make( 'post_meta', __( 'Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
@@ -87,6 +95,13 @@ class PostMeta {
 			))
 			->set_priority( 'high' );
 
+		// if on edit screen check the field type
+		$is_admin_on_edit_page = $this->is_edit_page();
+		$field_type = NULL;
+		if ($is_admin_on_edit_page) {
+			$field_type = $this->get_field_type($_GET['post']);
+		}
+
 		$this->container = Container::make( 'post_meta', __( 'Hidden Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
@@ -94,87 +109,147 @@ class PostMeta {
 			))
 			->set_priority( 'low' );
 
+		$date_required = ( $field_type === Date_Field::NAME );
 		$this->container = Container::make( 'post_meta', __( 'Date Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
-				$this->get_field_date_type(),
+				$this->get_field_date_type($date_required),
+				$this->get_field_date_start($date_required),
+				$this->get_field_date_end($date_required),
 			))
 			->set_priority( 'low' );
 
+		$taxonomy_required = ( $field_type === Taxonomy_Field::NAME );
 		$this->container = Container::make( 'post_meta', __( 'Taxonomy Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
-				$this->get_field_taxonomy_type(),
-				$this->get_field_taxonomy_singular_label(),
-				$this->get_field_taxonomy_plural_label(),
-				$this->get_field_taxonomy_slug(),
+				$this->get_field_taxonomy_type($taxonomy_required),
+				$this->get_field_taxonomy_singular_label($taxonomy_required),
+				$this->get_field_taxonomy_plural_label($taxonomy_required),
+				$this->get_field_taxonomy_slug($taxonomy_required),
 			))
 			->set_priority( 'low' );
 
+		$cpt_required = ( $field_type === CPT_Field::NAME );
 		$this->container = Container::make( 'post_meta', __( 'Custom Post Type Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
-				$this->get_field_cpt_id(),
-				$this->get_field_cpt_label(),
-				$this->get_field_cpt_slug(),
+				$this->get_field_cpt_id($cpt_required),
+				$this->get_field_cpt_label($cpt_required),
+				$this->get_field_cpt_slug($cpt_required),
 			))
 			->set_priority( 'low' );
 
+		$select_required = ( $field_type === Select_Field::NAME );
 		$this->container = Container::make( 'post_meta', __( 'Select Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( array(
-				$this->get_field_select_options(),
+				$this->get_field_select_options($select_required),
 			))
 			->set_priority( 'low' );
+
 	}
 
-	public function get_field_select_options() {
+	public function get_current_field_type_if_in_admin() {
+		if (!$this->is_edit_page()) {
+			return;
+		}
+
+		global $typenow;
+		if ($this->is_edit_page('edit') && $typenow === Diviner_Field::NAME ) {
+			// hold on to current type if we're in the admin setting
+			if (isset($_GET['post']) && !empty($_GET['post'])) {
+				$post_id = $_GET['post'];
+				return carbon_get_post_meta( $post_id,self::FIELD_TYPE);
+			}
+		} else {
+			// on add page
+			if ( !empty( $_GET[ 'field_type' ] ) ) {
+				return $_GET[ 'field_type' ];
+			}
+		}
+	}
+
+	function is_edit_page($new_edit = null){
+		global $pagenow;
+		//make sure we are on the backend
+		if (!is_admin()) return false;
+
+		if($new_edit == "edit")
+			return in_array( $pagenow, array( 'post.php',  ) );
+		elseif($new_edit == "new") //check for new post page
+			return in_array( $pagenow, array( 'post-new.php' ) );
+		else //check for either new or edit
+			return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
+	}
+
+	public function get_field_select_options($required = false) {
 		return Field::make( 'complex', self::FIELD_SELECT_OPTIONS )
 			->add_fields( array(
-				Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, __( 'Drop down label', 'ncpr-diviner' ) ),
+				Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, __( 'Drop down label', 'ncpr-diviner' ) )->set_required( $required ),
 			) );
 	}
 
-	public function get_field_cpt_id() {
-		return Field::make( 'text', self::FIELD_CPT_ID, __( 'Custom Post Type ID (use only lower case with underscores)', 'ncpr-diviner' ) );
+	public function get_field_cpt_id($required = false) {
+		return Field::make( 'text', self::FIELD_CPT_ID, __( 'Custom Post Type ID (use only lower case with underscores)', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_cpt_label() {
-		return Field::make( 'text', self::FIELD_CPT_LABEL, __( 'Custom Post Label', 'ncpr-diviner' ) );
+	public function get_field_cpt_label($required = false) {
+		return Field::make( 'text', self::FIELD_CPT_LABEL, __( 'Custom Post Label', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_cpt_slug() {
-		return Field::make( 'text', self::FIELD_CPT_SLUG, __( 'Custom Post Slug (use only lower case with dashes)', 'ncpr-diviner' ) );
+	public function get_field_cpt_slug($required = false) {
+		return Field::make( 'text', self::FIELD_CPT_SLUG, __( 'Custom Post Slug (use only lower case with dashes)', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_taxonomy_slug() {
+	public function get_field_taxonomy_slug($required = false) {
 		return Field::make( 'text', self::FIELD_TAXONOMY_SLUG, __( 'Taxonomy Slug', 'ncpr-diviner' ) )
-			->set_help_text( __( 'No spaces or underscores', 'ncpr-diviner' ) );
+			->set_help_text( __( 'No spaces or underscores', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_taxonomy_singular_label() {
+	public function get_field_taxonomy_singular_label($required = false) {
 		return Field::make( 'text', self::FIELD_TAXONOMY_SINGULAR_LABEL, __( 'Singular Taxonomy Label', 'ncpr-diviner' ) )
-			->set_help_text( __( 'ex: Type of Work', 'ncpr-diviner' ) );
+			->set_help_text( __( 'ex: Type of Work', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_taxonomy_plural_label() {
+	public function get_field_taxonomy_plural_label($required = false) {
 		return Field::make( 'text', self::FIELD_TAXONOMY_PLURAL_LABEL, __( 'Plural Taxonomy Label', 'ncpr-diviner' ) )
-			->set_help_text( __( 'ex: Types of Work', 'ncpr-diviner' ) );
+			->set_help_text( __( 'ex: Types of Work', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_taxonomy_type() {
+	public function get_field_taxonomy_type($required = false) {
 		return Field::make( 'select', self::FIELD_TAXONOMY_TYPE, __( 'Type of taxonomy field', 'ncpr-diviner' ) )
 			->add_options(self::FIELD_TAXONOMY_TYPE_OPTIONS)
-			->set_help_text( __( 'Tag or category', 'ncpr-diviner' ) );
+			->set_help_text( __( 'Tag or category', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_date_type() {
+	public function get_field_date_start($required = false) {
+		return Field::make( 'date', self::FIELD_DATE_START, __( 'Start Date of Slider', 'ncpr-diviner' ) )
+			->set_help_text( __( 'If type is century, start date rounds down to nearest century. If type if decade, start date rounds to nearest decade. Only uses year.', 'ncpr-diviner' ) )
+			->set_required( $required );
+	}
+
+	public function get_field_date_end($required = false) {
+		return Field::make( 'date', self::FIELD_DATE_END, __( 'End Date of Slider', 'ncpr-diviner' ) )
+			->set_help_text( __( 'If type is century, end date rounds down to nearest century. If type if decade, end date rounds to nearest decade. Only uses year.', 'ncpr-diviner' ) )
+			->set_required( $required );
+	}
+
+	public function get_field_date_type($required = false) {
 		return Field::make( 'select', self::FIELD_DATE_TYPE, __( 'Type of date field', 'ncpr-diviner' ) )
 			->add_options(self::FIELD_DATE_TYPE_OPTIONS)
-			->set_help_text( __( 'Century slider, Decade slider, Year slider, and two date min max selector', 'ncpr-diviner' ) );
+			->set_help_text( __( 'Century slider, Decade slider, Year slider, and two date min max selector', 'ncpr-diviner' ) )
+			->set_required( $required );
 	}
 
-	public function get_field_is_custom() {
+	public function get_field_is_custom($required = false) {
 		return Field::make( 'checkbox', self::FIELD_IS_DEFAULT, __( 'Is Default Field', 'ncpr-diviner' ) )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE )
 			->set_required( false );
@@ -201,8 +276,11 @@ class PostMeta {
 		return $field;
 	}
 
-	public function get_field_type() {
-		$type = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
+	public function get_field_type( $id = null) {
+		if (empty($id)) {
+			$id = get_the_ID();
+		}
+		$type = carbon_get_post_meta( $id, PostMeta::FIELD_TYPE );
 		if ( ! empty($type) ) {
 			return $type;
 		}
