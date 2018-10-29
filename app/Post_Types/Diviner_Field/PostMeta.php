@@ -184,10 +184,19 @@ class PostMeta {
 	}
 
 	public function get_field_select_options($required = false) {
-		return Field::make( 'complex', self::FIELD_SELECT_OPTIONS )
-			->add_fields( array(
-				Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, __( 'Drop down label', 'ncpr-diviner' ) )->set_required( $required ),
-			) );
+		return Field::make( 'complex', self::FIELD_SELECT_OPTIONS, __( 'Select Options', 'ncpr-diviner' ) )
+			->add_fields( $this->get_field_select_option_fields($required) );
+	}
+
+	public function get_field_select_option_fields($required = false) {
+		$args = [];
+		$args[] = Field::make( 'text', self::FIELD_SELECT_OPTIONS_VALUE, __( 'Value', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Use only lower case and underscores. No spaces. Used in the URL for facets search', 'ncpr-diviner' ) )
+			->set_required( $required );
+		$args[] = Field::make( 'text', self::FIELD_SELECT_OPTIONS_LABEL, __( 'Label', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Appears in the dropdown', 'ncpr-diviner' ) )
+			->set_required( $required );
+		return $args;
 	}
 
 	public function get_field_cpt_id($required = false) {

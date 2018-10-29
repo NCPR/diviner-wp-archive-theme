@@ -190,7 +190,7 @@ class AdminModifications {
 				<p>
 					<?php _e('Add a select field to assign a piece of information that comes from a very small list of pre-set choices to each of your archive item. Examples: Art Format, with the choices being Painting, Sculpture, or Digital.  ' ); ?>
 				</p>
-				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=select" class="button button-primary button-hero">
+				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo Select_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Select Field
 				</a>
 			</div>

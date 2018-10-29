@@ -14,6 +14,7 @@ import { CONFIG } from '../globals/config';
 import { FIELD_TYPE_TAXONOMY,
 			FIELD_TYPE_CPT,
 			FIELD_TYPE_TEXT,
+			FIELD_TYPE_SELECT,
 			FIELD_TYPE_DATE,
 			FIELD_DATE_TYPE,
 			FIELD_DATE_START,
@@ -24,6 +25,7 @@ import { FIELD_TYPE_TAXONOMY,
 import { termsToSelectOptions } from '../utils/wp/termsToSelectOptions';
 import { postsToSelectOptions } from '../utils/wp/postsToSelectOptions';
 import { getTaxonomyItemsFromTermIds } from '../utils/data/field-utils';
+import { carbonFieldSelectToSelectOptions } from '../utils/wp/carbonFieldSelectToSelectOptions';
 
 import {
 	setOrderBy,
@@ -76,6 +78,19 @@ class SearchFacets extends Component {
 			newData[this['data-id']] = ids;
 		}
 		_this.props.onChangeFacets(newData);
+	}
+
+	onChangeSelectField(e) {
+		console.log('onChangeSelectField', e);
+		const newData = _.cloneDeep(_this.props.fieldData);
+		if (e === null) {
+			newData[this['data-id']] = [];
+		} else {
+			// save as array of IDs
+			const ids = _.map(e, (item) => item.value);
+			newData[this['data-id']] = ids;
+		}
+		// _this.props.onChangeFacets(newData);
 	}
 
 	@autobind
@@ -140,6 +155,32 @@ class SearchFacets extends Component {
 				options={options}
 				isClearable={isClearable}
 				onChange={this.onChangeTaxobomyField}
+				value={valueItems}
+			></Select>
+		);
+	}
+
+	createSelectField(field) {
+		console.log('createSelectField');
+		if (!field.select_field_options || field.select_field_options.length === 0 ) {
+			return '';
+		}
+		// carbonFieldSelectToSelectOptions
+		const value = this.props.fieldData[field.field_id]; // as array id IDs
+		const clearText = 'Clear';
+		const isClearable = true;
+		const options = carbonFieldSelectToSelectOptions(field.select_field_options);
+		const valueItems = [];
+		return (
+			<Select
+				name={field.field_id}
+				data-type={FIELD_TYPE_SELECT}
+				data-id={field.field_id}
+				clearValueText={clearText}
+				isMulti={false}
+				options={options}
+				isClearable={isClearable}
+				onChange={this.onChangeSelectField}
 				value={valueItems}
 			></Select>
 		);
@@ -247,6 +288,11 @@ class SearchFacets extends Component {
 				{
 					(field.field_type === FIELD_TYPE_DATE )
 						? <div className="a-field-input a-field-input--date">{this.createDateField(field)}</div>
+						: ''
+				}
+				{
+					(field.field_type === FIELD_TYPE_SELECT )
+						? <div className="a-field-input a-field-input--select">{this.createSelectField(field)}</div>
 						: ''
 				}
 				<small className="a-input-description">{ field.helper }</small>

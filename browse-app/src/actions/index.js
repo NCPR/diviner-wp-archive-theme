@@ -243,38 +243,6 @@ function fetchPosts(cacheKey) {
 			// obj.pCounty = countyIDs;
 		}
 
-
-		/*
-		if (getState().dateFilter.length) {
-			archivalQuery.date_range(getState().dateFilter);
-			obj.pDate = getState().dateFilter;
-		}
-
-		if (getState().countyFilter.length) {
-			const countyIDs = _.map(getState().countyFilter, (item) => item.value);
-			archivalQuery.county(countyIDs);
-			obj.pCounty = countyIDs;
-		}
-		if (getState().workTypeFilter.length) {
-			// archivalQuery.workType(getState().workTypeFilter);
-			const workIDs = _.map(getState().workTypeFilter, (item) => item.value);
-			archivalQuery.workType(workIDs);
-			obj.pWorkType = workIDs;
-		}
-		if (getState().locationFilter) {
-			archivalQuery.location(getState().locationFilter);
-			obj.pLocation = getState().locationFilter;
-		}
-		if (getState().institutionFilter) {
-			archivalQuery.institution(getState().institutionFilter);
-			obj.pInstitution = getState().institutionFilter;
-		}
-		if (getState().donorFilter) {
-			archivalQuery.donor(getState().donorFilter);
-			obj.pDonor = getState().donorFilter;
-		}
-		*/
-
 		archivalQuery.test('something');
 
 		if (getState().queryString.length) {

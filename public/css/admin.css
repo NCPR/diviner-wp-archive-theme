@@ -50,36 +50,26 @@
   .field-select-wrap p {
     font-size: 120%; }
 
-/*
 #carbon_fields_container_date_field_variables {
-	display: none !important;
-
-	.post-field-type--diviner_date_field & {
-		display: block !important;
-	}
-}
+  display: none !important; }
+  .post-field-type--diviner_date_field #carbon_fields_container_date_field_variables {
+    display: block !important; }
 
 #carbon_fields_container_taxonomy_field_variables {
-	display: none !important;
-	.post-field-type--diviner_taxonomy_field & {
-		display: block !important;
-	}
-}
+  display: none !important; }
+  .post-field-type--diviner_taxonomy_field #carbon_fields_container_taxonomy_field_variables {
+    display: block !important; }
 
 #carbon_fields_container_custom_post_type_field_variables {
-	display: none !important;
-	.post-field-type--diviner_cpt_field & {
-		display: block !important;
-	}
-}
+  display: none !important; }
+  .post-field-type--diviner_cpt_field #carbon_fields_container_custom_post_type_field_variables {
+    display: block !important; }
 
 #carbon_fields_container_select_field_variables {
-	display: none !important;
-	.post-field-type--diviner_select_field & {
-		display: block !important;
-	}
-}
-*/
+  display: none !important; }
+  .post-field-type--diviner_select_field #carbon_fields_container_select_field_variables {
+    display: block !important; }
+
 .post-edit--diviner_field #minor-publishing {
   display: none; }
 

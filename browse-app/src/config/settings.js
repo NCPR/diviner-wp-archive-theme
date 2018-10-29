@@ -5,6 +5,7 @@ const settings = {
 
 export const FIELD_TYPE_TAXONOMY = 'diviner_taxonomy_field';
 export const FIELD_TYPE_CPT = 'diviner_cpt_field';
+export const FIELD_TYPE_SELECT = 'diviner_select_field';
 export const FIELD_TYPE_TEXT = 'diviner_text_field';
 export const FIELD_TYPE_DATE = 'diviner_date_field';
 
