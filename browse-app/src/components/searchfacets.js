@@ -6,6 +6,10 @@ import autobind from 'autobind-decorator';
 import { connect } from 'react-redux';
 import Slider from 'rc-slider';
 import ASlider from './aslider';
+import FieldDate from './fieldDate';
+import FieldSelect from './fieldSelect';
+import FieldTaxonomy from './fieldTaxonomy';
+import FieldCpt from './fieldCpt';
 
 
 // CONFIG
@@ -56,211 +60,9 @@ class SearchFacets extends Component {
 		this.props.onToggleClick();
 	}
 
-	onChangeCptField(e) {
-		const newData = _.cloneDeep(_this.props.fieldData);
-		if (e === null) {
-			newData[this['data-id']] = '';
-		} else {
-			newData[this['data-id']] = e.value;
-		}
-		_this.props.onChangeFacets(newData);
-	}
-
-	onChangeTaxobomyField(e) {
-		const newData = _.cloneDeep(_this.props.fieldData);
-		if (e === null) {
-			newData[this['data-id']] = [];
-		} else {
-			// save as array of IDs
-			const ids = _.map(e, (item) => item.value);
-			newData[this['data-id']] = ids;
-		}
-		_this.props.onChangeFacets(newData);
-	}
-
-	onChangeSelectField(e) {
-		const newData = _.cloneDeep(_this.props.fieldData);
-		if (e === null) {
-			newData[this['data-id']] = [];
-		} else {
-			// save as array of IDs
-			const ids = _.map(e, (item) => item.value);
-			newData[this['data-id']] = ids;
-		}
-		_this.props.onChangeFacets(newData);
-	}
-
-	@autobind
-	onChangeDateField(e) {
-		const newData = _.cloneDeep(_this.props.fieldData);
-		newData[e.id] = e.value;
-		this.props.onChangeFacets(newData);
-	}
-
 	createFields(fields) {
 		return fields.map(
 			(field, i) => this.createFieldUI(field, i)
-		);
-	}
-
-	getCptSelectItemFromId(cptId, id) {
-		return _.find(CONFIG.cpt_posts[cptId], { 'value': id })
-	}
-
-	createCptField(field) {
-		if (!CONFIG.cpt_posts[field.cpt_field_id]) {
-			return '';
-		}
-		const options = postsToSelectOptions(CONFIG.cpt_posts[field.cpt_field_id]);
-		const value = this.props.fieldData[field.field_id]; // as a single ID
-		const valueItem = this.getCptSelectItemFromId(field.cpt_field_id, value);
-
-
-		const clearText = 'Clear '+field.taxonomy_field_singular_label;
-		const isClearable = true;
-		return (
-			<Select
-				name={field.cpt_field_id}
-				clearValueText={clearText}
-				data-type={FIELD_TYPE_CPT}
-				data-id={field.field_id}
-				options={options}
-				isClearable={isClearable}
-				onChange={this.onChangeCptField}
-				value={valueItem}
-				></Select>
-		);
-	}
-
-	createTaxonomyField(field) {
-		if (!CONFIG.taxonomies[field.taxonomy_field_name]) {
-			return '';
-		}
-		const options = termsToSelectOptions(CONFIG.taxonomies[field.taxonomy_field_name]);
-		const value = this.props.fieldData[field.field_id]; // as array id IDs
-		const valueItems = termsToSelectOptions(getTaxonomyItemsFromTermIds(field.taxonomy_field_name, value));
-		const clearText = 'Clear';
-		const isClearable = true; 
-		return (
-			<Select
-				name={field.taxonomy_field_name}
-				data-type={FIELD_TYPE_TAXONOMY}
-				data-id={field.field_id}
-				clearValueText={clearText}
-				isMulti={true}
-				options={options}
-				isClearable={isClearable}
-				onChange={this.onChangeTaxobomyField}
-				value={valueItems}
-			></Select>
-		);
-	}
-
-	getSelectItemsFromValues(options, values) {
-		const selectedOptions = [];
-		_.forEach(values, (value) => {
-			_.forEach(options, (option) => {
-				if (value === option.value) {
-					selectedOptions.push(option);
-				}
-			});
-		});
-		return selectedOptions;
-	}
-
-
-	createSelectField(field) {
-		if (!field.select_field_options || field.select_field_options.length === 0 ) {
-			return '';
-		}
-		const values = this.props.fieldData[field.field_id]; // as array id IDs
-		let options = carbonFieldSelectToSelectOptions(field.select_field_options);
-		const valueItems = this.getSelectItemsFromValues(options, values);
-		const clearText = 'Clear';
-		const isClearable = true;
-		return (
-			<Select
-				name={field.field_id}
-				data-type={FIELD_TYPE_SELECT}
-				data-id={field.field_id}
-				clearValueText={clearText}
-				isMulti={true}
-				options={options}
-				isClearable={isClearable}
-				onChange={this.onChangeSelectField}
-				value={valueItems}
-			></Select>
-		);
-	}
-
-	createDateField(field) {
-		let step = 1;
-		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
-			step = 10;
-		}
-		let min = 1800;
-		let max = 2018;
-		if (field[FIELD_DATE_START]) {
-			// const start = field[FIELD_DATE_START].substring(0, 4);
-			const startDate = new Date(field[FIELD_DATE_START].substring(0, 4));
-			min = startDate.getFullYear();
-		}
-		if (field[FIELD_DATE_END]) {
-			// const end = field[FIELD_DATE_END].substring(0, 4);
-			const endDate = new Date(field[FIELD_DATE_END].substring(0, 4));
-			max = endDate.getFullYear();
-		}
-
-		let value = this.props.fieldData[field.field_id];
-		if (!value.length) {
-			value = [min, max];
-		}
-
-		return (
-			<ASlider
-				id={field.field_id}
-				min={min}
-				max={max}
-				step={step}
-				value={value}
-				onAfterChange={this.onChangeDateField}
-				>
-			</ASlider>
-		);
-	}
-
-	createDateFieldOld(field) {
-		const RangeWithToolTip = Slider.createSliderWithTooltip(Slider.Range);
-		let step = 1;
-		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
-			step = 10;
-		}
-		let min = 1800;
-		let max = 2018;
-		if (field[FIELD_DATE_START]) {
-			// const start = field[FIELD_DATE_START].substring(0, 4);
-			const startDate = new Date(field[FIELD_DATE_START].substring(0, 4));
-			min = startDate.getFullYear();
-		}
-		if (field[FIELD_DATE_END]) {
-			// const end = field[FIELD_DATE_END].substring(0, 4);
-			const endDate = new Date(field[FIELD_DATE_END].substring(0, 4));
-			max = endDate.getFullYear();
-		}
-
-		const defaultValue = [min, max];
-		return (
-			<div>
-				<RangeWithToolTip
-					className="a-rc-slider"
-					min={min}
-					max={max}
-					step={step}
-					defaultValue={defaultValue}
-					onAfterChange={this.onChangeDateField}
-					>
-						</RangeWithToolTip>
-			</div>
 		);
 	}
 
@@ -269,29 +71,27 @@ class SearchFacets extends Component {
 			return '';
 		}
 		return (
-			<div className="a-field" key={i}>
-				<label>{ field.title }</label>
+			<div className="a-input-group" key={i}>
 				{
 					(field.field_type === FIELD_TYPE_TAXONOMY )
-						? <div className="a-field-input a-field-input--taxonomy">{this.createTaxonomyField(field)}</div>
+						? <div className="a-field-input a-field-input--taxonomy"><FieldTaxonomy field={field} /></div>
 						: ''
 				}
 				{
 					(field.field_type === FIELD_TYPE_CPT )
-						? <div className="a-field-input a-field-input--cpt">{this.createCptField(field)}</div>
+						? <div className="a-field-input a-field-input--cpt"><FieldCpt field={field} /></div>
 						: ''
 				}
 				{
 					(field.field_type === FIELD_TYPE_DATE )
-						? <div className="a-field-input a-field-input--date">{this.createDateField(field)}</div>
+						? <div className="a-field-input a-field-input--date"><FieldDate field={field} /></div>
 						: ''
 				}
 				{
 					(field.field_type === FIELD_TYPE_SELECT )
-						? <div className="a-field-input a-field-input--select">{this.createSelectField(field)}</div>
+						? <div className="a-field-input a-field-input--select"><FieldSelect field={field} /></div>
 						: ''
 				}
-				<small className="a-input-description">{ field.helper }</small>
 			</div>
 		);
 	}
