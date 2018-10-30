@@ -1,6 +1,6 @@
 
 const settings = {
-	postsPerPage: 30,
+	postsPerPage: 15,
 };
 
 export const FIELD_TYPE_TAXONOMY = 'diviner_taxonomy_field';

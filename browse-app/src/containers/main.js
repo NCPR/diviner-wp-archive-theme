@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SearchFacets from '../components/searchfacets';
 import Controls from '../components/controls';
 import Grid from '../components/grid';
+import Popup from '../components/popup';
 
 import { startApp } from '../actions';
 
@@ -18,6 +19,7 @@ class Main extends Component {
 		this.props.startApp(this.props.location);
 	}
 
+	// <Popup></Popup>
 	render() {
 		return (
 			<div className='a-main'>
@@ -34,6 +36,8 @@ class Main extends Component {
 						<Grid />
 					</div>
 				</div>
+
+				<Popup></Popup>
 			</div>
 		);
 	}

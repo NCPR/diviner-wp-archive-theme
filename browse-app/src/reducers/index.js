@@ -6,7 +6,7 @@ import page from './pagination';
 import queryString from './queryString';
 import filterOpen from './filterOpen';
 import fieldData from './fieldData';
-
+import { currentPopupPostId, popupVisible } from './currentPopupPostId';
 
 const facetApp = combineReducers({
 	currentCacheKey,
@@ -16,6 +16,8 @@ const facetApp = combineReducers({
 	queryString,
 	postsByCacheKey,
 	filterOpen,
+	currentPopupPostId,
+	popupVisible
 });
 
 

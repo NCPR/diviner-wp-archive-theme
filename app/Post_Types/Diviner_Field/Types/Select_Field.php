@@ -19,7 +19,10 @@ class Select_Field extends FieldType {
 			return '';
 		}
 		$field =  Field::make( static::TYPE, $id, $field_label );
-		$filtered_options = [];
+		// add none value to all selects
+		$filtered_options = [
+			'none' => ''
+		];
 		foreach ($options as $option) {
 			$filtered_options[$option[FieldPostMeta::FIELD_SELECT_OPTIONS_VALUE]] = $option[FieldPostMeta::FIELD_SELECT_OPTIONS_LABEL];
 		}

@@ -6,7 +6,6 @@ import autobind from 'autobind-decorator';
 import { connect } from 'react-redux';
 import Slider from 'rc-slider';
 import ASlider from './aslider';
-// import styles from 'rc-slider/assets/index.css';
 
 
 // CONFIG
@@ -47,8 +46,8 @@ class SearchFacets extends Component {
 	}
 
 	@autobind
-	onClearClick() {
-		console.log('onClearClick');
+	onClearClick(e) {
+		e.preventDefault();
 		this.props.clearFacets();
 	}
 
@@ -59,7 +58,6 @@ class SearchFacets extends Component {
 
 	onChangeCptField(e) {
 		const newData = _.cloneDeep(_this.props.fieldData);
-		console.log('newData', newData);
 		if (e === null) {
 			newData[this['data-id']] = '';
 		} else {
@@ -81,7 +79,6 @@ class SearchFacets extends Component {
 	}
 
 	onChangeSelectField(e) {
-		console.log('onChangeSelectField', e);
 		const newData = _.cloneDeep(_this.props.fieldData);
 		if (e === null) {
 			newData[this['data-id']] = [];
@@ -90,12 +87,11 @@ class SearchFacets extends Component {
 			const ids = _.map(e, (item) => item.value);
 			newData[this['data-id']] = ids;
 		}
-		// _this.props.onChangeFacets(newData);
+		_this.props.onChangeFacets(newData);
 	}
 
 	@autobind
 	onChangeDateField(e) {
-		console.log('onChangeDateField', e);
 		const newData = _.cloneDeep(_this.props.fieldData);
 		newData[e.id] = e.value;
 		this.props.onChangeFacets(newData);
@@ -160,24 +156,35 @@ class SearchFacets extends Component {
 		);
 	}
 
+	getSelectItemsFromValues(options, values) {
+		const selectedOptions = [];
+		_.forEach(values, (value) => {
+			_.forEach(options, (option) => {
+				if (value === option.value) {
+					selectedOptions.push(option);
+				}
+			});
+		});
+		return selectedOptions;
+	}
+
+
 	createSelectField(field) {
-		console.log('createSelectField');
 		if (!field.select_field_options || field.select_field_options.length === 0 ) {
 			return '';
 		}
-		// carbonFieldSelectToSelectOptions
-		const value = this.props.fieldData[field.field_id]; // as array id IDs
+		const values = this.props.fieldData[field.field_id]; // as array id IDs
+		let options = carbonFieldSelectToSelectOptions(field.select_field_options);
+		const valueItems = this.getSelectItemsFromValues(options, values);
 		const clearText = 'Clear';
 		const isClearable = true;
-		const options = carbonFieldSelectToSelectOptions(field.select_field_options);
-		const valueItems = [];
 		return (
 			<Select
 				name={field.field_id}
 				data-type={FIELD_TYPE_SELECT}
 				data-id={field.field_id}
 				clearValueText={clearText}
-				isMulti={false}
+				isMulti={true}
 				options={options}
 				isClearable={isClearable}
 				onChange={this.onChangeSelectField}
@@ -209,10 +216,6 @@ class SearchFacets extends Component {
 			value = [min, max];
 		}
 
-		console.log('min',min);
-		console.log('max',max);
-		console.log('step',step);
-
 		return (
 			<ASlider
 				id={field.field_id}
@@ -227,7 +230,6 @@ class SearchFacets extends Component {
 	}
 
 	createDateFieldOld(field) {
-		console.log('createDateField', field);
 		const RangeWithToolTip = Slider.createSliderWithTooltip(Slider.Range);
 		let step = 1;
 		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
@@ -247,11 +249,6 @@ class SearchFacets extends Component {
 		}
 
 		const defaultValue = [min, max];
-
-		console.log('min',min);
-		console.log('max',max);
-		console.log('step',step);
-
 		return (
 			<div>
 				<RangeWithToolTip
@@ -268,7 +265,6 @@ class SearchFacets extends Component {
 	}
 
 	createFieldUI(field, i) {
-		console.log(field);
 		if (!field) {
 			return '';
 		}
@@ -307,9 +303,6 @@ class SearchFacets extends Component {
 	}
 
 	render() {
-		console.log('render');
-		console.log('this.props', this.props);
-
 		const ariaHidden = !this.props.filterOpen;
 		let toggleText = 'Display More Filters';
 		const facetsWrapClasses = [
@@ -343,6 +336,7 @@ class SearchFacets extends Component {
 					<div className="a-input-group">
 						<button
 							className="btn btn-s btn-fullmobile a-clear-button"
+							onClick={this.onClearClick}
 						>
 							Reset Search Filters
 						</button>
@@ -392,7 +386,6 @@ const mapDispatchToProps = (dispatch) => ({
 		dispatch(toggleClick());
 	},
 	onChangeFacets: (value) => {
-		console.log('onChangeFacet value', value);
 		dispatch(setFieldData(value));
 		dispatch(setPage(1));
 		dispatch(initiateSearch());

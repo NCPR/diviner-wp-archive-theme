@@ -77,10 +77,13 @@ class PostMeta {
 
 	protected $container;
 
+	/*
+	 *
+	 * Adds the necessary field fields (confused yet?)
+	 *
+	 * @hook carbon_fields_register_fields
+	 */
 	public function add_post_meta() {
-		global $typenow;
-		global $current_screen;
-
 		// var_dump('PostMeta add_post_meta');
 		$this->container = Container::make( 'post_meta', __( 'Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
@@ -95,11 +98,18 @@ class PostMeta {
 			))
 			->set_priority( 'high' );
 
-		// if on edit screen check the field type
+		// if on edit screen of the diviner field CPT check the field type
+		// have to use this appraoch because this function is called in the
 		$is_admin_on_edit_page = $this->is_edit_page();
 		$field_type = NULL;
 		if ($is_admin_on_edit_page) {
-			$field_type = $this->get_field_type($_GET['post']);
+			if (isset($_GET['post'])) {
+				if (get_post_type( $_GET['post'] ) === Diviner_Field::NAME) {
+					$field_type = $this->get_field_type($_GET['post']);
+				}
+
+			}
+
 		}
 
 		$this->container = Container::make( 'post_meta', __( 'Hidden Field Variables', 'ncpr-diviner' ) )

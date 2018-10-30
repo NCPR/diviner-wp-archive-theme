@@ -25,10 +25,7 @@ CONFIG.fields.forEach((field)=> {
 	} else {
 		params.push(field[FIELD_PROP_FIELD_ID]);
 	}
-
 });
-
-params.push('test');
 
 console.log('params', params);
 
@@ -243,8 +240,6 @@ function fetchPosts(cacheKey) {
 			// obj.pCounty = countyIDs;
 		}
 
-		archivalQuery.test('something');
-
 		if (getState().queryString.length) {
 			archivalQuery.search(getState().queryString);
 			obj.search = getState().queryString;
@@ -305,82 +300,6 @@ export function initiateSearch() {
 
 export function startApp(location) {
 	return (dispatch) => {
-		/*
-		if (location.search && location.search.length && location.search.indexOf('?') === 0) {
-			const params = location.search.substr(1);
-			const obj = getParams(params);
-
-			if (obj.pOrder) {
-				dispatch(setOrderBy(obj.pOrder));
-			}
-
-			if (obj.search) {
-				dispatch(setQueryString(obj.search));
-			}
-
-			if (obj.pWorkType) {
-				const workIDs = obj.pWorkType.split(',');
-				const workTypes = _.filter(CONFIG.work_types, (item) => {
-					if (_.includes(workIDs, item.term_id.toString())) {
-						return item;
-					}
-					return null;
-				});
-				const workTypesSel = termsToSelectOptions(workTypes);
-				dispatch(setWorkTypeFilter(workTypesSel));
-			}
-
-			if (obj.pCounty) {
-				const countyIDs = obj.pCounty.split(',');
-				const countyTypes = _.filter(CONFIG.counties, (item) => {
-					if (_.includes(countyIDs, item.term_id.toString())) {
-						return item;
-					}
-					return null;
-				});
-				const countyTypesSel = termsToSelectOptions(countyTypes);
-				dispatch(setCountyFilter(countyTypesSel));
-			}
-
-			if (obj.pLocation) {
-				dispatch(setLocationFilter(parseInt(obj.pLocation, 10)));
-			}
-
-			if (obj.pInstitution) {
-				dispatch(setInstitutionFilter(parseInt(obj.pInstitution, 10)));
-			}
-
-			if (obj.pDonor) {
-				dispatch(setDonorFilter(parseInt(obj.pDonor, 10)));
-			}
-
-			if (obj.pDate) {
-				const dateArr = obj.pDate.split(',');
-				const dateArrInts = [];
-				dateArr.forEach((part, index) => {
-					dateArrInts[index] = parseInt(part, 10);
-				});
-				dispatch(setDateFilter(dateArrInts));
-			}
-
-			if (obj.tags) {
-				const tagIDs = obj.tags.split(',');
-				const tagTypes = _.filter(CONFIG.tags, (item) => {
-					if (_.includes(tagIDs, item.term_id.toString())) {
-						return item;
-					}
-					return null;
-				});
-				const tagTypesSel = termsToSelectOptions(tagTypes);
-				dispatch(setTagsFilter(tagTypesSel));
-			}
-
-			if (obj.pPage) {
-				dispatch(setPage(parseInt(obj.pPage, 10)));
-			}
-		}
-		*/
-
 		dispatch(initiateSearch());
 	};
 }
@@ -388,7 +307,11 @@ export function startApp(location) {
 export function clearFacets() {
 	return (dispatch) => {
 		// reset facets
-		dispatch(setFieldData({}));
+		const fieldData = {};
+		CONFIG.fields.forEach((field)=> {
+			fieldData[field[FIELD_PROP_FIELD_ID]] = '';
+		});
+		dispatch(setFieldData(fieldData));
 		dispatch(setPage(1));
 		dispatch(initiateSearch());
 	};

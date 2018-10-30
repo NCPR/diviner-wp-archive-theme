@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 import { setPopupArchiveItem, setPopupVisible, setPage, initiateSearch } from '../actions';
 
@@ -11,15 +12,14 @@ class Grid extends Component {
 
 	constructor(props) {
 		super(props);
-		this.onSelectItem = this.onSelectItem.bind(this);
-		this.handlePageClick = this.handlePageClick.bind(this);
 	}
 
-
+	@autobind
 	onSelectItem(e) {
 		this.props.onSelectItem(e.id);
 	}
 
+	@autobind
 	handlePageClick(e) {
 		this.props.onChangePage(e.selected + 1);
 	}
@@ -42,8 +42,6 @@ class Grid extends Component {
 			<Item
 				key={i}
 				id={post.id}
-				XhasAudio={post.has_audio}
-				hasAudio={false}
 				title={post.title.rendered}
 				onSelectItem={this.onSelectItem}
 				image={image}>
@@ -151,13 +149,13 @@ function mapStateToProps(state) {
  */
 const mapDispatchToProps = (dispatch) => ({
 	onSelectItem: (value) => {
-	dispatch(setPopupArchiveItem(value));
-dispatch(setPopupVisible(true));
-},
-onChangePage: (value) => {
-	dispatch(setPage(value));
-	dispatch(initiateSearch());
-}
+		dispatch(setPopupArchiveItem(value));
+		dispatch(setPopupVisible(true));
+	},
+	onChangePage: (value) => {
+		dispatch(setPage(value));
+		dispatch(initiateSearch());
+	}
 });
 
 export default connect(

@@ -83,7 +83,7 @@ class Rest {
 		}
 		$value = $request[$field[self::FIELD_INDEX_FIELD_ID]];
 
-		error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		// error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
 		global $wp;
 		$vars = apply_filters( 'query_vars', $wp->public_query_vars );
@@ -105,8 +105,31 @@ class Rest {
 		return $args;
 	}
 
-	public function decorate_date_args($field, $args, $request )
-	{
+	public function decorate_select_args($field, $args, $request ) {
+		if ( empty( $request[$field[self::FIELD_INDEX_FIELD_ID]] ) ) {
+			return $args;
+		}
+		$value = $request[$field[self::FIELD_INDEX_FIELD_ID]];
+
+		error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+
+		global $wp;
+		$vars = apply_filters( 'query_vars', $wp->public_query_vars );
+		if ( ! isset($args[ 'meta_query' ])) {
+			$args[ 'meta_query' ] = [
+				'relation'		=> 'AND',
+			];
+		}
+		$args[ 'meta_query' ][] = [
+			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+			'value'		=> $value,
+			'compare'	=> 'IN'
+		];
+
+		return $args;
+	}
+
+	public function decorate_date_args($field, $args, $request ) {
 		if (empty($request[$field[self::FIELD_INDEX_FIELD_ID]])) {
 			return $args;
 		}
@@ -150,6 +173,10 @@ class Rest {
 			}
 			if ($field[self::FIELD_INDEX_TYPE] === Date_Field::NAME) {
 				$args = $this->decorate_date_args($field, $args, $request );
+			}
+
+			if ($field[self::FIELD_INDEX_TYPE] === Select_Field::NAME) {
+				$args = $this->decorate_select_args($field, $args, $request );
 			}
 		}
 
