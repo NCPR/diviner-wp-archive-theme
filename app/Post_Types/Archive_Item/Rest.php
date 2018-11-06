@@ -19,6 +19,7 @@ class Rest {
 	const FIELD_INDEX_TITLE = 'title';
 	const FIELD_INDEX_TYPE = 'type';
 	const FIELD_INDEX_FIELD_ID = 'field_id';
+	const FIELD_INDEX_FIELD_POPUP = 'field_popup';
 
 	protected $container;
 	protected $fields;
@@ -64,6 +65,7 @@ class Rest {
 				self::FIELD_INDEX_TITLE => get_the_title($post_id),
 				self::FIELD_INDEX_TYPE => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables'),
 				self::FIELD_INDEX_FIELD_ID => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_ID, 'carbon_fields_container_field_variables'),
+				self::FIELD_INDEX_FIELD_POPUP => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables'),
 			];
 		}
 		return $fields;
@@ -135,34 +137,38 @@ class Rest {
 		}
 		$range = $request[$field[self::FIELD_INDEX_FIELD_ID]];
 
-		$start_time = mktime(0, 0, 0, 0 , 0, $range[0]);
-		$start_date = date('Ymd', $start_time);
-
-		$end_time = mktime(0, 0, 0, 0 , 0, $range[1]);
-		$end_date = date('Ymd', $end_time);
-
+		// assume the format is array of dates in format YYY/MM/DD
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
 				'relation'		=> 'AND',
 			];
 		}
 
-		$args[ 'meta_query' ][] = [
-			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
-			'compare'	=> '>=',
-			'value'		=> $start_date,
-		];
+		if (isset($range[0])) {
+			$start_time = strtotime($range[0]);
+			$start_date = date("Ymd", $start_time);
+			$args[ 'meta_query' ][] = [
+				'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+				'compare'	=> '>=',
+				'value'		=> $start_date,
+			];
+		}
 
-		$args[ 'meta_query' ][] = [
-			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
-			'compare'	=> '<=',
-			'value'		=> $end_date,
-		];
+		if (isset($range[1])) {
+			$end_time = strtotime($range[1]);
+			$end_date = date('Ymd', $end_time);
+			$args[ 'meta_query' ][] = [
+				'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+				'compare'	=> '<=',
+				'value'		=> $end_date,
+			];
+		}
 
 		return $args;
 	}
 
 	public function rest_api_filter_add_vars( $args, $request ) {
+
 		$fields = $this->get_fields();
 		foreach($fields as $field) {
 			if ($field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME) {

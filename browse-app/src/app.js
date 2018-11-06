@@ -14,8 +14,6 @@ import Main from './containers/main';
  * The main container
  */
 
-console.log('CONFIG', CONFIG);
-
 class App extends Component {
 
 	render() {

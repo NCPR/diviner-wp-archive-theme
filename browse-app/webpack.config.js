@@ -4,6 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const DEBUG = process.env.NODE_ENV !== 'production';
 
+
+
 const devtool = DEBUG ? 'eval' : 'source-map';
 const entry = DEBUG ? [
 	'react-hot-loader/patch',
@@ -88,6 +90,10 @@ module.exports = {
 			{
 				test: /\.(png|jpg|jpeg)$/,
 				loader: 'url-loader?limit=100000&name=./img/[name]__[hash:base64:5].[ext]',
+			},
+			{
+				test: /\.css/,
+				loaders: ['style-loader', 'css-loader']
 			},
 			{
 				test: /\.pcss$/,

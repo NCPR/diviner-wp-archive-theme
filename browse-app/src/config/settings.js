@@ -33,5 +33,10 @@ export const FIELD_DATE_TYPE_DECADE = 'div_field_date_type_decade';
 export const FIELD_DATE_TYPE_YEAR = 'div_field_date_type_year';
 export const FIELD_DATE_TYPE_TWO_DATE = 'div_field_date_type_two_date';
 
+export const FIELD_DATE_MIN_YEAR_DEFAULT = 1800;
+export const FIELD_DATE_MAX_YEAR_DEFAULT = 2018;
+
+export const FIELD_POSITION_TOP = 'top';
+export const FIELD_POSITION_LEFT = 'left';
 
 export const SETTINGS = settings;

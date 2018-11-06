@@ -45,3 +45,18 @@
 		top: 0;
 	}
 }
+
+.a-item__action {
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		.a-item__figure-caption {
+			text-decoration: underline;
+		}
+	}
+}
+
+.a-item__figure-caption {
+
+}

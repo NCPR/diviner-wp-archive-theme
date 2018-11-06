@@ -5149,6 +5149,67 @@ ul.react-pagination li a {
       width: auto;
       text-align: left; } }
 
+.input {
+  margin-bottom: 10px;
+  line-height: 1; }
+
+.label,
+legend {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 16px; }
+  @media screen and (min-width: 768px) {
+    .label,
+    legend {
+      font-size: 18px; } }
+
+.required label:after {
+  content: '*'; }
+
+.required label:after {
+  padding-left: 4px; }
+
+input,
+button,
+textarea,
+select {
+  padding: 0 10px;
+  border: 1px solid #333333; }
+
+input,
+select,
+button {
+  display: inline-block;
+  height: 40px; }
+  .lt-ie9 input, .lt-ie9
+  select, .lt-ie9
+  button {
+    line-height: 40px; }
+
+/*
+.field,
+%field {
+
+	padding: 0 1em;
+	font-size: $font-size-form-s;
+	border: 1px solid $f_color_border;
+	border-radius: 2px;
+	background-color: $color_white;
+	display: block;
+	width: 100%;
+	height: 47px;
+	@include mq($mq-medium) {
+		font-size: $font-size-form;
+		border-width: 2px;
+		border-radius: 4px;
+	}
+
+	.inverted & {
+		border-color: $blue-dark;
+	}
+
+}
+*/
 .a-main {
   width: 100%;
   height: auto;
@@ -5233,6 +5294,11 @@ ul.react-pagination li a {
     position: absolute;
     top: 0; }
 
+.a-item__action {
+  cursor: pointer; }
+  .a-item__action:hover .a-item__figure-caption, .a-item__action:focus .a-item__figure-caption {
+    text-decoration: underline; }
+
 .a-facets {
   width: 100%;
   padding: 0 0 10px 0; }
@@ -5279,7 +5345,17 @@ ul.react-pagination li a {
   margin: 0 7px; }
 
 .a-field {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  /* Date */ }
+  .a-field .a-date-selector {
+    position: absolute;
+    display: none;
+    z-index: 5; }
+    .a-field .a-date-selector.a-date-selector--visible {
+      display: block; }
+
+.a-input-date {
+  width: 100%; }
 
 /* React pagination */
 ul.react-pagination {
@@ -5550,6 +5626,37 @@ ul.react-pagination .break a {
   margin-left: -4px;
   border-width: 4px 4px 0;
   border-top-color: #6c6c6c; }
+
+@media screen and (min-width: 768px) {
+  .a-control-row {
+    display: -ms-flexbox;
+    display: flex; } }
+
+@media screen and (min-width: 768px) {
+  .a-control-row--2 {
+    -ms-flex: 1 1 50%;
+        flex: 1 1 50%; } }
+
+@media screen and (min-width: 768px) {
+  .a-control-row--3 {
+    -ms-flex: 1 1 33.33%;
+        flex: 1 1 33.33%; } }
+
+.a-search-row {
+  display: -ms-flexbox;
+  display: flex; }
+
+.a-search-input {
+  -ms-flex: 1 1 100%;
+      flex: 1 1 100%;
+  margin-right: 20px; }
+  .a-search-input input {
+    width: 100%; }
+
+.a-search-button {
+  height: 40px;
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto; }
 
 * {
   box-sizing: border-box; }

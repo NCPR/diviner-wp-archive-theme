@@ -28,6 +28,21 @@ class Settings {
      */
 	protected static $theme_options;
 
+	public function hooks() {
+		add_action( 'carbon_fields_register_fields', [$this, 'crb_attach_theme_options'], 0, 0 );
+		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
+	}
+
+	public function custom_diviner_js_config( $data  ) {
+
+		$settings = [
+			'permission_notice' => carbon_get_theme_option(self::FIELD_GENERAL_PERMISSIONS),
+		];
+		$data['settings'] = $settings;
+		return $data;
+
+	}
+
     /**
      * Returns the menu slug of the theme options main page.
      *

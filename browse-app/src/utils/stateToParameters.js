@@ -7,7 +7,6 @@ import { CONFIG } from '../globals/config';
 // scripts in your app. By itself it
 // does nothing :)
 export default function stateToParameters(state) {
-	console.log('stateToParameters state', state)
 	const stringable = {
 		base: 'ALL',
 		fieldData: {},

@@ -6,12 +6,7 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 
 import {
-	FIELD_DATE_TYPE,
-	FIELD_DATE_START,
-	FIELD_DATE_END,
-	FIELD_DATE_TYPE_CENTURY,
-	FIELD_TYPE_SELECT,
-	FIELD_TYPE_TAXONOMY, FIELD_TYPE_CPT,
+	FIELD_TYPE_CPT,
 } from '../config/settings';
 
 import {
@@ -20,10 +15,8 @@ import {
 	setFieldData,
 } from '../actions';
 import {CONFIG} from "../globals/config";
-import {termsToSelectOptions} from "../utils/wp/termsToSelectOptions";
-import {getTaxonomyItemsFromTermIds} from "../utils/data/field-utils";
-import { carbonFieldSelectToSelectOptions } from '../utils/wp/carbonFieldSelectToSelectOptions';
-import {postsToSelectOptions} from "../utils/wp/postsToSelectOptions";
+import {postsToSelectOptions} from "../utils/wp/postsToSelectOptions"
+import { selectStyles } from '../shared/select-styles';;
 
 // to allow us to access this in the react select component context
 let _this;
@@ -50,7 +43,7 @@ class FieldCpt extends Component {
 	}
 
 	createField(field) {
-		console.log('createField', field);
+		// console.log('createField', field);
 		if (!CONFIG.cpt_posts[field.cpt_field_id]) {
 			return '';
 		}
@@ -69,6 +62,7 @@ class FieldCpt extends Component {
 				isClearable={isClearable}
 				onChange={this.onChangeField}
 				value={valueItem}
+				styles={selectStyles}
 			></Select>
 		);
 	}

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import Select from 'react-select';
 import autobind from 'autobind-decorator';
 import { connect } from 'react-redux';
-import Slider from 'rc-slider';
-import ASlider from './aslider';
+
 import FieldDate from './fieldDate';
 import FieldSelect from './fieldSelect';
 import FieldTaxonomy from './fieldTaxonomy';
 import FieldCpt from './fieldCpt';
-
 
 // CONFIG
 import { CONFIG } from '../globals/config';
@@ -22,16 +19,12 @@ import { FIELD_TYPE_TAXONOMY,
 			FIELD_DATE_TYPE,
 			FIELD_DATE_START,
 			FIELD_DATE_END,
-			FIELD_DATE_TYPE_CENTURY
+			FIELD_DATE_TYPE_CENTURY,
+			FIELD_POSITION_LEFT,
 } from '../config/settings';
 
-import { termsToSelectOptions } from '../utils/wp/termsToSelectOptions';
-import { postsToSelectOptions } from '../utils/wp/postsToSelectOptions';
-import { getTaxonomyItemsFromTermIds } from '../utils/data/field-utils';
-import { carbonFieldSelectToSelectOptions } from '../utils/wp/carbonFieldSelectToSelectOptions';
 
 import {
-	setOrderBy,
 	initiateSearch,
 	setPage,
 	clearFacets,
@@ -98,7 +91,7 @@ class SearchFacets extends Component {
 
 	filterFields(fields) {
 		return _.map(fields, function(o) {
-			if (o && o.position === 'left') return o;
+			if (o && o.position === FIELD_POSITION_LEFT) return o;
 		});
 	}
 

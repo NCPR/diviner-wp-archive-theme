@@ -13,7 +13,6 @@ const getInitialState = function() {
 const initialState = getInitialState();
 
 const fieldData = (state = initialState, action) => {
-	console.log('fieldData state', state, action);
 	switch (action.type) {
 		case SET_FIELD_DATA:
 			return action.value;

@@ -4,7 +4,6 @@ import { FIELD_PROP_FIELD_ID } from '../../config/settings';
 import { CONFIG } from '../../globals/config';
 
 export const getFieldTypeFromId = (fieldId) => {
-	console.log('getFieldTypeFromId', fieldId);
 	return _.find(CONFIG.fields, (field) => {
 		return field[FIELD_PROP_FIELD_ID] === fieldId;
 	})

@@ -1,0 +1,113 @@
+// -----------------------------------------------------------------------------
+//
+// Input Block / Wrapper
+//
+// -----------------------------------------------------------------------------
+
+.input,
+%input-wrap {
+	margin-bottom: $d_spacer_sm;
+	line-height: 1;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Label
+//
+// -----------------------------------------------------------------------------
+
+.label,
+%label {
+	display: inline-block;
+	margin-bottom: $d_spacer_sm;
+	font-size: 16px;
+
+	@include g-state(medium) {
+		font-size: 18px;
+	}
+}
+
+// -----------------------------------------------------------------------------
+//
+// Required
+//
+// -----------------------------------------------------------------------------
+
+// Required
+.required {
+	label {
+		&:after {
+			@extend %required;
+			content: '*';
+		}
+	}
+}
+
+%required {
+	padding-left: 4px;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Fieldset & Legend
+//
+// -----------------------------------------------------------------------------
+
+fieldset {
+
+}
+
+legend {
+	@extend %label;
+}
+
+
+// -----------------------------------------------------------------------------
+//
+// Inputs
+//
+// -----------------------------------------------------------------------------
+
+input,
+button,
+textarea,
+select {
+	padding: 0 10px;
+	border: 1px solid $f_color_border;
+}
+
+input,
+select,
+button {
+	display: inline-block;
+	height: 40px;
+	.lt-ie9 & {
+		line-height: 40px;
+	}
+}
+
+/*
+.field,
+%field {
+
+	padding: 0 1em;
+	font-size: $font-size-form-s;
+	border: 1px solid $f_color_border;
+	border-radius: 2px;
+	background-color: $color_white;
+	display: block;
+	width: 100%;
+	height: 47px;
+	@include mq($mq-medium) {
+		font-size: $font-size-form;
+		border-width: 2px;
+		border-radius: 4px;
+	}
+
+	.inverted & {
+		border-color: $blue-dark;
+	}
+
+}
+*/
+

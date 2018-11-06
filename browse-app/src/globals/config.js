@@ -17,6 +17,9 @@ const configDefault = {
 	taxonomies: [],
 	fields: [],
 	cpt_posts: [],
+	settings: {
+		permissions: ''
+	},
 };
 
 export const CONFIG = window.diviner_config || configDefault; // eslint-disable-line camelcase

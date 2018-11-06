@@ -4,7 +4,14 @@ import _ from 'lodash';
 import history from '../utils/data/history';
 
 import stateToParameters from '../utils/stateToParameters';
-import { SETTINGS, FIELD_PROP_FIELD_ID, FIELD_PROP_FIELD_TYPE, FIELD_TYPE_TAXONOMY, FIELD_PROP_TAXONOMY_NAME } from '../config/settings';
+import {
+	SETTINGS,
+	FIELD_PROP_FIELD_ID,
+	FIELD_PROP_FIELD_TYPE,
+	FIELD_TYPE_TAXONOMY,
+	FIELD_PROP_TAXONOMY_NAME,
+	FIELD_TYPE_DATE
+} from '../config/settings';
 import { CONFIG } from '../globals/config';
 import objectToParameters from '../utils/data/object-to-params';
 import getParams from '../utils/data/query-to-obj';
@@ -57,7 +64,6 @@ export const SET_ORDER_BY = 'SET_ORDER_BY';
 export const SET_TAG_FILTER = 'SET_TAG_FILTER';
 export const SET_YEAR_RANGE_FILTER = 'SET_YEAR_RANGE_FILTER';
 export const SET_DATE_FILTER = 'SET_DATE_FILTER';
-export const SET_DONOR_FILTER = 'SET_DONOR_FILTER';
 export const SET_PAGE = 'SET_PAGE';
 export const CLEAR_FACETS = 'CLEAR_FACETS';
 export const SET_MOBILE_FILTER_OPEN = 'SET_MOBILE_FILTER_OPEN';
@@ -177,7 +183,7 @@ function receivePosts(cacheKey, json) {
 
 // items: store.getState().otherReducer.items,
 function fetchPosts(cacheKey) {
-	console.log('fetchPosts', cacheKey);
+	// console.log('fetchPosts', cacheKey);
 	return (dispatch, getState) => {
 		dispatch(requestPosts(cacheKey));
 		const archivalQuery = site.archivalItems();
@@ -191,53 +197,24 @@ function fetchPosts(cacheKey) {
 			obj.pOrder = getState().orderBy;
 		}
 		*/
-
 		const fieldData = getState().fieldData;
-		console.log('fieldData', fieldData);
-
-		if (!_.isEmpty(fieldData)) {
-			// console.log('archivalQuery', archivalQuery);
+		if (!_.isEmpty(fieldData) ) {
 			_.forOwn(getState().fieldData, (value, key) => {
-				console.log('field Data state', value, key);
 				// if taxonomy or multi select then create array of IDs
 				const field = getFieldTypeFromId(key);
-				console.log('field', field);
 				if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
-					//const tagIDs = _.map(value, (item) => item.value);
 					const taxName = field[FIELD_PROP_TAXONOMY_NAME];
-					console.log('taxName', taxName);
-					console.log('key', key);
 					archivalQuery[taxName](value);
-					// archivalQuery['divinerTaxonomyField152'](value);
-
-					// archivalQuery.diviner_taxonomy_field_152(value);
-
-
-					//archivalQuery[key](value);
-
-					// archivalQuery['taxonomyThing'](value);
-
-
-					/*
-					console.log(Object.getOwnPropertyNames(archivalQuery).filter(function (p) {
-						return typeof archivalQuery[p] === 'function';
-					}));
-					*/
-
+				} else if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_DATE) {
+					if (value && value.length && value[0] && value[1]) {
+						archivalQuery[key](value);
+					}
 				} else {
 					archivalQuery[key](value);
 				}
 
 				obj[key] = value;
 			});
-
-			// getState().fieldData.forEach((fieldData) => {
-				// to do... change the query
-			//})
-
-			// const countyIDs = _.map(getState().countyFilter, (item) => item.value);
-			// archivalQuery.county(countyIDs);
-			// obj.pCounty = countyIDs;
 		}
 
 		if (getState().queryString.length) {
@@ -255,10 +232,7 @@ function fetchPosts(cacheKey) {
 		const path = `/browse/?${param}`;
 		history.push(path);
 
-		console.log('obj', obj);
-
 		archivalQuery.then((data) => {
-			console.log('data', data);
 			// console.log('header: ' , data.headers['x-wp-totalpages']);
 			dispatch(receivePosts(cacheKey, data));
 		}).catch((err) => {
@@ -291,7 +265,6 @@ export function initiateSearch() {
 	// create cache path from parameters
 	return (dispatch, getState) => {
 		const key = stateToParameters(getState());
-		console.log('key', key);
 		dispatch(setCacheKey(key));
 		// dispatch(invalidateSearchQuery(key));
 		dispatch(fetchPostsIfNeeded(key));

@@ -43,8 +43,7 @@ class ArchiveItem extends Component {
 		const post = this.props.post;
 		const imgSrc = this.getImage(post);
 		const imgCaption = post.feature_image.caption;
-		//const rights = (post.institution.rights) ? post.institution.rights : CONFIG.permission_notice;
-		const rights = "Rights Notice. Lorem Ipsum Something something something something";
+		const rights = CONFIG.settings.permission_notice;
 
 		let actionClass = 'a-sai__img-action';
 
@@ -78,14 +77,14 @@ class ArchiveItem extends Component {
 					</div>
 
 					{ // Check for disclaimer
-						(rights) &&
+						(rights && rights.length) &&
 						<div className="gr-12">
 							<div
 								className="a-sai__permission"
 							>
-								<div className="a-sai__permission-header">
+								<h4 className="a-sai__permission-header">
 									Permissions Statement
-								</div>
+								</h4>
 								<div
 									className="a-sai__permission-content"
 									dangerouslySetInnerHTML={{ __html: rights }}

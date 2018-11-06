@@ -22,7 +22,7 @@ import {
 import {CONFIG} from "../globals/config";
 import {termsToSelectOptions} from "../utils/wp/termsToSelectOptions";
 import {getTaxonomyItemsFromTermIds} from "../utils/data/field-utils";
-import { carbonFieldSelectToSelectOptions } from '../utils/wp/carbonFieldSelectToSelectOptions';
+import { selectStyles } from '../shared/select-styles';
 
 // to allow us to access this in the react select component context
 let _this;
@@ -47,7 +47,7 @@ class FieldTaxonomy extends Component {
 	}
 
 	createField(field) {
-		console.log('createField', field);
+		// console.log('createField', field);
 		if (!CONFIG.taxonomies[field.taxonomy_field_name]) {
 			return '';
 		}
@@ -67,6 +67,7 @@ class FieldTaxonomy extends Component {
 				isClearable={isClearable}
 				onChange={this.onChangeField}
 				value={valueItems}
+				styles={selectStyles}
 			></Select>
 		);
 	}

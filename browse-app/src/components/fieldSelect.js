@@ -13,6 +13,7 @@ import {
 	FIELD_TYPE_SELECT,
 } from '../config/settings';
 import { carbonFieldSelectToSelectOptions } from '../utils/wp/carbonFieldSelectToSelectOptions';
+import { selectTheme, selectStyles } from '../shared/select-styles';
 
 import {
 	initiateSearch,
@@ -55,17 +56,18 @@ class FieldSelect extends Component {
 	}
 
 	createField(field) {
-		console.log('createField', field);
+		// console.log('createField', field);
 		if (!field.select_field_options || field.select_field_options.length === 0 ) {
 			return '';
 		}
 		const values = this.props.fieldData[field.field_id]; // as array id IDs
-		console.log('values', values);
 		let options = carbonFieldSelectToSelectOptions(field.select_field_options);
 		const valueItems = this.getSelectItemsFromValues(options, values);
 		const clearText = 'Clear';
 		const isClearable = true;
-		console.log('valueItems', valueItems);
+
+		console.log()
+
 		return (
 			<Select
 				name={field.field_id}
@@ -77,6 +79,8 @@ class FieldSelect extends Component {
 				isClearable={isClearable}
 				onChange={this.onChangeSelectField}
 				value={valueItems}
+				//theme={(theme) => {return selectTheme(theme);}}
+				styles={selectStyles}
 				></Select>
 		)
 	}

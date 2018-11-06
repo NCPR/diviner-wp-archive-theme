@@ -12,6 +12,9 @@ $color_secondary: $color_grey_mid;
 $color_headers: $color_primary;
 
 
+$color_border: $color_secondary;
+
+
 // Media Queries
 // =================================================
 $mq_xxsmall: 375px;
@@ -43,3 +46,22 @@ $t_font_interface: $t_font_opensans;
 $t_font_icons: 'icomoon' !important;
 $t_font_headers: $t_font_oswald;
 
+
+// Font Sizes
+// =================================================
+$t_font_size_sm: 14px;
+$t_font_size_m: 16px;
+$t_font_size_lrg: 18px;
+$t_font_size_xlrg: 22px;
+
+$t_line_height_even: 1;
+$t_line_height_sm: 1.1;
+$t_line_height_m: 1.2;
+$t_line_height_lrg: 1.4;
+
+
+// Forms
+// =================================================
+
+$f_color_border: $color_border;
+$f_font_size_mobile: $t_font_size_m;
