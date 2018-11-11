@@ -2,8 +2,18 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from "lodash";
+
 import { sequencePopupArchiveItem } from '../actions';
 import { CONFIG } from '../globals/config';
+import { getTaxonomyItemsFromTermIds, getCPTsFromIds } from "../utils/data/field-utils";
+
+import { FIELD_TYPE_TAXONOMY,
+	FIELD_TYPE_CPT,
+	FIELD_TYPE_SELECT,
+	FIELD_TYPE_DATE,
+	FIELD_POSITION_LEFT,
+} from '../config/settings';
 
 class ArchiveItem extends Component {
 
@@ -39,12 +49,128 @@ class ArchiveItem extends Component {
 		return featuredimage;
 	}
 
+	filterFields(fields) {
+		return _.filter(fields, { 'display_in_popup': true });
+	}
+
+	renderSeclectField(field) {
+		return (
+			<div>{field.title}</div>
+		)
+	}
+
+	renderCPTField(field) {
+		const post = this.props.post;
+		/* Data structure of post.cpts[field.field_id]
+		{
+			id: "135"
+			subtype: "photographer"
+			type: "post"
+			value: "post:photographer:135"
+		}
+		 */
+		const ids = _.map(post.cpts[field.field_id], (item) => parseInt(item.id, 10));
+		const cptValues = getCPTsFromIds(field.cpt_field_id, ids);
+
+		const cptValuesOutput = cptValues.map((cptValue) => {
+			const key = `cpt-${cptValue.ID}`;
+			return (
+				<li className="a-sai__list-item a-sai__list-item--cpt" key={key}>
+					{cptValue.post_title}
+				</li>
+			);
+		});
+		return (
+			<div>
+				<label className="a-sai__label">
+					{field.title}
+				</label>
+				<ul className="a-sai__list a-sai__list--cpt">
+					{cptValuesOutput}
+				</ul>
+			</div>
+		);
+	}
+
+	renderTaxonomyField(field) {
+		const post = this.props.post;
+		if (!field.taxonomy_field_name || !post[field.taxonomy_field_name] || !post[field.taxonomy_field_name].length) {
+			return ('');
+		}
+		// display a list of the taxonomy terms
+		const terms = getTaxonomyItemsFromTermIds(field.taxonomy_field_name, post[field.taxonomy_field_name]);
+		const termsOutput = terms.map((term) => {
+			const termKey = `term-${term.term_id}`;
+			return (
+				<li className="a-sai__list-item a-sai__list-item--taxonomy" key={termKey}>
+					{term.name}
+				</li>
+			);
+		});
+		return (
+			<div>
+				<label className="a-sai__label">
+					{field.taxonomy_field_plural_label}
+				</label>
+				<ul className="a-sai__list a-sai__list--taxonomy">
+					{termsOutput}
+				</ul>
+			</div>
+		);
+	}
+	renderTextField(field) {
+		return (
+			<div>{field.title}</div>
+		)
+	}
+
+	renderField(field) {
+		let content = '';
+		if (field.field_type) {
+			if (field.field_type === FIELD_TYPE_SELECT) {
+				content = this.renderSeclectField(field);
+			} else if (field.field_type === FIELD_TYPE_CPT)  {
+				content = this.renderCPTField(field);
+			} else if (field.field_type === FIELD_TYPE_TAXONOMY)  {
+				content = this.renderTaxonomyField(field);
+			} else {
+				content = this.renderTextField(field);
+			}
+		}
+		return content;
+	}
+
+	renderFields() {
+		const fieldsToDisplay = this.filterFields(CONFIG.fields);
+		if (!fieldsToDisplay.length) {
+			return ('');
+		}
+
+		return (
+			<div className="row a-row">
+				<div className="gr-12">
+					<div className="a-sai__fields">
+						{fieldsToDisplay.map((field) => {
+							let classes = 'a-sai__field ';
+							classes += `a-sai__field--${field.field_type}`;
+							const fieldRef = `a-sai__field-ref--${field.id}`;
+							return (
+								<div className={classes} key={fieldRef}>
+									{ this.renderField(field) }
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	render() {
 		const post = this.props.post;
 		const imgSrc = this.getImage(post);
 		const imgCaption = post.feature_image.caption;
 		const rights = CONFIG.settings.permission_notice;
-
 		let actionClass = 'a-sai__img-action';
 
 		return (
@@ -70,8 +196,9 @@ class ArchiveItem extends Component {
 					</div>
 				</div>
 
-				<div className="row a-row">
+				{ this.renderFields() }
 
+				<div className="row a-row">
 					<div className="gr-12">
 						<a href={post.permalink} className="btn btn-full">View Details</a>
 					</div>

@@ -13,13 +13,8 @@ import FieldCpt from './fieldCpt';
 import { CONFIG } from '../globals/config';
 import { FIELD_TYPE_TAXONOMY,
 			FIELD_TYPE_CPT,
-			FIELD_TYPE_TEXT,
 			FIELD_TYPE_SELECT,
 			FIELD_TYPE_DATE,
-			FIELD_DATE_TYPE,
-			FIELD_DATE_START,
-			FIELD_DATE_END,
-			FIELD_DATE_TYPE_CENTURY,
 			FIELD_POSITION_LEFT,
 } from '../config/settings';
 

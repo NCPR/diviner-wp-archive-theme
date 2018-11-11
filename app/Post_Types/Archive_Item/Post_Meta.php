@@ -86,11 +86,11 @@ class Post_Meta {
 
 	}
 
-	public function get_field( $post_id, $type ) {
-		$id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_ID );
-		$label = get_the_title( $post_id );
-		$helper = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
-		return call_user_func( array($type, 'render'), $post_id, $id, $label, $helper);
+	public function get_field( $cpt_field_id, $type ) {
+		$id = carbon_get_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ID );
+		$label = get_the_title( $cpt_field_id );
+		$helper = carbon_get_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
+		return call_user_func( array($type, 'render'), $cpt_field_id, $id, $label, $helper);
 	}
 
 	public function add_dynamic_fields(){
@@ -106,14 +106,14 @@ class Post_Meta {
 			'post_type' => Diviner_Field::NAME,
 			'meta_query' => $meta_query
 		);
-		$posts_ids = get_posts($args);
+		$cpt_fields_ids = get_posts($args);
 		$dynamic_fields = [];
 
-		foreach($posts_ids as $post_id) {
-			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+		foreach($cpt_fields_ids as $cpt_field_id) {
+			$field_type = carbon_get_post_meta($cpt_field_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$type = Diviner_Field::get_class( $field_type );
 			if ( $type ) {
-				$field_rendered = $this->get_field( $post_id,  $type );
+				$field_rendered = $this->get_field( $cpt_field_id,  $type );
 				if ( ! empty( $field_rendered ) ) {
 					$dynamic_fields[] = $field_rendered;
 				}

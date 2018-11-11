@@ -221,6 +221,14 @@ class FieldDate extends Component {
 							ref={this.dateStartRef}
 							onClick={this.onToggleStartVisibility}
 						/>
+						<div
+							className={calendarStartClasses}
+							ref={this.calendarStartRef}>
+							<Calendar
+								date={startDate}
+								onChange={this.onChangeStartDate}
+							/>
+						</div>
 					</div>
 
 					<div className="gr-6">
@@ -233,26 +241,16 @@ class FieldDate extends Component {
 							ref={this.dateEndRef}
 							onClick={this.onToggleEndVisibility}
 						/>
+						<div
+							className={calendarEndClasses}
+							ref={this.calendarEndRef}>
+							<Calendar
+								date={endDate}
+								onChange={this.onChangeEndDate}
+							/>
+						</div>
 					</div>
 
-				</div>
-
-				<div
-					className={calendarStartClasses}
-					ref={this.calendarStartRef}>
-					<Calendar
-						date={startDate}
-						onChange={this.onChangeStartDate}
-					/>
-				</div>
-
-				<div
-					className={calendarEndClasses}
-					ref={this.calendarEndRef}>
-					<Calendar
-						date={endDate}
-						onChange={this.onChangeEndDate}
-					/>
 				</div>
 
 			</div>

@@ -6,6 +6,8 @@ use Diviner\Post_Types\Diviner_Field\PostMeta;
 
 abstract class FieldType implements iField {
 
+	const TYPE = 'date';
+
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		$field =  Field::make( static::TYPE, $id, $field_label );
 		if ( ! empty( $helper ) ) {
@@ -30,11 +32,13 @@ abstract class FieldType implements iField {
 	 */
 	static public function get_blueprint( $post_id ) {
 		return [
-			'id'        => $post_id,
-			'title'     => get_the_title( $post_id ),
-			'position'  => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT, 'carbon_fields_container_field_variables' ),
-			'helper'    => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_HELPER_TEXT, 'carbon_fields_container_field_variables' ),
-			'field_id'  => carbon_get_post_meta( $post_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' ),
+			'id'                => $post_id,
+			'title'             => get_the_title( $post_id ),
+			// 'field_type'              => carbon_get_post_meta( $post_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' ),
+			'position'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT, 'carbon_fields_container_field_variables' ),
+			'helper'            => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_HELPER_TEXT, 'carbon_fields_container_field_variables' ),
+			'field_id'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' ),
+			'display_in_popup'  => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables' ),
 		];
 	}
 }

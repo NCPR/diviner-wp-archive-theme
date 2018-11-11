@@ -24,6 +24,10 @@ class Rest {
 	protected $container;
 	protected $fields;
 
+	public function init() {
+		$this->fields = $this->get_fields();
+	}
+
 	public function hooks() {
 		$action = 'after_setup_theme';
 		if ( DIVINER_IS_PLUGIN ) {
@@ -34,12 +38,10 @@ class Rest {
 		add_action( 'rest_api_init', array( &$this,'custom_register_rest_fields') );
 	}
 
-	public function init() {
-		$this->fields = $this->get_fields();
-		var_dump('$this->fields ', $this->fields );
-	}
-
 	protected function get_fields() {
+		if (isset($this->fields)) {
+			return $this->fields;
+		}
 		$meta_query = array(
 			array(
 				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
@@ -68,7 +70,8 @@ class Rest {
 				self::FIELD_INDEX_FIELD_POPUP => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables'),
 			];
 		}
-		return $fields;
+		$this->fields = $fields;
+		return $this->fields;
 	}
 
 	public function decorate_taxonomy_args($field, $args, $request ) {
@@ -188,9 +191,9 @@ class Rest {
 
 		// error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
-		error_log(print_r( $request, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-		error_log(print_r( $fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-		error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		// error_log(print_r( $request, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		// error_log(print_r( $fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		// error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
 		return $args;
 
@@ -210,6 +213,64 @@ class Rest {
 				return get_the_permalink($arr['id']);
 			}
 		) );
+
+		// $fields = $this->get_fields();
+
+		error_log(print_r( $this->fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+
+
+		$fields = $this->get_fields();
+		$cpt_fields = array_filter($fields, function($field) {
+			return $field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME;
+		});
+		if ($cpt_fields) {
+			register_rest_field( Archive_Item::NAME, 'cpts', array(
+				'get_callback' => function( $arr ) use( &$cpt_fields) {
+					$ret = [];
+					// error_log(print_r( $cpt_fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+					foreach($cpt_fields as $field) {
+						$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
+						// $ret[$field_cpt_id] = carbon_get_post_meta( $arr['id'],FieldPostMeta::FIELD_ID );
+
+						// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
+						$ret[$field_id] = carbon_get_post_meta( $arr['id'], $field_id);
+
+					}
+					return $ret;
+				}
+			) );
+		}
+
+		/*
+		foreach($fields as $field) {
+			if ($field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME) {
+				// FIELD_INDEX_ID
+
+				$field_cpt_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_CPT_ID );
+				register_rest_field( Archive_Item::NAME, $field_cpt_id, array(
+					'get_callback' => function( $arr ) {
+						return 'value';
+					}
+				) );
+
+
+			}
+		}
+		*/
+
+		/*
+
+			if ($field[self::FIELD_INDEX_TYPE] === Taxonomy_Field::NAME) {
+				$args = $this->decorate_taxonomy_args($field, $args, $request );
+			}
+			if ($field[self::FIELD_INDEX_TYPE] === Date_Field::NAME) {
+				$args = $this->decorate_date_args($field, $args, $request );
+			}
+
+			if ($field[self::FIELD_INDEX_TYPE] === Select_Field::NAME) {
+				$args = $this->decorate_select_args($field, $args, $request );
+			}
+			*/
 
 		register_rest_field( Archive_Item::NAME, 'test', array(
 			'get_callback' => function( $arr ) {

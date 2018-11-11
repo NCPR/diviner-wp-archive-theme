@@ -1,0 +1,43 @@
+
+.a-sai__field {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.a-sai__label {
+	font-weight: $t_font_weight_bold;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+// UL
+.a-sai__list {
+	list-style:none;
+	display: inline;
+}
+
+.a-sai__list-item {
+	display: inline;
+	margin-right: 10px;
+
+	&:after {
+		content: ',';
+		display: inline;
+	}
+
+	&:last-of-type:after {
+		display: none;
+	}
+}
+
+.a-sai__list--taxonomy {
+}
+
+.a-sai__list-item--taxonomy {
+}
+
+.a-sai__list--cpt {
+}
+
+.a-sai__list-item--cpt {
+}

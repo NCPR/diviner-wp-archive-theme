@@ -77,6 +77,7 @@ return [
 		'CarbonFields/Boot.php',
 		'CarbonFields/Helper.php',
 		'Admin/Settings.php',
+		'Config/General.php',
 		'Setup/JS_Config.php',
 		'Post_Types/Archive_Item/Archive_Item.php',
 		'Post_Types/Archive_Item/AdminModifications.php',
