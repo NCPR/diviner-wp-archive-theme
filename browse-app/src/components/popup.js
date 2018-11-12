@@ -64,15 +64,8 @@ class Popup extends Component {
 	render() {
 		const post = postStore.getPostsById(this.props.currentPopupPostId);
 		const archiveItem = (post) ? (<ArchiveItem post={post} />) : undefined;
-
-		// const archiveItem = ( <div>thing</div> );
-
-		const dialogStyles = {
-		};
-
 		const controlStyles = {
 		};
-
 		controlStyles.display = this.props.popupPostVisible ? 'block' : 'none';
 
 		if (this.props.popupPostVisible) {
@@ -81,8 +74,14 @@ class Popup extends Component {
 			document.body.classList.remove('modal--open');
 		}
 
+		let classes = 'a-sai__popup ';
+		if (this.props.popupPostVisible) {
+			classes += 'a-sai__popup--visible ';
+		}
+
 		return (
-			<div>
+			<div
+				className={classes}>
 				<div className="a-sai__controls" style={controlStyles}>
 					<button
 						className="a-sai__control-btn a-sai__control-btn--previous"
@@ -106,7 +105,7 @@ class Popup extends Component {
 					afterClose={this._executeAfterModalClose}
 					onOverlayClicked={this.onCloseClicked}
 					onCloseClicked={this.onCloseClicked}
-					dialogStyles={dialogStyles}
+					xxtransitionDuration={0}
 					ref="dialogWithCallBacks"
 				>
 					{archiveItem}

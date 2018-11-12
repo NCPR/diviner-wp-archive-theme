@@ -241,6 +241,27 @@ class Rest {
 			) );
 		}
 
+		$select_fields = array_filter($fields, function($field) {
+			return $field[self::FIELD_INDEX_TYPE] === Select_Field::NAME;
+		});
+		if ($select_fields) {
+			register_rest_field( Archive_Item::NAME, 'selects', array(
+				'get_callback' => function( $arr ) use( &$select_fields) {
+					$ret = [];
+					// error_log(print_r( $cpt_fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+					foreach($select_fields as $field) {
+						$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
+						// $ret[$field_cpt_id] = carbon_get_post_meta( $arr['id'],FieldPostMeta::FIELD_ID );
+
+						// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
+						$ret[$field_id] = carbon_get_post_meta( $arr['id'], $field_id);
+
+					}
+					return $ret;
+				}
+			) );
+		}
+
 		/*
 		foreach($fields as $field) {
 			if ($field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME) {

@@ -12,6 +12,7 @@ class Select_Field extends FieldType {
 	const NAME = 'diviner_select_field';
 	const TITLE = 'Select Field';
 	const TYPE = 'select';
+	const REST_SELECT_OPTIONS = 'select_field_options';
 
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		$options = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS);
@@ -36,7 +37,7 @@ class Select_Field extends FieldType {
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
-			'select_field_options'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS),
+			self::REST_SELECT_OPTIONS  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS),
 		];
 		return array_merge($blueprint, $additional_vars);
 	}

@@ -13,7 +13,46 @@ import { FIELD_TYPE_TAXONOMY,
 	FIELD_TYPE_SELECT,
 	FIELD_TYPE_DATE,
 	FIELD_POSITION_LEFT,
+	FIELD_PROP_DISPLAY_IN_POPUP,
+	FIELD_PROP_SELECT_OPTIONS,
+	FIELD_PROP_SELECT_OPTIONS_LABEL,
+	FIELD_PROP_SELECT_OPTIONS_VALUE,
+	IMAGE_SIZE_BROWSE_POPUP,
 } from '../config/settings';
+
+/*
+{
+	"id": 159,
+	"title": "Test Select Hair Color",
+	"position": "left",
+	"helper": "Color of hair",
+	"field_id": "select_5bcf191008621",
+	"display_in_popup": false,
+	"select_field_options": [
+	{
+		"_type": "_",
+		"div_field_select_options_value": "red",
+		"div_field_select_options_label": "Red"
+	},
+	{
+		"_type": "_",
+		"div_field_select_options_value": "blond",
+		"div_field_select_options_label": "Blond"
+	},
+	{
+		"_type": "_",
+		"div_field_select_options_value": "black",
+		"div_field_select_options_label": "Black"
+	},
+	{
+		"_type": "_",
+		"div_field_select_options_value": "brown",
+		"div_field_select_options_label": "Brown"
+	}
+],
+	"field_type": "diviner_select_field"
+}
+*/
 
 class ArchiveItem extends Component {
 
@@ -40,8 +79,8 @@ class ArchiveItem extends Component {
 	getImage(post) {
 		let featuredimage = null;
 		if (post.feature_image && post.feature_image.sizes) {
-			if (post.feature_image.sizes['thumbnail'] && post.feature_image.sizes['thumbnail'].url) {
-				featuredimage = post.feature_image.sizes['thumbnail'].url;
+			if (post.feature_image.sizes[IMAGE_SIZE_BROWSE_POPUP] && post.feature_image.sizes[IMAGE_SIZE_BROWSE_POPUP].url) {
+				featuredimage = post.feature_image.sizes[IMAGE_SIZE_BROWSE_POPUP].url;
 			} else if (post.feature_image.sizes.full && post.feature_image.sizes.full.url) {
 				featuredimage = post.feature_image.sizes.full.url;
 			}
@@ -50,13 +89,36 @@ class ArchiveItem extends Component {
 	}
 
 	filterFields(fields) {
-		return _.filter(fields, { 'display_in_popup': true });
+		return _.filter(fields, (field) => {
+			return field[FIELD_PROP_DISPLAY_IN_POPUP] === true;
+		});
 	}
 
 	renderSeclectField(field) {
+		console.log('renderSeclectField field', field)
+		const post = this.props.post;
+		const value = post.selects[field.field_id];
+		const selectObjects = _.filter(field[FIELD_PROP_SELECT_OPTIONS], (option) => {
+			return option[FIELD_PROP_SELECT_OPTIONS_VALUE] === value;
+		});
+		const selectValuesOutput = selectObjects.map((selectValue) => {
+			const key = `select-${selectValue[FIELD_PROP_SELECT_OPTIONS_VALUE]}`;
+			return (
+				<li className="a-sai__list-item a-sai__list-item--select" key={key}>
+					{selectValue[FIELD_PROP_SELECT_OPTIONS_LABEL]}
+				</li>
+			);
+		});
 		return (
-			<div>{field.title}</div>
-		)
+			<div>
+				<label className="a-sai__label">
+					{field.title}
+				</label>
+				<ul className="a-sai__list-item a-sai__list-item--select">
+					{selectValuesOutput}
+				</ul>
+			</div>
+		);
 	}
 
 	renderCPTField(field) {
@@ -141,6 +203,7 @@ class ArchiveItem extends Component {
 	}
 
 	renderFields() {
+		console.log('renderFields this.props.post', this.props.post);
 		const fieldsToDisplay = this.filterFields(CONFIG.fields);
 		if (!fieldsToDisplay.length) {
 			return ('');
