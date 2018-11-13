@@ -18,7 +18,8 @@ const configDefault = {
 	fields: [],
 	cpt_posts: [],
 	settings: {
-		permissions: ''
+		permissions: '',
+		display_popup: false
 	},
 };
 

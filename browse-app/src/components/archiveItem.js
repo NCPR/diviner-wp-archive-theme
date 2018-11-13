@@ -18,6 +18,8 @@ import { FIELD_TYPE_TAXONOMY,
 	FIELD_PROP_SELECT_OPTIONS_LABEL,
 	FIELD_PROP_SELECT_OPTIONS_VALUE,
 	IMAGE_SIZE_BROWSE_POPUP,
+	FIELD_PROP_FIELD_ID,
+	FIELD_PROP_TAXONOMY_NAME,
 } from '../config/settings';
 
 /*
@@ -97,7 +99,11 @@ class ArchiveItem extends Component {
 	renderSeclectField(field) {
 		console.log('renderSeclectField field', field)
 		const post = this.props.post;
-		const value = post.selects[field.field_id];
+		const fieldId = field[FIELD_PROP_FIELD_ID];
+		if (!post.selects[fieldId]) {
+			return;
+		}
+		const value = post.selects[fieldId];
 		const selectObjects = _.filter(field[FIELD_PROP_SELECT_OPTIONS], (option) => {
 			return option[FIELD_PROP_SELECT_OPTIONS_VALUE] === value;
 		});
@@ -131,7 +137,11 @@ class ArchiveItem extends Component {
 			value: "post:photographer:135"
 		}
 		 */
-		const ids = _.map(post.cpts[field.field_id], (item) => parseInt(item.id, 10));
+		const fieldId = field[FIELD_PROP_FIELD_ID];
+		if (!post.cpts[fieldId]) {
+			return;
+		}
+		const ids = _.map(post.cpts[fieldId], (item) => parseInt(item.id, 10));
 		const cptValues = getCPTsFromIds(field.cpt_field_id, ids);
 
 		const cptValuesOutput = cptValues.map((cptValue) => {
@@ -156,11 +166,15 @@ class ArchiveItem extends Component {
 
 	renderTaxonomyField(field) {
 		const post = this.props.post;
-		if (!field.taxonomy_field_name || !post[field.taxonomy_field_name] || !post[field.taxonomy_field_name].length) {
-			return ('');
+		if (!field[FIELD_PROP_TAXONOMY_NAME]) {
+			return;
+		}
+		const taxonomy_name = field[FIELD_PROP_TAXONOMY_NAME];
+		if (!post[taxonomy_name] || !post[taxonomy_name].length) {
+			return;
 		}
 		// display a list of the taxonomy terms
-		const terms = getTaxonomyItemsFromTermIds(field.taxonomy_field_name, post[field.taxonomy_field_name]);
+		const terms = getTaxonomyItemsFromTermIds(taxonomy_name, post[taxonomy_name]);
 		const termsOutput = terms.map((term) => {
 			const termKey = `term-${term.term_id}`;
 			return (
@@ -181,9 +195,22 @@ class ArchiveItem extends Component {
 		);
 	}
 	renderTextField(field) {
+		const post = this.props.post;
+		const fieldId = field[FIELD_PROP_FIELD_ID];
+		const value = post.fields_text[fieldId];
+		if (!value) {
+			return;
+		}
 		return (
-			<div>{field.title}</div>
-		)
+			<div>
+				<label className="a-sai__label">
+					{field.title}
+				</label>
+				<div className="a-sai__value a-sai__value--text">
+					{value}
+				</div>
+			</div>
+		);
 	}
 
 	renderField(field) {
@@ -204,6 +231,7 @@ class ArchiveItem extends Component {
 
 	renderFields() {
 		console.log('renderFields this.props.post', this.props.post);
+		console.log('renderFields CONFIG.fields', CONFIG.fields);
 		const fieldsToDisplay = this.filterFields(CONFIG.fields);
 		if (!fieldsToDisplay.length) {
 			return ('');

@@ -35,11 +35,6 @@ class Diviner_Field {
 				'key'     => Helper::get_real_field_name(PostMeta::FIELD_ACTIVE ),
 				'value'   => PostMeta::FIELD_CHECKBOX_VALUE
 			),
-			array(
-				'key'     => Helper::get_real_field_name(PostMeta::FIELD_BROWSE_PLACEMENT ),
-				'value'   => PostMeta::PLACEMENT_OPTIONS_NONE,
-				'compare' => '!='
-			),
 		);
 		$args = array(
 			'posts_per_page' => -1,

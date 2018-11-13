@@ -10,6 +10,7 @@ use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
 use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
+use Diviner\Admin\Settings;
 use Diviner\CarbonFields\Helper;
 
 
@@ -46,11 +47,6 @@ class Rest {
 			array(
 				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
 				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			),
-			array(
-				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_BROWSE_PLACEMENT ),
-				'value'   => FieldPostMeta::PLACEMENT_OPTIONS_NONE,
-				'compare' => '!='
 			),
 		);
 		$args = array(
@@ -200,6 +196,7 @@ class Rest {
 	}
 
 	public function custom_register_rest_fields() {
+
 		register_rest_field( Archive_Item::NAME, 'feature_image', array(
 			'get_callback' => function( $arr ) {
 				$post_thumbnail_id = get_post_thumbnail_id( $arr['id'] );
@@ -214,11 +211,16 @@ class Rest {
 			}
 		) );
 
-		// $fields = $this->get_fields();
+		// only do this extra if the popup is used.
+		$has_popup = carbon_get_theme_option(Settings::FIELD_GENERAL_BROWSE_MODAL);
+		if (!$has_popup) {
+			return;
+		}
+		// error_log(print_r( $this->fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
-		error_log(print_r( $this->fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		// Taxonomies are already added
 
-
+		// add CPT field vars
 		$fields = $this->get_fields();
 		$cpt_fields = array_filter($fields, function($field) {
 			return $field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME;
@@ -241,19 +243,16 @@ class Rest {
 			) );
 		}
 
+		// add Selects field vars
 		$select_fields = array_filter($fields, function($field) {
 			return $field[self::FIELD_INDEX_TYPE] === Select_Field::NAME;
 		});
-		if ($select_fields) {
+		if ($select_fields && count($select_fields)) {
 			register_rest_field( Archive_Item::NAME, 'selects', array(
 				'get_callback' => function( $arr ) use( &$select_fields) {
 					$ret = [];
-					// error_log(print_r( $cpt_fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 					foreach($select_fields as $field) {
 						$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
-						// $ret[$field_cpt_id] = carbon_get_post_meta( $arr['id'],FieldPostMeta::FIELD_ID );
-
-						// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
 						$ret[$field_id] = carbon_get_post_meta( $arr['id'], $field_id);
 
 					}
@@ -262,42 +261,28 @@ class Rest {
 			) );
 		}
 
-		/*
-		foreach($fields as $field) {
-			if ($field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME) {
-				// FIELD_INDEX_ID
-
-				$field_cpt_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_CPT_ID );
-				register_rest_field( Archive_Item::NAME, $field_cpt_id, array(
-					'get_callback' => function( $arr ) {
-						return 'value';
+		$text_fields = array_filter($fields, function($field) {
+			return $field[self::FIELD_INDEX_TYPE] === Text_Field::NAME;
+		});
+		if ($text_fields && count($text_fields)) {
+			register_rest_field( Archive_Item::NAME, 'fields_text', array(
+				'get_callback' => function( $arr ) use( &$text_fields) {
+					$ret = [];
+					foreach($text_fields as $field) {
+						$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
+						$ret[$field_id] = carbon_get_post_meta( $arr['id'], $field_id);
 					}
-				) );
-
-
-			}
+					return $ret;
+				}
+			) );
 		}
-		*/
-
-		/*
-
-			if ($field[self::FIELD_INDEX_TYPE] === Taxonomy_Field::NAME) {
-				$args = $this->decorate_taxonomy_args($field, $args, $request );
-			}
-			if ($field[self::FIELD_INDEX_TYPE] === Date_Field::NAME) {
-				$args = $this->decorate_date_args($field, $args, $request );
-			}
-
-			if ($field[self::FIELD_INDEX_TYPE] === Select_Field::NAME) {
-				$args = $this->decorate_select_args($field, $args, $request );
-			}
-			*/
 
 		register_rest_field( Archive_Item::NAME, 'test', array(
-			'get_callback' => function( $arr ) {
-				return 'helloe world';
+			'get_callback' => function( $arr ) use( &$text_fields) {
+				return count($text_fields);
 			}
 		) );
+
 	}
 
 	public function get_image_data_for_api( $data ) {

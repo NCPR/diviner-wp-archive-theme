@@ -17,6 +17,7 @@ import objectToParameters from '../utils/data/object-to-params';
 import getParams from '../utils/data/query-to-obj';
 import { termsToSelectOptions } from '../utils/wp/termsToSelectOptions';
 import { getFieldTypeFromId } from '../utils/data/field-utils';
+import { lock, unlock } from '../utils/dom/body-lock';
 
 const site = new WPAPI({
 	endpoint: '/wp-json'
@@ -104,6 +105,11 @@ export function setOrderBy(value) {
 }
 
 export function setPopupVisible(isVisible) {
+	if (isVisible) {
+		lock();
+	} else {
+		unlock();
+	}
 	return {
 		type: SET_POPUP_VISIBLE,
 		value: isVisible
@@ -258,6 +264,22 @@ export function fetchPostsIfNeeded(cacheKey) {
 			return dispatch(fetchPosts(cacheKey));
 		}
 		return null;
+	};
+}
+
+export function selectGridItem(value) {
+	// create cache path from parameters
+	return (dispatch, getState) => {
+		if (CONFIG.settings.display_popup){
+			dispatch(setPopupArchiveItem(value));
+			dispatch(setPopupVisible(true));
+		} else {
+			const posts = getState().postsByCacheKey[getState().currentCacheKey];
+			const post = _.find(posts.items, {id: value});
+			if (post.permalink) {
+				location.href = post.permalink;
+			}
+		}
 	};
 }
 

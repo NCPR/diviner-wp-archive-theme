@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
-import { setPopupArchiveItem, setPopupVisible, setPage, initiateSearch } from '../actions';
+import { setPage, initiateSearch, selectGridItem } from '../actions';
 
 import Item from './item';
 
@@ -94,7 +94,6 @@ class Grid extends Component {
 							pageRangeDisplayed={4}
 							onPageChange={this.handlePageClick}
 							containerClassName={"react-pagination"}
-							xsubContainerClassName={"pages pagination"}
 							activeClassName={"active"} />
 						: null
 					}
@@ -104,8 +103,6 @@ class Grid extends Component {
 }
 
 // export default Grid;
-
-
 Grid.propTypes = {
 	posts: PropTypes.array.isRequired,
 	isFetching: PropTypes.bool.isRequired,
@@ -149,8 +146,7 @@ function mapStateToProps(state) {
  */
 const mapDispatchToProps = (dispatch) => ({
 	onSelectItem: (value) => {
-		dispatch(setPopupArchiveItem(value));
-		dispatch(setPopupVisible(true));
+		dispatch(selectGridItem(value))
 	},
 	onChangePage: (value) => {
 		dispatch(setPage(value));

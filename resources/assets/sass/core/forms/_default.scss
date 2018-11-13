@@ -74,7 +74,12 @@ textarea,
 select {
 	padding: 0 10px;
 	border: 1px solid $f_color_border;
+
+	&:focus {
+		border-color: $f_color_border_focus;
+	}
 }
+
 
 input,
 select,

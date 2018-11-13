@@ -37,6 +37,7 @@ class Settings {
 
 		$settings = [
 			'permission_notice' => carbon_get_theme_option(self::FIELD_GENERAL_PERMISSIONS),
+			'display_popup'     => carbon_get_theme_option(self::FIELD_GENERAL_BROWSE_MODAL)
 		];
 		$data['settings'] = $settings;
 		return $data;
