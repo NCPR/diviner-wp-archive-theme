@@ -12,14 +12,15 @@ import { FIELD_TYPE_TAXONOMY,
 	FIELD_TYPE_CPT,
 	FIELD_TYPE_SELECT,
 	FIELD_TYPE_DATE,
-	FIELD_POSITION_LEFT,
 	FIELD_PROP_DISPLAY_IN_POPUP,
 	FIELD_PROP_SELECT_OPTIONS,
 	FIELD_PROP_SELECT_OPTIONS_LABEL,
 	FIELD_PROP_SELECT_OPTIONS_VALUE,
 	IMAGE_SIZE_BROWSE_POPUP,
+	FIELD_PROP_TAXONOMY_PLURAL_LABEL,
 	FIELD_PROP_FIELD_ID,
 	FIELD_PROP_TAXONOMY_NAME,
+	FIELD_PROP_CPT_ID,
 } from '../config/settings';
 
 /*
@@ -97,7 +98,6 @@ class ArchiveItem extends Component {
 	}
 
 	renderSeclectField(field) {
-		console.log('renderSeclectField field', field)
 		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		if (!post.selects[fieldId]) {
@@ -142,7 +142,7 @@ class ArchiveItem extends Component {
 			return;
 		}
 		const ids = _.map(post.cpts[fieldId], (item) => parseInt(item.id, 10));
-		const cptValues = getCPTsFromIds(field.cpt_field_id, ids);
+		const cptValues = getCPTsFromIds(field[FIELD_PROP_CPT_ID], ids);
 
 		const cptValuesOutput = cptValues.map((cptValue) => {
 			const key = `cpt-${cptValue.ID}`;
@@ -186,7 +186,7 @@ class ArchiveItem extends Component {
 		return (
 			<div>
 				<label className="a-sai__label">
-					{field.taxonomy_field_plural_label}
+					{field[FIELD_PROP_TAXONOMY_PLURAL_LABEL]}
 				</label>
 				<ul className="a-sai__list a-sai__list--taxonomy">
 					{termsOutput}
@@ -194,6 +194,7 @@ class ArchiveItem extends Component {
 			</div>
 		);
 	}
+
 	renderTextField(field) {
 		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
@@ -230,8 +231,6 @@ class ArchiveItem extends Component {
 	}
 
 	renderFields() {
-		console.log('renderFields this.props.post', this.props.post);
-		console.log('renderFields CONFIG.fields', CONFIG.fields);
 		const fieldsToDisplay = this.filterFields(CONFIG.fields);
 		if (!fieldsToDisplay.length) {
 			return ('');

@@ -100,8 +100,6 @@ class FieldSelect extends Component {
 		const clearText = 'Clear';
 		const isClearable = true;
 
-		console.log()
-
 		return (
 			<Select
 				name={field.field_id}
