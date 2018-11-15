@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from "lodash";
+import { format } from 'date-fns';
 
 import { sequencePopupArchiveItem } from '../actions';
 import { CONFIG } from '../globals/config';
+import { getDecade, getCentury } from "../utils/data/date-utils";
 import { getTaxonomyItemsFromTermIds, getCPTsFromIds } from "../utils/data/field-utils";
 
 import { FIELD_TYPE_TAXONOMY,
@@ -21,6 +23,11 @@ import { FIELD_TYPE_TAXONOMY,
 	FIELD_PROP_FIELD_ID,
 	FIELD_PROP_TAXONOMY_NAME,
 	FIELD_PROP_CPT_ID,
+	FIELD_DATE_TYPE,
+	FIELD_DATE_TYPE_CENTURY,
+	FIELD_DATE_TYPE_DECADE,
+	FIELD_DATE_TYPE_YEAR,
+	FIELD_DATE_TYPE_TWO_DATE,
 } from '../config/settings';
 
 /*
@@ -214,8 +221,21 @@ class ArchiveItem extends Component {
 		);
 	}
 
+	/*
+	Example fieldData {
+		date_field_end: "2018-11-05"
+		date_field_start: "1920-10-08"
+		date_field_type: "div_field_date_type_two_date"
+		display_in_popup: true
+		field_id: "diviner_date_field_5bcf196f27610"
+		field_type: "diviner_date_field"
+		helper: "Date of birth"
+		id: 160
+		position: "left"
+		title: "Test Date"
+	}
+	*/
 	renderDateTextField(field) {
-		console.log('renderDateTextField', field);
 		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		const value = post.fields_date[fieldId];
@@ -223,14 +243,24 @@ class ArchiveItem extends Component {
 			return;
 		}
 		const date = new Date(value);
-		const utcDate = date.toUTCString();
+		const dateSimple = format(date, 'MM/DD/YYYY');
+
+		let dateOutput = dateSimple;
+		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
+			dateOutput = getCentury(date);
+		} else if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_DECADE) {
+			dateOutput = getDecade(date);
+		} else if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_YEAR) {
+			dateOutput = date.getFullYear().toString();
+		}
+
 		return (
 			<div>
 				<label className="a-sai__label">
 					{field.title}
 				</label>
 				<div className="a-sai__value a-sai__value--date">
-					{utcDate}
+					{dateOutput}
 				</div>
 			</div>
 		);
