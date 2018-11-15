@@ -1,6 +1,6 @@
 let scroll = 0;
 let locked = false;
-let scroller;
+let scrollObj = undefined;
 
 /**
  * @function isLocked
@@ -16,15 +16,15 @@ const isLocked = () => locked;
  */
 
 const lock = () => {
+	if (document.documentElement.scrollTop > document.body.scrollTop) {
+		scrollObj = document.documentElement;
+	} else {
+		scrollObj = document.body;
+	}
 	scroll = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
 	document.body.style.position = 'fixed';
 	document.body.style.marginTop = `-${scroll}px`;
 	locked = true;
-	if (scroll === document.documentElement.scrollTop) {
-		scroller = document.documentElement;
-	} else if (scroll === document.body.scrollTop) {
-		scroller = document.body;
-	}
 };
 
 /**
@@ -33,12 +33,12 @@ const lock = () => {
  */
 
 const unlock = () => {
-	if (!scroller) {
+	if (!scrollObj) {
 		return;
 	}
 	document.body.style.marginTop = '0px';
 	document.body.style.position = 'static';
-	scroller.scrollTop = scroll;
+	scrollObj.scrollTop = scroll;
 	locked = false;
 	scroll = 0;
 };

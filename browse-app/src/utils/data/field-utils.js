@@ -10,7 +10,7 @@ export const getFieldTypeFromId = (fieldId) => {
 };
 
 export const getTaxonomyItemsFromTermIds = (taxId, ids) => {
-	console.log('getTaxonomyItemsFromTermIds', CONFIG.taxonomies);
+	// console.log('getTaxonomyItemsFromTermIds', CONFIG.taxonomies);
 	const items = [];
 	_.forEach(ids, (id) => {
 		const item = _.find(CONFIG.taxonomies[taxId], { 'term_id': id });

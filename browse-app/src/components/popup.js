@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SkyLightStateless } from 'react-skylight';
-import ArchiveItem from './archiveItem';
 import { connect } from 'react-redux';
+import autobind from 'autobind-decorator';
 
+import ArchiveItem from './archiveItem';
 import * as postStore from '../utils/data/posts-store';
 import { setPopupVisible, sequencePopupArchiveItem } from '../actions';
 
@@ -15,10 +16,6 @@ class Popup extends Component {
 
 	constructor(props) {
 		super(props);
-		this.onCloseClicked = this.onCloseClicked.bind(this);
-		this.onPreviousClick = this.onPreviousClick.bind(this);
-		this.onNextClick = this.onNextClick.bind(this);
-		this.onKeyUp = this.onKeyUp.bind(this);
 	}
 
 	componentWillMount() {
@@ -29,6 +26,7 @@ class Popup extends Component {
 		document.removeEventListener('keyup', this.onKeyUp);
 	}
 
+	@autobind
 	onKeyUp(e) {
 		if (!e.keyCode) {
 			return;
@@ -41,14 +39,17 @@ class Popup extends Component {
 		}
 	}
 
+	@autobind
 	onPreviousClick() {
 		this.props.onPreviousClick();
 	}
 
+	@autobind
 	onNextClick() {
 		this.props.onNextClick();
 	}
 
+	@autobind
 	onCloseClicked() {
 		this.props.onCloseClick();
 	}
@@ -141,7 +142,9 @@ const mapStateToProps = (state) => ({
  * Mapping property to dispatches
  */
 const mapDispatchToProps = (dispatch) => ({
-	onCloseClick: () => dispatch(setPopupVisible(false)),
+	onCloseClick: () => {
+		dispatch(setPopupVisible(false))
+	},
 	onPreviousClick: () => dispatch(sequencePopupArchiveItem(-1)),
 	onNextClick: () => dispatch(sequencePopupArchiveItem(1)),
 });

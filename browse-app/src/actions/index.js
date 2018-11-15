@@ -24,9 +24,7 @@ const site = new WPAPI({
 });
 
 
-const params = [
-	'taxonomyThing'
-];
+const params = [];
 CONFIG.fields.forEach((field)=> {
 	if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
 		params.push(field[FIELD_PROP_TAXONOMY_NAME]);
@@ -34,8 +32,6 @@ CONFIG.fields.forEach((field)=> {
 		params.push(field[FIELD_PROP_FIELD_ID]);
 	}
 });
-
-console.log('params', params);
 
 site.archivalItems = site.registerRoute(
 	'wp/v2',
@@ -47,12 +43,12 @@ site.archivalItems = site.registerRoute(
 );
 
 if (process.env.NODE_ENV!=='production') {
+	console.log('params', params);
 	WPAPI.discover('/')
 		.then((siteDetails) => {
 		console.info('siteDetails', siteDetails);
 	});
 }
-
 
 export const INVALIDATE_SEARCH_QUERY = 'INVALIDATE_SEARCH_QUERY';
 export const REQUEST_POSTS = 'REQUEST_POSTS';

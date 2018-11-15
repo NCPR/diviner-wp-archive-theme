@@ -185,14 +185,17 @@ class Rest {
 			}
 		}
 
-		// error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-
-		// error_log(print_r( $request, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-		// error_log(print_r( $fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-		// error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-
 		return $args;
+	}
 
+	public function get_fields_values( $fields, $id ) {
+		$ret = [];
+		foreach($fields as $field) {
+			$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
+			$ret[$field_id] = carbon_get_post_meta( $id, $field_id);
+
+		}
+		return $ret;
 	}
 
 	public function custom_register_rest_fields() {
@@ -216,9 +219,6 @@ class Rest {
 		if (!$has_popup) {
 			return;
 		}
-		// error_log(print_r( $this->fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-
-		// Taxonomies are already added
 
 		// add CPT field vars
 		$fields = $this->get_fields();
@@ -228,17 +228,7 @@ class Rest {
 		if ($cpt_fields) {
 			register_rest_field( Archive_Item::NAME, 'cpts', array(
 				'get_callback' => function( $arr ) use( &$cpt_fields) {
-					$ret = [];
-					// error_log(print_r( $cpt_fields, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-					foreach($cpt_fields as $field) {
-						$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
-						// $ret[$field_cpt_id] = carbon_get_post_meta( $arr['id'],FieldPostMeta::FIELD_ID );
-
-						// $type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
-						$ret[$field_id] = carbon_get_post_meta( $arr['id'], $field_id);
-
-					}
-					return $ret;
+					return $this->get_fields_values( $cpt_fields, $arr['id']);
 				}
 			) );
 		}
@@ -250,13 +240,7 @@ class Rest {
 		if ($select_fields && count($select_fields)) {
 			register_rest_field( Archive_Item::NAME, 'selects', array(
 				'get_callback' => function( $arr ) use( &$select_fields) {
-					$ret = [];
-					foreach($select_fields as $field) {
-						$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
-						$ret[$field_id] = carbon_get_post_meta( $arr['id'], $field_id);
-
-					}
-					return $ret;
+					return $this->get_fields_values( $select_fields, $arr['id']);
 				}
 			) );
 		}
@@ -267,12 +251,19 @@ class Rest {
 		if ($text_fields && count($text_fields)) {
 			register_rest_field( Archive_Item::NAME, 'fields_text', array(
 				'get_callback' => function( $arr ) use( &$text_fields) {
-					$ret = [];
-					foreach($text_fields as $field) {
-						$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
-						$ret[$field_id] = carbon_get_post_meta( $arr['id'], $field_id);
-					}
-					return $ret;
+					return $this->get_fields_values( $text_fields, $arr['id']);
+				}
+			) );
+		}
+
+		// date field
+		$date_fields = array_filter($fields, function($field) {
+			return $field[self::FIELD_INDEX_TYPE] === Date_Field::NAME;
+		});
+		if ($date_fields && count($date_fields)) {
+			register_rest_field( Archive_Item::NAME, 'fields_date', array(
+				'get_callback' => function( $arr ) use( &$date_fields) {
+					return $this->get_fields_values( $date_fields, $arr['id']);
 				}
 			) );
 		}

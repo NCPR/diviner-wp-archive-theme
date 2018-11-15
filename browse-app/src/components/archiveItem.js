@@ -214,6 +214,28 @@ class ArchiveItem extends Component {
 		);
 	}
 
+	renderDateTextField(field) {
+		console.log('renderDateTextField', field);
+		const post = this.props.post;
+		const fieldId = field[FIELD_PROP_FIELD_ID];
+		const value = post.fields_date[fieldId];
+		if (!value) {
+			return;
+		}
+		const date = new Date(value);
+		const utcDate = date.toUTCString();
+		return (
+			<div>
+				<label className="a-sai__label">
+					{field.title}
+				</label>
+				<div className="a-sai__value a-sai__value--date">
+					{utcDate}
+				</div>
+			</div>
+		);
+	}
+
 	renderField(field) {
 		let content = '';
 		if (field.field_type) {
@@ -223,6 +245,8 @@ class ArchiveItem extends Component {
 				content = this.renderCPTField(field);
 			} else if (field.field_type === FIELD_TYPE_TAXONOMY)  {
 				content = this.renderTaxonomyField(field);
+			} else if (field.field_type === FIELD_TYPE_DATE)  {
+				content = this.renderDateTextField(field);
 			} else {
 				content = this.renderTextField(field);
 			}

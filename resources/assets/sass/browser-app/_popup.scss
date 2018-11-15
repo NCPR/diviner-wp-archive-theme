@@ -84,18 +84,7 @@
 	margin-left: 0 !important;
 	overflow-y: auto !important;
 
-	.admin-bar & {
-		top: 48px !important;
-	}
-
 	@include g-state( medium ) {
-		/*
-		position: absolute !important;
-		top: 50% !important;
-		transform: translateY(-50%) !important;
-		margin-top: 0 !important;
-		max-height: calc(100% - 40px) !important;
-		*/
 
 		position: absolute !important;
 		top: 50% !important;
@@ -114,7 +103,6 @@
 		}
 
 		.a-sai__popup & {
-
 		}
 
 		.a-sai__popup--visible & {
