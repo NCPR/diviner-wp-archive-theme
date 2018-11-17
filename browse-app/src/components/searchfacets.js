@@ -8,6 +8,7 @@ import FieldDate from './fieldDate';
 import FieldSelect from './fieldSelect';
 import FieldTaxonomy from './fieldTaxonomy';
 import FieldCpt from './fieldCpt';
+import FieldText from './fieldText';
 
 // CONFIG
 import { CONFIG } from '../globals/config';
@@ -15,6 +16,7 @@ import { FIELD_TYPE_TAXONOMY,
 			FIELD_TYPE_CPT,
 			FIELD_TYPE_SELECT,
 			FIELD_TYPE_DATE,
+			FIELD_TYPE_TEXT,
 			FIELD_POSITION_LEFT,
 } from '../config/settings';
 
@@ -78,6 +80,11 @@ class SearchFacets extends Component {
 				{
 					(field.field_type === FIELD_TYPE_SELECT )
 						? <div className="a-field-input a-field-input--select"><FieldSelect field={field} /></div>
+						: ''
+				}
+				{
+					(field.field_type === FIELD_TYPE_TEXT )
+						? <div className="a-field-input a-field-input--text"><FieldText field={field} /></div>
 						: ''
 				}
 			</div>

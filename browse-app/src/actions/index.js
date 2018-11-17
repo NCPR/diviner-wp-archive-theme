@@ -10,7 +10,7 @@ import {
 	FIELD_PROP_FIELD_TYPE,
 	FIELD_TYPE_TAXONOMY,
 	FIELD_PROP_TAXONOMY_NAME,
-	FIELD_TYPE_DATE
+	FIELD_TYPE_DATE, FIELD_TYPE_TEXT
 } from '../config/settings';
 import { CONFIG } from '../globals/config';
 import objectToParameters from '../utils/data/object-to-params';
@@ -211,6 +211,8 @@ function fetchPosts(cacheKey) {
 					if (value && value.length && value[0] && value[1]) {
 						archivalQuery[key](value);
 					}
+				} else if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TEXT) {
+					archivalQuery[key](value);
 				} else {
 					archivalQuery[key](value);
 				}
