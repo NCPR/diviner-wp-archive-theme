@@ -5,29 +5,17 @@ import PropTypes from 'prop-types';
 import _ from "lodash";
 import autobind from 'autobind-decorator';
 
-import FieldDate from './fieldDate';
-import FieldSelect from './fieldSelect';
-import FieldTaxonomy from './fieldTaxonomy';
-import FieldCpt from './fieldCpt';
+import Field from './field';
 
 import {
 	initiateSearch,
 	setQueryString,
 	setPage,
-	setFieldData,
 } from '../actions';
 
 // CONFIG
 import { CONFIG } from '../globals/config';
-import { FIELD_TYPE_TAXONOMY,
-	FIELD_TYPE_CPT,
-	FIELD_TYPE_TEXT,
-	FIELD_TYPE_SELECT,
-	FIELD_TYPE_DATE,
-	FIELD_DATE_TYPE,
-	FIELD_DATE_START,
-	FIELD_DATE_END,
-	FIELD_DATE_TYPE_CENTURY,
+import {
 	FIELD_POSITION_TOP,
 } from '../config/settings';
 
@@ -60,8 +48,8 @@ class Controls extends Component {
 	}
 
 	filterFields(fields) {
-		return _.map(fields, function(o) {
-			if (o && o.position === FIELD_POSITION_TOP) return o;
+		return _.filter(fields, function(o) {
+			return (o && o.position === FIELD_POSITION_TOP);
 		});
 	}
 
@@ -69,50 +57,22 @@ class Controls extends Component {
 		return fields.map(
 			(field, i) => {
 				if (i < 3) {
-					return this.createFieldUI(field, i);
+					return (
+						<Field field={field} key={i} />
+					)
 				}
 				return '';
 			}
 		);
 	}
 
-	createFieldUI(field, i) {
-		if (!field) {
-			return '';
-		}
-
-		return (
-			<div className="a-input-group" key={i}>
-				{
-					(field.field_type === FIELD_TYPE_TAXONOMY )
-						? <div className="a-field-input a-field-input--taxonomy"><FieldTaxonomy field={field} /></div>
-						: ''
-				}
-				{
-					(field.field_type === FIELD_TYPE_CPT )
-						? <div className="a-field-input a-field-input--cpt"><FieldCpt field={field} /></div>
-						: ''
-				}
-				{
-					(field.field_type === FIELD_TYPE_DATE )
-						? <div className="a-field-input a-field-input--date"><FieldDate field={field} /></div>
-						: ''
-				}
-				{
-					(field.field_type === FIELD_TYPE_SELECT )
-						? <div className="a-field-input a-field-input--select"><FieldSelect field={field} /></div>
-						: ''
-				}
-			</div>
-		);
-	}
-
 	render() {
 		const searchString = this.props.searchQuery ? this.props.searchQuery : '';
 		const fieldsOnTop = this.filterFields(CONFIG.fields);
+		console.log('fieldsOnTop', fieldsOnTop);
 
 		const fieldLength = fieldsOnTop.length > 3 ? 3 : fieldsOnTop.length;
-		let classes =  'a-control-row';
+		let classes =  'a-control-row ';
 		classes += `a-control-row--${fieldLength}`;
 
 		return (
@@ -147,8 +107,6 @@ class Controls extends Component {
 						? <div className={classes}>{this.createFields(fieldsOnTop)}</div>
 						: ''
 				}
-
-
 
 			</div>
 		);

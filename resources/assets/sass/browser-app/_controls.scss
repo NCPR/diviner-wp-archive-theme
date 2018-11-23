@@ -13,15 +13,25 @@
 	}
 }
 
-.a-control-row--2 {
+.a-control-row--2 > * {
 	@include g-state( medium ) {
 		flex: 1 1 50%;
+		margin-right: $d_spacer_m;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
 	}
 }
 
-.a-control-row--3 {
+.a-control-row--3 > * {
 	@include g-state( medium ) {
 		flex: 1 1 33.33%;
+		margin-right: $d_spacer_m;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
 	}
 }
 

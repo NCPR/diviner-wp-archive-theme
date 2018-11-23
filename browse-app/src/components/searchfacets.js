@@ -4,20 +4,12 @@ import _ from 'lodash';
 import autobind from 'autobind-decorator';
 import { connect } from 'react-redux';
 
-import FieldDate from './fieldDate';
-import FieldSelect from './fieldSelect';
-import FieldTaxonomy from './fieldTaxonomy';
-import FieldCpt from './fieldCpt';
-import FieldText from './fieldText';
+import Field from './field';
 
 // CONFIG
 import { CONFIG } from '../globals/config';
-import { FIELD_TYPE_TAXONOMY,
-			FIELD_TYPE_CPT,
-			FIELD_TYPE_SELECT,
-			FIELD_TYPE_DATE,
-			FIELD_TYPE_TEXT,
-			FIELD_POSITION_LEFT,
+import {
+	FIELD_POSITION_LEFT,
 } from '../config/settings';
 
 
@@ -52,48 +44,17 @@ class SearchFacets extends Component {
 
 	createFields(fields) {
 		return fields.map(
-			(field, i) => this.createFieldUI(field, i)
-		);
-	}
-
-	createFieldUI(field, i) {
-		if (!field) {
-			return '';
-		}
-		return (
-			<div className="a-input-group" key={i}>
-				{
-					(field.field_type === FIELD_TYPE_TAXONOMY )
-						? <div className="a-field-input a-field-input--taxonomy"><FieldTaxonomy field={field} /></div>
-						: ''
-				}
-				{
-					(field.field_type === FIELD_TYPE_CPT )
-						? <div className="a-field-input a-field-input--cpt"><FieldCpt field={field} /></div>
-						: ''
-				}
-				{
-					(field.field_type === FIELD_TYPE_DATE )
-						? <div className="a-field-input a-field-input--date"><FieldDate field={field} /></div>
-						: ''
-				}
-				{
-					(field.field_type === FIELD_TYPE_SELECT )
-						? <div className="a-field-input a-field-input--select"><FieldSelect field={field} /></div>
-						: ''
-				}
-				{
-					(field.field_type === FIELD_TYPE_TEXT )
-						? <div className="a-field-input a-field-input--text"><FieldText field={field} /></div>
-						: ''
-				}
-			</div>
+			(field, i) => {
+				return (
+					<Field field={field} key={i} />
+				);
+			}
 		);
 	}
 
 	filterFields(fields) {
-		return _.map(fields, function(o) {
-			if (o && o.position === FIELD_POSITION_LEFT) return o;
+		return _.filter(fields, function(o) {
+			return (o && o.position === FIELD_POSITION_LEFT);
 		});
 	}
 
