@@ -26,9 +26,10 @@ class PostMeta {
 	const FIELD_ID = 'div_field_id';
 
 	const FIELD_BROWSE_HELPER_TEXT = 'div_field_browse_helper';
-	const FIELD_ADMIN_HELPER_TEXT = 'div_field_admin_helper';
-	const FIELD_BROWSE_PLACEMENT = 'div_field_browse_placement';
-	const FIELD_BROWSE_DISPLAY = 'div_field_display';
+	const FIELD_ADMIN_HELPER_TEXT  = 'div_field_admin_helper';
+	const FIELD_BROWSE_PLACEMENT   = 'div_field_browse_placement';
+	const FIELD_BROWSE_DISPLAY     = 'div_field_display';
+	const FIELD_BROWSE_IS_SORTABLE = 'div_field_browse_sortable';
 
 	const FIELD_IS_DEFAULT     = 'div_field_default';
 
@@ -93,6 +94,7 @@ class PostMeta {
 				$this->get_field_browser_helper_text(),
 				$this->get_field_browser_placement(),
 				$this->get_field_display_popup(),
+				$this->get_field_is_sortable(),
 				$this->get_field_admin_helper_text(),
                 $this->get_field_id(),
 			))
@@ -348,6 +350,11 @@ class PostMeta {
 
 	public function get_field_display_popup() {
 		return Field::make( 'checkbox', self::FIELD_BROWSE_DISPLAY, __( 'Ensure the Field Appears in Popup Overlay After a User Clicks a Thumbnail in the Search Returns Grid', 'ncpr-diviner' ) )
+			->set_option_value( self::FIELD_CHECKBOX_VALUE );
+	}
+
+	public function get_field_is_sortable() {
+		return Field::make( 'checkbox', self::FIELD_BROWSE_IS_SORTABLE, __( 'Is this field sortable in the browse experience', 'ncpr-diviner' ) )
 			->set_option_value( self::FIELD_CHECKBOX_VALUE );
 	}
 

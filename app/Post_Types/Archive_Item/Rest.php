@@ -224,8 +224,18 @@ class Rest {
 			} else if ( $custom_order == Diviner_Field::ORDER_BY_PUBLICATION_DATE ) {
 				$args[ 'order' ] = 'ASC';
 				$args[ 'orderby' ] = 'date';
+			} else if ( substr( $custom_order, 0, 5 ) === "SORT|" ) {
+				$sort_args = explode( '|', $custom_order );
+				if (count($sort_args) == 3) {
+					$args[ 'order' ] = ( $sort_args[2] == 'ASC' ) ? 'ASC' : 'DESC';
+					$args[ 'meta_key' ] = Helper::get_real_field_name( $sort_args[1] );
+					$args[ 'orderby' ] = 'meta_value_num';
+				}
 			}
 		}
+
+		error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+
 		return $args;
 	}
 

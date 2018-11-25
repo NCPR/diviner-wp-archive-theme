@@ -33,13 +33,19 @@ class Diviner_Field {
 		register_post_type( self::NAME, $args );
 	}
 
-	public function get_active_fields() {
+	public function get_active_fields($additional_meta_query = []) {
 		$meta_query = array(
 			array(
 				'key'     => Helper::get_real_field_name(PostMeta::FIELD_ACTIVE ),
 				'value'   => PostMeta::FIELD_CHECKBOX_VALUE
 			),
 		);
+		if (count($additional_meta_query)) {
+			$meta_query[] = [
+				'relation'		=> 'AND',
+			];
+			$meta_query[] = $additional_meta_query;
+		}
 		$args = array(
 			'posts_per_page' => -1,
 			'fields' => 'ids',
@@ -106,13 +112,44 @@ class Diviner_Field {
 		return get_posts($args);
 	}
 
+	public function get_sort_options_for_date_field_id( $field_id ) {
+		$options = [];
+		// Ascending
+		$label = sprintf(
+			__( '%s Old to New (no date first)', 'ncpr-diviner' ),
+			get_the_title($field_id)
+		);
+		$value = sprintf(
+			'SORT|%s|ASC',
+			carbon_get_post_meta( $field_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' )
+		);
+		$options[] = [
+			'value' => $value,
+			'label' => $label,
+		];
+		// Descending
+		$label = sprintf(
+			__( '%s New To Old (no date last)', 'ncpr-diviner' ),
+			get_the_title($field_id)
+		);
+		$value = sprintf(
+			'SORT|%s|DESC',
+			carbon_get_post_meta( $field_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' )
+		);
+		$options[] = [
+			'value' => $value,
+			'label' => $label,
+		];
+		return $options;
+	}
+
 	/**
 	 * Get Order by Options for JS
 	 *
 	 * @return array   Array of value/labels
 	 */
 	public function get_order_by_options() {
-		return [
+		$defaults = [
 			[
 				'value' => static::ORDER_BY_PUBLICATION_DATE,
 				'label' => __( 'Publish Date', 'ncpr-diviner' ),
@@ -122,6 +159,21 @@ class Diviner_Field {
 				'label' => __( 'Title', 'ncpr-diviner' ),
 			],
 		];
+
+		$fields = $this->get_active_fields([
+			'key'     => Helper::get_real_field_name(PostMeta::FIELD_BROWSE_IS_SORTABLE ),
+			'value'   => PostMeta::FIELD_CHECKBOX_VALUE
+		]);
+		$dyn = [];
+		foreach($fields as $field_id) {
+			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE );
+			// add Date posts
+			if ($field_type === DATE_Field::NAME) {
+				$dyn = array_merge($dyn, $this->get_sort_options_for_date_field_id( $field_id ));
+			}
+		}
+
+		return array_merge($defaults, $dyn);
 	}
 
 	public function custom_diviner_js_config( $data  ) {
