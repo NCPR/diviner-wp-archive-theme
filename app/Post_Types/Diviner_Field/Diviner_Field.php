@@ -16,6 +16,10 @@ class Diviner_Field {
 
 	const NAME = 'diviner_field';
 
+	const ORDER_BY_RELEVANCE = '';
+	const ORDER_BY_TITLE = 'SORT_TITLE';
+	const ORDER_BY_PUBLICATION_DATE = 'SORT_PUBLICATION_DATE';
+
 	public function __construct() {
 	}
 
@@ -102,6 +106,24 @@ class Diviner_Field {
 		return get_posts($args);
 	}
 
+	/**
+	 * Get Order by Options for JS
+	 *
+	 * @return array   Array of value/labels
+	 */
+	public function get_order_by_options() {
+		return [
+			[
+				'value' => static::ORDER_BY_PUBLICATION_DATE,
+				'label' => __( 'Publish Date', 'ncpr-diviner' ),
+			],
+			[
+				'value' => static::ORDER_BY_TITLE,
+				'label' => __( 'Title', 'ncpr-diviner' ),
+			],
+		];
+	}
+
 	public function custom_diviner_js_config( $data  ) {
 		$taxonomy_terms = [];
 		$cpt_posts = [];
@@ -125,6 +147,7 @@ class Diviner_Field {
 		$data['fields'] = $return;
 		$data['taxonomies'] = $taxonomy_terms;
 		$data['cpt_posts'] = $cpt_posts;
+		$data['order_by'] = $this->get_order_by_options();
 		return $data;
 
 	}

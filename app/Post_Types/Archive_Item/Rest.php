@@ -30,12 +30,8 @@ class Rest {
 	}
 
 	public function hooks() {
-		$action = 'after_setup_theme';
-		if ( DIVINER_IS_PLUGIN ) {
-			$action = 'plugins_loaded';
-		}
-		// add_filter( $action, [$this, 'init'], 10, 2 );
 		add_filter( 'rest_' . Archive_Item::NAME . '_query', [$this, 'rest_api_filter_add_vars'], 10, 2 );
+		add_filter( 'rest_' . Archive_Item::NAME . '_query', [$this, 'rest_api_filter_add_order_by'], 3, 2 );
 		add_action( 'rest_api_init', array( &$this,'custom_register_rest_fields') );
 	}
 
@@ -86,8 +82,6 @@ class Rest {
 
 		// error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
-		global $wp;
-		$vars = apply_filters( 'query_vars', $wp->public_query_vars );
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
 				'relation'		=> 'AND',
@@ -112,10 +106,8 @@ class Rest {
 		}
 		$value = $request[$field[self::FIELD_INDEX_FIELD_ID]];
 
-		error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		// error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
-		global $wp;
-		$vars = apply_filters( 'query_vars', $wp->public_query_vars );
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
 				'relation'		=> 'AND',
@@ -136,10 +128,6 @@ class Rest {
 		}
 		$value = $request[$field[self::FIELD_INDEX_FIELD_ID]];
 
-		error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
-
-		global $wp;
-		$vars = apply_filters( 'query_vars', $wp->public_query_vars );
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
 				'relation'		=> 'AND',
@@ -213,6 +201,31 @@ class Rest {
 			}
 		}
 
+		return $args;
+	}
+
+	/**
+	 * Adds the order by meta
+	 *
+	 * @param  Object $args    Request arguments.
+	 * @return Object $args    Altered request arguments.
+	 */
+	function rest_api_filter_add_order_by( $args, $request ) {
+		$custom_order = $request['order_by'];
+
+		global $wp;
+		if ( empty( $request['order_by'] ) ) {
+			$args[ 'orderby' ] = 'relevance';
+		} else {
+
+			if ( $custom_order == Diviner_Field::ORDER_BY_TITLE ) {
+				$args[ 'order' ] = 'ASC';
+				$args[ 'orderby' ] = 'title';
+			} else if ( $custom_order == Diviner_Field::ORDER_BY_PUBLICATION_DATE ) {
+				$args[ 'order' ] = 'ASC';
+				$args[ 'orderby' ] = 'date';
+			}
+		}
 		return $args;
 	}
 

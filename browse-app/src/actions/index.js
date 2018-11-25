@@ -24,7 +24,9 @@ const site = new WPAPI({
 });
 
 
-const params = [];
+const params = [
+	'order_by',
+];
 CONFIG.fields.forEach((field)=> {
 	if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
 		params.push(field[FIELD_PROP_TAXONOMY_NAME]);
@@ -193,12 +195,11 @@ function fetchPosts(cacheKey) {
 		// change URL
 		const obj = {};
 
-		/*
 		if (getState().orderBy) {
-			archivalQuery.custom_order(getState().orderBy);
-			obj.pOrder = getState().orderBy;
+			archivalQuery.order_by(getState().orderBy);
+			obj.order_by = getState().orderBy;
 		}
-		*/
+
 		const fieldData = getState().fieldData;
 		if (!_.isEmpty(fieldData) ) {
 			_.forOwn(getState().fieldData, (value, key) => {

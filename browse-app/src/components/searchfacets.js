@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import autobind from 'autobind-decorator';
 import { connect } from 'react-redux';
+import Select from 'react-select';
 
 import Field from './field';
+import { selectStyles } from '../shared/select-styles';
 
 // CONFIG
 import { CONFIG } from '../globals/config';
@@ -16,6 +18,7 @@ import {
 import {
 	initiateSearch,
 	setPage,
+	setOrderBy,
 	clearFacets,
 	setFieldData,
 	toggleClick,
@@ -40,6 +43,13 @@ class SearchFacets extends Component {
 	@autobind
 	onToggleClick() {
 		this.props.onToggleClick();
+	}
+
+	@autobind
+	onChangeOrderBy(e) {
+		console.log('onChangeOrderBy', e);
+		const value = (e !== null) ? e.value : null;
+		this.props.onChangeOrderBy(value);
 	}
 
 	createFields(fields) {
@@ -69,7 +79,16 @@ class SearchFacets extends Component {
 			toggleText = 'Close More Filters';
 		}
 
+		const orderOptions = CONFIG.order_by;
 		const fieldsOnLeft = this.filterFields(CONFIG.fields);
+
+		console.log('this.props.order_by', this.props.order_by);
+
+
+		let order_by_option = undefined;
+		if (CONFIG.order_by) {
+			order_by_option = _.filter(CONFIG.order_by, {value: this.props.order_by});
+		}
 
 		return (
 			<div className="a-facets">
@@ -88,6 +107,19 @@ class SearchFacets extends Component {
 							? <div className="a-input-group">{this.createFields(fieldsOnLeft)}</div>
 							: <div>No fields available</div>
 					}
+
+					<div className="a-input-group">
+						<label>Sort By:</label>
+						<Select
+							name="order_by"
+							options={orderOptions}
+							onChange={this.onChangeOrderBy}
+							clearValueText="Clear Order"
+							isClearable={true}
+							value={order_by_option}
+							styles={selectStyles}
+						></Select>
+					</div>
 
 					<div className="a-input-group">
 						<button
@@ -114,6 +146,7 @@ SearchFacets.propTypes = {
 	onToggleClick: PropTypes.func,
 	clearFacets: PropTypes.func,
 	onChangeFacets: PropTypes.func,
+	onChangeOrderBy: PropTypes.func,
 };
 
 // Specifies the default values for props:
@@ -125,11 +158,13 @@ SearchFacets.defaultProps = {
 	onToggleClick: () => {},
 	clearFacets: () => {},
 	onChangeFacets: () => {},
+	onChangeOrderBy: () => {},
 };
 
 const mapStateToProps = (state) => ({
 	filterOpen: state.filterOpen,
 	fieldData: state.fieldData,
+	order_by: state.orderBy,
 });
 
 /**
@@ -143,6 +178,11 @@ const mapDispatchToProps = (dispatch) => ({
 	},
 	onChangeFacets: (value) => {
 		dispatch(setFieldData(value));
+		dispatch(setPage(1));
+		dispatch(initiateSearch());
+	},
+	onChangeOrderBy: (value) => {
+		dispatch(setOrderBy(value));
 		dispatch(setPage(1));
 		dispatch(initiateSearch());
 	},
