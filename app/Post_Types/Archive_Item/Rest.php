@@ -234,7 +234,7 @@ class Rest {
 			}
 		}
 
-		error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		// error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
 		return $args;
 	}

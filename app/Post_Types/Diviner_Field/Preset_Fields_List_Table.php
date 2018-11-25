@@ -3,6 +3,7 @@
 namespace Diviner\Post_Types\Diviner_Field;
 
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
+use Diviner\Post_Types\Diviner_Field\PostMeta;
 
 // WP_List_Table is not loaded automatically so we need to load it in our application
 if( ! class_exists( 'WP_List_Table' ) ) {
@@ -22,6 +23,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	 */
 	public function prepare_items()
 	{
+		$this->process_bulk_action();
 		$columns = $this->get_columns();
 		$hidden = $this->get_hidden_columns();
 		$sortable = $this->get_sortable_columns();
@@ -71,8 +73,9 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	public function get_columns()
 	{
 		$columns = array(
-			'cb'          => '',
+			'cb'          => '<input type="checkbox" />',
 			'id'          => 'ID',
+			'active'      => 'Active',
 			'title'       => 'Title',
 			'description' => 'Description'
 		);
@@ -87,6 +90,32 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	{
 		return array();
 	}
+
+	function get_bulk_actions() {
+		$actions = array(
+			'activate'    => 'Activate',
+			'deactivate'    => 'Deactivate'
+		);
+		return $actions;
+	}
+
+	function process_bulk_action() {
+
+		$action = $this->current_action();
+
+		if( 'activate' === $action) {
+			foreach($_GET['field'] as $id) {
+				carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  PostMeta::FIELD_CHECKBOX_VALUE);
+			}
+		}
+
+		if( 'deactivate' === $action) {
+			foreach($_GET['field'] as $id) {
+				carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  '');
+			}
+		}
+	}
+
 	/**
 	 * Define the sortable columns
 	 *
@@ -109,7 +138,6 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	{
 		switch( $column_name ) {
 			case 'id':
-			// case 'title':
 			case 'description':
 				return $item[ $column_name ];
 			default:
@@ -117,12 +145,20 @@ class Preset_Fields_List_Table extends \WP_List_Table
 		}
 	}
 
+	public function column_active( $item )
+	{
+		$field_active = carbon_get_post_meta($item['id'], PostMeta::FIELD_ACTIVE );
+		return ( (int)$field_active === 1 ) ? '✓' : '';
+	}
+
 	public function column_cb( $item )
 	{
 		return sprintf(
-			'<input type="checkbox" name="field[]" value="%s" />', $item['id']
+			'<input type="checkbox" name="field[]" value="%s"/>',
+			$item['id']
 		);
 	}
+
 
 	public function column_title( $item )
 	{

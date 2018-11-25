@@ -147,7 +147,7 @@ class AdminModifications {
 			<div class="field-select-wrap">
 				<h2>Text Field</h2>
 				<p>
-					<?php _e('Add a text field for a type of information you wish to assign to EACH archive item, but which will be completely different for each archive item. Example: serial number, catalog number, internal title, etc.' ); ?>
+					<?php _e('Add a text field for a type of information you wish to assign to EACH archive item, but which will be completely different for each archive item. Example: serial number, catalog number, internal title, etc.', 'ncpr-diviner' ); ?>
 				</p>
 				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo Text_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Text Field
@@ -158,7 +158,7 @@ class AdminModifications {
 			<div class="field-select-wrap">
 				<h2>Date</h2>
 				<p>
-					<?php _e('Add a date field if you would like your audience to be able to filter by a date range, by year, decade, or by century. Ex: if you want to sort a collection of a thousand photos from the 20th century into decades  ' ); ?>
+					<?php _e('Add a date field if you would like your audience to be able to filter by a date range, by year, decade, or by century. Ex: if you want to sort a collection of a thousand photos from the 20th century into decades.', 'ncpr-diviner' ); ?>
 				</p>
 				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo Date_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Date Field
@@ -168,7 +168,7 @@ class AdminModifications {
 			<div class="field-select-wrap">
 				<h2>Taxonomy (Category/Tags/Keywords)</h2>
 				<p>
-					<?php _e('Add a taxonomy field for categories you want to sort your materials by (ex: by location, such as by county, by neighborhood, or by room in a museum). You will have to create the choices in this category (ex: by county; Clinton, Essex, Warren, and Jefferson). Taxonomy fields are best suited to a category with fewer than twenty choices, which do not need further explanation to a viewer.' ); ?>
+					<?php _e('Add a taxonomy field for categories you want to sort your materials by (ex: by location, such as by county, by neighborhood, or by room in a museum). You will have to create the choices in this category (ex: by county; Clinton, Essex, Warren, and Jefferson). Taxonomy fields are best suited to a category with fewer than twenty choices, which do not need further explanation to a viewer.', 'ncpr-diviner' ); ?>
 				</p>
 				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo Taxonomy_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Taxonomy Field
@@ -178,7 +178,7 @@ class AdminModifications {
 			<div class="field-select-wrap">
 				<h2>Custom Post Type Field</h2>
 				<p>
-					<?php _e('For categories with many choices (20+) and which you would like to be able to elaborate on and attach auxiliary information, use the CPT field. A good example would be if you wished to sort your materials by their creator (photographer, author, etc.) – for each creator, this type of field allows you to create an “entry” for that creator. Other examples: donor, institution.' ); ?>
+					<?php _e('For categories with many choices (20+) and which you would like to be able to elaborate on and attach auxiliary information, use the CPT field. A good example would be if you wished to sort your materials by their creator (photographer, author, etc.) – for each creator, this type of field allows you to create an “entry” for that creator. Other examples: donor, institution.', 'ncpr-diviner' ); ?>
 				</p>
 				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo CPT_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Custom Post Type Field
@@ -188,7 +188,7 @@ class AdminModifications {
 			<div class="field-select-wrap">
 				<h2>Select Field</h2>
 				<p>
-					<?php _e('Add a select field to assign a piece of information that comes from a very small list of pre-set choices to each of your archive item. Examples: Art Format, with the choices being Painting, Sculpture, or Digital.  ' ); ?>
+					<?php _e('Add a select field to assign a piece of information that comes from a very small list of pre-set choices to each of your archive item. Examples: Art Format, with the choices being Painting, Sculpture, or Digital.', 'ncpr-diviner' ); ?>
 				</p>
 				<a href="post-new.php?post_type=<?php echo Diviner_Field::NAME; ?>&field_type=<?php echo Select_Field::NAME; ?>" class="button button-primary button-hero">
 					Add a New Select Field
@@ -218,11 +218,13 @@ class AdminModifications {
 				</div>
 			<?php } else { ?>
 				<div class="about-text">
-					<?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item. ' ); ?>
+					<?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item.', 'ncpr-diviner' ); ?>
 				</div>
 				<div>
-					<?php $presetFieldTable->display(); ?>
-					<input type="submit" name="submit" id="submit" class="button" value="Toggle Field Activattion">
+					<form id="diviner-fields" method="get">
+						<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+						<?php $presetFieldTable->display(); ?>
+					</form>
 				</div>
 			<?php } ?>
 		</div>
