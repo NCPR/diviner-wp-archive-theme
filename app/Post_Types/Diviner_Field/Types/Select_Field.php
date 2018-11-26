@@ -37,7 +37,7 @@ class Select_Field extends FieldType {
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
-			self::REST_SELECT_OPTIONS  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS),
+			static::REST_SELECT_OPTIONS  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS),
 		];
 		return array_merge($blueprint, $additional_vars);
 	}

@@ -44,7 +44,7 @@ class Post_Meta {
 
 	static public function get_type_label_from_id($id)
 	{
-		return isset(self::FIELD_TYPE_OPTIONS[$id]) ? self::FIELD_TYPE_OPTIONS[$id] : '';
+		return isset( static::FIELD_TYPE_OPTIONS[$id]) ? static::FIELD_TYPE_OPTIONS[$id] : '';
 	}
 
 	public function add_post_meta()
@@ -57,31 +57,31 @@ class Post_Meta {
 	{
 		$this->container = Container::make( 'post_meta', __( 'Type', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
 				$this->get_field_types(),
-			))
+			] )
 			->set_priority( 'high' );
 
 		$this->container = Container::make( 'post_meta', __( 'Audio', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
 				$this->get_field_audio(),
 				$this->get_field_audio_oembed()
-			))
+			] )
 			->set_priority( 'default' );
 
 		$this->container = Container::make( 'post_meta', __( 'Video', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
 				$this->get_field_video_oembed()
-			))
+			] )
 			->set_priority( 'default' );
 
 		$this->container = Container::make( 'post_meta', __( 'Document', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
 				$this->get_field_document()
-			))
+			] )
 			->set_priority( 'default' );
 
 	}
@@ -90,22 +90,25 @@ class Post_Meta {
 		$id = carbon_get_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ID );
 		$label = get_the_title( $cpt_field_id );
 		$helper = carbon_get_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
-		return call_user_func( array($type, 'render'), $cpt_field_id, $id, $label, $helper);
+		if( is_callable( [ $type,'render' ] ) ){
+			return call_user_func( [ $type, 'render' ], $cpt_field_id, $id, $label, $helper);
+		}
+		return '';
 	}
 
 	public function add_dynamic_fields(){
-		$meta_query = array(
-			array(
+		$meta_query = [
+			[
 				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
 				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			),
-		);
-		$args = array(
+			],
+		];
+		$args = [
 			'posts_per_page' => -1,
 			'fields' => 'ids',
 			'post_type' => Diviner_Field::NAME,
 			'meta_query' => $meta_query
-		);
+		];
 		$cpt_fields_ids = get_posts($args);
 		$dynamic_fields = [];
 
@@ -144,7 +147,7 @@ class Post_Meta {
 	{
 		return Field::make(
 			'file',
-			self::FIELD_DOCUMENT ,
+			static::FIELD_DOCUMENT ,
 			__( 'Any other document not an image or video or audio. Ex: PDF', 'ncpr-diviner' )
 		);
 
@@ -154,26 +157,26 @@ class Post_Meta {
 	{
 		return Field::make(
 			'oembed',
-			self::FIELD_VIDEO_OEMBED,
+			static::FIELD_VIDEO_OEMBED,
 			__( 'Any oembed video url', 'ncpr-diviner' )
 		);
 	}
 
 	public function get_field_audio()
 	{
-		return Field::make( 'file', self::FIELD_AUDIO , __( 'Any Audio File', 'ncpr-diviner' ) )
+		return Field::make( 'file', static::FIELD_AUDIO , __( 'Any Audio File', 'ncpr-diviner' ) )
 			->set_type( 'audio' );
 
 	}
 
 	public function get_field_audio_oembed()
 	{
-		return Field::make( 'oembed', self::FIELD_AUDIO_OEMBED, __( 'Any Oembed Audio File', 'ncpr-diviner' ) );
+		return Field::make( 'oembed', static::FIELD_AUDIO_OEMBED, __( 'Any Oembed Audio File', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_types() {
-		$field = Field::make( 'select', self::FIELD_TYPE, __( 'Type of Archive Item', 'ncpr-diviner' ) )
-			->add_options(self::FIELD_TYPE_OPTIONS)
+		$field = Field::make( 'select', static::FIELD_TYPE, __( 'Type of Archive Item', 'ncpr-diviner' ) )
+			->add_options( static::FIELD_TYPE_OPTIONS )
 			->set_help_text( __( 'What kind of field is this?', 'ncpr-diviner' ) );
 		if( isset( $_GET["type"] ) ) {
 			$field->set_default_value( 'div_ai_field_' . $_GET["type"] );

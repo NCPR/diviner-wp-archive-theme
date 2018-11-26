@@ -28,7 +28,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 		$hidden = $this->get_hidden_columns();
 		$sortable = $this->get_sortable_columns();
 		$this->items = $this->get_fields();
-		$this->_column_headers = array($columns, $hidden, $sortable);
+		$this->_column_headers = [ $columns, $hidden, $sortable ];
 	}
 
 	public function is_empty() {
@@ -72,13 +72,13 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	 */
 	public function get_columns()
 	{
-		$columns = array(
+		$columns = [
 			'cb'          => '<input type="checkbox" />',
 			'id'          => 'ID',
 			'active'      => 'Active',
 			'title'       => 'Title',
 			'description' => 'Description'
-		);
+		];
 		return $columns;
 	}
 	/**
@@ -88,14 +88,14 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	 */
 	public function get_hidden_columns()
 	{
-		return array();
+		return [];
 	}
 
 	function get_bulk_actions() {
-		$actions = array(
+		$actions = [
 			'activate'    => 'Activate',
 			'deactivate'    => 'Deactivate'
-		);
+		];
 		return $actions;
 	}
 
@@ -123,7 +123,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	 */
 	public function get_sortable_columns()
 	{
-		return array('title' => array('title', false));
+		return [ 'title' => [ 'title', false ] ];
 	}
 
 	/**

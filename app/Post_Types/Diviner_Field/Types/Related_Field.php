@@ -14,12 +14,12 @@ class Related_Field extends FieldType  {
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 
 		$field = Field::make(static::TYPE, $id, $field_label)
-			->set_types(array(
-				array(
+			->set_types( [
+				[
 					'type' => 'post',
 					'post_type' => Archive_Item::NAME,
-				),
-			));
+				],
+			] );
 
 		if ( ! empty( $helper ) ) {
 			$field->help_text($helper);

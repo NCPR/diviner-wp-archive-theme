@@ -24,34 +24,34 @@ class Diviner_Field {
 	}
 
 	public function hooks() {
-		add_action( 'init', array( &$this,'register'), 0, 0 );
+		add_action( 'init', [ &$this,'register' ], 0, 0 );
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 	}
 
 	public function register() {
 		$args = wp_parse_args( $this->get_args(), $this->get_labels() );
-		register_post_type( self::NAME, $args );
+		register_post_type( static::NAME, $args );
 	}
 
 	public function get_active_fields($additional_meta_query = []) {
-		$meta_query = array(
-			array(
+		$meta_query = [
+			[
 				'key'     => Helper::get_real_field_name(PostMeta::FIELD_ACTIVE ),
 				'value'   => PostMeta::FIELD_CHECKBOX_VALUE
-			),
-		);
+			],
+		];
 		if (count($additional_meta_query)) {
 			$meta_query[] = [
 				'relation'		=> 'AND',
 			];
 			$meta_query[] = $additional_meta_query;
 		}
-		$args = array(
+		$args = [
 			'posts_per_page' => -1,
 			'fields' => 'ids',
-			'post_type' => self::NAME,
+			'post_type' => static::NAME,
 			'meta_query' => $meta_query
-		);
+		];
 		return get_posts($args);
 	}
 
@@ -65,7 +65,7 @@ class Diviner_Field {
 			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'excerpt' ),
+			'supports'           => [ 'title', 'excerpt' ],
 			'has_archive'        => false,
 			'rewrite'            => false,
 			'exclude_from_search' => true,
@@ -105,10 +105,10 @@ class Diviner_Field {
 	}
 
 	public function get_field_cpt_posts( $field_id, $field_cpt_id ) {
-		$args = array(
+		$args = [
 			'posts_per_page' => -1,
 			'post_type' => $field_cpt_id,
-		);
+		];
 		return get_posts($args);
 	}
 
@@ -137,14 +137,10 @@ class Diviner_Field {
 		foreach($fields as $field_id) {
 			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE );
 			$field      = Diviner_Field::get_class($field_type);
-			$options    = call_user_func(array($field, 'get_sort_options'), $field_id);
-			$dyn        = array_merge($dyn, $options);
-			// add Date posts
-			/*
-			if ($field_type === DATE_Field::NAME) {
-				$dyn = array_merge($dyn, $this->get_sort_options_for_date_field_id( $field_id ));
+			if( is_callable( [ $field, 'get_sort_options' ] ) ){
+				$options    = call_user_func( [ $field, 'get_sort_options' ], $field_id);
+				$dyn        = array_merge($dyn, $options);
 			}
-			*/
 		}
 
 		return array_merge($defaults, $dyn);
@@ -158,7 +154,7 @@ class Diviner_Field {
 		foreach($fields as $field_id) {
 			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$field = Diviner_Field::get_class($field_type);
-			$blueprint = call_user_func(array($field, 'get_blueprint'), $field_id);
+			$blueprint = call_user_func( [ $field, 'get_blueprint' ], $field_id);
 			$blueprint['field_type'] = $field_type;
 			$return[] = $blueprint;
 			// add to taxonomy

@@ -30,36 +30,37 @@ class Rest {
 	}
 
 	public function hooks() {
-		add_filter( 'rest_' . Archive_Item::NAME . '_query', [$this, 'rest_api_filter_add_vars'], 10, 2 );
-		add_filter( 'rest_' . Archive_Item::NAME . '_query', [$this, 'rest_api_filter_add_order_by'], 3, 2 );
-		add_action( 'rest_api_init', array( &$this,'custom_register_rest_fields') );
+		$achive_item_name = Archive_Item::NAME;
+		add_filter( "rest_{$achive_item_name}_query", [$this, 'rest_api_filter_add_vars'], 10, 2 );
+		add_filter( "rest_{$achive_item_name}_query", [$this, 'rest_api_filter_add_order_by'], 3, 2 );
+		add_action( 'rest_api_init', [ &$this,'custom_register_rest_fields' ] );
 	}
 
 	protected function get_fields() {
 		if (isset($this->fields)) {
 			return $this->fields;
 		}
-		$meta_query = array(
-			array(
+		$meta_query = [
+			'diviner_is_active' => [
 				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
 				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			),
-		);
-		$args = array(
+			],
+		];
+		$args = [
 			'posts_per_page' => -1,
 			'fields' => 'ids',
 			'post_type' => Diviner_Field::NAME,
 			'meta_query' => $meta_query
-		);
+		];
 		$fields = [];
 		$posts_ids = get_posts($args);
 		foreach($posts_ids as $post_id) {
 			$fields[] = [
-				self::FIELD_INDEX_ID => $post_id,
-				self::FIELD_INDEX_TITLE => get_the_title($post_id),
-				self::FIELD_INDEX_TYPE => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables'),
-				self::FIELD_INDEX_FIELD_ID => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_ID, 'carbon_fields_container_field_variables'),
-				self::FIELD_INDEX_FIELD_POPUP => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables'),
+				static::FIELD_INDEX_ID => $post_id,
+				static::FIELD_INDEX_TITLE => get_the_title($post_id),
+				static::FIELD_INDEX_TYPE => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables'),
+				static::FIELD_INDEX_FIELD_ID => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_ID, 'carbon_fields_container_field_variables'),
+				static::FIELD_INDEX_FIELD_POPUP => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables'),
 			];
 		}
 		$this->fields = $fields;
@@ -67,7 +68,7 @@ class Rest {
 	}
 
 	public function decorate_taxonomy_args($field, $args, $request ) {
-		if (empty($request[$field[self::FIELD_INDEX_FIELD_ID]])) {
+		if (empty($request[$field[static::FIELD_INDEX_FIELD_ID]])) {
 			return $args;
 		}
 		return $args;
@@ -75,38 +76,35 @@ class Rest {
 
 
 	public function decorate_cpt_args($field, $args, $request ) {
-		if ( empty( $request[$field[self::FIELD_INDEX_FIELD_ID]] ) ) {
+		if ( empty( $request[$field[static::FIELD_INDEX_FIELD_ID]] ) ) {
 			return $args;
 		}
-		$value = $request[$field[self::FIELD_INDEX_FIELD_ID]];
-
-		// error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		$value = $request[$field[static::FIELD_INDEX_FIELD_ID]];
 
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
 				'relation'		=> 'AND',
 			];
 		}
-		$field_cpt_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_CPT_ID );
-		$args[ 'meta_query' ][] = [
-			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
-			'value'		=> sprintf('post:%s:%s',
-				$field_cpt_id,
-				$value
-			),
-			'compare'	=> '='
-		];
-
+		$field_cpt_id = carbon_get_post_meta( $field[static::FIELD_INDEX_ID],FieldPostMeta::FIELD_CPT_ID );
+		if ( ! empty( $field_cpt_id )) {
+			$args[ 'meta_query' ][] = [
+				'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
+				'value'		=> sprintf('post:%s:%s',
+					$field_cpt_id,
+					$value
+				),
+				'compare'	=> '='
+			];
+		}
 		return $args;
 	}
 
 	public function decorate_text_args($field, $args, $request ) {
-		if ( empty( $request[$field[self::FIELD_INDEX_FIELD_ID]] ) ) {
+		if ( empty( $request[$field[static::FIELD_INDEX_FIELD_ID]] ) ) {
 			return $args;
 		}
-		$value = $request[$field[self::FIELD_INDEX_FIELD_ID]];
-
-		// error_log(print_r( $value, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		$value = $request[$field[static::FIELD_INDEX_FIELD_ID]];
 
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
@@ -114,7 +112,7 @@ class Rest {
 			];
 		}
 		$args[ 'meta_query' ][] = [
-			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+			'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
 			'value'		=> $value,
 			'compare'	=> 'LIKE'
 		];
@@ -123,10 +121,10 @@ class Rest {
 	}
 
 	public function decorate_select_args($field, $args, $request ) {
-		if ( empty( $request[$field[self::FIELD_INDEX_FIELD_ID]] ) ) {
+		if ( empty( $request[$field[static::FIELD_INDEX_FIELD_ID]] ) ) {
 			return $args;
 		}
-		$value = $request[$field[self::FIELD_INDEX_FIELD_ID]];
+		$value = $request[$field[static::FIELD_INDEX_FIELD_ID]];
 
 		if ( ! isset($args[ 'meta_query' ])) {
 			$args[ 'meta_query' ] = [
@@ -134,7 +132,7 @@ class Rest {
 			];
 		}
 		$args[ 'meta_query' ][] = [
-			'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+			'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
 			'value'		=> $value,
 			'compare'	=> 'IN'
 		];
@@ -143,10 +141,10 @@ class Rest {
 	}
 
 	public function decorate_date_args($field, $args, $request ) {
-		if (empty($request[$field[self::FIELD_INDEX_FIELD_ID]])) {
+		if (empty($request[$field[static::FIELD_INDEX_FIELD_ID]])) {
 			return $args;
 		}
-		$range = $request[$field[self::FIELD_INDEX_FIELD_ID]];
+		$range = $request[$field[static::FIELD_INDEX_FIELD_ID]];
 
 		// assume the format is array of dates in format YYY/MM/DD
 		if ( ! isset($args[ 'meta_query' ])) {
@@ -159,9 +157,10 @@ class Rest {
 			$start_time = strtotime($range[0]);
 			$start_date = date("Ymd", $start_time);
 			$args[ 'meta_query' ][] = [
-				'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+				'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
 				'compare'	=> '>=',
 				'value'		=> $start_date,
+				'type'		=> 'DATE'
 			];
 		}
 
@@ -169,7 +168,7 @@ class Rest {
 			$end_time = strtotime($range[1]);
 			$end_date = date('Ymd', $end_time);
 			$args[ 'meta_query' ][] = [
-				'key'		=> $field[self::FIELD_INDEX_FIELD_ID],
+				'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
 				'compare'	=> '<=',
 				'value'		=> $end_date,
 			];
@@ -182,22 +181,22 @@ class Rest {
 
 		$fields = $this->get_fields();
 		foreach($fields as $field) {
-			if ($field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME) {
-				$args = $this->decorate_cpt_args($field, $args, $request );
-			}
-			if ($field[self::FIELD_INDEX_TYPE] === Taxonomy_Field::NAME) {
-				$args = $this->decorate_taxonomy_args($field, $args, $request );
-			}
-			if ($field[self::FIELD_INDEX_TYPE] === Date_Field::NAME) {
-				$args = $this->decorate_date_args($field, $args, $request );
-			}
-
-			if ($field[self::FIELD_INDEX_TYPE] === Select_Field::NAME) {
-				$args = $this->decorate_select_args($field, $args, $request );
-			}
-
-			if ($field[self::FIELD_INDEX_TYPE] === Text_Field::NAME) {
-				$args = $this->decorate_text_args($field, $args, $request );
+			switch ($field[static::FIELD_INDEX_TYPE]) {
+				case CPT_Field::NAME:
+					$args = $this->decorate_cpt_args($field, $args, $request );
+					break;
+				case Taxonomy_Field::NAME:
+					$args = $this->decorate_taxonomy_args($field, $args, $request );
+					break;
+				case Date_Field::NAME:
+					$args = $this->decorate_date_args($field, $args, $request );
+					break;
+				case Select_Field::NAME:
+					$args = $this->decorate_select_args($field, $args, $request );
+					break;
+				case Text_Field::NAME:
+					$args = $this->decorate_text_args($field, $args, $request );
+					break;
 			}
 		}
 
@@ -229,14 +228,12 @@ class Rest {
 				$sort_args = explode( '|', $custom_order );
 				if (count($sort_args) == 4) {
 					$field = Diviner_Field::get_class($sort_args[1]);
-					if ( ! empty( $field ) ) {
-						$args = call_user_func(array($field, 'decorate_query_args'), $args, $sort_args);
+					if ( ! empty( $field ) && is_callable( [ $field, 'decorate_query_args' ] ) ) {
+						$args = call_user_func( [ $field, 'decorate_query_args' ], $args, $sort_args);
 					}
 				}
 			}
 		}
-
-		error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
 		return $args;
 	}
@@ -244,7 +241,7 @@ class Rest {
 	public function get_fields_values( $fields, $id ) {
 		$ret = [];
 		foreach($fields as $field) {
-			$field_id = carbon_get_post_meta( $field[self::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
+			$field_id = carbon_get_post_meta( $field[static::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
 			$ret[$field_id] = carbon_get_post_meta( $id, $field_id);
 
 		}
@@ -253,19 +250,18 @@ class Rest {
 
 	public function custom_register_rest_fields() {
 
-		register_rest_field( Archive_Item::NAME, 'feature_image', array(
+		register_rest_field( Archive_Item::NAME, 'feature_image', [
 			'get_callback' => function( $arr ) {
 				$post_thumbnail_id = get_post_thumbnail_id( $arr['id'] );
-				// return $post_thumbnail_id;
 				return $this->get_image_data_for_api($post_thumbnail_id);
 			}
-		) );
+		] );
 
-		register_rest_field( Archive_Item::NAME, 'permalink', array(
+		register_rest_field( Archive_Item::NAME, 'permalink', [
 			'get_callback' => function( $arr ) {
 				return get_the_permalink($arr['id']);
 			}
-		) );
+		] );
 
 		// only do this extra if the popup is used.
 		$has_popup = carbon_get_theme_option(Settings::FIELD_GENERAL_BROWSE_MODAL);
@@ -276,56 +272,56 @@ class Rest {
 		// add CPT field vars
 		$fields = $this->get_fields();
 		$cpt_fields = array_filter($fields, function($field) {
-			return $field[self::FIELD_INDEX_TYPE] === CPT_Field::NAME;
+			return $field[static::FIELD_INDEX_TYPE] === CPT_Field::NAME;
 		});
 		if ($cpt_fields) {
-			register_rest_field( Archive_Item::NAME, 'cpts', array(
+			register_rest_field( Archive_Item::NAME, 'cpts', [
 				'get_callback' => function( $arr ) use( &$cpt_fields) {
 					return $this->get_fields_values( $cpt_fields, $arr['id']);
 				}
-			) );
+			] );
 		}
 
 		// add Selects field vars
 		$select_fields = array_filter($fields, function($field) {
-			return $field[self::FIELD_INDEX_TYPE] === Select_Field::NAME;
+			return $field[static::FIELD_INDEX_TYPE] === Select_Field::NAME;
 		});
 		if ($select_fields && count($select_fields)) {
-			register_rest_field( Archive_Item::NAME, 'selects', array(
+			register_rest_field( Archive_Item::NAME, 'selects', [
 				'get_callback' => function( $arr ) use( &$select_fields) {
 					return $this->get_fields_values( $select_fields, $arr['id']);
 				}
-			) );
+			] );
 		}
 
 		$text_fields = array_filter($fields, function($field) {
-			return $field[self::FIELD_INDEX_TYPE] === Text_Field::NAME;
+			return $field[static::FIELD_INDEX_TYPE] === Text_Field::NAME;
 		});
 		if ($text_fields && count($text_fields)) {
-			register_rest_field( Archive_Item::NAME, 'fields_text', array(
+			register_rest_field( Archive_Item::NAME, 'fields_text', [
 				'get_callback' => function( $arr ) use( &$text_fields) {
 					return $this->get_fields_values( $text_fields, $arr['id']);
 				}
-			) );
+			] );
 		}
 
 		// date field
 		$date_fields = array_filter($fields, function($field) {
-			return $field[self::FIELD_INDEX_TYPE] === Date_Field::NAME;
+			return $field[static::FIELD_INDEX_TYPE] === Date_Field::NAME;
 		});
 		if ($date_fields && count($date_fields)) {
-			register_rest_field( Archive_Item::NAME, 'fields_date', array(
+			register_rest_field( Archive_Item::NAME, 'fields_date', [
 				'get_callback' => function( $arr ) use( &$date_fields) {
 					return $this->get_fields_values( $date_fields, $arr['id']);
 				}
-			) );
+			] );
 		}
 
-		register_rest_field( Archive_Item::NAME, 'test', array(
+		register_rest_field( Archive_Item::NAME, 'test', [
 			'get_callback' => function( $arr ) use( &$text_fields) {
 				return count($text_fields);
 			}
-		) );
+		] );
 
 	}
 
@@ -338,7 +334,7 @@ class Rest {
 
 		// Something went wrong. Most likely the attachment was deleted.
 		if ( $size_data === false ) {
-			return new \stdClass;
+			return false;
 		}
 
 		$attachment = get_post( $data );

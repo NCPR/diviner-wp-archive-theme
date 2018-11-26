@@ -38,12 +38,12 @@ class CPT_Field extends FieldType {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => $field_slug ),
+			'rewrite'            => [ 'slug' => $field_slug ],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
+			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
 			'map_meta_cap'       => true,
 		];
 		$labels = [
@@ -66,12 +66,12 @@ class CPT_Field extends FieldType {
 		}
 
 		$field = Field::make(static::TYPE, $id, $field_label)
-			->set_types(array(
-				array(
+			->set_types([
+				[
 					'type' => 'post',
 					'post_type' => $field_cpt_id,
-				),
-			));
+				],
+			] );
 
 		if ( ! empty( $helper ) ) {
 			$field->help_text($helper);
@@ -86,8 +86,6 @@ class CPT_Field extends FieldType {
 			'cpt_field_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL ),
 			'cpt_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG ),
 		];
-		// get all the CPT items
-		// Is this the best approach here? Should the Select always pull dynamically??
 		return array_merge($blueprint, $additional_vars);
 	}
 }

@@ -53,7 +53,6 @@ abstract class FieldType implements iField {
 		return [
 			'id'                => $post_id,
 			'title'             => get_the_title( $post_id ),
-			// 'field_type'              => carbon_get_post_meta( $post_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' ),
 			'position'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT, 'carbon_fields_container_field_variables' ),
 			'helper'            => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_HELPER_TEXT, 'carbon_fields_container_field_variables' ),
 			'field_id'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' ),

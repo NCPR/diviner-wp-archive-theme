@@ -11,7 +11,7 @@ class Archive_Item {
 
 	public function register() {
 		$args = wp_parse_args( $this->get_args(), $this->get_labels() );
-		register_post_type( self::NAME, $args );
+		register_post_type( static::NAME, $args );
 	}
 
 	public function get_args() {
@@ -21,12 +21,12 @@ class Archive_Item {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'archive-item' ),
+			'rewrite'            => [ 'slug' => 'archive-item' ],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
+			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
 			'map_meta_cap'       => true,
 			'show_in_rest'       => true,
 			'rest_base'          => 'archival-items',
