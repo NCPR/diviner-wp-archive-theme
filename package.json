@@ -7,7 +7,10 @@
     "production": "cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.config.js",
     "watch": "npm run development -- --watch && webpack-dev-server --progress --colors"
   },
-  "dependencies": {},
+  "dependencies": {
+    "coffeekraken-gridle": "^3.0.1",
+    "lazysizes": "^4.1.4"
+  },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.1",

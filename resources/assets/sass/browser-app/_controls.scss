@@ -1,0 +1,54 @@
+.a-control-row {
+
+	@include g-state( medium ) {
+		display: flex;
+	}
+
+
+}
+
+.a-control-row--1 > * {
+	@include g-state( medium ) {
+
+	}
+}
+
+.a-control-row--2 > * {
+	@include g-state( medium ) {
+		flex: 1 1 50%;
+		margin-right: $d_spacer_m;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+}
+
+.a-control-row--3 > * {
+	@include g-state( medium ) {
+		flex: 1 1 33.33%;
+		margin-right: $d_spacer_m;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+}
+
+.a-search-row {
+	display: flex;
+}
+
+.a-search-input {
+	flex: 1 1 100%;
+	margin-right: 20px;
+
+	input {
+		width: 100%;
+	}
+}
+
+.a-search-button {
+	height: 40px;
+	flex: 0 0 auto;
+}

@@ -12,8 +12,6 @@ class CPT_Field extends FieldType {
 	const TITLE = 'CPT Field';
 	const TYPE = 'association';
 
-	const FIELD_CPT_TYPE_FIELD_ID = 'diviner_cpt_type_field';
-
 	static public function setup ( $post_id ) {
 		// set up CPT
 		$field_id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
@@ -40,12 +38,12 @@ class CPT_Field extends FieldType {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => $field_slug ),
+			'rewrite'            => [ 'slug' => $field_slug ],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
+			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
 			'map_meta_cap'       => true,
 		];
 		$labels = [
@@ -59,17 +57,6 @@ class CPT_Field extends FieldType {
 		$args = wp_parse_args( $args, $labels );
 		register_post_type( $field_id, $args );
 
-
-		// You could set up additional field here...
-		/*
-		$container = Container::make( 'post_meta', 'Creator Fields' )
-			->where( 'post_type', '=', Diviner_Field::NAME )
-			->add_fields( array(
-				Field::make( 'text', self::FIELD_CPT_TYPE_FIELD_ID, 'CPT Type Field ID' )
-			))
-			->set_priority( 'default' );
-		*/
-
 	}
 
 	static public function render( $post_id, $id, $field_label, $helper = '') {
@@ -79,16 +66,26 @@ class CPT_Field extends FieldType {
 		}
 
 		$field = Field::make(static::TYPE, $id, $field_label)
-			->set_types(array(
-				array(
+			->set_types([
+				[
 					'type' => 'post',
 					'post_type' => $field_cpt_id,
-				),
-			));
+				],
+			] );
 
 		if ( ! empty( $helper ) ) {
 			$field->help_text($helper);
 		}
 		return $field;
+	}
+
+	static public function get_blueprint( $post_id ) {
+		$blueprint = parent::get_blueprint( $post_id );
+		$additional_vars = [
+			'cpt_field_id'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID ),
+			'cpt_field_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL ),
+			'cpt_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG ),
+		];
+		return array_merge($blueprint, $additional_vars);
 	}
 }

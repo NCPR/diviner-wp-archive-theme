@@ -1,10 +1,81 @@
 // Colors
 // =================================================
-$white: #fff;
-$primary: #153FA6;
 
 $color_white: #fff;
 $color_grey_light: #dddddd;
+$color_grey: #999999;
+$color_grey_mid: #333333;
 $color_grey_dark: #777777;
+$color_blue: #5c69ff;
+
+$color_primary: $color_grey_dark;
+$color_secondary: $color_grey_mid;
+
+$color_headers: $color_primary;
+
+$color_border: $color_grey;
+$color_border_focus: $color_blue;
 
 
+// Media Queries
+// =================================================
+$mq_xxsmall: 375px;
+$mq_xsmall: 500px;
+$mq_small: 600px;
+$mq_medium : 768px;
+$mq_wpadmin: 783px;
+$mq_full: 960px;
+$mq_large: 1200px;
+$mq_xlarge: 1400px;
+
+
+// Spacers
+// =================================================
+$d_spacer_sm : 10px;
+$d_spacer_m : 20px;
+$d_spacer_lrg : 40px;
+$d_spacer_xlrg : 60px;
+
+
+// Fonts
+// =================================================
+$t_font_opensans: "Open Sans", Helvetica, Arial, sans-serif;
+$t_font_noticia: "Noticia", Times New Roman, serif;
+$t_font_oswald: "Oswald", Helvetica, Arial, serif;
+$t_font_display: $t_font_opensans;
+$t_font_body: $t_font_noticia;
+$t_font_interface: $t_font_opensans;
+$t_font_icons: 'icomoon' !important;
+$t_font_headers: $t_font_oswald;
+
+
+// Font Sizes
+// =================================================
+$t_font_size_sm: 14px;
+$t_font_size_m: 16px;
+$t_font_size_lrg: 18px;
+$t_font_size_xlrg: 22px;
+
+
+// Font Weights
+// =================================================
+$t_font_weight_normal: 400;
+$t_font_weight_light: 300;
+$t_font_weight_semi_bold: 500;
+$t_font_weight_bold: 700;
+
+
+// Line Heights
+// =================================================
+$t_line_height_even: 1;
+$t_line_height_sm: 1.1;
+$t_line_height_m: 1.2;
+$t_line_height_lrg: 1.4;
+
+
+// Forms
+// =================================================
+
+$f_color_border: $color_border;
+$f_color_border_focus: $color_border_focus;
+$f_font_size_mobile: $t_font_size_m;
