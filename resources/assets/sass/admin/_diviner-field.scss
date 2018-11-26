@@ -114,6 +114,15 @@
 	// display: none;
 }
 
+.carbon-field.div_field_browse_sortable {
+	display: none;
+
+	.post-field-type--diviner_text_field &,
+	.post-field-type--diviner_date_field & {
+		display: block;
+	}
+}
+
 .post-edit--diviner_field {
 	.page-title-action {
 		display: none;

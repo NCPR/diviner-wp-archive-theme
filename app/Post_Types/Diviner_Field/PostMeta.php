@@ -355,7 +355,8 @@ class PostMeta {
 
 	public function get_field_is_sortable() {
 		return Field::make( 'checkbox', self::FIELD_BROWSE_IS_SORTABLE, __( 'Is this field sortable in the browse experience', 'ncpr-diviner' ) )
-			->set_option_value( self::FIELD_CHECKBOX_VALUE );
+			->set_option_value( self::FIELD_CHECKBOX_VALUE )
+			->set_classes( self::FIELD_BROWSE_IS_SORTABLE );
 	}
 
 }

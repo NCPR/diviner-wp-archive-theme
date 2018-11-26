@@ -26,6 +26,25 @@ abstract class FieldType implements iField {
 	}
 
 	/**
+	 * Decorate query vars for rest
+	 *
+	 * @param  array $args  Args to pass to WP query.
+	 * @param  array $sort_args  array of sort gtom pipe SORT|<type>|<field>|ASC
+	 */
+	static public function decorate_query_args ( $args, $sort_args ) {
+		return $args;
+	}
+
+	/**
+	 * Return array of sort options
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 */
+	static public function get_sort_options( $post_id ) {
+		return [];
+	}
+
+	/**
 	 * Return basic blueprint for this field
 	 *
 	 * @param  int $post_id Post Id of field to set up.

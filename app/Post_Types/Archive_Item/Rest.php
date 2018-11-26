@@ -225,16 +225,18 @@ class Rest {
 				$args[ 'order' ] = 'ASC';
 				$args[ 'orderby' ] = 'date';
 			} else if ( substr( $custom_order, 0, 5 ) === "SORT|" ) {
+				// decorate the args based on each field (currently only text and date)
 				$sort_args = explode( '|', $custom_order );
-				if (count($sort_args) == 3) {
-					$args[ 'order' ] = ( $sort_args[2] == 'ASC' ) ? 'ASC' : 'DESC';
-					$args[ 'meta_key' ] = Helper::get_real_field_name( $sort_args[1] );
-					$args[ 'orderby' ] = 'meta_value_num';
+				if (count($sort_args) == 4) {
+					$field = Diviner_Field::get_class($sort_args[1]);
+					if ( ! empty( $field ) ) {
+						$args = call_user_func(array($field, 'decorate_query_args'), $args, $sort_args);
+					}
 				}
 			}
 		}
 
-		// error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
+		error_log(print_r( $args, true ) , 3, "/Applications/MAMP/logs/php_error.log");
 
 		return $args;
 	}

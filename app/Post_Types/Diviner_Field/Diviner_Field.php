@@ -112,37 +112,6 @@ class Diviner_Field {
 		return get_posts($args);
 	}
 
-	public function get_sort_options_for_date_field_id( $field_id ) {
-		$options = [];
-		// Ascending
-		$label = sprintf(
-			__( '%s Old to New (no date first)', 'ncpr-diviner' ),
-			get_the_title($field_id)
-		);
-		$value = sprintf(
-			'SORT|%s|ASC',
-			carbon_get_post_meta( $field_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' )
-		);
-		$options[] = [
-			'value' => $value,
-			'label' => $label,
-		];
-		// Descending
-		$label = sprintf(
-			__( '%s New To Old (no date last)', 'ncpr-diviner' ),
-			get_the_title($field_id)
-		);
-		$value = sprintf(
-			'SORT|%s|DESC',
-			carbon_get_post_meta( $field_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' )
-		);
-		$options[] = [
-			'value' => $value,
-			'label' => $label,
-		];
-		return $options;
-	}
-
 	/**
 	 * Get Order by Options for JS
 	 *
@@ -167,10 +136,15 @@ class Diviner_Field {
 		$dyn = [];
 		foreach($fields as $field_id) {
 			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE );
+			$field      = Diviner_Field::get_class($field_type);
+			$options    = call_user_func(array($field, 'get_sort_options'), $field_id);
+			$dyn        = array_merge($dyn, $options);
 			// add Date posts
+			/*
 			if ($field_type === DATE_Field::NAME) {
 				$dyn = array_merge($dyn, $this->get_sort_options_for_date_field_id( $field_id ));
 			}
+			*/
 		}
 
 		return array_merge($defaults, $dyn);
