@@ -18,6 +18,10 @@ class CPT_Field extends FieldType {
 		$field_label = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL );
 		$field_slug = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG );
 
+		if ( empty($field_id) || empty($field_label) || empty($field_slug)) {
+			return '';
+		}
+
 		// default values
 		if ( empty( $field_id ) ) {
 			$field_id = sprintf('div_cpt_name_%s', $post_id );
