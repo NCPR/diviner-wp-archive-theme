@@ -21,19 +21,101 @@ class Rest {
 	const FIELD_INDEX_TYPE = 'type';
 	const FIELD_INDEX_FIELD_ID = 'field_id';
 	const FIELD_INDEX_FIELD_POPUP = 'field_popup';
+	const FIELD_INDEX_FIELD_ELASTIC = 'field_elastic';
 
 	protected $container;
 	protected $fields;
 
-	public function init() {
-		$this->fields = $this->get_fields();
-	}
-
 	public function hooks() {
 		$achive_item_name = Archive_Item::NAME;
-		add_filter( "rest_{$achive_item_name}_query", [$this, 'rest_api_filter_add_vars'], 10, 2 );
-		add_filter( "rest_{$achive_item_name}_query", [$this, 'rest_api_filter_add_order_by'], 3, 2 );
+		add_filter( "rest_{$achive_item_name}_query", [ $this, 'rest_api_filter_add_vars' ], 10, 2 );
+		add_filter( "rest_{$achive_item_name}_query", [ $this, 'rest_api_filter_add_order_by' ], 3, 2 );
+		add_filter( "rest_{$achive_item_name}_query", [ $this, 'rest_api_enable_elastic' ], 11, 2 );
+		add_filter( 'ep_formatted_args_query', [ $this, 'ep_formatted_args_query' ], 10, 2 );
+		add_filter( 'ep_post_sync_args', [ &$this, 'custom_ep_post_sync_args' ], 10, 2);
 		add_action( 'rest_api_init', [ &$this,'custom_register_rest_fields' ] );
+	}
+
+	function custom_ep_post_sync_args($post_args, $post_id) {
+		$old_prepared_meta = !empty( $post_args['post_meta'] ) ? $post_args['post_meta'] : [];
+		$additional_meta = [];
+
+		$fields = $this->get_fields();
+		$search_fields = array_filter($fields, function($field) {
+			return $field[static::FIELD_INDEX_FIELD_ELASTIC] == (int)FieldPostMeta::FIELD_CHECKBOX_VALUE;
+		});
+
+		foreach($search_fields as $field) {
+			$field_class = Diviner_Field::get_class($field[static::FIELD_INDEX_TYPE]);
+			if (!empty($field_class) && is_callable([$field_class, 'decorate_ep_post_sync_args'])) {
+				$additional_meta = call_user_func([$field_class, 'decorate_ep_post_sync_args'], $additional_meta, $post_id, $field, $field[static::FIELD_INDEX_FIELD_ID]);
+			}
+		}
+		$new_prepared_meta = array_merge($old_prepared_meta, $additional_meta);
+		$post_args['post_meta'] = $new_prepared_meta;
+
+		return $post_args;
+	}
+
+	/**
+	 * Enable Elastic search and add the active fields to the search
+	 *
+	 * @param array $args
+	 * @param Object $request
+	 *
+	 * @return array
+	 */
+	function rest_api_enable_elastic( $args, $request ) {
+		$args[ 'ep_integrate' ] = true;
+
+		$fields = $this->get_fields();
+		$search_fields = array_filter($fields, function($field) {
+			return $field[static::FIELD_INDEX_FIELD_ELASTIC] == (int)FieldPostMeta::FIELD_CHECKBOX_VALUE;
+		});
+
+		$meta = [];
+		$taxonomies = [];
+		foreach($search_fields as $field) {
+			switch ($field[static::FIELD_INDEX_TYPE]) {
+				case CPT_Field::NAME:
+					$meta[] = $field[static::FIELD_INDEX_ID];
+					break;
+				case Taxonomy_Field::NAME:
+					$taxonomies[] = $field[static::FIELD_INDEX_ID];
+					break;
+				case Date_Field::NAME:
+				case Select_Field::NAME:
+					// cannot be added to the search
+					break;
+				case Text_Field::NAME:
+					$meta[] = $field[static::FIELD_INDEX_ID];
+					break;
+			}
+		}
+		$args[ 'search_fields' ] = [
+			'post_title',
+			'post_content',
+			'taxonomies' => $taxonomies,
+			'meta' => $meta,
+		];
+
+		return $args;
+	}
+
+	/**
+	 * Enable Elastic search
+	 *
+	 * @param string $search
+	 * @param WP_Query $query
+	 *
+	 * @return string
+	 */
+	function ep_formatted_args_query( $query, $args ) {
+		// change the ES search query
+		// https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
+		$query['bool']['should'][0]['multi_match']['type'] = 'most_fields';
+
+		return $query;
 	}
 
 	protected function get_fields() {
@@ -55,13 +137,18 @@ class Rest {
 		$fields = [];
 		$posts_ids = get_posts($args);
 		foreach($posts_ids as $post_id) {
-			$fields[] = [
+			$new_field = [
 				static::FIELD_INDEX_ID => $post_id,
 				static::FIELD_INDEX_TITLE => get_the_title($post_id),
 				static::FIELD_INDEX_TYPE => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables'),
 				static::FIELD_INDEX_FIELD_ID => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_ID, 'carbon_fields_container_field_variables'),
 				static::FIELD_INDEX_FIELD_POPUP => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables'),
 			];
+			if ( defined( 'EP_VERSION' ) ) {
+				// FIELD_INDEX_FIELD_ELASTIC
+				$new_field[ static::FIELD_INDEX_FIELD_ELASTIC ] = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_IS_ELASTIC);
+			}
+			$fields[] = $new_field;
 		}
 		$this->fields = $fields;
 		return $this->fields;

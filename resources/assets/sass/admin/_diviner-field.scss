@@ -123,6 +123,17 @@
 	}
 }
 
+.carbon-field.div_field_browse_elastic {
+	display: none;
+
+	.post-field-type--diviner_text_field &,
+	.post-field-type--diviner_cpt_field &,
+	.post-field-type--diviner_taxonomy_field &,
+	.post-field-type--diviner_select_field & {
+		display: block;
+	}
+}
+
 .post-edit--diviner_field {
 	.page-title-action {
 		display: none;
