@@ -15,8 +15,13 @@ class Taxonomy_Field extends FieldType {
 	const TYPE = 'taxonomy';
 
 	/**
-	 * Outputs nothing because taxonomies are handled like all WP taxonomies
+	 * Builds the field and returns it
 	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  string $id Field id
+	 * @param  string $field_label Label
+	 * @param  string $helper field helper text
+	 * @return object
 	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		return '';
@@ -88,6 +93,12 @@ class Taxonomy_Field extends FieldType {
 		);
 	}
 
+	/**
+	 * Return basic blueprint for this field
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
+	 */
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [

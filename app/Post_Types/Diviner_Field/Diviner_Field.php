@@ -33,7 +33,7 @@ class Diviner_Field {
 		register_post_type( static::NAME, $args );
 	}
 
-	public function get_active_fields($additional_meta_query = []) {
+	static public function get_active_fields($additional_meta_query = []) {
 		$meta_query = [
 			[
 				'key'     => Helper::get_real_field_name(PostMeta::FIELD_ACTIVE ),
@@ -129,7 +129,7 @@ class Diviner_Field {
 			],
 		];
 
-		$fields = $this->get_active_fields([
+		$fields = static::get_active_fields([
 			'key'     => Helper::get_real_field_name(PostMeta::FIELD_BROWSE_IS_SORTABLE ),
 			'value'   => PostMeta::FIELD_CHECKBOX_VALUE
 		]);
@@ -150,7 +150,7 @@ class Diviner_Field {
 		$taxonomy_terms = [];
 		$cpt_posts = [];
 		$return = [];
-		$fields = $this->get_active_fields();
+		$fields = static::get_active_fields();
 		foreach($fields as $field_id) {
 			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$field = Diviner_Field::get_class($field_type);

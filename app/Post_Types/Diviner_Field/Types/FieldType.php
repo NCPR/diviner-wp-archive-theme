@@ -8,6 +8,15 @@ abstract class FieldType implements iField {
 
 	const TYPE = 'date';
 
+	/**
+	 * Builds the field and returns it
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  string $id Field id
+	 * @param  string $field_label Label
+	 * @param  string $helper field helper text
+	 * @return object
+	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		$field =  Field::make( static::TYPE, $id, $field_label );
 		if ( ! empty( $helper ) ) {
@@ -17,12 +26,21 @@ abstract class FieldType implements iField {
 	}
 
 	/**
+	 * Decorate the ep sync args per field type
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
+	 */
+	static public function decorate_ep_post_sync_args( $additional_meta, $post_id, $field, $field_id ) {
+		return $additional_meta;
+	}
+
+	/**
 	 * No operation method for setting up field. Extend if necessary
 	 *
 	 * @param  int $post_id Post Id of field to set up.
 	 */
 	static public function setup( $post_id ) {
-
 	}
 
 	/**
@@ -30,6 +48,7 @@ abstract class FieldType implements iField {
 	 *
 	 * @param  array $args  Args to pass to WP query.
 	 * @param  array $sort_args  array of sort gtom pipe SORT|<type>|<field>|ASC
+	 * @return array
 	 */
 	static public function decorate_query_args ( $args, $sort_args ) {
 		return $args;
@@ -39,6 +58,7 @@ abstract class FieldType implements iField {
 	 * Return array of sort options
 	 *
 	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
 	 */
 	static public function get_sort_options( $post_id ) {
 		return [];
@@ -48,6 +68,7 @@ abstract class FieldType implements iField {
 	 * Return basic blueprint for this field
 	 *
 	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
 	 */
 	static public function get_blueprint( $post_id ) {
 		return [

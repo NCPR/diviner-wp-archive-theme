@@ -14,6 +14,15 @@ class Select_Field extends FieldType {
 	const TYPE = 'select';
 	const REST_SELECT_OPTIONS = 'select_field_options';
 
+	/**
+	 * Builds the field and returns it
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  string $id Field id
+	 * @param  string $field_label Label
+	 * @param  string $helper field helper text
+	 * @return object
+	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		$options = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS);
 		if (count($options) <= 1) {
@@ -34,6 +43,27 @@ class Select_Field extends FieldType {
 		return $field;
 	}
 
+	/**
+	 * Decorate the ep sync args per field type
+	 *
+	 * @param  array $additional_meta additional meta.
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  array $field
+	 * @param  array $field_id
+	 * @return array
+	 */
+	static public function decorate_ep_post_sync_args( $additional_meta, $post_id, $field, $field_id ) {
+		$field_value = carbon_get_post_meta( $post_id, $field_id );
+		$additional_meta[$field_id] = $field_value;
+		return $additional_meta;
+	}
+
+	/**
+	 * Return basic blueprint for this field
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
+	 */
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [

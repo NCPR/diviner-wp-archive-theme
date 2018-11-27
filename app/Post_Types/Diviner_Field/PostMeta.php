@@ -30,6 +30,7 @@ class PostMeta {
 	const FIELD_BROWSE_PLACEMENT   = 'div_field_browse_placement';
 	const FIELD_BROWSE_DISPLAY     = 'div_field_display';
 	const FIELD_BROWSE_IS_SORTABLE = 'div_field_browse_sortable';
+	const FIELD_BROWSE_IS_ELASTIC  = 'div_field_browse_elastic';
 
 	const FIELD_IS_DEFAULT     = 'div_field_default';
 
@@ -85,19 +86,25 @@ class PostMeta {
 	 * @hook carbon_fields_register_fields
 	 */
 	public function add_post_meta() {
-		// var_dump('PostMeta add_post_meta');
+
+		$fields = [
+			$this->get_field_types(),
+			$this->get_field_active(),
+			$this->get_field_browser_helper_text(),
+			$this->get_field_browser_placement(),
+			$this->get_field_display_popup(),
+			$this->get_field_is_sortable(),
+			$this->get_field_admin_helper_text(),
+			$this->get_field_id(),
+		];
+
+		if ( defined( 'EP_VERSION' ) ) { // only add elastic if elastic press plugin is available
+			$fields[] = $this->get_field_is_elastic();
+		}
+
 		$this->container = Container::make( 'post_meta', __( 'Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
-			->add_fields( [
-				$this->get_field_types(),
-				$this->get_field_active(),
-				$this->get_field_browser_helper_text(),
-				$this->get_field_browser_placement(),
-				$this->get_field_display_popup(),
-				$this->get_field_is_sortable(),
-				$this->get_field_admin_helper_text(),
-                $this->get_field_id(),
-			] )
+			->add_fields( $fields )
 			->set_priority( 'high' );
 
 		// if on edit screen of the diviner field CPT check the field type
@@ -109,9 +116,7 @@ class PostMeta {
 				if (get_post_type( $_GET['post'] ) === Diviner_Field::NAME) {
 					$field_type = $this->get_field_type($_GET['post']);
 				}
-
 			}
-
 		}
 
 		$this->container = Container::make( 'post_meta', __( 'Hidden Field Variables', 'ncpr-diviner' ) )
@@ -362,6 +367,12 @@ class PostMeta {
 		return Field::make( 'checkbox', static::FIELD_BROWSE_IS_SORTABLE, __( 'Is this field sortable in the browse experience', 'ncpr-diviner' ) )
 			->set_option_value( static::FIELD_CHECKBOX_VALUE )
 			->set_classes( static::FIELD_BROWSE_IS_SORTABLE );
+	}
+
+	public function get_field_is_elastic() {
+		return Field::make( 'checkbox', static::FIELD_BROWSE_IS_ELASTIC, __( 'Is this field searchable via the elastic search (only functional in tandem with elastic press plugin)', 'ncpr-diviner' ) )
+			->set_option_value( static::FIELD_CHECKBOX_VALUE )
+			->set_classes( static::FIELD_BROWSE_IS_ELASTIC );
 	}
 
 }

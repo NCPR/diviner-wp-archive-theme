@@ -59,6 +59,40 @@ class CPT_Field extends FieldType {
 
 	}
 
+	/**
+	 * Decorate the ep sync args per field type
+	 *
+	 * @param  array $additional_meta additional meta.
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  array $field
+	 * @param  array $field_id
+	 * @return array
+	 */
+	static public function decorate_ep_post_sync_args( $additional_meta, $post_id, $field, $field_id ) {
+
+		$field_values = carbon_get_post_meta( $post_id, $field_id );
+		$text = '';
+		foreach($field_values as $field_value) {
+			if ( !empty($field_value)) {
+				$text .= get_the_title($field_value['id']) . " ";
+			}
+		}
+
+		// error_log( print_r( $field_value, true ) , 3, "/Applications/MAMP/logs/php_error.log" );
+		$additional_meta[$field_id] = $text;
+
+		return $additional_meta;
+	}
+
+	/**
+	 * Builds the field and returns it
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  string $id Field id
+	 * @param  string $field_label Label
+	 * @param  string $helper field helper text
+	 * @return object
+	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		$field_cpt_id = carbon_get_post_meta( $post_id,FieldPostMeta::FIELD_CPT_ID );
 		if ( empty($field_cpt_id) ) {
@@ -79,6 +113,12 @@ class CPT_Field extends FieldType {
 		return $field;
 	}
 
+	/**
+	 * Return basic blueprint for this field
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
+	 */
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
