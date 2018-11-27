@@ -8,4 +8,6 @@ interface iField {
 
 	static public function setup( $post_id );
 
+	static public function get_blueprint( $post_id );
+
 }

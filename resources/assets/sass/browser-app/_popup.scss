@@ -1,0 +1,116 @@
+
+.a-sai__field {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.a-sai__label {
+	font-weight: $t_font_weight_bold;
+	display: inline-block;
+	margin-right: 10px;
+
+	&:after {
+		content: ':';
+		display: inline;
+	}
+}
+
+.a-sai__value {
+	display: inline;
+}
+
+// UL
+.a-sai__list {
+	list-style:none;
+	display: inline;
+}
+
+.a-sai__list-item {
+	display: inline;
+	margin-right: 10px;
+
+	&:after {
+		content: ',';
+		display: inline;
+	}
+
+	&:last-of-type:after {
+		display: none;
+	}
+}
+
+.a-sai__list--taxonomy {
+}
+
+.a-sai__list-item--taxonomy {
+}
+
+.a-sai__list--cpt {
+}
+
+.a-sai__list-item--cpt {
+}
+
+.a-sai__popup {
+
+}
+
+.a-sai__popup--visible {
+}
+
+.skylight-wrapper {
+
+	@include g-state( medium ) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+
+		.a-sai__popup--visible & {
+			pointer-events: auto;
+		}
+	}
+}
+
+.skylight-dialog {
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	margin-top: 0 !important;
+	margin-left: 0 !important;
+	overflow-y: auto !important;
+
+	@include g-state( medium ) {
+
+		position: absolute !important;
+		top: 50% !important;
+		margin-top: 20px !important;
+		transform: translateY(-50%)  !important;
+		max-height: calc(100% - 80px) !important;
+		overflow-y: auto;
+		margin-left: -250px !important;
+		width: 500px !important;
+		display: none;
+		left: 50% !important;
+		height: auto !important;
+
+		.admin-bar & {
+			top: 50% !important;
+		}
+
+		.a-sai__popup & {
+		}
+
+		.a-sai__popup--visible & {
+			display: block;
+		}
+	}
+}
+
+.a-sai__popup--visible .skylight-dialog {
+
+}

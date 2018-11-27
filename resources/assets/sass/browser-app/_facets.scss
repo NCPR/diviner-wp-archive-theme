@@ -1,0 +1,60 @@
+.a-facets {
+	width: 100%;
+	padding: 0 0 10px 0;
+
+	@include g-state( full ) {
+		padding: 0 20px 10px 0;
+	}
+
+	h6:first-of-type {
+		margin-top: 0;
+	}
+}
+
+.a-facets__wrap {
+	display: none;
+	@include g-state( medium ) {
+		display: block;
+	}
+}
+
+.a-facets__wrap--open {
+	display: block;
+	@include g-state( medium ) {
+		display: block;
+	}
+}
+
+.a-input-group {
+	margin: 5px 0 10px;
+
+	label {
+		font-weight: normal;
+		color: $color_grey_mid;
+		text-transform: uppercase;
+		font-size: 110%;
+
+		@include g-state( large ) {
+			font-size: 130%;
+		}
+	}
+
+	&.a-input-group--controls {
+		margin: 5px 0 12px;
+
+		@include g-state( large ) {
+			margin: 3px 0 12px;
+		}
+	}
+}
+
+.a-toggle-search-btn {
+	@include g-state( medium ) {
+		display: none;
+	}
+}
+
+.a-rc-slider {
+	padding: 10px 0 0;
+	margin: 0 7px;
+}

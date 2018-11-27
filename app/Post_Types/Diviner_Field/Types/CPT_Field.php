@@ -12,8 +12,6 @@ class CPT_Field extends FieldType {
 	const TITLE = 'CPT Field';
 	const TYPE = 'association';
 
-	const FIELD_CPT_TYPE_FIELD_ID = 'diviner_cpt_type_field';
-
 	static public function setup ( $post_id ) {
 		// set up CPT
 		$field_id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
@@ -40,12 +38,12 @@ class CPT_Field extends FieldType {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => $field_slug ),
+			'rewrite'            => [ 'slug' => $field_slug ],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
+			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
 			'map_meta_cap'       => true,
 		];
 		$labels = [
@@ -59,19 +57,42 @@ class CPT_Field extends FieldType {
 		$args = wp_parse_args( $args, $labels );
 		register_post_type( $field_id, $args );
 
-
-		// You could set up additional field here...
-		/*
-		$container = Container::make( 'post_meta', 'Creator Fields' )
-			->where( 'post_type', '=', Diviner_Field::NAME )
-			->add_fields( array(
-				Field::make( 'text', self::FIELD_CPT_TYPE_FIELD_ID, 'CPT Type Field ID' )
-			))
-			->set_priority( 'default' );
-		*/
-
 	}
 
+	/**
+	 * Decorate the ep sync args per field type
+	 *
+	 * @param  array $additional_meta additional meta.
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  array $field
+	 * @param  array $field_id
+	 * @return array
+	 */
+	static public function decorate_ep_post_sync_args( $additional_meta, $post_id, $field, $field_id ) {
+
+		$field_values = carbon_get_post_meta( $post_id, $field_id );
+		$text = '';
+		foreach($field_values as $field_value) {
+			if ( !empty($field_value)) {
+				$text .= get_the_title($field_value['id']) . " ";
+			}
+		}
+
+		// error_log( print_r( $field_value, true ) , 3, "/Applications/MAMP/logs/php_error.log" );
+		$additional_meta[$field_id] = $text;
+
+		return $additional_meta;
+	}
+
+	/**
+	 * Builds the field and returns it
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  string $id Field id
+	 * @param  string $field_label Label
+	 * @param  string $helper field helper text
+	 * @return object
+	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		$field_cpt_id = carbon_get_post_meta( $post_id,FieldPostMeta::FIELD_CPT_ID );
 		if ( empty($field_cpt_id) ) {
@@ -79,16 +100,32 @@ class CPT_Field extends FieldType {
 		}
 
 		$field = Field::make(static::TYPE, $id, $field_label)
-			->set_types(array(
-				array(
+			->set_types([
+				[
 					'type' => 'post',
 					'post_type' => $field_cpt_id,
-				),
-			));
+				],
+			] );
 
 		if ( ! empty( $helper ) ) {
 			$field->help_text($helper);
 		}
 		return $field;
+	}
+
+	/**
+	 * Return basic blueprint for this field
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
+	 */
+	static public function get_blueprint( $post_id ) {
+		$blueprint = parent::get_blueprint( $post_id );
+		$additional_vars = [
+			'cpt_field_id'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID ),
+			'cpt_field_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL ),
+			'cpt_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG ),
+		];
+		return array_merge($blueprint, $additional_vars);
 	}
 }

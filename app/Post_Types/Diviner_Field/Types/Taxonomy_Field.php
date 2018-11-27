@@ -15,8 +15,13 @@ class Taxonomy_Field extends FieldType {
 	const TYPE = 'taxonomy';
 
 	/**
-	 * Outputs nothing because taxonomies are handled like all WP taxonomies
+	 * Builds the field and returns it
 	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  string $id Field id
+	 * @param  string $field_label Label
+	 * @param  string $helper field helper text
+	 * @return object
 	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		return '';
@@ -47,7 +52,7 @@ class Taxonomy_Field extends FieldType {
 		}
 
 		// Labels
-		$labels = array(
+		$labels = [
 			'name'              => $field_label_plural,
 			'singular_name'     => $field_label_singular,
 			'search_items'      => sprintf( __( 'Search %s', 'ncpr-diviner' ), $field_label_plural ),
@@ -59,29 +64,50 @@ class Taxonomy_Field extends FieldType {
 			'add_new_item'      => sprintf( __( 'Add %s', 'ncpr-diviner' ), $field_label_singular ),
 			'new_item_name'     => sprintf( __( 'New %s', 'ncpr-diviner' ), $field_label_singular ),
 			'menu_name'         => $field_label_singular,
-		);
+		];
+
+		$taxonomy_name = static::get_taxonomy_name( $post_id );
 
 		// args
-		$args = array(
+		$args = [
 			'hierarchical'      => ( $field_tax_type === FieldPostMeta::FIELD_TAXONOMY_TYPE_CATEGORY ) ? true : false,
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array(
+			'rewrite'           => [
 				'slug' => $field_slug
-			),
+			],
 			'show_in_rest'      => true,
-		);
-		register_taxonomy( self::get_taxonomy_name( $post_id ), array( Archive_Item::NAME ), $args );
+			'rest_base'         => $taxonomy_name,
+		];
+		register_taxonomy( $taxonomy_name, [ Archive_Item::NAME ], $args );
 
 	}
 
 	static public function get_taxonomy_name( $post_id ) {
 		return sprintf(
 			'%s_%s',
-			self::NAME,
+			static::NAME,
 			$post_id
 		);
+	}
+
+	/**
+	 * Return basic blueprint for this field
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
+	 */
+	static public function get_blueprint( $post_id ) {
+		$blueprint = parent::get_blueprint( $post_id );
+		$additional_vars = [
+			'taxonomy_field_type'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE),
+			'taxonomy_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG),
+			'taxonomy_field_singular_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL),
+			'taxonomy_field_plural_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL),
+			'taxonomy_field_name'   => static::get_taxonomy_name( $post_id ),
+		];
+		return array_merge($blueprint, $additional_vars);
 	}
 }

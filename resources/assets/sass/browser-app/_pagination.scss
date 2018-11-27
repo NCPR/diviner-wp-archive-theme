@@ -1,0 +1,32 @@
+
+/* React pagination */
+
+ul.react-pagination {
+	display: inline-block;
+	margin: 20px 0;
+	padding-left: 0;
+	padding-right: 15px;
+}
+
+ul.react-pagination li {
+	display: inline-block;
+	margin-right: 1px;
+
+	a {
+		@extend %button;
+
+		color: $color_white;
+	}
+
+	&.active a {
+		background-color: $color_grey_mid;
+	}
+
+	&.disabled {
+		display: none;
+	}
+}
+
+ul.react-pagination .break a {
+	cursor: default;
+}
