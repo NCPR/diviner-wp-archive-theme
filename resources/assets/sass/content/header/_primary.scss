@@ -1,0 +1,29 @@
+.primary-menu {
+	display: none;
+
+	ol {
+	}
+
+	@include g-state(full) {
+		display: block;
+
+		ol {
+		}
+
+		li {
+			float: left;
+			display: inline-block;
+		}
+
+		li + li {
+			margin-left: $d_spacer_sm;
+		}
+
+	}
+
+	a {
+		@extend %button;
+
+		font-style: 20px;
+	}
+}

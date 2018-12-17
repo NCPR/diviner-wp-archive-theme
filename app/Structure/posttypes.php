@@ -26,8 +26,6 @@ use \Diviner\Post_Types\Diviner_Field\AdminModifications;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
 
-
-
 $container[ 'post_types.archive_item' ] = function ( Container $container ) {
 	return new Archive_Item();
 };

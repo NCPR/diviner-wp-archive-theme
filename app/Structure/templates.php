@@ -14,6 +14,9 @@ namespace Tonik\Theme\App\Structure;
 */
 
 use function Tonik\Theme\App\template;
+use \Pimple\Container;
+use \Diviner\Post_Types\Archive_Item\Rest;
+use \Diviner\Theme\General;
 
 /**
  * Renders post thumbnail by its formats.
@@ -62,14 +65,11 @@ function render_sidebar()
 add_action('theme/index/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
 add_action('theme/single/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
 
-/**
- * Renders [button] shortcode after homepage content.
- *
- * @uses resources/templates/shortcodes/button.tpl.php
- * @see resources/templates/partials/header.tpl.php
- */
-function render_documentation_button()
-{
-    echo do_shortcode("[button href='https://github.com/tonik/tonik']Checkout documentation →[/button]");
-}
-add_action('theme/header/end', 'Tonik\Theme\App\Structure\render_documentation_button');
+
+
+$container = \Tonik\Theme\App\Main::instance()->container();
+
+$container[ 'theme.general' ] = function ( Container $container ) {
+	return new General();
+};
+$container[ 'theme.general' ]->hooks();

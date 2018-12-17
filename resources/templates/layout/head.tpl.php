@@ -8,11 +8,3 @@
     </head>
     <body <?php body_class(); ?>>
         <main id="app" class="app">
-			<header>
-				<h1>
-					<a href="<?= get_home_url(); ?>">Diviner</a>
-				</h1>
-
-				<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-
-			</header>

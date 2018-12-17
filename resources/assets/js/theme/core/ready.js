@@ -7,6 +7,8 @@
 import _ from 'lodash';
 
 import { on, ready } from '../../utils/events';
+import header from '../content/header';
+import resize from './resize';
 
 /**
  * @function bindEvents
@@ -29,7 +31,9 @@ const init = () => {
 
 	// initialize the main scripts
 
-	console.info('Square One BE: Initialized all javascript that targeted document ready.');
+	header();
+
+	console.info('Diviner: Initialized all javascript that targeted document ready.');
 };
 
 /**

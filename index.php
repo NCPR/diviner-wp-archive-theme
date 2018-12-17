@@ -22,10 +22,11 @@ use function Tonik\Theme\App\template;
  */
 function render_header()
 {
-    template('partials/header', [
-        'title' => __('Tonik — WordPress Starter Theme'),
-        'lead' => __('Tonik is a WordPress Starter Theme which aims to modernize, organize and enhance some aspects of WordPress theme development. Take a look at what is waiting for you.'),
-    ]);
+	template('partials/header', [
+		'brand' => \Diviner\Theme\General::the_header_brand(),
+		'lead'  => get_bloginfo( 'description' ),
+		'primary_menu' => \Diviner\Theme\General::the_primary_menu(),
+	]);
 }
 add_action('theme/index/header', 'Tonik\Theme\Index\render_header');
 

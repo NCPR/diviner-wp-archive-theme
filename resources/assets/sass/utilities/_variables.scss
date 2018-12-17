@@ -4,18 +4,17 @@
 $color_white: #fff;
 $color_grey_light: #dddddd;
 $color_grey: #999999;
-$color_grey_mid: #333333;
 $color_grey_dark: #777777;
+$color_grey_darker: #333333;
 $color_blue: #5c69ff;
 
 $color_primary: $color_grey_dark;
-$color_secondary: $color_grey_mid;
+$color_secondary: $color_grey;
 
 $color_headers: $color_primary;
 
 $color_border: $color_grey;
 $color_border_focus: $color_blue;
-
 
 // Media Queries
 // =================================================
@@ -35,6 +34,12 @@ $d_spacer_sm : 10px;
 $d_spacer_m : 20px;
 $d_spacer_lrg : 40px;
 $d_spacer_xlrg : 60px;
+
+// Grid
+// =================================================
+$g_max_width: 960px;
+$g_gaps_sm: $d_spacer_m;
+$g_gaps_lrg: $d_spacer_lrg;
 
 
 // Fonts
