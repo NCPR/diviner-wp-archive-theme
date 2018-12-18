@@ -1,5 +1,14 @@
 <?php get_header(); ?>
 
+<?php
+/**
+ * Functions hooked into `theme/header` action.
+ *
+ */
+do_action('theme/header');
+?>
+
+
 <section class="section">
     <div class="wrapper">
         <div class="content">

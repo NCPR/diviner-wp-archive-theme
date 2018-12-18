@@ -5,10 +5,18 @@ use Diviner\Post_Types\Diviner_Field\PostMeta;
 use Diviner\Post_Types\Archive_Item\Post_Meta;
 use Diviner\CarbonFields\Helper;
 
-
 ?>
 
 <?php get_header(); ?>
+
+<?php
+/**
+ * Functions hooked into `theme/header` action.
+ *
+ */
+do_action('theme/header');
+?>
+
 
 <section class="section">
     <div class="wrapper">

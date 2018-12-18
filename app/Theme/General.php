@@ -2,6 +2,9 @@
 
 namespace Diviner\Theme;
 
+use function Tonik\Theme\App\template;
+
+
 /**
  * Class Settings
  *
@@ -13,11 +16,29 @@ class General {
 
 	public function hooks() {
 		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
+		add_action('theme/header', [$this, 'render_header']);
 	}
+
+
+	/**
+	 * Renders index page header.
+	 *
+	 * @see resources/templates/index.tpl.php
+	 */
+	function render_header()
+	{
+		template('partials/header', [
+			'brand' => static::the_header_brand(),
+			'lead'  => get_bloginfo( 'description' ),
+			'primary_menu' => static::the_primary_menu(),
+		]);
+	}
+
 
 	static public function the_primary_menu() {
 		return sprintf(
-			'<nav class="primary-menu"><div class="a11y-visual-hide">%s</div>%s</nav>',
+			'<div class="primary-menu__wrap" data-js="primary-menu__wrap"><nav class="primary-menu"><button class="primary-menu__close" data-js="primary-menu__close"><span class="fas fa-window-close"></span><span class="a11y-visual-hide">%s</span></button><div class="a11y-visual-hide">%s</div>%s</nav></div>',
+			__( 'Close Navigation', 'ncpr-diviner'),
 			__( 'Primary Navigation', 'ncpr-diviner'),
 			wp_nav_menu( [
 				'theme_location' => 'primary',

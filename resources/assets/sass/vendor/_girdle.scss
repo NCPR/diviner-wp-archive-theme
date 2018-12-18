@@ -34,6 +34,10 @@ $settings : (
 	min-width : $mq_medium
 ) );
 
+@include g-register-state( wpadmin, (
+	min-width : $mq_wpadmin
+) );
+
 @include g-register-state( full, (
 	min-width : $mq_full
 ) );

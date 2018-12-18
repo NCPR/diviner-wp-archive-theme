@@ -3,6 +3,8 @@
  * @description JavaScript specific to the site header
  */
 import delegate from 'delegate';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+
 
 import { HEADER_BREAKPOINT } from '../../config';
 import { on } from '../../../utils/events';
@@ -10,6 +12,22 @@ import * as tools from '../../../utils/tools';
 
 const el = {
 	header: tools.getNodes('header')[0],
+	primaryMenuWrap: tools.getNodes('primary-menu__wrap')[0],
+};
+
+/**
+ * @function closeMenu
+ * @description Close menu on click
+ */
+
+const closeMenu = () => {
+	tools.removeClass(document.body, 'menu--opened');
+	enableBodyScroll(el.primaryMenuWrap);
+};
+
+const openMenu = (e) => {
+	tools.addClass(document.body, 'menu--opened');
+	disableBodyScroll(el.primaryMenuWrap);
 };
 
 
@@ -21,13 +39,32 @@ const el = {
 const toggleMenu = (e) => {
 	console.log('toggleMenu');
 	e.preventDefault();
-	const clickedItem = e.delegateTarget;
 	const shouldActivateMenu = !tools.hasClass(document.body, 'menu--opened');
-
 	if (shouldActivateMenu) {
-		tools.addClass(document.body, 'menu--opened');
+		openMenu();
 	} else {
-		tools.removeClass(document.body, 'menu--opened');
+		closeMenu();
+	}
+};
+
+/**
+ * @function closeMenuHandler
+ * @description Close menu on click
+ */
+
+const closeMenuHandler = (e) => {
+	console.log('closeMenuHandler');
+	e.preventDefault();
+	closeMenu();
+};
+
+const executeResize = (e) => {
+	console.log('executeResize');
+	const g = document.getElementsByTagName('body')[0];
+	const x = window.innerWidth || document.documentElement.clientWidth || g.clientWidth;
+	// const y = window.innerHeight || document.documentElement.clientHeight || g.clientHeight;
+	if (x > HEADER_BREAKPOINT) {
+		closeMenu();
 	}
 };
 
@@ -37,14 +74,14 @@ const toggleMenu = (e) => {
  */
 
 const bindEvents = () => {
-	//on(document, 'modern_tribe/resize_executed', (e) => executeResize(e));  // eslint-disable-line
-	//on(document, 'modern_tribe/scroll', handleScroll);
+	on(document, 'diviner/resize', executeResize);  // eslint-disable-line
 	/*
 	delegate(el.header, '[data-js="trigger-child-menu"]', 'click', toggleSubMenu);
 	document.body.addEventListener('keydown', closeOnEsc);
 	document.addEventListener('click', maybeClose);
 	*/
 	delegate(el.header, '[data-js="header__menu-trigger"]', 'click', toggleMenu);
+	delegate(el.header, '[data-js="primary-menu__close"]', 'click', closeMenuHandler);
 };
 
 /**

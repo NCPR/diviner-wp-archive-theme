@@ -9,7 +9,7 @@ import { trigger } from '../../utils/events';
 const resize = () => {
 	// code for resize events can go here
 
-	trigger({ event: 'modern_tribe/resize_executed', native: false });
+	trigger({ event: 'diviner/resize', native: false });
 };
 
 export default resize;

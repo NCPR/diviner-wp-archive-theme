@@ -7,7 +7,7 @@
      *
      * @hooked Tonik\Theme\Index\render_header - 10
      */
-    do_action('theme/index/header');
+    do_action('theme/header');
 ?>
 
 
