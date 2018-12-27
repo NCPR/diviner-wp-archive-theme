@@ -37,7 +37,6 @@ const openMenu = (e) => {
  */
 
 const toggleMenu = (e) => {
-	console.log('toggleMenu');
 	e.preventDefault();
 	const shouldActivateMenu = !tools.hasClass(document.body, 'menu--opened');
 	if (shouldActivateMenu) {
@@ -53,7 +52,6 @@ const toggleMenu = (e) => {
  */
 
 const closeMenuHandler = (e) => {
-	console.log('closeMenuHandler');
 	e.preventDefault();
 	closeMenu();
 };
