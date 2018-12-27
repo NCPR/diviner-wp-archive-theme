@@ -58,12 +58,14 @@ const closeMenuHandler = (e) => {
 	closeMenu();
 };
 
-const executeResize = (e) => {
-	console.log('executeResize');
+const getWidth = () => {
 	const g = document.getElementsByTagName('body')[0];
-	const x = window.innerWidth || document.documentElement.clientWidth || g.clientWidth;
-	// const y = window.innerHeight || document.documentElement.clientHeight || g.clientHeight;
-	if (x > HEADER_BREAKPOINT) {
+	return window.innerWidth || document.documentElement.clientWidth || g.clientWidth;
+}
+
+const executeResize = (e) => {
+	const width = getWidth();
+	if (width > HEADER_BREAKPOINT) {
 		closeMenu();
 	}
 };
