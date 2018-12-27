@@ -1,9 +1,6 @@
 
-@import 'utilities/variables';
+@import 'utilities/all';
 @import 'vendor/all';
 @import 'core/all';
+@import 'content/all';
 @import 'browser-app/all';
-
-* {
-	box-sizing: border-box;
-}

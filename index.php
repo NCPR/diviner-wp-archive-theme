@@ -16,20 +16,6 @@ namespace Tonik\Theme\Index;
 use function Tonik\Theme\App\template;
 
 /**
- * Renders index page header.
- *
- * @see resources/templates/index.tpl.php
- */
-function render_header()
-{
-    template('partials/header', [
-        'title' => __('Tonik — WordPress Starter Theme'),
-        'lead' => __('Tonik is a WordPress Starter Theme which aims to modernize, organize and enhance some aspects of WordPress theme development. Take a look at what is waiting for you.'),
-    ]);
-}
-add_action('theme/index/header', 'Tonik\Theme\Index\render_header');
-
-/**
  * Renders index page.
  *
  * @see resources/templates/index.tpl.php

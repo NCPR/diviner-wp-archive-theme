@@ -21,8 +21,9 @@ use function Tonik\Theme\App\config;
  */
 function register_navigation_areas()
 {
-    register_nav_menus([
-        'primary' => __('Primary', 'ncpr-diviner'),
-    ]);
+	register_nav_menus([
+		'primary' => __('Primary', 'ncpr-diviner'),
+	]);
 }
 add_action('after_setup_theme', 'Tonik\Theme\App\Structure\register_navigation_areas');
+

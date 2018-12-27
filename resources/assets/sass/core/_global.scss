@@ -7,8 +7,30 @@
 html {
 }
 
+html, body, #page {
+	min-height: 100%;
+
+	@include g-state(full) {
+		min-height: initial;
+	}
+}
+
+html, body {
+	&.admin-bar {
+		top: $d_spacer_wpadmin_mobile;
+
+		@include g-state(wpadmin) {
+			top: $d_spacer_wpadmin_desktop;
+		}
+	}
+}
+
 body {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 100%;
+}
+
+.app {
+
 }

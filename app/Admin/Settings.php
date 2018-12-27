@@ -21,11 +21,11 @@ class Settings {
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
 	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
 
-    /**
-     * The built instance of the theme options container.
-     *
-     * @var \Carbon_Fields\Container\Theme_Options_Container
-     */
+	/**
+	 * The built instance of the theme options container.
+	 *
+	 * @var \Carbon_Fields\Container\Theme_Options_Container
+	 */
 	protected static $theme_options;
 
 	public function hooks() {
@@ -43,25 +43,25 @@ class Settings {
 		return $data;
 	}
 
-    /**
-     * Returns the menu slug of the theme options main page.
-     *
-     * This is the slug that should be used as `parent_slug` to
-     * add sub-menus to the main theme options page or to hide it.
-     *
-     * @since TBD
-     *
-     * @return string The main theme options page slug.
-     */
-    public static function menu_slug() {
-        return static::$theme_options->get_page_file();
-    }
+	/**
+	 * Returns the menu slug of the theme options main page.
+	 *
+	 * This is the slug that should be used as `parent_slug` to
+	 * add sub-menus to the main theme options page or to hide it.
+	 *
+	 * @since TBD
+	 *
+	 * @return string The main theme options page slug.
+	 */
+	public static function menu_slug() {
+		return static::$theme_options->get_page_file();
+	}
 
-    /**
+	/**
 	 * Setup Basic plugin settings
 	 */
 	public function crb_attach_theme_options() {
-	    // We can save the result of an instance call in a static property as it will be called once per HTTP request.
+		// We can save the result of an instance call in a static property as it will be called once per HTTP request.
 		static::$theme_options = Container::make(
 			'theme_options',
 			__( 'Diviner Settings', 'ncpr-diviner' )

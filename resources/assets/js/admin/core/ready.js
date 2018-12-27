@@ -29,7 +29,7 @@ const init = () => {
 
 	// initialize the main scripts
 
-	console.info('Square One BE: Initialized all javascript that targeted document ready.');
+	console.info('Diviner: Initialized all javascript that targeted document ready.');
 };
 
 /**
