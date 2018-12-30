@@ -16,9 +16,21 @@ class General {
 
 	public function hooks() {
 		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
-		add_action('theme/header', [$this, 'render_header']);
+		add_action( 'theme/header', [$this, 'render_header']);
+		add_action( 'after_setup_theme', [$this, 'register_navigation_areas'] );
 	}
 
+	/**
+	 * Registers navigation areas.
+	 *
+	 * @return void
+	 */
+	function register_navigation_areas() {
+		register_nav_menus([
+			'primary' => __('Primary', 'ncpr-diviner'),
+			'footer'  => __('Footer', 'ncpr-diviner'),
+		]);
+	}
 
 	/**
 	 * Renders index page header.
@@ -34,6 +46,29 @@ class General {
 		]);
 	}
 
+	/**
+	 * Renders index page footer.
+	 *
+	 * @see resources/templates/index.tpl.php
+	 */
+	function render_footer()
+	{
+		template('layout/footer', [
+			'footer_menu' => static::the_footer_menu(),
+		]);
+	}
+
+	static public function the_footer_menu() {
+		return sprintf(
+			'<div class="footer-menu__wrap"><nav class="footer-menu"><div class="a11y-visual-hide">%s</div>%s</nav></div>',
+			__( 'Footer Navigation', 'ncpr-diviner'),
+			wp_nav_menu( [
+				'theme_location' => 'footer',
+				'echo' => false,
+				'depth' => 1
+			] )
+		);
+	}
 
 	static public function the_primary_menu() {
 		return sprintf(
@@ -43,9 +78,9 @@ class General {
 			wp_nav_menu( [
 				'theme_location' => 'primary',
 				'echo' => false,
+				'depth' => 2
 			] )
 		);
-
 	}
 
 	static public function the_header_brand() {
@@ -67,6 +102,21 @@ class General {
 			);
 		}
 		return $brand;
+	}
+
+	static function the_social_module () {
+		return 'social module';
+	}
+
+	static function the_footer_copy () {
+		$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_FOOTER_COPY);
+		if ( !empty( $copy ) ) {
+			return sprintf(
+				'<div class="footer__copy">%s</div>',
+				$copy
+			);
+		}
+		return '';
 	}
 
 	public function awesome_fonts() {

@@ -103,7 +103,6 @@ return [
 		'Setup/supports.php',
 		'Setup/language.php',
 		'Setup/services.php',
-		'Structure/navs.php',
 		'Structure/widgets.php',
 		'Structure/sidebars.php',
 		'Structure/templates.php',
