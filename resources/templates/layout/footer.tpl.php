@@ -1,6 +1,6 @@
 			<footer class="footer">
 
-				<div class="wrapper">
+				<div class="wrapper wrapper--full">
 
 					<div class="row">
 
@@ -18,7 +18,9 @@
 
 						<div class="row">
 							<div class="gr-12">
-								<?= $footer_copy ?>
+								<div class="footer__copy d-content d-content--inverse">
+									<?= $footer_copy ?>
+								</div>
 							</div>
 						</div>
 
