@@ -1,6 +1,17 @@
-.social_links {
+.social-links {
 	margin: 0;
 	padding: 0;
+	display: flex;
+	justify-content: flex-start;
+
+
+	.footer & {
+		margin-bottom: $d_spacer_sm;
+
+		@include g-state(medium) {
+			float: right;
+		}
+	}
 }
 
 .social-links_item {

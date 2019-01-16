@@ -10,7 +10,7 @@
 
 <section class="section">
     <div class="wrapper">
-        <div class="content">
+        <div class="d-content">
             <?php if (have_posts()) : ?>
                 <h4>Posts</h4>
 

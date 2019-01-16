@@ -1,6 +1,6 @@
 			<footer class="footer">
 
-				<div class="wrapper wrapper--full">
+				<div class="wrapper">
 
 					<div class="row">
 
