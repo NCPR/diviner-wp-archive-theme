@@ -7,4 +7,4 @@
         <?php wp_head(); ?>
     </head>
     <body <?php body_class(); ?>>
-        <main id="app" class="app">
+        <main id="app" class="main">

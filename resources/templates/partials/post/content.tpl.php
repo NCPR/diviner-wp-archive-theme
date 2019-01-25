@@ -1,9 +1,11 @@
-<article>
-    <h1><?php the_title(); ?></h1>
+<article class="article">
+	<div class="d-content">
+		<h1><?php the_title(); ?></h1>
 
-    <time>
-        <small><?php the_date(); ?></small>
-    </time>
+		<time>
+			<small><?php the_date(); ?></small>
+		</time>
 
-    <p><?php the_content(); ?></p>
+		<p><?php the_content(); ?></p>
+	</div>
 </article>

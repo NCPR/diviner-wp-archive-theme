@@ -1,4 +1,15 @@
 
+.main {
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+}
+
+.main__inner {
+	flex: 1 1 auto;
+}
+
 .wrapper {
 	width: 100%;
 	padding: 0 $g_gaps_sm $d_spacer_m;
@@ -10,6 +21,33 @@
 	}
 }
 
+/* for sidebar */
+.wrapper__inner {
+	@include g-state(medium) {
+		display: flex;
+		width: 100%;
+	}
+}
+
+.wrapper__inner > * {
+	padding: $d_spacer_m 0;
+
+	@include g-state(medium) {
+		padding: $d_spacer_lrg 0;
+
+		&:first-child {
+			flex: 1 0 auto;
+		}
+		&:last-child {
+			flex: 0 0 auto;
+		}
+	}
+}
+
 .wrapper--full {
 	max-width: none;
+}
+
+.article {
+	padding: 20px 0;
 }

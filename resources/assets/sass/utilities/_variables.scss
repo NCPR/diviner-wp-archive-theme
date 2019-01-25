@@ -7,9 +7,13 @@ $color_grey: #999999;
 $color_grey_dark: #777777;
 $color_grey_darker: #333333;
 $color_blue: #5c69ff;
+$color_black: #000;
 
 $color_primary: $color_grey_dark;
 $color_secondary: $color_grey;
+
+$color_links: $color_primary;
+$color_links_hover: $color_black;
 
 $color_headers: $color_primary;
 
@@ -18,6 +22,9 @@ $color_border_focus: $color_blue;
 
 $color_text: $color_grey_dark;
 $color_text_inverse: $color_grey_light;
+
+$color_links_inverse: $color_primary;
+$color_links_inverse_hover: $color_black;
 
 
 // Media Queries
@@ -53,12 +60,12 @@ $g_gaps_lrg: $d_spacer_m;
 // =================================================
 $t_font_opensans: "Open Sans", Helvetica, Arial, sans-serif;
 $t_font_noticia: "Noticia", Times New Roman, serif;
-$t_font_oswald: "Oswald", Helvetica, Arial, serif;
+$t_font_helvetica: Helvetica, Arial, serif;
 $t_font_display: $t_font_opensans;
 $t_font_body: $t_font_noticia;
 $t_font_interface: $t_font_opensans;
 $t_font_icons: 'icomoon' !important;
-$t_font_headers: $t_font_oswald;
+$t_font_headers: $t_font_helvetica;
 
 
 // Font Sizes

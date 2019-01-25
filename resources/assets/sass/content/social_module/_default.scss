@@ -33,10 +33,12 @@
 	height: 40px;
 	line-height: 30px;
 	text-align: center;
+	background-color: transparent;
 
 	&:hover,
 	&:focus {
 		border: 1px solid $color_white;
 		color: $color_white;
+		background-color: rgba(0,0,0,0.2);
 	}
 }
