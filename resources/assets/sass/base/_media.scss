@@ -1,0 +1,143 @@
+
+// -----------------------------------------------------------------------------
+//
+// Embeds
+//
+// -----------------------------------------------------------------------------
+
+// Embeds
+.wp-embed-wrap {
+
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Media: Images
+ * ----------------------------------------------------------------------------- */
+
+img {
+	line-height: 0;
+	width: auto;
+	height: auto;
+
+	.d-content & {
+		margin-bottom: $d_spacer_m;
+		margin-top: $d_spacer_m;
+	}
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Media: Wrapper
+ * ----------------------------------------------------------------------------- */
+
+.wp-image {
+	width: auto !important;
+	max-width: none;
+	margin: 0 auto;
+}
+
+.wp-image--no-caption {
+
+}
+
+.wp-image--caption {
+
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Media: Image Captions
+ * ----------------------------------------------------------------------------- */
+
+.wp-caption-text {
+	max-width: 100%;
+	margin: $d_spacer_sm 0 0;
+	color: $color_grey_dark;
+	font-size: 13px;
+
+	@include g-state(medium) {
+		font-size: 15px;
+	}
+}
+
+// Caption: Wrapper
+.wp-caption {
+
+	/*
+	margin: 30px auto;
+	width: auto;
+
+	@include g-state(medium) {
+		margin: 55px 0;
+	}
+
+	img {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+	*/
+}
+
+// Caption: Caption
+.wp-caption-text {
+	/*
+	margin: 0 auto;
+	padding-top: 10px;
+	*/
+}
+
+/* -----------------------------------------------------------------------------
+ * Media: Alignments
+ * ----------------------------------------------------------------------------- */
+
+.aligncenter,
+.alignnone {
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
+}
+
+.alignleft,
+.alignright {
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-top: $d_spacer_sm;
+		max-width: 30%;
+	}
+
+	/**
+	 * CASE: Left or right aligned captioned images shouldn't be centered inside the container.
+	 */
+	&.wp-image--caption {
+
+		img {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
+
+// Media Alignments
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignleft {
+	@include g-state(medium) {
+		float: left;
+		max-width: 41%;
+		margin-right: $d_spacer_lrg;
+	}
+}
+
+.alignright {
+	@include g-state(medium) {
+		float: right;
+		max-width: 41%;
+		margin-left: $d_spacer_lrg;
+	}
+}

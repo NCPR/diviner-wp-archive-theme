@@ -11,11 +11,7 @@
 ?>
 
 <div class="main__inner">
-
-	<section class="section">
-		<div id="browse-app" class="browse-app"></div>
-	</section>
-
+	<div id="browse-app" class="browse-app"></div>
 </div>
 
 <?php get_footer(); ?>

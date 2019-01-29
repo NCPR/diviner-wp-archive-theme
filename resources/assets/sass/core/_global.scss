@@ -30,3 +30,33 @@ body {
 	overflow-y: scroll;
 	width: 100%;
 }
+
+
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Font & Color
+ *
+ * ----------------------------------------------------------------------------- */
+
+body,
+form,
+button,
+input,
+select,
+textarea {
+	font: $t_font_weight_normal normal 100%/$t_line_height_m $t_font_sanserif;
+	color: $color_text;
+}
+
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Text Selection
+ *
+ * ----------------------------------------------------------------------------- */
+
+::selection {
+	background: $color_selection_bg;
+	color: $color_selection_text;
+	text-shadow: none;
+}
+

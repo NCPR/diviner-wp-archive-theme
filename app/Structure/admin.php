@@ -5,6 +5,7 @@ namespace Tonik\Theme\App\Structure;
 use \Pimple\Container;
 use \Diviner\Admin\Settings;
 use \Diviner\Admin\Customizer;
+use \Diviner\Admin\ClassicEditor;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
 
@@ -17,4 +18,9 @@ $container[ 'admin.customizer' ] = function ( Container $container ) {
 	return new Customizer();
 };
 $container[ 'admin.customizer' ]->hooks();
+
+$container[ 'admin.classic_editor' ] = function ( Container $container ) {
+	return new ClassicEditor();
+};
+$container[ 'admin.classic_editor' ]->hooks();
 

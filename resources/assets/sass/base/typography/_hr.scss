@@ -1,0 +1,15 @@
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid $color_border;
+	padding: 0;
+
+	.d-content & {
+		margin: $d_spacer_lrg auto;
+
+		@include g-state(medium) {
+			margin: $d_spacer_xlrg auto;
+		}
+	}
+}

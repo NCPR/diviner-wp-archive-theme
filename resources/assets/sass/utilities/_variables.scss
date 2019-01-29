@@ -6,6 +6,7 @@ $color_grey_light: #dddddd;
 $color_grey: #999999;
 $color_grey_dark: #777777;
 $color_grey_darker: #333333;
+$color_grey_darkerer: #111111;
 $color_blue: #5c69ff;
 $color_black: #000;
 
@@ -20,11 +21,14 @@ $color_headers: $color_primary;
 $color_border: $color_grey;
 $color_border_focus: $color_blue;
 
-$color_text: $color_grey_dark;
+$color_text: $color_grey_darker;
 $color_text_inverse: $color_grey_light;
 
 $color_links_inverse: $color_primary;
 $color_links_inverse_hover: $color_black;
+
+$color_selection_bg: $color_blue;
+$color_selection_text: $color_white;
 
 
 // Media Queries
@@ -58,12 +62,12 @@ $g_gaps_lrg: $d_spacer_m;
 
 // Fonts
 // =================================================
-$t_font_opensans: "Open Sans", Helvetica, Arial, sans-serif;
-$t_font_noticia: "Noticia", Times New Roman, serif;
+$t_font_sanserif: Helvetica, Arial, sans-serif;
+$t_font_serif: Times New Roman, serif;
 $t_font_helvetica: Helvetica, Arial, serif;
-$t_font_display: $t_font_opensans;
-$t_font_body: $t_font_noticia;
-$t_font_interface: $t_font_opensans;
+$t_font_display: $t_font_sanserif;
+$t_font_body: $t_font_serif;
+$t_font_interface: $t_font_sanserif;
 $t_font_icons: 'icomoon' !important;
 $t_font_headers: $t_font_helvetica;
 
@@ -90,6 +94,8 @@ $t_line_height_even: 1;
 $t_line_height_sm: 1.1;
 $t_line_height_m: 1.2;
 $t_line_height_lrg: 1.4;
+$t_line_height_xlrg: 1.6;
+$t_line_height_xxlrg: 1.8;
 
 
 // Forms

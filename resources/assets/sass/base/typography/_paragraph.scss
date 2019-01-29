@@ -5,6 +5,10 @@
 // -----------------------------------------------------------------------------
 
 p {
+	@include body-text;
+
+	margin-bottom: 1.6em;
+
 	.d-content & {
 		color: $color_text;
 	}
@@ -12,6 +16,4 @@ p {
 	.d-content--inverse & {
 		color: $color_text_inverse;
 	}
-
-	margin-bottom: $d_spacer_sm;
 }

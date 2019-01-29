@@ -57,7 +57,34 @@ class General {
 		add_action( 'wp_enqueue_scripts', [$this, 'google_fonts'], 0, 0 );
 		add_action( 'theme/header', [$this, 'render_header']);
 		add_action( 'after_setup_theme', [$this, 'register_navigation_areas'] );
-		// add_filter( 'theme/single/sidebar/visibility', [$this, 'single_sidebar_visibility'], 1 );
+
+		add_filter('theme/sidebar/visibility', [$this, 'single_sidebar_visibility']);
+	}
+
+	/**
+	 * Hides sidebar on index template on specific views.
+	 *
+	 * @see apply_filters('theme/sidebar/visibility')
+	 */
+	function single_sidebar_visibility($status)
+	{
+		if (is_404() || is_page()) {
+			return false;
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Wrapper class is the container around the content area. Add sidebar or other decorator as necessary
+	 */
+	static function get_wrapper_classes() {
+		$classes = [ 'wrapper' ];
+		$show_sidebar = apply_filters('theme/sidebar/visibility', true);
+		if ($show_sidebar) {
+			$classes[] = 'wrapper--with-sidebar';
+		}
+		return implode ( ' ' , $classes );
 	}
 
 	/**
@@ -114,9 +141,6 @@ class General {
 		]);
 	}
 
-	function single_sidebar_visibility( $visibility ) {
-		return $visibility;
-	}
 
 	static public function the_footer_menu() {
 		return sprintf(

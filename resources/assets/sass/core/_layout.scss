@@ -19,9 +19,32 @@
 	@include g-state(medium) {
 		padding: 0 $g_gaps_lrg;
 	}
+
+
+}
+
+.wrapper__inner {
+	padding: $d_spacer_m 0;
+
+	@include g-state(medium) {
+		padding: $d_spacer_lrg 0;
+	}
+
+	.wrapper--with-sidebar & {
+		@include g-state(medium) {
+			display: flex;
+			width: 100%;
+
+		}
+	}
+
+	.wrapper--with-sidebar & > *:first-child {
+		flex: 1 0 auto;
+	}
 }
 
 /* for sidebar */
+/*
 .wrapper__inner {
 	@include g-state(medium) {
 		display: flex;
@@ -43,6 +66,7 @@
 		}
 	}
 }
+*/
 
 .wrapper--full {
 	max-width: none;

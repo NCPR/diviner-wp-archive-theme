@@ -228,18 +228,31 @@ class Customizer {
 				background-color: <?php echo $color_btn_link; ?>;
 			}
 
+			.d-content .btn:hover,
+			.d-content .btn:focus {
+				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+			}
+
 			.d-content h1,
 			.d-content h2,
 			.d-content h3,
 			.d-content h4,
-			.d-content h5 {
+			.d-content h5,
+			.d-content h6,
+			.single__header .h1,
+			.single__header .h2,
+			.single__header .h3,
+			.single__header .h4,
+			.single__header .h5,
+			.single__header .h6 {
 				font-family: '<?php echo $header_font_value; ?>';
 			}
 			.sidebar h1,
 			.sidebar h2,
 			.sidebar h3,
 			.sidebar h4,
-			.sidebar h5 {
+			.sidebar h5,
+			.sidebar h6 {
 				font-family: '<?php echo $header_font_value; ?>';
 			}
 			.primary-menu a {

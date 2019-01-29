@@ -1,14 +1,7 @@
 <?php
-
-use \Diviner\Post_Types\Diviner_Field\Diviner_Field;
-use Diviner\Post_Types\Diviner_Field\PostMeta;
-use Diviner\Post_Types\Archive_Item\Post_Meta;
-use Diviner\CarbonFields\Helper;
-
+use \Diviner\Theme\General;
 ?>
-
 <?php get_header(); ?>
-
 <?php
 /**
  * Functions hooked into `theme/header` action.
@@ -17,32 +10,30 @@ use Diviner\CarbonFields\Helper;
 do_action('theme/header');
 ?>
 
-
-<section class="section">
-    <div class="wrapper">
+<div class="main__inner">
+	<div class="<?php echo General::get_wrapper_classes(); ?>">
 
 		<div class="wrapper__inner">
 
-            <?php if (have_posts()) : ?>
-                <?php while (have_posts()) : the_post() ?>
-
+			<?php if (have_posts()) : ?>
+				<?php while (have_posts()) : the_post() ?>
 
 					<?php
 					// Helper::get_real_field_name(Post_Meta::FIELD_TYPE )
 					// echo carbon_get_the_post_meta( Post_Meta::FIELD_TYPE );
 					?>
 
-                    <?php
-                        /**
-                         * Functions hooked into `theme/single/content` action.
-                         *
-                         * @hooked Tonik\Theme\App\Structure\render_post_content - 10
-                         */
-                        do_action('theme/single/content');
-                    ?>
+					<?php
+						/**
+						 * Functions hooked into `theme/single/content` action.
+						 *
+						 * @hooked Tonik\Theme\App\Structure\render_post_content - 10
+						 */
+						do_action('theme/single/content');
+					?>
 
-                <?php endwhile; ?>
-            <?php endif; ?>
+				<?php endwhile; ?>
+			<?php endif; ?>
 
 			<div>
 
@@ -80,15 +71,12 @@ do_action('theme/header');
 				wp_reset_postdata();
 				*/
 
-
-
-
 				?>
 
 
 			</div>
 
-			<?php if (apply_filters('theme/single/sidebar/visibility', false)) : ?>
+			<?php if (apply_filters('theme/sidebar/visibility', false)) : ?>
 				<?php
 					/**
 					 * Functions hooked into `theme/single/sidebar` action.
@@ -101,7 +89,7 @@ do_action('theme/header');
 
 		</div>
 
-    </div>
-</section>
+	</div>
+</div>
 
 <?php get_footer(); ?>

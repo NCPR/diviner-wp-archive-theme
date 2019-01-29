@@ -4,12 +4,12 @@
  * @description Kicks in any third party plugins that operate on a sitewide basis.
  */
 
-import { trigger } from '../../utils/events';
+import { triggerEvent } from '../../utils/events';
 
 const resize = () => {
 	// code for resize events can go here
 
-	trigger({ event: 'diviner/resize', native: false });
+	triggerEvent({ event: 'diviner/resize', native: false });
 };
 
 export default resize;

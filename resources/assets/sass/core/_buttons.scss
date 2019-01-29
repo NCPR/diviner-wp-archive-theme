@@ -17,8 +17,11 @@
 	letter-spacing: .0275em;
 	padding: 0;
 	text-transform: uppercase;
-	font-size: 13px;
+	font-size: 16px;
 
+	@include g-state(medium) {
+		font-size: 20px;
+	}
 }
 
 // -----------------------------------------------------------------------------
@@ -50,7 +53,7 @@
 }
 
 // Button Size: Small
-.btn-s,
+.btn--s,
 %button-small {
 	font-size: 13px;
 
@@ -60,7 +63,7 @@
 }
 
 // Button Size: Large
-.btn-lg,
+.btn--lg,
 %button-large {
 	font-size: 1.1em;
 	padding: .95em 1.5em;
@@ -70,13 +73,13 @@
 	}
 }
 
-.btn-full {
+.btn--full {
 	width: 100%;
 	text-align: center;
 	margin: 0 0 9px;
 }
 
-.btn-fullmobile {
+.btn--fullmobile {
 	width: 100%;
 	text-align: center;
 	margin: 9px 0;
