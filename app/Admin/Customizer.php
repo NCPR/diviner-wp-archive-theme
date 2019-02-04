@@ -191,8 +191,8 @@ class Customizer {
 
 		?>
 		<style type="text/css">
-			.header {
-				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER ); ?>;
+			body .header {
+				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT ); ?>;
 			}
 
 			.primary-menu .menu a,
@@ -208,17 +208,18 @@ class Customizer {
 			@media screen and (min-width: 960px) {
 				.primary-menu .menu a,
 				.primary-menu .menu a:visited {
-					color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_MENU); ?>;
+					color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_MENU, static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_DEFAULT ); ?>;
 					background-color: transparent;
 				}
 				.primary-menu .menu a:focus,
 				.primary-menu .menu a:hover {
-					color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER); ?>;
+					color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER, static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER_DEFAULT ); ?>;
 					background-color: transparent;
 				}
 			}
-			.footer {
-				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER); ?>;
+
+			body .footer {
+				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER, static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT ); ?>;
 			}
 
 			.d-content a {
@@ -245,7 +246,7 @@ class Customizer {
 			.single__header .h4,
 			.single__header .h5,
 			.single__header .h6 {
-				font-family: '<?php echo $header_font_value; ?>';
+				font-family: "<?php echo $header_font_value; ?>";
 			}
 			.sidebar h1,
 			.sidebar h2,
@@ -253,23 +254,28 @@ class Customizer {
 			.sidebar h4,
 			.sidebar h5,
 			.sidebar h6 {
-				font-family: '<?php echo $header_font_value; ?>';
+				font-family: "<?php echo $header_font_value; ?>";
 			}
 			.primary-menu a {
-				font-family: '<?php echo $header_font_value; ?>' !important;
+				font-family: "<?php echo $header_font_value; ?>" !important;
 			}
-			body,
+
+			* {
+				font-family: "<?php echo $body_font_value; ?>";
+			}
+
 			.d-content {
-				font-family: '<?php echo $body_font_value; ?>';
+				font-family: "<?php echo $body_font_value; ?>";
 			}
+
 			.footer {
-				font-family: '<?php echo $body_font_value; ?>';
+				font-family: "<?php echo $body_font_value; ?>";
 			}
 			.<?php echo static::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
-				font-family: '<?php echo $header_font_value; ?>' !important;
+				font-family: "<?php echo $header_font_value; ?>" !important;
 			}
 			.<?php echo static::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
-				font-family: '<?php echo $body_font_value; ?>' !important;
+				font-family: "<?php echo $body_font_value; ?>" !important;
 			}
 
 			.browse-app h1,
@@ -278,7 +284,7 @@ class Customizer {
 			.browse-app h4,
 			.browse-app h5,
 			.browse-app h6 {
-				font-family: '<?php echo $header_font_value; ?>';
+				font-family: "<?php echo $header_font_value; ?>";
 			}
 
 		</style>

@@ -19,11 +19,6 @@ img {
 	line-height: 0;
 	width: auto;
 	height: auto;
-
-	.d-content & {
-		margin-bottom: $d_spacer_m;
-		margin-top: $d_spacer_m;
-	}
 }
 
 
@@ -37,18 +32,15 @@ img {
 	margin: 0 auto;
 }
 
-.wp-image--no-caption {
-
-}
-
-.wp-image--caption {
-
-}
-
-
 /* -----------------------------------------------------------------------------
  * Media: Image Captions
  * ----------------------------------------------------------------------------- */
+
+wp-caption {
+	img {
+		margin-bottom: 0;
+	}
+}
 
 .wp-caption-text {
 	max-width: 100%;
@@ -59,32 +51,6 @@ img {
 	@include g-state(medium) {
 		font-size: 15px;
 	}
-}
-
-// Caption: Wrapper
-.wp-caption {
-
-	/*
-	margin: 30px auto;
-	width: auto;
-
-	@include g-state(medium) {
-		margin: 55px 0;
-	}
-
-	img {
-		margin-bottom: 0;
-		margin-top: 0;
-	}
-	*/
-}
-
-// Caption: Caption
-.wp-caption-text {
-	/*
-	margin: 0 auto;
-	padding-top: 10px;
-	*/
 }
 
 /* -----------------------------------------------------------------------------
@@ -103,7 +69,6 @@ img {
 	margin-bottom: $d_spacer_m;
 
 	@include g-state(medium) {
-		margin-top: $d_spacer_sm;
 		max-width: 30%;
 	}
 
@@ -118,7 +83,6 @@ img {
 		}
 	}
 }
-
 
 // Media Alignments
 .aligncenter {

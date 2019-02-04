@@ -13,7 +13,7 @@ namespace Tonik\Theme\App\Structure;
 |
 */
 
-use function Tonik\Theme\App\config;
+use \Diviner\Theme\General;
 
 /**
  * Registers the widget areas.
@@ -23,11 +23,11 @@ use function Tonik\Theme\App\config;
 function register_widget_areas()
 {
     register_sidebar([
-        'id' => 'sidebar',
-        'name' => __('Sidebar', 'ncpr-diviner'),
-        'description' => __('Website sidebar', 'ncpr-diviner'),
+        'id'           => General::SIDEBAR_RIGHT_ID,
+        'name'         => __('Sidebar', 'ncpr-diviner'),
+        'description'  => __('Website sidebar', 'ncpr-diviner'),
         'before_title' => '<h5>',
-        'after_title' => '</h5>',
+        'after_title'  => '</h5>',
     ]);
 }
 add_action('widgets_init', 'Tonik\Theme\App\Structure\register_widget_areas');

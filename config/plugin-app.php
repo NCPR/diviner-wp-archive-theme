@@ -96,6 +96,7 @@ return [
 		'Post_Types/Diviner_Field/Types/CPT_Field.php',
 		'Post_Types/Diviner_Field/Types/Related_Field.php',
 		'Theme/General.php',
+		'Theme/Image.php',
 		'Http/assets.php',
 		'Http/ajaxes.php',
 		'Setup/actions.php',

@@ -1,11 +1,14 @@
-<article class="single article">
+<article class="single single--post">
 
 	<header class="single__header">
 		<h1 class="single__header-title h1"><?php the_title(); ?></h1>
 
-		<time>
-			<small><?php the_date(); ?></small>
-		</time>
+		<div class="single__header-meta">
+			<time class="single__header-time">
+				<?php the_date(); ?>
+			</time>
+		</div>
+
 	</header>
 
 	<div class="d-content">

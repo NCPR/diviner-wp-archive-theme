@@ -44,7 +44,11 @@ button,
 input,
 select,
 textarea {
-	font: $t_font_weight_normal normal 100%/$t_line_height_m $t_font_sanserif;
+	font-family: $t_font_sanserif;
+	font-weight: $t_font_weight_normal;
+	line-height: $t_line_height_m;
+	font-size: 100%;
+	font-style: normal;
 	color: $color_text;
 }
 

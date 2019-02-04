@@ -6,7 +6,6 @@ use function Tonik\Theme\App\template;
 
 use Diviner\Admin\Customizer;
 
-
 /**
  * Class Settings
  *
@@ -52,10 +51,14 @@ class General {
 	const FONTS_DEFAULT_HEADER = 'Fjalla One:400';
 	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400italic,700italic';
 
+	const SIDEBAR_RIGHT_ID = 'sidebar';
+
 	public function hooks() {
 		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
 		add_action( 'wp_enqueue_scripts', [$this, 'google_fonts'], 0, 0 );
+		// add_action( 'wp_enqueue_scripts', [$this, 'lazy-load'], 0, 0 );
 		add_action( 'theme/header', [$this, 'render_header']);
+		add_action( 'theme/header/feature-image', [$this, 'render_header_feature_image']);
 		add_action( 'after_setup_theme', [$this, 'register_navigation_areas'] );
 
 		add_filter('theme/sidebar/visibility', [$this, 'single_sidebar_visibility']);
@@ -69,6 +72,10 @@ class General {
 	function single_sidebar_visibility($status)
 	{
 		if (is_404() || is_page()) {
+			return false;
+		}
+
+		if ( !is_active_sidebar( static::SIDEBAR_RIGHT_ID ) ) {
 			return false;
 		}
 
@@ -114,14 +121,23 @@ class General {
 
 		return '#' . implode($hexcolor);
 	}
+	/**
+	 * Renders feature image subheader .
+	 *
+	 * @see resources/templates/index.tpl.php
+	 */
+	function render_header_feature_image() {
+		if ( is_single() || is_page() && has_post_thumbnail() ) {
+			template('partials/subheader/default', []);
+		}
+	}
 
 	/**
 	 * Renders index page header.
 	 *
 	 * @see resources/templates/index.tpl.php
 	 */
-	function render_header()
-	{
+	function render_header() {
 		template('partials/header', [
 			'brand' => static::the_header_brand(),
 			'lead'  => get_bloginfo( 'description' ),
@@ -134,8 +150,7 @@ class General {
 	 *
 	 * @see resources/templates/index.tpl.php
 	 */
-	function render_footer()
-	{
+	function render_footer() {
 		template('layout/footer', [
 			'footer_menu' => static::the_footer_menu(),
 		]);

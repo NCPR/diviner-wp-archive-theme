@@ -11,7 +11,12 @@ do_action('theme/header');
 ?>
 <div class="main__inner">
 
+	<?php
+	do_action('theme/header/feature-image');
+	?>
+
 	<div class="<?php echo General::get_wrapper_classes(); ?>">
+
 		<div class="wrapper__inner">
 
 			<?php if (have_posts()) : ?>

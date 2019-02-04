@@ -1,6 +1,9 @@
 .sidebar {
+	width: 100%;
+
 	@include g-state(medium) {
 		margin-left: $d_spacer_lrg;
-		max-width: 300px;
+		max-width: 250px;
+		width: 250px;
 	}
 }

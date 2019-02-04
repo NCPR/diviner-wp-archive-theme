@@ -1,4 +1,4 @@
-<article class="single page">
+<article class="single single--page">
 
 	<header class="single__header">
 		<h1 class="single__header-title h1"><?php the_title(); ?></h1>
