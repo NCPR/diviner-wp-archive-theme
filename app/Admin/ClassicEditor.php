@@ -21,11 +21,6 @@ class ClassicEditor {
 	 * Visual Editor Styles
 	 */
 	public function visual_editor_styles() {
-
-		// wp_register_style( 'editor-styles', get_template_directory_uri().'/public/css/editor-styles.css', false, '1.0.0' );
-		// wp_enqueue_style( 'editor-styles' );
-
-
 		$css_dir    = trailingslashit( get_template_directory_uri() ) . 'public/css/';
 		$editor_css = 'editor-styles.css';
 
@@ -36,9 +31,11 @@ class ClassicEditor {
 		}
 
 		add_editor_style( $css_dir . $editor_css );
-
 	}
 
+	/**
+	 * Visual Editor Custom Styles
+	 */
 	function add_editor_customizer_styles( $mceInit ) {
 		$styles = Customizer::get_customize_content_css();
 		$styles = str_replace(PHP_EOL, '', trim($styles));
@@ -61,12 +58,18 @@ class ClassicEditor {
 
 	}
 
+	/**
+	 * Visual Editor Buttons
+	 */
 	public function mce_buttons( $buttons ) {
 		$tag_select = array_shift( $buttons );
 		array_unshift( $buttons, $tag_select, 'styleselect' );
 		return $buttons;
 	}
 
+	/**
+	 * Visual Editor Custom Styles
+	 */
 	public function visual_editor_styles_dropdown( $settings ) {
 		$style_formats = [
 			[
@@ -79,15 +82,5 @@ class ClassicEditor {
 		$settings[ 'style_formats' ] = json_encode( $style_formats );
 		return $settings;
 	}
-
-
-	/*
-	 * add_filter( 'mce_buttons', function ( $settings ) use ( $container ) {
-			return $container[ 'theme.resources.editor_formats' ]->mce_buttons( $settings );
-		}, 10, 1 );
-		add_filter( 'tiny_mce_before_init', function ( $settings ) use ( $container ) {
-			return $container[ 'theme.resources.editor_formats' ]->visual_editor_styles_dropdown( $settings );
-		}, 10, 1 );
-	 */
 
 }
