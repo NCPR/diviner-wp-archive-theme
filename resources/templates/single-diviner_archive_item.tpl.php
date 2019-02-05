@@ -20,7 +20,7 @@ do_action('theme/header');
 
 <section class="section">
     <div class="wrapper">
-        <div class="content">
+        <div class="d-content">
 
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post() ?>

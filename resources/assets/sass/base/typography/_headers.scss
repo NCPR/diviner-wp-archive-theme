@@ -1,38 +1,11 @@
-
-/* Default header styles */
-
-%headers {
-	font-weight: 500;
-	margin-top: $d_spacer_m;
-	margin-bottom: $d_spacer_sm;
-	line-height: 1.2;
-	font-family: $t_font_headers;
-	color: $color_headers;
-	text-transform: uppercase;
-
-	small {
-		font-size: 80%;
-		color: grey;
-		line-height: 0;
-	}
-
-	a & {
-		text-decoration: none;
-
-		&:hover,
-		&:focus {
-			color: $color_headers;
-			text-decoration: underline;
-		}
-	}
-}
+// -----------------------------------------------------------------------------
+//
+// Headers
+//
+// -----------------------------------------------------------------------------
 
 h1, h2, h3, h4, h5, h6 {
 	@extend %headers;
-
-	.widget & {
-		color: $color_white;
-	}
 }
 
 h1,

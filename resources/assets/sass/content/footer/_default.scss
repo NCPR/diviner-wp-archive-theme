@@ -1,0 +1,36 @@
+.footer {
+	padding: $d_spacer_m 0;
+	background-color: $color_grey_dark;
+
+	a {
+		color: $color_white;
+		text-decoration: none;
+		font-size: 18px;
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+
+	p {
+		color: $color_white;
+	}
+}
+
+.footer-menu__wrap {
+	margin-bottom: $d_spacer_m;
+	display: block;
+}
+
+.footer-menu {
+	ul {
+		margin: 0;
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	li {
+		margin-right: $d_spacer_m;
+	}
+}

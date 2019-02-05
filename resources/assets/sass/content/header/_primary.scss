@@ -62,13 +62,13 @@
 		margin-top: 0;
 		padding-top: 0;
 
-		.menu > li > a {
+		.menu > ul > li > a {
 			padding: 0 10px;
 			height: 30px;
 			line-height: 30px;
 		}
 
-		.menu > li + li {
+		.menu > ul > li + li {
 			margin-left: $d_spacer_sm;
 		}
 	}
@@ -76,9 +76,31 @@
 	a {
 		@extend %button;
 
+		transition: $t_transition;
+
 		.menu--opened & {
 			display: block;
 		}
+
+		@include g-state(full) {
+			background-color: transparent;
+			border: none;
+			color: $color_grey;
+			font-family: $t_font_oswald;
+			font-size: 20px;
+			font-weight: $t_font_weight_normal;
+
+			&:visited {
+				color: $color_grey;
+			}
+
+			&:hover,
+			&:focus {
+				color: $color_grey_darker;
+				background-color: transparent;
+			}
+		}
+
 	}
 }
 

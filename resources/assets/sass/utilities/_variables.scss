@@ -16,6 +16,10 @@ $color_headers: $color_primary;
 $color_border: $color_grey;
 $color_border_focus: $color_blue;
 
+$color_text: $color_grey_dark;
+$color_text_inverse: $color_grey_light;
+
+
 // Media Queries
 // =================================================
 $mq_xxsmall: 375px;
@@ -42,7 +46,7 @@ $d_spacer_wpadmin_desktop : 32px;
 // =================================================
 $g_max_width: 960px;
 $g_gaps_sm: $d_spacer_m;
-$g_gaps_lrg: $d_spacer_lrg;
+$g_gaps_lrg: $d_spacer_m;
 
 
 // Fonts
@@ -87,3 +91,9 @@ $t_line_height_lrg: 1.4;
 $f_color_border: $color_border;
 $f_color_border_focus: $color_border_focus;
 $f_font_size_mobile: $t_font_size_m;
+
+
+// Transitions
+// =================================================
+
+$t_transition: all 0.15s ease-in-out;;

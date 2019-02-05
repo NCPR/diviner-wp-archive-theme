@@ -1,11 +1,15 @@
 
 .wrapper {
 	width: 100%;
-	padding: 0 $g_gaps_sm;
+	padding: 0 $g_gaps_sm $d_spacer_m;
 	max-width: $g_max_width;
 	margin: 0 auto;
 
 	@include g-state(medium) {
 		padding: 0 $g_gaps_lrg;
 	}
+}
+
+.wrapper--full {
+	max-width: none;
 }

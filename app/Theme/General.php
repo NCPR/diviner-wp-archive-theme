@@ -16,9 +16,21 @@ class General {
 
 	public function hooks() {
 		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
-		add_action('theme/header', [$this, 'render_header']);
+		add_action( 'theme/header', [$this, 'render_header']);
+		add_action( 'after_setup_theme', [$this, 'register_navigation_areas'] );
 	}
 
+	/**
+	 * Registers navigation areas.
+	 *
+	 * @return void
+	 */
+	function register_navigation_areas() {
+		register_nav_menus([
+			'primary' => __('Primary', 'ncpr-diviner'),
+			'footer'  => __('Footer', 'ncpr-diviner'),
+		]);
+	}
 
 	/**
 	 * Renders index page header.
@@ -34,6 +46,29 @@ class General {
 		]);
 	}
 
+	/**
+	 * Renders index page footer.
+	 *
+	 * @see resources/templates/index.tpl.php
+	 */
+	function render_footer()
+	{
+		template('layout/footer', [
+			'footer_menu' => static::the_footer_menu(),
+		]);
+	}
+
+	static public function the_footer_menu() {
+		return sprintf(
+			'<div class="footer-menu__wrap"><nav class="footer-menu"><div class="a11y-visual-hide">%s</div>%s</nav></div>',
+			__( 'Footer Navigation', 'ncpr-diviner'),
+			wp_nav_menu( [
+				'theme_location' => 'footer',
+				'echo' => false,
+				'depth' => 1
+			] )
+		);
+	}
 
 	static public function the_primary_menu() {
 		return sprintf(
@@ -43,9 +78,9 @@ class General {
 			wp_nav_menu( [
 				'theme_location' => 'primary',
 				'echo' => false,
+				'depth' => 2
 			] )
 		);
-
 	}
 
 	static public function the_header_brand() {
@@ -69,10 +104,66 @@ class General {
 		return $brand;
 	}
 
+	/**
+	 * Renders the social module.
+	 * Todo: Consolidate the code to output each social item... get the instance from the container?
+	 *
+	 * @see resources/templates/index.tpl.php
+	 */
+	static function the_social_module () {
+		$social_facebook = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_FACEBOOK);
+		$social_instagram = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_INSTAGRAM);
+		$social_twitter = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_TWITTER);
+
+
+		if ( !empty( $social_facebook ) || !empty( $social_instagram ) || !empty( $social_twitter ) ) {
+			$social_links = [];
+			if ( !empty( $social_facebook ) ) {
+				$social_links[] = sprintf(
+					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-facebook-f"></span></a></li>',
+					esc_attr( $social_facebook ),
+					__( 'Facebook Link', 'ncpr-diviner' )
+				);
+			}
+			if ( !empty( $social_instagram ) ) {
+				$social_links[] = sprintf(
+					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-instagram"></span></a></li>',
+					esc_attr( $social_instagram ),
+					__( 'Instagram Link', 'ncpr-diviner' )
+				);
+			}
+			if ( !empty( $social_twitter ) ) {
+				$social_links[] = sprintf(
+					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-twitter"></span></a></li>',
+					esc_attr( $social_twitter ),
+					__( 'Twitter Link', 'ncpr-diviner' )
+				);
+			}
+			return sprintf(
+				'<ul class="social-links">%s</ul>',
+				implode ( '' , $social_links )
+			);
+		}
+
+		return '';
+	}
+
+	static function the_footer_copy () {
+		$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_FOOTER_COPY);
+		if ( !empty( $copy ) ) {
+			return sprintf(
+				'<div class="footer__copy">%s</div>',
+				$copy
+			);
+		}
+		return '';
+	}
+
 	public function awesome_fonts() {
 		?>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/regular.css" integrity="sha384-l+NpTtA08hNNeMp0aMBg/cqPh507w3OvQSRoGnHcVoDCS9OtgxqgR7u8mLQv8poF" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/brands.css" integrity="sha384-1KLgFVb/gHrlDGLFPgMbeedi6tQBLcWvyNUN+YKXbD7ZFbjX6BLpMDf0PJ32XJfX" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" integrity="sha384-WK8BzK0mpgOdhCxq86nInFqSWLzR5UAsNg0MGX9aDaIIrFWQ38dGdhwnNCAoXFxL" crossorigin="anonymous">
 		<?php
 	}
