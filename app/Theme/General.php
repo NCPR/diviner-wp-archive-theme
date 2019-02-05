@@ -59,7 +59,7 @@ class General {
 		// add_action( 'wp_enqueue_scripts', [$this, 'lazy-load'], 0, 0 );
 		add_action( 'theme/header', [$this, 'render_header']);
 		add_action( 'theme/header/feature-image', [$this, 'render_header_feature_image']);
-		add_action( 'after_setup_theme', [$this, 'register_navigation_areas'] );
+		add_action( 'after_setup_theme', [$this, 'after_setup_theme'] );
 
 		add_filter('theme/sidebar/visibility', [$this, 'single_sidebar_visibility']);
 	}
@@ -92,6 +92,18 @@ class General {
 			$classes[] = 'wrapper--with-sidebar';
 		}
 		return implode ( ' ' , $classes );
+	}
+
+	/**
+	 * After theme set up
+	 *
+	 * @return void
+	 */
+	function after_setup_theme() {
+
+		// add_editor_style( 'public/css/editor-styles.css' );
+
+		$this->register_navigation_areas();
 	}
 
 	/**

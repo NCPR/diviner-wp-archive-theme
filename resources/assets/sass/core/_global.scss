@@ -29,6 +29,10 @@ body {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 100%;
+	-webkit-font-smoothing: antialiased;
+	hyphens: auto;
+	text-rendering: optimizeLegibility;
+	vertical-align: baseline;
 }
 
 

@@ -32,7 +32,6 @@ function diviner_admin_style() {
 	wp_register_style( 'admin-styles', get_template_directory_uri().'/public/css/admin.css', false, '1.0.0' );
 	wp_enqueue_style( 'admin-styles' );
 
-	// wp_enqueue_style('admin-styles', get_template_directory_uri().'/public/css/admin.css');
 }
 add_action('admin_enqueue_scripts', 'Tonik\Theme\App\Setup\diviner_admin_style');
 

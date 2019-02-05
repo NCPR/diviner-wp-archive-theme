@@ -2,9 +2,6 @@
 
 namespace Diviner\Admin;
 
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
-
 use Diviner\Theme\General;
 
 /**
@@ -179,16 +176,62 @@ class Customizer {
 		}
 	}
 
+	static public function get_customize_content_css() {
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
+		$header_font_value = General::FONTS[$header_font_key];
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
+		$body_font_value = General::FONTS[$body_font_key];
+		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
+
+		ob_start();
+		?>
+
+		.d-content a {
+			color: <?php echo $color_btn_link; ?>;
+		}
+		.d-content .btn {
+			background-color: <?php echo $color_btn_link; ?>;
+		}
+
+		.d-content .btn:hover,
+		.d-content .btn:focus {
+			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+		}
+
+		.d-content h1,
+		.d-content h2,
+		.d-content h3,
+		.d-content h4,
+		.d-content h5,
+		.d-content h6 {
+			font-family: '<?php echo $header_font_value; ?>';
+		}
+
+		.d-content {
+			font-family: '<?php echo $body_font_value; ?>';
+		}
+
+		.footer {
+			font-family: '<?php echo $body_font_value; ?>';
+		}
+		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
+			font-family: '<?php echo $header_font_value; ?>' !important;
+		}
+		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
+			font-family: '<?php echo $body_font_value; ?>' !important;
+		}
+		<?php
+		$styles = ob_get_clean();
+		return $styles;
+	}
+
 	public function customize_css()
 	{
 		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
 		$header_font_value = General::FONTS[$header_font_key];
-
 		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
 		$body_font_value = General::FONTS[$body_font_key];
-
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
-
 		?>
 		<style type="text/css">
 			body .header {
@@ -222,24 +265,6 @@ class Customizer {
 				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER, static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT ); ?>;
 			}
 
-			.d-content a {
-				color: <?php echo $color_btn_link; ?>;
-			}
-			.d-content .btn {
-				background-color: <?php echo $color_btn_link; ?>;
-			}
-
-			.d-content .btn:hover,
-			.d-content .btn:focus {
-				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
-			}
-
-			.d-content h1,
-			.d-content h2,
-			.d-content h3,
-			.d-content h4,
-			.d-content h5,
-			.d-content h6,
 			.single__header .h1,
 			.single__header .h2,
 			.single__header .h3,
@@ -264,18 +289,8 @@ class Customizer {
 				font-family: "<?php echo $body_font_value; ?>";
 			}
 
-			.d-content {
-				font-family: "<?php echo $body_font_value; ?>";
-			}
-
 			.footer {
 				font-family: "<?php echo $body_font_value; ?>";
-			}
-			.<?php echo static::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
-				font-family: "<?php echo $header_font_value; ?>" !important;
-			}
-			.<?php echo static::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
-				font-family: "<?php echo $body_font_value; ?>" !important;
 			}
 
 			.browse-app h1,
@@ -286,7 +301,8 @@ class Customizer {
 			.browse-app h6 {
 				font-family: "<?php echo $header_font_value; ?>";
 			}
-
+			<?php // get d-content specific
+			echo static::get_customize_content_css(); ?>
 		</style>
 		<?php
 	}
