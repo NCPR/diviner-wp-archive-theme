@@ -5,6 +5,10 @@
 // -----------------------------------------------------------------------------
 
 p {
+	@include body-text;
+
+	margin-bottom: 1.6em;
+
 	.d-content & {
 		color: $color_text;
 	}

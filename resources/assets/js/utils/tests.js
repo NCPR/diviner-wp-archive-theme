@@ -1,29 +1,4 @@
 
-const isJson = (str) => {
-	try {
-		JSON.parse(str);
-	} catch (e) {
-		return false;
-	}
-
-	return true;
-};
-
-const canLocalStore = () => {
-	let mod;
-	let result = false;
-	try {
-		mod = new Date();
-		localStorage.setItem(mod, mod.toString());
-		result = localStorage.getItem(mod) === mod.toString();
-		localStorage.removeItem(mod);
-		return result;
-	} catch (_error) {
-		console.error('This browser doesn\'t support local storage or is not allowing writing to it.');
-		return result;
-	}
-};
-
 const android = /(android)/i.test(navigator.userAgent);
 const chrome = !!window.chrome;
 const firefox = typeof InstallTrigger !== 'undefined';
@@ -48,4 +23,4 @@ const browserTests = () => ({
 	os,
 });
 
-export { isJson, canLocalStore, browserTests };
+export { browserTests };

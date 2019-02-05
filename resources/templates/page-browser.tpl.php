@@ -10,9 +10,8 @@
     do_action('theme/header');
 ?>
 
-
-<section class="section">
-	<div id="browse-app"></div>
-</section>
+<div class="main__inner">
+	<div id="browse-app" class="browse-app"></div>
+</div>
 
 <?php get_footer(); ?>

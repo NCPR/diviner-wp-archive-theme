@@ -1,0 +1,14 @@
+
+.single {
+
+}
+
+.single--article {
+	padding: $d_spacer_m 0;
+
+	@include g-state(medium) {
+		padding: $d_spacer_lrg 0;
+	}
+}
+
+

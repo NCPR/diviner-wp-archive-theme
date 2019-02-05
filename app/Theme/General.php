@@ -4,6 +4,7 @@ namespace Diviner\Theme;
 
 use function Tonik\Theme\App\template;
 
+use Diviner\Admin\Customizer;
 
 /**
  * Class Settings
@@ -14,10 +15,95 @@ use function Tonik\Theme\App\template;
  */
 class General {
 
+	const FONTS = [
+		'Source Sans Pro:400,700,400italic,700italic' => 'Source Sans Pro',
+		'Open Sans:400italic,700italic,400,700' => 'Open Sans',
+		'Oswald:400,700' => 'Oswald',
+		'Playfair Display:400,700,400italic' => 'Playfair Display',
+		'Montserrat:400,700' => 'Montserrat',
+		'Raleway:400,700' => 'Raleway',
+		'Droid Sans:400,700' => 'Droid Sans',
+		'Lato:400,700,400italic,700italic' => 'Lato',
+		'Arvo:400,700,400italic,700italic' => 'Arvo',
+		'Lora:400,700,400italic,700italic' => 'Lora',
+		'Merriweather:400,300italic,300,400italic,700,700italic' => 'Merriweather',
+		'Oxygen:400,300,700' => 'Oxygen',
+		'PT Serif:400,700' => 'PT Serif',
+		'PT Sans:400,700,400italic,700italic' => 'PT Sans',
+		'PT Sans Narrow:400,700' => 'PT Sans Narrow',
+		'Cabin:400,700,400italic' => 'Cabin',
+		'Fjalla One:400' => 'Fjalla One',
+		'Francois One:400' => 'Francois One',
+		'Josefin Sans:400,300,600,700' => 'Josefin Sans',
+		'Libre Baskerville:400,400italic,700' => 'Libre Baskerville',
+		'Arimo:400,700,400italic,700italic' => 'Arimo',
+		'Ubuntu:400,700,400italic,700italic' => 'Ubuntu',
+		'Bitter:400,700,400italic' => 'Bitter',
+		'Droid Serif:400,700,400italic,700italic' => 'Droid Serif',
+		'Roboto:400,400italic,700,700italic' => 'Roboto',
+		'Open Sans Condensed:700,300italic,300' => 'Open Sans Condensed',
+		'Roboto Condensed:400italic,700italic,400,700' => 'Roboto Condensed',
+		'Roboto Slab:400,700' => 'Roboto Slab',
+		'Yanone Kaffeesatz:400,700' => 'Yanone Kaffeesatz',
+		'Rokkitt:400' => 'Rokkitt',
+	];
+
+	const FONTS_DEFAULT_HEADER = 'Fjalla One:400';
+	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400italic,700italic';
+
+	const SIDEBAR_RIGHT_ID = 'sidebar';
+
 	public function hooks() {
 		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
+		add_action( 'wp_enqueue_scripts', [$this, 'google_fonts'], 0, 0 );
+		// add_action( 'wp_enqueue_scripts', [$this, 'lazy-load'], 0, 0 );
 		add_action( 'theme/header', [$this, 'render_header']);
-		add_action( 'after_setup_theme', [$this, 'register_navigation_areas'] );
+		add_action( 'theme/header/feature-image', [$this, 'render_header_feature_image']);
+		add_action( 'after_setup_theme', [$this, 'after_setup_theme'] );
+
+		add_filter('theme/sidebar/visibility', [$this, 'single_sidebar_visibility']);
+	}
+
+	/**
+	 * Hides sidebar on index template on specific views.
+	 *
+	 * @see apply_filters('theme/sidebar/visibility')
+	 */
+	function single_sidebar_visibility($status)
+	{
+		if (is_404() || is_page()) {
+			return false;
+		}
+
+		if ( !is_active_sidebar( static::SIDEBAR_RIGHT_ID ) ) {
+			return false;
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Wrapper class is the container around the content area. Add sidebar or other decorator as necessary
+	 */
+	static function get_wrapper_classes() {
+		$classes = [ 'wrapper' ];
+		$show_sidebar = apply_filters('theme/sidebar/visibility', true);
+		if ($show_sidebar) {
+			$classes[] = 'wrapper--with-sidebar';
+		}
+		return implode ( ' ' , $classes );
+	}
+
+	/**
+	 * After theme set up
+	 *
+	 * @return void
+	 */
+	function after_setup_theme() {
+
+		// add_editor_style( 'public/css/editor-styles.css' );
+
+		$this->register_navigation_areas();
 	}
 
 	/**
@@ -32,13 +118,38 @@ class General {
 		]);
 	}
 
+	static function luminance($hexcolor, $percent = 0.1) {
+		if ( strlen( $hexcolor ) < 6 ) {
+			$hexcolor = $hexcolor[0] . $hexcolor[0] . $hexcolor[1] . $hexcolor[1] . $hexcolor[2] . $hexcolor[2];
+		}
+		$hexcolor = array_map('hexdec', str_split( str_pad( str_replace('#', '', $hexcolor), 6, '0' ), 2 ) );
+
+		foreach ($hexcolor as $i => $color) {
+			$from = $percent < 0 ? 0 : $color;
+			$to = $percent < 0 ? $color : 255;
+			$pvalue = ceil( ($to - $from) * $percent );
+			$hexcolor[$i] = str_pad( dechex($color + $pvalue), 2, '0', STR_PAD_LEFT);
+		}
+
+		return '#' . implode($hexcolor);
+	}
+	/**
+	 * Renders feature image subheader .
+	 *
+	 * @see resources/templates/index.tpl.php
+	 */
+	function render_header_feature_image() {
+		if ( is_single() || is_page() && has_post_thumbnail() ) {
+			template('partials/subheader/default', []);
+		}
+	}
+
 	/**
 	 * Renders index page header.
 	 *
 	 * @see resources/templates/index.tpl.php
 	 */
-	function render_header()
-	{
+	function render_header() {
 		template('partials/header', [
 			'brand' => static::the_header_brand(),
 			'lead'  => get_bloginfo( 'description' ),
@@ -51,12 +162,12 @@ class General {
 	 *
 	 * @see resources/templates/index.tpl.php
 	 */
-	function render_footer()
-	{
+	function render_footer() {
 		template('layout/footer', [
 			'footer_menu' => static::the_footer_menu(),
 		]);
 	}
+
 
 	static public function the_footer_menu() {
 		return sprintf(
@@ -89,7 +200,7 @@ class General {
 		$brand = '';
 		if ( has_custom_logo() ) {
 			$brand = sprintf(
-				'<h1 class="header__logo"><a href="%s" class="header__logo-link"><img src="%s" title="%s" class="header__logo-img"></a></h1>',
+				'<div class="header__logo"><a href="%s" class="header__logo-link"><img src="%s" title="%s" class="header__logo-img"></a></div>',
 				get_home_url(),
 				esc_url( $logo[0] ),
 				get_bloginfo( 'name' )
@@ -103,6 +214,7 @@ class General {
 		}
 		return $brand;
 	}
+
 
 	/**
 	 * Renders the social module.
@@ -152,11 +264,32 @@ class General {
 		$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_FOOTER_COPY);
 		if ( !empty( $copy ) ) {
 			return sprintf(
-				'<div class="footer__copy">%s</div>',
+				'<div class="footer__copy"><p>%s</p></div>',
 				$copy
 			);
 		}
 		return '';
+	}
+
+	public function google_fonts() {
+
+		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
+		$header_font_value = General::FONTS[$header_font_key];
+
+		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_BODY, static::FONTS_DEFAULT_BODY);
+		$body_font_value = General::FONTS[$body_font_key];
+
+
+		if( $header_font_key ) {
+			wp_enqueue_style( 'linje-headings-fonts', '//fonts.googleapis.com/css?family='. esc_html($header_font_key) );
+		} else {
+			wp_enqueue_style( 'linje-source-sans', '//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
+		}
+		if( $body_font_key ) {
+			wp_enqueue_style( 'linje-body-fonts', '//fonts.googleapis.com/css?family='. esc_html($body_font_key) );
+		} else {
+			wp_enqueue_style( 'linje-source-body', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,700,600');
+		}
 	}
 
 	public function awesome_fonts() {

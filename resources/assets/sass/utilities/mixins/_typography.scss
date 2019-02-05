@@ -3,10 +3,9 @@
 	font-weight: 500;
 	margin-top: $d_spacer_m;
 	margin-bottom: $d_spacer_sm;
-	line-height: 1.2;
+	line-height: $t_line_height_m;
 	font-family: $t_font_headers;
 	color: $color_headers;
-	text-transform: uppercase;
 
 	small {
 		font-size: 80%;
@@ -22,5 +21,16 @@
 			color: $color_headers;
 			text-decoration: underline;
 		}
+	}
+}
+
+@mixin body-text {
+	font-size: $t_font_size_m;
+	line-height: $t_line_height_lrg;
+	letter-spacing: 0.3px;
+
+	@include g-state(medium) {
+		font-size: $t_font_size_lrg;
+		line-height: $t_line_height_lrg;
 	}
 }

@@ -1,0 +1,75 @@
+
+
+// -----------------------------------------------------------------------------
+//
+// Lists
+//
+// -----------------------------------------------------------------------------
+
+ul, ol, dl {
+
+	.d-content & {
+		@include body-text;
+		color: $color_text;
+	}
+
+	.d-content--inverse & {
+		color: $color_text_inverse;
+	}
+}
+
+li {
+	.d-content & {
+		margin-bottom: 0.4em;
+	}
+}
+
+ul {
+	.d-content & {
+		margin-bottom: 1.6em;
+		list-style: disc outside;
+		padding-left: 2.5em;
+		padding-right: 0;
+
+		@include g-state(medium) {
+			padding-left: 3em;
+			padding-right: 3em;
+		}
+	}
+}
+
+ol {
+	.d-content & {
+		margin-bottom: 1.6em;
+		list-style: none;
+		padding-left: 0.5em;
+		padding-right: 0;
+		counter-reset: my-awesome-counter;
+	}
+}
+
+ol li {
+	.d-content & {
+		padding: 0 0 0 2em;
+		counter-increment: my-awesome-counter;
+		position: relative;
+
+		@include g-state(medium) {
+			padding: 0 0 0 2.5em;
+		}
+	}
+
+}
+
+ol li::before {
+	.d-content & {
+		width: 1.8em;
+		text-align: right;
+		content: counter(my-awesome-counter);
+		font-weight: bold;
+		position: absolute;
+		left: 0;
+	}
+
+}
+

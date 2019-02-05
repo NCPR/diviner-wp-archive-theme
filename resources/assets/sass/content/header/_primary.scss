@@ -86,8 +86,9 @@
 			background-color: transparent;
 			border: none;
 			color: $color_grey;
-			font-family: $t_font_oswald;
+			font-family: $t_font_helvetica;
 			font-size: 20px;
+			letter-spacing: 0;
 			font-weight: $t_font_weight_normal;
 
 			&:visited {

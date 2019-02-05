@@ -4,9 +4,8 @@
  * @description The core dispatcher for the dom ready event javascript.
  */
 
-import _ from 'lodash';
 
-import { on, ready } from '../../utils/events';
+import { appReady } from '../../utils/events';
 
 /**
  * @function bindEvents
@@ -14,7 +13,7 @@ import { on, ready } from '../../utils/events';
  */
 
 const bindEvents = () => {
-	// on(window, 'resize', _.debounce(resize, 200, false));
+
 };
 
 /**
@@ -38,7 +37,7 @@ const init = () => {
  */
 
 const domReady = () => {
-	ready(init);
+	appReady(init);
 };
 
 export default domReady;

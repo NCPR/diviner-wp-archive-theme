@@ -29,8 +29,42 @@ body {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 100%;
+	-webkit-font-smoothing: antialiased;
+	hyphens: auto;
+	text-rendering: optimizeLegibility;
+	vertical-align: baseline;
 }
 
-.app {
 
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Font & Color
+ *
+ * ----------------------------------------------------------------------------- */
+
+body,
+form,
+button,
+input,
+select,
+textarea {
+	font-family: $t_font_sanserif;
+	font-weight: $t_font_weight_normal;
+	line-height: $t_line_height_m;
+	font-size: 100%;
+	font-style: normal;
+	color: $color_text;
 }
+
+/* -----------------------------------------------------------------------------
+ *
+ * Globals: Text Selection
+ *
+ * ----------------------------------------------------------------------------- */
+
+::selection {
+	background: $color_selection_bg;
+	color: $color_selection_text;
+	text-shadow: none;
+}
+

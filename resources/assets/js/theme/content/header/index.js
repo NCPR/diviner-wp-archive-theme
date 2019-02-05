@@ -8,11 +8,10 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 import { HEADER_BREAKPOINT } from '../../config';
 import { on } from '../../../utils/events';
-import * as tools from '../../../utils/tools';
 
 const el = {
-	header: tools.getNodes('header')[0],
-	primaryMenuWrap: tools.getNodes('primary-menu__wrap')[0],
+	header: document.querySelectorAll('[data-js="header"]')[0],
+	primaryMenuWrap: document.querySelectorAll('[data-js="primary-menu__wrap"]')[0],
 };
 
 /**
@@ -21,12 +20,12 @@ const el = {
  */
 
 const closeMenu = () => {
-	tools.removeClass(document.body, 'menu--opened');
+	document.body.classList.remove('menu--opened');
 	enableBodyScroll(el.primaryMenuWrap);
 };
 
 const openMenu = (e) => {
-	tools.addClass(document.body, 'menu--opened');
+	document.body.classList.add('menu--opened');
 	disableBodyScroll(el.primaryMenuWrap);
 };
 
@@ -38,7 +37,7 @@ const openMenu = (e) => {
 
 const toggleMenu = (e) => {
 	e.preventDefault();
-	const shouldActivateMenu = !tools.hasClass(document.body, 'menu--opened');
+	const shouldActivateMenu = !document.body.classList.contains('menu--opened');
 	if (shouldActivateMenu) {
 		openMenu();
 	} else {

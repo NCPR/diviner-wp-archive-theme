@@ -14,9 +14,6 @@ namespace Tonik\Theme\App\Structure;
 */
 
 use function Tonik\Theme\App\template;
-use \Pimple\Container;
-use \Diviner\Post_Types\Archive_Item\Rest;
-use \Diviner\Theme\General;
 
 /**
  * Renders post thumbnail by its formats.
@@ -47,7 +44,13 @@ add_action('theme/index/content/none', 'Tonik\Theme\App\Structure\render_empty_c
  */
 function render_post_content()
 {
-    template(['partials/post/content', get_post_format()]);
+	// depends on post type
+	$type = get_post_type();
+	if ( $type === 'page' ) {
+		template('partials/page/content');
+	} else {
+		template(['partials/post/content', get_post_format()]);
+	}
 }
 add_action('theme/single/content', 'Tonik\Theme\App\Structure\render_post_content');
 
@@ -64,12 +67,3 @@ function render_sidebar()
 }
 add_action('theme/index/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
 add_action('theme/single/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
-
-
-
-$container = \Tonik\Theme\App\Main::instance()->container();
-
-$container[ 'theme.general' ] = function ( Container $container ) {
-	return new General();
-};
-$container[ 'theme.general' ]->hooks();
