@@ -81,8 +81,20 @@ class Diviner_Field {
 				'name'         => _x( 'Diviner Fields', 'post type general name'),
 				'add_new_item' => __( 'Add New Diviner Field', 'ncpr-diviner' ),
 				'edit_item'    => __( 'Edit Diviner Field', 'ncpr-diviner' ),
+				'new_item'     => __( 'New Diviner Field', 'ncpr-diviner' ),
+				'view_item'    => __( 'View Diviner Field', 'ncpr-diviner' ),
+				'view_items'   => __( 'View Diviner Fields', 'ncpr-diviner' )
 			]
 		];
+	}
+
+	static public function get_class_title( $field_type ) {
+		$field = Diviner_Field::get_class($field_type);
+		$field_title_string = sprintf('%s::TITLE', $field);
+		if ( defined( $field_title_string ) ) {
+			return constant( $field_title_string );
+		}
+		return 'NONE';
 	}
 
 	static public function get_class( $field_type ) {

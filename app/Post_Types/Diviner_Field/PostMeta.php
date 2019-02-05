@@ -108,13 +108,17 @@ class PostMeta {
 			->set_priority( 'high' );
 
 		// if on edit screen of the diviner field CPT check the field type
-		// have to use this appraoch because this function is called in the
+		// have to use this approach because this function is called both on edit and new
 		$is_admin_on_edit_page = $this->is_edit_page();
 		$field_type = NULL;
 		if ($is_admin_on_edit_page) {
-			if (isset($_GET['post'])) {
+			if (isset($_GET['post'])) { // on edit page
 				if (get_post_type( $_GET['post'] ) === Diviner_Field::NAME) {
 					$field_type = $this->get_field_type($_GET['post']);
+				}
+			} else {
+				if (isset($_GET['field_type'])) {
+					$field_type = $_GET['field_type'];
 				}
 			}
 		}
@@ -340,7 +344,8 @@ class PostMeta {
 
 	public function get_field_active() {
 		return Field::make( 'checkbox', static::FIELD_ACTIVE, __( 'Is Field Active and Should it be Added to each Archive Item?', 'ncpr-diviner' ) )
-			->set_option_value( static::FIELD_CHECKBOX_VALUE );
+			->set_option_value( static::FIELD_CHECKBOX_VALUE )
+			->set_default_value( static::FIELD_CHECKBOX_VALUE );
 	}
 
 	public function get_field_browser_helper_text() {

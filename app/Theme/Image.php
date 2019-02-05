@@ -19,7 +19,6 @@ class Image {
 	}
 
 	function custom_responsive_image_sizes($sizes, $size) {
-		var_dump('custom_responsive_image_sizes', $size);
 		// blog posts
 		if ( in_array($size, [ General::IMAGE_SIZE_FEATURE_SM, General::IMAGE_SIZE_FEATURE_MD, General::IMAGE_SIZE_FEATURE_LRG ] ) ) {
 			// default to return if condition is not met

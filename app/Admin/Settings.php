@@ -40,9 +40,11 @@ class Settings {
 
 	public function custom_diviner_js_config( $data  ) {
 		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL);
+
 		$settings = [
 			'permission_notice' => carbon_get_theme_option(static::FIELD_GENERAL_PERMISSIONS),
 			'display_popup'     => empty( $display_popup ) ? false : $display_popup,
+			'help_page_link'    => carbon_get_theme_option(static::FIELD_GENERAL_HELP_PAGE),
 		];
 		$data['settings'] = $settings;
 		return $data;
@@ -66,11 +68,16 @@ class Settings {
 	 * Setup Basic plugin settings
 	 */
 	public function crb_attach_theme_options() {
+
+		// $basic_options_container = Container::make( 'theme_options', 'Diviner' );
+		// ->set_page_parent( $basic_options_container )
+
 		// We can save the result of an instance call in a static property as it will be called once per HTTP request.
 		static::$theme_options = Container::make(
 			'theme_options',
-			__( 'Diviner Settings', 'ncpr-diviner' )
-		)->add_fields(
+			__( 'Diviner', 'ncpr-diviner' )
+		)
+			->add_fields(
 			[
 				$this->permissions_field(),
 				$this->browse_field(),
