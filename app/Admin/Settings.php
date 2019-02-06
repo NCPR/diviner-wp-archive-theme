@@ -30,10 +30,10 @@ class Settings {
 	 *
 	 * @var \Carbon_Fields\Container\Theme_Options_Container
 	 */
-	protected static $theme_options;
-	protected static $theme_options_social;
+	protected static f$theme_options;
 
 	public function hooks() {
+		add_action( 'admin_menu', [ $this, 'modify_menus' ], 11 );
 		add_action( 'carbon_fields_register_fields', [$this, 'crb_attach_theme_options'], 0, 0 );
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 	}
@@ -48,6 +48,25 @@ class Settings {
 		];
 		$data['settings'] = $settings;
 		return $data;
+	}
+
+	/**
+	 * Modify menus
+	 */
+	public function modify_menus() {
+		// remove the default to allows another menu item name
+		remove_submenu_page(
+			static::menu_slug(),
+			static::menu_slug()
+		);
+		// add again with new name
+		add_submenu_page(
+			static::menu_slug(),
+			"General Settings",
+			"General Settings",
+			'manage_options',
+			static::menu_slug()
+		);
 	}
 
 	/**
@@ -66,12 +85,9 @@ class Settings {
 
 	/**
 	 * Setup Basic plugin settings
+	 * This function creates submenu too which must be modified above in the modify_menus function.
 	 */
 	public function crb_attach_theme_options() {
-
-		// $basic_options_container = Container::make( 'theme_options', 'Diviner' );
-		// ->set_page_parent( $basic_options_container )
-
 		// We can save the result of an instance call in a static property as it will be called once per HTTP request.
 		static::$theme_options = Container::make(
 			'theme_options',

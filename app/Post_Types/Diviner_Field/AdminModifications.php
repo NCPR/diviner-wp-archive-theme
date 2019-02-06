@@ -15,7 +15,7 @@ class AdminModifications {
 
 	public function hooks() {
 	    // Hook on 11 to go after the main options page is hooked.
-		add_action( 'admin_menu', [ &$this, 'rc_scd_register_menu' ], 11 );
+		add_action( 'admin_menu', [ &$this, 'rc_scd_register_menu' ], 12 );
 		add_filter( 'admin_body_class', [ &$this, 'admin_body_class' ] );
 		add_filter( 'gettext', [ &$this, 'change_excerpt_text' ], 10, 2 );
 		add_action( 'edit_form_after_title', [ &$this, 'add_helper_text' ] );
