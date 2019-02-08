@@ -349,7 +349,8 @@ class PostMeta {
 	}
 
 	public function get_field_browser_helper_text() {
-		return Field::make( 'text', static::FIELD_BROWSE_HELPER_TEXT, __( 'Browse Page Filter Helper Text', 'ncpr-diviner' ) );
+		return Field::make( 'text', static::FIELD_BROWSE_HELPER_TEXT, __( 'Browse Page Filter Helper Text', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Appears next to your field’s title on the Browse Page. If your field is Type of Work, your helper text may read: Example: Agriculture, Mining, Service, etc.', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_admin_helper_text() {
@@ -360,11 +361,11 @@ class PostMeta {
 	public function get_field_browser_placement() {
 		return Field::make( 'select', static::FIELD_BROWSE_PLACEMENT, __( 'Browse Page Placement', 'ncpr-diviner' ) )
 			->add_options( static::PLACEMENT_OPTIONS )
-			->set_help_text( __( 'Where this field appears in the browse page (top left or none)', 'ncpr-diviner' ) );
+			->set_help_text( __( 'Where this field will appear on your browse page. You can choose Top, Left, or none, if you do not wish to be able to search by this field (ex. if it is a call number relevant only to staff)', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_display_popup() {
-		return Field::make( 'checkbox', static::FIELD_BROWSE_DISPLAY, __( 'Ensure the Field Appears in Popup Overlay After a User Clicks a Thumbnail in the Search Returns Grid', 'ncpr-diviner' ) )
+		return Field::make( 'checkbox', static::FIELD_BROWSE_DISPLAY, __( 'Check this if you want this field to appear in the popup overlay that appears after clicking an archive item in the Browse Page.', 'ncpr-diviner' ) )
 			->set_option_value( static::FIELD_CHECKBOX_VALUE );
 	}
 

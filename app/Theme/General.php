@@ -5,6 +5,8 @@ namespace Diviner\Theme;
 use function Tonik\Theme\App\template;
 
 use Diviner\Admin\Customizer;
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
+use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
 
 /**
  * Class Settings
@@ -274,11 +276,7 @@ class General {
 	public function google_fonts() {
 
 		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::FONTS[$header_font_key];
-
 		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_BODY, static::FONTS_DEFAULT_BODY);
-		$body_font_value = General::FONTS[$body_font_key];
-
 
 		if( $header_font_key ) {
 			wp_enqueue_style( 'linje-headings-fonts', '//fonts.googleapis.com/css?family='. esc_html($header_font_key) );
@@ -290,6 +288,13 @@ class General {
 		} else {
 			wp_enqueue_style( 'linje-source-body', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,700,600');
 		}
+	}
+
+	/**
+	 * Output the single archive meta fields
+	 */
+	static public function the_archive_single_meta() {
+		echo ArchiveItemTheme::render_meta_fields();
 	}
 
 	public function awesome_fonts() {

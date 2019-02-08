@@ -239,7 +239,7 @@ class AdminModifications {
 			$presetFieldTable->prepare_items();
 			?>
 			<h2>
-				Manage Your Archive Item
+				Add Fields to Your Archive Items and the Browse Page
 				<a href="index.php?page=<?php echo esc_attr( static::SLUG_WIZARD ); ?>" class="button button-primary">
 					Create a New Meta Field
 				</a>
@@ -252,13 +252,13 @@ class AdminModifications {
 						You have not custom fields currently active on your your archive items. That probably means you have just installed the plugin for the first time and are getting set up. Please refer to the documentation at <a href="https://ncpr.github.io/diviner-wp-archive-theme/">https://ncpr.github.io/diviner-wp-archive-theme/</a>.
 					</p>
 					<p>
-						Click thru the below link to add more fields to your archive item.
+						Click through the below link to add more diviner meta fields to your archive item.
 					</p>
 				</div>
 			<?php } else { ?>
 				<div class="about-text">
 					<p>
-						<?php _e('These fields may be activated or deactivated to add meta data and search facets to the base archive item.', 'ncpr-diviner' ); ?>
+						Listed below are the fields you have created and added to your archive items. These fields represent a) the information you wish to be connected to your archive items, and b) how visitors and users of your site will be able to search through your archive items. Activate all fields you wish to appear on the front and back end of your site.
 					</p>
 				</div>
 				<div>

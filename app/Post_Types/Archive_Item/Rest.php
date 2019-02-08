@@ -404,11 +404,6 @@ class Rest {
 			] );
 		}
 
-		register_rest_field( Archive_Item::NAME, 'test', [
-			'get_callback' => function( $arr ) use( &$text_fields) {
-				return count($text_fields);
-			}
-		] );
 
 	}
 
