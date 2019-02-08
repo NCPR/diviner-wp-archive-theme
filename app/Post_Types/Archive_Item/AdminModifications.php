@@ -33,12 +33,12 @@ class AdminModifications {
 			'post_type' => Diviner_Field::NAME,
 			'meta_query' => $meta_query
 		];
-		$posts_ids = get_posts($args);
-		foreach($posts_ids as $post_id) {
-			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+		$field_posts_ids = get_posts($args);
+		foreach($field_posts_ids as $field_post_id) {
+			$field_type = carbon_get_post_meta($field_post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$field = Diviner_Field::get_class($field_type);
 			if( is_callable( [ $field, 'setup' ] ) ){
-				call_user_func( [ $field, 'setup' ], $post_id);
+				call_user_func( [ $field, 'setup' ], $field_post_id);
 			}
 		}
 	}

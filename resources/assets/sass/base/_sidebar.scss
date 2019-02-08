@@ -1,9 +1,22 @@
 .sidebar {
 	width: 100%;
+	margin: $d_spacer_m 0;
 
 	@include g-state(medium) {
-		margin-left: $d_spacer_lrg;
-		max-width: 250px;
-		width: 250px;
+		margin: $d_spacer_lrg 0 $d_spacer_lrg $d_spacer_lrg;
+		width: 300px;
+	}
+}
+
+.sidebar--grey {
+	background-color: $color_grey_light;
+}
+
+.sidebar__content {
+	width: 100%;
+	padding: $d_spacer_sm;
+
+	@include g-state(medium) {
+		padding: $d_spacer_lrg $d_spacer_m;
 	}
 }

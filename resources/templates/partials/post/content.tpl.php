@@ -1,10 +1,10 @@
-<article class="single single--post">
+<article class="single-item single-item--post">
 
-	<header class="single__header">
-		<h1 class="single__header-title h1"><?php the_title(); ?></h1>
+	<header class="single-item__header">
+		<h1 class="single-item__header-title h1"><?php the_title(); ?></h1>
 
-		<div class="single__header-meta">
-			<time class="single__header-time">
+		<div class="single-item__header-meta">
+			<time class="single-item__header-time">
 				<?php the_date(); ?>
 			</time>
 		</div>

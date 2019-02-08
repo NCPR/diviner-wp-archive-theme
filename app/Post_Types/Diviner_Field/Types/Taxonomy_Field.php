@@ -3,8 +3,6 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
-use Diviner\Post_Types\Diviner_Field\Types\FieldType;
-use Carbon_Fields\Field;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 
@@ -27,11 +25,30 @@ class Taxonomy_Field extends FieldType {
 		return '';
 	}
 
-	static public function setup( $post_id ) {
-		$field_label_singular = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
-		$field_label_plural = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL);
-		$field_slug = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG);
-		$field_tax_type = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE);
+	/**
+	 * Return field value
+	 *
+	 * @param  int $post_id Post Id of archive item.
+	 * @param  string $field_name ID of field to get value of
+	 * @param  int $field_post_id Field Id
+	 * @return string
+	 */
+	static public function get_value( $post_id, $field_name, $field_post_id ) {
+		$taxonomy_name = static::get_taxonomy_name( $field_post_id );
+		// ToDo: link back to the browse screen
+		return get_the_term_list( $post_id, $taxonomy_name, '', ', ' );
+	}
+
+	/**
+	 * Set up the field
+	 *
+	 * @param  int $field_post_id Post Id of field.
+	 */
+	static public function setup( $field_post_id ) {
+		$field_label_singular = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
+		$field_label_plural = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL);
+		$field_slug = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG);
+		$field_tax_type = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE);
 
 		if ( empty( $field_slug ) ) {
 			$field_slug = sanitize_title($field_label_singular);
@@ -40,14 +57,14 @@ class Taxonomy_Field extends FieldType {
 		if ( empty( $field_label_singular ) ) {
 			$field_label_singular = sprintf(
 				'Taxonomy %d',
-				$post_id
+				$field_post_id
 			);
 		}
 
 		if ( empty( $field_label_plural ) ) {
 			$field_label_plural = sprintf(
 				__( 'Taxonomies %d', 'ncpr-diviner' ),
-				$post_id
+				$field_post_id
 			);
 		}
 
@@ -66,7 +83,7 @@ class Taxonomy_Field extends FieldType {
 			'menu_name'         => $field_label_singular,
 		];
 
-		$taxonomy_name = static::get_taxonomy_name( $post_id );
+		$taxonomy_name = static::get_taxonomy_name( $field_post_id );
 
 		// args
 		$args = [

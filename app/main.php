@@ -23,12 +23,6 @@ class Main {
 		//$this->providers();
 	}
 
-	private function providers() {
-		//$this->container->register(new AdminProvider());
-		//$this->container->register(new GeneralProvider());
-		//$this->container->register(new PostTypeProvider());
-	}
-
 	public function container() {
 		return $this->container;
 	}

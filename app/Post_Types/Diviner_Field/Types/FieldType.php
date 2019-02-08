@@ -55,6 +55,18 @@ abstract class FieldType implements iField {
 	}
 
 	/**
+	 * Return field value
+	 *
+	 * @param  int $post_id Post Id of archive item.
+	 * @param  string $field_name ID of field to get value of
+	 * @param  int $field_post_id Field Id
+	 * @return string
+	 */
+	static public function get_value( $post_id, $field_name, $field_post_id ) {
+		return carbon_get_post_meta( $post_id, $field_name );
+	}
+
+	/**
 	 * Return array of sort options
 	 *
 	 * @param  int $post_id Post Id of field to set up.

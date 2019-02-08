@@ -3,13 +3,36 @@
 // Headers
 //
 // -----------------------------------------------------------------------------
+%headers {
+	font-weight: 500;
+	margin-bottom: $d_spacer_sm;
+	line-height: $t_line_height_m;
+	font-family: $t_font_headers;
+	color: $color_headers;
+
+	small {
+		font-size: 80%;
+		color: grey;
+		line-height: 0;
+	}
+
+	a & {
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			color: $color_headers;
+			text-decoration: underline;
+		}
+	}
+}
+
 
 h1, h2, h3, h4, h5, h6 {
 	@extend %headers;
 }
 
 h1,
-.h1,
 %h1 {
 	font-size: 2.3em;
 
@@ -18,7 +41,6 @@ h1,
 	}
 }
 h2,
-.h2,
 %h2 {
 	font-size: 1.9em;
 
@@ -27,7 +49,6 @@ h2,
 	}
 }
 h3,
-.h3,
 %h3 {
 
 	font-size: 1.8em;
@@ -37,7 +58,6 @@ h3,
 	}
 }
 h4,
-.h4,
 %h4 {
 	font-size: 1.6em;
 
@@ -46,7 +66,6 @@ h4,
 	}
 }
 h5,
-.h5,
 %h5 {
 	font-size: 1.4em;
 
@@ -55,7 +74,6 @@ h5,
 	}
 }
 h6,
-.h6,
 %h6 {
 	font-size: 1.2em;
 	text-transform: uppercase;
@@ -65,21 +83,28 @@ h6,
 	}
 }
 
+
 .h1 {
-	@extend h1;
+	@extend %h1;
 }
 .h2 {
-	@extend h2;
+	@extend %h2;
 }
 .h3 {
-	@extend h3;
+	@extend %h3;
 }
 .h4 {
-	@extend h4;
+	@extend %h4;
 }
 .h5 {
-	@extend h5;
+	@extend %h5;
 }
 .h6 {
-	@extend h6;
+	@extend %h6;
+}
+
+.d-content {
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: $d_spacer_m;
+	}
 }

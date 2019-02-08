@@ -1,11 +1,10 @@
 <aside class="sidebar">
-    <?php if (is_active_sidebar('sidebar')) : ?>
-        <ul>
-            <?php dynamic_sidebar('sidebar'); ?>
-        </ul>
-    <?php else: ?>
-        <h5>Sidebar</h5>
+	<div class="sidebar__content">
 
-        <h6>Your sidebar is empty.</h6>
-    <?php endif; ?>
-</aside>
+		<ul class="sidebar__list">
+			<?php dynamic_sidebar('sidebar'); ?>
+		</ul>
+
+	</div>
+
+</div>

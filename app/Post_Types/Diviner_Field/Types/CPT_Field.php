@@ -64,6 +64,36 @@ class CPT_Field extends FieldType {
 	}
 
 	/**
+	 * Return field value
+	 *
+	 * 	  [0]=>
+	 * 		array(4) {
+	 * 			["value"]=>
+	 * 				string(21) "post:photographer:135"
+	 * 			["type"]=>
+	 * 				string(4) "post"
+	 * 			["subtype"]=>
+	 * 				string(12) "photographer"
+	 * 			["id"]=>
+	 * 				string(3) "135"
+	 *
+	 * @param  int $post_id Post Id of archive item.
+	 * @param  string $field_name ID of field to get value of
+	 * @param  int $field_post_id Field Id
+	 * @return string
+	 */
+	static public function get_value( $post_id, $field_name, $field_post_id ) {
+		$raw_value = carbon_get_post_meta( $post_id, $field_name );
+		if ( isset($raw_value[0]) && isset($raw_value[0]['id']) ) {
+			$cpt_post = get_post($raw_value[0]['id']);
+			if ( isset($cpt_post) ) {
+				return get_the_title($cpt_post);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Decorate the ep sync args per field type
 	 *
 	 * @param  array $additional_meta additional meta.

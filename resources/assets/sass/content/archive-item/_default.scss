@@ -1,0 +1,22 @@
+
+.archive-item-meta {
+
+}
+
+.archive-item-meta__list {
+
+}
+
+.archive-item-meta__item {
+	margin-bottom: $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_sm;
+	}
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+

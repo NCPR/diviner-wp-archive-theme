@@ -1,6 +1,10 @@
 .post-type-diviner_field {
 }
 
+.wrap {
+
+}
+
 .wrap-diviner--light {
 	background-color: $color_white;
 	margin: 30px 0;
@@ -31,10 +35,13 @@
 			width: 10%;
 		}
 		.column-title {
-			width: 40%;
+			width: 30%;
+		}
+		.column-type {
+			width: 15%;
 		}
 		.column-description {
-			width: 40%;
+			width: 35%;
 		}
 	}
 }
@@ -53,10 +60,6 @@
 
 	h2 {
 		font-size: 20px;
-	}
-
-	p {
-		font-size: 120%;
 	}
 }
 

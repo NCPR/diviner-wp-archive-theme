@@ -1,29 +1,4 @@
 
-%headers {
-	font-weight: 500;
-	margin-top: $d_spacer_m;
-	margin-bottom: $d_spacer_sm;
-	line-height: $t_line_height_m;
-	font-family: $t_font_headers;
-	color: $color_headers;
-
-	small {
-		font-size: 80%;
-		color: grey;
-		line-height: 0;
-	}
-
-	a & {
-		text-decoration: none;
-
-		&:hover,
-		&:focus {
-			color: $color_headers;
-			text-decoration: underline;
-		}
-	}
-}
-
 @mixin body-text {
 	font-size: $t_font_size_m;
 	line-height: $t_line_height_lrg;

@@ -238,6 +238,10 @@ class Customizer {
 				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT ); ?>;
 			}
 
+			.sidebar a {
+				color: <?php echo $color_btn_link; ?>;
+			}
+
 			.primary-menu .menu a,
 			.primary-menu .menu a:visited {
 				background-color: <?php echo $color_btn_link; ?>;
@@ -265,12 +269,12 @@ class Customizer {
 				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER, static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT ); ?>;
 			}
 
-			.single__header .h1,
-			.single__header .h2,
-			.single__header .h3,
-			.single__header .h4,
-			.single__header .h5,
-			.single__header .h6 {
+			.single-item__header .h1,
+			.single-item__header .h2,
+			.single-item__header .h3,
+			.single-item__header .h4,
+			.single-item__header .h5,
+			.single-item__header .h6 {
 				font-family: "<?php echo $header_font_value; ?>";
 			}
 			.sidebar h1,
