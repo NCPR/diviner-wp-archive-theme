@@ -42,6 +42,10 @@ class Post_Meta {
 
 	protected $container;
 
+	public function hooks() {
+		add_action( 'carbon_fields_register_fields', [ $this, 'add_post_meta' ], 3, 0 );
+	}
+
 	static public function get_type_label_from_id($id)
 	{
 		return isset( static::FIELD_TYPE_OPTIONS[$id]) ? static::FIELD_TYPE_OPTIONS[$id] : '';
