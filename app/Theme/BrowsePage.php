@@ -51,15 +51,18 @@ class BrowsePage {
 	 */
 	public function add_admin_menu_button( $wp_admin_bar ) {
 		$current_browse = $this->get_current_browse_page();
-		$args = array(
-			'id' => 'diviner-custom-adminbar-button',
-			'title' => __( 'View Diviner Browse Page', 'ncpr-diviner' ),
-			'href' => get_the_permalink( $current_browse ),
-			'meta' => array(
-				'class' => 'wp-admin-bar--diviner-button'
-			)
-		);
-		$wp_admin_bar->add_node($args);
+		if ( isset($current_browse) && $current_browse !== 0 ) {
+			$args = array(
+				'id' => 'diviner-custom-adminbar-button',
+				'title' => __( 'View Diviner Browse Page', 'ncpr-diviner' ),
+				'href' => get_the_permalink( $current_browse ),
+				'meta' => array(
+					'class' => 'wp-admin-bar--diviner-button'
+				)
+			);
+			$wp_admin_bar->add_node($args);
+		}
+
 	}
 
 	/**
