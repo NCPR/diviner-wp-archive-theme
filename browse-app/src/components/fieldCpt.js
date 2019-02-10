@@ -43,7 +43,6 @@ class FieldCpt extends Component {
 	}
 
 	createField(field) {
-		// console.log('createField', field);
 		if (!CONFIG.cpt_posts[field.cpt_field_id]) {
 			return '';
 		}

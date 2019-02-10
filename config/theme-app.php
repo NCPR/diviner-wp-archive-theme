@@ -100,6 +100,7 @@ return [
 		'Post_Types/Diviner_Field/Types/Related_Field.php',
 		'Theme/General.php',
 		'Theme/Image.php',
+		'Theme/BrowsePage.php',
 		'Http/assets.php',
 		'Http/ajaxes.php',
 		'Setup/actions.php',

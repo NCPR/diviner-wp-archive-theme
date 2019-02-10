@@ -37,10 +37,7 @@ add_action( 'init', function() use ( $container ) {
 $container[ 'post_types.archive_item.postmeta' ] = function ( Container $container ) {
 	return new Post_Meta();
 };
-// TO DO: bring this into a hooks function
-add_action( 'carbon_fields_register_fields', function() use ( $container ) {
-	$container[ 'post_types.archive_item.postmeta' ]->add_post_meta();
-}, 3, 0 );
+$container[ 'post_types.archive_item.postmeta' ]->hooks();
 
 $container[ 'post_types.archive_item.admin_modifications' ] = function ( Container $container ) {
 	return new ArchiveItemAdminModifications();

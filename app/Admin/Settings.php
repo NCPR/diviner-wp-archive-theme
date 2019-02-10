@@ -4,6 +4,7 @@ namespace Diviner\Admin;
 
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
+use Diviner\Post_Types\Diviner_Field\AdminModifications;
 
 /**
  * Class Settings
@@ -90,10 +91,22 @@ class Settings {
 			</p>
 
 			<p>
-				These are the general settings of your archive, and represent site-wide choices you need to make.
+				Start by reviewing the general settings of your archive.
+			</p>
 
+			<p>
 				<a href="index.php?page=<?php echo esc_attr( static::$theme_options->get_page_file() ); ?>" class="button button-primary">
 					General Settings
+				</a>
+			</p>
+
+			<p>
+				Next, create new meta data fields for your archive items.
+			</p>
+
+			<p>
+				<a href="index.php?page=<?php echo esc_attr( AdminModifications::SLUG_WIZARD ); ?>" class="button button-primary">
+					Create New Diviner Meta Field
 				</a>
 			</p>
 

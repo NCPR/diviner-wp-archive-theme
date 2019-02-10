@@ -47,7 +47,6 @@ class SearchFacets extends Component {
 
 	@autobind
 	onChangeOrderBy(e) {
-		console.log('onChangeOrderBy', e);
 		const value = (e !== null) ? e.value : null;
 		this.props.onChangeOrderBy(value);
 	}
@@ -81,9 +80,6 @@ class SearchFacets extends Component {
 
 		const orderOptions = CONFIG.order_by;
 		const fieldsOnLeft = this.filterFields(CONFIG.fields);
-
-		console.log('this.props.order_by', this.props.order_by);
-
 
 		let order_by_option = undefined;
 		if (CONFIG.order_by) {
