@@ -61,7 +61,6 @@ class FieldDate extends Component {
 	@autobind
 	onClickBody(e) {
 		const { target } = e;
-		// console.log('onClickBody', e, target);
 		if (this.state.calendarStartVisible || this.state.calendarEndVisible) {
 			if (this.state.calendarStartVisible &&
 				this.calendarStartRef &&
@@ -115,7 +114,6 @@ class FieldDate extends Component {
 
 	@autobind
 	onChangeEndDate(e) {
-		// console.log('onChangeEndDate', e);
 		const newData = _.cloneDeep(this.props.fieldData);
 		let currentArray = newData[this.props.field.field_id];
 		const newValue = format(new Date(e), 'YYYY/MM/DD', { awareOfUnicodeTokens: true });

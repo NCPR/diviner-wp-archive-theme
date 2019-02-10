@@ -69,15 +69,21 @@ class Controls extends Component {
 	render() {
 		const searchString = this.props.searchQuery ? this.props.searchQuery : '';
 		const fieldsOnTop = this.filterFields(CONFIG.fields);
-		console.log('fieldsOnTop', fieldsOnTop);
 
 		const fieldLength = fieldsOnTop.length > 3 ? 3 : fieldsOnTop.length;
 		let classes =  'a-control-row ';
 		classes += `a-control-row--${fieldLength}`;
 
+		const page_title = CONFIG.browse_page_title ? CONFIG.browse_page_title : 'Browse';
 		return (
 			<div className="a-controls">
-				<h2 className="a-header-main">Explore Photos</h2>
+				<h2 className="a-header-main">{page_title}</h2>
+
+				{
+					(CONFIG.browse_page_content)
+						? <div className='a-page-content'><div className='d-content' dangerouslySetInnerHTML={{__html: CONFIG.browse_page_content}}></div></div>
+						: ''
+				}
 
 				<div className="a-input-group a-input-group--controls">
 					<label>Search Archive</label>

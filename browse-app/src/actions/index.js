@@ -45,7 +45,6 @@ site.archivalItems = site.registerRoute(
 );
 
 if (process.env.NODE_ENV!=='production') {
-	console.log('params', params);
 	WPAPI.discover('/')
 		.then((siteDetails) => {
 		console.info('siteDetails', siteDetails);
@@ -187,7 +186,6 @@ function receivePosts(cacheKey, json) {
 
 // items: store.getState().otherReducer.items,
 function fetchPosts(cacheKey) {
-	// console.log('fetchPosts', cacheKey);
 	return (dispatch, getState) => {
 		dispatch(requestPosts(cacheKey));
 		const archivalQuery = site.archivalItems();
@@ -234,11 +232,10 @@ function fetchPosts(cacheKey) {
 		obj.pPage = getState().page;
 
 		const param = objectToParameters(obj);
-		const path = `/browse/?${param}`;
+		const path = `${CONFIG.base_browse_url}/?${param}`;
 		history.push(path);
 
 		archivalQuery.then((data) => {
-			// console.log('header: ' , data.headers['x-wp-totalpages']);
 			dispatch(receivePosts(cacheKey, data));
 		}).catch((err) => {
 			// handle error

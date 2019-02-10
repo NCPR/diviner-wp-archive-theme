@@ -18,7 +18,6 @@ export const getCentury = (date) => {
 
 	let fullYear = date.getFullYear().toString();
 	let century = fullYear.substring(0, 2);
-	console.log('fullYear', fullYear)
 
 	if (Number.isNaN(fullYear) || !century || (fullYear.length < 4)) {
 		throw new Error('Date must be valid and have a 4-digit year attribute');
