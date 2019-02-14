@@ -52,6 +52,9 @@ class ClassicEditor {
 	 */
 	public function visual_editor_body_class( $settings ) {
 
+		if ( !isset($settings['body_class']) ) {
+			$settings['body_class'] = '';
+		}
 		$settings['body_class'] .= ' d-content';
 
 		return $settings;

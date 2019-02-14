@@ -103,9 +103,11 @@ class General {
 	 */
 	function after_setup_theme() {
 
-		// add_editor_style( 'public/css/editor-styles.css' );
-
 		$this->register_navigation_areas();
+
+		// Theme supports wide images, galleries and videos.
+		add_theme_support( 'align-wide' );
+
 	}
 
 	/**
