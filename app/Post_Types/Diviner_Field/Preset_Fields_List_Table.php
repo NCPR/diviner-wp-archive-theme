@@ -76,6 +76,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 			'active'      => 'Active',
 			'title'       => 'Title',
 			'type'        => 'Field Type',
+			'placement'   => 'Placement',
 			'description' => 'Description'
 		];
 	}
@@ -137,11 +138,17 @@ class Preset_Fields_List_Table extends \WP_List_Table
 		switch( $column_name ) {
 			case 'id':
 			case 'description':
+			case 'placement':
 			case 'type':
 				return $item[ $column_name ];
 			default:
 				return print_r( $item, true ) ;
 		}
+	}
+
+	public function column_placement( $item )
+	{
+		return carbon_get_post_meta( $item['id'], PostMeta::FIELD_BROWSE_PLACEMENT );
 	}
 
 	public function column_type( $item )
