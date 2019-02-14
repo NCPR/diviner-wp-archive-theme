@@ -98,7 +98,7 @@
 	}
 }
 
-.carbon-field.div_field_id {
+.cf-field.div_field_id {
 	input {
 		pointer-events: none;
 		color: $color_grey_dark;
@@ -113,11 +113,11 @@
 	display: none !important;
 }
 
-.carbon-field.div_field_type {
+.cf-field.div_field_type {
 	// display: none;
 }
 
-.carbon-field.div_field_browse_sortable {
+.cf-field.div_field_browse_sortable {
 	display: none;
 
 	.post-field-type--diviner_text_field &,
@@ -126,7 +126,7 @@
 	}
 }
 
-.carbon-field.div_field_browse_elastic {
+.cf-field.div_field_browse_elastic {
 	display: none;
 
 	.post-field-type--diviner_text_field &,
@@ -144,6 +144,6 @@
 }
 
 /* Make field type selector invisible */
-.div_field_type {
+.cf-field.div_field_type {
 	display: none;
 }
