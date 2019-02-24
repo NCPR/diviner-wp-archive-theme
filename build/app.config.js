@@ -82,9 +82,9 @@ module.exports = merge({
   resolve: {
 	alias: {
 	  'vue$': 'vue/dist/vue.esm.js'
-	}
+	},
+	extensions: ['*', '.js', '.jsx'],
   },
-
   /**
    * Settings of other build features.
    *

@@ -145,6 +145,7 @@ if (! isdev) {
     })
   )
 
+    /*
   module.exports.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       comments: isdev,
@@ -152,6 +153,7 @@ if (! isdev) {
       sourceMap: isdev
     })
   )
+  */
 
   module.exports.plugins.push(
     new ImageminPlugin({

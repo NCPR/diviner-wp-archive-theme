@@ -5,6 +5,10 @@ const config = require('../app.config')
  * Supports ES6 by compiling scripts with Babel.
  */
 module.exports = {
-  test: /\.js$/,
-  loader: ['babel-loader', 'eslint-loader']
+	test: /\.(js|jsx)$/,
+	exclude: /node_modules/,
+	use: [
+		'babel-loader',
+		'eslint-loader'
+	]
 }
