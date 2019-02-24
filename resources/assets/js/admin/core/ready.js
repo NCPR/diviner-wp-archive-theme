@@ -4,8 +4,10 @@
  * @description The core dispatcher for the dom ready event javascript.
  */
 
-
 import { appReady } from '../../utils/events';
+
+import blocks from '../blocks';
+import test from '../test';
 
 /**
  * @function bindEvents
@@ -27,6 +29,9 @@ const init = () => {
 	bindEvents();
 
 	// initialize the main scripts
+
+	blocks();
+	test();
 
 	console.info('Diviner: Initialized all javascript that targeted document ready.');
 };
