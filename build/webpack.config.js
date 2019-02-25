@@ -8,6 +8,7 @@ const CleanPlugin = require('clean-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const MinifyPlugin = require("babel-minify-webpack-plugin")
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin')
 
 const vueRule = require('./rules/vue')
@@ -145,15 +146,7 @@ if (! isdev) {
     })
   )
 
-    /*
-  module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      comments: isdev,
-      compress: { warnings: false },
-      sourceMap: isdev
-    })
-  )
-  */
+  module.exports.plugins.push(new MinifyPlugin());
 
   module.exports.plugins.push(
     new ImageminPlugin({
