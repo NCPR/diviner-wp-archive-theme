@@ -12,16 +12,18 @@ $color_black: #000;
 
 $color_primary: $color_grey_dark;
 $color_secondary: $color_grey;
+$color_accent: $color_grey;
 
 $color_links: $color_primary;
 $color_links_hover: $color_black;
 
-$color_headers: $color_primary;
+$color_headers: $color_grey_darker;
 
 $color_border: $color_grey;
 $color_border_focus: $color_blue;
 
 $color_text: $color_grey_darker;
+$color_text_light: $color_grey;
 $color_text_inverse: $color_grey_light;
 
 $color_links_inverse: $color_primary;
@@ -29,6 +31,7 @@ $color_links_inverse_hover: $color_black;
 
 $color_selection_bg: $color_blue;
 $color_selection_text: $color_white;
+
 
 
 // Media Queries
@@ -50,6 +53,7 @@ $d_spacer_sm: 10px;
 $d_spacer_m: 20px;
 $d_spacer_lrg: 40px;
 $d_spacer_xlrg: 60px;
+$d_spacer_xxlrg: 80px;
 
 $d_spacer_wpadmin_mobile: 46px;
 $d_spacer_wpadmin_desktop: 32px;

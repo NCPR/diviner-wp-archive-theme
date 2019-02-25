@@ -3,7 +3,8 @@
  * @description Some event functions for use in other modules
  */
 
-import _ from 'lodash';
+import assign from 'lodash/assign';
+
 
 const on = (el, name, handler) => {
 	if (el.addEventListener) {
@@ -21,7 +22,7 @@ const appReady = (readyFn) => {
 
 const triggerEvent = (opts) => {
 	let event;
-	const options = _.assign({
+	const options = assign({
 		data: {},
 		el: document,
 		event: '',

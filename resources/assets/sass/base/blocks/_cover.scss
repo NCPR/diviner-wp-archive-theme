@@ -1,0 +1,26 @@
+
+.wp-block-cover {
+	.wp-block-cover-text {
+		@extend %headers;
+
+		color: $color_white;
+		font-size: 30px;
+
+		@include g-state(medium) {
+			font-size: 40px;
+		}
+
+
+		.wp-block-column & {
+			@include g-state(medium) {
+				font-size: 30px;
+			}
+		}
+	}
+
+	.wp-block-column & {
+		@include g-state(medium) {
+			min-height: 200px;
+		}
+	}
+}

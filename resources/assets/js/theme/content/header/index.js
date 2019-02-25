@@ -24,7 +24,7 @@ const closeMenu = () => {
 	enableBodyScroll(el.primaryMenuWrap);
 };
 
-const openMenu = (e) => {
+const openMenu = () => {
 	document.body.classList.add('menu--opened');
 	disableBodyScroll(el.primaryMenuWrap);
 };
@@ -60,7 +60,7 @@ const getWidth = () => {
 	return window.innerWidth || document.documentElement.clientWidth || g.clientWidth;
 }
 
-const executeResize = (e) => {
+const executeResize = () => {
 	const width = getWidth();
 	if (width > HEADER_BREAKPOINT) {
 		closeMenu();

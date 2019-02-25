@@ -63,7 +63,6 @@ class General {
 		add_action( 'theme/header/feature-image', [$this, 'render_header_feature_image']);
 		add_action( 'after_setup_theme', [$this, 'after_setup_theme'] );
 
-		add_filter('theme/sidebar/visibility', [$this, 'single_sidebar_visibility']);
 	}
 
 	/**
@@ -71,28 +70,15 @@ class General {
 	 *
 	 * @see apply_filters('theme/sidebar/visibility')
 	 */
-	function single_sidebar_visibility($status)
-	{
-		if (is_404() || is_page()) {
-			return false;
-		}
-
-		if ( !is_active_sidebar( static::SIDEBAR_RIGHT_ID ) ) {
-			return false;
-		}
-
-		return $status;
+	function single_sidebar_visibility($status) {
+		return false;
 	}
 
 	/**
 	 * Wrapper class is the container around the content area. Add sidebar or other decorator as necessary
 	 */
 	static function get_wrapper_classes() {
-		$classes = [ 'wrapper' ];
-		$show_sidebar = apply_filters('theme/sidebar/visibility', true);
-		if ($show_sidebar) {
-			$classes[] = 'wrapper--with-sidebar';
-		}
+		$classes = [ 'wrapper', 'wrapper--staggered' ];
 		return implode ( ' ' , $classes );
 	}
 
@@ -107,6 +93,7 @@ class General {
 
 		// Theme supports wide images, galleries and videos.
 		add_theme_support( 'align-wide' );
+		add_theme_support( 'responsive-embeds' );
 
 	}
 
