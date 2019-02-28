@@ -3,40 +3,22 @@
 @import "utilities/girdle";
 @import "utilities/mixins/all";
 
-// wp-block-paragraph editor-rich-text__tinymce mce-content-body
+// General
 
-.edit-post-visual-editor p,
-.editor-styles-wrapper .editor-rich-text__tinymce.mce-content-body {
+// Block specific
+p.wp-block-paragraph,
+p.wp-block-paragraph.mce-content-body{
 	@include body-text;
 	color: $color_text;
-}
 
-.editor-styles-wrapper .mce-content-body {
-	@include body-text;
-	color: $color_text;
-}
-
-.edit-post-visual-editor p {
 	&.has-drop-cap:not(:focus)::first-letter {
 		@include drop-cap;
 	}
 }
 
-.edit-post-visual-editor .editor-styles-wrapper .mce-content-body {
-	line-height: inherit;
-}
-
-.edit-post-visual-editor .editor-block-list__block-edit,
-.edit-post-visual-editor {
-	font-family: $t_font_body;
-	font-size: 1em;
-	line-height: $t_line_height_m;
-}
-
 .edit-post-visual-editor .wp-block-button .wp-block-button__link {
 	@include button;
 }
-
 
 .edit-post-visual-editor .editor-block-list__block {
 
@@ -103,6 +85,7 @@
 
 .edit-post-visual-editor .wp-block-quote .wp-block-quote__citation {
 	@include cite-text;
+	text-align: right;
 }
 
 .edit-post-visual-editor .wp-block-quote:not(.is-large):not(.is-style-large) {
@@ -131,3 +114,19 @@
 	}
 }
 
+.edit-post-visual-editor .wp-block-freeform {
+	p {
+		@include body-text;
+	}
+
+	blockquote {
+		@include blockquote;
+	}
+}
+
+
+.wp-block-pullquote {
+	/*
+	ToDo: how to limit this block to 50% when aligned left right
+	*/
+}

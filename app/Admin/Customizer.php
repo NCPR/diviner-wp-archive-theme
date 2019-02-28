@@ -69,6 +69,10 @@ class Customizer {
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 		?>
 		<style type="text/css">
+			.edit-post-visual-editor.editor-styles-wrapper {
+				font-family: '<?php echo $body_font_value; ?>';
+			}
+
 			.editor-post-title__block .editor-post-title__input,
 			.editor-post-title h1,
 			.editor-post-title h2,
@@ -124,6 +128,10 @@ class Customizer {
 			.edit-post-visual-editor .wp-block-button .wp-block-button__link:hover,
 			.edit-post-visual-editor .wp-block-button .wp-block-button__link:focus {
 				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+			}
+
+			.edit-post-visual-editor .wp-block-freeform blockquote {
+				border-left-color: <?php echo $color_accent; ?>;
 			}
 
 		</style>
@@ -288,6 +296,10 @@ class Customizer {
 		.d-content h5,
 		.d-content h6 {
 			font-family: '<?php echo $header_font_value; ?>';
+		}
+
+		.d-content blockquote {
+			border-left-color: <?php echo $color_accent; ?>;;
 		}
 
 		.d-content blockquote p {

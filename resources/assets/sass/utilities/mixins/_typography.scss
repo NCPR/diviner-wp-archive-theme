@@ -53,6 +53,7 @@
 
 	cite {
 		@include cite-text;
+		color: $color_grey;
 	}
 
 	&.is-large,
@@ -67,6 +68,10 @@
 			@include g-state(medium) {
 				font-size: 27px;
 			}
+		}
+		
+		cite {
+			text-align: right;
 		}
 	}
 }

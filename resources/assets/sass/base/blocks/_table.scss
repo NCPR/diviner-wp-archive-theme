@@ -1,14 +1,9 @@
 .wp-block-table {
-	margin-top: 0;
-	margin-bottom: $d_spacer_m;
-	border: 1px solid $color_border;
-	border-collapse: collapse;
+	@include block-spacing;
 	@include body-text;
 
-	@include g-state(medium) {
-		margin-top: 0;
-		margin-bottom: $d_spacer_lrg;
-	}
+	border: 1px solid $color_border;
+	border-collapse: collapse;
 
 	th {
 		font-weight: $t_font_weight_bold;

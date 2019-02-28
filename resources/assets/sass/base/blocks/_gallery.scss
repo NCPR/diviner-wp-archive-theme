@@ -1,12 +1,7 @@
 
 ul.wp-block-gallery {
+	@include block-spacing;
+
 	padding: 0;
 	list-style: none;
-	margin-top: 0;
-	margin-bottom: $d_spacer_m;
-
-	@include g-state(medium) {
-		margin-top: 0;
-		margin-bottom: $d_spacer_lrg;
-	}
 }

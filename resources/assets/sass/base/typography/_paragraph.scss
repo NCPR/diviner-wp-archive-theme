@@ -7,7 +7,13 @@
 p {
 	@include body-text;
 
-	margin-bottom: 1.6em;
+	margin-top: 0;
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-top: 0;
+		margin-bottom: $d_spacer_lrg;
+	}
 
 	.d-content & {
 		color: $color_text;
