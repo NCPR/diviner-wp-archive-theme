@@ -13,7 +13,21 @@ import { appReady } from '../../utils/events';
  */
 
 const bindEvents = () => {
+	/*
+	const addBlockClassName = ( props, blockType ) => {
+		console.log('addBlockClassName', props, blockType );
+		if(blockType.name === 'core/list') {
+			return Object.assign( props, { class: 'wp-block-TEST' } );
+		}
+		return props;
+	};
 
+	wp.hooks.addFilter(
+		'blocks.getSaveContent.extraProps',
+		'gdt-guten-plugin/add-block-class-name',
+		addBlockClassName
+	);
+	*/
 };
 
 /**

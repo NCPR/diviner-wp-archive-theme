@@ -1,12 +1,9 @@
-
-ul.wp-block-gallery {
-	padding: 0;
-	list-style: none;
-	margin-top: 0;
+.wp-block-image {
+	margin-top: $d_spacer_m;
 	margin-bottom: $d_spacer_m;
 
 	@include g-state(medium) {
-		margin-top: 0;
+		margin-top: $d_spacer_lrg;
 		margin-bottom: $d_spacer_lrg;
 	}
 }

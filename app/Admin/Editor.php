@@ -7,10 +7,11 @@ namespace Diviner\Admin;
  *
  * @package Diviner\Admin
  */
-class ClassicEditor {
+class Editor {
 
 	public function hooks() {
-		add_action( 'after_setup_theme', [ $this, 'visual_editor_styles' ], 10, 0 );
+		// add_action( 'admin_init', [ $this, 'visual_editor_styles' ], 10, 0 );  // if add_theme_support('editor-styles');
+		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
 		add_filter( 'tiny_mce_before_init', [ $this, 'visual_editor_body_class' ], 10, 1 );
 		add_filter( 'tiny_mce_before_init', [ $this, 'visual_editor_styles_dropdown' ], 10, 1 );
 		add_filter( 'tiny_mce_before_init', [ $this, 'add_editor_customizer_styles' ], 10, 1 );
@@ -18,19 +19,27 @@ class ClassicEditor {
 	}
 
 	/**
+	 * Block Editor Assets
+	 */
+	public function block_editor_assets() {
+		$css_dir    = trailingslashit( get_template_directory_uri() ) . 'public/css/';
+		$editor_css = 'block-editor-styles.css';
+		wp_enqueue_style(
+			'diviner-block-editor-styles', // Handle.
+			$css_dir . $editor_css, // Block editor CSS.
+			[], // Dependency to include the CSS after it.
+			\Diviner\Theme\General::version()
+		);
+	}
+
+	/**
 	 * Visual Editor Styles
 	 */
 	public function visual_editor_styles() {
-		$css_dir    = trailingslashit( get_template_directory_uri() ) . 'public/css/';
+		$css_dir    = '/public/css/';
 		$editor_css = 'editor-styles.css';
-
-		// Production
-		if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
-			$css_dir    = trailingslashit( get_template_directory_uri() ) . 'public/css/';
-			$editor_css = 'editor-styles.css';
-		}
-
 		add_editor_style( $css_dir . $editor_css );
+
 	}
 
 	/**

@@ -1,0 +1,133 @@
+
+@import "utilities/variables";
+@import "utilities/girdle";
+@import "utilities/mixins/all";
+
+// wp-block-paragraph editor-rich-text__tinymce mce-content-body
+
+.edit-post-visual-editor p,
+.editor-styles-wrapper .editor-rich-text__tinymce.mce-content-body {
+	@include body-text;
+	color: $color_text;
+}
+
+.editor-styles-wrapper .mce-content-body {
+	@include body-text;
+	color: $color_text;
+}
+
+.edit-post-visual-editor p {
+	&.has-drop-cap:not(:focus)::first-letter {
+		@include drop-cap;
+	}
+}
+
+.edit-post-visual-editor .editor-styles-wrapper .mce-content-body {
+	line-height: inherit;
+}
+
+.edit-post-visual-editor .editor-block-list__block-edit,
+.edit-post-visual-editor {
+	font-family: $t_font_body;
+	font-size: 1em;
+	line-height: $t_line_height_m;
+}
+
+.edit-post-visual-editor .wp-block-button .wp-block-button__link {
+	@include button;
+}
+
+
+.edit-post-visual-editor .editor-block-list__block {
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		&.editor-rich-text__tinymce {
+			@include headers;
+		}
+	}
+
+	h1.editor-rich-text__tinymce {
+		@include h1
+	}
+
+	h2.editor-rich-text__tinymce {
+		@include h2
+	}
+
+	h3.editor-rich-text__tinymce {
+		@include h3
+	}
+
+	h4.editor-rich-text__tinymce {
+		@include h3
+	}
+
+	h5.editor-rich-text__tinymce {
+		@include h5
+	}
+
+	h6.editor-rich-text__tinymce {
+		@include h6
+	}
+
+}
+
+.edit-post-visual-editor .editor-post-title__block .editor-post-title__input {
+	font-weight: $t_font_weight_semi_bold;
+	margin-bottom: $d_spacer_sm;
+	line-height: $t_line_height_m;
+	font-family: $t_font_headers;
+	color: $color_headers !important;
+}
+
+.edit-post-visual-editor .wp-block-cover .editor-rich-text__tinymce {
+	font-family: $t_font_headers;
+}
+
+.edit-post-visual-editor .wp-block-separator:not(.is-style-dots) {
+	background-color: $color_accent;
+}
+
+.edit-post-visual-editor .wp-block-separator.is-style-dots:before {
+	color: $color_accent;
+}
+
+.edit-post-visual-editor .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {
+	background: $color_accent;
+}
+
+.edit-post-visual-editor .wp-block-quote .wp-block-quote__citation {
+	@include cite-text;
+}
+
+.edit-post-visual-editor .wp-block-quote:not(.is-large):not(.is-style-large) {
+	border-left-color: $color_accent;
+}
+
+.edit-post-visual-editor .wp-block-table {
+	border: 1px solid $color_border;
+
+	th, td {
+		border: 1px solid $color_border;
+		padding: $d_spacer_sm;
+	}
+
+	.wp-block-table__cell-content {
+		padding: 0;
+		@include body-text;
+	}
+}
+
+.edit-post-visual-editor .wp-block-paragraph {
+	@include body-text;
+
+	&.has-drop-cap:not(:focus)::first-letter {
+		@include drop-cap;
+	}
+}
+

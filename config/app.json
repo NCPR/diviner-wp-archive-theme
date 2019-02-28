@@ -10,6 +10,9 @@
     ],
     "editor-styles": [
       "./resources/assets/sass/editor-styles.scss"
+    ],
+    "block-editor-styles": [
+      "./resources/assets/sass/block-editor-styles.scss"
     ]
   }
 }

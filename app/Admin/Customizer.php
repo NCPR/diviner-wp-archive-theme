@@ -53,6 +53,81 @@ class Customizer {
 	public function hooks() {
 		add_action( 'customize_register', [$this, 'customize_register'], 10, 1 );
 		add_action( 'wp_enqueue_scripts', [$this, 'customize_css'] );
+		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
+	}
+
+	public function block_editor_assets() {
+		$this->block_styles();
+	}
+
+	public function block_styles() {
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
+		$header_font_value = General::FONTS[$header_font_key];
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
+		$body_font_value = General::FONTS[$body_font_key];
+		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
+		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
+		?>
+		<style type="text/css">
+			.editor-post-title__block .editor-post-title__input,
+			.editor-post-title h1,
+			.editor-post-title h2,
+			.editor-post-title h3,
+			.editor-post-title h4,
+			.editor-post-title h5 {
+				font-family: '<?php echo $header_font_value; ?>' !important;
+			}
+
+			.editor-rich-text,
+			.editor-rich-text p {
+				font-family: '<?php echo $body_font_value; ?>' !important;
+			}
+
+			.edit-post-visual-editor .editor-block-list__block h1.editor-rich-text__tinymce,
+			.edit-post-visual-editor .editor-block-list__block h2.editor-rich-text__tinymce,
+			.edit-post-visual-editor .editor-block-list__block h3.editor-rich-text__tinymce,
+			.edit-post-visual-editor .editor-block-list__block h4.editor-rich-text__tinymce,
+			.edit-post-visual-editor .editor-block-list__block h5.editor-rich-text__tinymce,
+			.edit-post-visual-editor .editor-block-list__block h6.editor-rich-text__tinymce {
+				font-family: '<?php echo $header_font_value; ?>' !important;
+			}
+
+			.edit-post-visual-editor .wp-block-cover .editor-rich-text__tinymce {
+				font-family: '<?php echo $header_font_value; ?>' !important;
+			}
+
+			.edit-post-visual-editor .wp-block-separator:not(.is-style-dots) {
+				background-color: <?php echo $color_accent; ?> !important;
+			}
+
+			.edit-post-visual-editor .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {
+				background: <?php echo $color_accent; ?> !important;
+			}
+
+			.edit-post-visual-editor .wp-block-separator.is-style-dots:before {
+				color: <?php echo $color_accent; ?> !important;
+			}
+
+			.edit-post-visual-editor .wp-block-quote:not(.is-large):not(.is-style-large) {
+				border-left-color: <?php echo $color_accent; ?> !important;
+			}
+
+			.edit-post-visual-editor .wp-block-pullquote {
+				border-top-color: <?php echo $color_accent; ?>;
+				border-bottom-color: <?php echo $color_accent; ?>;
+			}
+
+			.edit-post-visual-editor .wp-block-button .wp-block-button__link {
+				background: <?php echo $color_btn_link; ?> !important;
+			}
+
+			.edit-post-visual-editor .wp-block-button .wp-block-button__link:hover,
+			.edit-post-visual-editor .wp-block-button .wp-block-button__link:focus {
+				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+			}
+
+		</style>
+		<?php
 	}
 
 	public function customize_register( $wp_customize ) {
@@ -227,13 +302,14 @@ class Customizer {
 			font-family: '<?php echo $header_font_value; ?>';
 		}
 
-		.d-content .wp-block-button__link:hover,
-		.d-content .wp-block-button__link:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+		.d-content .wp-block-button__link,
+		.d-content .wp-block-button .wp-block-button__link {
+			background-color: <?php echo $color_btn_link; ?>;
 		}
 
-		.d-content .wp-block-button__link {
-			background-color: <?php echo $color_btn_link; ?>;
+		.d-content .wp-block-button .wp-block-button__link:hover,
+		.d-content .wp-block-button .wp-block-button__link:focus {
+		background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
 		}
 
 		.d-content .wp-block-separator:not(.is-style-dots) {
@@ -248,8 +324,7 @@ class Customizer {
 			background: <?php echo $color_accent; ?>;
 		}
 
-		.d-content blockquote.wp-block-quote,
-		.d-content blockquote {
+		.d-content .wp-block-quote:not(.is-style-solid-color) {
 			border-left-color: <?php echo $color_accent; ?>;
 		}
 
@@ -257,8 +332,6 @@ class Customizer {
 			border-top-color: <?php echo $color_accent; ?>;
 			border-bottom-color: <?php echo $color_accent; ?>;
 		}
-
-
 
 		<?php
 		$styles = ob_get_clean();

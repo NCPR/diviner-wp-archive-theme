@@ -11,6 +11,10 @@ p {
 
 	.d-content & {
 		color: $color_text;
+
+		&.has-drop-cap:not(:focus)::first-letter {
+			@include drop-cap;
+		}
 	}
 
 	.d-content--inverse & {

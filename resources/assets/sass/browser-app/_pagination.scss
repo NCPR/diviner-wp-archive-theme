@@ -13,7 +13,7 @@ ul.react-pagination li {
 	margin-right: 1px;
 
 	a {
-		@extend %button;
+		@include button;
 
 		color: $color_white;
 	}

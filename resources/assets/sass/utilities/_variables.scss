@@ -3,6 +3,7 @@
 
 $color_white: #fff;
 $color_grey_light: #dddddd;
+$color_grey_lighter: #f6f6f6;
 $color_grey: #999999;
 $color_grey_dark: #777777;
 $color_grey_darker: #333333;
@@ -19,7 +20,7 @@ $color_links_hover: $color_black;
 
 $color_headers: $color_grey_darker;
 
-$color_border: $color_grey;
+$color_border: $color_grey_light;
 $color_border_focus: $color_blue;
 
 $color_text: $color_grey_darker;

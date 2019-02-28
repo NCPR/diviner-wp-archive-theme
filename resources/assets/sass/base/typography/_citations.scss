@@ -15,55 +15,7 @@ q {
  * Global Quotes & Blockquotes
  * ----------------------------------------------------------------------------- */
 
-blockquote,
-blockquote.wp-block-quote {
-	background: transparent;
-	text-align: left;
-	border-left: 4px solid $color_accent;
-	padding-left: 1em;
 
-	p {
-		font-size: 16px;
-		font-style: italic;
-		font-weight: $t_font_weight_normal;
-		line-height: 1.4;
-
-		@include g-state(medium) {
-			font-size: 20px;
-		}
-	}
-
-	cite {
-		display: block;
-		font-size: 13px;
-		font-weight: $t_font_weight_bold;
-		margin-top: 12px;
-		text-transform: uppercase;
-		font-style: normal;
-		color: $color_grey;
-
-		@include g-state(medium) {
-			font-size: 16px;
-		}
-	}
-
-	p:last-of-type {
-		margin-bottom: 0;
-	}
-
-	&.is-large,
-	&.is-style-large {
-		margin: 40px auto;
-		border-left: none;
-		padding-left: 0;
-
-		p {
-			font-size: 20px;
-
-			@include g-state(medium) {
-				font-size: 27px;
-			}
-		}
-	}
-
+blockquote {
+	@include blockquote;
 }

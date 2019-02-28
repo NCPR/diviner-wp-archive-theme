@@ -3,104 +3,40 @@
 // Headers
 //
 // -----------------------------------------------------------------------------
-%headers {
-	font-weight: $t_font_weight_semi_bold;
-	margin-bottom: $d_spacer_sm;
-	line-height: $t_line_height_m;
-	font-family: $t_font_headers;
-	color: $color_headers;
-
-	small {
-		font-size: 80%;
-		color: grey;
-		line-height: 0;
-	}
-
-	a & {
-		text-decoration: none;
-
-		&:hover,
-		&:focus {
-			color: $color_headers;
-			text-decoration: underline;
-		}
-	}
-}
 
 
 h1, h2, h3, h4, h5, h6 {
-	@extend %headers;
+	@include headers;
 }
 
 h1,
-%h1 {
-	font-size: 2.3em;
-
-	@include g-state(medium) {
-		font-size: 2.8em;
-	}
-}
-h2,
-%h2 {
-	font-size: 1.9em;
-
-	@include g-state(medium) {
-		font-size: 2.2em;
-	}
-}
-h3,
-%h3 {
-
-	font-size: 1.8em;
-
-	@include g-state(medium) {
-		font-size: 2em;
-	}
-}
-h4,
-%h4 {
-	font-size: 1.6em;
-
-	@include g-state(medium) {
-		font-size: 1.8em;
-	}
-}
-h5,
-%h5 {
-	font-size: 1.4em;
-
-	@include g-state(medium) {
-		font-size: 1.6em;
-	}
-}
-h6,
-%h6 {
-	font-size: 1.2em;
-	text-transform: uppercase;
-
-	@include g-state(medium) {
-		font-size: 1.4em;
-	}
-}
-
-
 .h1 {
-	@extend %h1;
+	@include h1;
 }
+
+h2,
 .h2 {
-	@extend %h2;
+	@include h2;
 }
+
+h3,
 .h3 {
-	@extend %h3;
+	@include h3;
 }
+
+h4,
 .h4 {
-	@extend %h4;
+	@include h4;
 }
+
+h5,
 .h5 {
-	@extend %h5;
+	@include h5;
 }
+
+h6,
 .h6 {
-	@extend %h6;
+	@include h6;
 }
 
 .d-content {

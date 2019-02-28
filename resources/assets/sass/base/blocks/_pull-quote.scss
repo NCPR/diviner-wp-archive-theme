@@ -5,16 +5,16 @@
 .wp-block-pullquote {
 	border: none;
 	padding: 0;
-	margin-top: $d_spacer_lrg;
-	margin-bottom: $d_spacer_lrg;
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
 	line-height: inherit;
 
 	@include g-state(medium) {
-		margin-top: $d_spacer_m;
-		margin-bottom: $d_spacer_m;
+		margin-top: $d_spacer_lrg;
+		margin-bottom: $d_spacer_lrg;
 	}
 
-	blockquote {
+	.block-library-pullquote__content {
 		border-left: 0;
 		padding: 16px 0;
 		border-top: 4px solid $color_grey_dark;
@@ -31,12 +31,17 @@
 	&.is-style-solid-color blockquote {
 		border-top-color: transparent;
 		border-bottom-color: transparent;
+		border-left-width: 0;
+		padding: $d_spacer_m;
+
+		@include g-state(medium) {
+			padding: $d_spacer_lrg;
+		}
 	}
 
 	p {
 		font-size: 20px;
-		font-style: italic;
-		font-weight: $t_font_weight_normal;
+		font-weight: $t_font_weight_bold;
 		line-height: 1.4;
 
 		@include g-state(medium) {
@@ -67,7 +72,6 @@
 	}
 
 	&.alignleft {
-
 		@include g-state(medium) {
 			margin-right: $d_spacer_m;
 		}
@@ -79,21 +83,12 @@
 		}
 	}
 
-	cite {
-		display: block;
-		font-size: 13px;
-		font-weight: $t_font_weight_bold;
-		margin-top: 12px;
-		text-transform: uppercase;
-		font-style: normal;
-		color: $color_grey;
-
-		@include g-state(medium) {
-			font-size: 16px;
-		}
+	cite,
+	.wp-block-pullquote__citation {
+		@include cite-text;
 	}
 
-	&.is-style-solid-color cite {
-		color: inherit;
+	&.is-style-solid-color blockquote cite {
+		@include cite-text;
 	}
 }
