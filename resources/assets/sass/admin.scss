@@ -1,2 +1,6 @@
-@import 'utilities/all';
-@import 'admin/all';
+
+@import "utilities/variables";
+@import "utilities/girdle";
+@import 'admin/shared';
+@import 'admin/diviner-field';
+@import 'admin/archive-item';

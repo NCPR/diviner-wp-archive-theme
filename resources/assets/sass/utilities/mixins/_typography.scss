@@ -1,11 +1,153 @@
 
 @mixin body-text {
 	font-size: $t_font_size_m;
-	line-height: $t_line_height_lrg;
+	line-height: $t_line_height_xlrg;
 	letter-spacing: 0.3px;
 
 	@include g-state(medium) {
 		font-size: $t_font_size_lrg;
-		line-height: $t_line_height_lrg;
+		line-height: $t_line_height_xlrg;
 	}
 }
+
+@mixin drop-cap {
+	font-size: 5.1em;
+	line-height: 0.68;
+	font-weight: $t_font_weight_light;
+	margin: 0.11em 0.1em 0 -0.06em;
+}
+
+@mixin cite-text {
+	display: block;
+	font-size: 13px;
+	font-weight: $t_font_weight_bold;
+	margin-top: 12px;
+	text-transform: uppercase;
+	font-style: normal;
+
+	@include g-state(medium) {
+		font-size: 16px;
+	}
+}
+
+@mixin blockquote {
+	background: transparent;
+	text-align: left;
+	border-left: 4px solid $color_accent;
+	padding-left: 1em;
+
+	p {
+		font-size: 16px;
+		font-style: normal;
+		font-weight: $t_font_weight_normal;
+		line-height: 1.4;
+
+		@include g-state(medium) {
+			font-size: 20px;
+		}
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	cite {
+		@include cite-text;
+		color: $color_grey;
+	}
+
+	&.is-large,
+	&.is-style-large {
+		margin: 40px auto;
+		border-left: none;
+		padding-left: 0;
+
+		p {
+			font-size: 20px;
+
+			@include g-state(medium) {
+				font-size: 27px;
+			}
+		}
+		
+		cite {
+			@include cite-text;
+			text-align: right;
+		}
+	}
+}
+
+@mixin headers {
+	font-weight: $t_font_weight_semi_bold;
+	margin-bottom: $d_spacer_sm;
+	line-height: $t_line_height_m;
+	font-family: $t_font_headers;
+	color: $color_headers;
+
+	small {
+		font-size: 80%;
+		color: grey;
+		line-height: 0;
+	}
+
+	a & {
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			color: $color_headers;
+			text-decoration: underline;
+		}
+	}
+}
+
+@mixin h1 {
+	font-size: 2.3em;
+
+	@include g-state(medium) {
+		font-size: 2.8em;
+	}
+}
+
+@mixin h2 {
+	font-size: 1.9em;
+
+	@include g-state(medium) {
+		font-size: 2.2em;
+	}
+}
+
+@mixin h3 {
+
+	font-size: 1.8em;
+
+	@include g-state(medium) {
+		font-size: 2em;
+	}
+}
+
+@mixin h4 {
+	font-size: 1.6em;
+
+	@include g-state(medium) {
+		font-size: 1.8em;
+	}
+}
+
+@mixin h5 {
+	font-size: 1.4em;
+
+	@include g-state(medium) {
+		font-size: 1.6em;
+	}
+}
+
+@mixin h6 {
+	font-size: 1.2em;
+	text-transform: uppercase;
+
+	@include g-state(medium) {
+		font-size: 1.4em;
+	}
+}
+

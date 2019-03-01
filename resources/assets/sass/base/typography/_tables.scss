@@ -4,7 +4,7 @@
  * ----------------------------------------------------------------------------- */
 
 .table,
-.t-content table {
+.d-content table {
 	font-size: $t_font_size_sm;
 	margin: $d_spacer_m auto;
 	text-align: left;
@@ -24,7 +24,7 @@
  * ----------------------------------------------------------------------------- */
 
 .th,
-.t-content th {
+.d-content th {
 	padding: 14px 1em 12px;
 	font-family: $t_font_headers;
 	text-transform: uppercase;
@@ -46,7 +46,7 @@
  * ----------------------------------------------------------------------------- */
 
 .tr,
-.t-content tr {
+.d-content tr {
 
 	thead & {
 		border-bottom: 1px solid $color_border;
@@ -66,7 +66,7 @@
  * ----------------------------------------------------------------------------- */
 
 .td,
-.t-content td {
+.d-content td {
 	padding: 12px 1em 10px;
 	font-size: 14px;
 

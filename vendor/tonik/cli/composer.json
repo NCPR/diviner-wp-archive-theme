@@ -1,0 +1,28 @@
+{
+    "name": "tonik/cli",
+    "description": "Simple CLI for initiating themes based on Tonik WordPress Starter Theme.",
+    "keywords": ["tonik", "gin", "wordpress", "cli"],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0",
+        "league/climate": "^3.2",
+        "symfony/finder": "~2.3|~3.0",
+        "symfony/filesystem": "~2.3|~3.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "~1.0.0",
+        "phpunit/phpunit": "~5.3.0",
+        "satooshi/php-coveralls": "~1.0.0",
+        "php-mock/php-mock-phpunit": "^1.1"
+    },
+    "autoload": {
+        "exclude-from-classmap": ["/tests/"],
+        "psr-4": {
+            "Tonik\\CLI\\": "src/CLI/"
+        }
+    },
+    "bin": [
+        "tonik"
+    ],
+    "minimum-stability": "dev"
+}

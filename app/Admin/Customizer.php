@@ -46,13 +46,97 @@ class Customizer {
 	const SECTION_THEME_SETTING_FONT_BODY = 'diviner_setting_font_body';
 	const SECTION_THEME_CONTROL_FONT_BODY = 'diviner_control_font_body';
 
-	const CUSTOMIZER_FONT_CLASSNAME_HEADER = 'diviner-comstumizer-font-header';
-	const CUSTOMIZER_FONT_CLASSNAME_BODY = 'diviner-comstumizer-font-body';
+	const CUSTOMIZER_FONT_CLASSNAME_HEADER = 'diviner-costumizer-font-header';
+	const CUSTOMIZER_FONT_CLASSNAME_BODY = 'diviner-costumizer-font-body';
 
 
 	public function hooks() {
 		add_action( 'customize_register', [$this, 'customize_register'], 10, 1 );
 		add_action( 'wp_enqueue_scripts', [$this, 'customize_css'] );
+		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
+	}
+
+	public function block_editor_assets() {
+		$this->block_styles();
+	}
+
+	public function block_styles() {
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
+		$header_font_value = General::FONTS[$header_font_key];
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
+		$body_font_value = General::FONTS[$body_font_key];
+		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
+		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
+		?>
+		<style type="text/css">
+			.edit-post-visual-editor.editor-styles-wrapper {
+				font-family: '<?php echo $body_font_value; ?>';
+			}
+
+			.editor-post-title__block .editor-post-title__input,
+			.editor-post-title h1,
+			.editor-post-title h2,
+			.editor-post-title h3,
+			.editor-post-title h4,
+			.editor-post-title h5 {
+				font-family: '<?php echo $header_font_value; ?>' !important;
+			}
+
+			.editor-rich-text,
+			.editor-rich-text p {
+				font-family: '<?php echo $body_font_value; ?>' !important;
+			}
+
+			.editor-styles-wrapper .editor-block-list__block h1.editor-rich-text__tinymce,
+			.editor-styles-wrapper .editor-block-list__block h2.editor-rich-text__tinymce,
+			.editor-styles-wrapper .editor-block-list__block h3.editor-rich-text__tinymce,
+			.editor-styles-wrapper .editor-block-list__block h4.editor-rich-text__tinymce,
+			.editor-styles-wrapper .editor-block-list__block h5.editor-rich-text__tinymce,
+			.editor-styles-wrapper .editor-block-list__block h6.editor-rich-text__tinymce {
+				font-family: '<?php echo $header_font_value; ?>' !important;
+			}
+
+			.editor-styles-wrapper .wp-block-cover .editor-rich-text__tinymce {
+				font-family: '<?php echo $header_font_value; ?>' !important;
+			}
+
+			.editor-styles-wrapper .wp-block-separator:not(.is-style-dots) {
+				background-color: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {
+				background: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-separator.is-style-dots:before {
+				color: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-quote:not(.is-large):not(.is-style-large) {
+				border-left-color: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-pullquote {
+				border-top-color: <?php echo $color_accent; ?> !important;
+				border-bottom-color: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-button .wp-block-button__link {
+				background: <?php echo $color_btn_link; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-button .wp-block-button__link:hover,
+			.editor-styles-wrapper .wp-block-button .wp-block-button__link:focus {
+				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-freeform blockquote {
+				border-left-color: <?php echo $color_accent; ?> !important;
+			}
+
+
+		</style>
+		<?php
 	}
 
 	public function customize_register( $wp_customize ) {
@@ -182,17 +266,25 @@ class Customizer {
 		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
 		$body_font_value = General::FONTS[$body_font_key];
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
+		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 
 		ob_start();
 		?>
-
+		.d-content {
+			font-family: '<?php echo $body_font_value; ?>';
+		}
+		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
+			font-family: '<?php echo $header_font_value; ?>' !important;
+		}
+		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
+			font-family: '<?php echo $body_font_value; ?>' !important;
+		}
 		.d-content a {
 			color: <?php echo $color_btn_link; ?>;
 		}
 		.d-content .btn {
 			background-color: <?php echo $color_btn_link; ?>;
 		}
-
 		.d-content .btn:hover,
 		.d-content .btn:focus {
 			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
@@ -207,19 +299,57 @@ class Customizer {
 			font-family: '<?php echo $header_font_value; ?>';
 		}
 
-		.d-content {
+		.d-content blockquote {
+			border-left-color: <?php echo $color_accent; ?>;;
+		}
+
+		.d-content blockquote p {
 			font-family: '<?php echo $body_font_value; ?>';
 		}
 
 		.footer {
 			font-family: '<?php echo $body_font_value; ?>';
 		}
-		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
-			font-family: '<?php echo $header_font_value; ?>' !important;
+		/* Blocks */
+		.d-content .wp-block-cover .wp-block-cover-text {
+			font-family: '<?php echo $header_font_value; ?>';
 		}
-		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
-			font-family: '<?php echo $body_font_value; ?>' !important;
+
+		.d-content .wp-block-button__link,
+		.d-content .wp-block-button .wp-block-button__link {
+			background-color: <?php echo $color_btn_link; ?> !important;
 		}
+
+		.d-content .wp-block-button .wp-block-button__link:hover,
+		.d-content .wp-block-button .wp-block-button__link:focus {
+			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+		}
+
+		.d-content .wp-block-separator:not(.is-style-dots) {
+			background-color: <?php echo $color_accent; ?> !important;
+		}
+
+		.d-content .wp-block-separator.is-style-dots:before {
+			color: <?php echo $color_accent; ?> !important;
+		}
+
+		.d-content .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {
+			background: <?php echo $color_accent; ?> !important;
+		}
+
+		.d-content .wp-block-quote:not(.is-style-solid-color) {
+			border-left-color: <?php echo $color_accent; ?> !important;
+		}
+
+		.d-content .wp-block-pullquote blockquote {
+			border-top-color: <?php echo $color_accent; ?> !important;
+			border-bottom-color: <?php echo $color_accent; ?> !important;
+		}
+
+		.d-content .wp-block-freeform blockquote {
+			border-left-color: <?php echo $color_accent; ?> !important;
+		}
+
 		<?php
 		$styles = ob_get_clean();
 		return $styles;
@@ -236,10 +366,6 @@ class Customizer {
 		<style type="text/css">
 			body .header {
 				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT ); ?>;
-			}
-
-			.sidebar a {
-				color: <?php echo $color_btn_link; ?>;
 			}
 
 			.primary-menu .menu a,
@@ -277,20 +403,9 @@ class Customizer {
 			.single-item__header .h6 {
 				font-family: "<?php echo $header_font_value; ?>";
 			}
-			.sidebar h1,
-			.sidebar h2,
-			.sidebar h3,
-			.sidebar h4,
-			.sidebar h5,
-			.sidebar h6 {
-				font-family: "<?php echo $header_font_value; ?>";
-			}
+
 			.primary-menu a {
 				font-family: "<?php echo $header_font_value; ?>" !important;
-			}
-
-			* {
-				font-family: "<?php echo $body_font_value; ?>";
 			}
 
 			.footer {

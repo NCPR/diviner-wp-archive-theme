@@ -1,85 +1,21 @@
 
+blockquote,
+q {
+	.d-content & {
+		margin: $d_spacer_m auto;
+
+		@include g-state(medium) {
+			margin: $d_spacer_lrg auto;
+		}
+	}
+}
+
 
 /* -----------------------------------------------------------------------------
  * Global Quotes & Blockquotes
  * ----------------------------------------------------------------------------- */
 
-blockquote,
-q {
 
-	.d-content & {
-		margin: $d_spacer_m auto;
-	}
-}
-
-%quote-base {
-	text-align: center;
-	max-width: 100%;
-	padding: $d_spacer_sm 0;
-
-	@include g-state(medium) {
-		padding: $d_spacer_m 0;
-	}
-}
-
-%quote-text {
-	font-size: 24px;
-	font-family: $t_font_headers;
-	text-transform: uppercase;
-	line-height: $t_line_height_m;
-	color: $color_text;
-
-	@include g-state(medium) {
-		font-size: 44px;
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Quotes
- * ----------------------------------------------------------------------------- */
-
-/* q */
-.d-content q {
-	@extend %quote-base;
-	@extend %quote-text;
-
-	display: block;
-}
-
-/* -----------------------------------------------------------------------------
- * Blockquotes
- * ----------------------------------------------------------------------------- */
-
-/* blockquote */
-.d-content blockquote {
-	@extend %quote-base;
-
-	p {
-		@extend %quote-text;
-
-		margin: 0 auto;
-
-		& ~ p {
-			margin-top: $d_spacer_lrg;
-		}
-	}
-}
-
-/* -----------------------------------------------------------------------------
- * Cite
- * ----------------------------------------------------------------------------- */
-
-/* cite */
-.cite,
-.d-content cite {
-	font-size: $t_font_size_m;
-	text-transform: none;
-	color: $color_text;
-	font-style: normal;
-	display: block;
-	margin-top: $d_spacer_m;
-
-	@include g-state(medium) {
-		font-size: 22px;
-	}
+blockquote {
+	@include blockquote;
 }

@@ -7,6 +7,7 @@
 		color: $color_white;
 		text-decoration: none;
 		font-size: 18px;
+		font-weight: $t_font-weight_bold;
 
 		&:hover,
 		&:focus {
@@ -16,6 +17,10 @@
 
 	p {
 		color: $color_white;
+	}
+
+	@include g-state(medium) {
+		padding: $d_spacer_lrg 0;
 	}
 }
 

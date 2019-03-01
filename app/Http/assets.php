@@ -36,16 +36,6 @@ function register_scripts() {
 add_action('wp_enqueue_scripts', 'Tonik\Theme\App\Http\register_scripts');
 
 /**
- * Registers editor stylesheets.
- *
- * @return void
- */
-function register_editor_stylesheets() {
-    add_editor_style(asset_path('css/app.css'));
-}
-add_action('admin_init', 'Tonik\Theme\App\Http\register_editor_stylesheets');
-
-/**
  * Registers admin script files.
  *
  * @return void

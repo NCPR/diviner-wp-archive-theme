@@ -1,5 +1,10 @@
+@import 'default';
+@import 'global';
+@import 'layout';
 @import 'typography/all';
-@import 'forms/default';
+@import 'buttons';
 @import 'sidebar';
 @import 'widget';
 @import "media";
+@import "blocks/all";
+@import 'forms/default';

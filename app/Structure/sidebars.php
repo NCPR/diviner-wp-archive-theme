@@ -30,4 +30,5 @@ function register_widget_areas()
         'after_title'  => '</h5>',
     ]);
 }
-add_action('widgets_init', 'Tonik\Theme\App\Structure\register_widget_areas');
+// ToDo: remove for now
+// add_action('widgets_init', 'Tonik\Theme\App\Structure\register_widget_areas');

@@ -58,12 +58,66 @@ class General {
 	public function hooks() {
 		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
 		add_action( 'wp_enqueue_scripts', [$this, 'google_fonts'], 0, 0 );
+		add_action( 'wp_enqueue_scripts', [$this, 'output_color_swatch_styles'] );
+		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
 		// add_action( 'wp_enqueue_scripts', [$this, 'lazy-load'], 0, 0 );
 		add_action( 'theme/header', [$this, 'render_header']);
 		add_action( 'theme/header/feature-image', [$this, 'render_header_feature_image']);
 		add_action( 'after_setup_theme', [$this, 'after_setup_theme'] );
+		add_filter( 'wp_resource_hints', [$this, 'resource_hints'], 10, 2 );
 
-		add_filter('theme/sidebar/visibility', [$this, 'single_sidebar_visibility']);
+	}
+
+	function block_editor_assets() {
+		$this->google_fonts();
+		$this->output_color_swatch_styles();
+	}
+
+	/**
+	 * Add preconnect for Google Fonts.
+	 *
+	 * @param  array         $urls           URLs to print for resource hints.
+	 * @param  string|string $relation_type  The relation type the URLs are printed.
+	 * @return array         $urls           URLs to print for resource hints.
+	 */
+	function resource_hints( $urls, $relation_type ) {
+		if ( 'preconnect' === $relation_type ) {
+			$urls[] = array(
+				'href' => 'https://fonts.gstatic.com',
+				'crossorigin',
+			);
+		}
+		return $urls;
+	}
+
+	function get_color_swatch_styles() {
+		$styles_background = array_map( function( $color ) {
+			return sprintf(
+				'.has-%s-background-color { background-color: %s !important; }',
+				$color['slug'],
+				$color['color']
+			);
+		},Swatches::get_colors());
+
+		$styles_text = array_map( function( $color ) {
+			return sprintf(
+				'.has-%s-color, .has-%s-color p { color: %s !important; }',
+				$color['slug'],
+				$color['slug'],
+				$color['color']
+			);
+		},Swatches::get_colors());
+
+		$style_tag = sprintf(
+			'<style type="text/css">%s%s</style>',
+			implode("", $styles_background),
+			implode("", $styles_text)
+		);
+		return $style_tag;
+	}
+
+	function output_color_swatch_styles() {
+		echo $this->get_color_swatch_styles();
 	}
 
 	/**
@@ -71,28 +125,15 @@ class General {
 	 *
 	 * @see apply_filters('theme/sidebar/visibility')
 	 */
-	function single_sidebar_visibility($status)
-	{
-		if (is_404() || is_page()) {
-			return false;
-		}
-
-		if ( !is_active_sidebar( static::SIDEBAR_RIGHT_ID ) ) {
-			return false;
-		}
-
-		return $status;
+	function single_sidebar_visibility($status) {
+		return false;
 	}
 
 	/**
 	 * Wrapper class is the container around the content area. Add sidebar or other decorator as necessary
 	 */
 	static function get_wrapper_classes() {
-		$classes = [ 'wrapper' ];
-		$show_sidebar = apply_filters('theme/sidebar/visibility', true);
-		if ($show_sidebar) {
-			$classes[] = 'wrapper--with-sidebar';
-		}
+		$classes = [ 'wrapper', 'wrapper--staggered' ];
 		return implode ( ' ' , $classes );
 	}
 
@@ -103,9 +144,12 @@ class General {
 	 */
 	function after_setup_theme() {
 
-		// add_editor_style( 'public/css/editor-styles.css' );
-
 		$this->register_navigation_areas();
+
+		// Theme supports wide images, galleries and videos.
+		add_theme_support( 'align-wide' );
+		add_theme_support( 'responsive-embeds' );
+
 	}
 
 	/**
@@ -273,20 +317,31 @@ class General {
 		return '';
 	}
 
+	static function version() {
+		$my_theme = wp_get_theme();
+		$version = $my_theme->get( 'Version' );
+
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
+			$version = uniqid( 'version-dev-' );
+		}
+
+		return $version;
+	}
+
 	public function google_fonts() {
 
 		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
 		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_BODY, static::FONTS_DEFAULT_BODY);
 
 		if( $header_font_key ) {
-			wp_enqueue_style( 'linje-headings-fonts', '//fonts.googleapis.com/css?family='. esc_html($header_font_key) );
+			wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. esc_html($header_font_key) );
 		} else {
-			wp_enqueue_style( 'linje-source-sans', '//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
+			wp_enqueue_style( 'diviner-source-sans', '//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
 		}
 		if( $body_font_key ) {
-			wp_enqueue_style( 'linje-body-fonts', '//fonts.googleapis.com/css?family='. esc_html($body_font_key) );
+			wp_enqueue_style( 'diviner-body-fonts', '//fonts.googleapis.com/css?family='. esc_html($body_font_key) );
 		} else {
-			wp_enqueue_style( 'linje-source-body', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,700,600');
+			wp_enqueue_style( 'diviner-source-body', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,700,600');
 		}
 	}
 

@@ -46,17 +46,6 @@ use Diviner\Theme\General;
 				</div>
 			<?php endif; ?>
 
-			<?php if (apply_filters('theme/sidebar/visibility', true)) : ?>
-				<?php
-				/**
-				 * Functions hooked into `theme/index/sidebar` action.
-				 *
-				 * @hooked Tonik\Theme\App\Structure\render_sidebar - 10
-				 */
-				do_action('theme/index/sidebar');
-				?>
-			<?php endif; ?>
-
 		</div>
 	</div>
 
