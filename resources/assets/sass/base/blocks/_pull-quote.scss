@@ -14,10 +14,9 @@
 		margin-bottom: $d_spacer_lrg;
 	}
 
-	blockquote,
-	.block-library-pullquote__content {
+	blockquote {
 		border-left: 0;
-		padding: 16px 0;
+		padding: $d_spacer_m 0;
 		border-top: 4px solid $color_grey_dark;
 		border-bottom: 4px solid $color_grey_dark;
 		text-align: center;
@@ -31,6 +30,10 @@
 			p {
 				color: inherit;
 			}
+		}
+
+		@include g-state(medium) {
+			padding: $d_spacer_lrg 0;
 		}
 	}
 

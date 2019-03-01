@@ -71,6 +71,7 @@
 		}
 		
 		cite {
+			@include cite-text;
 			text-align: right;
 		}
 	}
