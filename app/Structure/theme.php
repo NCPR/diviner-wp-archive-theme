@@ -6,6 +6,7 @@ use \Pimple\Container;
 use \Diviner\Theme\General;
 use \Diviner\Theme\Image;
 use \Diviner\Theme\BrowsePage;
+use \Diviner\Theme\Post_Meta;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
 
@@ -24,3 +25,8 @@ $container[ 'theme.browse_page' ] = function ( Container $container ) {
 	return new BrowsePage();
 };
 $container[ 'theme.browse_page' ]->hooks();
+
+$container[ 'theme.post_meta' ] = function ( Container $container ) {
+	return new Post_Meta();
+};
+$container[ 'theme.post_meta' ]->hooks();
