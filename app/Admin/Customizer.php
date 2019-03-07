@@ -291,12 +291,18 @@ class Customizer {
 		}
 
 		.d-content h1,
+		.h1,
 		.d-content h2,
+		.h2,
 		.d-content h3,
+		.h3,
 		.d-content h4,
+		.h4,
 		.d-content h5,
-		.d-content h6 {
-			font-family: '<?php echo $header_font_value; ?>';
+		.h5,
+		.d-content h6,
+		.h6 {
+			font-family: '<?php echo $header_font_value; ?>' !important;
 		}
 
 		.d-content blockquote {

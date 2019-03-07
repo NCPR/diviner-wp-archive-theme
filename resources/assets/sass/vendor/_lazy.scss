@@ -1,0 +1,10 @@
+
+.lazyload {
+	opacity: 0;
+	transition: $t_transition;
+}
+
+.lazyloaded {
+	opacity: 1;
+	transition: $t_transition;
+}

@@ -31,7 +31,9 @@ add_action('wp_enqueue_scripts', 'Tonik\Theme\App\Http\register_stylesheets');
  * @return void
  */
 function register_scripts() {
-    wp_enqueue_script('app', asset_path('js/app.js'), ['jquery'], null, true);
+	$version = \Diviner\Theme\General::version();
+	wp_enqueue_script('vendor', asset_path('js/vendor.js'), [], $version, false);
+    wp_enqueue_script('app', asset_path('js/app.js'), ['jquery'], $version, true);
 }
 add_action('wp_enqueue_scripts', 'Tonik\Theme\App\Http\register_scripts');
 
