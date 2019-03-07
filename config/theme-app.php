@@ -102,6 +102,7 @@ return [
 		'Theme/Image.php',
 		'Theme/Swatches.php',
 		'Theme/BrowsePage.php',
+		'Theme/Post_Meta.php',
 		'Http/assets.php',
 		'Http/ajaxes.php',
 		'Setup/actions.php',
