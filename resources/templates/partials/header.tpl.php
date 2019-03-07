@@ -9,7 +9,7 @@
 	<button class="header__menu-trigger" data-js="header__menu-trigger">
 		<span class="fas fa-bars"></span>
 		<div class="a11y-hidden">
-			<?php __( 'Toggle Menu', 'ncpr-diviner'); ?>
+			<?= __( 'Toggle Menu', 'ncpr-diviner'); ?>
 		</div>
 	</button>
 

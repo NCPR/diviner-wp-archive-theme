@@ -61,6 +61,7 @@
 	@include g-state(full) {
 		margin-top: 0;
 		padding-top: 0;
+		margin-right: calc(-1 * #{$d_spacer_m});
 
 		.menu > ul > li {
 			overflow: visible;
@@ -75,11 +76,15 @@
 		.menu > ul > li + li {
 			margin-left: $d_spacer_sm;
 		}
+
 	}
 
 	a {
-		@include button;
+		@include button-global;
 
+		font-size: 20px;
+		text-transform: none;
+		padding: .5em 1em;
 		transition: $t_transition;
 
 		.menu--opened & {
@@ -88,6 +93,7 @@
 
 		@include g-state(full) {
 			background-color: transparent;
+			text-transform: uppercase;
 			border: none;
 			color: $color_grey;
 			font-family: $t_font_helvetica;
@@ -148,7 +154,7 @@
 		margin-left: -50px;
 		top: 100%;
 		padding: $d_spacer_sm;
-		background-color: $color_white;
+		background-color: $color_background;
 		box-shadow: 0 3px 7px 0 rgba(61,61,61,0.3);
 		max-width: 250px;
 		opacity: 0;
@@ -161,7 +167,7 @@
 
 		.menu > .menu-item-has-children:last-of-type > & {
 			left: auto;
-			right: 0;
+			right: 10px;
 
 		}
 

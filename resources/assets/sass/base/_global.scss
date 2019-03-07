@@ -16,6 +16,7 @@ html, body, #page {
 }
 
 html, body {
+
 	&.admin-bar {
 		top: $d_spacer_wpadmin_mobile;
 
@@ -33,6 +34,7 @@ body {
 	hyphens: auto;
 	text-rendering: optimizeLegibility;
 	vertical-align: baseline;
+	background-color: $color_background;
 }
 
 

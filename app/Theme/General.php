@@ -164,6 +164,21 @@ class General {
 		]);
 	}
 
+	static function is_dark($hex) {
+		return static::get_brightness($hex) > 150;
+	}
+
+	static function get_brightness($hex) {
+		// returns brightness value from 0 to 255
+		// strip off any leading #
+		$hex = str_replace('#', '', $hex);
+		$c_r = hexdec(substr($hex, 0, 2));
+		$c_g = hexdec(substr($hex, 2, 2));
+		$c_b = hexdec(substr($hex, 4, 2));
+
+		return (($c_r * 299) + ($c_g * 587) + ($c_b * 114)) / 1000;
+	}
+
 	static function luminance($hexcolor, $percent = 0.1) {
 		if ( strlen( $hexcolor ) < 6 ) {
 			$hexcolor = $hexcolor[0] . $hexcolor[0] . $hexcolor[1] . $hexcolor[1] . $hexcolor[2] . $hexcolor[2];

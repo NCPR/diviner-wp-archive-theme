@@ -368,20 +368,31 @@ class Customizer {
 		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
 		$body_font_value = General::FONTS[$body_font_key];
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
+		$color_header_bg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT );
+		$color_subheader_text_desktop = General::is_dark($color_header_bg) ? $color_header_bg : 'black';
 		?>
 		<style type="text/css">
 			body .header {
-				background-color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT ); ?>;
+				background-color: <?php echo $color_header_bg; ?>;
+			}
+
+			.header__menu-trigger span {
+				color: <?php echo $color_header_bg; ?> !important;
+			}
+
+			.header__menu-trigger:hover span,
+			.header__menu-trigger:focus span {
+				color: <?php echo $color_btn_link; ?> !important;
 			}
 
 			.primary-menu .menu a,
 			.primary-menu .menu a:visited {
-				background-color: <?php echo $color_btn_link; ?>;
+				color: <?php echo $color_btn_link; ?>;
 			}
 
 			.primary-menu .menu a:hover,
 			.primary-menu .menu a:focus {
-				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+				color: <?php echo General::luminance( substr($color_btn_link, 1), -0.8 ); ?>;
 			}
 
 			@media screen and (min-width: 960px) {
@@ -395,6 +406,18 @@ class Customizer {
 					color: <?php echo get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER, static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER_DEFAULT ); ?>;
 					background-color: transparent;
 				}
+
+				.primary-menu .menu .sub-menu a,
+				.primary-menu .menu .sub-menu a:visited {
+					color: <?php echo $color_subheader_text_desktop; ?>;
+				}
+
+				.primary-menu .menu .sub-menu a:focus,
+				.primary-menu .menu .sub-menu a:hover {
+					color: <?php echo $color_subheader_text_desktop; ?>;
+					text-decoration: underline;
+				}
+
 			}
 
 			body .footer {
