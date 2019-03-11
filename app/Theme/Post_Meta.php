@@ -28,8 +28,8 @@ class Post_Meta {
 	/**
 	 * Adds post meta
 	 */
-	public function add_post_meta()
-	{
+	public function add_post_meta() {
+		// ToDo revisit once the ->set_context( 'side' ) works better
 		$container = Container::make( 'post_meta', __( 'Subheader', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', 'page' )
 			->or_where( 'post_type', '=', 'post' )
