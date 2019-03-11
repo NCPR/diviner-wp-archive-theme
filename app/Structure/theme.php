@@ -7,9 +7,9 @@ use \Diviner\Theme\General;
 use \Diviner\Theme\Image;
 use \Diviner\Theme\BrowsePage;
 use \Diviner\Theme\Post_Meta;
+use \Diviner\Theme\Widgets;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
-
 
 $container[ 'theme.general' ] = function ( Container $container ) {
 	return new General();
@@ -30,3 +30,8 @@ $container[ 'theme.post_meta' ] = function ( Container $container ) {
 	return new Post_Meta();
 };
 $container[ 'theme.post_meta' ]->hooks();
+
+$container[ 'theme.widgets' ] = function ( Container $container ) {
+	return new Widgets();
+};
+$container[ 'theme.widgets' ]->hooks();

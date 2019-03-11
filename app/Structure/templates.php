@@ -42,14 +42,22 @@ add_action('theme/index/content/none', 'Tonik\Theme\App\Structure\render_empty_c
  *
  * @see resources/templates/single.tpl.php
  */
-function render_post_content()
-{
-	// depends on post type
+function render_post_content() {
 	$type = get_post_type();
-	if ( $type === 'page' ) {
-		template('partials/page/content');
-	} else {
-		template(['partials/post/content', get_post_format()]);
+	$path = sprintf(
+		'partials/%s/content',
+		$type
+	);
+	try {
+		template([
+			$path,
+			get_post_format()
+		]);
+	} catch (mysqli_sql_exception $ex) {
+		template([
+			'partials/post/content',
+			get_post_format()
+		]);
 	}
 }
 add_action('theme/single/content', 'Tonik\Theme\App\Structure\render_post_content');

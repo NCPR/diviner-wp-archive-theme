@@ -2,6 +2,9 @@
 
 	<header class="single-item__header">
 		<h1 class="single-item__header-title h1"><?php the_title(); ?></h1>
+		<?php
+		do_action('theme/header/after-title');
+		?>
 	</header>
 
 	<div class="d-content">

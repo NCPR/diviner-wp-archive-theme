@@ -112,7 +112,6 @@ return [
 		'Setup/services.php',
 		'Structure/theme.php',
 		'Structure/widgets.php',
-		'Structure/sidebars.php',
 		'Structure/templates.php',
 		'Structure/posttypes.php',
 		'Structure/admin.php',
