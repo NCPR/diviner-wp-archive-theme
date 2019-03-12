@@ -22,6 +22,10 @@ class General {
 	const IMAGE_SIZE_FEATURE_4x3_LRG  = 'image_size_feature_4x3_lrg';
 	const IMAGE_SIZE_FEATURE_4x3_MD = 'image_size_feature_4x3_md';
 
+	// overridden by CSS
+	const OEMBED_AUDIO_DIMENSIONS_WIDTH = 700;
+	const OEMBED_AUDIO_DIMENSIONS_HEIGHT = 81;
+
 	static $image_sizes = [
 		self::IMAGE_SIZE_BROWSE_POPUP => [
 			'width'  => 600,

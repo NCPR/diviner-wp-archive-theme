@@ -1,5 +1,14 @@
 <?php
 use Diviner\Theme\General;
+use Diviner\Post_Types\Archive_Item\Post_Meta as Archive_Item_Post_Meta;
+use Diviner\Post_Types\Archive_Item\Theme as Archive_Item_Theme;
+
+$type = carbon_get_post_meta( get_the_ID(), Archive_Item_Post_Meta::FIELD_TYPE );
+$show_audio = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_AUDIO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
+$show_video = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_VIDEO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
+$show_document = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_DOCUMENT || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
+$show_feature_image = !$show_video;
+
 ?>
 
 <article class="single-item single-item--post">
@@ -9,27 +18,83 @@ use Diviner\Theme\General;
 		<?php
 		do_action('theme/header/after-title');
 		?>
-		<?php
-		do_action('theme/header/feature-image');
-		?>
 	</header>
 
-	<aside class="sidebar sidebar--grey sidebar--pull-right">
+	<?php if ( $show_audio ) {
+		// standard audio
+		$audio_output = Archive_Item_Theme::render_audio();
+		if (!empty($audio_output)) {
+			printf(
+				'<div class="archive-item__content-block">%s</div>',
+				$audio_output
+			);
+		}
+		// oembed audio
+		$audio_oembed_output = Archive_Item_Theme::render_oembed_audio();
+		if (!empty($audio_oembed_output)) {
+			printf(
+				'<div class="archive-item__content-block">%s</div>',
+				$audio_oembed_output
+			);
+		}
+		?>
+	<?php } ?>
 
-		<div class="sidebar__content">
+	<?php
+	if ($show_feature_image) {
+		do_action('theme/header/feature-image');
+	}
+	?>
 
-			<h5>Details</h5>
+	<?php
+	if ($show_video) {
+		$video_oembed_output = Archive_Item_Theme::render_oembed_video();
+		if (!empty($video_oembed_output)) {
+			printf(
+				'<div class="archive-item__content-block">%s</div>',
+				$video_oembed_output
+			);
+		}
 
-			<?php // output meta data
-			General::the_archive_single_meta();
-			?>
+	}
+	?>
 
+	<div class="single-item__layout">
+
+		<aside class="sidebar sidebar--grey sidebar--pull-right">
+
+			<div class="sidebar__content">
+
+				<h5>Details</h5>
+
+				<?php
+				if ($show_document) {
+					$document_output = Archive_Item_Theme::render_document();
+					if (!empty($document_output)) {
+						printf(
+							'<div class="archive-item__content-block archive-item__content-block--document">%s</div>',
+							$document_output
+						);
+					}
+				}
+				?>
+
+				<?php // output meta data
+				General::the_archive_single_meta();
+				?>
+
+			</div>
+
+		</aside>
+
+		<div class="d-content">
+			<p><?php the_content(); ?></p>
 		</div>
 
-	</aside>
-
-	<div class="d-content">
-		<p><?php the_content(); ?></p>
 	</div>
+
+
+
+
 
 </article>
