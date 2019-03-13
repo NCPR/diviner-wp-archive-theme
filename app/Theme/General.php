@@ -359,19 +359,6 @@ class General {
 	}
 
 	/**
-	 * Generic Get Card Markup
-	 *
-	 * @param $post int|\WP_Post|null
-	 * @return string|null
-	 */
-	static public function get_card_markup($post = null) {
-		if (!empty($post)) {
-
-		}
-		return null;
-	}
-
-	/**
 	 * Output the single archive meta fields
 	 */
 	static public function the_archive_single_meta() {

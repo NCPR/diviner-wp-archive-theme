@@ -14,6 +14,14 @@ class Theme {
 		add_filter( 'embed_oembed_html', [ $this, 'wrap_oembed_html' ], 99, 4 );
 	}
 
+	/**
+	 * Returns accepted styles aspect ratio
+	 *
+	 * @param int $width
+	 * @param int $height
+	 * @return string
+	 *
+	 */
 	static public function get_aspect_ratio($width, $height) {
 		$rounded = round($width/$height, 2);
 		switch ($rounded) {
@@ -31,6 +39,16 @@ class Theme {
 		}
 	}
 
+	/**
+	 * Adds aspect ratio to oembed output
+	 *
+	 * @param string $html
+	 * @param string $url
+	 * @param array $attr
+	 * @param int|string $post_id
+	 * @return string
+	 *
+	 */
 	function wrap_oembed_html($html, $url, $attr, $post_id) {
 		if (get_post_type() !== Archive_Item::NAME) {
 			return $html;
@@ -56,6 +74,13 @@ class Theme {
 		);
 	}
 
+	/**
+	 * Prints out the dynamic meta fields related to  a post ide
+	 *
+	 * @param int | string $post_id
+	 * @return string
+	 *
+	 */
 	static public function render_meta_fields($post_id = null) {
 		if (!isset($post_id)) {
 			$post_id = get_the_ID();
@@ -97,6 +122,14 @@ class Theme {
 		 );
 	}
 
+	/**
+	 * Renders audio oembed with fixed height/width
+	 * ToDo use global $wp_embed like with video
+	 *
+	 * @param int | string $post_id
+	 * @return string
+	 *
+	 */
 	static public function render_oembed_audio($post_id = null) {
 		if (!isset($post_id)) {
 			$post_id = get_the_ID();
@@ -121,6 +154,13 @@ class Theme {
 		);
 	}
 
+	/**
+	 * Renders audio
+	 *
+	 * @param int | string $post_id
+	 * @return string
+	 *
+	 */
 	static public function render_audio($post_id = null) {
 		if (!isset($post_id)) {
 			$post_id = get_the_ID();
@@ -140,6 +180,13 @@ class Theme {
 		);
 	}
 
+	/**
+	 * Renders oembed video
+	 *
+	 * @param int | string $post_id
+	 * @return string
+	 *
+	 */
 	static public function render_oembed_video($post_id = null) {
 		if (!isset($post_id)) {
 			$post_id = get_the_ID();
@@ -159,8 +206,13 @@ class Theme {
 		);
 	}
 
-
-
+	/**
+	 * Renders document
+	 *
+	 * @param int | string $post_id
+	 * @return string
+	 *
+	 */
 	static public function render_document($post_id = null) {
 		if (!isset($post_id)) {
 			$post_id = get_the_ID();

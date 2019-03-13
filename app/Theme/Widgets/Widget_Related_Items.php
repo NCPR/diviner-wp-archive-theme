@@ -15,7 +15,10 @@ class Widget_Related_Items extends Widget {
 	const DIVINER_WIDGET_RELATED_ITEMS = 'diviner_widget_related_items';
 	const DIVINER_WIDGET_RELATED_FIELD_TITLE = 'diviner_widget_related_field_title';
 
-	// Register widget function. Must have the same name as the class
+	/**
+	 * Register widget function. Must have the same name as the class
+	 *
+	 */
 	function __construct() {
 		$this->setup(
 			static::DIVINER_WIDGET_RELATED_ITEMS,
@@ -31,7 +34,7 @@ class Widget_Related_Items extends Widget {
 		);
 	}
 
-	/*
+	/**
 	 * Constructs markup for slider cards as an array
 	 *
 	 * array(4) {
@@ -80,7 +83,10 @@ class Widget_Related_Items extends Widget {
 		return $related_post_output;
 	}
 
-	// Called when rendering the widget in the front-end
+	/**
+	 * Called when rendering the widget in the front-end
+	 *
+	 */
 	function front_end( $args, $instance ) {
 		if (get_post_type() !== Archive_Item::NAME ) {
 			return false;
