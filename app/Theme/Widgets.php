@@ -4,6 +4,8 @@ namespace Diviner\Theme;
 
 use function Tonik\Theme\App\template;
 
+use Diviner\Theme\Widgets\Widget_Related_Items;
+
 /**
  * Class Widgets
  *
@@ -18,7 +20,12 @@ class Widgets {
 
 	public function hooks() {
 		add_filter( 'widgets_init', [ $this, 'register_sidebars' ] );
+		add_filter( 'widgets_init', [ $this, 'load_widgets' ] );
 		add_action( 'theme/header/after-title', [$this, 'render_header_sidebar']);
+	}
+
+	function load_widgets() {
+		register_widget( '\Diviner\Theme\Widgets\Widget_Related_Items' );
 	}
 
 	function register_sidebars() {
@@ -35,7 +42,7 @@ class Widgets {
 
 		register_sidebar([
 			'id'           => static::SIDEBAR_ID_AFTER_TITLE,
-			'name'         => __('After Single Title', 'ncpr-diviner'),
+			'name'         => __('After Single Title', 'c'),
 			'description'  => __('Displaying after single titles (ex: for social media widgets)', 'ncpr-diviner'),
 			'before_title' => '<span class="a11y-hidden">',
 			'after_title' => '</span>',

@@ -1,0 +1,9 @@
+@import "~swiper/src/swiper";
+
+.swiper-container {
+	display: none;
+
+	&.swiper-container-initialized {
+		display: block;
+	}
+}

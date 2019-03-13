@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { on, appReady } from '../../utils/events';
 import header from '../content/header';
 import resize from './resize';
-// import vendor from '../vendor';
+import vendor from '../vendor';
 
 /**
  * @function bindEvents
@@ -34,7 +34,7 @@ const init = () => {
 
 	header();
 
-	// vendor();
+	vendor();
 
 	console.info('Diviner: Initialized all javascript that targeted document ready.');
 };

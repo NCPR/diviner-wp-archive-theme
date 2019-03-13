@@ -3,8 +3,6 @@
 
 namespace Diviner\Theme;
 
-use Diviner\Admin\Settings;
-
 /**
  * Setting up the Browse page at startup
  *

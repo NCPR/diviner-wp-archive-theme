@@ -2,12 +2,16 @@
 use Diviner\Theme\General;
 use Diviner\Post_Types\Archive_Item\Post_Meta as Archive_Item_Post_Meta;
 use Diviner\Post_Types\Archive_Item\Theme as Archive_Item_Theme;
+use Diviner\Admin\Settings as GeneralSettings;
+use Diviner\Theme\Widgets\Widget_Related_Items;
 
 $type = carbon_get_post_meta( get_the_ID(), Archive_Item_Post_Meta::FIELD_TYPE );
 $show_audio = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_AUDIO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_video = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_VIDEO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_document = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_DOCUMENT || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_feature_image = !$show_video;
+
+$show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_FIELD);
 
 ?>
 
@@ -94,7 +98,20 @@ $show_feature_image = !$show_video;
 	</div>
 
 
-
+	<?php
+	if ( $show_related ) {
+		echo '<div class="archive-item__content-block archive-item__content-block--related">';
+		the_widget(
+			'\Diviner\Theme\Widgets\Widget_Related_Items',
+			[],
+			[
+				'before_title' => '<h3 class="widgettitle h3">',
+				'after_title' => '</h3>',
+			]
+		);
+		echo '</div>';
+	}
+	?>
 
 
 </article>

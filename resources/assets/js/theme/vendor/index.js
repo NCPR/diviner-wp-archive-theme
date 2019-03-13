@@ -3,7 +3,7 @@
  * @description JavaScript for vendor libs
  */
 
-import LazyLoad from "vanilla-lazyload";
+import swiper from './swiper';
 
 /**
  * @function init
@@ -12,11 +12,7 @@ import LazyLoad from "vanilla-lazyload";
 
 const vendor = () => {
 
-	/*
-	const lazyLoadInstance = new LazyLoad({
-		elements_selector: ".lazy"
-	});
-	*/
+	swiper();
 
 	console.info('Diviner: Initialized vendor scripts.');
 };

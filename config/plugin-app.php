@@ -101,6 +101,7 @@ return [
 		'Theme/Swatches.php',
 		'Theme/BrowsePage.php',
 		'Theme/Post_Meta.php',
+		'Theme/Widgets/Widget_Related_Items.php',
 		'Http/assets.php',
 		'Http/ajaxes.php',
 		'Setup/actions.php',
