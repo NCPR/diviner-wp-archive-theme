@@ -1,6 +1,3 @@
-<?php
-use Diviner\Theme\General;
-?>
 <?php get_header(); ?>
 <?php
 /**
@@ -11,11 +8,7 @@ do_action('theme/header');
 ?>
 <div class="main__inner">
 
-	<?php
-	do_action('theme/header/feature-image');
-	?>
-
-	<div class="wrapper wrapper--with-sidebar">
+	<div class="wrapper">
 
 		<div class="wrapper__inner">
 
@@ -32,20 +25,6 @@ do_action('theme/header');
 					?>
 				<?php endwhile; ?>
 			<?php endif; ?>
-
-			<aside class="sidebar sidebar--grey">
-
-				<div class="sidebar__content">
-
-					<h5>Details</h5>
-
-					<?php // output meta data
-					General::the_archive_single_meta();
-					?>
-
-				</div>
-
-			</aside>
 
 		</div>
 	</div>

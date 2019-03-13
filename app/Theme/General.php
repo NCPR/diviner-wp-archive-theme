@@ -53,8 +53,6 @@ class General {
 	const FONTS_DEFAULT_HEADER = 'Fjalla One:400';
 	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400italic,700italic';
 
-	const SIDEBAR_RIGHT_ID = 'sidebar';
-
 	public function hooks() {
 		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
 		add_action( 'wp_enqueue_scripts', [$this, 'google_fonts'], 0, 0 );

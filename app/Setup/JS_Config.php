@@ -2,8 +2,6 @@
 
 namespace Diviner\Setup;
 
-use Diviner\Theme\BrowsePage;
-
 class JS_Config {
 
 	private $data;

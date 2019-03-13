@@ -19,4 +19,65 @@
 	}
 }
 
+.archive-item__content-block {
+	margin-bottom: $d_spacer_sm;
 
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+	}
+}
+
+.archive-item__content-block--document a {
+	font-size: 26px;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+
+	span {
+		flex: 1 0 auto;
+		font-size: 14px;
+		margin-left: 5px;
+		text-transform: uppercase;
+
+		@include g-state(medium) {
+			font-size: 16px;
+		}
+	}
+}
+
+.audio-oembed {
+	iframe {
+		width: 100% !important;
+	}
+}
+
+.video-oembed {
+
+	.video-oembed__container {
+		position: relative;
+		height: 0;
+		width: 100%;
+
+		iframe,
+		embed,
+		object {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.video-oembed__container--9-16 {
+		padding-bottom: 56.25%;
+	}
+
+	.video-oembed__container--3-4 {
+		padding-bottom: 75%;
+	}
+
+	.video-oembed__container--1-1 {
+		padding-bottom: 100%;
+	}
+}

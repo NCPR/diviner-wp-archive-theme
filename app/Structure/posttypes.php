@@ -19,6 +19,7 @@ use \Diviner\Post_Types\Archive_Item\Archive_Item;
 use \Diviner\Post_Types\Archive_Item\Post_Meta;
 use \Diviner\Post_Types\Archive_Item\AdminModifications as ArchiveItemAdminModifications;
 use \Diviner\Post_Types\Archive_Item\Rest;
+use \Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
 use \Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use \Diviner\Post_Types\Diviner_Field\PostMeta as DivinerFieldPostMeta;
 use \Diviner\Post_Types\Diviner_Field\AdminModifications;
@@ -49,6 +50,10 @@ $container[ 'post_types.archive_item.rest' ] = function ( Container $container )
 };
 $container[ 'post_types.archive_item.rest' ]->hooks();
 
+$container[ 'post_types.archive_item.theme' ] = function ( Container $container ) {
+	return new ArchiveItemTheme();
+};
+$container[ 'post_types.archive_item.theme' ]->hooks();
 
 $container[ 'post_types.diviner_field.diviner_field' ] = function ( Container $container ) {
 	return new Diviner_Field();
