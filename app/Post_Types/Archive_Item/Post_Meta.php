@@ -133,7 +133,7 @@ class Post_Meta {
 		if ( $related ) {
 			$field = Related_Field::render(
 				0,
-				'diviner_related',
+				static::FIELD_RELATED,
 				__( 'Related Archive Items', 'ncpr-diviner' ),
 				__( 'Appears on each archive item single page as a slider', 'ncpr-diviner' )
 			);

@@ -51,7 +51,7 @@ class Widget_Related_Items extends Widget {
 	 */
 	function get_related_cards() {
 		$post_id = get_the_ID();
-		$related_items = carbon_get_post_meta($post_id, 'diviner_related');
+		$related_items = carbon_get_post_meta($post_id, ArchiveItemPostMeta::FIELD_RELATED);
 		$related_ids = array_map(function($related_item) {
 			return $related_item['id'];
 		}, $related_items);
@@ -59,6 +59,7 @@ class Widget_Related_Items extends Widget {
 			'posts_per_page' => -1,
 			'orderby' => 'modified',
 			'post__in' => $related_ids,
+			'post__not_in' => [$post_id],
 			'post_type' => Archive_Item::NAME
 		];
 		$related_query = new \WP_Query($args);

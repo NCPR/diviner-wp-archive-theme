@@ -7,3 +7,10 @@
 		display: block;
 	}
 }
+
+.swiper-button {
+	&.swiper-button-disabled {
+		display: none;
+	}
+}
+
