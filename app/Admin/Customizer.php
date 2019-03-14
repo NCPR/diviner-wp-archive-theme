@@ -282,12 +282,12 @@ class Customizer {
 		.d-content a {
 			color: <?php echo $color_btn_link; ?>;
 		}
-		.d-content .btn {
-			background-color: <?php echo $color_btn_link; ?>;
+		.btn {
+			background-color: <?php echo $color_btn_link; ?> !important;
 		}
-		.d-content .btn:hover,
-		.d-content .btn:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+		.btn:hover,
+		.btn:focus {
+			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 		}
 
 		.d-content h1,

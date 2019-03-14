@@ -29,8 +29,9 @@
 
 .archive-item__content-block--document a {
 	font-size: 26px;
-	display: flex;
 	align-items: center;
+	display: flex;
+	justify-content: center;
 	text-decoration: none;
 
 	span {
@@ -42,6 +43,11 @@
 		@include g-state(medium) {
 			font-size: 16px;
 		}
+	}
+
+	.btn {
+		width: 100%;
+		display: block;
 	}
 }
 

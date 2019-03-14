@@ -50,7 +50,9 @@ class Widgets {
 	}
 
 	function render_header_sidebar($id) {
-		static::render_sidebar(static::SIDEBAR_ID_AFTER_TITLE);
+		if (!is_front_page()) {
+			static::render_sidebar(static::SIDEBAR_ID_AFTER_TITLE);
+		}
 	}
 
 	static function render_sidebar($id) {

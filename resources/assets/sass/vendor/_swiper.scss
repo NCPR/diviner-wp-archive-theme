@@ -2,6 +2,7 @@
 
 .swiper-container {
 	display: none;
+	text-align: center;
 
 	&.swiper-container-initialized {
 		display: block;
@@ -9,8 +10,15 @@
 }
 
 .swiper-button {
+	display: inline-block;
+
 	&.swiper-button-disabled {
-		display: none;
+		opacity: 0.4;
+		cursor: not-allowed;
+		pointer-events: none;
 	}
+}
+
+.swiper-button-prev {
 }
 

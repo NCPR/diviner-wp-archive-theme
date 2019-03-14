@@ -1,0 +1,8 @@
+
+.loop {
+	margin: $d_spacer_m 0 $d_spacer_lrg;
+
+	@include g-state(medium) {
+		margin: $d_spacer_xlrg 0 $d_spacer_xxlrg;
+	}
+}

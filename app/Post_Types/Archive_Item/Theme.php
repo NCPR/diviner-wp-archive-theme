@@ -226,7 +226,7 @@ class Theme {
 		$document_attachment_url = wp_get_attachment_url( $document );
 
 		return sprintf(
-			'<a href="%s"><i class="fas fa-file"></i><span>%s</span></a>',
+			'<a href="%s" class="btn"><i class="fas fa-download"></i><span>%s</span></a>',
 			$document_attachment_url,
 			__( 'Download', 'ncpr-diviner' )
 		);

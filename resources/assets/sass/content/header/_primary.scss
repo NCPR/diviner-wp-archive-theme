@@ -150,8 +150,8 @@
 		min-width: 180px;
 		position: absolute;
 		z-index: 10;
-		left: 50%;
-		margin-left: -50px;
+		left: 0;
+		margin-left: 0;
 		top: 100%;
 		padding: $d_spacer_sm;
 		background-color: $color_background;
@@ -168,7 +168,6 @@
 		.menu > .menu-item-has-children:last-of-type > & {
 			left: auto;
 			right: 10px;
-
 		}
 
 		li {

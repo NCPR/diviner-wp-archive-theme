@@ -11,10 +11,10 @@ $swiper_data = !empty($swiper_data) ? $swiper_data : '';
 	<div class="swiper-pagination"></div>
 
 	<!-- If we need navigation buttons -->
-	<button class="btn swiper-button swiper-button-prev">
+	<button class="btn btn--s swiper-button swiper-button-prev">
 		<span class="fas fa-arrow-left"></span>
 	</button>
-	<button class="btn swiper-button swiper-button-next">
+	<button class="btn btn--s swiper-button swiper-button-next">
 		<span class="fas fa-arrow-right"></span>
 	</button>
 
