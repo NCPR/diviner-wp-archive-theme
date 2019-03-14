@@ -33,16 +33,23 @@
 	display: flex;
 	justify-content: center;
 	text-decoration: none;
+	text-align: left;
+	max-width: 300px;
 
 	span {
-		flex: 1 0 auto;
+		flex: 1 1 auto;
 		font-size: 14px;
-		margin-left: 5px;
+		margin-left: 10px;
 		text-transform: uppercase;
+		text-align: left;
 
 		@include g-state(medium) {
 			font-size: 16px;
 		}
+	}
+
+	i {
+		flex: 0 0 auto;
 	}
 
 	.btn {

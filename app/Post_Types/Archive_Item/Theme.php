@@ -207,7 +207,7 @@ class Theme {
 	}
 
 	/**
-	 * Renders document
+	 * Renders document. Display title in button if there is one... otherwise just download
 	 *
 	 * @param int | string $post_id
 	 * @return string
@@ -218,17 +218,24 @@ class Theme {
 			$post_id = get_the_ID();
 		}
 
-		// $audio_attachment_url = wp_get_attachment_url( $audio );
 		$document = carbon_get_post_meta( $post_id, Archive_Item_Post_Meta::FIELD_DOCUMENT);
 		if (empty($document)) {
 			return '';
 		}
 		$document_attachment_url = wp_get_attachment_url( $document );
+		$document_attachment_title = get_the_title( (int)$document );
+		$download_text = __( 'Download', 'ncpr-diviner' );
+		if (!empty($document_attachment_title )) {
+			$download_text = sprintf(
+				__( 'Download %s', 'ncpr-diviner' ),
+				$document_attachment_title
+			);
+		}
 
 		return sprintf(
 			'<a href="%s" class="btn"><i class="fas fa-download"></i><span>%s</span></a>',
 			$document_attachment_url,
-			__( 'Download', 'ncpr-diviner' )
+			$download_text
 		);
 	}
 
