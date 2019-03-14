@@ -47,10 +47,7 @@ class Post_Meta {
 	}
 
 	static public function get_type_label_from_id($id) {
-		if ( !empty( $id ) && !empty( static::FIELD_TYPE_OPTIONS[$id] ) && isset( static::FIELD_TYPE_OPTIONS[$id] ) ) {
-			return static::FIELD_TYPE_OPTIONS[$id];
-		}
-		return '';
+		return isset( static::FIELD_TYPE_OPTIONS[$id] ) ? static::FIELD_TYPE_OPTIONS[$id] : '';
 	}
 
 	public function add_post_meta()
