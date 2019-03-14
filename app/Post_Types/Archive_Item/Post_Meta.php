@@ -46,9 +46,11 @@ class Post_Meta {
 		add_action( 'carbon_fields_register_fields', [ $this, 'add_post_meta' ], 3, 0 );
 	}
 
-	static public function get_type_label_from_id($id)
-	{
-		return isset( static::FIELD_TYPE_OPTIONS[$id]) ? static::FIELD_TYPE_OPTIONS[$id] : '';
+	static public function get_type_label_from_id($id) {
+		if ( isset( static::FIELD_TYPE_OPTIONS[$id] ) ) {
+			return static::FIELD_TYPE_OPTIONS[$id];
+		}
+		return '';
 	}
 
 	public function add_post_meta()
