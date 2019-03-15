@@ -54,8 +54,7 @@ class Widgets {
 	}
 
 	function before_content() {
-		$is_nosidebar_template = is_page_template('page-no-sidebar.php');
-		if (!$is_nosidebar_template && !is_front_page()) {
+		if (is_page_template('page-sidebar.php')) {
 			static::render_sidebar(static::SIDEBAR_ID_RIGHT);
 		}
 	}

@@ -3,7 +3,7 @@
 
 <?php
     /**
-     * Functions hooked into `theme/index/header` action.
+     * Functions hooked into `theme/header` action.
      *
      * @hooked Tonik\Theme\Index\render_header - 10
      */
