@@ -15,8 +15,17 @@
 
 	</header>
 
-	<div class="d-content">
-		<p><?php the_content(); ?></p>
+
+	<div class="single-item__layout">
+
+		<?php
+		do_action('theme/before-content');
+		?>
+
+		<div class="d-content">
+			<?php the_content(); ?>
+		</div>
+
 	</div>
 
 </article>

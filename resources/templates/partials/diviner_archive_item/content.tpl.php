@@ -92,7 +92,7 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 		</aside>
 
 		<div class="d-content">
-			<p><?php the_content(); ?></p>
+			<?php the_content(); ?>
 		</div>
 
 	</div>

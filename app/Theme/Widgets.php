@@ -16,12 +16,13 @@ use Diviner\Theme\Widgets\Widget_Related_Items;
 class Widgets {
 
 	const SIDEBAR_ID_AFTER_TITLE = 'sidebar_after_title';
-	const SIDEBAR_RIGHT_ID = 'sidebar_right';
+	const SIDEBAR_ID_RIGHT = 'sidebar_right';
 
 	public function hooks() {
 		add_filter( 'widgets_init', [ $this, 'register_sidebars' ] );
 		add_filter( 'widgets_init', [ $this, 'load_widgets' ] );
-		add_action( 'theme/header/after-title', [$this, 'render_header_sidebar']);
+		add_action( 'theme/header/after-title', [$this, 'after_title']);
+		add_action( 'theme/before-content', [$this, 'before_content']);
 	}
 
 	function load_widgets() {
@@ -29,29 +30,33 @@ class Widgets {
 	}
 
 	function register_sidebars() {
-		// ToDo: remove for now
-		/*
 		register_sidebar([
-			'id'           => static::SIDEBAR_RIGHT_ID,
+			'id'           => static::SIDEBAR_ID_RIGHT,
 			'name'         => __('Sidebar', 'ncpr-diviner'),
 			'description'  => __('Website sidebar', 'ncpr-diviner'),
-			'before_title' => '<h5>',
+			'before_title' => '<h5 class="h5">',
 			'after_title'  => '</h5>',
 		]);
-		*/
 
 		register_sidebar([
 			'id'           => static::SIDEBAR_ID_AFTER_TITLE,
-			'name'         => __('After Single Title', 'c'),
+			'name'         => __('After Single Title', 'ncpr-diviner'),
 			'description'  => __('Displaying after single titles (ex: for social media widgets)', 'ncpr-diviner'),
 			'before_title' => '<span class="a11y-hidden">',
 			'after_title' => '</span>',
 		]);
 	}
 
-	function render_header_sidebar($id) {
+	function after_title() {
 		if (!is_front_page()) {
 			static::render_sidebar(static::SIDEBAR_ID_AFTER_TITLE);
+		}
+	}
+
+	function before_content() {
+		$is_nosidebar_template = is_page_template('page-no-sidebar.php');
+		if (!$is_nosidebar_template && !is_front_page()) {
+			static::render_sidebar(static::SIDEBAR_ID_RIGHT);
 		}
 	}
 

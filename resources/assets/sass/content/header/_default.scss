@@ -29,6 +29,9 @@
 	@include g-state(full) {
 		display: block;
 		flex: 1 1 auto;
+		align-self: center;
+		margin-left: $d_spacer_m;
+		margin-bottom: 0;
 	}
 }
 

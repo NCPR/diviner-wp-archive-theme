@@ -29,6 +29,25 @@
 	}
 }
 
+/* Same as pull right */
+.sidebar--sidebar_right {
+	margin: $d_spacer_m 0;
+
+	@include g-state(medium) {
+		margin: 0 0 $d_spacer_lrg $d_spacer_lrg;
+		width: 300px;
+		float: right;
+	}
+
+	.sidebar__content {
+		padding: $d_spacer_sm;
+
+		@include g-state(medium) {
+			padding: $d_spacer_lrg $d_spacer_m;
+		}
+	}
+}
+
 .sidebar--grey {
 	background-color: $color_grey_light;
 }

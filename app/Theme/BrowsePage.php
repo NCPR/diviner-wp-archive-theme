@@ -27,7 +27,7 @@ class BrowsePage {
 			'fields' => 'ids',
 			'post_type' => 'page',
 			'meta_key' => '_wp_page_template',
-			'meta_value' => 'page-browser.tpl.php'
+			'meta_value' => 'page-browser.php'
 		];
 		$current_browse_pages = get_posts($args);
 		if ( is_array($current_browse_pages) && count( $current_browse_pages ) > 0 ) {
@@ -76,7 +76,7 @@ class BrowsePage {
 				'post_type'     => 'page',
 				'comment_status' => 'closed',
 				'ping_status'    => 'closed',
-				'page_template'  => 'page-browser.tpl.php'
+				'page_template'  => 'page-browser.php'
 			);
 
 			// Insert the post into the database

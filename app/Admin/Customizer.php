@@ -380,6 +380,10 @@ class Customizer {
 				color: <?php echo $color_header_bg; ?> !important;
 			}
 
+			.header__title {
+				font-family: "<?php echo $header_font_value; ?>" !important;
+			}
+
 			.header__menu-trigger:hover span,
 			.header__menu-trigger:focus span {
 				color: <?php echo $color_btn_link; ?> !important;

@@ -51,3 +51,11 @@
 .wrapper--full {
 	max-width: none;
 }
+
+.section {
+	margin-top: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-top: $d_spacer_lrg;
+	}
+}
