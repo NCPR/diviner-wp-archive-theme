@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Browse Template
+ * Template Name: Browse template
  */
 ?>
 <?php

@@ -287,10 +287,15 @@ class Customizer {
 		}
 		.btn {
 			background-color: <?php echo $color_btn_link; ?> !important;
+			font-family: '<?php echo $body_font_value; ?>' !important;
 		}
 		.btn:hover,
 		.btn:focus {
 			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+		}
+
+		label {
+			font-family: '<?php echo $body_font_value; ?>' !important;
 		}
 
 		.d-content h1,

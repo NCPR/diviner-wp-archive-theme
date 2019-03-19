@@ -16,6 +16,16 @@ class BrowsePage {
 			add_action( 'admin_bar_menu', [ $this, 'add_admin_menu_button' ], 90);
 		}
 	}
+
+	/**
+	 * Check to verify that a page is a browse page
+	 *
+	 * @return boolean
+	 */
+	public function is_current_page_browse() {
+		return is_page_template('page-browser.php');
+	}
+
 	/**
 	 * Gets first page with the browse template
 	 *
