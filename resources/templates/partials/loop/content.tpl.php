@@ -30,7 +30,7 @@ use \Diviner\Config\General;
 
 		<div class="loop-item__content">
 			<a href="<?php the_permalink(); ?>">
-				<h2 class="h2"><?php the_title(); ?></h2>
+				<h2 class="h3"><?php the_title(); ?></h2>
 			</a>
 			<div class="loop-item__meta">
 				<time class="loop-item__date">

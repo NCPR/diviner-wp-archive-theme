@@ -14,12 +14,11 @@
 }
 
 .pagination__item {
-	// @include  button;
-
 	margin: 0 $d_spacer_xsm;
 }
 
 .pagination__item--current {
+	background-color: $color_grey_dark !important;
 }
 
 

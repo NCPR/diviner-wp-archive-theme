@@ -24,7 +24,7 @@
 		padding: $d_spacer_sm;
 
 		@include g-state(medium) {
-			padding: $d_spacer_lrg $d_spacer_m;
+			padding: $d_spacer_m;
 		}
 	}
 }

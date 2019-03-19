@@ -42,6 +42,7 @@
 
 .card__title {
 	margin: 0 0 $d_spacer_sm;
+	text-align: left;
 
 	@include g-state(medium) {
 		margin: 0 0 $d_spacer_m;

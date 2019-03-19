@@ -238,6 +238,9 @@ class General {
 	/**
 	 * Renders out the index loop
 	 *
+	 * ToDo: add test for if on taxonomy page of archive item
+	 * $taxonomies = get_object_taxonomies( (object) array( 'post_type' => $post_type ) );
+	 *
 	 */
 	function theme_index_content() {
 		if (is_post_type_archive( Archive_Item::NAME )) {
@@ -245,7 +248,6 @@ class General {
 		} else {
 			template('partials/loop/content', []);
 		}
-
 	}
 
 	/**

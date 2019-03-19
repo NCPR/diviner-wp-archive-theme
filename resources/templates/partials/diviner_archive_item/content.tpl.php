@@ -69,7 +69,7 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 
 			<div class="sidebar__content">
 
-				<h5>Details</h5>
+				<h5 class="sidebar__title h5">Details</h5>
 
 				<?php
 				if ($show_document) {
