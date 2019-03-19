@@ -16,20 +16,23 @@ use Diviner\Theme\General;
 	<div class="<?php echo General::get_wrapper_classes(); ?>">
 		<div class="wrapper__inner">
 			<?php if (have_posts()) : ?>
-				<div class="loop">
-					<h1 class="h1 <?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?>">Posts</h1>
-					<div class="posts">
+				<div class="loop loop--<?php echo get_post_type();?>">
+					<h1 class="h1 <?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> page-title">
+						<?php echo \Diviner\Theme\General::get_page_title(); ?>
+					</h1>
+					<div class="loop__posts">
 						<?php while (have_posts()) : the_post() ?>
 							<?php
 							/**
-							 * Functions hooked into `theme/index/post/thumbnail` action.
+							 * Functions hooked into `theme/index/content` action.
 							 *
-							 * @hooked Tonik\Theme\App\Structure\render_post_thumbnail - 10
 							 */
-							do_action('theme/index/post/thumbnail');
+							do_action('theme/index/content');
 							?>
 						<?php endwhile; ?>
 					</div>
+
+					<?php Diviner\Theme\Pagination::pagination(); ?>
 
 				</div>
 

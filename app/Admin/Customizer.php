@@ -270,6 +270,9 @@ class Customizer {
 
 		ob_start();
 		?>
+		html body, html form, html button, html input, html select, html textarea {
+			font-family: '<?php echo $body_font_value; ?>';
+		}
 		.d-content {
 			font-family: '<?php echo $body_font_value; ?>';
 		}

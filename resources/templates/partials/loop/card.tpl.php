@@ -41,7 +41,7 @@ $display_feature = isset($display_feature) ? $display_feature : true;
 
 		<?php if ( $display_excerpt ) {
 			printf(
-				'<div class="card__excerpt">%s</div>',
+				'<div class="card__excerpt d-content"><p>%s</p></div>',
 				get_the_excerpt()
 			);
 		} ?>

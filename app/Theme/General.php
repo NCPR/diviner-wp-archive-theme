@@ -6,6 +6,7 @@ use function Tonik\Theme\App\template;
 
 use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
+use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
 
 /**
@@ -54,18 +55,31 @@ class General {
 	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400italic,700italic';
 
 	public function hooks() {
-		add_action( 'wp_head', [$this, 'awesome_fonts'], 0, 0 );
-		add_action( 'wp_enqueue_scripts', [$this, 'google_fonts'], 0, 0 );
-		add_action( 'wp_enqueue_scripts', [$this, 'output_color_swatch_styles'] );
+		add_action( 'wp_head', [ $this, 'awesome_fonts' ], 0, 0 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ], 0, 0 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'output_color_swatch_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
-		// add_action( 'wp_enqueue_scripts', [$this, 'lazy-load'], 0, 0 );
-		add_action( 'theme/header', [$this, 'render_header']);
-		add_action( 'theme/header/feature-image', [$this, 'render_header_feature_image']);
-		add_action( 'after_setup_theme', [$this, 'after_setup_theme'] );
-		add_filter( 'wp_resource_hints', [$this, 'resource_hints'], 10, 2 );
-
+		// add_action( 'wp_enqueue_scripts', [ $this, 'lazy-load' ], 0, 0 );
+		add_action( 'theme/header', [ $this, 'render_header']);
+		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ]);
+		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
+		add_filter( 'wp_resource_hints', [ $this, 'resource_hints' ], 10, 2 );
+		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
+		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ]);
 	}
 
+	/**
+	 * Filter except length to 35 words.
+	 *
+	 */
+	function custom_excerpt_length( $length ) {
+		return 30;
+	}
+
+	/**
+	 * Include block editor assets
+	 *
+	 */
 	function block_editor_assets() {
 		$this->google_fonts();
 		$this->output_color_swatch_styles();
@@ -88,6 +102,11 @@ class General {
 		return $urls;
 	}
 
+	/**
+	 * Output dynamic color swatches
+	 *
+	 * @return string   Style tags for block bg colors
+	 */
 	function get_color_swatch_styles() {
 		$styles_background = array_map( function( $color ) {
 			return sprintf(
@@ -162,10 +181,22 @@ class General {
 		]);
 	}
 
+	/**
+	 * Determines if bright or dark
+	 *
+	 * @param  string   $hex   Hex color.
+	 * @return bool
+	 */
 	static function is_dark($hex) {
 		return static::get_brightness($hex) > 150;
 	}
 
+	/**
+	 * Gets the brightness based on the hex
+	 *
+	 * @param  string   $hex   Hex color.
+	 * @return float
+	 */
 	static function get_brightness($hex) {
 		// returns brightness value from 0 to 255
 		// strip off any leading #
@@ -192,6 +223,7 @@ class General {
 
 		return '#' . implode($hexcolor);
 	}
+
 	/**
 	 * Renders feature image subheader .
 	 *
@@ -200,6 +232,21 @@ class General {
 	function render_header_feature_image() {
 		if ( is_single() || is_page() && has_post_thumbnail() ) {
 			template('partials/subheader/default', []);
+		}
+	}
+
+	/**
+	 * Renders out the index loop
+	 *
+	 * ToDo: add test for if on taxonomy page of archive item
+	 * $taxonomies = get_object_taxonomies( (object) array( 'post_type' => $post_type ) );
+	 *
+	 */
+	function theme_index_content() {
+		if (is_post_type_archive( Archive_Item::NAME )) {
+			template('partials/loop/card', []);
+		} else {
+			template('partials/loop/content', []);
 		}
 	}
 
@@ -339,6 +386,18 @@ class General {
 		}
 
 		return $version;
+	}
+
+
+	/**
+	 * Gets the title
+	 *
+	 * @return string
+	 */
+
+	static function get_page_title() {
+		$title = new \Diviner\Theme\Title();
+		return $title->get_title();
 	}
 
 	public function google_fonts() {

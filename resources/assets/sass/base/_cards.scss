@@ -1,4 +1,37 @@
 
+.card {
+
+
+
+	/* Case: on archive pages */
+	.post-type-archive-diviner_archive_item & {
+		margin-bottom: $d_spacer_m;
+
+		@include g-state(small) {
+			flex: 0 0 calc( 50% - ( #{$d_spacer_m} / 2 ) ); // account for margin in 2 up layout
+			margin-right: $d_spacer_m;
+
+			&:nth-child(2n) {
+				margin-right: 0;
+			}
+		}
+
+		@include g-state(medium) {
+			flex: 0 0 calc( 33.33% - ( ( #{$d_spacer_m} + #{$d_spacer_m} ) / 3 ) ); // account for margin in 3 up layout
+			margin-right: $d_spacer_m;
+
+			&:nth-child(2n) {
+				margin-right: $d_spacer_m;
+			}
+
+			&:nth-child(3n) {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+
 .card__feature-image {
 	margin: 0 0 $d_spacer_xsm;
 
@@ -9,6 +42,7 @@
 
 .card__title {
 	margin: 0 0 $d_spacer_sm;
+	text-align: left;
 
 	@include g-state(medium) {
 		margin: 0 0 $d_spacer_m;
@@ -22,3 +56,4 @@
 		margin: 0 0 $d_spacer_m;
 	}
 }
+
