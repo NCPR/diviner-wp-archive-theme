@@ -18,7 +18,7 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 <article class="single-item single-item--post">
 
 	<header class="single-item__header">
-		<h1 class="single-item__header-title h1"><?php the_title(); ?></h1>
+		<h1 class="single-item__header-title h1 page-title"><?php the_title(); ?></h1>
 		<?php
 		do_action('theme/header/after-title');
 		?>

@@ -106,7 +106,7 @@
 }
 
 @mixin h1 {
-	font-size: 2.3em;
+	font-size: 2.2em;
 
 	@include g-state(medium) {
 		font-size: 2.8em;

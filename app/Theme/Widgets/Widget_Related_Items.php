@@ -69,7 +69,7 @@ class Widget_Related_Items extends Widget {
 				$related_query->the_post();
 				ob_start();
 				echo '<div class="swiper-slide">';
-				template('partials/post/card', [
+				template('partials/loop/card', [
 					'display_excerpt' => false
 				]);
 				echo '</div>';

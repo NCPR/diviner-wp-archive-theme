@@ -25,3 +25,15 @@
 	}
 }
 
+
+.single-item__nocontent {
+
+}
+
+.single-item__block {
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_xlrg;
+	}
+}
