@@ -2,12 +2,8 @@
 
 namespace Diviner\Config;
 
-use \Carbon_Fields\Carbon_Fields;
-
 /**
- * Class Settings
- *
- * Functions for Settings
+ * Class General
  *
  * @package Diviner\CarbonFields
  */

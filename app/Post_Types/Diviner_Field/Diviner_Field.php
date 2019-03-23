@@ -9,9 +9,13 @@ use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
 use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
-use Diviner\CarbonFields\Errors\UndefinedType;
 use Diviner\CarbonFields\Helper;
 
+/**
+ * Class Diviner Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field
+ */
 class Diviner_Field {
 
 	const NAME = 'diviner_field';

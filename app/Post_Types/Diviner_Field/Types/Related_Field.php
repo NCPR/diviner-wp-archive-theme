@@ -5,6 +5,11 @@ namespace Diviner\Post_Types\Diviner_Field\Types;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Carbon_Fields\Field;
 
+/**
+ * Class Related Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Related_Field extends FieldType  {
 
 	const NAME = 'diviner_related_field';

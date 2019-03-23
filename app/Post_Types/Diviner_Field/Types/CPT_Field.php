@@ -6,6 +6,12 @@ namespace Diviner\Post_Types\Diviner_Field\Types;
 use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 
+
+/**
+ * Class CPT Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class CPT_Field extends FieldType {
 
 	const NAME = 'diviner_cpt_field';

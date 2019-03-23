@@ -5,12 +5,11 @@ namespace Diviner\Theme;
 use function Tonik\Theme\App\template;
 
 use Diviner\Admin\Customizer;
-use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
 
 /**
- * Class Settings
+ * Class General
  *
  * Functions Theme
  *

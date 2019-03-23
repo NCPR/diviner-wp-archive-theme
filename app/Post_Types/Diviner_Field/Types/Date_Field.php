@@ -7,6 +7,11 @@ use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
 
+/**
+ * Class Date Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Date_Field extends FieldType  {
 
 	const NAME  = 'diviner_date_field';

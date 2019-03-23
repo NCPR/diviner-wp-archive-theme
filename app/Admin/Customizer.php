@@ -5,9 +5,9 @@ namespace Diviner\Admin;
 use Diviner\Theme\General;
 
 /**
- * Class Settings
+ * Class Customizer
  *
- * Functions for Settings
+ * Functions for customizer output and settings
  *
  * @package Diviner\Admin
  */

@@ -7,7 +7,11 @@ use Diviner\Post_Types\Diviner_Field\PostMeta as DivinerFieldPostMeta;
 use Diviner\Post_Types\Archive_Item\Post_Meta as Archive_Item_Post_Meta;
 use Diviner\Config\General;
 
-
+/**
+ * Class Theme
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class Theme {
 
 	public function hooks() {

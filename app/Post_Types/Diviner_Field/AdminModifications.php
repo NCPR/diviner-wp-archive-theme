@@ -9,6 +9,11 @@ use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 
+/**
+ * Class Admin Modifications
+ *
+ * @package Diviner\Post_Types\Diviner_Field
+ */
 class AdminModifications {
 
 	const SLUG_WIZARD = 'diviner_wizard';

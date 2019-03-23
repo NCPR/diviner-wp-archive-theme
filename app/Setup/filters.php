@@ -17,18 +17,6 @@ use Diviner\CarbonFields\Boot;
 */
 
 
-/**
- * Shortens posts excerpts to 60 words.
- *
- * @return integer
- */
-function modify_excerpt_length()
-{
-    return 60;
-}
-add_filter('excerpt_length', 'Tonik\Theme\App\Setup\modify_excerpt_length');
-
-
 $container = \Tonik\Theme\App\Main::instance()->container();
 
 $container[ 'carbonfields.boot' ] = function ( Container $container ) {

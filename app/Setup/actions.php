@@ -2,7 +2,7 @@
 
 namespace Tonik\Theme\App\Setup;
 
-use Diviner\Setup\JS_Config;
+use Diviner\Theme\JS_Config;
 
 /*
 |-----------------------------------------------------------
@@ -15,16 +15,6 @@ use Diviner\Setup\JS_Config;
 |
 */
 
-/**
- * Example action handler.
- *
- * @return integer
- */
-function example_action()
-{
-    //
-}
-add_filter('excerpt_length', 'Tonik\Theme\App\Setup\example_action');
 
 // Update CSS within in Admin
 function diviner_admin_style() {

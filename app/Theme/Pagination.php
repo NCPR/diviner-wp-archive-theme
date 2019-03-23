@@ -1,13 +1,14 @@
 <?php
-/**
- * WordPress Pagination renderer
- *
- * Borrowed from Mozaik WordPress Theme Boilerplate
- *
- */
 
 namespace Diviner\Theme;
 
+/**
+ * Pagination renderer
+ *
+ * Based on Mozaik WordPress Theme Boilerplate pagination
+ *
+ * @package Diviner\Theme
+ */
 class Pagination {
 
 	/**

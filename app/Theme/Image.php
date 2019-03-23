@@ -15,7 +15,6 @@ class Image {
 
 	public function hooks() {
 		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'custom_post_thumbnail_sizes_attr' ], 10 , 3 );
-		// add_filter('wp_calculate_image_sizes', [ $this, 'custom_responsive_image_sizes' ], 10 , 2);
 	}
 
 	function custom_responsive_image_sizes($sizes, $size) {
@@ -72,11 +71,9 @@ class Image {
 		$img_sizes = wp_calculate_image_sizes( $image_size_src, $img_src, null, $image_id );
 		$img_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
-		/*
 		if ( in_array($image_size_src, [ General::IMAGE_SIZE_FEATURE_SM, General::IMAGE_SIZE_FEATURE_MD, General::IMAGE_SIZE_FEATURE_LRG ] ) ) { // if feature image
 			$img_sizes = '(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w';
 		}
-		*/
 
 		if ( $is_lazy ) {
 			return sprintf(

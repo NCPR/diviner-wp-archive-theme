@@ -6,6 +6,11 @@ namespace Diviner\Post_Types\Diviner_Field\Types;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 
+/**
+ * Class Taxonomy Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Taxonomy_Field extends FieldType {
 
 	const NAME = 'diviner_taxonomy_field';

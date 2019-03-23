@@ -4,6 +4,11 @@ namespace Diviner\Post_Types\Diviner_Field\Types;
 
 use Diviner\Post_Types\Diviner_Field\PostMeta;
 
+/**
+ * Abstract Field Type
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 abstract class FieldType implements iField {
 
 	const TYPE = 'date';

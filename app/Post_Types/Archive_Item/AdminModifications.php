@@ -2,12 +2,15 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
-use function Tonik\Theme\App\config;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
-use Diviner\CarbonFields\Errors\UndefinedType;
 
+/**
+ * Class Admin Modifications
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class AdminModifications {
 
 	const DIV_COL_TYPE = 'div_col_type';

@@ -3,7 +3,13 @@
 
 namespace Diviner\Theme;
 
-
+/**
+ * OEmbed
+ *
+ * Functions Theme
+ *
+ * @package Diviner\Theme
+ */
 class OEmbed{
 
 	/**

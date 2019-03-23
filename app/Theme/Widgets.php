@@ -4,8 +4,6 @@ namespace Diviner\Theme;
 
 use function Tonik\Theme\App\template;
 
-use Diviner\Theme\Widgets\Widget_Related_Items;
-
 /**
  * Class Widgets
  *

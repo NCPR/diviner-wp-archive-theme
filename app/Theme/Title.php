@@ -4,6 +4,11 @@ namespace Diviner\Theme;
 
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 
+/**
+ * Title
+ *
+ * @package Diviner\Theme
+ */
 class Title {
 
 	/**
@@ -48,22 +53,8 @@ class Title {
 			return __( 'No Items Found', 'ncpr-diviner' );
 		}
 
-
 		// Archives
 		return get_the_archive_title();
-	}
-
-
-	/**
-	 * Sets up the proper title
-	 *
-	 * @since core 1.0
-	 * @return string
-	 */
-
-	function get_page_title() {
-		$title = new \Tribe\Project\Theme\Page_Title();
-		return $title->get_title();
 	}
 
 }

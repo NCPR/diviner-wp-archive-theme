@@ -3,10 +3,14 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
-use Diviner\Post_Types\Diviner_Field\Types\FieldType;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Carbon_Fields\Field;
 
+/**
+ * Class Select Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Select_Field extends FieldType {
 
 	const NAME = 'diviner_select_field';

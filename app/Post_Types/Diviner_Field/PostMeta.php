@@ -6,7 +6,6 @@ namespace Diviner\Post_Types\Diviner_Field;
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
-use Diviner\CarbonFields\Helper;
 use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
@@ -14,7 +13,11 @@ use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
-
+/**
+ * Class Post Meta
+ *
+ * @package Diviner\Post_Types\Diviner_Field
+ */
 class PostMeta {
 
 	const CONTAINER_FIELDS = 'div_container_fields';

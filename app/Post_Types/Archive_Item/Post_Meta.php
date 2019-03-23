@@ -8,11 +8,14 @@ use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
-use Diviner\CarbonFields\Errors\UndefinedType;
-
 use Diviner\Admin\Settings;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
+/**
+ * Class Post Meta
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class Post_Meta {
 
 	const FIELD_TYPE = 'div_ai_field_type';

@@ -2,14 +2,17 @@
 
 namespace Diviner\Post_Types\Diviner_Field;
 
-
 // WP_List_Table is not loaded automatically so we need to load it in our application
 if( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
 /**
+ * Class Preset Fields List Table
+ *
  * Create a new table class that will extend the WP_List_Table
+ *
+ * @package Diviner\Post_Types\Diviner_Field
  */
 class Preset_Fields_List_Table extends \WP_List_Table
 {

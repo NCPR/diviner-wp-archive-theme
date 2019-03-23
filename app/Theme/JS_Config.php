@@ -1,7 +1,14 @@
 <?php
 
-namespace Diviner\Setup;
+namespace Diviner\Theme;
 
+/**
+ * JS Config
+ *
+ * Functions Theme
+ *
+ * @package Diviner\Theme
+ */
 class JS_Config {
 
 	private $data;
