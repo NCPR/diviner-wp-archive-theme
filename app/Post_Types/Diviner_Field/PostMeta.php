@@ -82,6 +82,10 @@ class PostMeta {
 
 	protected $container;
 
+	public function hooks() {
+		add_action( 'carbon_fields_register_fields', [ $this, 'add_post_meta' ], 2, 0 );
+	}
+
 	/*
 	 *
 	 * Adds the necessary field fields (confused yet?)

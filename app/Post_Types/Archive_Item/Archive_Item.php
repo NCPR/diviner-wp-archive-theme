@@ -12,6 +12,10 @@ class Archive_Item {
 
 	const NAME = 'diviner_archive_item';
 
+	public function hooks() {
+		add_action( 'init', [ $this, 'register' ], 0, 0 );
+	}
+
 	public function register() {
 		$args = wp_parse_args( $this->get_args(), $this->get_labels() );
 		register_post_type( static::NAME, $args );
