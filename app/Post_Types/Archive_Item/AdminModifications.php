@@ -104,35 +104,35 @@ class AdminModifications {
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Photo','ncpr-diviner'),
 			__('Add New Photo','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=photo'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Audio','ncpr-diviner'),
 			__('Add New Audio','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=audio'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Video','ncpr-diviner'),
 			__('Add New Video','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=video'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Document','ncpr-diviner'),
 			__('Add New Document','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=document'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Mixed Media','ncpr-diviner'),
 			__('Add New Mixed Media','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=mixed'
 		);
 
