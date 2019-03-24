@@ -55,6 +55,8 @@ p.wp-block-paragraph.mce-content-body{
 
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
 	@include button;
+
+	width: 100%;
 }
 
 .editor-styles-wrapper .editor-post-title__block .editor-post-title__input {
