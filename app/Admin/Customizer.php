@@ -102,6 +102,7 @@ class Customizer {
 
 			.editor-styles-wrapper .wp-block-separator:not(.is-style-dots) {
 				background-color: <?php echo $color_accent; ?> !important;
+				border-bottom-color: <?php echo $color_accent; ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {

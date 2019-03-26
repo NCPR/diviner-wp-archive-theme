@@ -76,12 +76,20 @@ p.wp-block-paragraph.mce-content-body{
 
 }
 
+.editor-styles-wrapper .wp-block-separator {
+	border-bottom-width: 4px;
+}
+
 .editor-styles-wrapper .wp-block-separator:not(.is-style-dots) {
 	background-color: $color_accent;
+	border-bottom-color: $color_accent;
 }
 
 .editor-styles-wrapper .wp-block-separator.is-style-dots:before {
 	color: $color_accent;
+	font-size: 38px;
+	letter-spacing: 12px;
+	padding-left: 12px;
 }
 
 .editor-styles-wrapper .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {
