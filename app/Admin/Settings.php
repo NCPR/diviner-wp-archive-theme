@@ -24,6 +24,7 @@ class Settings {
 	const FIELD_GENERAL_SOCIAL_TWITTER = 'diviner_field_general_social_twitter';
 	const FIELD_GENERAL_SOCIAL_FACEBOOK = 'diviner_field_general_social_facebook';
 	const FIELD_GENERAL_SOCIAL_INSTAGRAM = 'diviner_field_general_social_instagram';
+	const FIELD_GENERAL_COLLECTION = 'diviner_field_general_collection_active';
 
 	const GENERAL_SETTINGS_SLUG = 'diviner_general_settings_slug';
 
@@ -151,6 +152,7 @@ class Settings {
 				$this->social_media_link_twitter(),
 				$this->social_media_link_facebook(),
 				$this->social_media_link_instagram(),
+				$this->collection(),
 			]
 		);
 	}
@@ -175,7 +177,12 @@ class Settings {
 			->set_help_text( __( 'Related Items – add related items if you want to be able to manually connect your items to one another. For example, you might choose to link a sculpture to a series of paintings, or a video of a downtown area to pictures of downtown businesses. You add related items ONCE only, and it will work for your entire collection. ', 'ncpr-diviner' ) );
 	}
 
-
+	public function collection() {
+		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION, __( 'Activate Collections', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Activate collections to take advantage of groups of archive items that can be curated manually.', 'ncpr-diviner' ) )
+			->set_option_value( '1' )
+			->set_default_value( '1' );
+	}
 
 	public function get_pages() {
 		$cleaned = [

@@ -97,6 +97,8 @@ return [
 		'Post_Types/Diviner_Field/Types/Select_Field.php',
 		'Post_Types/Diviner_Field/Types/CPT_Field.php',
 		'Post_Types/Diviner_Field/Types/Related_Field.php',
+		'Post_Types/Collection/Collection.php',
+		'Post_Types/Collection/Post_Meta.php',
 		'Theme/General.php',
 		'Theme/Image.php',
 		'Theme/Swatches.php',
