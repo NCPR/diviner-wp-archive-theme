@@ -1,15 +1,14 @@
 
 .card {
 
-
-
-	/* Case: on archive pages */
-	.post-type-archive-diviner_archive_item & {
+	/* Case: on archive pages and collections */
+	.loop--cards & {
 		margin-bottom: $d_spacer_m;
 
 		@include g-state(small) {
 			flex: 0 0 calc( 50% - ( #{$d_spacer_m} / 2 ) ); // account for margin in 2 up layout
 			margin-right: $d_spacer_m;
+			width: calc( 50% - ( #{$d_spacer_m} / 2 ) );
 
 			&:nth-child(2n) {
 				margin-right: 0;
@@ -19,6 +18,7 @@
 		@include g-state(medium) {
 			flex: 0 0 calc( 33.33% - ( ( #{$d_spacer_m} + #{$d_spacer_m} ) / 3 ) ); // account for margin in 3 up layout
 			margin-right: $d_spacer_m;
+			width: calc( 33.33% - ( ( #{$d_spacer_m} + #{$d_spacer_m} ) / 3 ) );
 
 			&:nth-child(2n) {
 				margin-right: $d_spacer_m;

@@ -11,7 +11,7 @@ do_action('theme/header');
 ?>
 <div class="main__inner">
 
-	<div class="<?php echo General::get_wrapper_classes(); ?>">
+	<div class="wrapper">
 
 		<div class="wrapper__inner">
 

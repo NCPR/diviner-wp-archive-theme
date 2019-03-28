@@ -5,7 +5,7 @@ namespace Diviner\Post_Types\Collection;
 
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
-use Diviner\CarbonFields\Helper;
+use Diviner\Post_Types\Archive_Item\Archive_Item;
 
 /**
  * Class Post Meta
@@ -37,7 +37,7 @@ class Post_Meta {
 			->set_types( [
 				[
 					'type' => 'post',
-					'post_type' => Collection::NAME,
+					'post_type' => Archive_Item::NAME,
 				],
 			] )
 			->help_text(__( 'Select a curated collection of archive items', 'ncpr-diviner' ));

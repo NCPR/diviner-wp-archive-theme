@@ -1,6 +1,3 @@
-<?php
-use Diviner\Theme\General;
-?>
 <?php get_header(); ?>
 <?php
 /**
@@ -10,10 +7,6 @@ use Diviner\Theme\General;
 do_action('theme/header');
 ?>
 <div class="main__inner">
-
-	<?php
-	do_action('theme/header/feature-image');
-	?>
 
 	<div class="wrapper">
 
@@ -39,3 +32,4 @@ do_action('theme/header');
 </div>
 
 <?php get_footer(); ?>
+

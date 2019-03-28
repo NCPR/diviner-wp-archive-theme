@@ -53,7 +53,7 @@ function render_post_content() {
 			$path,
 			get_post_format()
 		]);
-	} catch (mysqli_sql_exception $ex) {
+	} catch (\Exception $ex) {
 		template([
 			'partials/post/content',
 			get_post_format()

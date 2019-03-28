@@ -13,13 +13,24 @@ use Diviner\Theme\General;
 
 <div class="main__inner">
 
-	<div class="<?php echo General::get_wrapper_classes(); ?>">
+	<div class="wrapper">
 		<div class="wrapper__inner">
-			<?php if (have_posts()) : ?>
-				<div class="loop loop--<?php echo get_post_type();?>">
-					<h1 class="h1 <?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> page-title">
-						<?php echo \Diviner\Theme\General::get_page_title(); ?>
-					</h1>
+			<div class="<?php echo General::get_loop_classes(); ?>">
+
+				<h1 class="h1 <?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?>">
+					<?php echo General::get_page_title(); ?>
+				</h1>
+
+				<?php
+				/**
+				 * Functions hooked into `theme/index/content` action.
+				 *
+				 */
+					do_action('theme/index/under-page-title');
+				?>
+
+				<?php if (have_posts()) : ?>
+
 					<div class="loop__posts">
 						<?php while (have_posts()) : the_post() ?>
 							<?php
@@ -34,10 +45,7 @@ use Diviner\Theme\General;
 
 					<?php Diviner\Theme\Pagination::pagination(); ?>
 
-				</div>
-
-			<?php else : ?>
-				<div class="loop">
+				<?php else : ?>
 					<?php
 					/**
 					 * Functions hooked into `theme/index/content/none` action.
@@ -46,8 +54,9 @@ use Diviner\Theme\General;
 					 */
 					do_action('theme/index/content/none');
 					?>
-				</div>
-			<?php endif; ?>
+				<?php endif; ?>
+
+			</div>
 
 		</div>
 	</div>

@@ -37,3 +37,12 @@
 		margin-bottom: $d_spacer_xlrg;
 	}
 }
+
+
+.single-item__header-meta {
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_lrg;
+	}
+}

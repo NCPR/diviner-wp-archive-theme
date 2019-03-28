@@ -7,6 +7,7 @@ use function Tonik\Theme\App\template;
 use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
+use Diviner\Post_Types\Collection\Collection;
 
 /**
  * Class General
@@ -64,6 +65,7 @@ class General {
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'resource_hints' ], 10, 2 );
 		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
+		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
 		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ]);
 	}
 
@@ -146,10 +148,19 @@ class General {
 	}
 
 	/**
-	 * Wrapper class is the container around the content area. Add sidebar or other decorator as necessary
+	 * Get Loop classes
 	 */
-	static function get_wrapper_classes() {
-		$classes = [ 'wrapper', 'wrapper--staggered' ];
+	static function get_loop_classes() {
+		$classes = [
+			'loop',
+			sprintf(
+				'loop--%s',
+				get_post_type()
+			)
+		];
+		if ( static::should_display_cards() ) {
+			$classes[] = 'loop--cards';
+		}
 		return implode ( ' ' , $classes );
 	}
 
@@ -235,6 +246,54 @@ class General {
 	}
 
 	/**
+	 * Is a taxonomy term in a particular post type
+	 *
+	 * @param object $term
+	 * @param string $post_type
+	 * @return bool
+	 */
+	static public function is_taxonomy_in_post_type( $term, $post_type = 'post' ) {
+		$taxonomies = get_object_taxonomies( (object) [
+			'post_type' => $post_type
+		] );
+		return in_array( $term->taxonomy, $taxonomies );
+	}
+
+	/**
+	 * Should display cards
+	 *
+	 * @return bool
+	 */
+	static public function should_display_cards( ) {
+		if (is_post_type_archive( [ Archive_Item::NAME, Collection::NAME ] )) {
+			return true;
+		} else {
+			$is_tax = is_tax();
+			if ($is_tax) {
+				$term = get_queried_object();
+				if ( static::is_taxonomy_in_post_type($term, Archive_Item::NAME) ) {
+					return true;
+				} else if ( static::is_taxonomy_in_post_type($term, Collection::NAME) ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	function theme_index_under_page_header() {
+		if (get_post_type() === Collection::NAME) {
+			$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_COLLECTION_DESCRIPTION);
+			if ( !empty( $copy ) ) {
+				printf(
+					'<div class="loop__description"><div class="d-content">%s</div></div>',
+					wpautop( $copy )
+				);
+			}
+		}
+	}
+
+	/**
 	 * Renders out the index loop
 	 *
 	 * ToDo: add test for if on taxonomy page of archive item
@@ -242,7 +301,7 @@ class General {
 	 *
 	 */
 	function theme_index_content() {
-		if (is_post_type_archive( Archive_Item::NAME )) {
+		if (static::should_display_cards()) {
 			template('partials/loop/card', []);
 		} else {
 			template('partials/loop/content', []);
@@ -331,7 +390,6 @@ class General {
 		$social_facebook = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_FACEBOOK);
 		$social_instagram = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_INSTAGRAM);
 		$social_twitter = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_TWITTER);
-
 
 		if ( !empty( $social_facebook ) || !empty( $social_instagram ) || !empty( $social_twitter ) ) {
 			$social_links = [];

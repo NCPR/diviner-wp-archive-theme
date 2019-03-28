@@ -56,3 +56,11 @@
 	text-transform: uppercase;
 }
 
+.loop__description {
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_lrg;
+	}
+}
+

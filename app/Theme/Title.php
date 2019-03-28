@@ -3,6 +3,7 @@
 namespace Diviner\Theme;
 
 use Diviner\Post_Types\Archive_Item\Archive_Item;
+use Diviner\Post_Types\Collection\Collection;
 
 /**
  * Title
@@ -49,8 +50,20 @@ class Title {
 			return __( 'Archive Items', 'ncpr-diviner' );
 		}
 
+		// Collections
+		elseif ( is_post_type_archive( Collection::NAME ) ) {
+			$collections_plural = Collection::get_plural_title();
+			if ( ! have_posts() ) {
+				return sprintf(
+					__( 'No %s Found', 'ncpr-diviner' ),
+					$collections_plural
+				);
+			}
+			return $collections_plural;
+		}
+
 		elseif ( ! have_posts() ) {
-			return __( 'No Items Found', 'ncpr-diviner' );
+			return __( 'No Posts Found', 'ncpr-diviner' );
 		}
 
 		// Archives
