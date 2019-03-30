@@ -8,6 +8,10 @@ do_action('theme/header');
 ?>
 <div class="main__inner">
 
+	<?php
+	do_action('theme/header/feature-image');
+	?>
+
 	<div class="wrapper">
 
 		<div class="wrapper__inner">

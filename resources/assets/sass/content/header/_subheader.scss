@@ -3,6 +3,12 @@
 }
 
 .subheader__image {
+	margin-bottom: $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+	}
+
 	img {
 		width: 100%;
 	}

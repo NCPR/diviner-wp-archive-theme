@@ -15,6 +15,7 @@ use Diviner\Post_Types\Archive_Item\Archive_Item;
 class Post_Meta {
 
 	const FIELD_ARCHIVE_ITEMS = 'div_collection_field_archive_items';
+	const FIELD_BROWSE_LINK = 'div_collection_field_browse_link';
 
 	protected $container;
 
@@ -23,7 +24,7 @@ class Post_Meta {
 	}
 
 	public function add_post_meta() {
-		$this->container = Container::make( 'post_meta', __( 'Archive items', 'ncpr-diviner' ) )
+		$this->container = Container::make( 'post_meta', __( 'Collection Details', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Collection::NAME )
 			->add_fields( [
 				$this->get_archive_items_field(),

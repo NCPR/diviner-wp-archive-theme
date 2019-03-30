@@ -4,6 +4,7 @@ namespace Diviner\Theme;
 
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
+use Diviner\Post_Types\Collection\Collection;
 
 /**
  * Class Post_Meta
@@ -33,6 +34,7 @@ class Post_Meta {
 		$container = Container::make( 'post_meta', __( 'Subheader', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', 'page' )
 			->or_where( 'post_type', '=', 'post' )
+			->or_where( 'post_type', '=',Collection::NAME )
 			->add_fields( [
 				$this->get_field_subheader_text(),
 			] )

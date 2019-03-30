@@ -4,6 +4,7 @@
 namespace Diviner\Post_Types\Collection;
 
 use Diviner\Admin\Settings;
+use Diviner\Post_Types\Archive_Item\Archive_Item;
 
 /**
  * Class Collection
@@ -110,6 +111,30 @@ class Collection {
 				'excerpt'
 			],
 		];
+	}
+
+	/**
+	 * Get query for related archive items
+	 *
+	 * @return \WP_Query
+	 *
+	 */
+	static public function get_archive_items_query($id = 0) {
+		if (!$id) {
+			$id = get_the_ID();
+		}
+		$archive_items = carbon_get_post_meta( $id, Post_Meta::FIELD_ARCHIVE_ITEMS);
+		$ids = array_column( $archive_items, 'id' );
+		$args = [
+			'post_type'      => Archive_Item::NAME,
+			'posts_per_page' => -1,
+			'post__in'       => $ids,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+		];
+
+		// The Query
+		return new \WP_Query( $args );
 	}
 
 	/**
