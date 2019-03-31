@@ -3,6 +3,7 @@
 namespace Diviner\Theme;
 
 use function Tonik\Theme\App\template;
+use function Tonik\Theme\App\asset_path;
 
 use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
@@ -59,7 +60,6 @@ class General {
 		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ], 0, 0 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'output_color_swatch_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
-		// add_action( 'wp_enqueue_scripts', [ $this, 'lazy-load' ], 0, 0 );
 		add_action( 'theme/header', [ $this, 'render_header']);
 		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ]);
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
@@ -67,6 +67,45 @@ class General {
 		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
 		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
 		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ]);
+
+		add_action('wp_enqueue_scripts', [ $this, 'register_scripts' ] );
+		add_action('wp_enqueue_scripts', [ $this, 'register_stylesheets' ] );
+		add_action('wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
+
+	}
+
+	/**
+	 * Moves front-end jQuery script to the footer.
+	 *
+	 * @param  \WP_Scripts $wp_scripts
+	 * @return void
+	 */
+	function move_jquery_to_the_footer($wp_scripts) {
+		if (! is_admin()) {
+			$wp_scripts->add_data('jquery', 'group', 1);
+			$wp_scripts->add_data('jquery-core', 'group', 1);
+			$wp_scripts->add_data('jquery-migrate', 'group', 1);
+		}
+	}
+
+	/**
+	 * Registers theme stylesheet files.
+	 *
+	 * @return void
+	 */
+	function register_stylesheets() {
+		wp_enqueue_style('app', asset_path('css/app.css'));
+	}
+
+	/**
+	 * Registers theme script files.
+	 *
+	 * @return void
+	 */
+	function register_scripts() {
+		$version = static::version();
+		wp_enqueue_script('vendor', asset_path('js/vendor.js'), [], $version, false);
+		wp_enqueue_script('app', asset_path('js/app.js'), ['jquery'], $version, true);
 	}
 
 	/**

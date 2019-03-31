@@ -2,8 +2,6 @@
 
 namespace Tonik\Theme\App\Setup;
 
-use Diviner\Theme\JS_Config;
-
 /*
 |-----------------------------------------------------------
 | Theme Actions
@@ -14,34 +12,5 @@ use Diviner\Theme\JS_Config;
 | logic at specific parts of WordPress.
 |
 */
-
-
-// Update CSS within in Admin
-function diviner_admin_style() {
-
-	wp_register_style( 'admin-styles', get_template_directory_uri().'/public/css/admin.css', false, '1.0.0' );
-	wp_enqueue_style( 'admin-styles' );
-
-}
-add_action('admin_enqueue_scripts', 'Tonik\Theme\App\Setup\diviner_admin_style');
-
-
-function diviner_scripts() {
-	$version = date( 'Y.m.d' );
-
-	$app_scripts    = get_template_directory_uri().'/browse-app/dist/master.js';
-	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) {
-		$app_scripts = apply_filters( 'browse_js_dev_path', $app_scripts );
-	}
-	wp_register_script( 'core-app-browse', $app_scripts );
-
-	$js_config = new JS_Config();
-	wp_localize_script( 'core-app-browse', 'diviner_config', $js_config->get_data() );
-
-	wp_enqueue_script( 'core-app-browse', $app_scripts, [  ], $version, true );
-
-}
-add_action('wp_enqueue_scripts', 'Tonik\Theme\App\Setup\diviner_scripts');
-
 
 
