@@ -22,6 +22,8 @@ use \Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
 use \Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use \Diviner\Post_Types\Diviner_Field\PostMeta as DivinerFieldPostMeta;
 use \Diviner\Post_Types\Diviner_Field\AdminModifications;
+use \Diviner\Post_Types\Collection\Collection;
+use \Diviner\Post_Types\Collection\Post_Meta as CollectionPostMeta;
 
 
 $container = \Tonik\Theme\App\Main::instance()->container();
@@ -65,5 +67,15 @@ $container[ 'post_types.diviner_field.admin_modifications' ] = function ( Contai
 	return new AdminModifications();
 };
 $container[ 'post_types.diviner_field.admin_modifications' ]->hooks();
+
+$container[ 'post_types.collection' ] = function ( Container $container ) {
+	return new Collection();
+};
+$container[ 'post_types.collection' ]->hooks();
+
+$container[ 'post_types.collection.postmeta' ] = function ( Container $container ) {
+	return new CollectionPostMeta();
+};
+$container[ 'post_types.collection.postmeta' ]->hooks();
 
 

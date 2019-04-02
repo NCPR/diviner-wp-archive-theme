@@ -3,10 +3,12 @@
 namespace Diviner\Theme;
 
 use function Tonik\Theme\App\template;
+use function Tonik\Theme\App\asset_path;
 
 use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
+use Diviner\Post_Types\Collection\Collection;
 
 /**
  * Class General
@@ -18,53 +20,104 @@ use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
 class General {
 
 	const FONTS = [
-		'Source Sans Pro:400,700,400italic,700italic' => 'Source Sans Pro',
-		'Open Sans:400italic,700italic,400,700' => 'Open Sans',
+		'Source Sans Pro:400,700,400i' => 'Source Sans Pro',
+		'Open Sans:400i,400,700' => 'Open Sans',
 		'Oswald:400,700' => 'Oswald',
-		'Playfair Display:400,700,400italic' => 'Playfair Display',
+		'Playfair Display:400,700,400i' => 'Playfair Display',
 		'Montserrat:400,700' => 'Montserrat',
 		'Raleway:400,700' => 'Raleway',
 		'Droid Sans:400,700' => 'Droid Sans',
-		'Lato:400,700,400italic,700italic' => 'Lato',
-		'Arvo:400,700,400italic,700italic' => 'Arvo',
-		'Lora:400,700,400italic,700italic' => 'Lora',
-		'Merriweather:400,300italic,300,400italic,700,700italic' => 'Merriweather',
+		'Lato:400,700,400i' => 'Lato',
+		'Arvo:400,700,400i' => 'Arvo',
+		'Lora:400,700,400i' => 'Lora',
+		'Merriweather:400,400i,700' => 'Merriweather',
 		'Oxygen:400,300,700' => 'Oxygen',
 		'PT Serif:400,700' => 'PT Serif',
-		'PT Sans:400,700,400italic,700italic' => 'PT Sans',
+		'PT Sans:400,700,400i' => 'PT Sans',
 		'PT Sans Narrow:400,700' => 'PT Sans Narrow',
-		'Cabin:400,700,400italic' => 'Cabin',
-		'Fjalla One:400' => 'Fjalla One',
-		'Francois One:400' => 'Francois One',
-		'Josefin Sans:400,300,600,700' => 'Josefin Sans',
-		'Libre Baskerville:400,400italic,700' => 'Libre Baskerville',
-		'Arimo:400,700,400italic,700italic' => 'Arimo',
-		'Ubuntu:400,700,400italic,700italic' => 'Ubuntu',
-		'Bitter:400,700,400italic' => 'Bitter',
-		'Droid Serif:400,700,400italic,700italic' => 'Droid Serif',
-		'Roboto:400,400italic,700,700italic' => 'Roboto',
-		'Open Sans Condensed:700,300italic,300' => 'Open Sans Condensed',
-		'Roboto Condensed:400italic,700italic,400,700' => 'Roboto Condensed',
+		'Cabin:400,700,400i' => 'Cabin',
+		'Josefin Sans:400,700' => 'Josefin Sans',
+		'Libre Baskerville:400,400i,700' => 'Libre Baskerville',
+		'Arimo:400,700,400i' => 'Arimo',
+		'Ubuntu:400,700,400i' => 'Ubuntu',
+		'Bitter:400,700,400i' => 'Bitter',
+		'Droid Serif:400,700,400i' => 'Droid Serif',
+		'Roboto:400,400i,700' => 'Roboto',
+		'Open Sans Condensed:700,300i,300' => 'Open Sans Condensed',
+		'Roboto Condensed:400i,400,700' => 'Roboto Condensed',
 		'Roboto Slab:400,700' => 'Roboto Slab',
 		'Yanone Kaffeesatz:400,700' => 'Yanone Kaffeesatz',
-		'Rokkitt:400' => 'Rokkitt',
+		'Noto Sans:400,400i,700' => 'Noto Sans',
+		'Work Sans:400,700' => 'Work Sans',
 	];
 
-	const FONTS_DEFAULT_HEADER = 'Fjalla One:400';
-	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400italic,700italic';
+	const FONTS_DEFAULT_HEADER = 'Oswald:400,700';
+	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400i';
 
 	public function hooks() {
 		add_action( 'wp_head', [ $this, 'awesome_fonts' ], 0, 0 );
-		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ], 0, 0 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'output_color_swatch_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
-		// add_action( 'wp_enqueue_scripts', [ $this, 'lazy-load' ], 0, 0 );
 		add_action( 'theme/header', [ $this, 'render_header']);
 		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ]);
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'resource_hints' ], 10, 2 );
 		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
+		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
 		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ]);
+
+		add_action('wp_enqueue_scripts', [ $this, 'register_scripts' ] );
+		add_action('wp_enqueue_scripts', [ $this, 'register_stylesheets' ] );
+		add_action('wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
+
+	}
+
+	/**
+	 * Moves front-end jQuery script to the footer.
+	 *
+	 * @param  \WP_Scripts $wp_scripts
+	 * @return void
+	 */
+	function move_jquery_to_the_footer($wp_scripts) {
+		if (! is_admin()) {
+			$wp_scripts->add_data('jquery', 'group', 1);
+			$wp_scripts->add_data('jquery-core', 'group', 1);
+			$wp_scripts->add_data('jquery-migrate', 'group', 1);
+		}
+	}
+
+	/**
+	 * Get Font Value
+	 *
+	 * @param  string $key
+	 * @return string
+	 */
+	static public function get_font_value_from_key( $key ) {
+		if ( array_key_exists( $key, static::FONTS ) ) {
+			return static::FONTS[$key];
+		}
+		return static::FONTS[static::FONTS_DEFAULT_BODY];
+	}
+
+	/**
+	 * Registers theme stylesheet files.
+	 *
+	 * @return void
+	 */
+	function register_stylesheets() {
+		wp_enqueue_style('app', asset_path('css/app.css'));
+	}
+
+	/**
+	 * Registers theme script files.
+	 *
+	 * @return void
+	 */
+	function register_scripts() {
+		$version = static::version();
+		wp_enqueue_script('vendor', asset_path('js/vendor.js'), [], $version, false);
+		wp_enqueue_script('app', asset_path('js/app.js'), ['jquery'], $version, true);
 	}
 
 	/**
@@ -146,10 +199,19 @@ class General {
 	}
 
 	/**
-	 * Wrapper class is the container around the content area. Add sidebar or other decorator as necessary
+	 * Get Loop classes
 	 */
-	static function get_wrapper_classes() {
-		$classes = [ 'wrapper', 'wrapper--staggered' ];
+	static function get_loop_classes() {
+		$classes = [
+			'loop',
+			sprintf(
+				'loop--%s',
+				get_post_type()
+			)
+		];
+		if ( static::should_display_cards() ) {
+			$classes[] = 'loop--cards';
+		}
 		return implode ( ' ' , $classes );
 	}
 
@@ -235,14 +297,61 @@ class General {
 	}
 
 	/**
+	 * Is a taxonomy term in a particular post type
+	 *
+	 * @param object $term
+	 * @param string $post_type
+	 * @return bool
+	 */
+	static public function is_taxonomy_in_post_type( $term, $post_type = 'post' ) {
+		$taxonomies = get_object_taxonomies( (object) [
+			'post_type' => $post_type
+		] );
+		return in_array( $term->taxonomy, $taxonomies );
+	}
+
+	/**
+	 * Should display cards
+	 *
+	 * @return bool
+	 */
+	static public function should_display_cards( ) {
+		if (is_post_type_archive( [ Archive_Item::NAME, Collection::NAME ] )) {
+			return true;
+		} else {
+			$is_tax = is_tax();
+			if ($is_tax) {
+				$term = get_queried_object();
+				if ( static::is_taxonomy_in_post_type($term, Archive_Item::NAME) ) {
+					return true;
+				} else if ( static::is_taxonomy_in_post_type($term, Collection::NAME) ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	function theme_index_under_page_header() {
+		if (get_post_type() === Collection::NAME) {
+			$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_COLLECTION_DESCRIPTION);
+			if ( !empty( $copy ) ) {
+				printf(
+					'<div class="loop__description"><div class="d-content">%s</div></div>',
+					wpautop( $copy )
+				);
+			}
+		}
+	}
+
+	/**
 	 * Renders out the index loop
 	 *
-	 * ToDo: add test for if on taxonomy page of archive item
 	 * $taxonomies = get_object_taxonomies( (object) array( 'post_type' => $post_type ) );
 	 *
 	 */
 	function theme_index_content() {
-		if (is_post_type_archive( Archive_Item::NAME )) {
+		if (static::should_display_cards()) {
 			template('partials/loop/card', []);
 		} else {
 			template('partials/loop/content', []);
@@ -332,7 +441,6 @@ class General {
 		$social_instagram = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_INSTAGRAM);
 		$social_twitter = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_TWITTER);
 
-
 		if ( !empty( $social_facebook ) || !empty( $social_instagram ) || !empty( $social_twitter ) ) {
 			$social_links = [];
 			if ( !empty( $social_facebook ) ) {
@@ -400,20 +508,12 @@ class General {
 	}
 
 	public function google_fonts() {
-
-		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
-		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_BODY, static::FONTS_DEFAULT_BODY);
-
-		if( $header_font_key ) {
-			wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. esc_html($header_font_key) );
-		} else {
-			wp_enqueue_style( 'diviner-source-sans', '//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
-		}
-		if( $body_font_key ) {
-			wp_enqueue_style( 'diviner-body-fonts', '//fonts.googleapis.com/css?family='. esc_html($body_font_key) );
-		} else {
-			wp_enqueue_style( 'diviner-source-body', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,700,600');
-		}
+		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
+		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_BODY, static::FONTS_DEFAULT_BODY);
+		$header_font_key = !empty($header_font_key) ? $header_font_key : static::FONTS_DEFAULT_HEADER;
+		$body_font_key = !empty($body_font_key) ? $body_font_key : static::FONTS_DEFAULT_BODY;
+		wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. urlencode($header_font_key) );
+		wp_enqueue_style( 'diviner-body-fonts', '//fonts.googleapis.com/css?family='. urlencode($body_font_key) );
 	}
 
 	/**

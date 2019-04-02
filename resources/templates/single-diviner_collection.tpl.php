@@ -1,6 +1,3 @@
-<?php
-use Diviner\Theme\General;
-?>
 <?php get_header(); ?>
 <?php
 /**
@@ -39,3 +36,4 @@ do_action('theme/header');
 </div>
 
 <?php get_footer(); ?>
+

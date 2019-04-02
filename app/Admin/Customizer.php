@@ -62,9 +62,9 @@ class Customizer {
 
 	public function block_styles() {
 		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::FONTS[$header_font_key];
+		$header_font_value = General::get_font_value_from_key($header_font_key);
 		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::FONTS[$body_font_key];
+		$body_font_value = General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 		?>
@@ -244,6 +244,7 @@ class Customizer {
 		$wp_customize->add_setting( $setting_name , array(
 			'default'   => $default,
 			'transport' => 'refresh',
+			'sanitize_callback' => 'sanitize_hex_color',
 		) );
 		$wp_customize->add_control( new \WP_Customize_Color_Control( $wp_customize, $control_name, array(
 			'label'    => $control_title,
@@ -254,18 +255,14 @@ class Customizer {
 
 	public function sanitize_fonts( $input ) {
 		$valid = General::FONTS;
-		if ( array_key_exists( $input, $valid ) ) {
-			return $input;
-		} else {
-			return '';
-		}
+		return ( array_key_exists( $input, $valid ) ? $input : General::FONTS_DEFAULT_BODY );
 	}
 
 	static public function get_customize_content_css() {
 		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::FONTS[$header_font_key];
+		$header_font_value = General::get_font_value_from_key($header_font_key);
 		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::FONTS[$body_font_key];
+		$body_font_value = General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 
@@ -373,9 +370,9 @@ class Customizer {
 	public function customize_css()
 	{
 		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::FONTS[$header_font_key];
+		$header_font_value = General::get_font_value_from_key($header_font_key);
 		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::FONTS[$body_font_key];
+		$body_font_value = General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_header_bg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT );
 		$color_subheader_text_desktop = General::is_dark($color_header_bg) ? $color_header_bg : 'black';

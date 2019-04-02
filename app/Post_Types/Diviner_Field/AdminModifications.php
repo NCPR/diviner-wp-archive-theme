@@ -124,14 +124,14 @@ class AdminModifications {
 
 	function rc_scd_register_menu() {
 
-        add_submenu_page(
-            Settings::menu_slug(),
-            'Diviner Meta Fields',
-            'Manage Diviner Meta Fields',
-            'manage_options',
-            'diviner-manage-fields',
-            [ $this, 'rc_scd_create_dashboard' ]
-        );
+		add_submenu_page(
+			Settings::menu_slug(),
+			'Diviner Meta Fields',
+			'Manage Diviner Meta Fields',
+			'manage_options',
+			'diviner-manage-fields',
+			[ $this, 'rc_scd_create_dashboard' ]
+		);
 
 		add_submenu_page(
 			null,           // -> Set to null - will hide menu link

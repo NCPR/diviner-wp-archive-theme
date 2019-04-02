@@ -24,6 +24,10 @@ class Settings {
 	const FIELD_GENERAL_SOCIAL_TWITTER = 'diviner_field_general_social_twitter';
 	const FIELD_GENERAL_SOCIAL_FACEBOOK = 'diviner_field_general_social_facebook';
 	const FIELD_GENERAL_SOCIAL_INSTAGRAM = 'diviner_field_general_social_instagram';
+	const FIELD_GENERAL_COLLECTION = 'diviner_field_general_collection_active';
+	const FIELD_GENERAL_COLLECTION_SINGULAR = 'diviner_field_general_collection_singular';
+	const FIELD_GENERAL_COLLECTION_PLURAL = 'diviner_field_general_collection_plural';
+	const FIELD_GENERAL_COLLECTION_DESCRIPTION = 'diviner_field_general_collection_description';
 
 	const GENERAL_SETTINGS_SLUG = 'diviner_general_settings_slug';
 
@@ -148,11 +152,21 @@ class Settings {
 				$this->help_page_field(),
 				$this->related_field(),
 				$this->footer_copy(),
+				$this->get_separator( __( 'Connect Social Media Accounts', 'ncpr-diviner' ) ),
 				$this->social_media_link_twitter(),
 				$this->social_media_link_facebook(),
 				$this->social_media_link_instagram(),
+				$this->get_separator( __( 'Customize Your Collections', 'ncpr-diviner' ) ),
+				$this->collection(),
+				$this->collection_title_singular(),
+				$this->collection_title_plural(),
+				$this->collection_description(),
 			]
 		);
+	}
+
+	public function get_separator( $header = 'More' ) {
+		return Field::make( 'separator', uniqid('diviner_field_general_seperator'), $header );
 	}
 
 	public function permissions_field() {
@@ -175,7 +189,30 @@ class Settings {
 			->set_help_text( __( 'Related Items – add related items if you want to be able to manually connect your items to one another. For example, you might choose to link a sculpture to a series of paintings, or a video of a downtown area to pictures of downtown businesses. You add related items ONCE only, and it will work for your entire collection. ', 'ncpr-diviner' ) );
 	}
 
+	public function collection() {
+		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION, __( 'Activate Collections', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Activate collections to take advantage of groups of archive items that can be curated manually.', 'ncpr-diviner' ) )
+			->set_option_value( '1' )
+			->set_default_value( '1' );
+	}
 
+	public function collection_title_singular() {
+		return Field::make( 'text', static::FIELD_GENERAL_COLLECTION_SINGULAR, __( 'Collections Title Singular', 'ncpr-diviner' ) )
+			->set_default_value( 'Collection' )
+			->set_help_text( __( 'Title used to describe collections in interface and loop page','ncpr-diviner' ) )
+			->set_required( true );
+	}
+
+	public function collection_title_plural() {
+		return Field::make( 'text', static::FIELD_GENERAL_COLLECTION_PLURAL, __( 'Collections Title Plural', 'ncpr-diviner' ) )
+			->set_default_value( 'Collections' )
+			->set_help_text( __( 'Title used to describe collections in interface. Also used in slug','ncpr-diviner' ) );
+	}
+
+	public function collection_description() {
+		return Field::make( 'rich_text', static::FIELD_GENERAL_COLLECTION_DESCRIPTION, __( 'Collection Description ', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Appears at the top of the collections looop page', 'ncpr-diviner' ) );
+	}
 
 	public function get_pages() {
 		$cleaned = [
