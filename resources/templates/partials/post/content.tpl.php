@@ -11,6 +11,9 @@
 			<time class="single-item__header-time">
 				<?php the_date(); ?>
 			</time>
+			<div class="single-item__header-categories">
+				<?php the_category( ' | ' ); ?>
+			</div>
 		</div>
 
 	</header>
