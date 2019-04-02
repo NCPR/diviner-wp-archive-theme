@@ -23,4 +23,3 @@ $container[ 'admin.classic_editor' ] = function ( Container $container ) {
 	return new Editor();
 };
 $container[ 'admin.classic_editor' ]->hooks();
-
