@@ -92,7 +92,6 @@ class Theme {
 		$active_field_posts_ids = Diviner_Field::get_active_fields();
 		$field_output = [];
 
-
 		foreach($active_field_posts_ids as $active_field_post_id) {
 			$field_name = carbon_get_post_meta(
 				$active_field_post_id,
@@ -104,15 +103,12 @@ class Theme {
 				DivinerFieldPostMeta::FIELD_TYPE,
 				'carbon_fields_container_field_variables'
 			);
-			// var_dump($field_type);
 			$field_class = Diviner_Field::get_class($field_type);
-			// var_dump($field_class);
 			if( is_callable( [ $field_class, 'get_value' ] ) ) {
 				$field_value = call_user_func( [ $field_class, 'get_value' ], $post_id, $field_name, $active_field_post_id);
 			}
-			// var_dump($field_value);
 			$field_title = get_the_title( $active_field_post_id );
-			if (isset($field_value)) {
+			if (isset($field_value) && !empty($field_value)) {
 				$field_output[] = sprintf(
 					'<li class="archive-item-meta__item"><label class="archive-item-meta__item-label">%s</label><div class="archive-item-meta__item-value">%s</div></li>',
 					$field_title,

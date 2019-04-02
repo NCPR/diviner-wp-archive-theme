@@ -41,8 +41,26 @@
 
 .single-item__header-meta {
 	margin-bottom: $d_spacer_m;
+	font-size: 90%;
 
 	@include g-state(medium) {
 		margin-bottom: $d_spacer_lrg;
 	}
+
+	& > * {
+		display: block;
+		margin-bottom: $d_spacer_xsm;
+
+		@include g-state(medium) {
+			margin-bottom: $d_spacer_sm;
+		}
+	}
+
+	&:nth-child(-1) {
+		margin-bottom: 0;
+	}
+}
+
+.single-item__header-date {
+
 }

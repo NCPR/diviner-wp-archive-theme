@@ -395,6 +395,10 @@ class General {
 		);
 	}
 
+	/**
+	 * Outputs the primary nav
+	 *
+	 */
 	static public function the_primary_menu() {
 		return sprintf(
 			'<div class="primary-menu__wrap" data-js="primary-menu__wrap"><nav class="primary-menu"><button class="primary-menu__close" data-js="primary-menu__close"><span class="fas fa-window-close"></span><span class="a11y-visual-hide">%s</span></button><div class="a11y-visual-hide">%s</div>%s</nav></div>',
@@ -408,6 +412,11 @@ class General {
 		);
 	}
 
+	/**
+	 * Gets the header brand
+	 *
+	 * @return string
+	 */
 	static public function the_header_brand() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
@@ -473,6 +482,11 @@ class General {
 		return '';
 	}
 
+	/**
+	 * Gets the footer copy
+	 *
+	 * @return string
+	 */
 	static function the_footer_copy () {
 		$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_FOOTER_COPY);
 		if ( !empty( $copy ) ) {
@@ -484,6 +498,11 @@ class General {
 		return '';
 	}
 
+	/**
+	 * Returns the version for assets
+	 *
+	 * @return string
+	 */
 	static function version() {
 		$my_theme = wp_get_theme();
 		$version = $my_theme->get( 'Version' );
@@ -495,13 +514,11 @@ class General {
 		return $version;
 	}
 
-
 	/**
 	 * Gets the title
 	 *
 	 * @return string
 	 */
-
 	static function get_page_title() {
 		$title = new \Diviner\Theme\Title();
 		return $title->get_title();
@@ -523,6 +540,10 @@ class General {
 		echo ArchiveItemTheme::render_meta_fields();
 	}
 
+	/**
+	 * Renders awesome fonts
+	 *
+	 */
 	public function awesome_fonts() {
 		?>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
