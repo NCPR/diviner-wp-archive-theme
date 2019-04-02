@@ -152,15 +152,21 @@ class Settings {
 				$this->help_page_field(),
 				$this->related_field(),
 				$this->footer_copy(),
+				$this->get_separator( __( 'Connect Social Media Accounts', 'ncpr-diviner' ) ),
 				$this->social_media_link_twitter(),
 				$this->social_media_link_facebook(),
 				$this->social_media_link_instagram(),
+				$this->get_separator( __( 'Customize Your Collections', 'ncpr-diviner' ) ),
 				$this->collection(),
 				$this->collection_title_singular(),
 				$this->collection_title_plural(),
 				$this->collection_description(),
 			]
 		);
+	}
+
+	public function get_separator( $header = 'More' ) {
+		return Field::make( 'separator', uniqid('diviner_field_general_seperator'), $header );
 	}
 
 	public function permissions_field() {

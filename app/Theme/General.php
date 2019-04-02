@@ -20,44 +20,43 @@ use Diviner\Post_Types\Collection\Collection;
 class General {
 
 	const FONTS = [
-		'Source Sans Pro:400,700,400italic,700italic' => 'Source Sans Pro',
-		'Open Sans:400italic,700italic,400,700' => 'Open Sans',
+		'Source Sans Pro:400,700,400i' => 'Source Sans Pro',
+		'Open Sans:400i,400,700' => 'Open Sans',
 		'Oswald:400,700' => 'Oswald',
-		'Playfair Display:400,700,400italic' => 'Playfair Display',
+		'Playfair Display:400,700,400i' => 'Playfair Display',
 		'Montserrat:400,700' => 'Montserrat',
 		'Raleway:400,700' => 'Raleway',
 		'Droid Sans:400,700' => 'Droid Sans',
-		'Lato:400,700,400italic,700italic' => 'Lato',
-		'Arvo:400,700,400italic,700italic' => 'Arvo',
-		'Lora:400,700,400italic,700italic' => 'Lora',
-		'Merriweather:400,300italic,300,400italic,700,700italic' => 'Merriweather',
+		'Lato:400,700,400i' => 'Lato',
+		'Arvo:400,700,400i' => 'Arvo',
+		'Lora:400,700,400i' => 'Lora',
+		'Merriweather:400,400i,700' => 'Merriweather',
 		'Oxygen:400,300,700' => 'Oxygen',
 		'PT Serif:400,700' => 'PT Serif',
-		'PT Sans:400,700,400italic,700italic' => 'PT Sans',
+		'PT Sans:400,700,400i' => 'PT Sans',
 		'PT Sans Narrow:400,700' => 'PT Sans Narrow',
-		'Cabin:400,700,400italic' => 'Cabin',
-		'Fjalla One:400' => 'Fjalla One',
-		'Francois One:400' => 'Francois One',
-		'Josefin Sans:400,300,600,700' => 'Josefin Sans',
-		'Libre Baskerville:400,400italic,700' => 'Libre Baskerville',
-		'Arimo:400,700,400italic,700italic' => 'Arimo',
-		'Ubuntu:400,700,400italic,700italic' => 'Ubuntu',
-		'Bitter:400,700,400italic' => 'Bitter',
-		'Droid Serif:400,700,400italic,700italic' => 'Droid Serif',
-		'Roboto:400,400italic,700,700italic' => 'Roboto',
-		'Open Sans Condensed:700,300italic,300' => 'Open Sans Condensed',
-		'Roboto Condensed:400italic,700italic,400,700' => 'Roboto Condensed',
+		'Cabin:400,700,400i' => 'Cabin',
+		'Josefin Sans:400,700' => 'Josefin Sans',
+		'Libre Baskerville:400,400i,700' => 'Libre Baskerville',
+		'Arimo:400,700,400i' => 'Arimo',
+		'Ubuntu:400,700,400i' => 'Ubuntu',
+		'Bitter:400,700,400i' => 'Bitter',
+		'Droid Serif:400,700,400i' => 'Droid Serif',
+		'Roboto:400,400i,700' => 'Roboto',
+		'Open Sans Condensed:700,300i,300' => 'Open Sans Condensed',
+		'Roboto Condensed:400i,400,700' => 'Roboto Condensed',
 		'Roboto Slab:400,700' => 'Roboto Slab',
 		'Yanone Kaffeesatz:400,700' => 'Yanone Kaffeesatz',
-		'Rokkitt:400' => 'Rokkitt',
+		'Noto Sans:400,400i,700' => 'Noto Sans',
+		'Work Sans:400,700' => 'Work Sans',
 	];
 
-	const FONTS_DEFAULT_HEADER = 'Fjalla One:400';
-	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400italic,700italic';
+	const FONTS_DEFAULT_HEADER = 'Oswald:400,700';
+	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400i';
 
 	public function hooks() {
 		add_action( 'wp_head', [ $this, 'awesome_fonts' ], 0, 0 );
-		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ], 0, 0 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'output_color_swatch_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
 		add_action( 'theme/header', [ $this, 'render_header']);
@@ -86,6 +85,19 @@ class General {
 			$wp_scripts->add_data('jquery-core', 'group', 1);
 			$wp_scripts->add_data('jquery-migrate', 'group', 1);
 		}
+	}
+
+	/**
+	 * Get Font Value
+	 *
+	 * @param  string $key
+	 * @return string
+	 */
+	static public function get_font_value_from_key( $key ) {
+		if ( array_key_exists( $key, static::FONTS ) ) {
+			return static::FONTS[$key];
+		}
+		return static::FONTS[static::FONTS_DEFAULT_BODY];
 	}
 
 	/**
@@ -496,20 +508,12 @@ class General {
 	}
 
 	public function google_fonts() {
-
-		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
-		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_CONTROL_FONT_BODY, static::FONTS_DEFAULT_BODY);
-
-		if( $header_font_key ) {
-			wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. esc_html($header_font_key) );
-		} else {
-			wp_enqueue_style( 'diviner-source-sans', '//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
-		}
-		if( $body_font_key ) {
-			wp_enqueue_style( 'diviner-body-fonts', '//fonts.googleapis.com/css?family='. esc_html($body_font_key) );
-		} else {
-			wp_enqueue_style( 'diviner-source-body', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,700,600');
-		}
+		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
+		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_BODY, static::FONTS_DEFAULT_BODY);
+		$header_font_key = !empty($header_font_key) ? $header_font_key : static::FONTS_DEFAULT_HEADER;
+		$body_font_key = !empty($body_font_key) ? $body_font_key : static::FONTS_DEFAULT_BODY;
+		wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. urlencode($header_font_key) );
+		wp_enqueue_style( 'diviner-body-fonts', '//fonts.googleapis.com/css?family='. urlencode($body_font_key) );
 	}
 
 	/**
