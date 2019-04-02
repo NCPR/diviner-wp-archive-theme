@@ -3,6 +3,7 @@
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
 use Diviner\Post_Types\Diviner_Field\PostMeta;
+use Carbon_Fields\Field;
 
 /**
  * Abstract Field Type
