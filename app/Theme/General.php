@@ -540,6 +540,10 @@ class General {
 		echo ArchiveItemTheme::render_meta_fields();
 	}
 
+	/**
+	 * Renders awesome fonts
+	 *
+	 */
 	public function awesome_fonts() {
 		?>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
