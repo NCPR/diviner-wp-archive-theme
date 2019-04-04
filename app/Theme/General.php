@@ -125,7 +125,7 @@ class General {
 	 *
 	 */
 	function custom_excerpt_length( $length ) {
-		return 30;
+		return 20;
 	}
 
 	/**

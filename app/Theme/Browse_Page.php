@@ -8,7 +8,7 @@ namespace Diviner\Theme;
  *
  * @package Diviner\Admin
  */
-class BrowsePage {
+class Browse_Page {
 
 	public function hooks() {
 		if ( DIVINER_IS_THEME ) {

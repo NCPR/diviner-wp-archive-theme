@@ -14,16 +14,18 @@ use Diviner\Post_Types\Archive_Item\Archive_Item;
  */
 class Recent_Archive_Items {
 
+	const BLOCK_ID = 'diviner_block_rai';
 	const BLOCK_TITLE = 'diviner_block_rai_title';
 
 	/**
 	 * Custom Related Archive Items Block
 	 */
-	public function init() {
-		Block::make( 'Recent Archive Items' )
+	public function __construct() {
+		Block::make( static::BLOCK_ID, __( 'Diviner Recent Archive Items', 'ncpr-diviner' ) )
 			->add_fields( [
 				Field::make( 'text', static::BLOCK_TITLE, __( 'Block Title', 'ncpr-diviner' ) )->set_default_value( __( 'Recent Archive Items', 'ncpr-diviner' ) )
 			])
+		->set_icon( 'star-filled' )
 		->set_render_callback([ $this, 'render' ]); // ToDo figure out typecasting
 	}
 

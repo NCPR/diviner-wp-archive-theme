@@ -60,12 +60,13 @@ class Settings {
 	 * Add admin menus
 	 */
 	public function create_admin_menus() {
-		add_menu_page(
+		add_menu_page( // add_menu_page
 			__( 'Diviner', 'ncpr-diviner' ),
 			__( 'Diviner', 'ncpr-diviner' ),
 			'manage_options',
 			static::GENERAL_SETTINGS_SLUG,
-			[ &$this, 'general_settings_render' ]
+			[ &$this, 'general_settings_render' ],
+			'dashicons-star-filled'
 		);
 	}
 
@@ -99,7 +100,7 @@ class Settings {
 			</p>
 
 			<p>
-				<a href="index.php?page=<?php echo esc_attr( static::$theme_options->get_page_file() ); ?>" class="button button-primary">
+				<a href="admin.php?page=<?php echo esc_attr( static::$theme_options->get_page_file() ); ?>" class="button button-primary">
 					General Settings
 				</a>
 			</p>
