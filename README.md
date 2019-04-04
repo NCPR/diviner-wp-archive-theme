@@ -35,7 +35,7 @@ This project is based on the excellent [Tonik Starter Theme](/README_Tonik.md) b
 ### Summer and early Fall of 2018
 
 * ~~Development of Alpha Version based on existing [North Country at Work](http://www.northcountryatwork.org/) code base~~
-* ~~Elastic search enabled multi facet react front end~~
+* Elastic search enabled multi facet react front end (in testing)
 * ~~Admin experience allowing user to activate/deactivate a set of core fields~~
 * ~~Date field with multi front end display options (year decade or century slider or date range selector)~~
 * ~~Text field for basic text data~~
