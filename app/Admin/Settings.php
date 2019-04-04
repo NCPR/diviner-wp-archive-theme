@@ -21,6 +21,7 @@ class Settings {
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
 	const FIELD_GENERAL_FOOTER_COPY = 'diviner_field_general_footer_copy';
 	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
+	const FIELD_GENERAL_LOOP_CARDS_FIELD = 'diviner_field_general_loop_cards';
 	const FIELD_GENERAL_SOCIAL_TWITTER = 'diviner_field_general_social_twitter';
 	const FIELD_GENERAL_SOCIAL_FACEBOOK = 'diviner_field_general_social_facebook';
 	const FIELD_GENERAL_SOCIAL_INSTAGRAM = 'diviner_field_general_social_instagram';
@@ -28,6 +29,7 @@ class Settings {
 	const FIELD_GENERAL_COLLECTION_SINGULAR = 'diviner_field_general_collection_singular';
 	const FIELD_GENERAL_COLLECTION_PLURAL = 'diviner_field_general_collection_plural';
 	const FIELD_GENERAL_COLLECTION_DESCRIPTION = 'diviner_field_general_collection_description';
+	const FIELD_GENERAL_COLLECTION_CARDS = 'diviner_field_general_collection_cards';
 
 	const GENERAL_SETTINGS_SLUG = 'diviner_general_settings_slug';
 
@@ -152,6 +154,7 @@ class Settings {
 				$this->browse_modal_field(),
 				$this->help_page_field(),
 				$this->related_field(),
+				$this->loop_as_cards_field(),
 				$this->footer_copy(),
 				$this->get_separator( __( 'Connect Social Media Accounts', 'ncpr-diviner' ) ),
 				$this->social_media_link_twitter(),
@@ -161,7 +164,8 @@ class Settings {
 				$this->collection(),
 				$this->collection_title_singular(),
 				$this->collection_title_plural(),
-				$this->collection_description(),
+				$this->collection_loop_as_cards_field(),
+				$this->collection_description()
 			]
 		);
 	}
@@ -183,6 +187,12 @@ class Settings {
 	public function browse_modal_field() {
 		return Field::make( 'checkbox', static::FIELD_GENERAL_BROWSE_MODAL, __( 'Activate Modal in browse page on click', 'ncpr-diviner' ) )
 			->set_help_text( __( 'Modal displays by default mid size image, title, and copyright information', 'ncpr-diviner' ) );
+	}
+
+	public function loop_as_cards_field() {
+		return Field::make( 'checkbox', static::FIELD_GENERAL_LOOP_CARDS_FIELD, __( 'Display blog loop as cards', 'ncpr-diviner' ) )
+			->set_option_value( '1' )
+			->set_default_value( '0' );
 	}
 
 	public function related_field() {
@@ -213,6 +223,12 @@ class Settings {
 	public function collection_description() {
 		return Field::make( 'rich_text', static::FIELD_GENERAL_COLLECTION_DESCRIPTION, __( 'Collection Description ', 'ncpr-diviner' ) )
 			->set_help_text( __( 'Appears at the top of the collections looop page', 'ncpr-diviner' ) );
+	}
+
+	public function collection_loop_as_cards_field() {
+		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION_CARDS, __( 'Display collection loop as cards', 'ncpr-diviner' ) )
+			->set_option_value( '1' )
+			->set_default_value( '1' );
 	}
 
 	public function get_pages() {
