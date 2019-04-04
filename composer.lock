@@ -4,20 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4a57e815994be9d46a6e957207056dc",
+    "content-hash": "654209664958947f1acff8eecd23c241",
     "packages": [
         {
-            "name": "htmlburger/carbon-fields",
-            "version": "3.0.2",
+            "name": "awps/font-awesome-php",
+            "version": "4.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/htmlburger/carbon-fields.git",
-                "reference": "6425d314b1c9bcdcc83660ac400e20e57582ddd6"
+                "url": "https://github.com/awps/font-awesome-php.git",
+                "reference": "a395b3b7df3b6970b64cef086bbcc9686625bb60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/htmlburger/carbon-fields/zipball/6425d314b1c9bcdcc83660ac400e20e57582ddd6",
-                "reference": "6425d314b1c9bcdcc83660ac400e20e57582ddd6",
+                "url": "https://api.github.com/repos/awps/font-awesome-php/zipball/a395b3b7df3b6970b64cef086bbcc9686625bb60",
+                "reference": "a395b3b7df3b6970b64cef086bbcc9686625bb60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Awps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Andrei Surdu",
+                    "homepage": "http://zerowp.com/"
+                }
+            ],
+            "description": "A PHP library for Font Awesome.",
+            "time": "2017-12-19T19:01:16+00:00"
+        },
+        {
+            "name": "htmlburger/carbon-fields",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/htmlburger/carbon-fields.git",
+                "reference": "c4c009a7e50e13282859e6fc2711c0a8b717e778"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/htmlburger/carbon-fields/zipball/c4c009a7e50e13282859e6fc2711c0a8b717e778",
+                "reference": "c4c009a7e50e13282859e6fc2711c0a8b717e778",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +173,7 @@
             ],
             "description": "WordPress developer-friendly custom fields for post types, taxonomy terms, users, comments, widgets, options and more.",
             "homepage": "http://carbonfields.net/",
-            "time": "2019-01-14T12:30:37+00:00"
+            "time": "2019-04-01T07:37:08+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -588,7 +624,7 @@
                 "tonik",
                 "wordpress"
             ],
-            "time": "2018-03-27 13:54:09"
+            "time": "2018-03-27T13:54:09+00:00"
         }
     ],
     "aliases": [],
