@@ -27,6 +27,10 @@ class General {
 	const IMAGE_SIZE_CARD_MD = 'image_size_card_md';
 	const IMAGE_SIZE_CARD_SM = 'image_size_card_sm';
 
+	const IMAGE_SIZE_ARCHIVE_SINGLE_LRG  = 'image_size_archive_single_lrg';
+	const IMAGE_SIZE_ARCHIVE_SINGLE_M  = 'image_size_archive_single_m';
+	const IMAGE_SIZE_ARCHIVE_SINGLE_SM  = 'image_size_archive_single_s';
+
 	// overridden by CSS
 	const OEMBED_AUDIO_DIMENSIONS_WIDTH = 700;
 	const OEMBED_AUDIO_DIMENSIONS_HEIGHT = 81;
@@ -52,7 +56,21 @@ class General {
 			'height' => 160,
 			'crop'   => true,
 		],
-
+		self::IMAGE_SIZE_ARCHIVE_SINGLE_LRG => [
+			'width'  => 1600,
+			'height' => 0,
+			'crop'   => false,
+		],
+		self::IMAGE_SIZE_ARCHIVE_SINGLE_M => [
+			'width'  => 1200,
+			'height' => 0,
+			'crop'   => false,
+		],
+		self::IMAGE_SIZE_ARCHIVE_SINGLE_SM => [
+			'width'  => 800,
+			'height' => 0,
+			'crop'   => false,
+		],
 		self::IMAGE_SIZE_THUMBNAIL_LRG => [
 			'width'  => 1200,
 			'height' => 900,

@@ -13,6 +13,8 @@ namespace Tonik\Theme\App\Structure;
 |
 */
 
+// ToDo pull these template calls into classes
+
 use function Tonik\Theme\App\template;
 
 /**

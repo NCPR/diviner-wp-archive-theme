@@ -21,8 +21,6 @@ use Diviner\Config\General;
  */
 function add_image_sizes()
 {
-	add_image_size('custom-thumbnail', 800, 600, true);
-
 	foreach ( General::$image_sizes as $key => $attributes ) {
 		add_image_size( $key, $attributes[ 'width' ], $attributes[ 'height' ], $attributes[ 'crop' ] );
 	}
