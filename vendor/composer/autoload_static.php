@@ -35,6 +35,10 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         array (
             'Carbon_Fields\\' => 14,
         ),
+        'A' => 
+        array (
+            'Awps\\' => 5,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -77,6 +81,10 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         'Carbon_Fields\\' => 
         array (
             0 => __DIR__ . '/..' . '/htmlburger/carbon-fields/core',
+        ),
+        'Awps\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/awps/font-awesome-php/src',
         ),
     );
 
