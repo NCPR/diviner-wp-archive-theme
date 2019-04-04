@@ -9,6 +9,7 @@ use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
 use Diviner\Post_Types\Collection\Collection;
+use Diviner\Admin\Settings;
 
 /**
  * Class General
@@ -316,8 +317,10 @@ class General {
 	 * @return bool
 	 */
 	static public function should_display_cards( ) {
-		if (is_post_type_archive( [ Archive_Item::NAME, Collection::NAME ] )) {
+		if (is_post_type_archive( [ Archive_Item::NAME ] )) {
 			return true;
+		} else if ( is_post_type_archive( [ Collection::NAME ] ) ) {
+			return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_CARDS);
 		} else {
 			$is_tax = is_tax();
 			if ($is_tax) {
@@ -325,11 +328,11 @@ class General {
 				if ( static::is_taxonomy_in_post_type($term, Archive_Item::NAME) ) {
 					return true;
 				} else if ( static::is_taxonomy_in_post_type($term, Collection::NAME) ) {
-					return true;
+					return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_CARDS);
 				}
 			}
 		}
-		return false;
+		return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_LOOP_CARDS_FIELD);;
 	}
 
 	function theme_index_under_page_header() {
