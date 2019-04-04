@@ -58,4 +58,6 @@ This project is based on the excellent [Tonik Starter Theme](/README_Tonik.md) b
 * Release in the wild
 * User testing session 
 * Support adopters
+* Upgrade to webpack 4
+* Add modal window system to the collections display. Set up chunking for the react library
 
