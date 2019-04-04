@@ -1,0 +1,191 @@
+
+.primary-menu__wrap {
+	display: none;
+	margin:	60px 0;
+
+	@include g-state(full) {
+		display: block;
+		margin: 0;
+	}
+
+	.menu--opened & {
+		display: block;
+		position: fixed;
+		padding: $d_spacer_m;
+		margin: 0;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		width: 100%;
+		height: 100%;
+		background: $color_white;
+		overflow: auto;
+
+		@include g-state(full) {
+			display: block;
+			position:relative;
+			width: auto;
+			height: auto;
+			background: transparent;
+		}
+
+
+	}
+
+	.menu--opened.admin-bar & {
+		top: $d_spacer_wpadmin_mobile;
+
+		@include g-state(wpadmin) {
+			top: $d_spacer_wpadmin_desktop;
+		}
+	}
+}
+
+.primary-menu {
+	padding-top: 50px;
+	position: relative;
+
+	li {
+		float: left;
+		display: inline-block;
+		position: relative;
+
+		.menu--opened & {
+			display: block;
+			width: 100%;
+			margin: $d_spacer_sm 0;
+			float: none;
+		}
+	}
+
+	@include g-state(full) {
+		margin-top: 0;
+		padding-top: 0;
+		margin-right: calc(-1 * #{$d_spacer_m});
+
+		.menu > ul > li {
+			overflow: visible;
+		}
+
+		.menu > ul > li > a {
+			padding: 0 10px;
+			height: 30px;
+			line-height: 30px;
+		}
+
+		.menu > ul > li + li {
+			margin-left: $d_spacer_sm;
+		}
+
+	}
+
+	a {
+		@include button-global;
+
+		font-size: 20px;
+		text-transform: none;
+		padding: .5em 1em;
+		transition: $t_transition;
+
+		.menu--opened & {
+			display: block;
+		}
+
+		@include g-state(full) {
+			background-color: transparent;
+			text-transform: uppercase;
+			border: none;
+			color: $color_grey;
+			font-family: $t_font_helvetica;
+			font-size: 20px;
+			letter-spacing: 0;
+			font-weight: $t_font_weight_normal;
+
+			&:visited {
+				color: $color_grey;
+			}
+
+			&:hover,
+			&:focus {
+				color: $color_grey_darker;
+				background-color: transparent;
+			}
+		}
+
+	}
+}
+
+.primary-menu__close {
+	display: none;
+	position: absolute;
+	top: 0;
+	border: 0;
+	right: 0;
+	padding: 0;
+	font-size: 30px;
+
+	.menu--opened & {
+		display: block;
+
+		@include g-state(full) {
+			display: none;
+		}
+	}
+
+	@include g-state(full) {
+		display: none;
+	}
+}
+
+.menu-item-has-children {
+	overflow: visible;
+}
+
+.sub-menu {
+	margin-left: $d_spacer_m;
+
+	@include g-state(full) {
+		display: none;
+		width: auto;
+		min-width: 180px;
+		position: absolute;
+		z-index: 10;
+		left: 0;
+		margin-left: 0;
+		top: 100%;
+		padding: $d_spacer_sm;
+		background-color: $color_background;
+		box-shadow: 0 3px 7px 0 rgba(61,61,61,0.3);
+		max-width: 250px;
+		opacity: 0;
+		transition: $t_transition;
+
+		.menu > .menu-item-has-children:hover > & {
+			display: block;
+			opacity: 1;
+		}
+
+		.menu > .menu-item-has-children:last-of-type > & {
+			left: auto;
+			right: 10px;
+		}
+
+		li {
+			float: none;
+			margin-bottom: $d_spacer_sm;
+			width: 100%;
+			position: relative;
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+
+			a {
+				position: relative;
+				display: block;
+				width: 100%;
+			}
+		}
+
+	}
+}

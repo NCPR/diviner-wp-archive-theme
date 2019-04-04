@@ -9,9 +9,13 @@ use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
 use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
-use Diviner\CarbonFields\Errors\UndefinedType;
 use Diviner\CarbonFields\Helper;
 
+/**
+ * Class Diviner Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field
+ */
 class Diviner_Field {
 
 	const NAME = 'diviner_field';
@@ -81,18 +85,30 @@ class Diviner_Field {
 				'name'         => _x( 'Diviner Fields', 'post type general name'),
 				'add_new_item' => __( 'Add New Diviner Field', 'ncpr-diviner' ),
 				'edit_item'    => __( 'Edit Diviner Field', 'ncpr-diviner' ),
+				'new_item'     => __( 'New Diviner Field', 'ncpr-diviner' ),
+				'view_item'    => __( 'View Diviner Field', 'ncpr-diviner' ),
+				'view_items'   => __( 'View Diviner Fields', 'ncpr-diviner' )
 			]
 		];
 	}
 
+	static public function get_class_title( $field_type ) {
+		$field = Diviner_Field::get_class($field_type);
+		$field_title_string = sprintf('%s::TITLE', $field);
+		if ( defined( $field_title_string ) ) {
+			return constant( $field_title_string );
+		}
+		return 'NONE';
+	}
+
 	static public function get_class( $field_type ) {
 		$map = [
-			Text_Field::NAME        => Text_Field::class,
-			Date_Field::NAME        => Date_Field::class,
-			CPT_Field::NAME         => CPT_Field::class,
-			Related_Field::NAME     => Related_Field::class,
-			Taxonomy_Field::NAME    => Taxonomy_Field::class,
-			Select_Field::NAME    => Select_Field::class,
+			Text_Field::NAME     => Text_Field::class,
+			Date_Field::NAME     => Date_Field::class,
+			CPT_Field::NAME      => CPT_Field::class,
+			Related_Field::NAME  => Related_Field::class,
+			Taxonomy_Field::NAME => Taxonomy_Field::class,
+			Select_Field::NAME   => Select_Field::class,
 		];
 		if( !array_key_exists( $field_type, $map ) ){
 			throw UndefinedType("{$field_type} is not a valid field type");

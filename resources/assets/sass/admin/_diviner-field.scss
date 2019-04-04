@@ -1,6 +1,10 @@
 .post-type-diviner_field {
 }
 
+.wrap {
+
+}
+
 .wrap-diviner--light {
 	background-color: $color_white;
 	margin: 30px 0;
@@ -31,10 +35,16 @@
 			width: 10%;
 		}
 		.column-title {
-			width: 40%;
+			width: 30%;
+		}
+		.column-type {
+			width: 10%;
+		}
+		.column-placement {
+			width: 10%;
 		}
 		.column-description {
-			width: 40%;
+			width: 35%;
 		}
 	}
 }
@@ -53,10 +63,6 @@
 
 	h2 {
 		font-size: 20px;
-	}
-
-	p {
-		font-size: 120%;
 	}
 }
 
@@ -95,7 +101,7 @@
 	}
 }
 
-.carbon-field.div_field_id {
+.cf-field.div_field_id {
 	input {
 		pointer-events: none;
 		color: $color_grey_dark;
@@ -110,11 +116,11 @@
 	display: none !important;
 }
 
-.carbon-field.div_field_type {
+.cf-field.div_field_type {
 	// display: none;
 }
 
-.carbon-field.div_field_browse_sortable {
+.cf-field.div_field_browse_sortable {
 	display: none;
 
 	.post-field-type--diviner_text_field &,
@@ -123,7 +129,7 @@
 	}
 }
 
-.carbon-field.div_field_browse_elastic {
+.cf-field.div_field_browse_elastic {
 	display: none;
 
 	.post-field-type--diviner_text_field &,
@@ -138,4 +144,9 @@
 	.page-title-action {
 		display: none;
 	}
+}
+
+/* Make field type selector invisible */
+.cf-field.div_field_type {
+	display: none;
 }

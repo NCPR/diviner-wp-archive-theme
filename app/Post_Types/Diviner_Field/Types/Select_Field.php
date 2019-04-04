@@ -3,10 +3,14 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
-use Diviner\Post_Types\Diviner_Field\Types\FieldType;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Carbon_Fields\Field;
 
+/**
+ * Class Select Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Select_Field extends FieldType {
 
 	const NAME = 'diviner_select_field';
@@ -41,6 +45,31 @@ class Select_Field extends FieldType {
 			$field->help_text($helper);
 		}
 		return $field;
+	}
+
+	/**
+	 * Return field value
+	 *
+	 * @param  int $post_id Post Id of archive item.
+	 * @param  string $field_name ID of field to get value of
+	 * @param  int $field_post_id Field Id
+	 * @return string
+	 */
+	static public function get_value( $post_id, $field_name, $field_post_id ) {
+		$raw_value = carbon_get_post_meta( $post_id, $field_name );
+		$options = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_SELECT_OPTIONS);
+		$filtered_options = array_filter(
+			$options,
+			function ($val, $key) use ($raw_value) {
+				return $val[FieldPostMeta::FIELD_SELECT_OPTIONS_VALUE] === $raw_value;
+			},
+			ARRAY_FILTER_USE_BOTH
+		);
+		$flattened_options = array_values($filtered_options);
+		if (isset($flattened_options[0])) {
+			return $flattened_options[0][FieldPostMeta::FIELD_SELECT_OPTIONS_LABEL];
+		}
+		return $raw_value;
 	}
 
 	/**

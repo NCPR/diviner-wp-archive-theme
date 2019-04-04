@@ -3,11 +3,18 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
-use function Tonik\Theme\App\config;
-
+/**
+ * Class Archive Item
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class Archive_Item {
 
 	const NAME = 'diviner_archive_item';
+
+	public function hooks() {
+		add_action( 'init', [ $this, 'register' ], 0, 0 );
+	}
 
 	public function register() {
 		$args = wp_parse_args( $this->get_args(), $this->get_labels() );

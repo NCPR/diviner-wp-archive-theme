@@ -5,9 +5,7 @@ namespace Diviner\CarbonFields;
 use \Carbon_Fields\Carbon_Fields;
 
 /**
- * Class Settings
- *
- * Functions for Settings
+ * Class Boot
  *
  * @package Diviner\CarbonFields
  */

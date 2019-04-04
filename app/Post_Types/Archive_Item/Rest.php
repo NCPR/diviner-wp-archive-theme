@@ -2,7 +2,6 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
-use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
@@ -13,7 +12,11 @@ use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Admin\Settings;
 use Diviner\CarbonFields\Helper;
 
-
+/**
+ * Class Rest
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class Rest {
 
 	const FIELD_INDEX_ID = 'id';
@@ -404,11 +407,6 @@ class Rest {
 			] );
 		}
 
-		register_rest_field( Archive_Item::NAME, 'test', [
-			'get_callback' => function( $arr ) use( &$text_fields) {
-				return count($text_fields);
-			}
-		] );
 
 	}
 

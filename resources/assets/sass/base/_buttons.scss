@@ -1,0 +1,38 @@
+
+.btn {
+	@include button;
+}
+
+.btn--s {
+	font-size: 13px;
+
+	@include g-state(medium) {
+		font-size: 15px;
+	}
+}
+
+.btn--lg {
+	font-size: 1.1em;
+	padding: .95em 1.5em;
+
+	@include g-state(medium) {
+		font-size: 1.2em;
+	}
+}
+
+.btn--full {
+	width: 100%;
+	text-align: center;
+	margin: 0 0 9px;
+}
+
+.btn--fullmobile {
+	width: 100%;
+	text-align: center;
+	margin: 9px 0;
+
+	@include g-state(medium) {
+		width: auto;
+		text-align: left;
+	}
+}

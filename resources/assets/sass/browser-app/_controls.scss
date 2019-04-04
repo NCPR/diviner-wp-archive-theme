@@ -3,8 +3,6 @@
 	@include g-state( medium ) {
 		display: flex;
 	}
-
-
 }
 
 .a-control-row--1 > * {
@@ -51,4 +49,8 @@
 .a-search-button {
 	height: 40px;
 	flex: 0 0 auto;
+}
+
+.a-page-content {
+	overflow: auto;
 }

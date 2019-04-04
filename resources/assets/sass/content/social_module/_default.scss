@@ -1,0 +1,44 @@
+.social-links {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: flex-start;
+
+
+	.footer & {
+		margin-bottom: $d_spacer_sm;
+
+		@include g-state(medium) {
+			float: right;
+		}
+	}
+}
+
+.social-links_item {
+	float: left;
+
+	& + & {
+		margin-left: $d_spacer_m;
+	}
+}
+
+.social-links_link {
+	font-size: 22px;
+	padding: 5px;
+	border: 1px solid $color_grey_light;
+	color: $color_grey_light;
+	border-radius: 50%;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 30px;
+	text-align: center;
+	background-color: transparent;
+
+	&:hover,
+	&:focus {
+		border: 1px solid $color_white;
+		color: $color_white;
+		background-color: rgba(0,0,0,0.2);
+	}
+}

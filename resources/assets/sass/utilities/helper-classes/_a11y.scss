@@ -1,0 +1,12 @@
+
+.a11y-hidden {
+	@include hidden;
+}
+
+.a11y-visual-hide {
+	@include visually-hide;
+}
+
+.a11y-visual-show {
+	@include visually-hide;
+}

@@ -1,0 +1,80 @@
+
+/* -----------------------------------------------------------------------------
+ * Table
+ * ----------------------------------------------------------------------------- */
+
+.table,
+.d-content table {
+	font-size: $t_font_size_sm;
+	margin: $d_spacer_m auto;
+	text-align: left;
+	border-collapse: collapse;
+	border-bottom: 1px solid $color_border;
+	width: 100%;
+	table-layout: fixed;
+
+	@include g-state(medium) {
+		font-size: $t_font_size_m;
+		table-layout: auto;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TH
+ * ----------------------------------------------------------------------------- */
+
+.th,
+.d-content th {
+	padding: 14px 1em 12px;
+	font-family: $t_font_headers;
+	text-transform: uppercase;
+	background-color: $color_grey_light;
+	color: $color_headers;
+	font-size: 18px;
+
+	@include g-state(medium) {
+		font-size: 24px;
+	}
+
+	& ~ th {
+		border-left: 1px solid $color_border;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TR
+ * ----------------------------------------------------------------------------- */
+
+.tr,
+.d-content tr {
+
+	thead & {
+		border-bottom: 1px solid $color_border;
+	}
+
+	& ~ tr {
+		border-top: 1px solid $color_border;
+	}
+
+	&:nth-of-type(even) {
+		background-color: $color_white;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * TD
+ * ----------------------------------------------------------------------------- */
+
+.td,
+.d-content td {
+	padding: 12px 1em 10px;
+	font-size: 14px;
+
+	@include g-state(medium) {
+		font-size: 18px;
+	}
+
+	& ~ td {
+		border-left: 1px solid $color_border;
+	}
+}

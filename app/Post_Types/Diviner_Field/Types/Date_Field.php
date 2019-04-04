@@ -7,6 +7,11 @@ use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
 
+/**
+ * Class Date Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Date_Field extends FieldType  {
 
 	const NAME  = 'diviner_date_field';
@@ -29,6 +34,20 @@ class Date_Field extends FieldType  {
 		}
 		return $field;
 	}
+
+	/**
+	 * Return field value
+	 *
+	 * @param  int $post_id Post Id of archive item.
+	 * @param  string $field_name ID of field to get value of
+	 * @param  int $field_post_id Field Id
+	 * @return string
+	 */
+	static public function get_value( $post_id, $field_name, $field_post_id ) {
+		$raw_date = carbon_get_post_meta( $post_id, $field_name );
+		return mysql2date( get_option( 'date_format' ), $raw_date );
+	}
+	// $the_date = mysql2date( get_option( 'date_format' ), $post->post_date );
 
 	/**
 	 * Return basic blueprint for this field

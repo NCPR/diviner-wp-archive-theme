@@ -3,11 +3,15 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
-use Diviner\Post_Types\Diviner_Field\Types\FieldType;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
 use Carbon_Fields\Field;
 
+/**
+ * Class Text Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Text_Field extends FieldType {
 
 	const NAME  = 'diviner_text_field';

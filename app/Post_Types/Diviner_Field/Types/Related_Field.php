@@ -5,6 +5,11 @@ namespace Diviner\Post_Types\Diviner_Field\Types;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Carbon_Fields\Field;
 
+/**
+ * Class Related Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Related_Field extends FieldType  {
 
 	const NAME = 'diviner_related_field';
@@ -14,7 +19,7 @@ class Related_Field extends FieldType  {
 	/**
 	 * Builds the field and returns it
 	 *
-	 * @param  int $post_id Post Id of field to set up.
+	 * @param  int $post_id Post Id of field to set up (ignored bc not dynamic currently)
 	 * @param  string $id Field id
 	 * @param  string $field_label Label
 	 * @param  string $helper field helper text

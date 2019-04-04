@@ -8,11 +8,14 @@ use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
-use Diviner\CarbonFields\Errors\UndefinedType;
-
 use Diviner\Admin\Settings;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
+/**
+ * Class Post Meta
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class Post_Meta {
 
 	const FIELD_TYPE = 'div_ai_field_type';
@@ -42,9 +45,12 @@ class Post_Meta {
 
 	protected $container;
 
-	static public function get_type_label_from_id($id)
-	{
-		return isset( static::FIELD_TYPE_OPTIONS[$id]) ? static::FIELD_TYPE_OPTIONS[$id] : '';
+	public function hooks() {
+		add_action( 'carbon_fields_register_fields', [ $this, 'add_post_meta' ], 3, 0 );
+	}
+
+	static public function get_type_label_from_id($id) {
+		return isset( static::FIELD_TYPE_OPTIONS[$id] ) ? static::FIELD_TYPE_OPTIONS[$id] : '';
 	}
 
 	public function add_post_meta()
@@ -129,17 +135,19 @@ class Post_Meta {
 		if ( $related ) {
 			$field = Related_Field::render(
 				0,
-				'diviner_related',
+				static::FIELD_RELATED,
 				__( 'Related Archive Items', 'ncpr-diviner' ),
 				__( 'Appears on each archive item single page as a slider', 'ncpr-diviner' )
 			);
 			$dynamic_fields[] = $field;
 		}
 
-		$dyn_fields_container = Container::make( 'post_meta', __( 'Additional Fields', 'ncpr-diviner' ) )
-			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( $dynamic_fields )
-			->set_priority( 'default' );
+		if ( count($dynamic_fields) ) {
+			$dyn_fields_container = Container::make( 'post_meta', __( 'Additional Fields', 'ncpr-diviner' ) )
+				->where( 'post_type', '=', Archive_Item::NAME )
+				->add_fields( $dynamic_fields )
+				->set_priority( 'default' );
+		}
 
 	}
 

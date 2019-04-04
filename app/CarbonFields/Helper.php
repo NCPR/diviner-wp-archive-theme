@@ -3,9 +3,7 @@
 namespace Diviner\CarbonFields;
 
 /**
- * Class Settings
- *
- * Functions for Settings
+ * Class Helper
  *
  * @package Diviner\CarbonFields
  */

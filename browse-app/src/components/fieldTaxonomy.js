@@ -47,7 +47,6 @@ class FieldTaxonomy extends Component {
 	}
 
 	createField(field) {
-		// console.log('createField', field);
 		if (!CONFIG.taxonomies[field.taxonomy_field_name]) {
 			return '';
 		}

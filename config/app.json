@@ -4,9 +4,18 @@
       "./resources/assets/js/app.js",
       "./resources/assets/sass/app.scss"
     ],
+    "vendor": [
+      "./resources/assets/js/vendor.js"
+    ],
     "admin": [
       "./resources/assets/sass/admin.scss",
-      "./resources/assets/js/admin/admin.js"
+      "./resources/assets/js/admin.js"
+    ],
+    "editor-styles": [
+      "./resources/assets/sass/editor-styles.scss"
+    ],
+    "block-editor-styles": [
+      "./resources/assets/sass/block-editor-styles.scss"
     ]
   }
 }

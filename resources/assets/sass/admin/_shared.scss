@@ -19,9 +19,22 @@
 		}
 	}
 
+	p,
+	li {
+		font-size: 110%;
+	}
+
+	p {
+		margin-bottom: 15px;
+	}
+
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+
 }
 
 .wrap-diviner--auto-width {
 	display: inline-block;
-	width: autos;
+	width: auto;
 }

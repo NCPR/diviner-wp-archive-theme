@@ -1,0 +1,119 @@
+
+/* Pull Quote
+--------------------------------------------- */
+
+.wp-block-pullquote {
+	border: none;
+	padding: 0;
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
+	line-height: inherit;
+
+	@include g-state(medium) {
+		margin-top: $d_spacer_lrg;
+		margin-bottom: $d_spacer_lrg;
+	}
+
+	blockquote {
+		border-left: 0;
+		padding: $d_spacer_m 0;
+		border-top: 4px solid $color_grey_dark;
+		border-bottom: 4px solid $color_grey_dark;
+		text-align: center;
+
+		p {
+			max-width: 80%;
+			margin: 0 auto;
+		}
+
+		&.has-text-color {
+			p {
+				color: inherit;
+			}
+		}
+
+		@include g-state(medium) {
+			padding: $d_spacer_lrg 0;
+		}
+	}
+
+	p {
+		font-size: 20px;
+		font-weight: $t_font_weight_bold;
+		line-height: $t_line_height_lrg;
+		letter-spacing: 0.1px;
+
+		@include g-state(medium) {
+			font-size: 27px;
+		}
+	}
+
+	&.alignleft,
+	&.alignright {
+		max-width: 100%;
+
+		@include g-state(medium) {
+			max-width: 50%;
+			display: inline-block;
+			margin-top: $d_spacer_m;
+			margin-bottom: $d_spacer_m;
+
+			blockquote {
+				margin: 0 auto;
+			}
+		}
+
+		p {
+			font-size: 20px;
+
+			@include g-state(medium) {
+				font-size: 27px;
+			}
+		}
+	}
+
+	&.alignleft {
+		@include g-state(medium) {
+			margin-right: $d_spacer_m;
+		}
+	}
+
+	&.alignright {
+		@include g-state(medium) {
+			margin-left: $d_spacer_m;
+		}
+	}
+
+	cite,
+	.wp-block-pullquote__citation {
+		@include cite-text;
+
+		color: $color_grey;
+	}
+
+	&.is-style-solid-color blockquote {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: left;
+		max-width: 100%;
+		border-top-color: transparent;
+		border-bottom-color: transparent;
+		border-left-width: 0;
+		padding: $d_spacer_m;
+		margin-top: 0;
+		margin-bottom: 0;
+
+		@include g-state(medium) {
+			padding: $d_spacer_lrg;
+			max-width: 80%;
+		}
+
+		cite {
+			@include cite-text;
+		}
+
+		p {
+
+		}
+	}
+}

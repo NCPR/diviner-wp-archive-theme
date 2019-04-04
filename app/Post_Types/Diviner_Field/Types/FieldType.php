@@ -3,7 +3,13 @@
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
 use Diviner\Post_Types\Diviner_Field\PostMeta;
+use Carbon_Fields\Field;
 
+/**
+ * Abstract Field Type
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 abstract class FieldType implements iField {
 
 	const TYPE = 'date';
@@ -52,6 +58,18 @@ abstract class FieldType implements iField {
 	 */
 	static public function decorate_query_args ( $args, $sort_args ) {
 		return $args;
+	}
+
+	/**
+	 * Return field value
+	 *
+	 * @param  int $post_id Post Id of archive item.
+	 * @param  string $field_name ID of field to get value of
+	 * @param  int $field_post_id Field Id
+	 * @return string
+	 */
+	static public function get_value( $post_id, $field_name, $field_post_id ) {
+		return carbon_get_post_meta( $post_id, $field_name );
 	}
 
 	/**

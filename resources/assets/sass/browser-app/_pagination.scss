@@ -13,13 +13,13 @@ ul.react-pagination li {
 	margin-right: 1px;
 
 	a {
-		@extend %button;
+		@include button;
 
 		color: $color_white;
 	}
 
 	&.active a {
-		background-color: $color_grey_mid;
+		background-color: $color_grey;
 	}
 
 	&.disabled {

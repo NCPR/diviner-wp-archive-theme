@@ -2,12 +2,15 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
-use function Tonik\Theme\App\config;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
-use Diviner\CarbonFields\Errors\UndefinedType;
 
+/**
+ * Class Admin Modifications
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class AdminModifications {
 
 	const DIV_COL_TYPE = 'div_col_type';
@@ -33,12 +36,12 @@ class AdminModifications {
 			'post_type' => Diviner_Field::NAME,
 			'meta_query' => $meta_query
 		];
-		$posts_ids = get_posts($args);
-		foreach($posts_ids as $post_id) {
-			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+		$field_posts_ids = get_posts($args);
+		foreach($field_posts_ids as $field_post_id) {
+			$field_type = carbon_get_post_meta($field_post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$field = Diviner_Field::get_class($field_type);
 			if( is_callable( [ $field, 'setup' ] ) ){
-				call_user_func( [ $field, 'setup' ], $post_id);
+				call_user_func( [ $field, 'setup' ], $field_post_id);
 			}
 		}
 	}
@@ -104,35 +107,35 @@ class AdminModifications {
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Photo','ncpr-diviner'),
 			__('Add New Photo','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=photo'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Audio','ncpr-diviner'),
 			__('Add New Audio','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=audio'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Video','ncpr-diviner'),
 			__('Add New Video','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=video'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Document','ncpr-diviner'),
 			__('Add New Document','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=document'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
 			__('Add New Mixed Media','ncpr-diviner'),
 			__('Add New Mixed Media','ncpr-diviner'),
-			'manage_options',
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=mixed'
 		);
 

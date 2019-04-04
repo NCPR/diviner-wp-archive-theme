@@ -1,25 +1,17 @@
 // ncaw_config for data coming from BE
 const configDefault = {
-	years: {
-		min: 1850,
-		max: 2017,
-		default: [
-			1890,
-			1920
-		]
-	},
+	browse_page_title: '',
+	browse_page_content: '',
+	base_browse_url: '',
 	order_by: [],
 	tags: [],
-	year_choices: [],  // contains all the years
-	help_page: undefined,
-	base_browse_url: 'TESTURL',
-	permission_notice: '',
 	taxonomies: [],
 	fields: [],
 	cpt_posts: [],
 	settings: {
-		permissions: '',
-		display_popup: false
+		display_popup: false,
+		help_page_link: '',
+		permission_notice: ''
 	},
 };
 

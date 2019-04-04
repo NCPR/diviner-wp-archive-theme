@@ -1,0 +1,29 @@
+// -----------------------------------------------------------------------------
+//
+// Paragraph
+//
+// -----------------------------------------------------------------------------
+
+p {
+	@include body-text;
+
+	margin-top: 0;
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-top: 0;
+		margin-bottom: $d_spacer_lrg;
+	}
+
+	.d-content & {
+		color: $color_text;
+
+		&.has-drop-cap:not(:focus)::first-letter {
+			@include drop-cap;
+		}
+	}
+
+	.d-content--inverse & {
+		color: $color_text_inverse;
+	}
+}

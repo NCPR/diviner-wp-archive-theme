@@ -6,9 +6,6 @@ npm-debug.log
 
 .DS_Store
 Thumbs.db
-
-public
-
 .env
 
 **/node_modules/

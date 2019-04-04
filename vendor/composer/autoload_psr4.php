@@ -7,6 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Tonik\\Gin\\' => array($vendorDir . '/tonik/gin/src/Gin'),
+    'Tonik\\CLI\\' => array($vendorDir . '/tonik/cli/src/CLI'),
+    'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
+    'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
+    'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'League\\CLImate\\' => array($vendorDir . '/league/climate/src'),
+    'Diviner\\' => array($baseDir . '/app'),
     'Carbon_Fields\\' => array($vendorDir . '/htmlburger/carbon-fields/core'),
+    'Awps\\' => array($vendorDir . '/awps/font-awesome-php/src'),
 );

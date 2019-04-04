@@ -34,4 +34,4 @@ function render_button_shortcode($atts, $content)
 
     return ob_get_clean();
 }
-add_shortcode('button', 'Tonik\Theme\App\Structure\render_button_shortcode');
+// add_shortcode('button', 'Tonik\Theme\App\Structure\render_button_shortcode');

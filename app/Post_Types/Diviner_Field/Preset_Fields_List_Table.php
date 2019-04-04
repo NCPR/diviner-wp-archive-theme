@@ -2,16 +2,17 @@
 
 namespace Diviner\Post_Types\Diviner_Field;
 
-use Diviner\Post_Types\Diviner_Field\Diviner_Field;
-use Diviner\Post_Types\Diviner_Field\PostMeta;
-
 // WP_List_Table is not loaded automatically so we need to load it in our application
 if( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
 /**
+ * Class Preset Fields List Table
+ *
  * Create a new table class that will extend the WP_List_Table
+ *
+ * @package Diviner\Post_Types\Diviner_Field
  */
 class Preset_Fields_List_Table extends \WP_List_Table
 {
@@ -50,10 +51,10 @@ class Preset_Fields_List_Table extends \WP_List_Table
 			// The 2nd Loop
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
-				//echo '<li>' . get_the_title( $the_query->post->ID ) . '</li>';
 				$fields[] = [
 					'id' => $the_query->post->ID,
 					'title' => get_the_title( $the_query->post->ID ),
+					'type' => get_the_title( $the_query->post->ID ),
 					'description' => get_the_excerpt( $the_query->post->ID ),
 				];
 			}
@@ -72,14 +73,15 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	 */
 	public function get_columns()
 	{
-		$columns = [
+		return [
 			'cb'          => '<input type="checkbox" />',
 			'id'          => 'ID',
 			'active'      => 'Active',
 			'title'       => 'Title',
+			'type'        => 'Field Type',
+			'placement'   => 'Placement',
 			'description' => 'Description'
 		];
-		return $columns;
 	}
 	/**
 	 * Define which columns are hidden
@@ -139,10 +141,23 @@ class Preset_Fields_List_Table extends \WP_List_Table
 		switch( $column_name ) {
 			case 'id':
 			case 'description':
+			case 'placement':
+			case 'type':
 				return $item[ $column_name ];
 			default:
 				return print_r( $item, true ) ;
 		}
+	}
+
+	public function column_placement( $item )
+	{
+		return carbon_get_post_meta( $item['id'], PostMeta::FIELD_BROWSE_PLACEMENT );
+	}
+
+	public function column_type( $item )
+	{
+		$field_type = carbon_get_post_meta($item['id'], PostMeta::FIELD_TYPE);
+		return Diviner_Field::get_class_title($field_type);
 	}
 
 	public function column_active( $item )
@@ -158,7 +173,6 @@ class Preset_Fields_List_Table extends \WP_List_Table
 			$item['id']
 		);
 	}
-
 
 	public function column_title( $item )
 	{

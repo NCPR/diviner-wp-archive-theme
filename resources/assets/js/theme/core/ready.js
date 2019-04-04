@@ -6,7 +6,10 @@
 
 import _ from 'lodash';
 
-import { on, ready } from '../../utils/events';
+import { on, appReady } from '../../utils/events';
+import header from '../content/header';
+import resize from './resize';
+import vendor from '../vendor';
 
 /**
  * @function bindEvents
@@ -29,7 +32,11 @@ const init = () => {
 
 	// initialize the main scripts
 
-	console.info('Square One BE: Initialized all javascript that targeted document ready.');
+	header();
+
+	vendor();
+
+	console.info('Diviner: Initialized all javascript that targeted document ready.');
 };
 
 /**
@@ -38,7 +45,7 @@ const init = () => {
  */
 
 const domReady = () => {
-	ready(init);
+	appReady(init);
 };
 
 export default domReady;

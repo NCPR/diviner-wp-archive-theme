@@ -90,7 +90,6 @@ class FieldSelect extends Component {
 	}
 
 	createField(field) {
-		// console.log('createField', field);
 		if (!field.select_field_options || field.select_field_options.length === 0 ) {
 			return '';
 		}

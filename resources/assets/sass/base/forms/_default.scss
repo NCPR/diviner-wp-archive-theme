@@ -1,0 +1,95 @@
+// -----------------------------------------------------------------------------
+//
+// Input Block / Wrapper
+//
+// -----------------------------------------------------------------------------
+
+.input,
+%input-wrap {
+	margin-bottom: $d_spacer_sm;
+	line-height: 1;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Label
+//
+// -----------------------------------------------------------------------------
+
+label,
+.label,
+%label {
+	display: inline-block;
+	margin-bottom: $d_spacer_xsm;
+	font-size: 16px;
+	font-weight: $t_font_weight_bold;
+
+	@include g-state(medium) {
+		font-size: 18px;
+	}
+}
+
+// -----------------------------------------------------------------------------
+//
+// Required
+//
+// -----------------------------------------------------------------------------
+
+// Required
+.required {
+	label {
+		&:after {
+			@extend %required;
+			content: '*';
+		}
+	}
+}
+
+%required {
+	padding-left: 4px;
+}
+
+// -----------------------------------------------------------------------------
+//
+// Fieldset & Legend
+//
+// -----------------------------------------------------------------------------
+
+fieldset {
+
+}
+
+legend {
+	@extend %label;
+}
+
+
+// -----------------------------------------------------------------------------
+//
+// Inputs
+//
+// -----------------------------------------------------------------------------
+
+input,
+button,
+textarea,
+select {
+	padding: 0 10px;
+	border: 1px solid $f_color_border;
+
+	&:focus {
+		border-color: $f_color_border_focus;
+	}
+}
+
+
+input,
+select,
+button {
+	display: inline-block;
+	height: 40px;
+	.lt-ie9 & {
+		line-height: 40px;
+	}
+}
+
