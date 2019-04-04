@@ -13,7 +13,6 @@ use Diviner\Theme\General;
  */
 class Customizer {
 
-
 	const SECTION_THEME_CUSTOMIZATIONS  = 'diviner_section_theme_customizations';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER  = 'diviner_setting_color_header';

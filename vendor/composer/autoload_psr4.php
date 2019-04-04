@@ -16,4 +16,5 @@ return array(
     'League\\CLImate\\' => array($vendorDir . '/league/climate/src'),
     'Diviner\\' => array($baseDir . '/app'),
     'Carbon_Fields\\' => array($vendorDir . '/htmlburger/carbon-fields/core'),
+    'Awps\\' => array($vendorDir . '/awps/font-awesome-php/src'),
 );

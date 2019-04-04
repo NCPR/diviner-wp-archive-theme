@@ -103,6 +103,10 @@
 	@include g-state(medium) {
 		margin-bottom: 0.8m;
 	}
+
+	.d-content--inverse & {
+		color: $color_text_inverse;
+	}
 }
 
 @mixin h1 {

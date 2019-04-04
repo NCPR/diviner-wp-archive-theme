@@ -142,10 +142,12 @@ class Post_Meta {
 			$dynamic_fields[] = $field;
 		}
 
-		$dyn_fields_container = Container::make( 'post_meta', __( 'Additional Fields', 'ncpr-diviner' ) )
-			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( $dynamic_fields )
-			->set_priority( 'default' );
+		if ( count($dynamic_fields) ) {
+			$dyn_fields_container = Container::make( 'post_meta', __( 'Additional Fields', 'ncpr-diviner' ) )
+				->where( 'post_type', '=', Archive_Item::NAME )
+				->add_fields( $dynamic_fields )
+				->set_priority( 'default' );
+		}
 
 	}
 

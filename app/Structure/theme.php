@@ -5,7 +5,8 @@ namespace Tonik\Theme\App\Structure;
 use \Pimple\Container;
 use \Diviner\Theme\General;
 use \Diviner\Theme\Image;
-use \Diviner\Theme\BrowsePage;
+use \Diviner\Theme\Browse_Page;
+use \Diviner\Theme\Home_Page;
 use \Diviner\Theme\Post_Meta;
 use \Diviner\Theme\Widgets;
 
@@ -22,9 +23,14 @@ $container[ 'theme.image' ] = function ( Container $container ) {
 $container[ 'theme.image' ]->hooks();
 
 $container[ 'theme.browse_page' ] = function ( Container $container ) {
-	return new BrowsePage();
+	return new Browse_Page();
 };
 $container[ 'theme.browse_page' ]->hooks();
+
+$container[ 'theme.home_page' ] = function ( Container $container ) {
+	return new Home_Page();
+};
+$container[ 'theme.home_page' ]->hooks();
 
 $container[ 'theme.post_meta' ] = function ( Container $container ) {
 	return new Post_Meta();

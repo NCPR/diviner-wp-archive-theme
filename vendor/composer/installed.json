@@ -468,17 +468,17 @@
     },
     {
         "name": "htmlburger/carbon-fields",
-        "version": "3.0.2",
-        "version_normalized": "3.0.2.0",
+        "version": "v3.1.0",
+        "version_normalized": "3.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/htmlburger/carbon-fields.git",
-            "reference": "6425d314b1c9bcdcc83660ac400e20e57582ddd6"
+            "reference": "c4c009a7e50e13282859e6fc2711c0a8b717e778"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/htmlburger/carbon-fields/zipball/6425d314b1c9bcdcc83660ac400e20e57582ddd6",
-            "reference": "6425d314b1c9bcdcc83660ac400e20e57582ddd6",
+            "url": "https://api.github.com/repos/htmlburger/carbon-fields/zipball/c4c009a7e50e13282859e6fc2711c0a8b717e778",
+            "reference": "c4c009a7e50e13282859e6fc2711c0a8b717e778",
             "shasum": ""
         },
         "require": {
@@ -488,7 +488,7 @@
             "mockery/mockery": "^0.9.7",
             "phpunit/phpunit": "~4.8"
         },
-        "time": "2019-01-14T12:30:37+00:00",
+        "time": "2019-04-01T07:37:08+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -600,5 +600,43 @@
         ],
         "description": "WordPress developer-friendly custom fields for post types, taxonomy terms, users, comments, widgets, options and more.",
         "homepage": "http://carbonfields.net/"
+    },
+    {
+        "name": "awps/font-awesome-php",
+        "version": "4.7.0",
+        "version_normalized": "4.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/awps/font-awesome-php.git",
+            "reference": "a395b3b7df3b6970b64cef086bbcc9686625bb60"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/awps/font-awesome-php/zipball/a395b3b7df3b6970b64cef086bbcc9686625bb60",
+            "reference": "a395b3b7df3b6970b64cef086bbcc9686625bb60",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-12-19T19:01:16+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Awps\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "Andrei Surdu",
+                "homepage": "http://zerowp.com/"
+            }
+        ],
+        "description": "A PHP library for Font Awesome."
     }
 ]
