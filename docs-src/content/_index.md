@@ -4,35 +4,29 @@ date: 2018-08-27T10:21:12-04:00
 draft: false
 ---
 
-Cras sit amet nisl sit amet nunc vulputate suscipit. Aliquam erat volutpat. Ut molestie lacinia viverra. Donec iaculis feugiat orci, vitae rutrum erat condimentum in. Suspendisse potenti. Maecenas non porttitor felis, id vulputate magna. Nulla vestibulum mauris ac nisi rutrum, in finibus massa tincidunt. Donec massa sapien, cursus sit amet nulla eget, consequat volutpat velit. Vestibulum accumsan nunc quam, viverra auctor ex gravida quis. Proin cursus nec ante ac lobortis. Quisque viverra dolor massa, et fringilla metus volutpat sit amet. Vivamus vehicula malesuada augue. Cras ullamcorper cursus dolor, sed molestie risus posuere eu. Etiam molestie mi vitae lorem finibus hendrerit aliquet sit amet arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+DIVINER is a free and open-source solution for small to mid-size institutions with public archiving needs. 
+
+DIVINER 1.0 is a digital platform (available as a WordPress theme) built for archiving, organizing, and presenting large amounts of photographs, audio, video, and documents - or all four! It’s main selling point is an audience-friendly public interface that encourages personal interaction and engagement. DIVINER might be right for your organization if you have a collection of humanities materials you would like to share with the public (for example, a collection of 3,000 photographs of a large farm in the early 1900s; or thousands of audio clips and interviews related to immigration in Wisconsin). 
 
 
 ### About the Creators
 
-Curabitur tristique efficitur metus, nec consectetur nisl auctor malesuada. Curabitur imperdiet facilisis felis, nec eleifend felis pellentesque sit amet. Proin eget dictum ipsum. Vivamus sed risus in sapien tempor vehicula. Vestibulum facilisis ultrices nunc in placerat. Mauris cursus gravida neque, non vulputate nunc fringilla sit amet. Sed imperdiet consectetur sodales.
+DIVINER was created by a team at North Country Public Radio (an affiliate station of National Public radio - NPR), including Project Manager Amy Feiereisel, Digital Developer Graeme Hoffman, Station Manager Ellen Rocco, Digital Editor Dale Hobson, and Digital Director Bill Haenel. 
+
+After conceiving a people-powered photo history project (North Country at Work, ncpr.org/work) that needed a platform like DIVINER, and searching fruitlessly for an affordable already-existing software, we decided to build one in late 2016. About a year later we had a website up and running with a place for stories, photo collections, and most importantly, a reactive archive filled with about 2,000 photos. 
+
+The team applied for an NEH Digital Advancement for the Humanities grant to white-label the platform and make it available to other non-profit organizations (like museums, historical associations, and public media organizations). Our first version of the platform, DIVINER 1.0, became available on May 1, 2019. 
 
 
-### What Diviner does and does not do
+### Future of the project
 
-- Wordpress theme to create an small to midsized cultural project
-- Browse page with multifacted search
-- consectetuer adipiscing elit
-- Aenean commodo ligula eget dolor
-- Aenean massa
-- Collections
-- Single archive items 
+This is Diviner 1.0. 
+
+We plan to have future releases, and are currently working with organizations, big AND small, from around the United States to populate their own installations of DIVINER. Check back soon for examples of how people are using DIVINER for their own projects - from historical photo archives to special projects on immigration in the US! 
 
 
-### What Diviner does not do
- 
- - NOT a repository for master images, videos, or other media – not a Past Perfect alternative
- - Curabitur tristique efficitur metus, nec consectetu
- 
-### Future of the Project 
- 
-PROJECT REQUIREMENTS Is DIVINER right for you? Answer these questions, then move to:
-check boxes
+### What Diviner does 
 
-- Do you have a project with more the 100 individual pieces of media (photo, video, audio) 
+First, a little on what DIVINER is not: it is NOT an internal cataloguing database. It is a space to organize and share media in a public-friendly archive! Though it is a FABULOUS way to sort through large amounts of material, and may be used as a way to search through a full collection, we do not suggest an organization store MASTER images, documents, or videos in DIVINER. They will a) take up too much space, and b) you should always have a back-up (or several) of your master digital files. 
 
- 
+The heart of DIVINER is our browse experience for your materials (referred to as “archive items”). We also offer a unique collections experience, and let users custom design other desired pages (examples: Homepage, About, Contact Us, History, etcetera). A user can also create standard WordPress posts and stories. 
