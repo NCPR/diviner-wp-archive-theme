@@ -34,20 +34,28 @@ This project is based on the excellent [Tonik Starter Theme](/README_Tonik.md) b
 
 ### Summer and early Fall of 2018
 
-* Development of Alpha Version based on existing [North Country at Work](http://www.northcountryatwork.org/) code base
-* Elastic search enabled multi facet react front end
-* Admin experience allowing user to activate/deactivate a set of core fields
-* Date field with multi front end display options (year decade or century slider or date range selector)
-* Text field for basic text data
-* Taxonomy fields for any number of things (location, keywords etc)
-* CPT field for related CPT items
+* ~~Development of Alpha Version based on existing [North Country at Work](http://www.northcountryatwork.org/) code base~~
+* ~~Elastic search enabled multi facet react front end~~
+* ~~Admin experience allowing user to activate/deactivate a set of core fields~~
+* ~~Date field with multi front end display options (year decade or century slider or date range selector)~~
+* ~~Text field for basic text data~~
+* ~~Taxonomy fields for any number of things (location, keywords etc)~~
+* ~~CPT field for related CPT items~~
+* ~~Select Field~~
 
 ### Late fall 2018
 
-* QA work with NCPR team
-* Refinements and improvements
+* ~~Collections Feature (optional)~~
+* QA work with NCPR team (ongoing)
+* Refinements and improvements (ongoing)
+* ~~Theme Buildout~~
+* ~~Gutenberg Compatible~~
 
-### January 2019
+### Winter 2019 and beyond
 
+* Submission to Wordpress.org as a theme
+* Documentation (ongoing)
 * Release in the wild
 * User testing session 
+* Support adopters
+
