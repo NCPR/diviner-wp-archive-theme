@@ -5,6 +5,7 @@ namespace Diviner\Admin;
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\AdminModifications;
+use Diviner\Theme\Home_Page;
 
 /**
  * Class Settings
@@ -80,40 +81,65 @@ class Settings {
 		?>
 		<div class="wrap wrap-diviner wrap-diviner--limited wrap-diviner--default">
 
-			<h2>Diviner Archiving Theme</h2>
+			<h2><?php _e( 'Diviner Archiving Theme', 'ncpr-diviner' ); ?></h2>
 
 			<p>
-				Thank you for installing the Diviner Archiving Theme. This wordpress theme allows small institutions and media organizations to create a public-facing, custom archive interface for a themed collection of media.
+				<?php _e( 'Thank you for installing the Diviner Archiving Theme. This wordpress theme allows small institutions and media organizations to create a public-facing, custom archive interface for a themed collection of media.', 'ncpr-diviner' ); ?>
 			</p>
 
-			<p>The main features of this project are</p>
+			<p><?php _e( 'The main features of this project are', 'ncpr-diviner' ); ?></p>
 			<ul>
-				<li>Small scale archiving tool for a wide array of media materials (audio, video, documents, articles)</li>
-				<li>Dublin Core like meta data fields</li>
-				<li>Customizable multi-faceted search mechanism</li>
+				<li><?php _e( 'Small scale archiving tool for a wide array of media materials (audio, video, documents, articles)', 'ncpr-diviner' ); ?></li>
+				<li><?php _e( 'Dublin Core-like meta data fields', 'ncpr-diviner' ); ?></li>
+				<li><?php _e( 'Customizable multi-faceted search mechanism', 'ncpr-diviner' ); ?></li>
 			</ul>
 
 			<p>
-				Read more about this theme on the <a href="https://ncpr.github.io/diviner-wp-archive-theme/" target="_blank">documentation website</a>.
+				<?php printf(
+					wp_kses(
+							__( 'Read more about this theme on the <a href="%s" target="_blank">documentation website</a>.', 'ncpr-diviner' ),
+							[ 'a' => [ 'href' => [], 'target' => [] ] ]
+					),
+					'https://ncpr.github.io/diviner-wp-archive-theme/'
+				); ?>
+
 			</p>
 
 			<p>
-				Start by reviewing the general settings of your archive.
+				<?php _e( 'Start by reviewing the general settings of your archive.', 'ncpr-diviner' ); ?>
 			</p>
 
 			<p>
 				<a href="admin.php?page=<?php echo esc_attr( static::$theme_options->get_page_file() ); ?>" class="button button-primary">
-					General Settings
+					<?php _e( 'General Settings', 'ncpr-diviner' ); ?>
 				</a>
 			</p>
 
 			<p>
-				Next, create new meta data fields for your archive items.
+				<?php _e( 'Next, create new meta data fields for your archive items.', 'ncpr-diviner' ); ?>
 			</p>
 
 			<p>
 				<a href="index.php?page=<?php echo esc_attr( AdminModifications::SLUG_WIZARD ); ?>" class="button button-primary">
-					Create New Diviner Meta Field
+					<?php _e( 'Create New Diviner Meta Field', 'ncpr-diviner' ); ?>
+				</a>
+			</p>
+
+			<br>
+
+			<hr>
+
+			<h3>
+				<?php _e( 'Miscellaneous Actions', 'ncpr-diviner' ); ?>
+			</h3>
+
+			<p>
+				<?php _e( 'The first time this theme is activated, an example homepage is generated. To regenerate, click the below button.', 'ncpr-diviner' ); ?>
+			</p>
+
+			<p>
+				<a href="/wp-admin/admin-post.php?action=<?php echo esc_attr( Home_Page::ADMIN_HOME_PAGE_POST_REMOVE); ?>" class="button button-primary">
+					<?php _e( 'Regenerate Default Home Page Content', 'ncpr-diviner' ); ?>
 				</a>
 			</p>
 
