@@ -20,6 +20,7 @@ class Settings {
 	const FIELD_GENERAL_BROWSE_TITLE = 'diviner_field_general_browse_title';
 	const FIELD_GENERAL_BROWSE_MODAL = 'diviner_field_general_browse_modal';
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
+	const FIELD_GENERAL_NAV_SEARCH_PAGE = 'diviner_field_general_search_page';
 	const FIELD_GENERAL_FOOTER_COPY = 'diviner_field_general_footer_copy';
 	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
 	const FIELD_GENERAL_LOOP_CARDS_FIELD = 'diviner_field_general_loop_cards';
@@ -41,9 +42,11 @@ class Settings {
 	 */
 	protected static $theme_options;
 
+	private $_pages = null;
+
 	public function hooks() {
 		add_action( 'admin_menu', [ $this, 'create_admin_menus' ], 9 );
-		add_action( 'carbon_fields_register_fields', [$this, 'crb_attach_theme_options'], 0, 0 );
+		add_action( 'carbon_fields_register_fields', [$this, 'crb_attach_theme_options'], 1, 0 );
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 	}
 
@@ -179,6 +182,7 @@ class Settings {
 				$this->browse_field(),
 				$this->browse_modal_field(),
 				$this->help_page_field(),
+				$this->search_page_field(),
 				$this->related_field(),
 				$this->loop_as_cards_field(),
 				$this->footer_copy(),
@@ -213,6 +217,12 @@ class Settings {
 	public function browse_modal_field() {
 		return Field::make( 'checkbox', static::FIELD_GENERAL_BROWSE_MODAL, __( 'Activate Modal in browse page on click', 'ncpr-diviner' ) )
 			->set_help_text( __( 'Modal displays by default mid size image, title, and copyright information', 'ncpr-diviner' ) );
+	}
+
+	public function search_page_field() {
+		return Field::make( 'select', static::FIELD_GENERAL_NAV_SEARCH_PAGE, __( 'Nav Search Page', 'ncpr-diviner' ) )
+			->add_options( [ $this, 'get_pages' ] )
+			->set_help_text( __( 'Select a page to link the search icon to in the navigation', 'ncpr-diviner' ) );
 	}
 
 	public function loop_as_cards_field() {
@@ -258,6 +268,9 @@ class Settings {
 	}
 
 	public function get_pages() {
+		if (!empty($this->_pages)) {
+			return $this->_pages;
+		}
 		$cleaned = [
 			0 => ''
 		];
@@ -269,7 +282,8 @@ class Settings {
 		foreach ($pages as $page) {
 			$cleaned[$page->ID] = $page->post_title;
 		}
-		return $cleaned;
+		$this->_pages = $cleaned;
+		return $this->_pages;
 	}
 
 	public function help_page_field() {

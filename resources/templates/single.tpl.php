@@ -1,6 +1,3 @@
-<?php
-use Diviner\Theme\General;
-?>
 <?php get_header(); ?>
 <?php
 /**

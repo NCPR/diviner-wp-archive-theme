@@ -36,8 +36,15 @@
 	@include g-state(medium) {
 		margin-bottom: $d_spacer_xlrg;
 	}
-}
 
+	&.single-item__block--tight {
+		margin-bottom: $d_spacer_sm;
+
+		@include g-state(medium) {
+			margin-bottom: $d_spacer_m;
+		}
+	}
+}
 
 .single-item__header-meta {
 	margin-bottom: $d_spacer_m;

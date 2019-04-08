@@ -336,7 +336,7 @@ class General {
 	}
 
 	function theme_index_under_page_header() {
-		if (get_post_type() === Collection::NAME) {
+		if ( is_post_type_archive( Collection::NAME ) ) {
 			$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_COLLECTION_DESCRIPTION);
 			if ( !empty( $copy ) ) {
 				printf(
