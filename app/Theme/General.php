@@ -292,7 +292,9 @@ class General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	function render_header_feature_image() {
-		if ( is_single() || is_page() && has_post_thumbnail() ) {
+		if ( is_singular( Archive_Item::NAME ) ) {
+			template('partials/diviner_archive_item/feature-image', []);
+		} else if ( is_single() || is_page() && has_post_thumbnail() ) {
 			template('partials/subheader/default', []);
 		}
 	}

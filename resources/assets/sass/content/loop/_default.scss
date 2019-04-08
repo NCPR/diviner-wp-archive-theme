@@ -11,15 +11,16 @@
 .loop__posts {
 
 	/* Case: for cards */
-	&.loop__posts--cards,
-	.loop--diviner_archive_item &,
-	.loop--diviner_collection & {
+	.loop--cards &,
+	.loop--diviner_archive_item & {
 		display: flex;
 		flex-wrap: wrap;
 	}
 }
 
 .loop-item {
+	@include clearfix;
+
 	margin-bottom: $d_spacer_lrg;
 
 	@include g-state(medium) {
