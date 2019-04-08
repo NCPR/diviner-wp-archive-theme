@@ -107,6 +107,7 @@ return [
 		'Theme/Swatches.php',
 		'Theme/Browse_Page.php',
 		'Theme/Home_Page.php',
+		'Theme/Search_Page.php',
 		'Theme/Post_Meta.php',
 		'Theme/Widgets/Widget_Related_Items.php',
 		'Theme/JS_Config.php',
