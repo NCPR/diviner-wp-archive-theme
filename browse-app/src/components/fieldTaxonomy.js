@@ -21,8 +21,8 @@ import {
 } from '../actions';
 import {CONFIG} from "../globals/config";
 import {termsToSelectOptions} from "../utils/wp/termsToSelectOptions";
-import {getTaxonomyItemsFromTermIds} from "../utils/data/field-utils";
-import { selectStyles } from '../shared/select-styles';
+import {getTaxonomyItemsFromTermIds} from "../utils/data/fieldUtils";
+import { selectStyles } from '../shared/selectStyles';
 
 // to allow us to access this in the react select component context
 let _this;

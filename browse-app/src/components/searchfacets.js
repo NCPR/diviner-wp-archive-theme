@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 
 import Field from './field';
-import { selectStyles } from '../shared/select-styles';
+import { selectStyles } from '../shared/selectStyles';
 
 // CONFIG
 import { CONFIG } from '../globals/config';

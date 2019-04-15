@@ -16,11 +16,9 @@ class FieldText extends Component {
 
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			value: this.getInitalValue(props)
 		};
-
 	}
 
 	@autobind
@@ -47,8 +45,6 @@ class FieldText extends Component {
 	}
 
 	createField() {
-		// const value = this.props.fieldData[this.props.field.field_id]; // as array id IDs
-
 		return (
 			<input
 				type="text"

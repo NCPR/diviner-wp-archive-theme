@@ -16,4 +16,3 @@ const configDefault = {
 };
 
 export const CONFIG = window.diviner_config || configDefault; // eslint-disable-line camelcase
-

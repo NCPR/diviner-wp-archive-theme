@@ -12,14 +12,12 @@ import { startApp } from '../actions';
  * The main container
  */
 
-
 class Main extends Component {
 
 	componentDidMount() {
 		this.props.startApp(this.props.location);
 	}
 
-	// <Popup></Popup>
 	render() {
 		return (
 			<div className='a-main'>
@@ -36,12 +34,10 @@ class Main extends Component {
 						<Grid />
 					</div>
 				</div>
-
 				<Popup></Popup>
 			</div>
 		);
 	}
 }
 
-//export default Main;
 export default connect(null, { startApp })(Main);

@@ -7,8 +7,8 @@ import { format } from 'date-fns';
 
 import { sequencePopupArchiveItem } from '../actions';
 import { CONFIG } from '../globals/config';
-import { getDecade, getCentury } from "../utils/data/date-utils";
-import { getTaxonomyItemsFromTermIds, getCPTsFromIds } from "../utils/data/field-utils";
+import { getDecade, getCentury } from "../utils/data/dateUtils";
+import { getTaxonomyItemsFromTermIds, getCPTsFromIds } from "../utils/data/fieldUtils";
 
 import { FIELD_TYPE_TAXONOMY,
 	FIELD_TYPE_CPT,
@@ -27,42 +27,7 @@ import { FIELD_TYPE_TAXONOMY,
 	FIELD_DATE_TYPE_CENTURY,
 	FIELD_DATE_TYPE_DECADE,
 	FIELD_DATE_TYPE_YEAR,
-	FIELD_DATE_TYPE_TWO_DATE,
 } from '../config/settings';
-
-/*
-{
-	"id": 159,
-	"title": "Test Select Hair Color",
-	"position": "left",
-	"helper": "Color of hair",
-	"field_id": "select_5bcf191008621",
-	"display_in_popup": false,
-	"select_field_options": [
-	{
-		"_type": "_",
-		"div_field_select_options_value": "red",
-		"div_field_select_options_label": "Red"
-	},
-	{
-		"_type": "_",
-		"div_field_select_options_value": "blond",
-		"div_field_select_options_label": "Blond"
-	},
-	{
-		"_type": "_",
-		"div_field_select_options_value": "black",
-		"div_field_select_options_label": "Black"
-	},
-	{
-		"_type": "_",
-		"div_field_select_options_value": "brown",
-		"div_field_select_options_label": "Brown"
-	}
-],
-	"field_type": "diviner_select_field"
-}
-*/
 
 class ArchiveItem extends Component {
 

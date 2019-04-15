@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 
 import ArchiveItem from './archiveItem';
-import * as postStore from '../utils/data/posts-store';
+import * as postStore from '../utils/data/postsStore';
 import { setPopupVisible, sequencePopupArchiveItem } from '../actions';
 
 const KEY_ARROW_RIGHT = 39;
@@ -106,7 +106,6 @@ class Popup extends Component {
 					afterClose={this._executeAfterModalClose}
 					onOverlayClicked={this.onCloseClicked}
 					onCloseClicked={this.onCloseClicked}
-					xxtransitionDuration={0}
 					ref="dialogWithCallBacks"
 				>
 					{archiveItem}

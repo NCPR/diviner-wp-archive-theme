@@ -15,43 +15,83 @@ import FieldDate from "./fieldDate";
 import FieldSelect from "./fieldSelect";
 import FieldText from "./fieldText";
 
+
+/**
+ * field
+ *
+ * Renders uot each field based on the below format
+ */
+/*
+{
+	"id": 159,
+	"title": "Test Select Hair Color",
+	"position": "left",
+	"helper": "Color of hair",
+	"field_id": "select_5bcf191008621",
+	"display_in_popup": false,
+	"select_field_options": [
+	{
+		"_type": "_",
+		"div_field_select_options_value": "red",
+		"div_field_select_options_label": "Red"
+	},
+	{
+		"_type": "_",
+		"div_field_select_options_value": "blond",
+		"div_field_select_options_label": "Blond"
+	},
+	{
+		"_type": "_",
+		"div_field_select_options_value": "black",
+		"div_field_select_options_label": "Black"
+	},
+	{
+		"_type": "_",
+		"div_field_select_options_value": "brown",
+		"div_field_select_options_label": "Brown"
+	}
+],
+	"field_type": "diviner_select_field"
+}
+*/
 class Field extends Component {
 
 	render() {
 		if (!this.props.field) {
 			return '';
 		}
+		let FieldComponent = FieldText;
+		let fieldClass = 'a-field-input a-field-input--text';
+		switch(this.props.field.field_type) {
+			case FIELD_TYPE_TAXONOMY:
+				FieldComponent = FieldTaxonomy;
+				fieldClass = 'a-field-input a-field-input--taxonomy';
+				break;
+			case FIELD_TYPE_CPT:
+				FieldComponent = FieldCpt;
+				fieldClass = 'a-field-input a-field-input--cpt';
+				break;
+			case FIELD_TYPE_DATE:
+				FieldComponent = FieldDate;
+				fieldClass = 'a-field-input a-field-input--date';
+				break;
+			case FIELD_TYPE_SELECT:
+				FieldComponent = FieldSelect;
+				fieldClass = 'a-field-input a-field-input--select';
+				break;
+		}
 		return (
 			<div className="a-input-group">
-				{
-					(this.props.field.field_type === FIELD_TYPE_TAXONOMY )
-						? <div className="a-field-input a-field-input--taxonomy"><FieldTaxonomy field={this.props.field} /></div>
-						: ''
-				}
-				{
-					(this.props.field.field_type === FIELD_TYPE_CPT )
-						? <div className="a-field-input a-field-input--cpt"><FieldCpt field={this.props.field} /></div>
-						: ''
-				}
-				{
-					(this.props.field.field_type === FIELD_TYPE_DATE )
-						? <div className="a-field-input a-field-input--date"><FieldDate field={this.props.field} /></div>
-						: ''
-				}
-				{
-					(this.props.field.field_type === FIELD_TYPE_SELECT )
-						? <div className="a-field-input a-field-input--select"><FieldSelect field={this.props.field} /></div>
-						: ''
-				}
-				{
-					(this.props.field.field_type === FIELD_TYPE_TEXT )
-						? <div className="a-field-input a-field-input--text"><FieldText field={this.props.field} /></div>
-						: ''
-				}
+				<div className={fieldClass}>
+					<FieldComponent
+						field={this.props.field} ></FieldComponent>
+				</div>
 			</div>
 		);
 	}
 }
+
+
 
 Field.propTypes = {
 	field: PropTypes.object,

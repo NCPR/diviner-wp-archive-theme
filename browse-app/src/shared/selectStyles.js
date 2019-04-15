@@ -4,7 +4,6 @@ export const selectStyles = {
 		...base,
 		width: '38px',
 		height: '38px',
-		// background: '#e3a161',
 	}),
 	indicatorSeparator: () => ({
 		display: 'none',
@@ -16,8 +15,6 @@ export const selectStyles = {
 	}),
 	control: base => ({
 		...base,
-		// width: 300,
-		// borderColor: '#e3a161',
 		borderRadius: 0,
 		borderWidth: 1,
 		height: '40px',

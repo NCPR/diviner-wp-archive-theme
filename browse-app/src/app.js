@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 
-
 import { BrowserRouter, Route, Redirect, Switch  } from 'react-router-dom';
-
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 import { CONFIG } from './globals/config';
-import history from './utils/data/history';
 
 import Main from './containers/main';
 

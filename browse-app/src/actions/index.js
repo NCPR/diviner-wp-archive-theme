@@ -13,11 +13,9 @@ import {
 	FIELD_TYPE_DATE, FIELD_TYPE_TEXT
 } from '../config/settings';
 import { CONFIG } from '../globals/config';
-import objectToParameters from '../utils/data/object-to-params';
-import getParams from '../utils/data/query-to-obj';
-import { termsToSelectOptions } from '../utils/wp/termsToSelectOptions';
-import { getFieldTypeFromId } from '../utils/data/field-utils';
-import { lock, unlock } from '../utils/dom/body-lock';
+import objectToParameters from '../utils/data/objectToParams';
+import { getFieldTypeFromId } from '../utils/data/fieldUtils';
+import { lock, unlock } from '../utils/dom/bodyLock';
 
 const site = new WPAPI({
 	endpoint: '/wp-json'

@@ -16,7 +16,7 @@ import {
 } from '../actions';
 import {CONFIG} from "../globals/config";
 import {postsToSelectOptions} from "../utils/wp/postsToSelectOptions"
-import { selectStyles } from '../shared/select-styles';;
+import { selectStyles } from '../shared/selectStyles';;
 
 // to allow us to access this in the react select component context
 let _this;

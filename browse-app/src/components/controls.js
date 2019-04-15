@@ -6,14 +6,11 @@ import _ from "lodash";
 import autobind from 'autobind-decorator';
 
 import Field from './field';
-
 import {
 	initiateSearch,
 	setQueryString,
 	setPage,
 } from '../actions';
-
-// CONFIG
 import { CONFIG } from '../globals/config';
 import {
 	FIELD_POSITION_TOP,
