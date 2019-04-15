@@ -154,7 +154,7 @@ class Customizer {
 			static::SECTION_THEME_CUSTOMIZATIONS,
 			static::SECTION_THEME_SETTING_COLOR_HEADER,
 			static::SECTION_THEME_CONTROL_COLOR_HEADER,
-			__( 'Header Color', 'ncpr-diviner' ),
+			__( 'Header Background Color', 'ncpr-diviner' ),
 			static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT
 		);
 
@@ -164,7 +164,8 @@ class Customizer {
 			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT,
 			static::SECTION_THEME_CONTROL_COLOR_HEADER_TEXT,
 			__( 'Header Text Color', 'ncpr-diviner' ),
-			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT
+			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT,
+			__( 'Used for the tagline or site title when there is no logo', 'ncpr-diviner' )
 		);
 
 		$this->setup_color_control(
@@ -190,7 +191,7 @@ class Customizer {
 			static::SECTION_THEME_CUSTOMIZATIONS,
 			static::SECTION_THEME_SETTING_COLOR_FOOTER,
 			static::SECTION_THEME_CONTROL_COLOR_FOOTER,
-			__( 'Footer Color', 'ncpr-diviner' ),
+			__( 'Footer Background Color', 'ncpr-diviner' ),
 			static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT
 		);
 
