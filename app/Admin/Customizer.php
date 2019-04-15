@@ -19,6 +19,10 @@ class Customizer {
 	const SECTION_THEME_CONTROL_COLOR_HEADER  = 'diviner_control_color_header';
 	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#DDDDDD';
 
+	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT  = 'diviner_setting_color_header_text';
+	const SECTION_THEME_CONTROL_COLOR_HEADER_TEXT  = 'diviner_control_color_header_text';
+	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT = '#dddddd';
+
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU  = 'diviner_setting_color_header_menu';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_MENU  = 'diviner_control_color_header_menu';
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU_DEFAULT = '#999999';
@@ -157,6 +161,15 @@ class Customizer {
 		$this->setup_color_control(
 			$wp_customize,
 			static::SECTION_THEME_CUSTOMIZATIONS,
+			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT,
+			static::SECTION_THEME_CONTROL_COLOR_HEADER_TEXT,
+			__( 'Header Text Color', 'ncpr-diviner' ),
+			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT
+		);
+
+		$this->setup_color_control(
+			$wp_customize,
+			static::SECTION_THEME_CUSTOMIZATIONS,
 			static::SECTION_THEME_SETTING_COLOR_HEADER_MENU,
 			static::SECTION_THEME_CONTROL_COLOR_HEADER_MENU,
 			__( 'Header Menu Button Color', 'ncpr-diviner' ),
@@ -239,16 +252,17 @@ class Customizer {
 
 	}
 
-	private function setup_color_control( $wp_customize, $section, $setting_name, $control_name, $control_title, $default = '#000000' ) {
+	private function setup_color_control( $wp_customize, $section, $setting_name, $control_name, $control_title, $default = '#000000', $description = NULL ) {
 		$wp_customize->add_setting( $setting_name , array(
 			'default'   => $default,
 			'transport' => 'refresh',
 			'sanitize_callback' => 'sanitize_hex_color',
 		) );
 		$wp_customize->add_control( new \WP_Customize_Color_Control( $wp_customize, $control_name, array(
-			'label'    => $control_title,
-			'section'  => $section,
-			'settings' => $setting_name,
+			'label'        => $control_title,
+			'section'      => $section,
+			'settings'     => $setting_name,
+			'description' => $description,
 		) ) );
 	}
 
@@ -264,6 +278,8 @@ class Customizer {
 		$body_font_value = General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
+		$color_header_text = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT, static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT);
+		$color_header_text_hover = General::is_dark($color_header_text) ? General::luminance( substr($color_header_text, 1), 0.7 ) : General::luminance( substr($color_header_text, 1), -0.7 );
 
 		ob_start();
 		?>
@@ -278,6 +294,15 @@ class Customizer {
 		}
 		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
 			font-family: '<?php echo $body_font_value; ?>' !important;
+		}
+		.header__title a {
+			color: <?php echo $color_header_text ?>;
+		}
+		.header__title a:hover {
+			color: <?php echo $color_header_text_hover ?>;
+		}
+		.header__lead {
+			color: <?php echo $color_header_text ?>;
 		}
 		.d-content a {
 			color: <?php echo $color_btn_link; ?>;
