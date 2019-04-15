@@ -296,10 +296,13 @@ class Customizer {
 		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
 			font-family: '<?php echo $body_font_value; ?>' !important;
 		}
-		.header__title a {
+		.header__title a,
+		.header__title a:visited {
 			color: <?php echo $color_header_text ?>;
 		}
-		.header__title a:hover {
+		.header__title a:hover,
+		.header__title a:focus,
+		.header__title a:active {
 			color: <?php echo $color_header_text_hover ?>;
 		}
 		.header__lead {
