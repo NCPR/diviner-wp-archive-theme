@@ -1,18 +1,17 @@
 
 .a-sai__field {
 	display: block;
-	margin-bottom: 10px;
+	font-size: 15px;
+	margin-bottom: 5px;
 }
 
 .a-sai__label {
+	@include clearfix;
+
 	font-weight: $t_font_weight_bold;
 	display: inline-block;
+	font-size: 15px;
 	margin-right: 10px;
-
-	&:after {
-		content: ':';
-		display: inline;
-	}
 }
 
 .a-sai__value {
@@ -58,6 +57,18 @@
 .a-sai__popup--visible {
 }
 
+.a-sai__permission-header {
+	margin-bottom: $d_spacer_sm;
+}
+
+.a-sai__permission {
+	background-color: $color_grey_lighter;
+	padding: $d_spacer_m;
+	border: 1px solid $color_border;
+	margin-top: $d_spacer_sm;
+	font-size: 90%;
+}
+
 .skylight-wrapper {
 
 	@include g-state( medium ) {
@@ -71,6 +82,10 @@
 		.a-sai__popup--visible & {
 			pointer-events: auto;
 		}
+	}
+
+	.skylight-close-button {
+		font-size: 2.0em;
 	}
 }
 
@@ -92,8 +107,8 @@
 		transform: translateY(-50%)  !important;
 		max-height: calc(100% - 80px) !important;
 		overflow-y: auto;
-		margin-left: -250px !important;
-		width: 500px !important;
+		margin-left: -290px !important;
+		width: 580px !important;
 		display: none;
 		left: 50% !important;
 		height: auto !important;

@@ -15,8 +15,53 @@ class Browse_Page {
 			add_action( 'after_switch_theme', [ $this, 'setup_browse_page' ] );
 			add_action( 'admin_bar_menu', [ $this, 'add_admin_menu_button' ], 90);
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+			add_filter( 'diviner_js_config', [ $this, 'filter_diviner_js_config' ] );
 		}
 	}
+
+	/**
+	 * Browse Page Localization
+	 *
+	 */
+	function get_browse_page_localization() {
+		return [
+			'popup_permission_statement' => __( 'Permissions Statement', 'ncpr-diviner' ),
+			'popup_view_details' => __( 'View Details', 'ncpr-diviner' ),
+			'popup_previous' => __( 'Previous', 'ncpr-diviner' ),
+			'popup_next' => __( 'Next', 'ncpr-diviner' ),
+			'grid_default' => __( 'Happy searching!!', 'ncpr-diviner' ),
+			'grid_loading' => __( 'Loading', 'ncpr-diviner' ),
+			'grid_no_results' => __( 'No Results Found', 'ncpr-diviner' ),
+			'paginate_previous' => __( 'Previous', 'ncpr-diviner' ),
+			'paginate_next' => __( 'Next', 'ncpr-diviner' ),
+			'search_header' => __( 'Search Archive', 'ncpr-diviner' ),
+			'search_placeholder' => __( 'Ex: cheese factory, grocery store, mine...', 'ncpr-diviner' ),
+			'search_cta' => __( 'Go', 'ncpr-diviner' ),
+			'facets_header' => __( 'Narrow Results By:', 'ncpr-diviner' ),
+			'facets_sort_label' => __( 'Sort By:', 'ncpr-diviner' ),
+			'facets_sort_clear' => __( 'Clear Order', 'ncpr-diviner' ),
+			'facets_reset' => __( 'Reset Search Filters','ncpr-diviner' )
+		];
+	}
+
+	/**
+	 * Filter config js data
+	 *
+	 */
+	function filter_diviner_js_config( $data ) {
+		$browse_page = $this->get_current_browse_page();
+		$is_current_browse = $this->is_current_page_browse();
+		$browse_page_id = $is_current_browse ? get_the_ID() : $browse_page;
+		$permalink = get_permalink( $browse_page_id );
+
+		$data = [
+			'base_browse_url' => '/' . basename( $permalink ),
+			'browse_page_title' => get_the_title( $browse_page_id ),
+			'browse_page_localization' => $this->get_browse_page_localization()
+		];
+		return $data;
+	}
+
 
 	/**
 	 * Enqueue scripts

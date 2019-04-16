@@ -69,7 +69,7 @@ class ArchiveItem extends Component {
 		});
 	}
 
-	renderSeclectField(field) {
+	renderSelectField(field) {
 		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		if (!post.selects[fieldId]) {
@@ -79,6 +79,9 @@ class ArchiveItem extends Component {
 		const selectObjects = _.filter(field[FIELD_PROP_SELECT_OPTIONS], (option) => {
 			return option[FIELD_PROP_SELECT_OPTIONS_VALUE] === value;
 		});
+		if (!selectObjects.length) {
+			return
+		}
 		const selectValuesOutput = selectObjects.map((selectValue) => {
 			const key = `select-${selectValue[FIELD_PROP_SELECT_OPTIONS_VALUE]}`;
 			return (
@@ -99,23 +102,25 @@ class ArchiveItem extends Component {
 		);
 	}
 
-	renderCPTField(field) {
-		const post = this.props.post;
-		/* Data structure of post.cpts[field.field_id]
+	/* Data structure of post.cpts[field.field_id]
 		{
 			id: "135"
 			subtype: "photographer"
 			type: "post"
 			value: "post:photographer:135"
 		}
-		 */
+		*/
+	renderCPTField(field) {
+		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		if (!post.cpts[fieldId]) {
 			return;
 		}
 		const ids = _.map(post.cpts[fieldId], (item) => parseInt(item.id, 10));
 		const cptValues = getCPTsFromIds(field[FIELD_PROP_CPT_ID], ids);
-
+		if (!cptValues.length) {
+			return;
+		}
 		const cptValuesOutput = cptValues.map((cptValue) => {
 			const key = `cpt-${cptValue.ID}`;
 			return (
@@ -145,7 +150,6 @@ class ArchiveItem extends Component {
 		if (!post[taxonomy_name] || !post[taxonomy_name].length) {
 			return;
 		}
-		// display a list of the taxonomy terms
 		const terms = getTaxonomyItemsFromTermIds(taxonomy_name, post[taxonomy_name]);
 		const termsOutput = terms.map((term) => {
 			const termKey = `term-${term.term_id}`;
@@ -235,7 +239,7 @@ class ArchiveItem extends Component {
 		let content = '';
 		if (field.field_type) {
 			if (field.field_type === FIELD_TYPE_SELECT) {
-				content = this.renderSeclectField(field);
+				content = this.renderSelectField(field);
 			} else if (field.field_type === FIELD_TYPE_CPT)  {
 				content = this.renderCPTField(field);
 			} else if (field.field_type === FIELD_TYPE_TAXONOMY)  {
@@ -255,20 +259,32 @@ class ArchiveItem extends Component {
 			return ('');
 		}
 
+		const mappedOutput = fieldsToDisplay.map((field) => {
+			const fieldOutput = this.renderField(field);
+			if (!fieldOutput) {
+				return;
+			}
+			let classes = 'a-sai__field ';
+			classes += `a-sai__field--${field.field_type}`;
+			const fieldRef = `a-sai__field-ref--${field.id}`;
+			return (
+				<div className={classes} key={fieldRef}>
+					{ fieldOutput }
+				</div>
+			);
+		});
+		const filteredOutput = mappedOutput.filter(function (el) {
+			return el != null;
+		});
+		if (!filteredOutput.length) {
+			return '';
+		}
+
 		return (
-			<div className="row a-row">
+			<div className="row a-row a-row--extra-padding">
 				<div className="gr-12">
 					<div className="a-sai__fields">
-						{fieldsToDisplay.map((field) => {
-							let classes = 'a-sai__field ';
-							classes += `a-sai__field--${field.field_type}`;
-							const fieldRef = `a-sai__field-ref--${field.id}`;
-							return (
-								<div className={classes} key={fieldRef}>
-									{ this.renderField(field) }
-								</div>
-							);
-						})}
+						{filteredOutput}
 					</div>
 				</div>
 			</div>
@@ -307,9 +323,11 @@ class ArchiveItem extends Component {
 
 				{ this.renderFields() }
 
-				<div className="row a-row">
+				<div className="row a-row a-row--extra-padding">
 					<div className="gr-12">
-						<a href={post.permalink} className="btn btn-full">View Details</a>
+						<a href={post.permalink} className="btn btn--full">
+							{ CONFIG.browse_page_localization.popup_view_details }
+						</a>
 					</div>
 
 					{ // Check for disclaimer
@@ -318,9 +336,9 @@ class ArchiveItem extends Component {
 							<div
 								className="a-sai__permission"
 							>
-								<h4 className="a-sai__permission-header">
-									Permissions Statement
-								</h4>
+								<div className="h6 a-sai__permission-header">
+									{ CONFIG.browse_page_localization.popup_permission_statement }
+								</div>
 								<div
 									className="a-sai__permission-content"
 									dangerouslySetInnerHTML={{ __html: rights }}
