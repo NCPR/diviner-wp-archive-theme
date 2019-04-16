@@ -88,6 +88,7 @@ select,
 button {
 	display: inline-block;
 	height: 40px;
+
 	.lt-ie9 & {
 		line-height: 40px;
 	}

@@ -14,9 +14,8 @@ import {
 	setPage,
 	setFieldData,
 } from '../actions';
-import {CONFIG} from "../globals/config";
-import {postsToSelectOptions} from "../utils/wp/postsToSelectOptions"
-import { selectStyles } from '../shared/selectStyles';;
+import { CONFIG } from "../globals/config";
+import { postsToSelectOptions } from "../utils/wp/postsToSelectOptions"
 
 // to allow us to access this in the react select component context
 let _this;
@@ -44,7 +43,7 @@ class FieldCpt extends Component {
 
 	createField(field) {
 		if (!CONFIG.cpt_posts[field.cpt_field_id]) {
-			return '';
+			return;
 		}
 		const options = postsToSelectOptions(CONFIG.cpt_posts[field.cpt_field_id]);
 		const value = this.props.fieldData[field.field_id]; // as a single ID
@@ -61,7 +60,8 @@ class FieldCpt extends Component {
 				isClearable={isClearable}
 				onChange={this.onChangeField}
 				value={valueItem}
-				styles={selectStyles}
+				className="react-select-container"
+				classNamePrefix="react-select"
 			></Select>
 		);
 	}
@@ -70,13 +70,18 @@ class FieldCpt extends Component {
 		if (!this.props.field) {
 			return '';
 		}
-		return (
-			<div className="a-field">
-				<label>{ this.props.field.title }</label>
-				<div className="a-field-input a-field-input--date">{this.createField(this.props.field)}</div>
-				<small className="a-input-description">{ this.props.field.helper }</small>
-			</div>
-		);
+		const fieldOutput = this.createField(this.props.field);
+		if (!fieldOutput) {
+			return '';
+		} else {
+			return (
+				<div className="a-field">
+					<label>{ this.props.field.title }</label>
+					<div className="a-field-input a-field-input--date">{fieldOutput}</div>
+					<small className="a-input-description">{ this.props.field.helper }</small>
+				</div>
+			);
+		}
 	}
 }
 

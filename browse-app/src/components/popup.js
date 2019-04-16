@@ -7,6 +7,7 @@ import autobind from 'autobind-decorator';
 import ArchiveItem from './archiveItem';
 import * as postStore from '../utils/data/postsStore';
 import { setPopupVisible, sequencePopupArchiveItem } from '../actions';
+import { CONFIG } from '../globals/config';
 
 const KEY_ARROW_RIGHT = 39;
 const KEY_ARROW_LEFT = 37;
@@ -89,13 +90,17 @@ class Popup extends Component {
 						onClick={this.onPreviousClick}
 					>
 						<i className="icon-arrow-left2"></i>
-						<span>Previous</span>
+						<span>
+							{ CONFIG.browse_page_localization.popup_previous }
+						</span>
 					</button>
 					<button
 						className="a-sai__control-btn a-sai__control-btn--next"
 						onClick={this.onNextClick}
 					>
-						<span>Next</span>
+						<span>
+							{ CONFIG.browse_page_localization.popup_next}
+						</span>
 						<i className="icon-arrow-right2"></i>
 					</button>
 				</div>

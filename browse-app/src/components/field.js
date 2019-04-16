@@ -57,7 +57,7 @@ import FieldText from "./fieldText";
 class Field extends Component {
 
 	render() {
-		if (!this.props.field) {
+		if (!this.props.field || !this.props.field.field_type) {
 			return '';
 		}
 		let FieldComponent = FieldText;
@@ -92,12 +92,10 @@ class Field extends Component {
 }
 
 
-
 Field.propTypes = {
 	field: PropTypes.object,
 };
 
-// Specifies the default values for props:
 Field.defaultProps = {
 	field: {},
 };

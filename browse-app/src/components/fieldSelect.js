@@ -8,7 +8,6 @@ import {
 	FIELD_TYPE_SELECT,
 } from '../config/settings';
 import { carbonFieldSelectToSelectOptions } from '../utils/wp/carbonFieldSelectToSelectOptions';
-import { selectTheme, selectStyles } from '../shared/selectStyles';
 
 import {
 	initiateSearch,
@@ -71,8 +70,8 @@ class FieldSelect extends Component {
 				isClearable={isClearable}
 				onChange={this.onChangeSelectField}
 				value={valueItems}
-				//theme={(theme) => {return selectTheme(theme);}}
-				styles={selectStyles}
+				className="react-select-container"
+				classNamePrefix="react-select"
 				></Select>
 		)
 	}
@@ -84,7 +83,7 @@ class FieldSelect extends Component {
 		return (
 			<div className="a-field">
 				<label>{ this.props.field.title }</label>
-				<div className="a-field-input a-field-input--date">{this.createField(this.props.field)}</div>
+				<div className="a-field-input a-field-input--select">{this.createField(this.props.field)}</div>
 				<small className="a-input-description">{ this.props.field.helper }</small>
 			</div>
 		);
