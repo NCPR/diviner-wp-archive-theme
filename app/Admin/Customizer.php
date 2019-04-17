@@ -332,8 +332,8 @@ class Customizer {
 		.header__lead {
 			color: <?php echo $color_header_text ?>;
 		}
-		.d-content a,
-		.sidebar a {
+
+		.main__inner a {
 			color: <?php echo $color_btn_link; ?>;
 		}
 
@@ -347,17 +347,6 @@ class Customizer {
 		.react-select-container .react-select__control.react-select__control--is-focused {
 			border-color: <?php echo $color_btn_link; ?> !important;
 		}
-
-		/*
-		.btn {
-			background-color: <?php echo $color_btn_link; ?> !important;
-			font-family: '<?php echo $body_font_value; ?>' !important;
-		}
-		.btn:hover,
-		.btn:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
-		}
-		*/
 
 		.main label {
 			font-family: '<?php echo $body_font_value; ?>' !important;
