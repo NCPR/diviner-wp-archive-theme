@@ -284,9 +284,33 @@ class Customizer {
 
 		ob_start();
 		?>
-		html body, html form, html button, html input, html select, html textarea {
+		.main,
+		.main form,
+		.main button,
+		.main input,
+		.main select,
+		.main textarea {
 			font-family: '<?php echo $body_font_value; ?>';
 		}
+
+		.main button,
+		.main input[type="button"],
+		.main input[type="reset"],
+		.main input[type="submit"] {
+			background-color: <?php echo $color_btn_link; ?>;
+		}
+
+		.main button:hover,
+		.main button:focus,
+		.main input[type="button"]:hover,
+		.main input[type="button"]:focus,
+		.main input[type="reset"]:hover,
+		.main input[type="reset"]:focus,
+		.main input[type="submit"]:hover,
+		.main input[type="submit"]:focus {
+			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+		}
+
 		.d-content {
 			font-family: '<?php echo $body_font_value; ?>';
 		}
@@ -312,15 +336,19 @@ class Customizer {
 		.sidebar a {
 			color: <?php echo $color_btn_link; ?>;
 		}
+
 		input:focus,
 		button:focus,
 		textarea:focus,
 		select:focus {
 			border-color: <?php echo $color_btn_link; ?> !important;
 		}
+
 		.react-select-container .react-select__control.react-select__control--is-focused {
 			border-color: <?php echo $color_btn_link; ?> !important;
 		}
+
+		/*
 		.btn {
 			background-color: <?php echo $color_btn_link; ?> !important;
 			font-family: '<?php echo $body_font_value; ?>' !important;
@@ -329,9 +357,12 @@ class Customizer {
 		.btn:focus {
 			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 		}
-		label {
+		*/
+
+		.main label {
 			font-family: '<?php echo $body_font_value; ?>' !important;
 		}
+
 		.d-content h1,
 		.h1,
 		.d-content h2,

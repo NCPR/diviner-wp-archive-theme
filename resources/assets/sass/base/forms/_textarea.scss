@@ -1,0 +1,8 @@
+textarea {
+	@include form-basic;
+
+	resize: none;
+	padding: $d_spacer_sm;
+	height: 300px;
+	line-height: 1.6;
+}

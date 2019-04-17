@@ -113,5 +113,4 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 	}
 	?>
 
-
 </article>

@@ -1,0 +1,67 @@
+.comments {
+	margin-top: $d_spacer_lrg;
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-top: $d_spacer_xlrg;
+		margin-bottom: $d_spacer_lrg;
+	}
+}
+
+.comments__title {
+	margin-bottom: $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+	}
+}
+
+.comment-reply-title {
+	margin-bottom: $d_spacer_sm;
+	margin-top: $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+		margin-top: $d_spacer_m;
+	}
+}
+
+.comment {
+	margin-bottom: $d_spacer_sm;
+	font-size: 90%;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+	}
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+.comment-meta {
+	width: 100px;
+	float: left;
+	margin-right: $d_spacer_m;
+	text-align: center;
+}
+
+.comment-metadata {
+	font-size: 11px;
+}
+
+.comment__list {
+	margin-bottom: $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+	}
+}
+
+.logged-in-as {
+	margin-bottom: $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+	}
+}

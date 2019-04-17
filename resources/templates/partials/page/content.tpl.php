@@ -19,4 +19,8 @@
 
 	</div>
 
+	<?php
+	do_action('theme/comments');
+	?>
+
 </article>

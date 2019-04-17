@@ -71,26 +71,32 @@ legend {
 // -----------------------------------------------------------------------------
 
 input,
-button,
-textarea,
 select {
 	padding: 0 10px;
 	border: 1px solid $f_color_border;
+	height: 40px;
 
 	&:focus {
 		border-color: $f_color_border_focus;
 	}
 }
 
-
 input,
-select,
-button {
+select {
 	display: inline-block;
 	height: 40px;
-
-	.lt-ie9 & {
-		line-height: 40px;
-	}
 }
 
+
+// -----------------------------------------------------------------------------
+//
+// Buttons
+//
+// -----------------------------------------------------------------------------
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	@include button;
+}
