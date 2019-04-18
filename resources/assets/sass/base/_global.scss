@@ -44,12 +44,7 @@ body {
  *
  * ----------------------------------------------------------------------------- */
 
-body,
-form,
-button,
-input,
-select,
-textarea {
+body {
 	font-family: $t_font_sanserif;
 	font-weight: $t_font_weight_normal;
 	line-height: $t_line_height_m;

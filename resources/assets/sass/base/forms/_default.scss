@@ -1,3 +1,24 @@
+
+// -----------------------------------------------------------------------------
+//
+// Shared
+//
+// -----------------------------------------------------------------------------
+
+form,
+button,
+input,
+select,
+textarea {
+	font-family: $t_font_sanserif;
+	font-weight: $t_font_weight_normal;
+	line-height: $t_line_height_m;
+	font-size: 100%;
+	font-style: normal;
+	color: $color_text;
+}
+
+
 // -----------------------------------------------------------------------------
 //
 // Input Block / Wrapper

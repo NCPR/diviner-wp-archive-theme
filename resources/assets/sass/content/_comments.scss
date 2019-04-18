@@ -1,10 +1,14 @@
 .comments {
 	margin-top: $d_spacer_lrg;
 	margin-bottom: $d_spacer_m;
+	padding: $d_spacer_m;
+	background-color: $color_white;
+	border: 1px solid $color_border;
 
 	@include g-state(medium) {
 		margin-top: $d_spacer_xlrg;
 		margin-bottom: $d_spacer_lrg;
+		padding: $d_spacer_lrg;
 	}
 }
 
@@ -16,23 +20,21 @@
 	}
 }
 
+.comment-respond {
+
+}
+
 .comment-reply-title {
 	margin-bottom: $d_spacer_sm;
-	margin-top: $d_spacer_sm;
 
 	@include g-state(medium) {
 		margin-bottom: $d_spacer_m;
-		margin-top: $d_spacer_m;
 	}
 }
 
 .comment {
-	margin-bottom: $d_spacer_sm;
-	font-size: 90%;
-
-	@include g-state(medium) {
-		margin-bottom: $d_spacer_m;
-	}
+	@include clearfix;
+	margin-bottom: $d_spacer_m;
 
 	&:last-of-type {
 		margin-bottom: 0;
@@ -41,9 +43,14 @@
 
 .comment-meta {
 	width: 100px;
-	float: left;
+	float: none;
 	margin-right: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
 	text-align: center;
+
+	@include g-state(medium) {
+		float: left;
+	}
 }
 
 .comment-metadata {
@@ -51,10 +58,10 @@
 }
 
 .comment__list {
-	margin-bottom: $d_spacer_sm;
+	margin-bottom: $d_spacer_lrg;
 
 	@include g-state(medium) {
-		margin-bottom: $d_spacer_m;
+		margin-bottom: $d_spacer_xlrg;
 	}
 }
 
@@ -63,5 +70,30 @@
 
 	@include g-state(medium) {
 		margin-bottom: $d_spacer_m;
+	}
+}
+
+.comment-content {
+	font-size: 14px;
+	color: $color_grey_dark;
+
+	@include g-state(medium) {
+		font-size: 16px;
+	}
+
+	p {
+		&:last-of-type {
+			margin-bottom: $d_spacer_sm;
+		}
+	}
+}
+
+.form-submit {
+	margin-bottom: 0;
+}
+
+.comment-author {
+	img {
+		margin-bottom: $d_spacer_sm;
 	}
 }

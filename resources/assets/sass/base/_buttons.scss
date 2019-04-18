@@ -3,6 +3,11 @@
 	@include button;
 }
 
+a.btn,
+a.btn:visited {
+	color: $color_white;
+}
+
 .btn--s {
 	font-size: 13px;
 
