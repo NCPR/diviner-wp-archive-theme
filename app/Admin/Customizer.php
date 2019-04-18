@@ -134,8 +134,26 @@ class Customizer {
 				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
+			/* Free form classic styles */
 			.editor-styles-wrapper .wp-block-freeform blockquote {
 				border-left-color: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-freeform .btn {
+				background: <?php echo $color_btn_link; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-freeform hr {
+				background: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-freeform h1,
+			.editor-styles-wrapper .wp-block-freeform h2,
+			.editor-styles-wrapper .wp-block-freeform h3,
+			.editor-styles-wrapper .wp-block-freeform h4,
+			.editor-styles-wrapper .wp-block-freeform h5,
+			.editor-styles-wrapper .wp-block-freeform h6 {
+				font-family: '<?php echo $header_font_value; ?>' !important;
 			}
 
 
@@ -295,9 +313,9 @@ class Customizer {
 
 		.main__inner button,
 		.main__inner .btn,
-		.main__inner input[type="button"],
-		.main__inner input[type="reset"],
-		.main__inner input[type="submit"] {
+		.main__inner input[type='button'],
+		.main__inner input[type='reset'],
+		.main__inner input[type='submit'] {
 			background-color: <?php echo $color_btn_link; ?>;
 		}
 
@@ -305,12 +323,12 @@ class Customizer {
 		.main__inner button:focus,
 		.main__inner .btn:hover,
 		.main__inner .btn:focus,
-		.main__inner input[type="button"]:hover,
-		.main__inner input[type="button"]:focus,
-		.main__inner input[type="reset"]:hover,
-		.main__inner input[type="reset"]:focus,
-		.main__inner input[type="submit"]:hover,
-		.main__inner input[type="submit"]:focus {
+		.main__inner input[type='button']:hover,
+		.main__inner input[type='button']:focus,
+		.main__inner input[type='reset']:hover,
+		.main__inner input[type='reset']:focus,
+		.main__inner input[type='submit']:hover,
+		.main__inner input[type='submit']:focus {
 			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
 		}
 
@@ -371,11 +389,15 @@ class Customizer {
 		}
 
 		.d-content blockquote {
-			border-left-color: <?php echo $color_accent; ?>;;
+			border-left-color: <?php echo $color_accent; ?>;
 		}
 
 		.d-content blockquote p {
 			font-family: '<?php echo $body_font_value; ?>';
+		}
+
+		.d-content hr:not(.is-style-dots) {
+			background-color: <?php echo $color_accent; ?> !important;
 		}
 
 		.footer {

@@ -19,7 +19,7 @@
 	}
 }
 
-@mixin button {
+@mixin button ($withStates: true) {
 	@include  button-global;
 
 	background-color: $color_primary;
@@ -28,18 +28,17 @@
 	padding: .5em 0.8em;
 	border-radius: 4px;
 
-	&:visited {
-		color: $color_white;
-	}
-	&:hover,
-	&:focus,
-	&:active {
-		background-color: $color_secondary;
-		color: $color_white;
-		text-decoration: none;
-	}
-	&:focus {
-		outline: 1px dotted;
+	@if $withStates {
+		&:visited {
+			color: $color_white;
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: $color_secondary;
+			color: $color_white;
+			text-decoration: none;
+		}
 	}
 }
 

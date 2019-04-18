@@ -30,17 +30,13 @@
 	}
 }
 
-@mixin blockquote {
-	background: transparent;
-	text-align: left;
-	border-left: 4px solid $color_accent;
-	padding-left: 1em;
-
+@mixin blockquote-text {
 	p {
 		font-size: 16px;
 		font-style: normal;
 		font-weight: $t_font_weight_normal;
 		line-height: 1.4;
+		margin-top: 0;
 
 		@include g-state(medium) {
 			font-size: 20px;
@@ -50,9 +46,20 @@
 			margin-bottom: 0;
 		}
 	}
+}
+
+@mixin blockquote {
+	@include blockquote-text;
+
+	background: transparent;
+	text-align: left;
+	border-left: 4px solid $color_accent;
+	padding-left: 1em;
+	color: $color_grey_darker;
 
 	cite {
 		@include cite-text;
+
 		color: $color_grey;
 	}
 
@@ -72,7 +79,6 @@
 		
 		cite {
 			@include cite-text;
-			text-align: right;
 		}
 	}
 }
