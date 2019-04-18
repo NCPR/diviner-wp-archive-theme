@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SkyLightStateless } from 'react-skylight';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 import ArchiveItem from './archiveItem';
 import * as postStore from '../utils/data/postsStore';
@@ -11,7 +12,6 @@ import { CONFIG } from '../globals/config';
 
 const KEY_ARROW_RIGHT = 39;
 const KEY_ARROW_LEFT = 37;
-
 
 class Popup extends Component {
 
@@ -55,25 +55,39 @@ class Popup extends Component {
 		this.props.onCloseClick();
 	}
 
-	_executeBeforeModalOpen() {
+	@autobind
+	lockBody() {
 		document.body.classList.add('modal--open');
+		const modal = document.querySelectorAll('.skylight-wrapper')[0];
+		enableBodyScroll(modal);
+	}
+	
+	@autobind
+	unlockBody() {
+		document.body.classList.remove('modal--open');
+		const modal = document.querySelectorAll('.skylight-wrapper')[0];
+		enableBodyScroll(modal);
 	}
 
+	@autobind
+	_executeBeforeModalOpen() {
+		this.lockBody();
+
+	}
+
+	@autobind
 	_executeAfterModalClose() {
-		document.body.classList.remove('modal--open');
+		this.unlockBody();
 	}
 
 	render() {
 		const post = postStore.getPostsById(this.props.currentPopupPostId);
 		const archiveItem = (post) ? (<ArchiveItem post={post} />) : undefined;
-		const controlStyles = {
-		};
-		controlStyles.display = this.props.popupPostVisible ? 'block' : 'none';
 
 		if (this.props.popupPostVisible) {
-			document.body.classList.add('modal--open');
+			this.lockBody();
 		} else {
-			document.body.classList.remove('modal--open');
+			this.unlockBody();
 		}
 
 		let classes = 'a-sai__popup ';
@@ -84,13 +98,13 @@ class Popup extends Component {
 		return (
 			<div
 				className={classes}>
-				<div className="a-sai__controls" style={controlStyles}>
+				<div className="a-sai__controls">
 					<button
 						className="a-sai__control-btn a-sai__control-btn--previous"
 						onClick={this.onPreviousClick}
 					>
-						<i className="icon-arrow-left2"></i>
-						<span>
+						<span className="fas fa-arrow-left"></span>
+						<span className="a11y-visual-hide">
 							{ CONFIG.browse_page_localization.popup_previous }
 						</span>
 					</button>
@@ -98,10 +112,10 @@ class Popup extends Component {
 						className="a-sai__control-btn a-sai__control-btn--next"
 						onClick={this.onNextClick}
 					>
-						<span>
+						<span className="a11y-visual-hide">
 							{ CONFIG.browse_page_localization.popup_next}
 						</span>
-						<i className="icon-arrow-right2"></i>
+						<span className="fas fa-arrow-right"></span>
 					</button>
 				</div>
 

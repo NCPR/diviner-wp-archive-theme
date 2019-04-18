@@ -223,6 +223,10 @@ class ArchiveItem extends Component {
 			dateOutput = date.getFullYear().toString();
 		}
 
+		// reset scroll on rerender
+		const modal = document.querySelectorAll('.skylight-dialog')[0];
+		modal.scrollTop = 0;
+
 		return (
 			<div>
 				<label className="a-sai__label">
