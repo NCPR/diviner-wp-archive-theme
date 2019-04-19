@@ -103,19 +103,7 @@ class Post_Meta {
 	}
 
 	public function add_dynamic_fields(){
-		$meta_query = [
-			[
-				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
-				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			],
-		];
-		$args = [
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'post_type' => Diviner_Field::NAME,
-			'meta_query' => $meta_query
-		];
-		$cpt_fields_ids = get_posts($args);
+		$cpt_fields_ids = Diviner_Field::get_active_fields();
 		$dynamic_fields = [];
 
 		foreach($cpt_fields_ids as $cpt_field_id) {

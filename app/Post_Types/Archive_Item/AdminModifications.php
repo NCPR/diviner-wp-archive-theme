@@ -24,19 +24,7 @@ class AdminModifications {
 	}
 
 	function active_field_setup(  ) {
-		$meta_query = [
-			[
-				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
-				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			],
-		];
-		$args = [
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'post_type' => Diviner_Field::NAME,
-			'meta_query' => $meta_query
-		];
-		$field_posts_ids = get_posts($args);
+		$field_posts_ids = Diviner_Field::get_active_fields();
 		foreach($field_posts_ids as $field_post_id) {
 			$field_type = carbon_get_post_meta($field_post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$field = Diviner_Field::get_class($field_type);

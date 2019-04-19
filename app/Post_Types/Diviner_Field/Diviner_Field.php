@@ -23,6 +23,7 @@ class Diviner_Field {
 	const ORDER_BY_RELEVANCE = '';
 	const ORDER_BY_TITLE = 'SORT_TITLE';
 	const ORDER_BY_PUBLICATION_DATE = 'SORT_PUBLICATION_DATE';
+	const CACHE_KEY_ACTIVE_FIELDS = 'CACHE_KEY_ACTIVE_FIELDS';
 
 	public function __construct() {
 	}
@@ -56,7 +57,20 @@ class Diviner_Field {
 			'post_type' => static::NAME,
 			'meta_query' => $meta_query
 		];
-		return get_posts($args);
+
+		// used cached version if possible
+		$query_string = http_build_query( $args );
+		$cache_key = sprintf(
+			'%s_%s',
+			$query_string,
+			static::CACHE_KEY_ACTIVE_FIELDS
+		);
+		$result = wp_cache_get( $cache_key );
+		if ( false === $result ) {
+			$result = get_posts($args);;
+			wp_cache_set( $cache_key, $result );
+		};
+		return $result;
 	}
 
 	public function get_args() {
