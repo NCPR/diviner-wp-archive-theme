@@ -236,9 +236,7 @@ class Diviner_Field {
 		$return = [];
 		$fields = static::get_active_fields();
 		foreach($fields as $field_id) {
-			//$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
 			$field_type = Diviner_Field::get_field_post_meta($field_id, PostMeta::FIELD_TYPE );
-
 			$field = Diviner_Field::get_class($field_type);
 			$blueprint = call_user_func( [ $field, 'get_blueprint' ], $field_id);
 			$blueprint['field_type'] = $field_type;

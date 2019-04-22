@@ -106,8 +106,7 @@ class Post_Meta {
 		$dynamic_fields = [];
 
 		foreach($cpt_fields_ids as $cpt_field_id) {
-			$field_type = Diviner_Field::get_field_post_meta($cpt_field_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
-			// $field_type = carbon_get_post_meta($cpt_field_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			$field_type = Diviner_Field::get_field_post_meta($cpt_field_id, FieldPostMeta::FIELD_TYPE );
 			$type = Diviner_Field::get_class( $field_type );
 			if ( $type ) {
 				$field_rendered = $this->get_field( $cpt_field_id,  $type );
