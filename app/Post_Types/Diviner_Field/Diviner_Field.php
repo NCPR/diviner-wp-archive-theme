@@ -70,14 +70,18 @@ class Diviner_Field {
 				$id
 			);
 			$field_post_meta_array = $wpdb->get_results($sql);
-
-			foreach ($field_post_meta_array as &$post_meta_item) {
-				$key = sprintf(
-					'%s%s',
-					$id,
-					$post_meta_item->key
-				);
-				wp_cache_set( $key, $post_meta_item->value );
+			// get the field type
+			$fieldTypeObject = array_values(array_filter(
+				$field_post_meta_array,
+				function ($e) {
+					return $e->key == Helper::get_real_field_name(PostMeta::FIELD_TYPE );
+				}
+			) );
+			if ( $fieldTypeObject ) {
+				$field = static::get_class( $fieldTypeObject[0]->value );
+				if( is_callable( [ $field, 'hydrate_post_meta_cache' ] ) ){
+					call_user_func( [ $field, 'hydrate_post_meta_cache' ], $id, $field_post_meta_array);
+				}
 			}
 		}
 

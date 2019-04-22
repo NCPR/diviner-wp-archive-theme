@@ -84,6 +84,29 @@ abstract class FieldType implements iField {
 	}
 
 	/**
+	 * Hydrate post meta
+	 *
+	 * @param  $field_id string
+	 * @param  $post_meta_items array
+	 * @return void
+	 */
+	static public function hydrate_post_meta_cache( $field_id, $post_meta_items ) {
+		$needle = '_div_field_';
+		// filter by div related
+		$filtered_post_meta = array_filter($post_meta_items, function ($item) use ($needle)  {
+			return ( substr( $item->key, 0, 11 ) === $needle ) ;
+		});
+		foreach ($filtered_post_meta as &$post_meta_item) {
+			$key = sprintf(
+				'%s%s',
+				$field_id,
+				$post_meta_item->key
+			);
+			wp_cache_set( $key, $post_meta_item->value );
+		}
+	}
+
+	/**
 	 * Return basic blueprint for this field
 	 *
 	 * @param  int $post_id Post Id of field to set up.

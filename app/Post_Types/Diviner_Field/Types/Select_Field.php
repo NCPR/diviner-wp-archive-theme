@@ -3,8 +3,8 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
-use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
+use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Carbon_Fields\Field;
 
 /**
@@ -29,9 +29,9 @@ class Select_Field extends FieldType {
 	 * @return object
 	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
-		$options = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS );
+		$options = Select_Field::get_select_options( $post_id ); // retrieve from cache
 		if (count($options) <= 1) {
-			return '';
+			return null;
 		}
 		$field =  Field::make( static::TYPE, $id, $field_label );
 		// add none value to all selects
@@ -49,6 +49,89 @@ class Select_Field extends FieldType {
 	}
 
 	/**
+	 * Get select options
+	 *
+	 * @param  $field_id string
+	 * @return object
+	 */
+	static public function get_select_options( $field_id ) {
+		$key = sprintf(
+			'%s%s',
+			$field_id,
+			FieldPostMeta::FIELD_SELECT_OPTIONS
+		);
+		return wp_cache_get( $key );
+	}
+
+	/**
+	 * Hydrate post meta. Pulls out the selections options and builds an array of object loking like this
+	 *
+	 * array (size=3)
+	 *  '_type' => string '_' (length=1)
+	 *  'div_field_select_options_value' => string 'blond' (length=5)
+	 *  'div_field_select_options_label' => string 'Blond' (length=5)
+	 *
+	 * The FIELD_SELECT_OPTIONS complex field is either empty with a value like this
+	 *
+	 * _div_field_select_options|||0|_empty
+	 *
+	 * or its a series of entries in the following format
+	 *
+	 * array (size=3)
+	 *   0 => object(stdClass)[673]
+	 *    public 'key' => string '_div_field_select_options|||0|value' (length=35)
+	 *    public 'value' => string '_' (length=1)
+	 *   1 => object(stdClass)[672]
+	 *    public 'key' => string '_div_field_select_options|div_field_select_options_label|0|0|value' (length=66)
+	 *    public 'value' => string 'Bordeaux' (length=8)
+	 *   2 => object(stdClass)[671]
+	 *    public 'key' => string '_div_field_select_options|div_field_select_options_value|0|0|value' (length=66)
+	 *    public 'value' => string 'bordeaux' (length=8)
+	 *
+	 * @param  $field_id string
+	 * @param  $post_meta_items array
+	 * @return void
+	 */
+	static public function hydrate_post_meta_cache( $field_id, $post_meta_items ) {
+		$select_options = [];
+		$other_post_meta = [];
+		$needle = FieldPostMeta::FIELD_SELECT_OPTIONS;
+		array_walk($post_meta_items, function ($item) use (&$select_options, &$other_post_meta, $needle)  {
+			if ( preg_match("/{$needle}/i", $item->key) ) {
+				$select_options[] = $item;
+			} else {
+				$other_post_meta[] = $item;
+			}
+		});
+
+		// create select options array
+		$select_options_array = [];
+		// if the complex selection options field is empty there is one entry with a value of _div_field_select_options|||0|_empty
+		if ( is_array( $select_options ) && count( $select_options ) > 1 ) {
+			usort($select_options, function($obj1, $obj2) {
+				return strcasecmp($obj1->key, $obj2->key) < 0;
+			});
+			$num_items = (int)ceil(count($select_options) / 3 );
+			for ($i = 0; $i < $num_items; $i++) {
+				$select_options_array[] = [
+					'_type' => $select_options[$i]->value,
+					FieldPostMeta::FIELD_SELECT_OPTIONS_VALUE => $select_options[$num_items + $i]->value,
+					FieldPostMeta::FIELD_SELECT_OPTIONS_LABEL => $select_options[(2 * $num_items) + $i]->value,
+				];
+			}
+		}
+		$key = sprintf(
+			'%s%s',
+			$field_id,
+			FieldPostMeta::FIELD_SELECT_OPTIONS
+		);
+		wp_cache_set( $key, $select_options_array );
+
+		parent::hydrate_post_meta_cache( $field_id, $other_post_meta );
+	}
+
+
+	/**
 	 * Return field value
 	 *
 	 * @param  int $post_id Post Id of archive item.
@@ -58,8 +141,10 @@ class Select_Field extends FieldType {
 	 */
 	static public function get_value( $post_id, $field_name, $field_post_id ) {
 		$raw_value = carbon_get_post_meta( $post_id, $field_name );
-		$options = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_SELECT_OPTIONS);
-
+		$options = Select_Field::get_select_options( $post_id ); // retrieve from cache
+		if ( !is_array($options) ) {
+			return '';
+		}
 		$filtered_options = array_filter(
 			$options,
 			function ($val, $key) use ($raw_value) {
@@ -80,7 +165,7 @@ class Select_Field extends FieldType {
 	 * @param  array $additional_meta additional meta.
 	 * @param  int $post_id Post Id of field to set up.
 	 * @param  array $field
-	 * @param  array $field_id
+	 * @param  int|string $field_id
 	 * @return array
 	 */
 	static public function decorate_ep_post_sync_args( $additional_meta, $post_id, $field, $field_id ) {
@@ -97,8 +182,9 @@ class Select_Field extends FieldType {
 	 */
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
+		$options = Select_Field::get_select_options( $post_id ); // retrieve from cache
 		$additional_vars = [
-			static::REST_SELECT_OPTIONS  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS),
+			static::REST_SELECT_OPTIONS  => $options,
 		];
 		return array_merge($blueprint, $additional_vars);
 	}
