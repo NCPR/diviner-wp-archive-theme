@@ -11,6 +11,9 @@ use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 use Diviner\CarbonFields\Helper;
 
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
+
 /**
  * Class Diviner Field
  *
@@ -31,6 +34,53 @@ class Diviner_Field {
 	public function hooks() {
 		add_action( 'init', [ &$this,'register' ], 0, 0 );
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
+		add_action( 'init', [ $this, 'hydrate_cache' ], 0 );
+	}
+
+	static public function set_field_post_meta($id, $post_meta_name, $value) {
+		carbon_set_post_meta( (int) $id, $post_meta_name,  $value);
+	}
+
+	static public function get_field_post_meta($id, $post_meta_name, $container_id = 'carbon_fields_container_field_variables') {
+		$key = sprintf(
+			'%s%s',
+			$id,
+			Helper::get_real_field_name($post_meta_name)
+		);
+		$cached_value = wp_cache_get( $key );
+		if ( $cached_value ) {
+			return $cached_value;
+		}
+		$uncached_value = carbon_get_post_meta($id, $post_meta_name, $container_id);
+		wp_cache_set( $key, $uncached_value );
+		return $uncached_value;
+	}
+
+	public function hydrate_cache() {
+		$active_field_posts_ids = static::get_active_fields();
+		if ( count($active_field_posts_ids) === 0 ) {
+			return;
+		}
+		global $wpdb;
+		$table_name = $wpdb->postmeta;
+		foreach ($active_field_posts_ids as &$id) {
+			$sql = sprintf(
+				'SELECT `meta_key` AS `key`, `meta_value` AS `value` FROM %s WHERE `post_id` = %s ORDER BY `meta_key` ASC',
+				$table_name,
+				$id
+			);
+			$field_post_meta_array = $wpdb->get_results($sql);
+
+			foreach ($field_post_meta_array as &$post_meta_item) {
+				$key = sprintf(
+					'%s%s',
+					$id,
+					$post_meta_item->key
+				);
+				wp_cache_set( $key, $post_meta_item->value );
+			}
+		}
+
 	}
 
 	public function register() {
@@ -165,7 +215,7 @@ class Diviner_Field {
 		]);
 		$dyn = [];
 		foreach($fields as $field_id) {
-			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE );
+			$field_type = Diviner_Field::get_field_post_meta($field_id, PostMeta::FIELD_TYPE );
 			$field      = Diviner_Field::get_class($field_type);
 			if( is_callable( [ $field, 'get_sort_options' ] ) ){
 				$options    = call_user_func( [ $field, 'get_sort_options' ], $field_id);
@@ -182,7 +232,9 @@ class Diviner_Field {
 		$return = [];
 		$fields = static::get_active_fields();
 		foreach($fields as $field_id) {
-			$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			//$field_type = carbon_get_post_meta($field_id, PostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			$field_type = Diviner_Field::get_field_post_meta($field_id, PostMeta::FIELD_TYPE );
+
 			$field = Diviner_Field::get_class($field_type);
 			$blueprint = call_user_func( [ $field, 'get_blueprint' ], $field_id);
 			$blueprint['field_type'] = $field_type;

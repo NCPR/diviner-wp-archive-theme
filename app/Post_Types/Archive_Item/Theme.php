@@ -93,12 +93,11 @@ class Theme {
 		$field_output = [];
 
 		foreach($active_field_posts_ids as $active_field_post_id) {
-			$field_name = carbon_get_post_meta(
+			$field_name = Diviner_Field::get_field_post_meta(
 				$active_field_post_id,
-				DivinerFieldPostMeta::FIELD_ID,
-				'carbon_fields_container_field_variables'
+				DivinerFieldPostMeta::FIELD_ID
 			);
-			$field_type = carbon_get_post_meta(
+			$field_type = Diviner_Field::get_field_post_meta(
 				$active_field_post_id,
 				DivinerFieldPostMeta::FIELD_TYPE,
 				'carbon_fields_container_field_variables'

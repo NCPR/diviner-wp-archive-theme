@@ -22,14 +22,18 @@ class Item extends Component {
 		});
 	}
 
-	render() {
-		const sectionStyle = {
-		};
-
+	getImage() {
 		if (this.props.image) {
-			sectionStyle.backgroundImage = `url(${this.props.image})`;
+			return(
+				<LazyLoad>
+					<img src={this.props.image} />
+				</LazyLoad>
+			);
 		}
+		return ('');
+	}
 
+	render() {
 		let itemClass = 'a-item';
 		if (this.props.hasAudio) itemClass += ' a-item--has-audio';
 
@@ -38,9 +42,7 @@ class Item extends Component {
 				<div className="a-item__action" onClick={this.onClick}>
 					<div className="a-item__figure">
 						<div className="a-item__img">
-							<LazyLoad>
-								<img src={this.props.image} />
-							</LazyLoad>
+							{this.getImage()}
 						</div>
 						<div
 							className="a-item__figure-caption"

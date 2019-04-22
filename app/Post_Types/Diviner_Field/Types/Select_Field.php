@@ -3,6 +3,7 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Carbon_Fields\Field;
 
@@ -28,7 +29,7 @@ class Select_Field extends FieldType {
 	 * @return object
 	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
-		$options = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS);
+		$options = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS );
 		if (count($options) <= 1) {
 			return '';
 		}
@@ -57,7 +58,8 @@ class Select_Field extends FieldType {
 	 */
 	static public function get_value( $post_id, $field_name, $field_post_id ) {
 		$raw_value = carbon_get_post_meta( $post_id, $field_name );
-		$options = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_SELECT_OPTIONS);
+		$options = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_SELECT_OPTIONS);
+
 		$filtered_options = array_filter(
 			$options,
 			function ($val, $key) use ($raw_value) {
@@ -96,7 +98,7 @@ class Select_Field extends FieldType {
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
-			static::REST_SELECT_OPTIONS  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS),
+			static::REST_SELECT_OPTIONS  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_SELECT_OPTIONS),
 		];
 		return array_merge($blueprint, $additional_vars);
 	}

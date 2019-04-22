@@ -172,6 +172,7 @@ class ArchiveItem extends Component {
 	}
 
 	renderTextField(field) {
+
 		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		const value = post.fields_text[fieldId];

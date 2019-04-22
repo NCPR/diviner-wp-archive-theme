@@ -4,6 +4,7 @@
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
 use Carbon_Fields\Field;
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 
 
@@ -20,9 +21,9 @@ class CPT_Field extends FieldType {
 
 	static public function setup ( $post_id ) {
 		// set up CPT
-		$field_id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
-		$field_label = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL );
-		$field_slug = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG );
+		$field_id = Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
+		$field_label = Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL );
+		$field_slug = Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG );
 
 		if ( empty($field_id) || empty($field_label) || empty($field_slug)) {
 			return '';
@@ -109,7 +110,6 @@ class CPT_Field extends FieldType {
 	 * @return array
 	 */
 	static public function decorate_ep_post_sync_args( $additional_meta, $post_id, $field, $field_id ) {
-
 		$field_values = carbon_get_post_meta( $post_id, $field_id );
 		$text = '';
 		foreach($field_values as $field_value) {
@@ -117,8 +117,6 @@ class CPT_Field extends FieldType {
 				$text .= get_the_title($field_value['id']) . " ";
 			}
 		}
-
-		// error_log( print_r( $field_value, true ) , 3, "/Applications/MAMP/logs/php_error.log" );
 		$additional_meta[$field_id] = $text;
 
 		return $additional_meta;
@@ -134,7 +132,7 @@ class CPT_Field extends FieldType {
 	 * @return object
 	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
-		$field_cpt_id = carbon_get_post_meta( $post_id,FieldPostMeta::FIELD_CPT_ID );
+		$field_cpt_id = Diviner_Field::get_field_post_meta( $post_id,FieldPostMeta::FIELD_CPT_ID );
 		if ( empty($field_cpt_id) ) {
 			return null;
 		}
@@ -162,9 +160,9 @@ class CPT_Field extends FieldType {
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
-			'cpt_field_id'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID ),
-			'cpt_field_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL ),
-			'cpt_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG ),
+			'cpt_field_id'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID ),
+			'cpt_field_label'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_LABEL ),
+			'cpt_field_slug'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_SLUG ),
 		];
 		return array_merge($blueprint, $additional_vars);
 	}

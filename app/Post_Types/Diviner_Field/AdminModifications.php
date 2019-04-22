@@ -97,7 +97,7 @@ class AdminModifications {
 		$classes .= sprintf( ' post-edit--%s', $post->post_type );
 		if( $post->post_type == Diviner_Field::NAME && in_array( $pagenow, [ 'post.php' ] ) ) {
 			// get the type of field
-			$type = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
+			$type = Diviner_Field::get_field_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
 			$classes .= sprintf( ' post-field-type--%s', $type );
 		} else {
 			// post-field-type--diviner_date_field

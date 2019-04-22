@@ -2,6 +2,7 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta;
 use Carbon_Fields\Field;
 
@@ -92,10 +93,10 @@ abstract class FieldType implements iField {
 		return [
 			'id'                => $post_id,
 			'title'             => get_the_title( $post_id ),
-			'position'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT, 'carbon_fields_container_field_variables' ),
-			'helper'            => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_HELPER_TEXT, 'carbon_fields_container_field_variables' ),
-			'field_id'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' ),
-			'display_in_popup'  => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables' ),
+			'position'          => Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT ),
+			'helper'            => Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_BROWSE_HELPER_TEXT ),
+			'field_id'          => Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_ID ),
+			'display_in_popup'  => (bool) Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_BROWSE_DISPLAY ),
 		];
 	}
 }

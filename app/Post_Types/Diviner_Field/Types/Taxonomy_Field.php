@@ -3,6 +3,7 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 
@@ -50,10 +51,10 @@ class Taxonomy_Field extends FieldType {
 	 * @param  int $field_post_id Post Id of field.
 	 */
 	static public function setup( $field_post_id ) {
-		$field_label_singular = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
-		$field_label_plural = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL);
-		$field_slug = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG);
-		$field_tax_type = carbon_get_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE);
+		$field_label_singular = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
+		$field_label_plural = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL);
+		$field_slug = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG);
+		$field_tax_type = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE);
 
 		if ( empty( $field_slug ) ) {
 			$field_slug = sanitize_title($field_label_singular);
@@ -124,10 +125,10 @@ class Taxonomy_Field extends FieldType {
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
-			'taxonomy_field_type'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE),
-			'taxonomy_field_slug'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG),
-			'taxonomy_field_singular_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL),
-			'taxonomy_field_plural_label'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL),
+			'taxonomy_field_type'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE),
+			'taxonomy_field_slug'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG),
+			'taxonomy_field_singular_label'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL),
+			'taxonomy_field_plural_label'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL),
 			'taxonomy_field_name'   => static::get_taxonomy_name( $post_id ),
 		];
 		return array_merge($blueprint, $additional_vars);

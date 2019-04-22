@@ -4,7 +4,6 @@ namespace Diviner\Post_Types\Archive_Item;
 
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
-use Diviner\CarbonFields\Helper;
 
 /**
  * Class Admin Modifications
@@ -26,7 +25,9 @@ class AdminModifications {
 	function active_field_setup(  ) {
 		$field_posts_ids = Diviner_Field::get_active_fields();
 		foreach($field_posts_ids as $field_post_id) {
-			$field_type = carbon_get_post_meta($field_post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			// $field_type = carbon_get_post_meta($field_post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			$field_type = Diviner_Field::get_field_post_meta($field_post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+
 			$field = Diviner_Field::get_class($field_type);
 			if( is_callable( [ $field, 'setup' ] ) ){
 				call_user_func( [ $field, 'setup' ], $field_post_id);
