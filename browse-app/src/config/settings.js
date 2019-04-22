@@ -39,3 +39,4 @@ export const FIELD_DATE_MAX_YEAR_DEFAULT = 2018;
 export const FIELD_POSITION_TOP = 'top';
 export const FIELD_POSITION_LEFT = 'left';
 export const IMAGE_SIZE_BROWSE_POPUP = 'image_size_browse_popup';
+export const IMAGE_SIZE_BROWSE_GRID = 'image_size_browse_grid';

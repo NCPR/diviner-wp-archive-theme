@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
 import { CONFIG } from '../globals/config';
+import { IMAGE_SIZE_BROWSE_GRID } from '../config/settings';
 import { setPage, initiateSearch, selectGridItem } from '../actions';
 import Item from './item';
 
@@ -27,7 +28,9 @@ class Grid extends Component {
 	getImage(post) {
 		let featuredimage = null;
 		if (post.feature_image && post.feature_image.sizes) {
-			if (post.feature_image.sizes['thumbnail'] && post.feature_image.sizes['thumbnail'].url) {
+			if (post.feature_image.sizes[IMAGE_SIZE_BROWSE_GRID] && post.feature_image.sizes[IMAGE_SIZE_BROWSE_GRID].url) {
+				featuredimage = post.feature_image.sizes[IMAGE_SIZE_BROWSE_GRID].url;
+			} else if (post.feature_image.sizes['thumbnail'] && post.feature_image.sizes['thumbnail'].url) {
 				featuredimage = post.feature_image.sizes['thumbnail'].url;
 			} else if (post.feature_image.sizes.full && post.feature_image.sizes.full.url) {
 				featuredimage = post.feature_image.sizes.full.url;

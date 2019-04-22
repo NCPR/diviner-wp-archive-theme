@@ -3,6 +3,7 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
 use Carbon_Fields\Field;
@@ -82,7 +83,7 @@ class Text_Field extends FieldType {
 		$value = sprintf(
 			'SORT|%s|%s|ASC',
 			static::NAME,
-			carbon_get_post_meta( $field_id, FieldPostMeta::FIELD_ID )
+			Diviner_Field::get_field_post_meta( $field_id, FieldPostMeta::FIELD_ID )
 		);
 		$options[] = [
 			'value' => $value,

@@ -4,6 +4,7 @@
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
 use Carbon_Fields\Field;
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\CarbonFields\Helper;
 
@@ -58,9 +59,9 @@ class Date_Field extends FieldType  {
 	static public function get_blueprint( $post_id ) {
 		$blueprint = parent::get_blueprint( $post_id );
 		$additional_vars = [
-			'date_field_type'  => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_DATE_TYPE),
-			'date_field_start' => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_DATE_START),
-			'date_field_end'   => carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_DATE_END),
+			'date_field_type'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_DATE_TYPE),
+			'date_field_start' => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_DATE_START),
+			'date_field_end'   => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_DATE_END),
 		];
 		return array_merge($blueprint, $additional_vars);
 	}
@@ -95,7 +96,7 @@ class Date_Field extends FieldType  {
 		$value = sprintf(
 			'SORT|%s|%s|ASC',
 			static::NAME,
-			carbon_get_post_meta( $field_id, FieldPostMeta::FIELD_ID )
+			Diviner_Field::get_field_post_meta( $field_id, FieldPostMeta::FIELD_ID )
 		);
 		$options[] = [
 			'value' => $value,
@@ -109,7 +110,7 @@ class Date_Field extends FieldType  {
 		$value = sprintf(
 			'SORT|%s|%s|DESC',
 			static::NAME,
-			carbon_get_post_meta( $field_id, FieldPostMeta::FIELD_ID )
+			Diviner_Field::get_field_post_meta( $field_id, FieldPostMeta::FIELD_ID )
 		);
 		$options[] = [
 			'value' => $value,

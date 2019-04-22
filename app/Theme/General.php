@@ -101,6 +101,23 @@ class General {
 	}
 
 	/**
+	 * Get the theme option and caches it
+	 *
+	 * @param  $id string id for theme option
+	 * @return string
+	 */
+	static public function get_theme_option( $id ) {
+		$cached_value = wp_cache_get( $id );
+		if ( $cached_value ) {
+			return $cached_value;
+		}
+		$uncached_value = carbon_get_theme_option( $id );
+		wp_cache_set( $id, $uncached_value );
+		return $uncached_value;
+	}
+
+
+	/**
 	 * Get Font Value
 	 *
 	 * @param  string $key

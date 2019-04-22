@@ -12,6 +12,7 @@ class General {
 	const VERSION = '1.0.0';
 
 	const IMAGE_SIZE_BROWSE_POPUP = 'image_size_browse_popup';
+	const IMAGE_SIZE_BROWSE_GRID = 'image_size_browse_grid';
 
 	const IMAGE_SIZE_FEATURE_SM   = 'image_size_feature_sm'; // 5 x 1
 	const IMAGE_SIZE_FEATURE_MD   = 'image_size_feature_md';
@@ -39,6 +40,11 @@ class General {
 		self::IMAGE_SIZE_BROWSE_POPUP => [
 			'width'  => 600,
 			'height' => 0,
+			'crop'   => true,
+		],
+		self::IMAGE_SIZE_BROWSE_GRID => [
+			'width'  => 500,
+			'height' => 500,
 			'crop'   => true,
 		],
 		self::IMAGE_SIZE_FEATURE_LRG => [

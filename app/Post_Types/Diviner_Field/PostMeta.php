@@ -322,7 +322,7 @@ class PostMeta {
 		if (empty($id)) {
 			$id = get_the_ID();
 		}
-		$type = carbon_get_post_meta( $id, PostMeta::FIELD_TYPE );
+		$type = Diviner_Field::get_field_post_meta( $id, PostMeta::FIELD_TYPE );
 		if ( ! empty($type) ) {
 			return $type;
 		}
@@ -336,15 +336,13 @@ class PostMeta {
 		$field = Field::make( 'text', static::FIELD_ID, __( 'Field ID (for reference only)', 'ncpr-diviner' ) )
 			->set_required( true )->set_classes( static::FIELD_ID );
 
-		$id = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_ID );
+		$id = Diviner_Field::get_field_post_meta( get_the_ID(), PostMeta::FIELD_ID );
 
 		if ( empty($id) ) {
 			$type = $this->get_field_type();
 			$default_value = uniqid( sprintf('%s_', $type ) );
 			$field->set_default_value( $default_value );
 		}
-
-		// ->set_default_value( $default_value );
 
 		return $field;
 	}

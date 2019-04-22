@@ -50,7 +50,7 @@ class Settings {
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 	}
 
-	public function custom_diviner_js_config( $data  ) {
+	public function custom_diviner_js_config( $data ) {
 		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL);
 
 		$settings = [

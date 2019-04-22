@@ -3,6 +3,10 @@
 	display: block;
 	font-size: 15px;
 	margin-bottom: 5px;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
 }
 
 .a-sai__label {
@@ -12,6 +16,7 @@
 	display: inline-block;
 	font-size: 15px;
 	margin-right: 10px;
+	margin-bottom: 0;
 }
 
 .a-sai__value {

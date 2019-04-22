@@ -2,6 +2,7 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta;
 use Carbon_Fields\Field;
 
@@ -83,6 +84,29 @@ abstract class FieldType implements iField {
 	}
 
 	/**
+	 * Hydrate post meta
+	 *
+	 * @param  $field_id string
+	 * @param  $post_meta_items array
+	 * @return void
+	 */
+	static public function hydrate_post_meta_cache( $field_id, $post_meta_items ) {
+		$needle = '_div_field_';
+		// filter by div related
+		$filtered_post_meta = array_filter($post_meta_items, function ($item) use ($needle)  {
+			return ( substr( $item->key, 0, 11 ) === $needle ) ;
+		});
+		foreach ($filtered_post_meta as &$post_meta_item) {
+			$key = sprintf(
+				'%s%s',
+				$field_id,
+				$post_meta_item->key
+			);
+			wp_cache_set( $key, $post_meta_item->value );
+		}
+	}
+
+	/**
 	 * Return basic blueprint for this field
 	 *
 	 * @param  int $post_id Post Id of field to set up.
@@ -92,10 +116,10 @@ abstract class FieldType implements iField {
 		return [
 			'id'                => $post_id,
 			'title'             => get_the_title( $post_id ),
-			'position'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT, 'carbon_fields_container_field_variables' ),
-			'helper'            => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_HELPER_TEXT, 'carbon_fields_container_field_variables' ),
-			'field_id'          => carbon_get_post_meta( $post_id, PostMeta::FIELD_ID, 'carbon_fields_container_field_variables' ),
-			'display_in_popup'  => carbon_get_post_meta( $post_id, PostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables' ),
+			'position'          => Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT ),
+			'helper'            => Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_BROWSE_HELPER_TEXT ),
+			'field_id'          => Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_ID ),
+			'display_in_popup'  => (bool) Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_BROWSE_DISPLAY ),
 		];
 	}
 }
