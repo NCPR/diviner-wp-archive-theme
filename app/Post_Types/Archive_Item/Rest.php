@@ -32,17 +32,12 @@ class Rest {
 
 	public function hooks() {
 		$achive_item_name = Archive_Item::NAME;
-		add_action( 'rest_api_init', [ $this, 'rest_api_init' ] );
 		add_filter( "rest_{$achive_item_name}_query", [ $this, 'rest_api_filter_add_vars' ], 10, 2 );
 		add_filter( "rest_{$achive_item_name}_query", [ $this, 'rest_api_filter_add_order_by' ], 3, 2 );
 		add_filter( "rest_{$achive_item_name}_query", [ $this, 'rest_api_enable_elastic' ], 11, 2 );
 		add_filter( 'ep_formatted_args_query', [ $this, 'ep_formatted_args_query' ], 10, 2 );
 		add_filter( 'ep_post_sync_args', [ &$this, 'custom_ep_post_sync_args' ], 10, 2);
 		add_action( 'rest_api_init', [ &$this,'custom_register_rest_fields' ] );
-	}
-
-	function rest_api_init() {
-
 	}
 
 	function custom_ep_post_sync_args($post_args, $post_id) {
