@@ -140,6 +140,11 @@ class Browse_Page {
 	 * Init Browse page
 	 */
 	public function setup_browse_page() {
+
+		// ensure that permalink structure isnt using the plain approach
+		global $wp_rewrite;
+		$wp_rewrite->set_permalink_structure( $wp_rewrite->root . '/%postname%/' ); // custom post permalinks
+
 		if ( !$this->already_have_browse_page() ) {
 			// Create post object
 			$browse_page = array(
