@@ -58,3 +58,16 @@ Now we can move on to configuring your general settings! On the left navigation 
    1. Ex: Title: North Country at Work photo collections. Description: Collected here are our curated work photo collections. Some have been created around industries, others around specific time periods or from certain families. Enjoy perusing! 
      
 
+####Customize Your Browse and Homepages
+    
+This is not time-sensitive, and can be done later in set-up if you so choose. Navigate to Pages on the left navigation menu. You will see a list of all your pages, which right now, should include Help, Search, Diviner Browse, and Diviner Home. 
+
+1. Choose to edit Diviner Browse and add a description of what visitors can find in your archive if you want to. (This is optional! You may or may not want a descriptive paragraph). 
+1. Choose to edit Diviner Home. 
+   1. Once you’re in the editing experience, click on Preview on the upper right.  This will show you what your current homepage looks like in a new tab, and this is how you can check to see how your choices on the back-end are affecting the look of your home page.
+   1. Now head on back to the Diviner Home edit page, and get to customizing! You can keep elements you like, get rid of elements you don’t, and add additional elements. The basis of this homepage building experience is WordPress’s 5.0, which includes the Gutenberg Editor experience. For more on the basics of Gutenberg and how to leverage Gutenberg to its full potential, use this manual.       
+   1. What exists out-of-the-box on your home page are a number of DIVINER elements - you can keep or discard them. They are: (Make screenshot of homepage edit screen and label all these) 
+      1. Photo subheader with overlaid text - this will appear at the top of your homepage. Add a photo by adding a featured image (on lower right) and by adding subheader text (at very bottom of homepage edit screen). 
+      1. Link Boxes - three appear automatically; you can add more or remove link boxes at will. You can use these link boxes to direct visitors to other destinations on your site, such as your Browse Page, Collections, or an About the Project page. You can customize the fonts and colors of the boxes, add photos, etc. 
+      1. Featured Story - this appears underneath your link boxes, and you activate it by choosing a post in the drop-down menu. 
+      1. Recent Additions - this feature appears at the bottom of your homepage, above the footer. It pulls from your recently added Archive Items in your Browse page.  
