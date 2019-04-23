@@ -48,7 +48,6 @@ class Date_Field extends FieldType  {
 		$raw_date = carbon_get_post_meta( $post_id, $field_name );
 		return mysql2date( get_option( 'date_format' ), $raw_date );
 	}
-	// $the_date = mysql2date( get_option( 'date_format' ), $post->post_date );
 
 	/**
 	 * Return basic blueprint for this field

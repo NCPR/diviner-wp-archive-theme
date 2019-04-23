@@ -48,6 +48,17 @@
 			margin: 3px 0 12px;
 		}
 	}
+
+	.a-control-row--1 & {
+		width: 100%;
+	}
+
+	.a-control-row--2 & {
+
+		@include g-state( large ) {
+			width: 50%;
+		}
+	}
 }
 
 .a-input-group--clear {
