@@ -43,8 +43,8 @@ class General {
 			'crop'   => true,
 		],
 		self::IMAGE_SIZE_BROWSE_GRID => [
-			'width'  => 500,
-			'height' => 500,
+			'width'  => 600,
+			'height' => 600,
 			'crop'   => true,
 		],
 		self::IMAGE_SIZE_FEATURE_LRG => [
