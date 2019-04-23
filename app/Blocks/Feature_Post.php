@@ -77,5 +77,5 @@ class Feature_Post {
 			);
 		}
 	}
-	
+
 }
