@@ -3,41 +3,56 @@ title: "Getting Started"
 draft: false
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula eu lectus vel egestas. Mauris eu molestie leo. Mauris lobortis risus nec luctus consectetur. Pellentesque vestibulum leo id turpis faucibus malesuada. Donec velit libero, fermentum in aliquet eu, euismod eget turpis. Quisque imperdiet eleifend lectus, eget consequat purus. Sed imperdiet dolor ac suscipit vulputate. Nam convallis risus non ipsum efficitur volutpat.
+## Define Your Project 
 
-## Technical Requirements:
-    
-   - server to install it in with a version of WordPress – a web server with a database with x amount of gigs
-   - optional installs: elastic search
-   - additional optional plug-ins
-   - back-up system for your server
+We recommend potential users define their project as much as they can before they get started. It will help immeasurably in the overall installation and configuration of DIVINER. 
+
+- **NAME** What will you call your DIVINER archive? Decide on a title.
+- **CONTENT** What is going IN your DIVINER archive? Decide now what you want to put into the archive, because you will design your search mechanisms by which you want to sort through your materials before you upload your materials, not after. 
+- **SEARCHABILITY** Think about your materials and how you want your audience to be able to search them. For example, if you have 1000 dog portraits, you may want to filter them by breed, age of the dog, date taken, size of the dog, etcetera. Perhaps you have 5,000 audio clips of folk songs. You may want to search by date recorded, by subject, by singer/group, and by the location from which they originated. We suggest choosing between five and ten criteria you’d like to be able to search by, though you can certainly do less or more than that! Write them down. Each of these will become a field you have to fill out for each archive item as you enter it. 
+
+## Hosting Recommendations
+
+To get started with Diviner, you will need a hosting solution capable of running Wordpress (https://codex.wordpress.org/Template:Server_requirements), for which the base requirements are:
+
+* PHP version 5.6.20 or greater, PHP 7 is highly recommended
+* MySQL version 5.0.15 or greater or any version of MariaDB
+
+We recommend you choose a managed wordpress environment with 
+
+* 1 gig of minimum RAM
+* Daily backups of media files and database
+* Regular updates to wordpress core 
+
+
+## Additional Plugins
+
+Although not required, we also recommend that Diviner be used in tandem with ElasticPress and an Elasticsearch server account, such as Searchly. Elasticsearch will cache search returns in the browse page and improve performance in the real-time multifacet search. 
+
+Other plugins may be used with this theme. We recommend a social media plugin to add social media buttons to each article in either the Sidebar or After Single Title widget area. If your managed hosting service does not already provide daily updates, we recommend a plugin to manage scheduled backups.
+
+
 
 ## Installation of Diviner
-    
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula eu lectus vel egestas. Mauris eu molestie leo. Mauris lobortis risus nec luctus consectetur. Pellentesque vestibulum leo id turpis faucibus malesuada. Donec velit libero, fermentum in aliquet eu, euismod eget turpis. Quisque imperdiet eleifend lectus, eget consequat purus. Sed imperdiet dolor ac suscipit vulputate. Nam convallis risus non ipsum efficitur volutpat.
-  
-1. Download, Install, and activate the DIVINER plug-in and open your administration experience. 
-1. Set DIVINER General Settings
-1. Activate fields to design archive item and browse page experiences. READ MORE ABOUT FIELDS HERE: What’s a field and why do I need one? 
-1. Assign your labels to the fields, and choose where they will express on the Browse page.       
-1. Once your fields are configured, start adding archive items
 
+Install Wordpress by follow the installation instructions of your managed hosting service. Refer to the Wordpress documentation directly for further information: https://wordpress.org/support/article/how-to-install-wordpress/
 
-## Set-up of Fields (high level) 
+Set up an admin account for managing your site
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor neque, volutpat eget varius sed, accumsan ut massa. Sed nec vestibulum tortor. Nulla mattis tempor justo, eu sodales lorem elementum eget. Ut vel auctor urna. Nunc a risus vel risus condimentum convallis. Nulla ut dolor nisi. Phasellus sagittis vel leo vel pharetra. Curabitur euismod sapien sagittis risus volutpat, a vehicula nisi faucibus. Integer eleifend massa ac est sagittis, sed lacinia massa facilisis. Nunc at pharetra ante.
+Login as your new admin user. Navigate to the Appearance/Themes section and install Diviner Archive Theme. This may be done either directly in the interface via the theme Wordpress theme marketplace (once the theme is available) or as a direct download. Please contact us directly if you do not already have a ZIP of the theme.
+ 
+Activate the theme and verify that you now see the Diviner and Archive Items menus in the admin interface. 
 
-Cras sit amet nisl sit amet nunc vulputate suscipit. Aliquam erat volutpat. Ut molestie lacinia viverra. Donec iaculis feugiat orci, vitae rutrum erat condimentum in. Suspendisse potenti. Maecenas non porttitor felis, id vulputate magna. Nulla vestibulum mauris ac nisi rutrum, in finibus massa tincidunt. Donec massa sapien, cursus sit amet nulla eget, consequat volutpat velit. Vestibulum accumsan nunc quam, viverra auctor ex gravida quis. Proin cursus nec ante ac lobortis. Quisque viverra dolor massa, et fringilla metus volutpat sit amet. Vivamus vehicula malesuada augue. Cras ullamcorper cursus dolor, sed molestie risus posuere eu. Etiam molestie mi vitae lorem finibus hendrerit aliquet sit amet arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+**Activate additional optional plugins**
 
-Curabitur tristique efficitur metus, nec consectetur nisl auctor malesuada. Curabitur imperdiet facilisis felis, nec eleifend felis pellentesque sit amet. Proin eget dictum ipsum. Vivamus sed risus in sapien tempor vehicula. Vestibulum facilisis ultrices nunc in placerat. Mauris cursus gravida neque, non vulputate nunc fringilla sit amet. Sed imperdiet consectetur sodales.
+Plugins may be installed from the wordpress.org plugin marketplace via the admin tool.
 
-Curabitur imperdiet facilisis felis, nec eleifend felis pellentesque sit amet. Proin eget dictum ipsum. Vivamus sed risus in sapien tempor vehicula. Vestibulum facilisis ultrices nunc in placerat. Mauris cursus gravida neque, non vulputate nunc fringilla sit amet. Sed imperdiet consectetur sodales.
+* ElasticPress
+  * Install plugin and activate it
+  * Set up an Elasticsearch service such as searchly
+  * Enter the Elasticsearch host URL in the elasticpress settings
+  * Click the sync button in the ElasticPress seetings to rebuild the search index. Because syncing happens in batches, this may take time if you already have a number of archive items.
+  * Verify in your Elastcsearch service account that the indexing was successful
+* Google Analytics
+* Any other plugins you might prefer to use (Social Media plugin, etc)
 
-
-## Customize Your Theme (high level) 
-
-Cras sit amet nisl sit amet nunc vulputate suscipit. Aliquam erat volutpat. Ut molestie lacinia viverra. Donec iaculis feugiat orci, vitae rutrum erat condimentum in. Suspendisse potenti. Maecenas non porttitor felis, id vulputate magna. Nulla vestibulum mauris ac nisi rutrum, in finibus massa tincidunt. Donec massa sapien, cursus sit amet nulla eget, consequat volutpat velit. Vestibulum accumsan nunc quam, viverra auctor ex gravida quis. Proin cursus nec ante ac lobortis. Quisque viverra dolor massa, et fringilla metus volutpat sit amet. Vivamus vehicula malesuada augue. Cras ullamcorper cursus dolor, sed molestie risus posuere eu. Etiam molestie mi vitae lorem finibus hendrerit aliquet sit amet arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
-Curabitur tristique efficitur metus, nec consectetur nisl auctor malesuada. Curabitur imperdiet facilisis felis, nec eleifend felis pellentesque sit amet. Proin eget dictum ipsum. Vivamus sed risus in sapien tempor vehicula. Vestibulum facilisis ultrices nunc in placerat. Mauris cursus gravida neque, non vulputate nunc fringilla sit amet. Sed imperdiet consectetur sodales.
-
-  
