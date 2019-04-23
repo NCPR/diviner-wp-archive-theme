@@ -231,6 +231,10 @@ class Diviner_Field {
 	}
 
 	public function custom_diviner_js_config( $data  ) {
+		if ( !is_page_template('page-browser.php') ) {
+			return $data;
+		}
+
 		$taxonomy_terms = [];
 		$cpt_posts = [];
 		$return = [];

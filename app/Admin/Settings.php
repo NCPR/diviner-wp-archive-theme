@@ -50,8 +50,10 @@ class Settings {
 	}
 
 	public function custom_diviner_js_config( $data ) {
+		if ( !is_page_template('page-browser.php') ) {
+			return $data;
+		}
 		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL);
-
 		$settings = [
 			'permission_notice' => carbon_get_theme_option(static::FIELD_GENERAL_PERMISSIONS),
 			'display_popup'     => empty( $display_popup ) ? false : $display_popup,
