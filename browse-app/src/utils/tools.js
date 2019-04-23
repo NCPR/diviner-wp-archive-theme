@@ -1,3 +1,7 @@
+/**
+ * @module
+ * @description Some shared functions
+ */
 
 import { browserTests } from './tests';
 

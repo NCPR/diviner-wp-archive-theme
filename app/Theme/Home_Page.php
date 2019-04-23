@@ -3,6 +3,8 @@
 
 namespace Diviner\Theme;
 
+use \Diviner\Admin\Settings;
+
 /**
  * Setting up the home page at startup
  *
@@ -11,11 +13,50 @@ namespace Diviner\Theme;
 class Home_Page {
 
 	const THEME_OPTION_HOME_PAGE_CREATED = 'diviner_theme_option_homepage_created';
+	const ADMIN_HOME_PAGE_POST_REMOVE = 'diviner_admin_homepage_post_remove';
+	const TRANSIENT_SHOW_NOTICE = 'diviner_homepage_transient_show_notice';
 
 	public function hooks() {
 		if ( DIVINER_IS_THEME ) {
 			add_action( 'after_switch_theme', [ $this, 'setup_home_page' ] );
+			add_action(
+					sprintf( 'admin_post_%s', static::ADMIN_HOME_PAGE_POST_REMOVE ),
+					[ $this, 'regen_default_homepage' ]
+			);
+			add_action( 'admin_notices', [ $this, 'admin_notices' ] );
 		}
+	}
+
+	/**
+	 * admin notices
+	 *
+	 */
+	public function admin_notices() {
+		if( get_transient( static::TRANSIENT_SHOW_NOTICE ) ){
+			printf(
+				'<div class="notice"><p>%s</p></div>',
+				__( 'You just regenerated the default homepage content', 'ncpr-diviner' )
+			);
+			delete_transient( static::TRANSIENT_SHOW_NOTICE );
+		}
+	}
+
+	/**
+	 * Regenerate default home
+	 *
+	 */
+	public function regen_default_homepage() {
+		$homepage_id = get_option( static::THEME_OPTION_HOME_PAGE_CREATED, 0 );
+		if ($homepage_id && $homepage_id !== 0) {
+			// remove previous
+			wp_delete_post( $homepage_id, true );
+			delete_option( static::THEME_OPTION_HOME_PAGE_CREATED );
+			set_transient( static::TRANSIENT_SHOW_NOTICE, true, 5 );
+			// add new
+			$this->inset_default_home_page();
+		}
+		// redirect to main
+		wp_redirect( admin_url( sprintf('/wp-admin/admin.php?page=%s',Settings::GENERAL_SETTINGS_SLUG ) ), 301 );
 	}
 
 	/**
@@ -107,18 +148,24 @@ class Home_Page {
 	}
 
 	/**
+	 * Inset New Default Home page
+	 */
+	public function inset_default_home_page() {
+		$page_id = $this->create_home_page();
+		if($page_id !== 0) {
+			update_option( 'page_on_front', $page_id);
+			update_option( 'show_on_front', 'page' );
+			update_option( static::THEME_OPTION_HOME_PAGE_CREATED, $page_id );
+		}
+	}
+
+	/**
 	 * Init Home page
 	 */
 	public function setup_home_page() {
 		$homepage_exists = get_option( static::THEME_OPTION_HOME_PAGE_CREATED, 0 );
 		if (!$homepage_exists) {
-			$page_id = $this->create_home_page();
-			if($page_id !== 0) {
-				update_option( 'page_on_front', $page_id);
-				update_option( 'show_on_front', 'page' );
-				update_option( static::THEME_OPTION_HOME_PAGE_CREATED, 1 );
-			}
-
+			$this->inset_default_home_page();
 		}
 	}
 

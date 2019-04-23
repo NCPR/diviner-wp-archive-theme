@@ -1,18 +1,22 @@
 
 .a-sai__field {
 	display: block;
-	margin-bottom: 10px;
+	font-size: 15px;
+	margin-bottom: 5px;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
 }
 
 .a-sai__label {
+	@include clearfix;
+
 	font-weight: $t_font_weight_bold;
 	display: inline-block;
+	font-size: 15px;
 	margin-right: 10px;
-
-	&:after {
-		content: ':';
-		display: inline;
-	}
+	margin-bottom: 0;
 }
 
 .a-sai__value {
@@ -39,23 +43,16 @@
 	}
 }
 
-.a-sai__list--taxonomy {
+.a-sai__permission-header {
+	margin-bottom: $d_spacer_sm;
 }
 
-.a-sai__list-item--taxonomy {
-}
-
-.a-sai__list--cpt {
-}
-
-.a-sai__list-item--cpt {
-}
-
-.a-sai__popup {
-
-}
-
-.a-sai__popup--visible {
+.a-sai__permission {
+	background-color: $color_grey_lighter;
+	padding: $d_spacer_m;
+	border: 1px solid $color_border;
+	margin-top: $d_spacer_sm;
+	font-size: 90%;
 }
 
 .skylight-wrapper {
@@ -71,6 +68,10 @@
 		.a-sai__popup--visible & {
 			pointer-events: auto;
 		}
+	}
+
+	.skylight-close-button {
+		font-size: 2.0em;
 	}
 }
 
@@ -92,8 +93,8 @@
 		transform: translateY(-50%)  !important;
 		max-height: calc(100% - 80px) !important;
 		overflow-y: auto;
-		margin-left: -250px !important;
-		width: 500px !important;
+		margin-left: -290px !important;
+		width: 580px !important;
 		display: none;
 		left: 50% !important;
 		height: auto !important;
@@ -111,6 +112,50 @@
 	}
 }
 
-.a-sai__popup--visible .skylight-dialog {
+.a-sai__controls {
+	display: none;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 150;
+	pointer-events: none;
 
+	.a-sai__popup--visible & {
+
+		@include g-state( medium ) {
+			display: block;
+		}
+	}
+}
+
+.a-sai__control-btn {
+	position: absolute;
+	transition: all 0.3s;
+	pointer-events:all;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,0.29);
+	top: 50vh;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0;
+	border: 2px solid $color_grey_lighter;
+}
+
+.a-sai__control-btn--previous {
+	left: 5px;
+
+	@include g-state( medium ) {
+		left: calc(50% - 350px);
+	}
+}
+
+.a-sai__control-btn--next{
+	right: 5px;
+
+	@include g-state( medium ) {
+		right: calc(50% - 350px);
+	}
 }

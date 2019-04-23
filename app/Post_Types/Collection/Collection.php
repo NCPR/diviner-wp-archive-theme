@@ -5,6 +5,7 @@ namespace Diviner\Post_Types\Collection;
 
 use Diviner\Admin\Settings;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
+use Diviner\Theme\General;
 
 /**
  * Class Collection
@@ -31,7 +32,7 @@ class Collection {
 	 * @return null
 	 */
 	public function register() {
-		$collections_active = carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION);
+		$collections_active = carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION );
 		if ($collections_active ) {
 			$args = wp_parse_args( $this->get_args(), $this->get_labels() );
 			register_post_type( static::NAME, $args );
@@ -75,7 +76,7 @@ class Collection {
 	 * @return string
 	 */
 	static public function get_plural_title() {
-		$collections_plural = carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_PLURAL);
+		$collections_plural = General::get_theme_option(Settings::FIELD_GENERAL_COLLECTION_PLURAL);
 		if (empty($collections_plural)) {
 			$collections_plural = static::get_default_plural_title();
 		}
@@ -88,7 +89,7 @@ class Collection {
 	 * @return array
 	 */
 	public function get_args() {
-		$collections_plural = carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_PLURAL);
+		$collections_plural = General::get_theme_option(Settings::FIELD_GENERAL_COLLECTION_PLURAL);
 		return [
 			'public'             => true,
 			'publicly_queryable' => true,

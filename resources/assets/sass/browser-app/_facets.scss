@@ -13,6 +13,8 @@
 
 .a-facets__wrap {
 	display: none;
+	margin-top: 15px;
+
 	@include g-state( medium ) {
 		display: block;
 	}
@@ -29,13 +31,13 @@
 	margin: 5px 0 10px;
 
 	label {
-		font-weight: normal;
-		color: $color_grey;
+		font-weight: bold;
+		color: $color_grey_dark;
 		text-transform: uppercase;
-		font-size: 110%;
+		font-size: 100%;
 
 		@include g-state( large ) {
-			font-size: 130%;
+			font-size: 120%;
 		}
 	}
 
@@ -45,6 +47,25 @@
 		@include g-state( large ) {
 			margin: 3px 0 12px;
 		}
+	}
+
+	.a-control-row--1 & {
+		width: 100%;
+	}
+
+	.a-control-row--2 & {
+
+		@include g-state( large ) {
+			width: 50%;
+		}
+	}
+}
+
+.a-input-group--clear {
+	margin-top: 15px;
+
+	@include g-state( large ) {
+		margin-top: 20px;
 	}
 }
 

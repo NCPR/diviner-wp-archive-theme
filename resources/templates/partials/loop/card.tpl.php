@@ -2,10 +2,19 @@
 
 use \Diviner\Theme\Image;
 use \Diviner\Config\General;
+use \Diviner\Post_Types\Archive_Item\Archive_Item;
 
 // defaults
 $display_excerpt = isset($display_excerpt) ? $display_excerpt : true;
 $display_feature = isset($display_feature) ? $display_feature : true;
+
+$image_size_src = General::IMAGE_SIZE_CARD_SM;
+$image_size_src_set = General::IMAGE_SIZE_CARD_LRG;
+
+if ( get_post_type() === Archive_Item::NAME ) {
+	$image_size_src = General::IMAGE_SIZE_BROWSE_GRID;
+	$image_size_src_set = General::IMAGE_SIZE_BROWSE_GRID;
+}
 
 ?>
 
@@ -21,8 +30,8 @@ $display_feature = isset($display_feature) ? $display_feature : true;
 				<?php
 				Image::image(
 					get_post_thumbnail_id(),
-					General::IMAGE_SIZE_CARD_SM,
-					General::IMAGE_SIZE_CARD_LRG,
+					$image_size_src,
+					$image_size_src_set,
 					false,
 					'(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w'
 				);

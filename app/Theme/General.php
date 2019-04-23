@@ -21,35 +21,35 @@ use Diviner\Admin\Settings;
 class General {
 
 	const FONTS = [
-		'Source Sans Pro:400,700,400i' => 'Source Sans Pro',
-		'Open Sans:400i,400,700' => 'Open Sans',
-		'Oswald:400,700' => 'Oswald',
-		'Playfair Display:400,700,400i' => 'Playfair Display',
-		'Montserrat:400,700' => 'Montserrat',
-		'Raleway:400,700' => 'Raleway',
-		'Droid Sans:400,700' => 'Droid Sans',
-		'Lato:400,700,400i' => 'Lato',
-		'Arvo:400,700,400i' => 'Arvo',
-		'Lora:400,700,400i' => 'Lora',
-		'Merriweather:400,400i,700' => 'Merriweather',
-		'Oxygen:400,300,700' => 'Oxygen',
-		'PT Serif:400,700' => 'PT Serif',
-		'PT Sans:400,700,400i' => 'PT Sans',
-		'PT Sans Narrow:400,700' => 'PT Sans Narrow',
-		'Cabin:400,700,400i' => 'Cabin',
-		'Josefin Sans:400,700' => 'Josefin Sans',
-		'Libre Baskerville:400,400i,700' => 'Libre Baskerville',
-		'Arimo:400,700,400i' => 'Arimo',
-		'Ubuntu:400,700,400i' => 'Ubuntu',
-		'Bitter:400,700,400i' => 'Bitter',
-		'Droid Serif:400,700,400i' => 'Droid Serif',
-		'Roboto:400,400i,700' => 'Roboto',
+		'Source Sans Pro:400,700,400i'     => 'Source Sans Pro',
+		'Open Sans:400i,400,700'           => 'Open Sans',
+		'Oswald:400,700'                   => 'Oswald',
+		'Playfair Display:400,700,400i'    => 'Playfair Display',
+		'Montserrat:400,700'               => 'Montserrat',
+		'Raleway:400,700'                  => 'Raleway',
+		'Droid Sans:400,700'               => 'Droid Sans',
+		'Lato:400,700,400i'                => 'Lato',
+		'Arvo:400,700,400i'                => 'Arvo',
+		'Lora:400,700,400i'                => 'Lora',
+		'Merriweather:400,400i,700'        => 'Merriweather',
+		'Oxygen:400,300,700'               => 'Oxygen',
+		'PT Serif:400,700'                 => 'PT Serif',
+		'PT Sans:400,700,400i'             => 'PT Sans',
+		'PT Sans Narrow:400,700'           => 'PT Sans Narrow',
+		'Cabin:400,700,400i'               => 'Cabin',
+		'Josefin Sans:400,700'             => 'Josefin Sans',
+		'Libre Baskerville:400,400i,700'   => 'Libre Baskerville',
+		'Arimo:400,700,400i'               => 'Arimo',
+		'Ubuntu:400,700,400i'              => 'Ubuntu',
+		'Bitter:400,700,400i'              => 'Bitter',
+		'Droid Serif:400,700,400i'         => 'Droid Serif',
+		'Roboto:400,400i,700'              => 'Roboto',
 		'Open Sans Condensed:700,300i,300' => 'Open Sans Condensed',
-		'Roboto Condensed:400i,400,700' => 'Roboto Condensed',
-		'Roboto Slab:400,700' => 'Roboto Slab',
-		'Yanone Kaffeesatz:400,700' => 'Yanone Kaffeesatz',
-		'Noto Sans:400,400i,700' => 'Noto Sans',
-		'Work Sans:400,700' => 'Work Sans',
+		'Roboto Condensed:400i,400,700'    => 'Roboto Condensed',
+		'Roboto Slab:400,700'              => 'Roboto Slab',
+		'Yanone Kaffeesatz:400,700'        => 'Yanone Kaffeesatz',
+		'Noto Sans:400,400i,700'           => 'Noto Sans',
+		'Work Sans:400,700'                => 'Work Sans',
 	];
 
 	const FONTS_DEFAULT_HEADER = 'Oswald:400,700';
@@ -59,19 +59,31 @@ class General {
 		add_action( 'wp_head', [ $this, 'awesome_fonts' ], 0, 0 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'output_color_swatch_styles' ] );
-		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );
-		add_action( 'theme/header', [ $this, 'render_header']);
-		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ]);
+		add_action( 'enqueue_block_assets', [ $this, 'block_editor_assets' ] );
+		add_action( 'theme/header', [ $this, 'render_header' ] );
+		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ] );
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'resource_hints' ], 10, 2 );
 		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
 		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
-		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ]);
+		add_action( 'theme/comments', [ $this, 'theme_comments' ] );
+		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ] );
 
-		add_action('wp_enqueue_scripts', [ $this, 'register_scripts' ] );
-		add_action('wp_enqueue_scripts', [ $this, 'register_stylesheets' ] );
-		add_action('wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'register_scripts' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'register_stylesheets' ] );
+		add_action( 'wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
 
+	}
+
+	/**
+	 * Display comments if necessary
+	 *
+	 * @return void
+	 */
+	function theme_comments() {
+		if ( comments_open() || get_comments_number() > 0 ) {
+			comments_template();
+		}
 	}
 
 	/**
@@ -87,6 +99,23 @@ class General {
 			$wp_scripts->add_data('jquery-migrate', 'group', 1);
 		}
 	}
+
+	/**
+	 * Get the theme option and caches it
+	 *
+	 * @param  $id string id for theme option
+	 * @return string
+	 */
+	static public function get_theme_option( $id ) {
+		$cached_value = wp_cache_get( $id );
+		if ( $cached_value ) {
+			return $cached_value;
+		}
+		$uncached_value = carbon_get_theme_option( $id );
+		wp_cache_set( $id, $uncached_value );
+		return $uncached_value;
+	}
+
 
 	/**
 	 * Get Font Value
@@ -292,7 +321,9 @@ class General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	function render_header_feature_image() {
-		if ( is_single() || is_page() && has_post_thumbnail() ) {
+		if ( is_singular( Archive_Item::NAME ) ) {
+			template('partials/diviner_archive_item/feature-image', []);
+		} else if ( is_single() || is_page() && has_post_thumbnail() ) {
 			template('partials/subheader/default', []);
 		}
 	}
@@ -336,7 +367,7 @@ class General {
 	}
 
 	function theme_index_under_page_header() {
-		if (get_post_type() === Collection::NAME) {
+		if ( is_post_type_archive( Collection::NAME ) ) {
 			$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_COLLECTION_DESCRIPTION);
 			if ( !empty( $copy ) ) {
 				printf(
@@ -387,14 +418,18 @@ class General {
 
 
 	static public function the_footer_menu() {
+		$menu = wp_nav_menu( [
+			'theme_location' => 'footer',
+			'echo' => false,
+			'depth' => 1
+		] );
+		if ( empty( $menu ) ) {
+			return '';
+		}
 		return sprintf(
 			'<div class="footer-menu__wrap"><nav class="footer-menu"><div class="a11y-visual-hide">%s</div>%s</nav></div>',
 			__( 'Footer Navigation', 'ncpr-diviner'),
-			wp_nav_menu( [
-				'theme_location' => 'footer',
-				'echo' => false,
-				'depth' => 1
-			] )
+			$menu
 		);
 	}
 

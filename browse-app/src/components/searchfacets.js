@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 
 import Field from './field';
-import { selectStyles } from '../shared/select-styles';
 
 // CONFIG
 import { CONFIG } from '../globals/config';
@@ -92,39 +91,46 @@ class SearchFacets extends Component {
 				<button
 					className="btn btn-fullmobile a-toggle-search-btn"
 					onClick={this.onToggleClick}
-					>
+				>
 					{toggleText}
 				</button>
 
 				<div className={facetsWrapClasses.join(' ')} aria-hidden={ariaHidden}>
-					<h5>Narrow Results By:</h5>
+
 					{
 						(fieldsOnLeft.length > 0)
-							? <div className="a-input-group">{this.createFields(fieldsOnLeft)}</div>
-							: <div>No fields available</div>
+							? <div><h5>{CONFIG.browse_page_localization.facets_header}</h5><div className="a-input-group">{this.createFields(fieldsOnLeft)}</div></div>
+							: <div></div>
 					}
 
 					<div className="a-input-group">
-						<label>Sort By:</label>
+						<label>
+							{CONFIG.browse_page_localization.facets_sort_label}
+						</label>
 						<Select
 							name="order_by"
 							options={orderOptions}
 							onChange={this.onChangeOrderBy}
-							clearValueText="Clear Order"
+							clearValueText={CONFIG.browse_page_localization.facets_sort_clear}
 							isClearable={true}
 							value={order_by_option}
-							styles={selectStyles}
+							className="react-select-container"
+							classNamePrefix="react-select"
 						></Select>
 					</div>
 
-					<div className="a-input-group">
-						<button
-							className="btn btn-s btn-fullmobile a-clear-button"
-							onClick={this.onClearClick}
-						>
-							Reset Search Filters
-						</button>
-					</div>
+					{
+						(fieldsOnLeft.length > 0)
+							? <div className="a-input-group a-input-group--clear">
+								<button
+									className="btn btn-s btn-fullmobile a-clear-button"
+									onClick={this.onClearClick}
+								>
+									{CONFIG.browse_page_localization.facets_reset}
+								</button>
+							</div>
+							: <div></div>
+					}
 
 				</div>
 

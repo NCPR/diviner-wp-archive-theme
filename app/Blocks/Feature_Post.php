@@ -49,10 +49,7 @@ class Feature_Post {
 			'post_type' => 'post'
 		];
 		$feature_query = new \WP_Query($args);
-		$output = sprintf(
-			'<p>%s</p>',
-			__( 'Featured item not found', 'ncpr-diviner' )
-		);
+		$output = '';
 		if ( $feature_query->have_posts() ) {
 			while ( $feature_query->have_posts() ) {
 				$feature_query->the_post();
@@ -65,17 +62,20 @@ class Feature_Post {
 			wp_reset_postdata();
 		}
 
-		$header = '';
-		if ( isset( $block_data[static::BLOCK_TITLE] ) && !empty( $block_data[static::BLOCK_TITLE] ) ) {
-			$header = sprintf('<h3 class="h3">%s</h3>',
-				esc_html($block_data[static::BLOCK_TITLE])
+		// displays nothing if there is no feature post
+		if ( !empty( $output ) ) {
+			$header = '';
+			if ( isset( $block_data[static::BLOCK_TITLE] ) && !empty( $block_data[static::BLOCK_TITLE] ) ) {
+				$header = sprintf('<h3 class="h3">%s</h3>',
+					esc_html($block_data[static::BLOCK_TITLE])
+				);
+			}
+			printf(
+				'<div class="diviner-block diviner-block__feature-post">%s%s</div>',
+				$header,
+				$output
 			);
 		}
-		printf(
-			'<div class="diviner-block diviner-block__feature-post">%s%s</div>',
-			$header,
-			$output
-		);
 	}
 
 }

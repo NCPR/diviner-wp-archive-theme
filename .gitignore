@@ -2,6 +2,9 @@
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 node_modules
 npm-debug.log
+yarn-debug.log
+yarn-error.log
+
 # vendor
 
 .DS_Store

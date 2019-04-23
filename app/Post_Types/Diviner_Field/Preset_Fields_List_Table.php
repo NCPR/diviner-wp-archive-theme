@@ -69,7 +69,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Override the parent columns method. Defines the columns to use in your listing table
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function get_columns()
 	{
@@ -86,7 +86,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Define which columns are hidden
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function get_hidden_columns()
 	{
@@ -107,13 +107,15 @@ class Preset_Fields_List_Table extends \WP_List_Table
 
 		if( 'activate' === $action) {
 			foreach($_GET['field'] as $id) {
-				carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  PostMeta::FIELD_CHECKBOX_VALUE);
+				Diviner_Field::set_field_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  PostMeta::FIELD_CHECKBOX_VALUE );
+				// carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  PostMeta::FIELD_CHECKBOX_VALUE);
 			}
 		}
 
 		if( 'deactivate' === $action) {
 			foreach($_GET['field'] as $id) {
-				carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  '');
+				Diviner_Field::set_field_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  '' );
+				// carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  '');
 			}
 		}
 	}
@@ -121,7 +123,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Define the sortable columns
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function get_sortable_columns()
 	{
@@ -131,7 +133,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Define what data to show on each column of the table
 	 *
-	 * @param  Array $item        Data
+	 * @param  array $item        Data
 	 * @param  String $column_name - Current column name
 	 *
 	 * @return Mixed
@@ -151,18 +153,18 @@ class Preset_Fields_List_Table extends \WP_List_Table
 
 	public function column_placement( $item )
 	{
-		return carbon_get_post_meta( $item['id'], PostMeta::FIELD_BROWSE_PLACEMENT );
+		return Diviner_Field::get_field_post_meta( $item['id'], PostMeta::FIELD_BROWSE_PLACEMENT );
 	}
 
 	public function column_type( $item )
 	{
-		$field_type = carbon_get_post_meta($item['id'], PostMeta::FIELD_TYPE);
+		$field_type = Diviner_Field::get_field_post_meta( $item['id'], PostMeta::FIELD_TYPE);
 		return Diviner_Field::get_class_title($field_type);
 	}
 
 	public function column_active( $item )
 	{
-		$field_active = carbon_get_post_meta($item['id'], PostMeta::FIELD_ACTIVE );
+		$field_active = Diviner_Field::get_field_post_meta( $item['id'], PostMeta::FIELD_ACTIVE );
 		return ( (int)$field_active === 1 ) ? '✓' : '';
 	}
 

@@ -1,5 +1,5 @@
 .footer {
-	padding: $d_spacer_m 0;
+	padding: $d_spacer_lrg 0;
 	background-color: $color_grey_dark;
 	flex: 0 0 auto;
 
@@ -20,7 +20,11 @@
 	}
 
 	@include g-state(medium) {
-		padding: $d_spacer_lrg 0;
+		padding: $d_spacer_xlrg 0;
+	}
+
+	.wrapper {
+		padding-bottom: 0;
 	}
 }
 
@@ -32,11 +36,18 @@
 .footer-menu {
 	ul {
 		margin: 0;
-		display: flex;
-		justify-content: flex-start;
+		display: block;
 	}
 
 	li {
-		margin-right: $d_spacer_m;
+		vertical-align: top;
+		display: inline-block;
+		margin-right: $d_spacer_smm;
+		margin-bottom: $d_spacer_smm;
+		width: auto;
+
+		@include g-state(medium) {
+			margin-bottom: $d_spacer_m;
+		}
 	}
 }

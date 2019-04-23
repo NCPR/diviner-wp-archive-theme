@@ -12,6 +12,7 @@ class General {
 	const VERSION = '1.0.0';
 
 	const IMAGE_SIZE_BROWSE_POPUP = 'image_size_browse_popup';
+	const IMAGE_SIZE_BROWSE_GRID = 'image_size_browse_grid';
 
 	const IMAGE_SIZE_FEATURE_SM   = 'image_size_feature_sm'; // 5 x 1
 	const IMAGE_SIZE_FEATURE_MD   = 'image_size_feature_md';
@@ -27,6 +28,10 @@ class General {
 	const IMAGE_SIZE_CARD_MD = 'image_size_card_md';
 	const IMAGE_SIZE_CARD_SM = 'image_size_card_sm';
 
+	const IMAGE_SIZE_ARCHIVE_SINGLE_LRG  = 'image_size_archive_single_lrg';
+	const IMAGE_SIZE_ARCHIVE_SINGLE_M  = 'image_size_archive_single_m';
+	const IMAGE_SIZE_ARCHIVE_SINGLE_SM  = 'image_size_archive_single_s';
+
 	// overridden by CSS
 	const OEMBED_AUDIO_DIMENSIONS_WIDTH = 700;
 	const OEMBED_AUDIO_DIMENSIONS_HEIGHT = 81;
@@ -35,6 +40,11 @@ class General {
 		self::IMAGE_SIZE_BROWSE_POPUP => [
 			'width'  => 600,
 			'height' => 0,
+			'crop'   => true,
+		],
+		self::IMAGE_SIZE_BROWSE_GRID => [
+			'width'  => 600,
+			'height' => 600,
 			'crop'   => true,
 		],
 		self::IMAGE_SIZE_FEATURE_LRG => [
@@ -52,7 +62,21 @@ class General {
 			'height' => 160,
 			'crop'   => true,
 		],
-
+		self::IMAGE_SIZE_ARCHIVE_SINGLE_LRG => [
+			'width'  => 1600,
+			'height' => 0,
+			'crop'   => false,
+		],
+		self::IMAGE_SIZE_ARCHIVE_SINGLE_M => [
+			'width'  => 1200,
+			'height' => 0,
+			'crop'   => false,
+		],
+		self::IMAGE_SIZE_ARCHIVE_SINGLE_SM => [
+			'width'  => 800,
+			'height' => 0,
+			'crop'   => false,
+		],
 		self::IMAGE_SIZE_THUMBNAIL_LRG => [
 			'width'  => 1200,
 			'height' => 900,

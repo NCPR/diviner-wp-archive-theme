@@ -3,11 +3,17 @@
 namespace Tonik\Theme\App\Structure;
 
 use \Pimple\Container;
+use \Diviner\Admin\General;
 use \Diviner\Admin\Settings;
 use \Diviner\Admin\Customizer;
 use \Diviner\Admin\Editor;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
+
+$container[ 'admin.general' ] = function ( Container $container ) {
+	return new General();
+};
+$container[ 'admin.general' ]->hooks();
 
 $container[ 'admin.settings' ] = function ( Container $container ) {
 	return new Settings();

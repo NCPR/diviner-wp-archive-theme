@@ -5,7 +5,7 @@ import {
 	RECEIVE_POSTS
 } from '../actions';
 
-import * as postsStore from '../utils/data/posts-store';
+import * as postsStore from '../utils/data/postsStore';
 
 
 function posts(state = {

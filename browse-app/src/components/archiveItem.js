@@ -7,8 +7,8 @@ import { format } from 'date-fns';
 
 import { sequencePopupArchiveItem } from '../actions';
 import { CONFIG } from '../globals/config';
-import { getDecade, getCentury } from "../utils/data/date-utils";
-import { getTaxonomyItemsFromTermIds, getCPTsFromIds } from "../utils/data/field-utils";
+import { getDecade, getCentury } from "../utils/data/dateUtils";
+import { getTaxonomyItemsFromTermIds, getCPTsFromIds } from "../utils/data/fieldUtils";
 
 import { FIELD_TYPE_TAXONOMY,
 	FIELD_TYPE_CPT,
@@ -27,42 +27,7 @@ import { FIELD_TYPE_TAXONOMY,
 	FIELD_DATE_TYPE_CENTURY,
 	FIELD_DATE_TYPE_DECADE,
 	FIELD_DATE_TYPE_YEAR,
-	FIELD_DATE_TYPE_TWO_DATE,
 } from '../config/settings';
-
-/*
-{
-	"id": 159,
-	"title": "Test Select Hair Color",
-	"position": "left",
-	"helper": "Color of hair",
-	"field_id": "select_5bcf191008621",
-	"display_in_popup": false,
-	"select_field_options": [
-	{
-		"_type": "_",
-		"div_field_select_options_value": "red",
-		"div_field_select_options_label": "Red"
-	},
-	{
-		"_type": "_",
-		"div_field_select_options_value": "blond",
-		"div_field_select_options_label": "Blond"
-	},
-	{
-		"_type": "_",
-		"div_field_select_options_value": "black",
-		"div_field_select_options_label": "Black"
-	},
-	{
-		"_type": "_",
-		"div_field_select_options_value": "brown",
-		"div_field_select_options_label": "Brown"
-	}
-],
-	"field_type": "diviner_select_field"
-}
-*/
 
 class ArchiveItem extends Component {
 
@@ -104,7 +69,7 @@ class ArchiveItem extends Component {
 		});
 	}
 
-	renderSeclectField(field) {
+	renderSelectField(field) {
 		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		if (!post.selects[fieldId]) {
@@ -114,6 +79,9 @@ class ArchiveItem extends Component {
 		const selectObjects = _.filter(field[FIELD_PROP_SELECT_OPTIONS], (option) => {
 			return option[FIELD_PROP_SELECT_OPTIONS_VALUE] === value;
 		});
+		if (!selectObjects.length) {
+			return
+		}
 		const selectValuesOutput = selectObjects.map((selectValue) => {
 			const key = `select-${selectValue[FIELD_PROP_SELECT_OPTIONS_VALUE]}`;
 			return (
@@ -134,23 +102,25 @@ class ArchiveItem extends Component {
 		);
 	}
 
-	renderCPTField(field) {
-		const post = this.props.post;
-		/* Data structure of post.cpts[field.field_id]
+	/* Data structure of post.cpts[field.field_id]
 		{
 			id: "135"
 			subtype: "photographer"
 			type: "post"
 			value: "post:photographer:135"
 		}
-		 */
+		*/
+	renderCPTField(field) {
+		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		if (!post.cpts[fieldId]) {
 			return;
 		}
 		const ids = _.map(post.cpts[fieldId], (item) => parseInt(item.id, 10));
 		const cptValues = getCPTsFromIds(field[FIELD_PROP_CPT_ID], ids);
-
+		if (!cptValues.length) {
+			return;
+		}
 		const cptValuesOutput = cptValues.map((cptValue) => {
 			const key = `cpt-${cptValue.ID}`;
 			return (
@@ -180,7 +150,6 @@ class ArchiveItem extends Component {
 		if (!post[taxonomy_name] || !post[taxonomy_name].length) {
 			return;
 		}
-		// display a list of the taxonomy terms
 		const terms = getTaxonomyItemsFromTermIds(taxonomy_name, post[taxonomy_name]);
 		const termsOutput = terms.map((term) => {
 			const termKey = `term-${term.term_id}`;
@@ -203,6 +172,7 @@ class ArchiveItem extends Component {
 	}
 
 	renderTextField(field) {
+
 		const post = this.props.post;
 		const fieldId = field[FIELD_PROP_FIELD_ID];
 		const value = post.fields_text[fieldId];
@@ -254,6 +224,10 @@ class ArchiveItem extends Component {
 			dateOutput = date.getFullYear().toString();
 		}
 
+		// reset scroll on rerender
+		const modal = document.querySelectorAll('.skylight-dialog')[0];
+		modal.scrollTop = 0;
+
 		return (
 			<div>
 				<label className="a-sai__label">
@@ -270,7 +244,7 @@ class ArchiveItem extends Component {
 		let content = '';
 		if (field.field_type) {
 			if (field.field_type === FIELD_TYPE_SELECT) {
-				content = this.renderSeclectField(field);
+				content = this.renderSelectField(field);
 			} else if (field.field_type === FIELD_TYPE_CPT)  {
 				content = this.renderCPTField(field);
 			} else if (field.field_type === FIELD_TYPE_TAXONOMY)  {
@@ -290,20 +264,32 @@ class ArchiveItem extends Component {
 			return ('');
 		}
 
+		const mappedOutput = fieldsToDisplay.map((field) => {
+			const fieldOutput = this.renderField(field);
+			if (!fieldOutput) {
+				return;
+			}
+			let classes = 'a-sai__field ';
+			classes += `a-sai__field--${field.field_type}`;
+			const fieldRef = `a-sai__field-ref--${field.id}`;
+			return (
+				<div className={classes} key={fieldRef}>
+					{ fieldOutput }
+				</div>
+			);
+		});
+		const filteredOutput = mappedOutput.filter(function (el) {
+			return el != null;
+		});
+		if (!filteredOutput.length) {
+			return '';
+		}
+
 		return (
-			<div className="row a-row">
+			<div className="row a-row a-row--extra-padding">
 				<div className="gr-12">
 					<div className="a-sai__fields">
-						{fieldsToDisplay.map((field) => {
-							let classes = 'a-sai__field ';
-							classes += `a-sai__field--${field.field_type}`;
-							const fieldRef = `a-sai__field-ref--${field.id}`;
-							return (
-								<div className={classes} key={fieldRef}>
-									{ this.renderField(field) }
-								</div>
-							);
-						})}
+						{filteredOutput}
 					</div>
 				</div>
 			</div>
@@ -342,9 +328,11 @@ class ArchiveItem extends Component {
 
 				{ this.renderFields() }
 
-				<div className="row a-row">
+				<div className="row a-row a-row--extra-padding">
 					<div className="gr-12">
-						<a href={post.permalink} className="btn btn-full">View Details</a>
+						<a href={post.permalink} className="btn btn--full">
+							{ CONFIG.browse_page_localization.popup_view_details }
+						</a>
 					</div>
 
 					{ // Check for disclaimer
@@ -353,9 +341,9 @@ class ArchiveItem extends Component {
 							<div
 								className="a-sai__permission"
 							>
-								<h4 className="a-sai__permission-header">
-									Permissions Statement
-								</h4>
+								<div className="h6 a-sai__permission-header">
+									{ CONFIG.browse_page_localization.popup_permission_statement }
+								</div>
 								<div
 									className="a-sai__permission-content"
 									dangerouslySetInnerHTML={{ __html: rights }}

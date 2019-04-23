@@ -8,7 +8,6 @@ import { triggerEvent } from '../../utils/events';
 
 const resize = () => {
 	// code for resize events can go here
-
 	triggerEvent({ event: 'diviner/resize', native: false });
 };
 

@@ -15,4 +15,6 @@ interface iField {
 
 	static public function get_blueprint( $post_id );
 
+	static public function hydrate_post_meta_cache( $field_id, $post_meta_items );
+
 }

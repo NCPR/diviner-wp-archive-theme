@@ -7,7 +7,6 @@ use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
-use Diviner\CarbonFields\Helper;
 use Diviner\Admin\Settings;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
@@ -93,9 +92,9 @@ class Post_Meta {
 	}
 
 	public function get_field( $cpt_field_id, $type ) {
-		$id = carbon_get_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ID );
+		$id = Diviner_Field::get_field_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ID );
 		$label = get_the_title( $cpt_field_id );
-		$helper = carbon_get_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
+		$helper = Diviner_Field::get_field_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
 		if( is_callable( [ $type,'render' ] ) ){
 			return call_user_func( [ $type, 'render' ], $cpt_field_id, $id, $label, $helper);
 		}
@@ -103,23 +102,11 @@ class Post_Meta {
 	}
 
 	public function add_dynamic_fields(){
-		$meta_query = [
-			[
-				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
-				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			],
-		];
-		$args = [
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'post_type' => Diviner_Field::NAME,
-			'meta_query' => $meta_query
-		];
-		$cpt_fields_ids = get_posts($args);
+		$cpt_fields_ids = Diviner_Field::get_active_fields();
 		$dynamic_fields = [];
 
 		foreach($cpt_fields_ids as $cpt_field_id) {
-			$field_type = carbon_get_post_meta($cpt_field_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+			$field_type = Diviner_Field::get_field_post_meta($cpt_field_id, FieldPostMeta::FIELD_TYPE );
 			$type = Diviner_Field::get_class( $field_type );
 			if ( $type ) {
 				$field_rendered = $this->get_field( $cpt_field_id,  $type );

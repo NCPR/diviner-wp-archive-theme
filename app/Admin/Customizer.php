@@ -19,6 +19,10 @@ class Customizer {
 	const SECTION_THEME_CONTROL_COLOR_HEADER  = 'diviner_control_color_header';
 	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#DDDDDD';
 
+	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT  = 'diviner_setting_color_header_text';
+	const SECTION_THEME_CONTROL_COLOR_HEADER_TEXT  = 'diviner_control_color_header_text';
+	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT = '#dddddd';
+
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU  = 'diviner_setting_color_header_menu';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_MENU  = 'diviner_control_color_header_menu';
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU_DEFAULT = '#999999';
@@ -130,8 +134,26 @@ class Customizer {
 				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
+			/* Free form classic styles */
 			.editor-styles-wrapper .wp-block-freeform blockquote {
 				border-left-color: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-freeform .btn {
+				background: <?php echo $color_btn_link; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-freeform hr {
+				background: <?php echo $color_accent; ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-freeform h1,
+			.editor-styles-wrapper .wp-block-freeform h2,
+			.editor-styles-wrapper .wp-block-freeform h3,
+			.editor-styles-wrapper .wp-block-freeform h4,
+			.editor-styles-wrapper .wp-block-freeform h5,
+			.editor-styles-wrapper .wp-block-freeform h6 {
+				font-family: '<?php echo $header_font_value; ?>' !important;
 			}
 
 
@@ -150,8 +172,18 @@ class Customizer {
 			static::SECTION_THEME_CUSTOMIZATIONS,
 			static::SECTION_THEME_SETTING_COLOR_HEADER,
 			static::SECTION_THEME_CONTROL_COLOR_HEADER,
-			__( 'Header Color', 'ncpr-diviner' ),
+			__( 'Header Background Color', 'ncpr-diviner' ),
 			static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT
+		);
+
+		$this->setup_color_control(
+			$wp_customize,
+			static::SECTION_THEME_CUSTOMIZATIONS,
+			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT,
+			static::SECTION_THEME_CONTROL_COLOR_HEADER_TEXT,
+			__( 'Header Text Color', 'ncpr-diviner' ),
+			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT,
+			__( 'Used for the tagline or site title when there is no logo', 'ncpr-diviner' )
 		);
 
 		$this->setup_color_control(
@@ -177,7 +209,7 @@ class Customizer {
 			static::SECTION_THEME_CUSTOMIZATIONS,
 			static::SECTION_THEME_SETTING_COLOR_FOOTER,
 			static::SECTION_THEME_CONTROL_COLOR_FOOTER,
-			__( 'Footer Color', 'ncpr-diviner' ),
+			__( 'Footer Background Color', 'ncpr-diviner' ),
 			static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT
 		);
 
@@ -239,16 +271,17 @@ class Customizer {
 
 	}
 
-	private function setup_color_control( $wp_customize, $section, $setting_name, $control_name, $control_title, $default = '#000000' ) {
+	private function setup_color_control( $wp_customize, $section, $setting_name, $control_name, $control_title, $default = '#000000', $description = NULL ) {
 		$wp_customize->add_setting( $setting_name , array(
 			'default'   => $default,
 			'transport' => 'refresh',
 			'sanitize_callback' => 'sanitize_hex_color',
 		) );
 		$wp_customize->add_control( new \WP_Customize_Color_Control( $wp_customize, $control_name, array(
-			'label'    => $control_title,
-			'section'  => $section,
-			'settings' => $setting_name,
+			'label'        => $control_title,
+			'section'      => $section,
+			'settings'     => $setting_name,
+			'description' => $description,
 		) ) );
 	}
 
@@ -264,12 +297,41 @@ class Customizer {
 		$body_font_value = General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
+		$color_header_text = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT, static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT);
+		$color_header_text_hover = General::is_dark($color_header_text) ? General::luminance( substr($color_header_text, 1), 0.7 ) : General::luminance( substr($color_header_text, 1), -0.7 );
 
 		ob_start();
 		?>
-		html body, html form, html button, html input, html select, html textarea {
+		.main,
+		.main form,
+		.main button,
+		.main input,
+		.main select,
+		.main textarea {
 			font-family: '<?php echo $body_font_value; ?>';
 		}
+
+		.main__inner button,
+		.main__inner .btn,
+		.main__inner input[type='button'],
+		.main__inner input[type='reset'],
+		.main__inner input[type='submit'] {
+			background-color: <?php echo $color_btn_link; ?>;
+		}
+
+		.main__inner button:hover,
+		.main__inner button:focus,
+		.main__inner .btn:hover,
+		.main__inner .btn:focus,
+		.main__inner input[type='button']:hover,
+		.main__inner input[type='button']:focus,
+		.main__inner input[type='reset']:hover,
+		.main__inner input[type='reset']:focus,
+		.main__inner input[type='submit']:hover,
+		.main__inner input[type='submit']:focus {
+			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+		}
+
 		.d-content {
 			font-family: '<?php echo $body_font_value; ?>';
 		}
@@ -279,19 +341,35 @@ class Customizer {
 		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
 			font-family: '<?php echo $body_font_value; ?>' !important;
 		}
-		.d-content a {
-			color: <?php echo $color_btn_link; ?>;
-		}
-		.btn {
-			background-color: <?php echo $color_btn_link; ?> !important;
-			font-family: '<?php echo $body_font_value; ?>' !important;
-		}
-		.btn:hover,
-		.btn:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+		.header__title a,
+		.header__title a:visited {
+			color: <?php echo $color_header_text ?>;
 		}
 
-		label {
+		.header__title a:hover,
+		.header__title a:focus,
+		.header__title a:active {
+			color: <?php echo $color_header_text_hover ?>;
+		}
+		.header__lead {
+			color: <?php echo $color_header_text ?>;
+		}
+
+		.main__inner a {
+			color: <?php echo $color_btn_link; ?>;
+		}
+
+		input:focus,
+		textarea:focus,
+		select:focus {
+			border-color: <?php echo $color_btn_link; ?> !important;
+		}
+
+		.react-select-container .react-select__control.react-select__control--is-focused {
+			border-color: <?php echo $color_btn_link; ?> !important;
+		}
+
+		.main label {
 			font-family: '<?php echo $body_font_value; ?>' !important;
 		}
 
@@ -311,11 +389,15 @@ class Customizer {
 		}
 
 		.d-content blockquote {
-			border-left-color: <?php echo $color_accent; ?>;;
+			border-left-color: <?php echo $color_accent; ?>;
 		}
 
 		.d-content blockquote p {
 			font-family: '<?php echo $body_font_value; ?>';
+		}
+
+		.d-content hr:not(.is-style-dots) {
+			background-color: <?php echo $color_accent; ?> !important;
 		}
 
 		.footer {

@@ -65,12 +65,12 @@ class AdminModifications {
 			return $translation;
 		}
 		if ( 'Excerpt' == $original ) {
-			return __( 'Description' ); //Change here to what you want Excerpt box to be called
+			return __( 'Field Description', 'ncpr-diviner' ); //Change here to what you want Excerpt box to be called
 		} else {
 			$pos = strpos($original, 'Excerpts are optional hand-crafted summaries of your');
 
 			if ($pos !== false) {
-				return __( 'Description for field' );
+				return __( 'Appears in the manage fields page of the admin', 'ncpr-diviner' );
 			}
 		}
 		return $translation;
@@ -97,7 +97,7 @@ class AdminModifications {
 		$classes .= sprintf( ' post-edit--%s', $post->post_type );
 		if( $post->post_type == Diviner_Field::NAME && in_array( $pagenow, [ 'post.php' ] ) ) {
 			// get the type of field
-			$type = carbon_get_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
+			$type = Diviner_Field::get_field_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
 			$classes .= sprintf( ' post-field-type--%s', $type );
 		} else {
 			// post-field-type--diviner_date_field

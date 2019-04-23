@@ -6,14 +6,11 @@ import _ from "lodash";
 import autobind from 'autobind-decorator';
 
 import Field from './field';
-
 import {
 	initiateSearch,
 	setQueryString,
 	setPage,
 } from '../actions';
-
-// CONFIG
 import { CONFIG } from '../globals/config';
 import {
 	FIELD_POSITION_TOP,
@@ -74,19 +71,13 @@ class Controls extends Component {
 		let classes =  'a-control-row ';
 		classes += `a-control-row--${fieldLength}`;
 
-		const page_title = CONFIG.browse_page_title ? CONFIG.browse_page_title : 'Browse';
 		return (
 			<div className="a-controls">
-				<h2 className="a-header-main">{page_title}</h2>
-
-				{
-					(CONFIG.browse_page_content)
-						? <div className='a-page-content'><div className='d-content' dangerouslySetInnerHTML={{__html: CONFIG.browse_page_content}}></div></div>
-						: ''
-				}
 
 				<div className="a-input-group a-input-group--controls">
-					<label>Search Archive</label>
+					<label>
+						{CONFIG.browse_page_localization.search_header}
+					</label>
 					<div className="a-search-row">
 						<div
 							className="a-search-input"
@@ -95,7 +86,7 @@ class Controls extends Component {
 								type="text"
 								onKeyDown={this.onSearchKeyDown}
 								onChange={this.searchUpdated}
-								placeholder="Ex: cheese factory, grocery store, mine..."
+								placeholder={CONFIG.browse_page_localization.search_placeholder}
 								value={searchString}
 							/>
 						</div>
@@ -103,7 +94,7 @@ class Controls extends Component {
 							className="btn a-search-button"
 							onClick={this.onClick}
 						>
-							Go
+							{CONFIG.browse_page_localization.search_cta}
 						</button>
 					</div>
 				</div>

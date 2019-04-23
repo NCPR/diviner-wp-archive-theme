@@ -4,6 +4,7 @@ namespace Diviner\Post_Types\Archive_Item;
 
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
+use Diviner\Post_Types\Diviner_Field\PostMeta;
 use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
@@ -11,6 +12,7 @@ use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Admin\Settings;
 use Diviner\CarbonFields\Helper;
+use Diviner\Config\General;
 
 /**
  * Class Rest
@@ -143,13 +145,13 @@ class Rest {
 			$new_field = [
 				static::FIELD_INDEX_ID => $post_id,
 				static::FIELD_INDEX_TITLE => get_the_title($post_id),
-				static::FIELD_INDEX_TYPE => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables'),
-				static::FIELD_INDEX_FIELD_ID => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_ID, 'carbon_fields_container_field_variables'),
-				static::FIELD_INDEX_FIELD_POPUP => carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_DISPLAY, 'carbon_fields_container_field_variables'),
+				static::FIELD_INDEX_TYPE => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TYPE ),
+				static::FIELD_INDEX_FIELD_ID => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_ID ),
+				static::FIELD_INDEX_FIELD_POPUP => (bool) Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_BROWSE_DISPLAY ),
 			];
 			if ( defined( 'EP_VERSION' ) ) {
 				// FIELD_INDEX_FIELD_ELASTIC
-				$new_field[ static::FIELD_INDEX_FIELD_ELASTIC ] = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_IS_ELASTIC);
+				$new_field[ static::FIELD_INDEX_FIELD_ELASTIC ] = Diviner_Field::get_field_post_meta($post_id, FieldPostMeta::FIELD_BROWSE_IS_ELASTIC);
 			}
 			$fields[] = $new_field;
 		}
@@ -176,7 +178,7 @@ class Rest {
 				'relation'		=> 'AND',
 			];
 		}
-		$field_cpt_id = carbon_get_post_meta( $field[static::FIELD_INDEX_ID],FieldPostMeta::FIELD_CPT_ID );
+		$field_cpt_id = Diviner_Field::get_field_post_meta( $field[static::FIELD_INDEX_ID],FieldPostMeta::FIELD_CPT_ID );
 		if ( ! empty( $field_cpt_id )) {
 			$args[ 'meta_query' ][] = [
 				'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
@@ -331,8 +333,8 @@ class Rest {
 	public function get_fields_values( $fields, $id ) {
 		$ret = [];
 		foreach($fields as $field) {
-			$field_id = carbon_get_post_meta( $field[static::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
-			$ret[$field_id] = carbon_get_post_meta( $id, $field_id);
+			$field_id = Diviner_Field::get_field_post_meta( $field[static::FIELD_INDEX_ID],FieldPostMeta::FIELD_ID );
+			$ret[$field_id] = carbon_get_post_meta( $id, $field_id );
 
 		}
 		return $ret;
@@ -350,6 +352,12 @@ class Rest {
 		register_rest_field( Archive_Item::NAME, 'permalink', [
 			'get_callback' => function( $arr ) {
 				return get_the_permalink($arr['id']);
+			}
+		] );
+
+		register_rest_field( Archive_Item::NAME, 'div_ai_field_type', [
+			'get_callback' => function( $arr ) {
+				return carbon_get_post_meta( $arr['id'], Post_Meta::FIELD_TYPE );
 			}
 		] );
 
@@ -415,36 +423,56 @@ class Rest {
 		$all_sizes_data = [ ];
 
 		// Full is the only guaranteed size, so it's going to be our default
-		$size_data = wp_get_attachment_image_src( $data, 'full' );
+		$full_size_data = wp_get_attachment_image_src( $data, 'full' );
 
 		// Something went wrong. Most likely the attachment was deleted.
-		if ( $size_data === false ) {
+		if ( $full_size_data === false ) {
 			return false;
 		}
 
 		$attachment = get_post( $data );
 
 		$return_data = [
-			'url'         => $size_data[0],
-			'width'       => $size_data[1],
-			'height'      => $size_data[2],
+			'url'         => $full_size_data[0],
+			'width'       => $full_size_data[1],
+			'height'      => $full_size_data[2],
 			'title'       => $attachment->post_title,
 			'alt'         => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
 			'description' => $attachment->post_content,
 			'caption'     => $attachment->post_excerpt,
 		];
 
-		// Set all the other sizes
+		$all_sizes_data[ 'full' ] = [
+			'url'    => $full_size_data[0],
+			'width'  => $full_size_data[1],
+			'height' => $full_size_data[2],
+		];
 
+		$sizes_in_rest  = [
+			General::IMAGE_SIZE_BROWSE_GRID,
+			General::IMAGE_SIZE_BROWSE_POPUP,
+			'thumbnail' // for fallback
+		];
+
+		// Set all the other sizes
 		foreach ( get_intermediate_image_sizes() as $size ) {
 
 			if ( $size === 'full' ) {
+				continue;
+			}
+			// limit sizes to only
+			if ( !in_array($size, $sizes_in_rest ) ) {
 				continue;
 			}
 
 			$size_data = wp_get_attachment_image_src( $data, $size );
 
 			if ( $size_data === false ) {
+				continue;
+			}
+
+			// ignore if the URL value is the same as with the full
+			if ( $full_size_data[0] === $size_data[0] ) {
 				continue;
 			}
 

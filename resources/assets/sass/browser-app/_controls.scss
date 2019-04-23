@@ -54,3 +54,12 @@
 .a-page-content {
 	overflow: auto;
 }
+
+.a-help-link {
+	float: right;
+	margin: 0 0 $d_spacer_sm $d_spacer_m;
+
+	@include g-state( medium ) {
+
+	}
+}

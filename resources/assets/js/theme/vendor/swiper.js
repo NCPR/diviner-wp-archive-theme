@@ -63,19 +63,11 @@ const buildSwipers = () => {
 		swiper.setAttribute('data-swiper-id', id);
 		const swiperOptions = swiper.getAttribute('data-swiper-data');
 		const mergedOptions = Object.assign(options, JSON.parse(swiperOptions));
-		console.log('mergedOptions',mergedOptions);
 		const mySwiper = new Swiper(
 			`[data-swiper-id="${id}"]`,
 			mergedOptions
 		);
 	});
-
-	/*
-	const mySwiper = new Swiper(
-		'[data-js="swiper"]',
-		options
-	);
-	*/
 };
 
 
@@ -85,8 +77,6 @@ const buildSwipers = () => {
  */
 
 const init = () => {
-	console.log('swiper');
-
 	if (el.swipers.length) {
 		buildSwipers();
 	}

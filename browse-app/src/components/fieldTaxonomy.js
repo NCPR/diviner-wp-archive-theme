@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import autobind from 'autobind-decorator';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 
 import {
-	FIELD_DATE_TYPE,
-	FIELD_DATE_START,
-	FIELD_DATE_END,
-	FIELD_DATE_TYPE_CENTURY,
-	FIELD_TYPE_SELECT,
 	FIELD_TYPE_TAXONOMY,
 } from '../config/settings';
 
@@ -19,10 +13,9 @@ import {
 	setPage,
 	setFieldData,
 } from '../actions';
-import {CONFIG} from "../globals/config";
-import {termsToSelectOptions} from "../utils/wp/termsToSelectOptions";
-import {getTaxonomyItemsFromTermIds} from "../utils/data/field-utils";
-import { selectStyles } from '../shared/select-styles';
+import { CONFIG } from "../globals/config";
+import { termsToSelectOptions } from "../utils/wp/termsToSelectOptions";
+import { getTaxonomyItemsFromTermIds } from "../utils/data/fieldUtils";
 
 // to allow us to access this in the react select component context
 let _this;
@@ -66,7 +59,8 @@ class FieldTaxonomy extends Component {
 				isClearable={isClearable}
 				onChange={this.onChangeField}
 				value={valueItems}
-				styles={selectStyles}
+				className="react-select-container"
+				classNamePrefix="react-select"
 			></Select>
 		);
 	}

@@ -4,8 +4,9 @@ import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
+import { CONFIG } from '../globals/config';
+import { IMAGE_SIZE_BROWSE_GRID } from '../config/settings';
 import { setPage, initiateSearch, selectGridItem } from '../actions';
-
 import Item from './item';
 
 class Grid extends Component {
@@ -27,7 +28,9 @@ class Grid extends Component {
 	getImage(post) {
 		let featuredimage = null;
 		if (post.feature_image && post.feature_image.sizes) {
-			if (post.feature_image.sizes['thumbnail'] && post.feature_image.sizes['thumbnail'].url) {
+			if (post.feature_image.sizes[IMAGE_SIZE_BROWSE_GRID] && post.feature_image.sizes[IMAGE_SIZE_BROWSE_GRID].url) {
+				featuredimage = post.feature_image.sizes[IMAGE_SIZE_BROWSE_GRID].url;
+			} else if (post.feature_image.sizes['thumbnail'] && post.feature_image.sizes['thumbnail'].url) {
 				featuredimage = post.feature_image.sizes['thumbnail'].url;
 			} else if (post.feature_image.sizes.full && post.feature_image.sizes.full.url) {
 				featuredimage = post.feature_image.sizes.full.url;
@@ -43,6 +46,7 @@ class Grid extends Component {
 				key={i}
 				id={post.id}
 				title={post.title.rendered}
+				type={post.div_ai_field_type}
 				onSelectItem={this.onSelectItem}
 				image={image}>
 			</Item>
@@ -67,11 +71,11 @@ class Grid extends Component {
 		if (showPagination) {
 			totalPages = parseInt(this.props.posts._paging.totalPages, 10);
 		}
-		let label = 'Happy searching!!';
+		let label = CONFIG.browse_page_localization.grid_default;
 		if (this.props.isFetching) {
-			label = 'Loading';
+			label = CONFIG.browse_page_localization.grid_loading;
 		} else if (this.props.posts.length === 0 && !this.props.posts._paging) {
-			label = 'No results found';
+			label = CONFIG.browse_page_localization.grid_no_results;
 		}
 
 		return (
@@ -84,12 +88,15 @@ class Grid extends Component {
 				{
 					(showPagination)
 						? <ReactPaginate
-							previousLabel={"previous"}
-							nextLabel={"next"}
+							previousLabel={CONFIG.browse_page_localization.paginate_previous}
+							nextLabel={CONFIG.browse_page_localization.paginate_next}
 							breakLabel={<a href="">...</a>}
 							breakClassName={"break-me"}
 							pageCount={totalPages}
 							marginPagesDisplayed={2}
+							pageLinkClassName="btn"
+							previousLinkClassName="btn"
+							nextLinkClassName="btn"
 							forcePage={currentPage}
 							pageRangeDisplayed={4}
 							onPageChange={this.handlePageClick}

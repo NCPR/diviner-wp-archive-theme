@@ -74,11 +74,6 @@ const executeResize = () => {
 
 const bindEvents = () => {
 	on(document, 'diviner/resize', executeResize);  // eslint-disable-line
-	/*
-	delegate(el.header, '[data-js="trigger-child-menu"]', 'click', toggleSubMenu);
-	document.body.addEventListener('keydown', closeOnEsc);
-	document.addEventListener('click', maybeClose);
-	*/
 	delegate(el.header, '[data-js="header__menu-trigger"]', 'click', toggleMenu);
 	delegate(el.header, '[data-js="primary-menu__close"]', 'click', closeMenuHandler);
 };

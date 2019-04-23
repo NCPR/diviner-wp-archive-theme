@@ -7,10 +7,21 @@
 p.wp-block-paragraph,
 p.wp-block-paragraph.mce-content-body{
 	@include body-text;
+
 	color: $color_text;
 
 	&.has-drop-cap:not(:focus)::first-letter {
 		@include drop-cap;
+	}
+}
+
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol {
+
+	li {
+		@include body-text;
+
+		color: $color_text;
 	}
 }
 
@@ -28,33 +39,33 @@ p.wp-block-paragraph.mce-content-body{
 	}
 
 	h1.editor-rich-text__tinymce {
-		@include h1
+		@include h1;
 	}
 
 	h2.editor-rich-text__tinymce {
-		@include h2
+		@include h2;
 	}
 
 	h3.editor-rich-text__tinymce {
-		@include h3
+		@include h3;
 	}
 
 	h4.editor-rich-text__tinymce {
-		@include h3
+		@include h3;
 	}
 
 	h5.editor-rich-text__tinymce {
-		@include h5
+		@include h5;
 	}
 
 	h6.editor-rich-text__tinymce {
-		@include h6
+		@include h6;
 	}
 
 }
 
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
-	@include button;
+	@include button(false);
 
 	width: 100%;
 }
@@ -96,9 +107,12 @@ p.wp-block-paragraph.mce-content-body{
 	background: $color_accent;
 }
 
+.editor-styles-wrapper .wp-block-quote .editor-rich-text__tinymce:not(.wp-block-quote__citation) {
+	@include blockquote-text;
+}
+
 .editor-styles-wrapper .wp-block-quote .wp-block-quote__citation {
 	@include cite-text;
-	text-align: right;
 }
 
 .editor-styles-wrapper .wp-block-quote:not(.is-large):not(.is-style-large) {
@@ -114,8 +128,9 @@ p.wp-block-paragraph.mce-content-body{
 	}
 
 	.wp-block-table__cell-content {
-		padding: 0;
 		@include body-text;
+
+		padding: 0;
 	}
 }
 
@@ -128,12 +143,75 @@ p.wp-block-paragraph.mce-content-body{
 }
 
 .editor-styles-wrapper .wp-block-freeform {
+
+	& > * {
+		margin-bottom: $d_spacer_m;
+	}
+
 	p {
 		@include body-text;
 	}
 
 	blockquote {
 		@include blockquote;
+
+		margin-bottom: $d_spacer_m;
+	}
+
+	.btn {
+		@include button(false);
+	}
+
+	&.block-library-rich-text__tinymce:focus {
+		a[data-mce-selected].btn {
+			@include button(false);
+
+			color: $color_white;
+			margin: 0;
+		}
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		@include headers;
+	}
+
+	h1 {
+		@include h1;
+	}
+
+	h2 {
+		@include h2;
+	}
+
+	h3 {
+		@include h3;
+	}
+
+	h4 {
+		@include h4;
+	}
+
+	h5 {
+		@include h5;
+	}
+
+	h6 {
+		@include h6;
+	}
+
+	li {
+		@include body-text;
+
+		color: $color_text;
+	}
+
+	hr {
+		max-width: 80px;
+		border: 0;
+		height: 4px;
+		background: $color_accent;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 

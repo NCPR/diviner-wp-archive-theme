@@ -5,6 +5,7 @@ namespace Diviner\Admin;
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\AdminModifications;
+use Diviner\Theme\Home_Page;
 
 /**
  * Class Settings
@@ -16,9 +17,9 @@ use Diviner\Post_Types\Diviner_Field\AdminModifications;
 class Settings {
 
 	const FIELD_GENERAL_PERMISSIONS = 'diviner_field_general_permissions';
-	const FIELD_GENERAL_BROWSE_TITLE = 'diviner_field_general_browse_title';
 	const FIELD_GENERAL_BROWSE_MODAL = 'diviner_field_general_browse_modal';
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
+	const FIELD_GENERAL_NAV_SEARCH_PAGE = 'diviner_field_general_search_page';
 	const FIELD_GENERAL_FOOTER_COPY = 'diviner_field_general_footer_copy';
 	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
 	const FIELD_GENERAL_LOOP_CARDS_FIELD = 'diviner_field_general_loop_cards';
@@ -40,20 +41,32 @@ class Settings {
 	 */
 	protected static $theme_options;
 
+	private $_pages = null;
+
 	public function hooks() {
 		add_action( 'admin_menu', [ $this, 'create_admin_menus' ], 9 );
-		add_action( 'carbon_fields_register_fields', [$this, 'crb_attach_theme_options'], 0, 0 );
+		add_action( 'carbon_fields_register_fields', [$this, 'crb_attach_theme_options'], 1, 0 );
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 	}
 
-	public function custom_diviner_js_config( $data  ) {
-		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL);
-
+	public function custom_diviner_js_config( $data ) {
+		if ( !is_page_template('page-browser.php') ) {
+			return $data;
+		}
+		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL );
+		$help_page_link = carbon_get_theme_option(static::FIELD_GENERAL_HELP_PAGE );
 		$settings = [
 			'permission_notice' => carbon_get_theme_option(static::FIELD_GENERAL_PERMISSIONS),
-			'display_popup'     => empty( $display_popup ) ? false : $display_popup,
-			'help_page_link'    => carbon_get_theme_option(static::FIELD_GENERAL_HELP_PAGE),
+			'display_popup'     => empty( $display_popup ) ? false : $display_popup
 		];
+		/*
+		if (!empty($help_page_link)) {
+			$settings['help_page'] = [
+				'title' => get_the_title($help_page_link),
+				'permalink' => get_the_permalink($help_page_link)
+			];
+		}
+		*/
 		$data['settings'] = $settings;
 		return $data;
 	}
@@ -80,40 +93,65 @@ class Settings {
 		?>
 		<div class="wrap wrap-diviner wrap-diviner--limited wrap-diviner--default">
 
-			<h2>Diviner Archiving Theme</h2>
+			<h2><?php _e( 'Diviner Archiving Theme', 'ncpr-diviner' ); ?></h2>
 
 			<p>
-				Thank you for installing the Diviner Archiving Theme. This wordpress theme allows small institutions and media organizations to create a public-facing, custom archive interface for a themed collection of media.
+				<?php _e( 'Thank you for installing the Diviner Archiving Theme. This wordpress theme allows small institutions and media organizations to create a public-facing, custom archive interface for a themed collection of media.', 'ncpr-diviner' ); ?>
 			</p>
 
-			<p>The main features of this project are</p>
+			<p><?php _e( 'The main features of this project are', 'ncpr-diviner' ); ?></p>
 			<ul>
-				<li>Small scale archiving tool for a wide array of media materials (audio, video, documents, articles)</li>
-				<li>Dublin Core like meta data fields</li>
-				<li>Customizable multi-faceted search mechanism</li>
+				<li><?php _e( 'Small scale archiving tool for a wide array of media materials (audio, video, documents, articles)', 'ncpr-diviner' ); ?></li>
+				<li><?php _e( 'Dublin Core-like meta data fields', 'ncpr-diviner' ); ?></li>
+				<li><?php _e( 'Customizable multi-faceted search mechanism', 'ncpr-diviner' ); ?></li>
 			</ul>
 
 			<p>
-				Read more about this theme on the <a href="https://ncpr.github.io/diviner-wp-archive-theme/" target="_blank">documentation website</a>.
+				<?php printf(
+					wp_kses(
+							__( 'Read more about this theme on the <a href="%s" target="_blank">documentation website</a>.', 'ncpr-diviner' ),
+							[ 'a' => [ 'href' => [], 'target' => [] ] ]
+					),
+					'https://ncpr.github.io/diviner-wp-archive-theme/'
+				); ?>
+
 			</p>
 
 			<p>
-				Start by reviewing the general settings of your archive.
+				<?php _e( 'Start by reviewing the general settings of your archive.', 'ncpr-diviner' ); ?>
 			</p>
 
 			<p>
 				<a href="admin.php?page=<?php echo esc_attr( static::$theme_options->get_page_file() ); ?>" class="button button-primary">
-					General Settings
+					<?php _e( 'General Settings', 'ncpr-diviner' ); ?>
 				</a>
 			</p>
 
 			<p>
-				Next, create new meta data fields for your archive items.
+				<?php _e( 'Next, create new meta data fields for your archive items.', 'ncpr-diviner' ); ?>
 			</p>
 
 			<p>
 				<a href="index.php?page=<?php echo esc_attr( AdminModifications::SLUG_WIZARD ); ?>" class="button button-primary">
-					Create New Diviner Meta Field
+					<?php _e( 'Create New Diviner Meta Field', 'ncpr-diviner' ); ?>
+				</a>
+			</p>
+
+			<br>
+
+			<hr>
+
+			<h3>
+				<?php _e( 'Miscellaneous Actions', 'ncpr-diviner' ); ?>
+			</h3>
+
+			<p>
+				<?php _e( 'The first time this theme is activated, an example homepage is generated. To regenerate, click the below button.', 'ncpr-diviner' ); ?>
+			</p>
+
+			<p>
+				<a href="/wp-admin/admin-post.php?action=<?php echo esc_attr( Home_Page::ADMIN_HOME_PAGE_POST_REMOVE); ?>" class="button button-primary">
+					<?php _e( 'Regenerate Default Home Page Content', 'ncpr-diviner' ); ?>
 				</a>
 			</p>
 
@@ -150,9 +188,9 @@ class Settings {
 			->add_fields(
 			[
 				$this->permissions_field(),
-				$this->browse_field(),
 				$this->browse_modal_field(),
 				$this->help_page_field(),
+				$this->search_page_field(),
 				$this->related_field(),
 				$this->loop_as_cards_field(),
 				$this->footer_copy(),
@@ -179,14 +217,15 @@ class Settings {
 			->set_help_text( __( 'This statement will appear on all archive items if you choose to add one. This is the primary way to communicate to your audience who owns/has the copyright to media (photos, videos, documents, etc.) in your archive', 'ncpr-diviner' ) );
 	}
 
-	public function browse_field() {
-		return Field::make( 'text', static::FIELD_GENERAL_BROWSE_TITLE, __( 'Browse Page Title', 'ncpr-diviner' ) )
-			->set_help_text( __( 'Name your Browse Page/Archive! Example: Explore Photos','ncpr-diviner' ) );
-	}
-
 	public function browse_modal_field() {
 		return Field::make( 'checkbox', static::FIELD_GENERAL_BROWSE_MODAL, __( 'Activate Modal in browse page on click', 'ncpr-diviner' ) )
 			->set_help_text( __( 'Modal displays by default mid size image, title, and copyright information', 'ncpr-diviner' ) );
+	}
+
+	public function search_page_field() {
+		return Field::make( 'select', static::FIELD_GENERAL_NAV_SEARCH_PAGE, __( 'Nav Search Page', 'ncpr-diviner' ) )
+			->add_options( [ $this, 'get_pages' ] )
+			->set_help_text( __( 'Select a page to link the search icon to in the navigation', 'ncpr-diviner' ) );
 	}
 
 	public function loop_as_cards_field() {
@@ -232,6 +271,9 @@ class Settings {
 	}
 
 	public function get_pages() {
+		if (!empty($this->_pages)) {
+			return $this->_pages;
+		}
 		$cleaned = [
 			0 => ''
 		];
@@ -243,7 +285,8 @@ class Settings {
 		foreach ($pages as $page) {
 			$cleaned[$page->ID] = $page->post_title;
 		}
-		return $cleaned;
+		$this->_pages = $cleaned;
+		return $this->_pages;
 	}
 
 	public function help_page_field() {

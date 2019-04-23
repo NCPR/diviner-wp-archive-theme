@@ -13,6 +13,8 @@ namespace Tonik\Theme\App\Structure;
 |
 */
 
+// ToDo pull these template calls into classes
+
 use function Tonik\Theme\App\template;
 
 /**
@@ -43,7 +45,11 @@ add_action('theme/index/content/none', 'Tonik\Theme\App\Structure\render_empty_c
  * @see resources/templates/single.tpl.php
  */
 function render_post_content() {
-	$type = get_post_type();
+	if (is_page_template('page-search.php')) {
+		$type = 'search';
+	} else {
+		$type = get_post_type();
+	}
 	$path = sprintf(
 		'partials/%s/content',
 		$type
