@@ -69,7 +69,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Override the parent columns method. Defines the columns to use in your listing table
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function get_columns()
 	{
@@ -86,7 +86,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Define which columns are hidden
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function get_hidden_columns()
 	{
@@ -123,7 +123,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Define the sortable columns
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function get_sortable_columns()
 	{
@@ -133,7 +133,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	/**
 	 * Define what data to show on each column of the table
 	 *
-	 * @param  Array $item        Data
+	 * @param  array $item        Data
 	 * @param  String $column_name - Current column name
 	 *
 	 * @return Mixed

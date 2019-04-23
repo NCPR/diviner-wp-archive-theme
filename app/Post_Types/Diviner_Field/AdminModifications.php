@@ -65,12 +65,12 @@ class AdminModifications {
 			return $translation;
 		}
 		if ( 'Excerpt' == $original ) {
-			return __( 'Description' ); //Change here to what you want Excerpt box to be called
+			return __( 'Field Description', 'ncpr-diviner' ); //Change here to what you want Excerpt box to be called
 		} else {
 			$pos = strpos($original, 'Excerpts are optional hand-crafted summaries of your');
 
 			if ($pos !== false) {
-				return __( 'Description for field' );
+				return __( 'Appears in the manage fields page of the admin', 'ncpr-diviner' );
 			}
 		}
 		return $translation;
