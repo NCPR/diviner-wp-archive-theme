@@ -39,11 +39,11 @@ class Search_Page {
 	}
 
 	/**
-	 * Gets first page with the browse template
+	 * Gets first page with the search template
 	 *
 	 * @return int post id
 	 */
-	public function get_current_browse_page() {
+	public function get_current_search_page() {
 		$args = [
 			'posts_per_page' => -1,
 			'fields' => 'ids',
@@ -51,18 +51,18 @@ class Search_Page {
 			'meta_key' => '_wp_page_template',
 			'meta_value' => 'page-search.php'
 		];
-		$current_browse_pages = get_posts($args);
-		if ( is_array($current_browse_pages) && count( $current_browse_pages ) > 0 ) {
-			return $current_browse_pages[0];
+		$current_search_pages = get_posts($args);
+		if ( is_array( $current_search_pages ) && count( $current_search_pages ) > 0 ) {
+			return $current_search_pages[0];
 		}
 		return 0;
 	}
 
 	/**
-	 * do we have a browse page
+	 * do we have a search page
 	 */
-	public function already_have_browse_page() {
-		$current_browse_page = $this->get_current_browse_page();
+	public function already_have_search_page() {
+		$current_browse_page = $this->get_current_search_page();
 		return isset( $current_browse_page ) && $current_browse_page > 0;
 	}
 	/**
@@ -70,7 +70,7 @@ class Search_Page {
 	 */
 	public function create_search_page() {
 		// Create page
-		$browse_page = array(
+		$search_page = array(
 			'post_title'    => wp_strip_all_tags( __( 'Search', 'ncpr-diviner' ) ),
 			'post_status'   => 'publish',
 			'post_author'   => 1,
@@ -81,16 +81,12 @@ class Search_Page {
 		);
 
 		// Insert the post into the database
-		return wp_insert_post( $browse_page );
+		return wp_insert_post( $search_page );
 	}
 
 	/**
 	 * Determines if a post, identified by the specified ID, exist
 	 * within the WordPress database.
-	 *
-	 * Note that this function uses the 'acme_' prefix to serve as an
-	 * example for how to use the function within a theme. If this were
-	 * to be within a class, then the prefix would not be necessary.
 	 *
 	 * @param    int    $id    The ID of the post to check
 	 * @return   bool          True if the post exists; otherwise, false.
@@ -104,12 +100,14 @@ class Search_Page {
 	 * Insert New Default Search Page
 	 */
 	public function insert_default_search_page() {
-		$page_id = $this->create_search_page();
-		if($page_id !== 0) {
-			carbon_set_theme_option(Settings::FIELD_GENERAL_NAV_SEARCH_PAGE, $page_id );
+		$current_search = $this->get_current_search_page();
+		if ( empty($current_search) ) {
+			$current_search = $this->create_search_page();
+		}
+		if($current_search !== 0) {
+			carbon_set_theme_option(Settings::FIELD_GENERAL_NAV_SEARCH_PAGE, $current_search );
 		}
 	}
-
 
 
 	/**
@@ -117,7 +115,7 @@ class Search_Page {
 	 */
 	public function setup_search_page() {
 		$searchpage = carbon_get_theme_option(Settings::FIELD_GENERAL_NAV_SEARCH_PAGE );
-		if ( !empty( $searchpage ) || !$this->post_exists( $searchpage ) ) {
+		if ( empty( $searchpage ) || !$this->post_exists( $searchpage ) ) {
 			$this->insert_default_search_page();
 		}
 	}

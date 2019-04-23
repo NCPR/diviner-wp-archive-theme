@@ -6,11 +6,13 @@ Comes in via the Carbon fields complex field (repeater)
 [
 	{
 		"_type":"_",
+		"div_field_select_options_value":"Red"
 		"div_field_select_options_label":"Red"
 	},
 	{
 		"_type":"_",
-		"div_field_select_options_label":"Blond"
+		"div_field_select_options_value":"Blond"
+		"div_field_select_options_label":"Red"
 	}
 ]
  */

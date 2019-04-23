@@ -17,7 +17,6 @@ use Diviner\Theme\Home_Page;
 class Settings {
 
 	const FIELD_GENERAL_PERMISSIONS = 'diviner_field_general_permissions';
-	const FIELD_GENERAL_BROWSE_TITLE = 'diviner_field_general_browse_title';
 	const FIELD_GENERAL_BROWSE_MODAL = 'diviner_field_general_browse_modal';
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
 	const FIELD_GENERAL_NAV_SEARCH_PAGE = 'diviner_field_general_search_page';
@@ -179,7 +178,6 @@ class Settings {
 			->add_fields(
 			[
 				$this->permissions_field(),
-				$this->browse_field(),
 				$this->browse_modal_field(),
 				$this->help_page_field(),
 				$this->search_page_field(),
@@ -207,11 +205,6 @@ class Settings {
 	public function permissions_field() {
 		return Field::make( 'rich_text', static::FIELD_GENERAL_PERMISSIONS, __( 'Permissions/Rights Note on Archive item', 'ncpr-diviner' ) )
 			->set_help_text( __( 'This statement will appear on all archive items if you choose to add one. This is the primary way to communicate to your audience who owns/has the copyright to media (photos, videos, documents, etc.) in your archive', 'ncpr-diviner' ) );
-	}
-
-	public function browse_field() {
-		return Field::make( 'text', static::FIELD_GENERAL_BROWSE_TITLE, __( 'Browse Page Title', 'ncpr-diviner' ) )
-			->set_help_text( __( 'Name your Browse Page/Archive! Example: Explore Photos','ncpr-diviner' ) );
 	}
 
 	public function browse_modal_field() {

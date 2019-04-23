@@ -21,7 +21,7 @@ let _this;
 class FieldSelect extends Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 		_this = this;
 	}
 
@@ -80,10 +80,16 @@ class FieldSelect extends Component {
 		if (!this.props.field) {
 			return '';
 		}
+
+		const field = this.createField(this.props.field);
+		if (!field) {
+			return '';
+		}
+
 		return (
 			<div className="a-field">
 				<label>{ this.props.field.title }</label>
-				<div className="a-field-input a-field-input--select">{this.createField(this.props.field)}</div>
+				<div className="a-field-input a-field-input--select">{field}</div>
 				<small className="a-input-description">{ this.props.field.helper }</small>
 			</div>
 		);

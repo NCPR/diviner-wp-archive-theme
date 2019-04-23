@@ -91,18 +91,16 @@ class SearchFacets extends Component {
 				<button
 					className="btn btn-fullmobile a-toggle-search-btn"
 					onClick={this.onToggleClick}
-					>
+				>
 					{toggleText}
 				</button>
 
 				<div className={facetsWrapClasses.join(' ')} aria-hidden={ariaHidden}>
-					<h5>
-						{CONFIG.browse_page_localization.facets_header}
-					</h5>
+
 					{
 						(fieldsOnLeft.length > 0)
-							? <div className="a-input-group">{this.createFields(fieldsOnLeft)}</div>
-							: <div>{`<!-- No fields to display -->`}</div>
+							? <div><h5>{CONFIG.browse_page_localization.facets_header}</h5><div className="a-input-group">{this.createFields(fieldsOnLeft)}</div></div>
+							: <div></div>
 					}
 
 					<div className="a-input-group">
@@ -121,14 +119,18 @@ class SearchFacets extends Component {
 						></Select>
 					</div>
 
-					<div className="a-input-group a-input-group--clear">
-						<button
-							className="btn btn-s btn-fullmobile a-clear-button"
-							onClick={this.onClearClick}
-						>
-							{CONFIG.browse_page_localization.facets_reset}
-						</button>
-					</div>
+					{
+						(fieldsOnLeft.length > 0)
+							? <div className="a-input-group a-input-group--clear">
+								<button
+									className="btn btn-s btn-fullmobile a-clear-button"
+									onClick={this.onClearClick}
+								>
+									{CONFIG.browse_page_localization.facets_reset}
+								</button>
+							</div>
+							: <div></div>
+					}
 
 				</div>
 

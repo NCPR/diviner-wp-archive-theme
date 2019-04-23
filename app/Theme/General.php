@@ -418,14 +418,18 @@ class General {
 
 
 	static public function the_footer_menu() {
+		$menu = wp_nav_menu( [
+			'theme_location' => 'footer',
+			'echo' => false,
+			'depth' => 1
+		] );
+		if ( empty( $menu ) ) {
+			return '';
+		}
 		return sprintf(
 			'<div class="footer-menu__wrap"><nav class="footer-menu"><div class="a11y-visual-hide">%s</div>%s</nav></div>',
 			__( 'Footer Navigation', 'ncpr-diviner'),
-			wp_nav_menu( [
-				'theme_location' => 'footer',
-				'echo' => false,
-				'depth' => 1
-			] )
+			$menu
 		);
 	}
 
