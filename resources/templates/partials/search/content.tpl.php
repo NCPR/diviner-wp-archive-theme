@@ -1,7 +1,13 @@
 <article class="single-item single-item--page">
 
 	<header class="single-item__header">
+		<?php
+		do_action('theme/header/before-title');
+		?>
 		<h1 class="single-item__header-title h1 page-title"><?php the_title(); ?></h1>
+		<?php
+		do_action('theme/header/after-title');
+		?>
 	</header>
 
 	<?php if ( !empty( get_the_content() ) ) { ?>

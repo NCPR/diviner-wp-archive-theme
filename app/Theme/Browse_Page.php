@@ -3,6 +3,8 @@
 
 namespace Diviner\Theme;
 
+use Diviner\Admin\Settings;
+
 /**
  * Setting up the Browse page at startup
  *
@@ -16,6 +18,24 @@ class Browse_Page {
 			add_action( 'admin_bar_menu', [ $this, 'add_admin_menu_button' ], 90);
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 			add_filter( 'diviner_js_config', [ $this, 'filter_diviner_js_config' ] );
+			add_action( 'theme/header/before-title', [$this, 'before_title']);
+		}
+	}
+
+	/**
+	 * Displays the help page if its set and if on the browse page
+	 *
+	 */
+	function before_title() {
+		if (is_page_template('page-browser.php')) {
+			$help_page_link = carbon_get_theme_option(Settings::FIELD_GENERAL_HELP_PAGE );
+			if (!empty($help_page_link)) {
+				printf(
+					'<a href="%s" class="a-help-link">%s</a>',
+					get_the_permalink($help_page_link),
+					get_the_title($help_page_link)
+				);
+			}
 		}
 	}
 

@@ -53,12 +53,20 @@ class Settings {
 		if ( !is_page_template('page-browser.php') ) {
 			return $data;
 		}
-		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL);
+		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL );
+		$help_page_link = carbon_get_theme_option(static::FIELD_GENERAL_HELP_PAGE );
 		$settings = [
 			'permission_notice' => carbon_get_theme_option(static::FIELD_GENERAL_PERMISSIONS),
-			'display_popup'     => empty( $display_popup ) ? false : $display_popup,
-			'help_page_link'    => carbon_get_theme_option(static::FIELD_GENERAL_HELP_PAGE),
+			'display_popup'     => empty( $display_popup ) ? false : $display_popup
 		];
+		/*
+		if (!empty($help_page_link)) {
+			$settings['help_page'] = [
+				'title' => get_the_title($help_page_link),
+				'permalink' => get_the_permalink($help_page_link)
+			];
+		}
+		*/
 		$data['settings'] = $settings;
 		return $data;
 	}
