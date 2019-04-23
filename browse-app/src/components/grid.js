@@ -46,6 +46,7 @@ class Grid extends Component {
 				key={i}
 				id={post.id}
 				title={post.title.rendered}
+				type={post.div_ai_field_type}
 				onSelectItem={this.onSelectItem}
 				image={image}>
 			</Item>

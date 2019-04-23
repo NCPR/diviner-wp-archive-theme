@@ -45,6 +45,45 @@
 		position: absolute;
 		top: 0;
 	}
+
+	.a-item--has-audio &,
+	.a-item--has-video & {
+		position: relative;
+
+		&:after {
+			font-family: $t_font_icons;
+			font-weight: 900;
+			-webkit-font-smoothing: antialiased;
+			display: inline-block;
+			font-style: normal;
+			font-variant: normal;
+			text-rendering: auto;
+			line-height: 1;
+			content: "\f028";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			z-index: 3;
+			color: $color_grey_light;
+			margin-left: $d_spacer_sm;
+			margin-bottom: $d_spacer_sm;
+			font-size: 2em;
+			opacity: 0.5;
+		}
+	}
+
+	.a-item--has-audio &:after {
+		content: "\f028";
+	}
+
+	.a-item--has-video &:after {
+		content: "\f04b";
+	}
+
+	.a-item--has-audio .a-item__action:hover &:after,
+	.a-item--has-video .a-item__action:hover &:after {
+		opacity: 0.6;
+	}
 }
 
 .a-item__action {

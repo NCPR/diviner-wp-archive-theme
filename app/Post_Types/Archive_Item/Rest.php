@@ -4,6 +4,7 @@ namespace Diviner\Post_Types\Archive_Item;
 
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
+use Diviner\Post_Types\Diviner_Field\PostMeta;
 use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
@@ -351,6 +352,12 @@ class Rest {
 		register_rest_field( Archive_Item::NAME, 'permalink', [
 			'get_callback' => function( $arr ) {
 				return get_the_permalink($arr['id']);
+			}
+		] );
+
+		register_rest_field( Archive_Item::NAME, 'div_ai_field_type', [
+			'get_callback' => function( $arr ) {
+				return carbon_get_post_meta( $arr['id'], Post_Meta::FIELD_TYPE );
 			}
 		] );
 

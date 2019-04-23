@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import LazyLoad from 'react-lazy-load';
+
+import {
+	DIV_AI_TYPE_VIDEO,
+	DIV_AI_TYPE_AUDIO
+} from '../config/settings';
 
 
 class Item extends Component {
@@ -18,7 +22,6 @@ class Item extends Component {
 		this.props.onSelectItem({
 			id: this.props.id,
 			title: this.props.title,
-			hasAudio: this.props.hasAudio,
 		});
 	}
 
@@ -35,7 +38,8 @@ class Item extends Component {
 
 	render() {
 		let itemClass = 'a-item';
-		if (this.props.hasAudio) itemClass += ' a-item--has-audio';
+		if (this.props.type === DIV_AI_TYPE_AUDIO) itemClass += ' a-item--has-audio';
+		if (this.props.type === DIV_AI_TYPE_VIDEO) itemClass += ' a-item--has-video';
 
 		return (
 			<div className={itemClass}>
@@ -58,7 +62,7 @@ class Item extends Component {
 Item.propTypes = {
 	id: PropTypes.number,
 	title: PropTypes.string,
-	hasAudio: PropTypes.bool,
+	type: PropTypes.string,
 	onSelectItem: PropTypes.func,
 };
 
