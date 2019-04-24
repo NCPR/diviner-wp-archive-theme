@@ -27,7 +27,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/documentation/</guid>
-      <description>Requirements  a web server compatible with WordPress – we suggest WP Engine, Digital Ocean, and Site Ground optional installs: elastic search (DIVINER will work without Elastic Search, but without it, there is a limit to how many records you can have within your system) additional optional plug-ins back-up system for your server  If you’re looking for a further level of customization or do not wish to set up DIVINER yourself, consider hiring a digital developer.</description>
+      <description>The following instructions provide a how to in setting up your new archiving site with the DIVINER theme. If you have any questions please refer to the wordpress.org forum.
+Vocab/Lexicon  Kitchen Sink: the rendering of all gutenberg elements, called blocks, in the main content area of pages and posts. Previously, this editor experience was a WYSIWYG. Breakpoint: describes the different stylings of elements based on width and device characteristics.</description>
     </item>
     
     <item>
@@ -36,8 +37,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/getting-started/</guid>
-      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula eu lectus vel egestas. Mauris eu molestie leo. Mauris lobortis risus nec luctus consectetur. Pellentesque vestibulum leo id turpis faucibus malesuada. Donec velit libero, fermentum in aliquet eu, euismod eget turpis. Quisque imperdiet eleifend lectus, eget consequat purus. Sed imperdiet dolor ac suscipit vulputate. Nam convallis risus non ipsum efficitur volutpat.
-Technical Requirements:  server to install it in with a version of WordPress – a web server with a database with x amount of gigs optional installs: elastic search additional optional plug-ins back-up system for your server  Installation of Diviner Lorem ipsum dolor sit amet, consectetur adipiscing elit.</description>
+      <description>Define Your Project We recommend potential users define their project as much as they can before they get started. It will help immeasurably in the overall installation and configuration of DIVINER.
+ NAME What will you call your DIVINER archive? Decide on a title. CONTENT What is going IN your DIVINER archive? Decide now what you want to put into the archive, because you will design your search mechanisms by which you want to sort through your materials before you upload your materials, not after.</description>
     </item>
     
     <item>
@@ -47,7 +48,7 @@ Technical Requirements:  server to install it in with a version of WordPress –
       
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/is-diviner-for-you/</guid>
       <description>Ask yourself these questions - if you answer yes to 3 or more of them, DIVINER might be what you’re looking for!
-MATERIALS  Do you have a project with more the 100 individual pieces of media (photo, video, audio)? Do you want to share these pieces as an archive with the public? Can you think of ways to search through your data?  TECH NEEDS  Can you (or someone in your organization or company) devote considerable time to customizing an archive and uploading your media?</description>
+Materials  Do you have a project with more the 100 individual pieces of media (photo, video, audio)? Do you want to share these pieces as an archive with the public? Can you think of ways to search through your data?  Tech Needs  Can you (or someone in your organization or company) devote considerable time to customizing an archive and uploading your media?</description>
     </item>
     
     <item>
