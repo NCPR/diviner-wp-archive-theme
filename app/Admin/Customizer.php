@@ -486,6 +486,15 @@ class Customizer {
 				color: <?php echo General::luminance( substr($color_btn_link, 1), -0.8 ); ?>;
 			}
 
+			.single-item__navigation a {
+				background-color: <?php echo $color_btn_link; ?> !important;
+			}
+
+			.single-item__navigation a:hover,
+			.single-item__navigation a:focus {
+				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+			}
+
 			@media screen and (min-width: 960px) {
 				.primary-menu .menu a,
 				.primary-menu .menu a:visited {

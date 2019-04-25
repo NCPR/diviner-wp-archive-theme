@@ -60,19 +60,83 @@ class General {
 		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'output_color_swatch_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'block_editor_assets' ] );
-		add_action( 'theme/header', [ $this, 'render_header' ] );
-		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ] );
-		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'resource_hints' ], 10, 2 );
-		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
-		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
-		add_action( 'theme/comments', [ $this, 'theme_comments' ] );
-		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ] );
-
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_stylesheets' ] );
 		add_action( 'wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
+		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ] );
+		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
 
+		add_action( 'theme/header', [ $this, 'render_header' ] );
+		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ] );
+		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
+		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
+		add_action( 'theme/before-content', [$this, 'before_content']);
+		add_action( 'theme/article-end', [ $this, 'theme_comments' ], 7 );
+		add_action( 'theme/article-end', [ $this, 'page_links' ], 4 );
+		add_action( 'theme/article-end', [ $this, 'post_navigation' ], 5 );
+
+	}
+
+	/**
+	 * Display page navigation (next and previous)
+	 *
+	 * @return void
+	 */
+	function post_navigation() {
+		$prev = get_previous_post_link(
+				'%link',
+			sprintf(
+					'<span class="fa fa-arrow-left"></span> %s',
+				'%title'
+			)
+		);
+
+		$next = get_next_post_link(
+			'%link',
+			sprintf(
+				'%s <span class="fa fa-arrow-right"></span>',
+				'%title'
+			)
+		);
+
+		if ( empty( $prev ) && empty( $next ) ) {
+			return;
+		}
+		?>
+		<div class="single-item__navigation">
+			<div class="a11y-visual-hide">
+				<?php echo __( 'Article Navigation', 'ncpr-diviner' ); ?>
+			</div>
+			<?php if ( !empty( $prev ) ) { ?>
+				<div class="single-item__navigation-btn single-item__navigation-btn--prev">
+					<?php echo $prev; ?>
+				</div>
+			<?php } ?>
+			<?php if ( !empty( $next ) ) { ?>
+				<div class="single-item__navigation-btn single-item__navigation-btn--next">
+					<?php echo $next; ?>
+				</div>
+			<?php } ?>
+		</div> <!-- end navigation -->
+		<?php
+	}
+
+	/**
+	 * Display page links
+	 *
+	 * @return void
+	 */
+	function page_links() {
+		if ( get_post_type() === 'post' ) {
+			echo wp_link_pages( [
+				'before'      => '<div class="page-links"><span class="h5 page-links-title">' . __( 'Pages:', 'ncpr-diviner' ) . '</span>',
+				'after'       => '</div>',
+				'next_or_number' => 'next',
+				'link_before' => '<span>',
+				'link_after'  => '</span>',
+			] );
+		}
 	}
 
 	/**
@@ -84,6 +148,15 @@ class General {
 		if ( comments_open() || get_comments_number() > 0 ) {
 			comments_template();
 		}
+	}
+
+	/**
+	 * Display edit links
+	 *
+	 * @return void
+	 */
+	function before_content() {
+		edit_post_link( __( 'Edit This Content', 'ncpr-diviner' ), '<div class="edit-link">', '</div>');
 	}
 
 	/**
@@ -153,6 +226,8 @@ class General {
 	/**
 	 * Filter except length to 35 words.
 	 *
+	 * @param int $length
+	 * @return int
 	 */
 	function custom_excerpt_length( $length ) {
 		return 20;
@@ -458,10 +533,17 @@ class General {
 	static public function the_header_brand() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-		$brand = '';
+
+		$size_class = 'header__logo--square';
+		if ( (int)$logo[1] > (int)$logo[2] ) {
+			$size_class = 'header__logo--landscape';
+		} else if ( (int)$logo[1] < (int)$logo[2] ) {
+			$size_class = 'header__logo--portrait';
+		}
 		if ( has_custom_logo() ) {
 			$brand = sprintf(
-				'<div class="header__logo"><a href="%s" class="header__logo-link"><img src="%s" title="%s" class="header__logo-img"></a></div>',
+				'<div class="header__logo %s"><a href="%s" class="header__logo-link"><img src="%s" title="%s" class="header__logo-img"></a></div>',
+				$size_class,
 				get_home_url(),
 				esc_url( $logo[0] ),
 				get_bloginfo( 'name' )
@@ -475,7 +557,6 @@ class General {
 		}
 		return $brand;
 	}
-
 
 	/**
 	 * Renders the social module.

@@ -11,11 +11,14 @@
 		?>
 
 		<div class="single-item__header-meta">
-			<time class="single-item__header-time">
-				<?php the_date(); ?>
+			<time class="single-item__header-date">
+				<?php the_time( get_option( 'date_format' ) ); ?>
 			</time>
 			<div class="single-item__header-categories">
 				<?php the_category( ' | ' ); ?>
+			</div>
+			<div class="single-item__header-tags">
+				<?php the_tags(); ?>
 			</div>
 		</div>
 
@@ -25,17 +28,22 @@
 	<div class="single-item__layout">
 
 		<?php
-		do_action('theme/before-content');
+		do_action('theme/above-content');
 		?>
 
 		<div class="d-content">
+
+			<?php
+			do_action('theme/before-content');
+			?>
+
 			<?php the_content(); ?>
 		</div>
 
 	</div>
 
 	<?php
-	do_action('theme/comments');
+	do_action('theme/article-end');
 	?>
 
 </article>

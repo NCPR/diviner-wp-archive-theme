@@ -95,11 +95,15 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 		</aside>
 
 		<div class="d-content">
+
+			<?php
+			do_action('theme/before-content');
+			?>
+
 			<?php the_content(); ?>
 		</div>
 
 	</div>
-
 
 	<?php
 	if ( $show_related ) {
@@ -114,6 +118,10 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 		);
 		echo '</div>';
 	}
+	?>
+
+	<?php
+	do_action('theme/article-end');
 	?>
 
 </article>

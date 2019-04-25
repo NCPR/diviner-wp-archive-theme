@@ -66,23 +66,10 @@ class AdminModifications {
 			return $classes;
 		}
 
-		if ( get_the_ID() ) {
-
-		}
-
 		$type = carbon_get_post_meta( get_the_ID(), Post_Meta::FIELD_TYPE );
-        $classes .= ' archive-item-edit';
+		$classes .= ' archive-item-edit';
 		if ( ! empty( $type ) ) {
 			$classes .= sprintf( ' archive-item-edit--%s', $type );
-		} else {
-			// pseudo code
-			// check the query
-			if ( !empty( $_GET[ 'type' ] ) ) {
-				$type = $_GET[ 'type' ];
-				if ( ! empty( $type ) ) {
-					// $classes .= sprintf( ' archive-item-edit--%s', $field_type );
-				}
-			}
 		}
 
 		return $classes;

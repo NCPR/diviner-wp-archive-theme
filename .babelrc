@@ -6,7 +6,6 @@
         "targets": {
           "browsers": ["last 2 versions"]
         },
-        "debug": true,
         "useBuiltIns": true
       }
     ]

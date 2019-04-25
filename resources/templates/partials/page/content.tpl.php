@@ -13,17 +13,22 @@
 	<div class="single-item__layout">
 
 		<?php
-		do_action('theme/before-content');
+		do_action('theme/above-content');
 		?>
 
 		<div class="d-content">
+
+			<?php
+			do_action('theme/before-content');
+			?>
+
 			<?php the_content(); ?>
 		</div>
 
 	</div>
 
 	<?php
-	do_action('theme/comments');
+	do_action('theme/article-end');
 	?>
 
 </article>

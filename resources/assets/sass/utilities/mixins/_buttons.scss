@@ -43,14 +43,8 @@
 }
 
 @mixin button-small {
-	font-size: 13px;
+	@include  button;
 
-	@include g-state(medium) {
-		font-size: 15px;
-	}
-}
-
-@mixin button-small {
 	font-size: 13px;
 
 	@include g-state(medium) {

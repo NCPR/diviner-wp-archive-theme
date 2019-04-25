@@ -14,6 +14,11 @@
 		<div class="single-item__block single-item__block--tight">
 
 			<div class="d-content">
+
+				<?php
+				do_action('theme/before-content');
+				?>
+
 				<?php the_content(); ?>
 			</div>
 
