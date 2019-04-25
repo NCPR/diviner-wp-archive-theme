@@ -84,6 +84,9 @@ class General {
 	 * @return void
 	 */
 	function post_navigation() {
+		if ( 	!is_single() ) {
+			return;
+		}
 		$prev = get_previous_post_link(
 				'%link',
 			sprintf(
