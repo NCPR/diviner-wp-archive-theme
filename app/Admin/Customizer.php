@@ -17,11 +17,11 @@ class Customizer {
 
 	const SECTION_THEME_SETTING_COLOR_HEADER  = 'diviner_setting_color_header';
 	const SECTION_THEME_CONTROL_COLOR_HEADER  = 'diviner_control_color_header';
-	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#DDDDDD';
+	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#bbbbbb';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT  = 'diviner_setting_color_header_text';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_TEXT  = 'diviner_control_color_header_text';
-	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT = '#dddddd';
+	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT = '#ffffff';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU  = 'diviner_setting_color_header_menu';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_MENU  = 'diviner_control_color_header_menu';
