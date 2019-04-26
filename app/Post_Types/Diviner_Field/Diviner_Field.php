@@ -11,8 +11,6 @@ use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 use Diviner\CarbonFields\Helper;
 
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
 
 /**
  * Class Diviner Field
@@ -32,9 +30,32 @@ class Diviner_Field {
 	}
 
 	public function hooks() {
-		add_action( 'init', [ &$this,'register' ], 0, 0 );
+		add_action( 'init', [ $this,'register' ], 0, 0 );
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 		add_action( 'init', [ $this, 'hydrate_cache' ], 0 );
+		add_filter( 'carbon_fields_should_save_field_value', [ $this, 'filter_should_save_field_value' ], 10, 3 );
+	}
+
+	/**
+	 * Checks if a value can be saved
+	 *
+	 * @param bool $save
+	 * @param Mixed $value
+	 * @param \Carbon_Fields\Field\Select_Field $field
+	 * @return boolean
+	 */
+	public function filter_should_save_field_value( $save, $value, $field ) {
+		// ToDo display notification
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_SELECT_OPTIONS_VALUE ) ) {
+			// removed whitespace and lower case
+			$zname_clean = preg_replace('/\s*/', '', $value);
+			// convert the string to all lowercase
+			$zname_clean = strtolower($zname_clean);
+			if ( $zname_clean !== $value ) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	static public function set_field_post_meta($id, $post_meta_name, $value) {
@@ -127,6 +148,11 @@ class Diviner_Field {
 		return $result;
 	}
 
+	/**
+	 * Args for register post type
+	 *
+	 * @return array
+	 */
 	public function get_args() {
 		return [
 			'public'             => false,
@@ -138,19 +164,23 @@ class Diviner_Field {
 			'hierarchical'       => false,
 			'menu_position'      => null,
 			'supports'           => [ 'title', 'excerpt' ],
-			'has_archive'        => false,
 			'rewrite'            => false,
 			'exclude_from_search' => true,
 		];
 	}
 
+	/**
+	 * Labels for register post type
+	 *
+	 * @return array
+	 */
 	public function get_labels() {
 		return [
 			'labels' => [
 				'singular'     => __( 'Diviner Field', 'ncpr-diviner' ),
 				'plural'       => __( 'Diviner Fields', 'ncpr-diviner' ),
-				'slug'         => _x( 'diviner-field', 'post type slug', 'diviner' ),
-				'name'         => _x( 'Diviner Fields', 'post type general name'),
+				'slug'         => _x( 'diviner-field', 'post type slug', 'ncpr-diviner' ),
+				'name'         => _x( 'Diviner Fields', 'post type general name', 'ncpr-diviner' ),
 				'add_new_item' => __( 'Add New Diviner Field', 'ncpr-diviner' ),
 				'edit_item'    => __( 'Edit Diviner Field', 'ncpr-diviner' ),
 				'new_item'     => __( 'New Diviner Field', 'ncpr-diviner' ),
@@ -230,6 +260,12 @@ class Diviner_Field {
 		return array_merge($defaults, $dyn);
 	}
 
+	/**
+	 * Add the divinr field related data
+	 *
+	 * @param  array $data JS config data to be dropped into page as JSON
+	 * @return array       Altered data
+	 */
 	public function custom_diviner_js_config( $data  ) {
 		if ( !is_page_template('page-browser.php') ) {
 			return $data;
@@ -255,8 +291,8 @@ class Diviner_Field {
 			}
 		}
 		$data['fields'] = $return;
-		$data['taxonomies'] = $taxonomy_terms;
-		$data['cpt_posts'] = $cpt_posts;
+		$data['taxonomies'] = $taxonomy_terms; //ToDo make this dynamic
+		$data['cpt_posts'] = $cpt_posts; // ToDo make this dynamic
 		$data['order_by'] = $this->get_order_by_options();
 		return $data;
 

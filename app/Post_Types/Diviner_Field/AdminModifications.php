@@ -20,11 +20,46 @@ class AdminModifications {
 
 	public function hooks() {
 	    // Hook on 11 to go after the main options page is hooked.
-		add_action( 'admin_menu', [ &$this, 'rc_scd_register_menu' ], 12 );
-		add_filter( 'admin_body_class', [ &$this, 'admin_body_class' ] );
-		add_filter( 'gettext', [ &$this, 'change_excerpt_text' ], 10, 2 );
-		add_action( 'edit_form_after_title', [ &$this, 'add_helper_text' ] );
-		add_filter( 'post_updated_messages', [ &$this, 'post_published' ] );
+		add_action( 'admin_menu', [ $this, 'rc_scd_register_menu' ], 12 );
+		add_filter( 'admin_body_class', [ $this, 'admin_body_class' ] );
+		add_filter( 'gettext', [ $this, 'change_excerpt_text' ], 10, 2 );
+		add_action( 'edit_form_after_title', [ $this, 'add_helper_text' ] );
+		add_filter( 'post_updated_messages', [ $this, 'post_published' ] );
+
+		// custom field table
+		add_filter( 'manage_diviner_field_posts_columns', [ $this, 'set_custom_edit_book_columns' ] );
+		add_action( 'manage_diviner_field_posts_custom_column' , [ $this, 'custom_book_column' ], 10, 2 );
+
+	}
+
+	public function custom_book_column( $column, $post_id ) {
+		switch ( $column ) {
+			case 'field_active' :
+				$field_active = carbon_get_post_meta( $post_id, PostMeta::FIELD_ACTIVE );
+				echo ( (int)$field_active === 1 ) ? '✓' : '';
+				break;
+			case 'field_type' :
+				$field_type = carbon_get_post_meta( $post_id, PostMeta::FIELD_TYPE );
+				echo Diviner_Field::get_class_title( $field_type );
+				break;
+			case 'field_placement' :
+				echo Diviner_Field::get_field_post_meta( $post_id, PostMeta::FIELD_BROWSE_PLACEMENT );
+		}
+	}
+
+	public function set_custom_edit_book_columns($columns) {
+		$new = [];
+		foreach($columns as $key=>$value) {
+			if($key=='date') {  // when we find the date column
+				$new['field_active'] = __( 'Active', 'ncpr-diviner' );
+				$new['field_type'] = __( 'Field Type', 'ncpr-diviner' );
+				$new['field_placement'] = __( 'Browse Placement', 'ncpr-diviner' );
+
+			}
+			$new[$key]=$value;
+		}
+
+		return $new;
 	}
 
 	function post_published( $messages ) {
@@ -58,7 +93,13 @@ class AdminModifications {
 		printf( '<div>%s</div>', __( 'Label appearing on the Archive item Edit Screen', 'ncpr-diviner' ) );
 	}
 
-
+	/**
+	 * Modify the excerpt header and help text for Divnier Fields admin
+	 *
+	 * @param  String $translation
+	 * @param  String $original
+	 * @return String modified strings
+	 */
 	function change_excerpt_text( $translation, $original ){
 		global $post;
 		if( !empty($post) && $post->post_type !== Diviner_Field::NAME) {
@@ -86,16 +127,19 @@ class AdminModifications {
 		global $post;
 		global $pagenow;
 
-		if (!$pagenow || !$post) {
+		$screen = get_current_screen();
+
+		if (!$pagenow || !$post || !$screen) {
 			return $classes;
 		}
 
-		if ( get_post_type() !== Diviner_Field::NAME ) {
+		$classes .= sprintf( ' post-edit--%s', $screen->post_type );
+
+		if ( $screen->post_type !== Diviner_Field::NAME ) {
 			return $classes;
 		}
 
-		$classes .= sprintf( ' post-edit--%s', $post->post_type );
-		if( $post->post_type == Diviner_Field::NAME && in_array( $pagenow, [ 'post.php' ] ) ) {
+		if( in_array( $pagenow, [ 'post.php' ] ) ) {
 			// get the type of field
 			$type = Diviner_Field::get_field_post_meta( get_the_ID(), PostMeta::FIELD_TYPE );
 			$classes .= sprintf( ' post-field-type--%s', $type );
@@ -139,7 +183,7 @@ class AdminModifications {
 			'Diviner Meta Field Wizard',   // -> Title that would otherwise appear in the menu
 			'manage_options', // -> Capability level
 			self::SLUG_WIZARD,   // -> Still accessible via admin.php?page=menu_handle
-			[ &$this,'rc_scd_create_wizard' ] // -> To render the page
+			[ $this,'rc_scd_create_wizard' ] // -> To render the page
 		);
 
 

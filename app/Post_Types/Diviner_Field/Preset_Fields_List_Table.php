@@ -108,14 +108,12 @@ class Preset_Fields_List_Table extends \WP_List_Table
 		if( 'activate' === $action) {
 			foreach($_GET['field'] as $id) {
 				Diviner_Field::set_field_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  PostMeta::FIELD_CHECKBOX_VALUE );
-				// carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  PostMeta::FIELD_CHECKBOX_VALUE);
 			}
 		}
 
 		if( 'deactivate' === $action) {
 			foreach($_GET['field'] as $id) {
 				Diviner_Field::set_field_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  '' );
-				// carbon_set_post_meta( (int) $id, PostMeta::FIELD_ACTIVE,  '');
 			}
 		}
 	}
@@ -179,7 +177,7 @@ class Preset_Fields_List_Table extends \WP_List_Table
 	public function column_title( $item )
 	{
 		return sprintf(
-			'<a href="%s">%s</a>',
+			'<a href="%s" class="row-title">%s</a>',
 			get_edit_post_link( $item[ 'id' ] ),
 			$item[ 'title' ]
 		);
