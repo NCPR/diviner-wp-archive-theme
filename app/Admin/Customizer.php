@@ -13,11 +13,13 @@ use Diviner\Theme\General;
  */
 class Customizer {
 
+	const PIMPLE_CONTAINER_NAME = 'admin.customizer';
+
 	const SECTION_THEME_CUSTOMIZATIONS  = 'diviner_section_theme_customizations';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER  = 'diviner_setting_color_header';
 	const SECTION_THEME_CONTROL_COLOR_HEADER  = 'diviner_control_color_header';
-	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#bbbbbb';
+	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#333';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT  = 'diviner_setting_color_header_text';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_TEXT  = 'diviner_control_color_header_text';
@@ -25,7 +27,7 @@ class Customizer {
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU  = 'diviner_setting_color_header_menu';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_MENU  = 'diviner_control_color_header_menu';
-	const SECTION_THEME_SETTING_COLOR_HEADER_MENU_DEFAULT = '#999999';
+	const SECTION_THEME_SETTING_COLOR_HEADER_MENU_DEFAULT = '#F4D35E';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER  = 'diviner_setting_color_header_menu_hover';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_MENU_HOVER  = 'diviner_control_color_header_menu_hover';

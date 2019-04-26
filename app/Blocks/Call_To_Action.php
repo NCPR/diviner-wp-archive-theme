@@ -2,10 +2,10 @@
 
 namespace Diviner\Blocks;
 
-use function Tonik\Theme\App\template;
 use Carbon_Fields\Block;
 use Carbon_Fields\Field;
 use Diviner\Theme\Swatches;
+use Diviner\Admin\General;
 use Awps\FontAwesome;
 
 /**
@@ -24,6 +24,7 @@ class Call_To_Action {
 	const BLOCK_ICON = 'diviner_block_cta_icon';
 	const BLOCK_THEME = 'diviner_block_cta_theme';
 	const BLOCK_LINK = 'diviner_block_cta_link';
+	const BLOCK_PAGE = 'diviner_block_cta_page';
 	const BLOCK_SUBTITLE = 'diviner_block_cta_subtitle';
 
 
@@ -39,7 +40,8 @@ class Call_To_Action {
 				$this->get_color_text_hover_field(),
 				Field::make( 'image', static::BLOCK_BG_IMG, __( 'Background Image', 'ncpr-diviner' ) ),
 				$this->get_icon_field(),
-				Field::make( 'text', static::BLOCK_LINK, __( 'Link', 'ncpr-diviner' ) ),
+				$this->get_page_link(),
+				$this->get_manual_link(),
 				Field::make( 'text', static::BLOCK_SUBTITLE, __( 'Promo Subtitle', 'ncpr-diviner' ) )
 			])
 		->set_icon( 'star-filled' )
@@ -47,9 +49,34 @@ class Call_To_Action {
 	}
 
 	/**
+	 * Get manual link field
+	 *
+	 * @return Mixed
+	 */
+	public function get_manual_link() {
+		return Field::make( 'text', static::BLOCK_LINK, __( 'Link to URL', 'ncpr-diviner' ) )
+			->set_help_text( __( 'If you want to link this call to action to some other URL', 'ncpr-diviner' ) );
+	}
+
+	/**
+	 * Get page link field
+	 *
+	 * @throws
+	 *
+	 * @return Mixed
+	 */
+	public function get_page_link() {
+		$container = \Tonik\Theme\App\Main::instance()->container();
+		return Field::make( 'select', static::BLOCK_PAGE, __( 'Link to Page', 'ncpr-diviner' ) )
+			->add_options( [ $container[General::PIMPLE_CONTAINER_NAME], 'get_pages' ] )
+			->set_help_text( __( 'If you want to link this call to action to a page on your site', 'ncpr-diviner' ) );
+	}
+
+
+	/**
 	 * Get Color Text Field
 	 *
-	 * @return mixed
+	 * @return Field
 	 */
 	public function get_color_text_field() {
 		$palette = array_column(Swatches::get_colors(), 'color');
@@ -116,7 +143,15 @@ class Call_To_Action {
 	 * Custom Related Archive Items Block
 	 */
 	public function render( $block_data ) {
-		$has_link = isset( $block_data[static::BLOCK_LINK] ) && !empty( $block_data[static::BLOCK_LINK] );
+		$has_link = false;
+		$has_manual_link = isset( $block_data[static::BLOCK_LINK] ) && !empty( $block_data[static::BLOCK_LINK] );
+		$has_page_link = isset( $block_data[static::BLOCK_PAGE] ) && !empty( $block_data[static::BLOCK_PAGE] );
+
+		if ($has_page_link || $has_manual_link ) {
+			$has_link = true;
+			$link = ( $has_page_link ) ? get_permalink( $block_data[static::BLOCK_PAGE] ) : esc_url( $block_data[static::BLOCK_LINK] );
+		}
+
 		$block_class = uniqid('diviner-block__call-to-action-');
 		ob_start();
 		if ( $has_link ) {
@@ -139,7 +174,7 @@ class Call_To_Action {
 
 			printf(
 				'<a class="call-to-action__link" href="%s">',
-				esc_url($block_data[static::BLOCK_LINK])
+				$link
 			);
 		}
 		echo ('<div class="call-to-action__inner">');
