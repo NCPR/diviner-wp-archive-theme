@@ -90,7 +90,7 @@ class General {
 		$prev = get_previous_post_link(
 				'%link',
 			sprintf(
-					'<span class="fa fa-arrow-left"></span> %s',
+					'<span class="fa fa-arrow-left" aria-hidden="true"></span> %s',
 				'%title'
 			)
 		);
@@ -98,7 +98,7 @@ class General {
 		$next = get_next_post_link(
 			'%link',
 			sprintf(
-				'%s <span class="fa fa-arrow-right"></span>',
+				'%s <span class="fa fa-arrow-right" aria-hidden="true"></span>',
 				'%title'
 			)
 		);
@@ -517,7 +517,7 @@ class General {
 	 */
 	static public function the_primary_menu() {
 		return sprintf(
-			'<div class="primary-menu__wrap" data-js="primary-menu__wrap"><nav class="primary-menu"><button class="primary-menu__close" data-js="primary-menu__close"><span class="fas fa-window-close"></span><span class="a11y-visual-hide">%s</span></button><div class="a11y-visual-hide">%s</div>%s</nav></div>',
+			'<div class="primary-menu__wrap" data-js="primary-menu__wrap"><nav class="primary-menu"><button class="primary-menu__close" data-js="primary-menu__close"><span class="fa fa-times" aria-hidden="true"></span><span class="a11y-visual-hide">%s</span></button><div class="a11y-visual-hide">%s</div>%s</nav></div>',
 			__( 'Close Navigation', 'ncpr-diviner'),
 			__( 'Primary Navigation', 'ncpr-diviner'),
 			wp_nav_menu( [

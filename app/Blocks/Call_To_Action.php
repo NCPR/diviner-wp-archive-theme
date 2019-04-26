@@ -190,7 +190,7 @@ class Call_To_Action {
 		);
 		echo '<div class="call-to-action__content">';
 		if ( isset( $block_data[static::BLOCK_ICON] ) && !empty( $block_data[static::BLOCK_ICON] ) ) {
-			printf('<i class="call-to-action__icon fa %s"></i>',
+			printf('<i class="call-to-action__icon fa %s" aria-hidden="true"></i>',
 				esc_attr($block_data[static::BLOCK_ICON])
 			);
 		}

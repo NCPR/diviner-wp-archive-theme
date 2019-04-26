@@ -103,7 +103,7 @@ class Popup extends Component {
 						className="a-sai__control-btn a-sai__control-btn--previous"
 						onClick={this.onPreviousClick}
 					>
-						<span className="fas fa-arrow-left"></span>
+						<span className="fas fa-arrow-left" aria-hidden="true"></span>
 						<span className="a11y-visual-hide">
 							{ CONFIG.browse_page_localization.popup_previous }
 						</span>
@@ -115,7 +115,7 @@ class Popup extends Component {
 						<span className="a11y-visual-hide">
 							{ CONFIG.browse_page_localization.popup_next}
 						</span>
-						<span className="fas fa-arrow-right"></span>
+						<span className="fas fa-arrow-right" aria-hidden="true"></span>
 					</button>
 				</div>
 
