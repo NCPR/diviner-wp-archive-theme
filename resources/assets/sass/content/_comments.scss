@@ -1,12 +1,14 @@
 .comments {
-	margin-top: $d_spacer_lrg;
+	clear: both;
+	display: block;
+	margin-top: $d_spacer_m;
 	margin-bottom: $d_spacer_m;
 	padding: $d_spacer_m;
 	background-color: $color_white;
 	border: 1px solid $color_border;
 
 	@include g-state(medium) {
-		margin-top: $d_spacer_xlrg;
+		margin-top: $d_spacer_lrg;
 		margin-bottom: $d_spacer_lrg;
 		padding: $d_spacer_lrg;
 	}

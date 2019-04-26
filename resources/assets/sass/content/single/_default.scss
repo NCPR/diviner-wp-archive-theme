@@ -10,6 +10,7 @@
 .single-item__layout {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: $d_spacer_m;
 
 	/* stack in mobile and float in desktop ... see sidebar */
 	& > *:nth-child(1) {
@@ -22,6 +23,7 @@
 
 	@include g-state(medium) {
 		display: block;
+		margin-bottom: $d_spacer_lrg;
 	}
 }
 
@@ -69,5 +71,23 @@
 }
 
 .single-item__header-date {
-
+	font-size: 120%;
 }
+
+.edit-link {
+	display: block;
+	margin-top: $d_spacer_xsm;
+	margin-bottom: $d_spacer_m;
+
+	a {
+		@include button-small;
+	}
+}
+
+.page-links {
+	display: block;
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
+}
+
+

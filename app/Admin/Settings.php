@@ -80,7 +80,7 @@ class Settings {
 			__( 'Diviner', 'ncpr-diviner' ),
 			'manage_options',
 			static::GENERAL_SETTINGS_SLUG,
-			[ &$this, 'general_settings_render' ],
+			[ $this, 'general_settings_render' ],
 			'dashicons-star-filled'
 		);
 	}

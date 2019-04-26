@@ -9,6 +9,11 @@
 }
 
 .loop__posts {
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_lrg;
+	}
 
 	/* Case: for cards */
 	.loop--cards &,

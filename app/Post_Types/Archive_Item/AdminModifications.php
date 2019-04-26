@@ -15,13 +15,17 @@ class AdminModifications {
 	const DIV_COL_TYPE = 'div_col_type';
 
 	public function hooks() {
-		add_action( 'admin_menu', [ &$this,'register_menu_links' ] );
-		add_filter( 'admin_body_class', [ &$this,'admin_body_class' ] );
+		add_action( 'admin_menu', [ $this,'register_menu_links' ] );
+		add_filter( 'admin_body_class', [ $this,'admin_body_class' ] );
 		add_filter( 'manage_edit-diviner_archive_item_columns', [ $this, 'archival_item_columns' ] );
 		add_action( 'manage_diviner_archive_item_posts_custom_column', [ $this, 'manage_diviner_archive_item_posts_custom_column' ], 10, 2 );
 		add_action( 'carbon_fields_register_fields', [ $this, 'active_field_setup' ], 3, 0 );
 	}
 
+	/**
+	 * Runs the setup functions on all active fields
+	 *
+	 */
 	function active_field_setup(  ) {
 		$field_posts_ids = Diviner_Field::get_active_fields();
 		foreach($field_posts_ids as $field_post_id) {
@@ -33,20 +37,31 @@ class AdminModifications {
 		}
 	}
 
-	function manage_diviner_archive_item_posts_custom_column( $colname, $cptid  ) {
-		if ( $colname == static::DIV_COL_TYPE && !empty( $cptid ) ) {
-			$type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
+	/**
+	 * Injecting the type value into the type column
+	 *
+	 * @param string $colname
+	 * @param string $id
+	 */
+	function manage_diviner_archive_item_posts_custom_column( $colname, $id  ) {
+		if ( $colname == static::DIV_COL_TYPE && !empty( $id ) ) {
+			$type = carbon_get_post_meta( $id, Post_Meta::FIELD_TYPE );
 			if ( ! empty($type) ){
 				echo Post_Meta::get_type_label_from_id($type);
 			}
 		}
 	}
 
+	/**
+	 * Adding the type column
+	 *
+	 * @param array $columns
+	 * @return array
+	 */
 	function archival_item_columns( $columns ) {
 		$columns[ static::DIV_COL_TYPE ] = "Type";
 		return $columns;
 	}
-
 
 	/**
 	 * Adds one or more classes to the body tag in the dashboard.
@@ -66,23 +81,10 @@ class AdminModifications {
 			return $classes;
 		}
 
-		if ( get_the_ID() ) {
-
-		}
-
 		$type = carbon_get_post_meta( get_the_ID(), Post_Meta::FIELD_TYPE );
-        $classes .= ' archive-item-edit';
+		$classes .= ' archive-item-edit';
 		if ( ! empty( $type ) ) {
 			$classes .= sprintf( ' archive-item-edit--%s', $type );
-		} else {
-			// pseudo code
-			// check the query
-			if ( !empty( $_GET[ 'type' ] ) ) {
-				$type = $_GET[ 'type' ];
-				if ( ! empty( $type ) ) {
-					// $classes .= sprintf( ' archive-item-edit--%s', $field_type );
-				}
-			}
 		}
 
 		return $classes;

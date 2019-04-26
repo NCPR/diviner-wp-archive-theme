@@ -4,7 +4,6 @@
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
-use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
 use Carbon_Fields\Field;
 
 /**
@@ -113,10 +112,17 @@ class Select_Field extends FieldType {
 			});
 			$num_items = (int)ceil(count($select_options) / 3 );
 			for ($i = 0; $i < $num_items; $i++) {
+				if (!is_object($select_options[$i])) {
+					continue;
+				}
+				$type = ( isset( $select_options[$i] ) && is_object( $select_options[$i] ) && isset( $select_options[$i]->value ) ) ? $select_options[$i]->value : '' ;
+				$value = ( isset( $select_options[$num_items + $i] ) && is_object( $select_options[$num_items + $i] ) && isset( $select_options[$num_items + $i]->value ) ) ? $select_options[$num_items + $i]->value : '' ;
+				$label = ( isset( $select_options[(2 * $num_items) + $i] ) && is_object( $select_options[(2 * $num_items) + $i] ) && isset( $select_options[(2 * $num_items) + $i]->value ) ) ? $select_options[(2 * $num_items) + $i]->value : '' ;
+
 				$select_options_array[] = [
-					'_type' => $select_options[$i]->value,
-					FieldPostMeta::FIELD_SELECT_OPTIONS_VALUE => $select_options[$num_items + $i]->value,
-					FieldPostMeta::FIELD_SELECT_OPTIONS_LABEL => $select_options[(2 * $num_items) + $i]->value,
+					'_type' => $type,
+					FieldPostMeta::FIELD_SELECT_OPTIONS_VALUE => $value,
+					FieldPostMeta::FIELD_SELECT_OPTIONS_LABEL => $label,
 				];
 			}
 		}

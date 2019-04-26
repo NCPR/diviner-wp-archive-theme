@@ -20,7 +20,7 @@ class Widgets {
 		add_filter( 'widgets_init', [ $this, 'register_sidebars' ] );
 		add_filter( 'widgets_init', [ $this, 'load_widgets' ] );
 		add_action( 'theme/header/after-title', [$this, 'after_title']);
-		add_action( 'theme/before-content', [$this, 'before_content']);
+		add_action( 'theme/above-content', [$this, 'above_content']);
 	}
 
 	function load_widgets() {
@@ -51,7 +51,7 @@ class Widgets {
 		}
 	}
 
-	function before_content() {
+	function above_content() {
 		if (is_page_template('page-sidebar.php')) {
 			static::render_sidebar(static::SIDEBAR_ID_RIGHT);
 		}

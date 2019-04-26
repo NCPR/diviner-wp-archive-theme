@@ -17,11 +17,11 @@ class Customizer {
 
 	const SECTION_THEME_SETTING_COLOR_HEADER  = 'diviner_setting_color_header';
 	const SECTION_THEME_CONTROL_COLOR_HEADER  = 'diviner_control_color_header';
-	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#DDDDDD';
+	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#bbbbbb';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT  = 'diviner_setting_color_header_text';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_TEXT  = 'diviner_control_color_header_text';
-	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT = '#dddddd';
+	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT = '#ffffff';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_MENU  = 'diviner_setting_color_header_menu';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_MENU  = 'diviner_control_color_header_menu';
@@ -484,6 +484,15 @@ class Customizer {
 			.primary-menu .menu a:hover,
 			.primary-menu .menu a:focus {
 				color: <?php echo General::luminance( substr($color_btn_link, 1), -0.8 ); ?>;
+			}
+
+			.single-item__navigation a {
+				background-color: <?php echo $color_btn_link; ?> !important;
+			}
+
+			.single-item__navigation a:hover,
+			.single-item__navigation a:focus {
+				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
 			@media screen and (min-width: 960px) {

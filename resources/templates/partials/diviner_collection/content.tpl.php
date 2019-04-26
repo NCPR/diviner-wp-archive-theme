@@ -19,11 +19,17 @@ use function Tonik\Theme\App\template;
 	<div class="single-item__layout single-item__block">
 
 		<?php
-		do_action('theme/before-content');
+		do_action('theme/above-content');
 		?>
 
 		<div class="d-content">
+
+			<?php
+			do_action('theme/before-content');
+			?>
+
 			<?php the_content(); ?>
+
 		</div>
 
 	</div>
@@ -55,5 +61,9 @@ use function Tonik\Theme\App\template;
 
 
 	</div>
+
+	<?php
+	do_action('theme/article-end');
+	?>
 
 </article>
