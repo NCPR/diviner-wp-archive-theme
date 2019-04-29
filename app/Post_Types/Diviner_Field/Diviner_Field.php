@@ -34,6 +34,51 @@ class Diviner_Field {
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 		add_action( 'init', [ $this, 'hydrate_cache' ], 0 );
 		add_filter( 'carbon_fields_should_save_field_value', [ $this, 'filter_should_save_field_value' ], 10, 3 );
+		add_filter( 'carbon_fields_should_delete_field_value_on_save', [ $this, 'filter_should_delete_field_value' ], 10, 2 );
+	}
+
+	/**
+	 * Checks if a value is slug friendly lowercase and dash
+	 *
+	 * @param string $value
+	 * @return boolean
+	 */
+	public function is_slugfriendly_string($value) {
+		return preg_match('/^[a-z-]+$/', $value);
+	}
+
+	/**
+	 * Checks if a value is machine readable lowercase and underscore
+	 *
+	 * @param string $value
+	 * @return boolean
+	 */
+	public function is_machine_readable_string($value) {
+		return preg_match('/^[a-z_]+$/', $value);
+	}
+
+	/**
+	 * Checks if a value can be deleted
+	 *
+	 * @param bool $delete
+	 * @param \Carbon_Fields\Field\Select_Field $field
+	 * @return boolean
+	 */
+	public function filter_should_delete_field_value( $delete, $field ) {
+		$value = $field->get_value();
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_SELECT_OPTIONS_VALUE ) ) {
+			return $this->is_machine_readable_string($value);
+		}
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_CPT_ID ) ) {
+			return $this->is_machine_readable_string($value);
+		}
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_CPT_SLUG ) ) {
+			return $this->is_slugfriendly_string($value);
+		}
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_TAXONOMY_SLUG ) ) {
+			return $this->is_slugfriendly_string($value);
+		}
+		return true;
 	}
 
 	/**
@@ -47,13 +92,16 @@ class Diviner_Field {
 	public function filter_should_save_field_value( $save, $value, $field ) {
 		// ToDo display notification
 		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_SELECT_OPTIONS_VALUE ) ) {
-			// removed whitespace and lower case
-			$zname_clean = preg_replace('/\s*/', '', $value);
-			// convert the string to all lowercase
-			$zname_clean = strtolower($zname_clean);
-			if ( $zname_clean !== $value ) {
-				return false;
-			}
+			return $this->is_machine_readable_string($value);
+		}
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_CPT_ID ) ) {
+			return $this->is_machine_readable_string($value);
+		}
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_CPT_SLUG ) ) {
+			return $this->is_slugfriendly_string($value);
+		}
+		if ( $field->get_name() === Helper::get_real_field_name(PostMeta::FIELD_TAXONOMY_SLUG ) ) {
+			return $this->is_slugfriendly_string($value);
 		}
 		return true;
 	}
