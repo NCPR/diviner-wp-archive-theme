@@ -7,6 +7,8 @@
 
 import { appReady } from '../../utils/events';
 
+import titleValidation from '../modules/title-validation';
+
 /**
  * @function bindEvents
  * @description Bind global event listeners here,
@@ -25,6 +27,8 @@ const init = () => {
 	// apply browser classes
 
 	// bindEvents();
+
+	titleValidation();
 
 	// initialize the main scripts
 
