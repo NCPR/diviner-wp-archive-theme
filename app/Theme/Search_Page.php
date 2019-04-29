@@ -29,7 +29,7 @@ class Search_Page {
 		$searchpage = carbon_get_theme_option(Settings::FIELD_GENERAL_NAV_SEARCH_PAGE );
 		if ( !empty( $searchpage ) ) {
 			printf(
-				'<a class="header__menu-search" href="%s"><span class="fas fa-search"></span><div class="a11y-hidden">%s</div></a>',
+				'<a class="header__menu-search" href="%s"><span class="fas fa-search" aria-hidden="true"></span><div class="a11y-hidden">%s</div></a>',
 				get_permalink( $searchpage ),
 				__( 'Search', 'ncpr-diviner')
 			);

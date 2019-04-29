@@ -18,7 +18,6 @@
 		z-index: 10;
 		width: 100%;
 		height: 100%;
-		background: $color_white;
 		overflow: auto;
 
 		@include g-state(full) {
@@ -82,10 +81,11 @@
 	a {
 		@include button-global;
 
-		font-size: 20px;
-		text-transform: none;
+		font-size: 25px;
+		text-transform: uppercase;
 		padding: .5em 1em;
 		transition: $t_transition;
+		font-weight: $t_font_weight_normal;
 
 		.menu--opened & {
 			display: block;
@@ -116,6 +116,8 @@
 }
 
 .primary-menu__close {
+	@include button-global;
+
 	display: none;
 	position: absolute;
 	top: 0;
@@ -123,6 +125,14 @@
 	right: 0;
 	padding: 0;
 	font-size: 30px;
+	background: transparent;
+	color: $color_grey_light;
+
+	&:hover,
+	&:focus {
+		background-color: transparent;
+		color: $color_white;
+	}
 
 	.menu--opened & {
 		display: block;

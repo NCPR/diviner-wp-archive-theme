@@ -12,10 +12,10 @@ $swiper_data = !empty($swiper_data) ? $swiper_data : '';
 
 	<!-- If we need navigation buttons -->
 	<button class="btn btn--s swiper-button swiper-button-prev">
-		<span class="fas fa-arrow-left"></span>
+		<span class="fas fa-arrow-left" aria-hidden="true"></span>
 	</button>
 	<button class="btn btn--s swiper-button swiper-button-next">
-		<span class="fas fa-arrow-right"></span>
+		<span class="fas fa-arrow-right" aria-hidden="true"></span>
 	</button>
 
 	<!-- If we need scrollbar -->

@@ -18,10 +18,9 @@ class Main {
 		$this->container = $container;
 	}
 
-	public function init() {
-		//$this->providers();
-	}
-
+	/**
+	 * @return Container $container
+	 */
 	public function container() {
 		return $this->container;
 	}

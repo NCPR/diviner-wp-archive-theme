@@ -16,6 +16,8 @@ use Diviner\Theme\Home_Page;
  */
 class Settings {
 
+	const PIMPLE_CONTAINER_NAME = 'admin.settings';
+
 	const FIELD_GENERAL_PERMISSIONS = 'diviner_field_general_permissions';
 	const FIELD_GENERAL_BROWSE_MODAL = 'diviner_field_general_browse_modal';
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
@@ -41,8 +43,6 @@ class Settings {
 	 */
 	protected static $theme_options;
 
-	private $_pages = null;
-
 	public function hooks() {
 		add_action( 'admin_menu', [ $this, 'create_admin_menus' ], 9 );
 		add_action( 'carbon_fields_register_fields', [$this, 'crb_attach_theme_options'], 1, 0 );
@@ -54,19 +54,10 @@ class Settings {
 			return $data;
 		}
 		$display_popup = carbon_get_theme_option(static::FIELD_GENERAL_BROWSE_MODAL );
-		$help_page_link = carbon_get_theme_option(static::FIELD_GENERAL_HELP_PAGE );
 		$settings = [
 			'permission_notice' => carbon_get_theme_option(static::FIELD_GENERAL_PERMISSIONS),
 			'display_popup'     => empty( $display_popup ) ? false : $display_popup
 		];
-		/*
-		if (!empty($help_page_link)) {
-			$settings['help_page'] = [
-				'title' => get_the_title($help_page_link),
-				'permalink' => get_the_permalink($help_page_link)
-			];
-		}
-		*/
 		$data['settings'] = $settings;
 		return $data;
 	}
@@ -223,8 +214,9 @@ class Settings {
 	}
 
 	public function search_page_field() {
+		$container = \Tonik\Theme\App\Main::instance()->container();
 		return Field::make( 'select', static::FIELD_GENERAL_NAV_SEARCH_PAGE, __( 'Nav Search Page', 'ncpr-diviner' ) )
-			->add_options( [ $this, 'get_pages' ] )
+			->add_options( [ $container[General::PIMPLE_CONTAINER_NAME], 'get_pages' ] )
 			->set_help_text( __( 'Select a page to link the search icon to in the navigation', 'ncpr-diviner' ) );
 	}
 
@@ -270,28 +262,10 @@ class Settings {
 			->set_default_value( '1' );
 	}
 
-	public function get_pages() {
-		if (!empty($this->_pages)) {
-			return $this->_pages;
-		}
-		$cleaned = [
-			0 => ''
-		];
-		$args = [
-			'post_type'    => 'page',
-			'sort_column'  => 'menu_order'
-		];
-		$pages = get_pages( $args );
-		foreach ($pages as $page) {
-			$cleaned[$page->ID] = $page->post_title;
-		}
-		$this->_pages = $cleaned;
-		return $this->_pages;
-	}
-
 	public function help_page_field() {
+		$container = \Tonik\Theme\App\Main::instance()->container();
 		return Field::make( 'select', static::FIELD_GENERAL_HELP_PAGE, __( 'Help Page', 'ncpr-diviner' ) )
-			->add_options( [ $this, 'get_pages' ] )
+			->add_options( [ $container[General::PIMPLE_CONTAINER_NAME], 'get_pages' ] )
 			->set_help_text( __( 'If you want a help page, create one under pages in the main menu, then select that page in this dropdown', 'ncpr-diviner' ) );
 	}
 

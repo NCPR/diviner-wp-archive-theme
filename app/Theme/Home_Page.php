@@ -109,15 +109,15 @@ class Home_Page {
 
 		<!-- wp:columns {"columns":3,"align":"wide"} -->
 		<div class="wp-block-columns alignwide has-3-columns"><!-- wp:column -->
-			<div class="wp-block-column"><!-- wp:carbon-fields/diviner-block-cta {"data":{"diviner_block_cta_title":"Promo Title 1","diviner_block_cta_color":"#F4D35E","diviner_block_cta_text_color":"#000000","diviner_block_cta_text_color_hover":"#0D3B66","diviner_block_cta_bg_img":"","diviner_block_cta_icon":"fa-magnet","diviner_block_cta_link":"#","diviner_block_cta_subtitle":"More info here"}} /--></div>
+			<div class="wp-block-column"><!-- wp:carbon-fields/diviner-block-cta {"data":{"diviner_block_cta_title":"Promo Title 1","diviner_block_cta_color":"#F4D35E","diviner_block_cta_text_color":"#000000","diviner_block_cta_text_color_hover":"#0D3B66","diviner_block_cta_bg_img":"","diviner_block_cta_icon":"fa-magnet","diviner_block_cta_link":"","diviner_block_cta_page":"","diviner_block_cta_subtitle":"More info here"}} /--></div>
 			<!-- /wp:column -->
 
 			<!-- wp:column -->
-			<div class="wp-block-column"><!-- wp:carbon-fields/diviner-block-cta {"data":{"diviner_block_cta_title":"Promo Title 2","diviner_block_cta_color":"#F4D35E","diviner_block_cta_bg_img":"","diviner_block_cta_icon":"fa-headphones","diviner_block_cta_link":"#","diviner_block_cta_subtitle":"Some subtitle","diviner_block_cta_text_color":"#000000","diviner_block_cta_text_color_hover":"#0D3B66"}} /--></div>
+			<div class="wp-block-column"><!-- wp:carbon-fields/diviner-block-cta {"data":{"diviner_block_cta_title":"Promo Title 2","diviner_block_cta_color":"#F4D35E","diviner_block_cta_bg_img":"","diviner_block_cta_icon":"fa-headphones","diviner_block_cta_link":"","diviner_block_cta_page":"","diviner_block_cta_subtitle":"Some subtitle","diviner_block_cta_text_color":"#000000","diviner_block_cta_text_color_hover":"#0D3B66"}} /--></div>
 			<!-- /wp:column -->
 
 			<!-- wp:column -->
-			<div class="wp-block-column"><!-- wp:carbon-fields/diviner-block-cta {"data":{"diviner_block_cta_title":"Promo Title 3 ","diviner_block_cta_color":"#F4D35E","diviner_block_cta_text_color":"#000000","diviner_block_cta_text_color_hover":"#0D3B66","diviner_block_cta_bg_img":"","diviner_block_cta_icon":"fa-heart","diviner_block_cta_link":"#","diviner_block_cta_subtitle":"Another subtitle"}} /--></div>
+			<div class="wp-block-column"><!-- wp:carbon-fields/diviner-block-cta {"data":{"diviner_block_cta_title":"Promo Title 3 ","diviner_block_cta_color":"#F4D35E","diviner_block_cta_text_color":"#000000","diviner_block_cta_text_color_hover":"#0D3B66","diviner_block_cta_bg_img":"","diviner_block_cta_icon":"fa-heart","diviner_block_cta_link":"","diviner_block_cta_page":"","diviner_block_cta_subtitle":"Another subtitle"}} /--></div>
 			<!-- /wp:column --></div>
 		<!-- /wp:columns -->
 

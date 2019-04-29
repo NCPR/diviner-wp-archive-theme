@@ -249,7 +249,7 @@ class PostMeta {
 
 	public function get_field_taxonomy_slug($required = false) {
 		return Field::make( 'text', static::FIELD_TAXONOMY_SLUG, __( 'Taxonomy Slug', 'ncpr-diviner' ) )
-			->set_help_text( __( 'No spaces or underscores', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Must be lowercase and dashes only (ex: types-of-work)', 'ncpr-diviner' ) )
 			->set_required( $required );
 	}
 

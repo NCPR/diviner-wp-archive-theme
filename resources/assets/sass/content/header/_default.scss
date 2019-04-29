@@ -78,7 +78,7 @@
 .header__menu-trigger {
 	@include button-global;
 
-	background-color: $color_white;
+	background-color: transparent;
 	border: 0;
 	padding: 6px 7px 5px;
 	width: auto;
@@ -96,8 +96,10 @@
 
 	&:hover,
 	&:focus {
+		background-color: transparent;
+
 		span {
-			color: $color_black;
+			color: $color_white;
 		}
 	}
 }

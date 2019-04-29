@@ -9,6 +9,8 @@ namespace Diviner\Admin;
  */
 class Editor {
 
+	const PIMPLE_CONTAINER_NAME = 'admin.classic_editor';
+
 	public function hooks() {
 		// add_action( 'admin_init', [ $this, 'visual_editor_styles' ], 10, 0 );  // if add_theme_support('editor-styles');
 		add_action( 'enqueue_block_assets', [ $this,'block_editor_assets' ] );

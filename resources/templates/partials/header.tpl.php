@@ -7,7 +7,7 @@
 	<?= $primary_menu ?>
 
 	<button class="header__menu-trigger" data-js="header__menu-trigger">
-		<span class="fas fa-bars"></span>
+		<span class="fas fa-bars" aria-hidden="true"></span>
 		<div class="a11y-hidden">
 			<?= __( 'Toggle Menu', 'ncpr-diviner'); ?>
 		</div>

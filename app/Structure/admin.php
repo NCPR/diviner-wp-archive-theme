@@ -10,22 +10,22 @@ use \Diviner\Admin\Editor;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
 
-$container[ 'admin.general' ] = function ( Container $container ) {
+$container[ General::PIMPLE_CONTAINER_NAME ] = function ( Container $container ) {
 	return new General();
 };
-$container[ 'admin.general' ]->hooks();
+$container[ General::PIMPLE_CONTAINER_NAME ]->hooks();
 
-$container[ 'admin.settings' ] = function ( Container $container ) {
+$container[ Settings::PIMPLE_CONTAINER_NAME ] = function ( Container $container ) {
 	return new Settings();
 };
-$container[ 'admin.settings' ]->hooks();
+$container[ Settings::PIMPLE_CONTAINER_NAME ]->hooks();
 
-$container[ 'admin.customizer' ] = function ( Container $container ) {
+$container[ Customizer::PIMPLE_CONTAINER_NAME ] = function ( Container $container ) {
 	return new Customizer();
 };
-$container[ 'admin.customizer' ]->hooks();
+$container[ Customizer::PIMPLE_CONTAINER_NAME ]->hooks();
 
-$container[ 'admin.classic_editor' ] = function ( Container $container ) {
+$container[ Editor::PIMPLE_CONTAINER_NAME ] = function ( Container $container ) {
 	return new Editor();
 };
-$container[ 'admin.classic_editor' ]->hooks();
+$container[ Editor::PIMPLE_CONTAINER_NAME ]->hooks();

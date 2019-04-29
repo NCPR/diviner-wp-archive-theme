@@ -232,7 +232,7 @@ class Theme {
 		}
 
 		return sprintf(
-			'<a href="%s" class="btn"><i class="fas fa-download"></i><span>%s</span></a>',
+			'<a href="%s" class="btn"><i class="fas fa-download" aria-hidden="true"></i><span>%s</span></a>',
 			$document_attachment_url,
 			$download_text
 		);
