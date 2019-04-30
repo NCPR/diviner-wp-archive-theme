@@ -23,7 +23,13 @@ class Title {
 
 		// Blog
 		if ( is_home() ) {
-			return __( 'Blog', 'ncpr-diviner' );
+			$page_object = get_queried_object();
+			if ($page_object && !empty( $page_object->post_title ) ) {
+				return get_queried_object()->post_title;
+			} else {
+				return __( 'Blog', 'ncpr-diviner' );
+			}
+
 		}
 
 		// Search
