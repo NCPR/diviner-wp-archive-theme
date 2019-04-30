@@ -16,11 +16,11 @@ import { CONFIG } from '../globals/config';
 import objectToParameters from '../utils/data/objectToParams';
 import { getFieldTypeFromId } from '../utils/data/fieldUtils';
 import { lock, unlock } from '../utils/dom/bodyLock';
+import { isPlainPermalinkStructure } from '../utils/data/permalinks';
 
 const site = new WPAPI({
-	endpoint: '/wp-json'
+	endpoint: isPlainPermalinkStructure() ? '?rest_route=' : '/wp-json'
 });
-
 
 const params = [
 	'order_by',
@@ -230,7 +230,7 @@ function fetchPosts(cacheKey) {
 		obj.pPage = getState().page;
 
 		const param = objectToParameters(obj);
-		const path = `${CONFIG.base_browse_url}/?${param}`;
+		const path = isPlainPermalinkStructure() ? `${CONFIG.base_browse_url}&${param}` : `${CONFIG.base_browse_url}/?${param}`;
 		history.push(path);
 
 		archivalQuery.then((data) => {
