@@ -1,8 +1,9 @@
-// ncaw_config for data coming from BE
+// diviner_config for data coming from BE
 const configDefault = {
 	browse_page_title: '',
 	browse_page_content: '',
 	base_browse_url: '',
+	permalink_structure: '',
 	order_by: [],
 	tags: [],
 	taxonomies: [],
