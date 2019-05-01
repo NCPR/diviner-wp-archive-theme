@@ -4,8 +4,12 @@ import LazyLoad from 'react-lazy-load';
 
 import {
 	DIV_AI_TYPE_VIDEO,
-	DIV_AI_TYPE_AUDIO
+	DIV_AI_TYPE_AUDIO,
+	DIV_AI_TYPE_DOCUMENT,
+	DIV_AI_TYPE_PHOTO,
+	DIV_AI_TYPE_MIXED
 } from '../config/settings';
+import {REQUEST_POSTS} from "../actions";
 
 
 class Item extends Component {
@@ -38,15 +42,18 @@ class Item extends Component {
 
 	render() {
 		let itemClass = 'a-item';
-		if (this.props.type === DIV_AI_TYPE_AUDIO) itemClass += ' a-item--has-audio';
-		if (this.props.type === DIV_AI_TYPE_VIDEO) itemClass += ' a-item--has-video';
+		const image = this.getImage();
+		if (!image) {
+			itemClass += ` a-item--no-feature-image`;
+		}
+		itemClass += ` a-item--type-${this.props.type}`;
 
 		return (
 			<div className={itemClass}>
 				<div className="a-item__action" onClick={this.onClick}>
 					<div className="a-item__figure">
 						<div className="a-item__img">
-							{this.getImage()}
+							{image}
 						</div>
 						<div
 							className="a-item__figure-caption"

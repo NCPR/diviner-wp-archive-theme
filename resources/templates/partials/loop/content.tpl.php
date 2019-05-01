@@ -34,7 +34,7 @@ use \Diviner\Config\General;
 			</a>
 			<div class="loop-item__meta">
 				<time class="loop-item__date">
-					<?php the_date(); ?>
+					<?php the_time( get_option( 'date_format' ) ); ?>
 				</time>
 			</div>
 

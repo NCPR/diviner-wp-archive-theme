@@ -6,7 +6,9 @@
 		</a>
 
 		<time>
-			<small><?php the_date(); ?></small>
+			<small>
+				<?php the_time( get_option( 'date_format' ) ); ?>
+			</small>
 		</time>
 	</div>
 
