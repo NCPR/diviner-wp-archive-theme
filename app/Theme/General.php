@@ -84,7 +84,7 @@ class General {
 	 * @return void
 	 */
 	function post_navigation() {
-		if ( !is_single() ) {
+		if ( !is_single() || is_singular( Archive_Item::NAME ) ) {
 			return;
 		}
 		$prev = get_previous_post_link(
