@@ -32,8 +32,7 @@ if ( get_post_type() === Archive_Item::NAME ) {
 					get_post_thumbnail_id(),
 					$image_size_src,
 					$image_size_src_set,
-					false,
-					'(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w'
+					false
 				);
 				?>
 			</div>

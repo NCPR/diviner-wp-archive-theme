@@ -52,11 +52,11 @@ class Image {
 	 * @param int        $image
 	 * @param string     $image_size_src
 	 * @param string     $image_size_srcset
-	 * @param string     $override_img_sizes
+	 * @param array      $image_classes
 	 *
 	 * @return string
 	 */
-	public static function get_image( $image, $image_size_src, $image_size_srcset, $is_lazy = false, $override_img_sizes ) {
+	public static function get_image( $image, $image_size_src, $image_size_srcset, $is_lazy = false, $image_classes = [] ) {
 		if ( ! wp_attachment_is_image( $image ) ) {
 			return false;
 		}
@@ -75,22 +75,28 @@ class Image {
 			$img_sizes = '(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w';
 		}
 
+		if ($is_lazy) {
+			$image_classes[] = 'lazyload';
+		}
+
 		if ( $is_lazy ) {
 			return sprintf(
-				'<img data-src="%s" data-srcset="%s" data-sizes="%s" alt="%s" class="lazyload">',
+				'<img data-src="%s" data-srcset="%s" data-sizes="%s" alt="%s" class="%s">',
 				esc_attr( $img_src ),
 				esc_attr( $img_srcset ),
 				esc_attr( $img_sizes ),
-				esc_attr( $img_alt )
+				esc_attr( $img_alt ),
+				implode(" ",$image_classes)
 			);
 		}
 
 		return sprintf(
-			'<img src="%s" srcset="%s" sizes="%s" alt="%s">',
+			'<img src="%s" srcset="%s" sizes="%s" alt="%s" class="%s">',
 			esc_attr( $img_src ),
 			esc_attr( $img_srcset ),
 			esc_attr( $img_sizes ),
-			esc_attr( $img_alt )
+			esc_attr( $img_alt ),
+			implode(" ",$image_classes)
 		);
 	}
 
@@ -102,10 +108,10 @@ class Image {
 	 * @param string     $image_size_src
 	 * @param string     $image_size_srcset
 	 * @param bool       $is_lazy
-	 * @param string     $override_img_sizes
+	 * @param array      $image_classes
 	 */
-	public static function image( $image, $image_size_src, $image_size_srcset, $is_lazy = false, $override_img_sizes ) {
-		echo static::get_image( $image, $image_size_src, $image_size_srcset, $is_lazy, $override_img_sizes );
+	public static function image( $image, $image_size_src, $image_size_srcset, $is_lazy = false, $image_classes = [] ) {
+		echo static::get_image( $image, $image_size_src, $image_size_srcset, $is_lazy, $image_classes );
 	}
 
 	/**

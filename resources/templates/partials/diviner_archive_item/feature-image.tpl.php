@@ -9,6 +9,9 @@ if ( !isset( $thumbnail_id ) ) {
 	return;
 }
 
+$caption = wp_get_attachment_caption(get_post_thumbnail_id());
+$has_caption = !empty($caption);
+
 ?>
 <div class="subheader">
 	<div class="subheader__image">
@@ -16,8 +19,12 @@ if ( !isset( $thumbnail_id ) ) {
 			get_post_thumbnail_id(),
 			General::IMAGE_SIZE_ARCHIVE_SINGLE_M,
 			General::IMAGE_SIZE_ARCHIVE_SINGLE_LRG,
-			true,
-			'(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w'
+			true
 		); ?>
 	</div>
+	<?php if ( $has_caption ) { ?>
+		<div class="subheader__image-caption">
+			<?php echo $caption; ?>
+		</div>
+	<?php } ?>
 </div>
