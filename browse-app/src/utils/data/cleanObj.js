@@ -10,6 +10,7 @@ const cleanObj = obj => {
 			delete obj[propName];
 		}
 	}
+	return obj;
 };
 
 export default cleanObj;

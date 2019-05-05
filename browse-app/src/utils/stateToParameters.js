@@ -14,7 +14,7 @@ export default function stateToParameters(state) {
 	};
 	if (state.fieldData) {
 		CONFIG.fields.forEach((field) => {
-			if (state.fieldData[field.field_id]) {
+			if (state.fieldData[field.field_id] && state.fieldData[field.field_id]) {
 				stringable.filters[field.field_id] = state.fieldData[field.field_id];
 			}
 		});
