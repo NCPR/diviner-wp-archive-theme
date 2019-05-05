@@ -55,6 +55,22 @@
 	font-size: 90%;
 }
 
+.a-sai__img-wrap {
+	max-height: 320px;
+	background-color: $color_grey_dark;
+
+	a {
+		display: flex;
+		justify-content: center;
+	}
+
+	img {
+		height: 100%;
+		width: auto;
+		max-height: 320px;
+	}
+}
+
 .skylight-wrapper {
 
 	@include g-state( medium ) {
