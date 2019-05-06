@@ -66,6 +66,23 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 	}
 	?>
 
+
+	<?php
+	if ($show_document) { // <iframe src = "/ViewerJS/#../demo/ohm2013.odp" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe>
+		$document_output = Archive_Item_Theme::render_document_iframe();
+		if (!empty($document_output)) {
+			printf(
+				'<div class="archive-item__content-block">%s</div>',
+				$document_output
+			);
+		}
+
+	}
+	?>
+
+
+
+
 	<div class="single-item__layout">
 
 		<aside class="sidebar sidebar--grey sidebar--pull-right">

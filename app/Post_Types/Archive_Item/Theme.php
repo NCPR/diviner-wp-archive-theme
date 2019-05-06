@@ -205,6 +205,31 @@ class Theme {
 		);
 	}
 
+
+	/**
+	 * Renders document iframe
+	 *
+	 * @param int | string $post_id
+	 * @return string
+	 *
+	 */
+	static public function render_document_iframe($post_id = null) {
+		if (!isset($post_id)) {
+			$post_id = get_the_ID();
+		}
+
+		$document = carbon_get_post_meta( $post_id, Archive_Item_Post_Meta::FIELD_DOCUMENT);
+		if (empty($document)) {
+			return '';
+		}
+		return sprintf(
+			'<div class="document-embed"><div class="document-embed__container document-embed__container--3-4"><iframe src = "%s/viewerjs/index.html#%s" width="724" height="1024" allowfullscreen webkitallowfullscreen></iframe></div></div>',
+			get_template_directory_uri(),
+			wp_get_attachment_url( $document )
+		);
+	}
+
+
 	/**
 	 * Renders document. Display title in button if there is one... otherwise just download
 	 *

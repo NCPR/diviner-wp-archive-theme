@@ -66,6 +66,7 @@ class General {
 		add_action( 'wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
 		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ] );
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
+		add_filter( 'upload_mimes', [ $this, 'viewerjs_mime_type_filter' ] );
 
 		add_action( 'theme/header', [ $this, 'render_header' ] );
 		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ] );
@@ -76,6 +77,20 @@ class General {
 		add_action( 'theme/article-end', [ $this, 'page_links' ], 4 );
 		add_action( 'theme/article-end', [ $this, 'post_navigation' ], 5 );
 
+	}
+
+	function viewerjs_mime_type_filter($mime_types) {
+		$mime_types['odt'] =  'application/vnd.oasis.opendocument.text';
+		$mime_types['fodt'] = 'application/vnd.oasis.opendocument.text-flat-xml';
+		$mime_types['ott'] =  'application/vnd.oasis.opendocument.text-template';
+		$mime_types['odp'] =  'application/vnd.oasis.opendocument.presentation';
+		$mime_types['fodp'] = 'application/vnd.oasis.opendocument.presentation-flat-xml';
+		$mime_types['otp'] =  'application/vnd.oasis.opendocument.presentation-template';
+		$mime_types['ods'] =  'application/vnd.oasis.opendocument.spreadsheet';
+		$mime_types['fods'] = 'application/vnd.oasis.opendocument.spreadsheet-flat-xml';
+		$mime_types['ots'] =  'application/vnd.oasis.opendocument.spreadsheet-template';
+		$mime_types['pdf'] =  'application/pdf';
+		return $mime_types;
 	}
 
 	/**
