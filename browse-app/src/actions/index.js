@@ -16,22 +16,24 @@ import { CONFIG } from '../globals/config';
 import objectToParameters from '../utils/data/objectToParams';
 import { getFieldTypeFromId } from '../utils/data/fieldUtils';
 import { lock, unlock } from '../utils/dom/bodyLock';
+import { isPlainPermalinkStructure } from '../utils/data/permalinks';
 
 const site = new WPAPI({
-	endpoint: '/wp-json'
+	endpoint: isPlainPermalinkStructure() ? '?rest_route=' : '/wp-json'
 });
-
 
 const params = [
 	'order_by',
 ];
-CONFIG.fields.forEach((field)=> {
-	if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
-		params.push(field[FIELD_PROP_TAXONOMY_NAME]);
-	} else {
-		params.push(field[FIELD_PROP_FIELD_ID]);
-	}
-});
+if (CONFIG.fields && CONFIG.fields.length) {
+	CONFIG.fields.forEach((field)=> {
+		if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
+			params.push(field[FIELD_PROP_TAXONOMY_NAME]);
+		} else {
+			params.push(field[FIELD_PROP_FIELD_ID]);
+		}
+	});
+}
 
 site.archivalItems = site.registerRoute(
 	'wp/v2',
@@ -182,18 +184,42 @@ function receivePosts(cacheKey, json) {
 	};
 }
 
+const getParamsObjectFromState = (getState) => {
+	const obj = {};
+	if (getState().orderBy) {
+		obj.order_by = getState().orderBy;
+	}
+
+	const fieldData = getState().fieldData;
+	if (!_.isEmpty(fieldData) ) {
+		_.forOwn(getState().fieldData, (value, key) => {
+			obj[key] = value;
+		});
+	}
+
+	if (getState().queryString.length) {
+		obj.search = getState().queryString;
+	}
+	obj.pPage = getState().page;
+	return obj;
+};
+
+const updateHistory = (getState) => {
+	const obj = getParamsObjectFromState(getState);
+	const param = objectToParameters(obj);
+	const path = isPlainPermalinkStructure() ? `${CONFIG.base_browse_url}&${param}` : `${CONFIG.base_browse_url}/?${param}`;
+	history.push(path);
+};
+
 // items: store.getState().otherReducer.items,
 function fetchPosts(cacheKey) {
 	return (dispatch, getState) => {
 		dispatch(requestPosts(cacheKey));
-		const archivalQuery = site.archivalItems();
 
-		// change URL
-		const obj = {};
+		const archivalQuery = site.archivalItems();
 
 		if (getState().orderBy) {
 			archivalQuery.order_by(getState().orderBy);
-			obj.order_by = getState().orderBy;
 		}
 
 		const fieldData = getState().fieldData;
@@ -213,25 +239,18 @@ function fetchPosts(cacheKey) {
 				} else {
 					archivalQuery[key](value);
 				}
-
-				obj[key] = value;
 			});
 		}
 
 		if (getState().queryString.length) {
 			archivalQuery.search(getState().queryString);
-			obj.search = getState().queryString;
 		}
 
 		// pagination
 		archivalQuery.perPage(SETTINGS.postsPerPage);
 		archivalQuery.page(getState().page);
 
-		obj.pPage = getState().page;
-
-		const param = objectToParameters(obj);
-		const path = `${CONFIG.base_browse_url}/?${param}`;
-		history.push(path);
+		updateHistory(getState);
 
 		archivalQuery.then((data) => {
 			dispatch(receivePosts(cacheKey, data));
@@ -256,6 +275,9 @@ export function fetchPostsIfNeeded(cacheKey) {
 	return (dispatch, getState) => {
 		if (shouldFetchPosts(getState(), cacheKey)) {
 			return dispatch(fetchPosts(cacheKey));
+		} else {
+			// still need to create a history entry and update the path
+			updateHistory(getState);
 		}
 		return null;
 	};

@@ -17,6 +17,7 @@ class Select_Field extends FieldType {
 	const TITLE = 'Select Field';
 	const TYPE = 'select';
 	const REST_SELECT_OPTIONS = 'select_field_options';
+	const NONE_OPTION_VALUE = 'none';
 
 	/**
 	 * Builds the field and returns it
@@ -35,7 +36,7 @@ class Select_Field extends FieldType {
 		$field =  Field::make( static::TYPE, $id, $field_label );
 		// add none value to all selects
 		$filtered_options = [
-			'none' => ''
+			static::NONE_OPTION_VALUE => ''
 		];
 		foreach ($options as $option) {
 			$filtered_options[$option[FieldPostMeta::FIELD_SELECT_OPTIONS_VALUE]] = $option[FieldPostMeta::FIELD_SELECT_OPTIONS_LABEL];
@@ -59,7 +60,8 @@ class Select_Field extends FieldType {
 			$field_id,
 			FieldPostMeta::FIELD_SELECT_OPTIONS
 		);
-		return wp_cache_get( $key );
+		$options = wp_cache_get( $key );
+		return isset($options) && is_array($options) ? $options : null;
 	}
 
 	/**
@@ -147,8 +149,11 @@ class Select_Field extends FieldType {
 	 */
 	static public function get_value( $post_id, $field_name, $field_post_id ) {
 		$raw_value = carbon_get_post_meta( $post_id, $field_name );
-		$options = Select_Field::get_select_options( $post_id ); // retrieve from cache
+		$options = Select_Field::get_select_options( $field_post_id ); // retrieve from cache
 		if ( !is_array($options) ) {
+			return '';
+		}
+		if ( $raw_value === static::NONE_OPTION_VALUE ) {
 			return '';
 		}
 		$filtered_options = array_filter(

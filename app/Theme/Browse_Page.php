@@ -17,31 +17,10 @@ class Browse_Page {
 	public function hooks() {
 		if ( DIVINER_IS_THEME ) {
 			add_action( 'after_switch_theme', [ $this, 'setup_browse_page' ] );
-			add_action( 'after_switch_theme', [ $this, 'maybe_force_rewrites' ], 1 );
 			add_action( 'admin_bar_menu', [ $this, 'add_admin_menu_button' ], 90);
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 			add_filter( 'diviner_js_config', [ $this, 'filter_diviner_js_config' ] );
 			add_action( 'theme/header/before-title', [$this, 'before_title']);
-		}
-	}
-
-	/**
-	 * Force rewrite rules changes
-	 *
-	 */
-	function maybe_force_rewrites() {
-		$structure = get_option( 'permalink_structure' );
-		$ready_to_set = get_option( static::DIV_OPTION_REWRITE_RULES, true );
-		if ( empty( $structure ) && $ready_to_set ) { // '' means plain
-			// ensure that permalink structure isnt using the plain approach
-			global $wp_rewrite;
-			$wp_rewrite->set_permalink_structure( $wp_rewrite->root . '/%postname%/' ); // custom post permalinks
-
-			// Set the option
-			update_option( static::DIV_OPTION_REWRITE_RULES, false );
-
-			// Flush the rules and tell it to write htaccess
-			$wp_rewrite->flush_rules( true );
 		}
 	}
 
@@ -96,9 +75,11 @@ class Browse_Page {
 		$is_current_browse = $this->is_current_page_browse();
 		$browse_page_id = $is_current_browse ? get_the_ID() : $browse_page;
 		$permalink = get_permalink( $browse_page_id );
+		$permalink_structure = get_option( 'permalink_structure' );
 
 		$data = [
 			'base_browse_url' => '/' . basename( $permalink ),
+			'permalink_structure' => $permalink_structure,
 			'browse_page_title' => get_the_title( $browse_page_id ),
 			'browse_page_localization' => $this->get_browse_page_localization()
 		];

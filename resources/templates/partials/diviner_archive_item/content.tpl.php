@@ -9,7 +9,7 @@ $type = carbon_get_post_meta( get_the_ID(), Archive_Item_Post_Meta::FIELD_TYPE )
 $show_audio = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_AUDIO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_video = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_VIDEO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_document = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_DOCUMENT || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
-$show_feature_image = !$show_video;
+$show_feature_image = !$show_video && !$show_audio;
 
 $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_FIELD);
 
@@ -65,6 +65,23 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 
 	}
 	?>
+
+
+	<?php
+	if ($show_document) { // <iframe src = "/ViewerJS/#../demo/ohm2013.odp" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe>
+		$document_output = Archive_Item_Theme::render_document_iframe();
+		if (!empty($document_output)) {
+			printf(
+				'<div class="archive-item__content-block">%s</div>',
+				$document_output
+			);
+		}
+
+	}
+	?>
+
+
+
 
 	<div class="single-item__layout">
 

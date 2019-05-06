@@ -98,3 +98,31 @@
 .archive-item__content-block--related {
 	clear: both;
 }
+
+.document-embed {
+	.document-embed__container {
+		position: relative;
+		height: 0;
+		width: 100%;
+
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100% !important;
+			height: 100% !important;
+		}
+	}
+
+	.document-embed__container--9-16 {
+		padding-bottom: 56.25% !important;
+	}
+
+	.document-embed__container--3-4 {
+		padding-bottom: 75% !important;
+	}
+
+	.document-embed__container--1-1 {
+		padding-bottom: 100% !important;
+	}
+}

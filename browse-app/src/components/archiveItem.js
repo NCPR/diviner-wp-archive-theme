@@ -313,18 +313,22 @@ class ArchiveItem extends Component {
 						: null
 				}
 
-				<div className="row a-row">
-					<div className="gr-12">
-						<div className="a-sai__img-wrap">
-							<a href={post.permalink} className={actionClass}>
-								<img
-								src={imgSrc}
-								alt={imgCaption}
-								className="a-sai__img"/>
-							</a>
+				{
+					(imgSrc) ?
+						<div className="row a-row">
+							<div className="gr-12">
+								<div className="a-sai__img-wrap">
+									<a href={post.permalink} className={actionClass}>
+										<img
+											src={imgSrc}
+											alt={imgCaption}
+											className="a-sai__img"/>
+									</a>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+						: null
+				}
 
 				{ this.renderFields() }
 

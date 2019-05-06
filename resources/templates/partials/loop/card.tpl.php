@@ -16,24 +16,37 @@ if ( get_post_type() === Archive_Item::NAME ) {
 	$image_size_src_set = General::IMAGE_SIZE_BROWSE_GRID;
 }
 
+$img_classes = [ 'card__feature-image' ];
+if ( !get_post_thumbnail_id() ) {
+	$img_classes[] = 'card__feature-image--none';
+}
+$img_classes_output = implode(' ', $img_classes);
+
+$card_classes = [ 'card' ];
+$card_classes[] = sprintf( 'card--type-%s', get_post_type() );
+if ( get_post_type() === Archive_Item::NAME ) {
+	$archive_item_type = carbon_get_post_meta( get_the_ID(), \Diviner\Post_Types\Archive_Item\Post_Meta::FIELD_TYPE );
+	$card_classes[] = sprintf( 'card--ai-type-%s', $archive_item_type );
+}
+$card_classes_output = implode(' ', $card_classes);
+
 ?>
 
-<article class="card">
+<article class="<?php echo $card_classes_output; ?>">
 
 	<div class="card__inner">
 
 		<?php
-		if ( $display_feature && get_post_thumbnail_id() ) {
+		if ( $display_feature ) {
 		?>
-			<a href="<?php the_permalink(); ?>">
-			<div class="card__feature-image">
+			<a href="<?php the_permalink(); ?>" class="card__feature-image-anchor" title="<?php esc_attr_e(get_the_title()); ?>">
+			<div class="<?php echo $img_classes_output; ?>">
 				<?php
 				Image::image(
 					get_post_thumbnail_id(),
 					$image_size_src,
 					$image_size_src_set,
-					false,
-					'(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w'
+					false
 				);
 				?>
 			</div>

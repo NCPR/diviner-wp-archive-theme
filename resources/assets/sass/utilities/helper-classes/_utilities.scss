@@ -9,3 +9,62 @@
 	@include clearfix;
 }
 
+
+// -----------------------------------------------------------------------------
+//
+// Breakpoint Visibility
+//
+// -----------------------------------------------------------------------------
+
+.display-none {
+	display: none;
+}
+
+.display-small-block {
+	@include g-state(small) {
+		display: block;
+	}
+}
+
+.display-medium-block {
+	@include g-state(medium) {
+		display: block;
+	}
+}
+
+.display-full-block {
+	@include g-state(full) {
+		display: block;
+	}
+}
+
+.display-large-block {
+	@include g-state(large) {
+		display: block;
+	}
+}
+
+.display-small-none {
+	@include g-state(small) {
+		display: none;
+	}
+}
+
+.display-medium-none {
+	@include g-state(medium) {
+		display: none;
+	}
+}
+
+.display-full-none {
+	@include g-state(full) {
+		display: none;
+	}
+}
+
+.display-large-none {
+	@include g-state(large) {
+		display: none;
+	}
+}
+

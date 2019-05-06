@@ -133,9 +133,8 @@ class Diviner_Field {
 		global $wpdb;
 		$table_name = $wpdb->postmeta;
 		foreach ($active_field_posts_ids as &$id) {
-			$sql = sprintf(
-				'SELECT `meta_key` AS `key`, `meta_value` AS `value` FROM %s WHERE `post_id` = %s ORDER BY `meta_key` ASC',
-				$table_name,
+			$sql = $wpdb->prepare(
+				"SELECT `meta_key` AS `key`, `meta_value` AS `value` FROM {$table_name} WHERE `post_id` = %s ORDER BY `meta_key` ASC",
 				$id
 			);
 			$field_post_meta_array = $wpdb->get_results($sql);
@@ -153,7 +152,6 @@ class Diviner_Field {
 				}
 			}
 		}
-
 	}
 
 	public function register() {

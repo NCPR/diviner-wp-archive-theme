@@ -18,8 +18,7 @@ use \Diviner\Config\General;
 					get_post_thumbnail_id(),
 					General::IMAGE_SIZE_THUMBNAIL_SM,
 					General::IMAGE_SIZE_THUMBNAIL_LRG,
-					true,
-					'(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w'
+					true
 				);
 				?>
 				</a>
@@ -34,7 +33,7 @@ use \Diviner\Config\General;
 			</a>
 			<div class="loop-item__meta">
 				<time class="loop-item__date">
-					<?php the_date(); ?>
+					<?php the_time( get_option( 'date_format' ) ); ?>
 				</time>
 			</div>
 
