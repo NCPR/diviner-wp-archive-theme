@@ -2,6 +2,7 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
+use \DateTime;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 use Diviner\Post_Types\Diviner_Field\PostMeta;
@@ -232,6 +233,11 @@ class Rest {
 		return $args;
 	}
 
+	public function get_meta_query_date_from_string($date_string) {
+		$time = DateTime::createFromFormat("Y/n/j", $date_string);
+		return date("Ymd", $time->getTimestamp() );
+	}
+
 	public function decorate_date_args($field, $args, $request ) {
 		if (empty($request[$field[static::FIELD_INDEX_FIELD_ID]])) {
 			return $args;
@@ -246,8 +252,7 @@ class Rest {
 		}
 
 		if (isset($range[0])) {
-			$start_time = strtotime($range[0]);
-			$start_date = date("Ymd", $start_time);
+			$start_date = $this->get_meta_query_date_from_string( $range[0] );
 			$args[ 'meta_query' ][] = [
 				'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
 				'compare'	=> '>=',
@@ -257,12 +262,12 @@ class Rest {
 		}
 
 		if (isset($range[1])) {
-			$end_time = strtotime($range[1]);
-			$end_date = date('Ymd', $end_time);
+			$end_date = $this->get_meta_query_date_from_string( $range[1] );
 			$args[ 'meta_query' ][] = [
 				'key'		=> $field[static::FIELD_INDEX_FIELD_ID],
 				'compare'	=> '<=',
 				'value'		=> $end_date,
+				'type'		=> 'DATE'
 			];
 		}
 
