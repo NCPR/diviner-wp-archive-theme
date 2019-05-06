@@ -25,13 +25,15 @@ const site = new WPAPI({
 const params = [
 	'order_by',
 ];
-CONFIG.fields.forEach((field)=> {
-	if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
-		params.push(field[FIELD_PROP_TAXONOMY_NAME]);
-	} else {
-		params.push(field[FIELD_PROP_FIELD_ID]);
-	}
-});
+if (CONFIG.fields && CONFIG.fields.length) {
+	CONFIG.fields.forEach((field)=> {
+		if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
+			params.push(field[FIELD_PROP_TAXONOMY_NAME]);
+		} else {
+			params.push(field[FIELD_PROP_FIELD_ID]);
+		}
+	});
+}
 
 site.archivalItems = site.registerRoute(
 	'wp/v2',
