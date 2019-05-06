@@ -613,7 +613,7 @@ class General {
 		$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_FOOTER_COPY);
 		if ( !empty( $copy ) ) {
 			return sprintf(
-				'<div class="footer__copy"><p>%s</p></div>',
+				'<div class="footer__copy d-content"><p>%s</p></div>',
 				$copy
 			);
 		}

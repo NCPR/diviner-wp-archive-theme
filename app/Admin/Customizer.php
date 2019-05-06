@@ -19,7 +19,7 @@ class Customizer {
 
 	const SECTION_THEME_SETTING_COLOR_HEADER  = 'diviner_setting_color_header';
 	const SECTION_THEME_CONTROL_COLOR_HEADER  = 'diviner_control_color_header';
-	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#333';
+	const SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT  = '#777777';
 
 	const SECTION_THEME_SETTING_COLOR_HEADER_TEXT  = 'diviner_setting_color_header_text';
 	const SECTION_THEME_CONTROL_COLOR_HEADER_TEXT  = 'diviner_control_color_header_text';
@@ -36,6 +36,18 @@ class Customizer {
 	const SECTION_THEME_SETTING_COLOR_FOOTER = 'diviner_setting_color_footer';
 	const SECTION_THEME_CONTROL_COLOR_FOOTER = 'diviner_control_color_footer';
 	const SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT = '#777777';
+
+	const SECTION_THEME_SETTING_COLOR_FOOTER_TEXT  = 'diviner_setting_color_footer_text';
+	const SECTION_THEME_CONTROL_COLOR_FOOTER_TEXT  = 'diviner_control_color_footer_text';
+	const SECTION_THEME_SETTING_COLOR_FOOTER_TEXT_DEFAULT = '#FFFFFF';
+
+	const SECTION_THEME_SETTING_COLOR_FOOTER_MENU  = 'diviner_setting_color_footer_menu';
+	const SECTION_THEME_CONTROL_COLOR_FOOTER_MENU  = 'diviner_control_color_footer_menu';
+	const SECTION_THEME_SETTING_COLOR_FOOTER_MENU_DEFAULT = '#F4D35E';
+
+	const SECTION_THEME_SETTING_COLOR_FOOTER_MENU_HOVER  = 'diviner_setting_color_footer_menu_hover';
+	const SECTION_THEME_CONTROL_COLOR_FOOTER_MENU_HOVER  = 'diviner_control_color_footer_menu_hover';
+	const SECTION_THEME_SETTING_COLOR_FOOTER_MENU_HOVER_DEFAULT = '#FFFFFF';
 
 	const SECTION_THEME_SETTING_COLOR_BUTTON_LINK = 'diviner_setting_color_button_link';
 	const SECTION_THEME_CONTROL_COLOR_BUTTON_LINK = 'diviner_control_color_button_link';
@@ -213,6 +225,34 @@ class Customizer {
 			static::SECTION_THEME_CONTROL_COLOR_FOOTER,
 			__( 'Footer Background Color', 'ncpr-diviner' ),
 			static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT
+		);
+
+		$this->setup_color_control(
+			$wp_customize,
+			static::SECTION_THEME_CUSTOMIZATIONS,
+			static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT,
+			static::SECTION_THEME_CONTROL_COLOR_FOOTER_TEXT,
+			__( 'Footer Text Color', 'ncpr-diviner' ),
+			static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT_DEFAULT,
+			__( 'Used for text in footer widgets', 'ncpr-diviner' )
+		);
+
+		$this->setup_color_control(
+			$wp_customize,
+			static::SECTION_THEME_CUSTOMIZATIONS,
+			static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU,
+			static::SECTION_THEME_CONTROL_COLOR_FOOTER_MENU,
+			__( 'Footer Menu Button Color', 'ncpr-diviner' ),
+			static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_DEFAULT
+		);
+
+		$this->setup_color_control(
+			$wp_customize,
+			static::SECTION_THEME_CUSTOMIZATIONS,
+			static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_HOVER,
+			static::SECTION_THEME_CONTROL_COLOR_FOOTER_MENU_HOVER,
+			__( 'Footer Menu Button Hover Color', 'ncpr-diviner' ),
+			static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_HOVER_DEFAULT
 		);
 
 		$this->setup_color_control(
@@ -459,11 +499,13 @@ class Customizer {
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_header_bg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT );
 		$color_subheader_text_desktop = General::is_dark($color_header_bg) ? $color_header_bg : 'black';
-		$color_footer_bbg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER, static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT );;
+		$color_footer_bbg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER, static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT );
+		$color_footer_text = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT, static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT_DEFAULT);
+		$color_footer_menu = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU, static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_DEFAULT);
+		$color_footer_menu_hover = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_HOVER, static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_HOVER_DEFAULT);
 		$color_navigation = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_MENU, static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_DEFAULT );
 		$color_navigation_hover = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER, static::SECTION_THEME_SETTING_COLOR_HEADER_MENU_HOVER_DEFAULT );
 
-		// General::luminance( substr($color_btn_link, 1), -0.8 );
 		?>
 		<style type="text/css">
 			body .header {
@@ -511,7 +553,7 @@ class Customizer {
 			}
 
 			.single-item__navigation a:hover,
-			.single-item__navigation a:focus {
+			.single-fitem__navigation a:focus {
 				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
@@ -544,7 +586,40 @@ class Customizer {
 			}
 
 			body .footer {
-				background-color: <?php echo $color_footer_bbg ?>;
+				color: <?php echo $color_footer_text; ?>;
+				background-color: <?php echo $color_footer_bbg; ?>;
+			}
+
+			body .footer p {
+				color: <?php echo $color_footer_text; ?>;
+			}
+
+			body .footer a {
+				color: <?php echo $color_footer_menu; ?>;
+			}
+
+			body .footer a:hover,
+			body .footer a:focus {
+				color: <?php echo $color_footer_menu_hover; ?>;
+			}
+
+			.footer .menu a {
+				font-family: "<?php echo $header_font_value; ?>" !important;
+				color: <?php echo $color_footer_menu; ?>;
+			}
+
+			.footer .menu a,
+			.footer a.social-links_link {
+				color: <?php echo $color_footer_menu; ?>;
+				border-color: <?php echo $color_footer_menu; ?>;
+			}
+
+			.footer .menu a:hover,
+			.footer .menu a:focus,
+			.footer a.social-links_link:hover,
+			.footer a.social-links_link:focus {
+				color: <?php echo $color_footer_menu_hover; ?>;
+				border-color: <?php echo $color_footer_menu_hover; ?>;
 			}
 
 			.single-item__header .h1,

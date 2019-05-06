@@ -10,8 +10,6 @@ ul, ol, dl {
 
 	.d-content & {
 		@include body-text;
-
-		color: $color_text;
 	}
 
 	.d-content--inverse & {
