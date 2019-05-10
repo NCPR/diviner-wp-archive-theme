@@ -18,7 +18,7 @@ To get started with Diviner, you will need a hosting solution capable of running
 * PHP version 5.6.20 or greater, PHP 7 is highly recommended
 * MySQL version 5.0.15 or greater or any version of MariaDB
 
-We recommend you choose a managed wordpress environment with 
+We recommend you choose a managed wordpress environment with: 
 
 * 1 gig of minimum RAM
 * Daily backups of media files and database
