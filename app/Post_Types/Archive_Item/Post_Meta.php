@@ -124,7 +124,7 @@ class Post_Meta {
 				0,
 				static::FIELD_RELATED,
 				__( 'Related Archive Items', 'ncpr-diviner' ),
-				__( 'Appears on each archive item single page as a slider', 'ncpr-diviner' )
+				__( 'Appears on each archive item single page as a slider. Scroll down for the full list of archive items to choose from.', 'ncpr-diviner' )
 			);
 			$dynamic_fields[] = $field;
 		}
