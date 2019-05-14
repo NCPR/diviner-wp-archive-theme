@@ -235,7 +235,7 @@ class Rest {
 
 	public function get_meta_query_date_from_string($date_string) {
 		$time = DateTime::createFromFormat("Y/n/j", $date_string);
-		return date("Ymd", $time->getTimestamp() );
+		return date("Y-m-d", $time->getTimestamp() );
 	}
 
 	public function decorate_date_args($field, $args, $request ) {
@@ -296,6 +296,8 @@ class Rest {
 					break;
 			}
 		}
+
+		// var_dump($args);
 
 		return $args;
 	}
