@@ -57,7 +57,7 @@ class Widget_Related_Items extends Widget {
 		}, $related_items);
 		$args = [
 			'posts_per_page' => -1,
-			'orderby' => 'modified',
+			'orderby' => 'post__in',
 			'post__in' => $related_ids,
 			'post__not_in' => [$post_id],
 			'post_type' => Archive_Item::NAME
