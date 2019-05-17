@@ -175,3 +175,38 @@
 		right: calc(50% - 350px);
 	}
 }
+
+.single-archive-item__header {
+	&:before {
+		font-family: $t_font_icons;
+		font-weight: 900;
+		-webkit-font-smoothing: antialiased;
+		display: inline-block;
+		font-style: normal;
+		font-variant: normal;
+		text-rendering: auto;
+		margin-right: 10px;
+		content: "";
+		color: $color_grey;
+	}
+
+	.single-archive-item--div_ai_field_audio &:before {
+		content: "\f028";
+	}
+
+	.single-archive-item--div_ai_field_video &:before {
+		content: "\f04b";
+	}
+
+	.single-archive-item--div_ai_field_document &:before {
+		content: "\f15c";
+	}
+
+	.single-archive-item--div_ai_field_mixed &:before {
+		content: "\f24d";
+	}
+
+	.single-archive-item--sdiv_ai_field_photo &:before {
+		content: "\f03e";
+	}
+}

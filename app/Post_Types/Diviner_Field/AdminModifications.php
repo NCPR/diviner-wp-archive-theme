@@ -252,13 +252,13 @@ class AdminModifications {
 			</div>
 
 			<div class="field-select-wrap">
-				<h2>Custom Post Type Field</h2>
+				<h2>Advanced Detail Field</h2>
 				<p>
-					<?php _e('For categories with many choices (20+) and which you would like to be able to elaborate on and attach auxiliary information, use the CPT field. A good example would be if you wished to sort your materials by their creator (photographer, author, etc.) – for each creator, this type of field allows you to create an “entry” for that creator. Other examples: donor, institution.', 'ncpr-diviner' ); ?>
+					<?php _e('For categories with many choices (20+) and which you would like to be able to elaborate on and attach auxiliary information, use the Advanced Detail Field. A good example would be if you wished to sort your materials by their creator (photographer, author, etc.) – for each creator, this type of field allows you to create an “entry” for that creator. Other examples: donor, institution. Internally, this field manages what is typically called a custom post type in wordpress vernacular.', 'ncpr-diviner' ); ?>
 				</p>
 				<p>
 					<a href="post-new.php?post_type=<?php echo esc_attr( Diviner_Field::NAME ); ?>&field_type=<?php echo esc_attr( CPT_Field::NAME ); ?>" class="button button-primary button-hero">
-						Add a New Custom Post Type Meta Field
+						Add a New Advanced Detail Field
 					</a>
 				</p>
 

@@ -19,7 +19,7 @@ The following instructions provide a how to in setting up your new archiving sit
 - **Modal**: refers to a pop-up window that appears when you have clicked on an archive item within the browse experience
 - **Types of Fields (that can be configured)**: 
    - Taxonomy: 
-   - Custom Post Type (CPT): A data type in wordpress for describing a discrete kind of content 
+   - Advanced Detail: manages a discrete kind of wordpress content 
    - Date: 
    - Text: 
    - Select

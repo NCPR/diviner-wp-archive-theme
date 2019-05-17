@@ -10,28 +10,15 @@ import { appReady } from '../../utils/events';
 import titleValidation from '../modules/title-validation';
 
 /**
- * @function bindEvents
- * @description Bind global event listeners here,
- */
-
-const bindEvents = () => {
-
-};
-
-/**
  * @function init
  * @description The core dispatcher for init across the codebase.
  */
 
 const init = () => {
-	// apply browser classes
-
-	// bindEvents();
-
-	titleValidation();
 
 	// initialize the main scripts
-
+	titleValidation();
+	
 	console.info('Diviner: Initialized all javascript that targeted document ready.');
 };
 

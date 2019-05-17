@@ -114,7 +114,7 @@ class Settings {
 
 			<p>
 				<a href="admin.php?page=<?php echo esc_attr( static::$theme_options->get_page_file() ); ?>" class="button button-primary">
-					<?php _e( 'General Settings', 'ncpr-diviner' ); ?>
+					<?php _e( 'General Diviner Settings', 'ncpr-diviner' ); ?>
 				</a>
 			</p>
 
@@ -173,7 +173,7 @@ class Settings {
 		// We can save the result of an instance call in a static property as it will be called once per HTTP request.
 		static::$theme_options = Container::make(
 			'theme_options',
-			__( 'General Settings', 'ncpr-diviner' )
+			__( 'General Diviner Settings', 'ncpr-diviner' )
 		)
 			->set_page_parent( static::GENERAL_SETTINGS_SLUG )
 			->add_fields(

@@ -303,9 +303,12 @@ class ArchiveItem extends Component {
 		const rights = CONFIG.settings.permission_notice;
 		let actionClass = 'a-sai__img-action';
 
+		let itemClass = 'single-archive-item';
+		itemClass += ` single-archive-item--${this.props.post.div_ai_field_type}`;
+
 		return (
-			<section className="single-archive-item" onKeyDown={this.handleKeyPress}>
-				<h4 dangerouslySetInnerHTML={{ __html: post.title.rendered }}></h4>
+			<section className={itemClass} onKeyDown={this.handleKeyPress}>
+				<h4 dangerouslySetInnerHTML={{ __html: post.title.rendered }} className="single-archive-item__header"></h4>
 				{
 					(this.props.shouldDisplayArrows) ?
 					<div className="a-sai__controls">

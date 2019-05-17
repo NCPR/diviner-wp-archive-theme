@@ -16,7 +16,7 @@ use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 class CPT_Field extends FieldType {
 
 	const NAME = 'diviner_cpt_field';
-	const TITLE = 'CPT Field';
+	const TITLE = 'Advanced Detail Field';
 	const TYPE = 'association';
 
 	static public function setup ( $post_id ) {
@@ -34,7 +34,7 @@ class CPT_Field extends FieldType {
 			$field_id = sprintf('div_cpt_name_%s', $post_id );
 		}
 		if ( empty( $field_label ) ) {
-			$field_label = 'Diviner Custom Post Type';
+			$field_label = 'Advanced Detail Item';
 		}
 		$field_labels = sprintf('%ss', $field_label);
 		if ( empty( $field_slug ) ) {

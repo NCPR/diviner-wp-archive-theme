@@ -33,8 +33,8 @@ class Diviner_Field {
 		add_action( 'init', [ $this,'register' ], 0, 0 );
 		add_filter( 'diviner_js_config', [ $this, 'custom_diviner_js_config' ] );
 		add_action( 'init', [ $this, 'hydrate_cache' ], 0 );
-		add_filter( 'carbon_fields_should_save_field_value', [ $this, 'filter_should_save_field_value' ], 10, 3 );
-		add_filter( 'carbon_fields_should_delete_field_value_on_save', [ $this, 'filter_should_delete_field_value' ], 10, 2 );
+		// add_filter( 'carbon_fields_should_save_field_value', [ $this, 'filter_should_save_field_value' ], 10, 3 );
+		// add_filter( 'carbon_fields_should_delete_field_value_on_save', [ $this, 'filter_should_delete_field_value' ], 10, 2 );
 	}
 
 	/**
