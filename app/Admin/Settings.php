@@ -221,7 +221,7 @@ class Settings {
 	}
 
 	public function loop_as_cards_field() {
-		return Field::make( 'checkbox', static::FIELD_GENERAL_LOOP_CARDS_FIELD, __( 'Display blog loop as cards', 'ncpr-diviner' ) )
+		return Field::make( 'checkbox', static::FIELD_GENERAL_LOOP_CARDS_FIELD, __( 'Display blog listing as cards', 'ncpr-diviner' ) )
 			->set_option_value( '1' )
 			->set_default_value( '0' );
 	}

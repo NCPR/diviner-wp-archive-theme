@@ -4,6 +4,7 @@ namespace Diviner\Post_Types\Archive_Item;
 
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
+use Diviner\Post_Types\Diviner_Field\PostMeta;
 
 /**
  * Class Admin Modifications
@@ -20,6 +21,29 @@ class AdminModifications {
 		add_filter( 'manage_edit-diviner_archive_item_columns', [ $this, 'archival_item_columns' ] );
 		add_action( 'manage_diviner_archive_item_posts_custom_column', [ $this, 'manage_diviner_archive_item_posts_custom_column' ], 10, 2 );
 		add_action( 'carbon_fields_register_fields', [ $this, 'active_field_setup' ], 3, 0 );
+		add_action( 'save_post', [ $this, 'save_ai_meta' ], 11, 3 ); // ToDo move this to gutenberg experience
+	}
+
+	/**
+	 * Copies over the feature image to the thumbnail is there is one
+	 *
+	 * @param int $post_id The post ID.
+	 * @param post $post The post object.
+	 * @param bool $update Whether this is an existing post being updated or not.
+	 */
+	function save_ai_meta( $post_id, $post, $update ) {
+		// only on new creations
+		if (!$update) return;
+		// only for archive singles
+		if (get_post_type($post_id) !== Archive_Item::NAME ) return;
+		$thumb_id = get_post_thumbnail_id($post_id);
+		// only do this when there is no value in the thumbnail already
+		if (empty($thumb_id)) {
+			$feature_photo = carbon_get_post_meta( $post_id, Post_Meta::FIELD_PHOTO );
+			if (!empty($feature_photo)) {
+				set_post_thumbnail( $post_id, $feature_photo );
+			}
+		}
 	}
 
 	/**

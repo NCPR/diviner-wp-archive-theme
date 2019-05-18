@@ -25,22 +25,27 @@ class Post_Meta {
 	const FIELD_TYPE_DOCUMENT   = 'div_ai_field_document';
 	const FIELD_TYPE_MIXED      = 'div_ai_field_mixed';
 
+	const CONTAINER_TYPES           = 'div_ai_container_types';
+	const CONTAINER_TYPE_PHOTO      = 'div_ai_container_photo';
+	const CONTAINER_TYPE_VIDEO      = 'div_ai_container_video';
+	const CONTAINER_TYPE_AUDIO      = 'div_ai_container_audio';
+	const CONTAINER_TYPE_DOCUMENT   = 'div_ai_container_document';
+	const CONTAINER_TYPE_MIXED      = 'div_ai_container_mixed';
+
 	const FIELD_TYPE_OPTIONS = [
-		self::FIELD_TYPE_PHOTO  => 'Photo',
-		self::FIELD_TYPE_VIDEO   => 'Video',
-		self::FIELD_TYPE_AUDIO   => 'Audio',
+		self::FIELD_TYPE_PHOTO    => 'Photo',
+		self::FIELD_TYPE_VIDEO    => 'Video',
+		self::FIELD_TYPE_AUDIO    => 'Audio',
 		self::FIELD_TYPE_DOCUMENT => 'Document',
-		self::FIELD_TYPE_MIXED=> 'Mixed media',
+		self::FIELD_TYPE_MIXED    => 'Mixed media',
 	];
 
-	const FIELD_RELATED = 'div_ai_field_related';
-	const FIELD_AUDIO = 'div_ai_field_audio';
-	const FIELD_AUDIO_OEMBED = 'div_ai_field_audio_oembed';
-
-	const FIELD_VIDEO_OEMBED = 'div_ai_field_video_oembed';
-
-	const FIELD_DOCUMENT = 'div_ai_field_document';
-	const FIELD_DATE = 'div_ai_field_date';
+	const FIELD_PHOTO        = 'div_ai_field_feature_photo';
+	const FIELD_RELATED      = 'div_ai_field_related';
+	const FIELD_AUDIO        = 'div_ai_field_feature_audio';
+	const FIELD_AUDIO_OEMBED = 'div_ai_field_audio_feature_oembed';
+	const FIELD_VIDEO_OEMBED = 'div_ai_field_video_feature_oembed';
+	const FIELD_DOCUMENT     = 'div_ai_field_feature_document';
 
 	protected $container;
 
@@ -60,34 +65,61 @@ class Post_Meta {
 
 	public function add_permanent_fields()
 	{
-		$this->container = Container::make( 'post_meta', __( 'Type', 'ncpr-diviner' ) )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPES,
+			__( 'Type', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( [
 				$this->get_field_types(),
 			] )
 			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', __( 'Audio', 'ncpr-diviner' ) )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_PHOTO,
+			__( 'Photo', 'ncpr-diviner' )
+		)
+			->where( 'post_type', '=', Archive_Item::NAME )
+			->add_fields( [
+				$this->get_field_photo()
+			] )
+			->set_priority( 'high' );
+
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_AUDIO,
+			__( 'Audio', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( [
 				$this->get_field_audio(),
 				$this->get_field_audio_oembed()
 			] )
-			->set_priority( 'default' );
+			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', __( 'Video', 'ncpr-diviner' ) )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_VIDEO,
+			__( 'Video', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( [
 				$this->get_field_video_oembed()
 			] )
-			->set_priority( 'default' );
+			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', __( 'Document', 'ncpr-diviner' ) )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_DOCUMENT,
+			__( 'Document', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
 			->add_fields( [
 				$this->get_field_document()
 			] )
-			->set_priority( 'default' );
+			->set_priority( 'high' );
 
 	}
 
@@ -144,6 +176,16 @@ class Post_Meta {
 			'file',
 			static::FIELD_DOCUMENT ,
 			__( 'Any other document not an image or video or audio. Ex: PDF', 'ncpr-diviner' )
+		);
+
+	}
+
+	public function get_field_photo()
+	{
+		return Field::make(
+			'image',
+			static::FIELD_PHOTO,
+			__( 'Large feature image to appear in single page.', 'ncpr-diviner' )
 		);
 
 	}

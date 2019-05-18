@@ -50,6 +50,14 @@ class Archive_Item {
 				'name'         => _x( 'Archive Items', 'post type general name', 'ncpr-diviner' ),
 				'add_new_item' => __( 'Add New Archive Item', 'ncpr-diviner' ),
 				'edit_item'    => __( 'Edit Archive Item', 'ncpr-diviner' ),
+				// Overrides the “Featured Image” label
+				'featured_image'        => __( 'Thumbnail image', 'ncpr-diviner' ),
+				// Overrides the “Set featured image” label
+				'set_featured_image'    => __( 'Set thumbnail image', 'ncpr-diviner' ),
+				// Overrides the “Remove featured image” label
+				'remove_featured_image' => _x( 'Remove thumbnail image', 'ncpr-diviner' ),
+				// Overrides the “Use as featured image” label
+				'use_featured_image'    => _x( 'Use as thumbnail image', 'ncpr-diviner' ),
 			]
 		];
 	}

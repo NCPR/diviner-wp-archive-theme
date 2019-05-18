@@ -5,7 +5,14 @@
 	}
 }
 
-#carbon_fields_container_audio {
+/* Makes the type field invisible */
+#carbon_fields_container_div_ai_container_types {
+	display: none !important;
+}
+
+/* Handles all the main media visiblity  */
+
+#carbon_fields_container_div_ai_container_audio {
 	display: none !important;
 
 	.archive-item-edit--div_ai_field_audio &,
@@ -14,7 +21,7 @@
 	}
 }
 
-#carbon_fields_container_video {
+#carbon_fields_container_div_ai_container_video {
 	display: none !important;
 
 	.archive-item-edit--div_ai_field_video &,
@@ -23,10 +30,19 @@
 	}
 }
 
-#carbon_fields_container_document {
+#carbon_fields_container_div_ai_container_document {
 	display: none !important;
 
 	.archive-item-edit--div_ai_field_document &,
+	.archive-item-edit--div_ai_field_mixed & {
+		display: block !important;
+	}
+}
+
+#carbon_fields_container_div_ai_container_photo {
+	display: none !important;
+
+	.archive-item-edit--div_ai_field_photo &,
 	.archive-item-edit--div_ai_field_mixed & {
 		display: block !important;
 	}

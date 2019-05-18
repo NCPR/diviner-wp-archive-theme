@@ -414,9 +414,7 @@ class General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	function render_header_feature_image() {
-		if ( is_singular( Archive_Item::NAME ) ) {
-			template('partials/diviner_archive_item/feature-image', []);
-		} else if ( is_single() || is_page() && has_post_thumbnail() ) {
+		if ( is_single() || is_page() && has_post_thumbnail() ) {
 			template('partials/subheader/default', []);
 		}
 	}
@@ -661,6 +659,9 @@ class General {
 		return $title->get_title();
 	}
 
+	/**
+	 * Retrieve google fonts
+	 */
 	public function google_fonts() {
 		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
 		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_BODY, static::FONTS_DEFAULT_BODY);
@@ -668,13 +669,6 @@ class General {
 		$body_font_key = !empty($body_font_key) ? $body_font_key : static::FONTS_DEFAULT_BODY;
 		wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. urlencode($header_font_key) );
 		wp_enqueue_style( 'diviner-body-fonts', '//fonts.googleapis.com/css?family='. urlencode($body_font_key) );
-	}
-
-	/**
-	 * Output the single archive meta fields
-	 */
-	static public function the_archive_single_meta() {
-		echo ArchiveItemTheme::render_meta_fields();
 	}
 
 	/**

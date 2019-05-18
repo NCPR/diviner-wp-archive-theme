@@ -9,7 +9,7 @@ $type = carbon_get_post_meta( get_the_ID(), Archive_Item_Post_Meta::FIELD_TYPE )
 $show_audio = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_AUDIO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_video = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_VIDEO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_document = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_DOCUMENT || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
-$show_feature_image = !$show_video && !$show_audio;
+$show_feature_image = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_PHOTO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 
 $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_FIELD);
 
@@ -49,7 +49,13 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 
 	<?php
 	if ($show_feature_image) {
-		do_action('theme/header/feature-image');
+		$photo_output = Archive_Item_Theme::render_photo();
+		if (!empty($photo_output)) {
+			printf(
+				'<div class="archive-item__content-block">%s</div>',
+				$photo_output
+			);
+		}
 	}
 	?>
 
@@ -68,7 +74,7 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 
 
 	<?php
-	if ($show_document) { // <iframe src = "/ViewerJS/#../demo/ohm2013.odp" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe>
+	if ($show_document) {
 		$document_output = Archive_Item_Theme::render_document_iframe();
 		if (!empty($document_output)) {
 			printf(
@@ -80,36 +86,42 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 	}
 	?>
 
-
-
-
 	<div class="single-item__layout">
 
-		<aside class="sidebar sidebar--grey sidebar--pull-right">
+		<?php
+		$single_meta = Archive_Item_Theme::render_meta_fields();
+		if (!empty($single_meta) || $show_document) {
+			?>
 
-			<div class="sidebar__content">
+			<aside class="sidebar sidebar--grey sidebar--pull-right">
 
-				<h5 class="sidebar__title h5">Details</h5>
+				<div class="sidebar__content">
 
-				<?php
-				if ($show_document) {
-					$document_output = Archive_Item_Theme::render_document();
-					if (!empty($document_output)) {
-						printf(
-							'<div class="archive-item__content-block archive-item__content-block--document">%s</div>',
-							$document_output
-						);
+					<h5 class="sidebar__title h5">Details</h5>
+
+					<?php
+					if ( $show_document ) {
+						$document_output = Archive_Item_Theme::render_document();
+						if ( ! empty( $document_output ) ) {
+							printf(
+								'<div class="archive-item__content-block archive-item__content-block--document">%s</div>',
+								$document_output
+							);
+						}
 					}
-				}
-				?>
+					?>
 
-				<?php // output meta data
-				General::the_archive_single_meta();
-				?>
+					<?php
+					echo $single_meta;
+					?>
 
-			</div>
+				</div>
 
-		</aside>
+			</aside>
+
+			<?php
+		}
+		?>
 
 		<div class="d-content">
 
