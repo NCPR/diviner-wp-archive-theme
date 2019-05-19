@@ -25,7 +25,7 @@ const site = new WPAPI({
 const params = [
 	'order_by',
 ];
-if (CONFIG.fields && CONFIG.fields.length) {
+if (CONFIG && CONFIG.fields && CONFIG.fields.length) {
 	CONFIG.fields.forEach((field)=> {
 		if (field[FIELD_PROP_FIELD_TYPE]===FIELD_TYPE_TAXONOMY) {
 			params.push(field[FIELD_PROP_TAXONOMY_NAME]);

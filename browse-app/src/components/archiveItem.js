@@ -308,7 +308,7 @@ class ArchiveItem extends Component {
 
 		return (
 			<section className={itemClass} onKeyDown={this.handleKeyPress}>
-				<h4 dangerouslySetInnerHTML={{ __html: post.title.rendered }} className="single-archive-item__header"></h4>
+				<h4 dangerouslySetInnerHTML={{ __html: post.title.rendered }} className="single-archive-item__header" />
 				{
 					(this.props.shouldDisplayArrows) ?
 					<div className="a-sai__controls">

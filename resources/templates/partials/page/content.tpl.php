@@ -10,6 +10,7 @@
 		?>
 	</header>
 
+	<?php if( '' !== get_post()->post_content ) { ?>
 	<div class="single-item__layout">
 
 		<?php
@@ -26,6 +27,7 @@
 		</div>
 
 	</div>
+	<?php } ?>
 
 	<?php
 	do_action('theme/article-end');

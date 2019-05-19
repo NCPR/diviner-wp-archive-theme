@@ -74,11 +74,13 @@ class FieldCpt extends Component {
 		if (!fieldOutput) {
 			return '';
 		} else {
+			const dangerousHtml = {__html:this.props.field.title};
+			const dangerousHtmlDescription = {__html:this.props.field.helper};
 			return (
 				<div className="a-field">
-					<label>{ this.props.field.title }</label>
+					<label dangerouslySetInnerHTML={dangerousHtml} />
 					<div className="a-field-input a-field-input--date">{fieldOutput}</div>
-					<small className="a-input-description">{ this.props.field.helper }</small>
+					<small className="a-input-description" dangerouslySetInnerHTML={dangerousHtmlDescription} />
 				</div>
 			);
 		}
