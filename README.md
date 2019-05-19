@@ -79,7 +79,7 @@ Then you can view the browse page with the dev version.
 * ~~Date field with multi front end display options (year decade or century slider or date range selector)~~
 * ~~Text field for basic text data~~
 * ~~Taxonomy fields for any number of things (location, keywords etc)~~
-* ~~CPT field for related CPT items~~
+* ~~CPT field for related CPT items (Advanced Detail Field)~~
 * ~~Select Field~~
 
 ### Late fall 2018

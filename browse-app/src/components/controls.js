@@ -75,9 +75,7 @@ class Controls extends Component {
 			<div className="a-controls">
 
 				<div className="a-input-group a-input-group--controls">
-					<label>
-						{CONFIG.browse_page_localization.search_header}
-					</label>
+					<label dangerouslySetInnerHTML={{__html:CONFIG.browse_page_localization.search_header}} />
 					<div className="a-search-row">
 						<div
 							className="a-search-input"
@@ -93,9 +91,8 @@ class Controls extends Component {
 						<button
 							className="btn a-search-button"
 							onClick={this.onClick}
-						>
-							{CONFIG.browse_page_localization.search_cta}
-						</button>
+							dangerouslySetInnerHTML={{__html:CONFIG.browse_page_localization.search_cta}}
+						/>
 					</div>
 				</div>
 

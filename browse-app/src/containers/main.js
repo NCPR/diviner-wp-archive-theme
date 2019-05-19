@@ -21,12 +21,12 @@ class Main extends Component {
 	render() {
 		return (
 			<div className='a-main'>
-				<div className="row">
+				<div className="row a-row--controls">
 					<div className="gr-12">
 						<Controls />
 					</div>
 				</div>
-				<div className="row">
+				<div className="row a-row--facets">
 					<div className="gr-12 gr-3@medium">
 						<SearchFacets />
 					</div>

@@ -59,10 +59,11 @@
 .field-select-wrap {
 	background-color: $color_white;
 	margin: 30px 0;
-	padding: 20px;
+	padding: 30px;
 
 	h2 {
 		font-size: 20px;
+		margin-top: 0;
 	}
 }
 
@@ -81,7 +82,7 @@
 	}
 }
 
-#carbon_fields_container_custom_post_type_field_variables {
+#carbon_fields_container_advanced_detail_field_variables {
 	display: none !important;
 	.post-field-type--diviner_cpt_field & {
 		display: block !important;
@@ -93,10 +94,6 @@
 	.post-field-type--diviner_select_field & {
 		display: block !important;
 	}
-}
-
-#carbon_fields_container_type {
-	display: none !important;
 }
 
 #minor-publishing {

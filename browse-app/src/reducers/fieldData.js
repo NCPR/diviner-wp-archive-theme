@@ -4,9 +4,11 @@ import { CONFIG } from '../globals/config';
 
 const getInitialState = function() {
 	const state = {};
-	CONFIG.fields.forEach((field) => {
-		state[field.field_id] = '';
-	})
+	if (CONFIG.fields && CONFIG.fields.length) {
+		CONFIG.fields.forEach((field) => {
+			state[field.field_id] = '';
+		})
+	}
 	return state;
 };
 

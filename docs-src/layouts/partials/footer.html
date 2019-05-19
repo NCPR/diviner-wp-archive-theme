@@ -5,15 +5,21 @@
 
 {{ $copyright := default $thanks .Site.Copyright }}
 
-<footer class="blog-footer w-100 bg-light">
+<footer class="blog-footer w-100 bg-secondary">
 
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <nav class="bg-light text-muted my-4">
+            <div class="col-md-6">
+                <nav class="text-white my-4">
                     <p class="w-100">{{ $copyright }}</p>
                     <p class="w-100"><a href="#">{{ i18n "backToTop" }}</a></p>
                 </nav>
+            </div>
+
+            <div class="col-md-6">
+                <div class="my-4  float-md-right">
+                    <a class="logo-ncpr" href="http://ncpr.org">North Country Public Radio</a>
+                </div>
             </div>
         </div>
     </div>

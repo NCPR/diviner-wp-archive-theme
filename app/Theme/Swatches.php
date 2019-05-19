@@ -54,7 +54,7 @@ class Swatches {
 			[
 				'name'  => __( 'Oasis', 'ncpr-diviner' ),
 				'slug'  => 'portica-orange',
-				'color'	=> '#c'
+				'color'	=> '#F4D35E'
 			],
 			[
 				'name'  => __( 'Turquoise', 'ncpr-diviner' ),

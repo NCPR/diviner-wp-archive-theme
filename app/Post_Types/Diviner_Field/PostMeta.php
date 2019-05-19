@@ -159,7 +159,7 @@ class PostMeta {
 			->set_priority( 'low' );
 
 		$cpt_required = ( $field_type === CPT_Field::NAME );
-		$this->container = Container::make( 'post_meta', __( 'Custom Post Type Field Variables', 'ncpr-diviner' ) )
+		$this->container = Container::make( 'post_meta', __( 'Advanced Detail Field Variables', 'ncpr-diviner' ) )
 			->where( 'post_type', '=', Diviner_Field::NAME )
 			->add_fields( [
 				$this->get_field_cpt_id($cpt_required),
@@ -224,6 +224,7 @@ class PostMeta {
 	public function get_field_select_option_fields($required = false) {
 		$args = [];
 		$args[] = Field::make( 'text', static::FIELD_SELECT_OPTIONS_VALUE, __( 'Value', 'ncpr-diviner' ) )
+			->set_attribute( 'pattern', '^([A-Za-z]|[0-9]|_)+$' ) // letters numbers no spaces and underscores
 			->set_help_text( __( 'Use only lower case and underscores. No spaces. Used in the URL for facets search', 'ncpr-diviner' ) )
 			->set_required( $required );
 		$args[] = Field::make( 'text', static::FIELD_SELECT_OPTIONS_LABEL, __( 'Label', 'ncpr-diviner' ) )
@@ -233,22 +234,26 @@ class PostMeta {
 	}
 
 	public function get_field_cpt_id($required = false) {
-		return Field::make( 'text', static::FIELD_CPT_ID, __( 'Custom Post Type ID (use only lower case with underscores)', 'ncpr-diviner' ) )
+		return Field::make( 'text', static::FIELD_CPT_ID, __( 'Advanced Detail Field ID (use only lower case with underscores)', 'ncpr-diviner' ) )
+			->set_attribute( 'pattern', '^([A-Za-z]|[0-9]|_)+$' ) // letters numbers no spaces and underscores
 			->set_required( $required );
 	}
 
 	public function get_field_cpt_label($required = false) {
-		return Field::make( 'text', static::FIELD_CPT_LABEL, __( 'Custom Post Label', 'ncpr-diviner' ) )
+		return Field::make( 'text', static::FIELD_CPT_LABEL, __( 'Advanced Detail Field Label', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Appears in the left side admin menu', 'ncpr-diviner' ) )
 			->set_required( $required );
 	}
 
 	public function get_field_cpt_slug($required = false) {
-		return Field::make( 'text', static::FIELD_CPT_SLUG, __( 'Custom Post Slug (use only lower case with dashes)', 'ncpr-diviner' ) )
+		return Field::make( 'text', static::FIELD_CPT_SLUG, __( 'Advanced Detail Field Slug (use only lower case with dashes)', 'ncpr-diviner' ) )
+			->set_attribute( 'pattern', '^[a-z0-9]+(?:-[a-z0-9]+)*$')
 			->set_required( $required );
 	}
 
 	public function get_field_taxonomy_slug($required = false) {
 		return Field::make( 'text', static::FIELD_TAXONOMY_SLUG, __( 'Taxonomy Slug', 'ncpr-diviner' ) )
+			->set_attribute('pattern', '^[a-z0-9]+(?:-[a-z0-9]+)*$' )
 			->set_help_text( __( 'Must be lowercase and dashes only (ex: types-of-work)', 'ncpr-diviner' ) )
 			->set_required( $required );
 	}

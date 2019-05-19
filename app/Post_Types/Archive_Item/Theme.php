@@ -7,6 +7,8 @@ use Diviner\Post_Types\Diviner_Field\PostMeta as DivinerFieldPostMeta;
 use Diviner\Post_Types\Archive_Item\Post_Meta as Archive_Item_Post_Meta;
 use Diviner\Config\General;
 
+use function Tonik\Theme\App\template;
+
 /**
  * Class Theme
  *
@@ -115,10 +117,14 @@ class Theme {
 				);
 			}
 		}
-		 return sprintf(
-		 	'<div class="archive-item-meta"><ul class="archive-item-meta__list">%s</ul></div>',
-			 implode( '', $field_output)
-		 );
+		if (count($field_output) == 0) {
+			return '';
+		} else {
+			return sprintf(
+				'<div class="archive-item-meta"><ul class="archive-item-meta__list">%s</ul></div>',
+				implode( '', $field_output)
+			);
+		}
 	}
 
 	/**
@@ -176,6 +182,29 @@ class Theme {
 		return sprintf(
 			'<div class="audio-player">%s</div>',
 			do_shortcode( $shortcode )
+		);
+	}
+
+	/**
+	 * Renders photo
+	 *
+	 * @param int | string $post_id
+	 * @return string
+	 *
+	 */
+	static public function render_photo($post_id = null) {
+		if (!isset($post_id)) {
+			$post_id = get_the_ID();
+		}
+		ob_start();
+		template('partials/diviner_archive_item/feature-image', []);
+		$output = ob_get_clean();
+		if ( empty($output) ) {
+			return '';
+		}
+		return sprintf(
+			'<div class="photo">%s</div>',
+			$output
 		);
 	}
 

@@ -65,7 +65,7 @@ class Image {
 			$image_size_srcset = $image_size_src;
 		}
 
-		$image_id = get_post_thumbnail_id();
+		$image_id = $image;
 		$img_src = wp_get_attachment_image_url( $image_id, $image_size_src );
 		$img_srcset = wp_get_attachment_image_srcset( $image_id, $image_size_srcset );
 		$img_sizes = wp_calculate_image_sizes( $image_size_src, $img_src, null, $image_id );
