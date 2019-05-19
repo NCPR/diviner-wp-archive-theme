@@ -2,6 +2,18 @@
   margin-bottom: 2rem;
 }
 
+html {
+  height: 100%;
+}
+
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
 .blog-header .container {
   margin-top: 2em;
 }
@@ -17,4 +29,48 @@
 
 .blog-header ~ .container {
   margin-top: 50px;
+  margin-bottom: 50px;
+  flex: 1 0 auto;
+
+}
+
+.navbar-brand {
+  font-size: 200%;
+}
+
+.jumbotron--home {
+  position: relative;
+  background-color: transparent;
+}
+
+.jumbotron--home:after {
+  content: "";
+  background-repeat: repeat;
+  background-image: url(../img/bg-sprinkles-grey.png);
+  -webkit-background-size: 10%;
+  background-size: 10%;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+a.logo-ncpr {
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url(../img/NCPRlogo.png);
+  text-indent: -9999px;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
+.blog-post {
+  margin-bottom: 3em;
 }

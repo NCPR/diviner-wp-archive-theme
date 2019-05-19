@@ -3,10 +3,11 @@ title: "Contact"
 draft: false
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor neque, volutpat eget varius sed, accumsan ut massa. Sed nec vestibulum tortor. Nulla mattis tempor justo, eu sodales lorem elementum eget. Ut vel auctor urna. Nunc a risus vel risus condimentum convallis. Nulla ut dolor nisi. Phasellus sagittis vel leo vel pharetra. Curabitur euismod sapien sagittis risus volutpat, a vehicula nisi faucibus. Integer eleifend massa ac est sagittis, sed lacinia massa facilisis. Nunc at pharetra ante.
+**DIVINER** is an open source project by a team at [North Country Public Radio](northcountrypublicradio.org/) (an affiliate station of National Public radio - NPR), including Project Manager Amy Feiereisel, Digital Developer Graeme Hoffman, Station Manager Ellen Rocco, Digital Editor Dale Hobson, and Digital Director Bill Haenel.
+  
+The code source maintained by [Graeme Hoffman](http://graemehoffman.com) at [Diviner Github](https://github.com/NCPR/diviner-wp-archive-theme/)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dolor neque, volutpat eget varius sed, accumsan ut massa. Sed nec vestibulum tortor. Nulla mattis tempor justo, eu sodales lorem elementum eget. Ut vel auctor urna. Nunc a risus vel risus condimentum convallis. Nulla ut dolor nisi. Phasellus sagittis vel leo vel pharetra. Curabitur euismod sapien sagittis risus volutpat, a vehicula nisi faucibus. Integer eleifend massa ac est sagittis, sed lacinia massa facilisis. Nunc at pharetra ante.
- 
-![Alt Text](http://placehold.it/200x50 "Image Title")
+Please feel free to log any issue reports in github.
+
 
 
