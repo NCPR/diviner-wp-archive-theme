@@ -77,13 +77,13 @@ Choose whether or not you want to **Activate Related Items Field on Archive Item
 
 Example: _you add a photo of a certain factory to your archive, and you already have other factory-related archive items uploaded - such as an interview with a former worker, and a scan of old advertising. Related items will allow you to link the photo of the factory to the interview and the ad._
 
-**Display blog loop as cards.** Check this box if you want your posts/stories to be displayed as cards instead of in the traditional stacked WordPress manner.
+**Display blog listing as cards.** Check this box if you want your posts/stories to be displayed as cards instead of in the traditional stacked WordPress manner.
 
-**Standard Layout**
+**Stacked Wordpress Layout:**
 
 ![alt_text](../img/image1.png "image_tooltip")
 
-**Card Layout**
+**Card Layout:**
 
 ![alt_text](../img/image4.png "image_tooltip")
 

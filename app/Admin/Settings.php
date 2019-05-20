@@ -241,23 +241,23 @@ class Settings {
 	public function collection_title_singular() {
 		return Field::make( 'text', static::FIELD_GENERAL_COLLECTION_SINGULAR, __( 'Collections Title Singular', 'ncpr-diviner' ) )
 			->set_default_value( 'Collection' )
-			->set_help_text( __( 'Title used to describe collections in interface and loop page','ncpr-diviner' ) )
+			->set_help_text( __( 'Singular title used to describe collections','ncpr-diviner' ) )
 			->set_required( true );
 	}
 
 	public function collection_title_plural() {
 		return Field::make( 'text', static::FIELD_GENERAL_COLLECTION_PLURAL, __( 'Collections Title Plural', 'ncpr-diviner' ) )
 			->set_default_value( 'Collections' )
-			->set_help_text( __( 'Title used to describe collections in interface. Also used in slug','ncpr-diviner' ) );
+			->set_help_text( __( 'Plural title used to describe collections','ncpr-diviner' ) );
 	}
 
 	public function collection_description() {
 		return Field::make( 'rich_text', static::FIELD_GENERAL_COLLECTION_DESCRIPTION, __( 'Collection Description ', 'ncpr-diviner' ) )
-			->set_help_text( __( 'Appears at the top of the collections looop page', 'ncpr-diviner' ) );
+			->set_help_text( __( 'Appears at the top of the collections page', 'ncpr-diviner' ) );
 	}
 
 	public function collection_loop_as_cards_field() {
-		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION_CARDS, __( 'Display collection loop as cards', 'ncpr-diviner' ) )
+		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION_CARDS, __( 'Display collection listing as cards', 'ncpr-diviner' ) )
 			->set_option_value( '1' )
 			->set_default_value( '1' );
 	}
