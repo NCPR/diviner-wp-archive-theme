@@ -190,9 +190,12 @@ class Settings {
 			[
 				$this->permissions_field(),
 				$this->browse_modal_field(),
+				$this->get_separator( __( 'Optional Pages', 'ncpr-diviner' ) ),
 				$this->help_page_field(),
 				$this->search_page_field(),
+				$this->get_separator( __( 'Blog Display', 'ncpr-diviner' ) ),
 				$this->loop_as_cards_field(),
+				$this->get_separator( __( 'Footer', 'ncpr-diviner' ) ),
 				$this->footer_copy(),
 				$this->get_separator( __( 'Connect Social Media Accounts', 'ncpr-diviner' ) ),
 				$this->social_media_link_twitter(),
