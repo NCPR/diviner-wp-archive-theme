@@ -86,7 +86,7 @@ class Taxonomy_Field extends FieldType {
 			'update_item'       => sprintf( __( 'Update %s', 'ncpr-diviner' ), $field_label_singular ),
 			'add_new_item'      => sprintf( __( 'Add %s', 'ncpr-diviner' ), $field_label_singular ),
 			'new_item_name'     => sprintf( __( 'New %s', 'ncpr-diviner' ), $field_label_singular ),
-			'menu_name'         => $field_label_singular,
+			'menu_name'         => $field_label_plural,
 		];
 
 		$taxonomy_name = static::get_taxonomy_name( $field_post_id );

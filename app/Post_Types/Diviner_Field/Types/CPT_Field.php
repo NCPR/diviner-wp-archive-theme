@@ -47,12 +47,13 @@ class CPT_Field extends FieldType {
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
-			'show_in_menu'       => true,
+			'show_in_menu'       => 'diviner_general_settings_slug',
 			'query_var'          => true,
 			'rewrite'            => [ 'slug' => $field_slug ],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
+			'menu_icon'          => 'dashicons-video',
 			'menu_position'      => null,
 			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
 			'map_meta_cap'       => true,
@@ -61,6 +62,7 @@ class CPT_Field extends FieldType {
 			'labels' => [
 				'singular'     => $field_label,
 				'plural'       => $field_labels,
+				'menu_name'    => sprintf('%s (<i>Advanced Detail Field</i>)', $field_labels),
 				'name'         => $field_labels,
 				'add_new_item' => sprintf( 'Add New %s', $field_label ),
 			]

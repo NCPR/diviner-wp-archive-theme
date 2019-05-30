@@ -273,7 +273,7 @@ class PostMeta {
 	public function get_field_taxonomy_type($required = false) {
 		return Field::make( 'select', static::FIELD_TAXONOMY_TYPE, __( 'Type of taxonomy field', 'ncpr-diviner' ) )
 			->add_options( static::FIELD_TAXONOMY_TYPE_OPTIONS )
-			->set_help_text( __( 'Tag or category', 'ncpr-diviner' ) )
+			->set_help_text( __( 'Tag or category. Tags are non-hierarchical and categories are hierarchical.', 'ncpr-diviner' ) )
 			->set_required( $required );
 	}
 

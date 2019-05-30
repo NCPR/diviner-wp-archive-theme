@@ -11,8 +11,6 @@ $show_video = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_VIDEO || $type === 
 $show_document = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_DOCUMENT || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 $show_feature_image = ( $type === Archive_Item_Post_Meta::FIELD_TYPE_PHOTO || $type === Archive_Item_Post_Meta::FIELD_TYPE_MIXED );
 
-$show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_FIELD);
-
 ?>
 
 <article class="single-item single-item--post">
@@ -135,18 +133,16 @@ $show_related = carbon_get_theme_option(GeneralSettings::FIELD_GENERAL_RELATED_F
 	</div>
 
 	<?php
-	if ( $show_related ) {
-		echo '<div class="archive-item__content-block archive-item__content-block--related">';
-		the_widget(
-			'\Diviner\Theme\Widgets\Widget_Related_Items',
-			[],
-			[
-				'before_title' => '<h3 class="widgettitle h3">',
-				'after_title' => '</h3>',
-			]
-		);
-		echo '</div>';
-	}
+	the_widget(
+		'\Diviner\Theme\Widgets\Widget_Related_Items',
+		[],
+		[
+			'before_title' => '<h3 class="widgettitle h3">',
+			'after_title' => '</h3>',
+			'before_widget' => '<div class="archive-item__content-block archive-item__content-block--related">',
+			'after_widget' => '</div>',
+		]
+	);
 	?>
 
 	<?php

@@ -32,6 +32,7 @@ class Archive_Item {
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
+			'menu_icon'          => 'dashicons-star-filled',
 			'menu_position'      => null,
 			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
 			'map_meta_cap'       => true,

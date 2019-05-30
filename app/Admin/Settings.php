@@ -23,7 +23,6 @@ class Settings {
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
 	const FIELD_GENERAL_NAV_SEARCH_PAGE = 'diviner_field_general_search_page';
 	const FIELD_GENERAL_FOOTER_COPY = 'diviner_field_general_footer_copy';
-	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
 	const FIELD_GENERAL_LOOP_CARDS_FIELD = 'diviner_field_general_loop_cards';
 	const FIELD_GENERAL_SOCIAL_TWITTER = 'diviner_field_general_social_twitter';
 	const FIELD_GENERAL_SOCIAL_FACEBOOK = 'diviner_field_general_social_facebook';
@@ -128,6 +127,17 @@ class Settings {
 				</a>
 			</p>
 
+			<p>
+				<?php _e( 'To customize the look and feel of your site (logo, fonts and colors), go the theme customizer .', 'ncpr-diviner' ); ?>
+			</p>
+
+			<p>
+				<a href="customize.php" class="button button-primary">
+					<?php _e( 'Customizer', 'ncpr-diviner' ); ?>
+				</a>
+			</p>
+
+
 			<br>
 
 			<hr>
@@ -182,7 +192,6 @@ class Settings {
 				$this->browse_modal_field(),
 				$this->help_page_field(),
 				$this->search_page_field(),
-				$this->related_field(),
 				$this->loop_as_cards_field(),
 				$this->footer_copy(),
 				$this->get_separator( __( 'Connect Social Media Accounts', 'ncpr-diviner' ) ),
@@ -224,11 +233,6 @@ class Settings {
 		return Field::make( 'checkbox', static::FIELD_GENERAL_LOOP_CARDS_FIELD, __( 'Display blog listing as cards', 'ncpr-diviner' ) )
 			->set_option_value( '1' )
 			->set_default_value( '0' );
-	}
-
-	public function related_field() {
-		return Field::make( 'checkbox', static::FIELD_GENERAL_RELATED_FIELD, __( 'Activate Related Items Field on Archive Items', 'ncpr-diviner' ) )
-			->set_help_text( __( 'Related Items – add related items if you want to be able to manually connect your items to one another. For example, you might choose to link a sculpture to a series of paintings, or a video of a downtown area to pictures of downtown businesses. You add related items ONCE only, and it will work for your entire collection. ', 'ncpr-diviner' ) );
 	}
 
 	public function collection() {
