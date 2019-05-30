@@ -375,7 +375,7 @@ class PostMeta {
 	}
 
 	public function get_field_display_popup() {
-		return Field::make( 'checkbox', static::FIELD_BROWSE_DISPLAY, __( 'Check this if you want this field to appear in the popup overlay that appears after clicking an archive item in the Browse Page.', 'ncpr-diviner' ) )
+		return Field::make( 'checkbox', static::FIELD_BROWSE_DISPLAY, __( 'Check for this field to appear in the modal overlay in the Browse Page.', 'ncpr-diviner' ) )
 			->set_option_value( static::FIELD_CHECKBOX_VALUE );
 	}
 
