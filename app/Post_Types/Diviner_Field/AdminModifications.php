@@ -30,6 +30,45 @@ class AdminModifications {
 		add_filter( 'manage_diviner_field_posts_columns', [ $this, 'set_custom_edit_book_columns' ] );
 		add_action( 'manage_diviner_field_posts_custom_column' , [ $this, 'custom_book_column' ], 10, 2 );
 
+		add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
+
+	}
+
+
+	/*
+	 *
+	 * Adds the META boxes to the right on the edit creen
+	 *
+	 * @hook carbon_fields_register_fields
+	 */
+	public function add_meta_boxes() {
+
+		add_meta_box(
+			Diviner_Field::META_BOX_ID,
+			__( 'Additional Field Details', 'ncpr-diviner' ),
+			array( $this, 'render_metabox' ),
+			Diviner_Field::NAME,
+			'side',
+			'default'
+		);
+
+	}
+
+	/**
+	 * Renders the meta boxes.
+	 */
+	public function render_metabox( $post ) {
+		$field_id = get_the_id();
+		if (isset($field_id) && $field_id > 0) {
+			$field_type = Diviner_Field::get_field_post_meta( $field_id, PostMeta::FIELD_TYPE );
+			if (isset($field_type)) {
+				$field = Diviner_Field::get_class($field_type);
+				$field_post_meta_box_content = call_user_func( [ $field, 'get_meta_box' ], $field, $field_id);
+				echo $field_post_meta_box_content;
+				return;
+			}
+		}
+		return;
 	}
 
 	public function custom_book_column( $column, $post_id ) {

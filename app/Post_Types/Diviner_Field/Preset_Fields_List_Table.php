@@ -176,10 +176,14 @@ class Preset_Fields_List_Table extends \WP_List_Table
 
 	public function column_title( $item )
 	{
+		$title = __( '[ None ]', 'ncpr-diviner' );
+		if (!empty($item[ 'title' ])) {
+			$title = $item[ 'title' ];
+		}
 		return sprintf(
 			'<a href="%s" class="row-title">%s</a>',
 			get_edit_post_link( $item[ 'id' ] ),
-			$item[ 'title' ]
+			$title
 		);
 	}
 

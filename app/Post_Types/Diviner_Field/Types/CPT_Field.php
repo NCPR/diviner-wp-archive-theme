@@ -19,6 +19,47 @@ class CPT_Field extends FieldType {
 	const TITLE = 'Advanced Detail Field';
 	const TYPE = 'association';
 
+	/**
+	 * Get meta box additional info
+	 *
+	 * @param  \stdClass $field Field Class.
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return string
+	 */
+	static public function get_meta_box( $field, $post_id ) {
+
+		if ($post_id <= 0) {
+			return parent::get_meta_box($field, $post_id);
+		}
+		$field_id = Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
+		if ( isset($field_id) && !empty($field_id)) {
+			$output = sprintf(
+				'<p>%s</p>',
+				__( 'This field defines a new content type in wordpress to which your archive items may be associated. This field allows you to create, edit, and delete new content pages of this new content type.', 'ncpr-diviner' )
+			);
+			$pt = get_post_type_object( $field_id );
+			if (!empty($pt)) {
+				$view_all_link = sprintf( 'edit.php?post_type=%s', $field_id );
+				$output .= sprintf(
+					'<p><a href="%s" class="button button-primary">%s</a><br></p>',
+					$view_all_link,
+					$pt->labels->view_items
+				);
+
+				$new_link = sprintf( 'post-new.php?post_type=%s', $field_id );
+				$output .= sprintf(
+					'<p><a href="%s" class="button button-primary">%s</a><br></p>',
+					$new_link,
+					$pt->labels->add_new_item
+				);
+			}
+			$output .= parent::get_meta_box($field, $post_id);
+			return $output;
+		} else {
+			return parent::get_meta_box($field, $post_id);
+		}
+	}
+
 	static public function setup ( $post_id ) {
 		// set up CPT
 		$field_id = Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_CPT_ID );
@@ -56,12 +97,13 @@ class CPT_Field extends FieldType {
 			'menu_icon'          => 'dashicons-video',
 			'menu_position'      => null,
 			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
-			'map_meta_cap'       => true,
+			'map_meta_cap'       => true
 		];
 		$labels = [
 			'labels' => [
 				'singular'     => $field_label,
 				'plural'       => $field_labels,
+				'view_items'   => sprintf('View %s', $field_labels ) ,
 				'menu_name'    => sprintf('%s (<i>Advanced Detail Field</i>)', $field_labels),
 				'name'         => $field_labels,
 				'add_new_item' => sprintf( 'Add New %s', $field_label ),

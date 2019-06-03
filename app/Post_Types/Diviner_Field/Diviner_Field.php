@@ -25,6 +25,7 @@ class Diviner_Field {
 	const ORDER_BY_TITLE = 'SORT_TITLE';
 	const ORDER_BY_PUBLICATION_DATE = 'SORT_PUBLICATION_DATE';
 	const CACHE_KEY_ACTIVE_FIELDS = 'CACHE_KEY_ACTIVE_FIELDS';
+	const META_BOX_ID = 'META_BOX_ID';
 
 	public function __construct() {
 	}
@@ -211,7 +212,7 @@ class Diviner_Field {
 			'menu_position'      => null,
 			'supports'           => [ 'title', 'excerpt' ],
 			'rewrite'            => false,
-			'exclude_from_search' => true,
+			'exclude_from_search' => true
 		];
 	}
 
