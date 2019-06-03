@@ -31,7 +31,32 @@ class AdminModifications {
 		add_action( 'manage_diviner_field_posts_custom_column' , [ $this, 'custom_book_column' ], 10, 2 );
 
 		add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
+		add_action( 'edit_form_after_title', [ $this, 'edit_form_after_title' ] );
 
+	}
+
+	/*
+	 *
+	 * Outputs field type after title
+	 *
+	 * @hook edit_form_after_title
+	 */
+	public function edit_form_after_title() {
+		global $post;
+		if( !empty($post) && $post->post_type !== Diviner_Field::NAME) {
+			return;
+		}
+		$field_id = get_the_id();
+		if (isset($field_id) && $field_id > 0) {
+			$field_type = Diviner_Field::get_field_post_meta( $field_id, PostMeta::FIELD_TYPE );
+			if (isset($field_type)) {
+				$field = Diviner_Field::get_class( $field_type );
+				printf(
+						'<div class="wrap "><i><b>Field Type:</b> %s</i></div>',
+					$field::TITLE
+				);
+			}
+		}
 	}
 
 
