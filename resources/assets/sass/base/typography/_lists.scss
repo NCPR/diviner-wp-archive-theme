@@ -1,0 +1,100 @@
+
+
+// -----------------------------------------------------------------------------
+//
+// Lists
+//
+// -----------------------------------------------------------------------------
+
+ul,
+ol,
+dl {
+
+	.d-content & {
+		@include body-text;
+
+		margin-bottom: $d_spacer_smm;
+	}
+
+	.d-content--inverse & {
+		color: $color_text_inverse;
+	}
+}
+
+
+li {
+	.d-content & {
+		margin-bottom: 0.4em;
+	}
+}
+
+ul {
+	.d-content & {
+		list-style: disc outside;
+		padding-left: 2.5em;
+		padding-right: 0;
+
+		@include g-state(medium) {
+			padding-left: 3em;
+			padding-right: 3em;
+		}
+	}
+}
+
+ol {
+	.d-content & {
+		list-style: none;
+		padding-left: 0.5em;
+		padding-right: 0;
+		counter-reset: my-awesome-counter;
+	}
+}
+
+ol li {
+	.d-content & {
+		padding: 0 0 0 2em;
+		counter-increment: my-awesome-counter;
+		position: relative;
+
+		@include g-state(medium) {
+			padding: 0 0 0 2.5em;
+		}
+	}
+
+}
+
+ol li::before {
+	.d-content & {
+		width: 1.8em;
+		text-align: right;
+		content: counter(my-awesome-counter);
+		font-weight: bold;
+		position: absolute;
+		left: 0;
+	}
+
+}
+
+
+// -----------------------------------------------------------------------------
+//
+// DL
+//
+// -----------------------------------------------------------------------------
+
+
+.dl,
+.d-content dl {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.dt,
+.d-content dt {
+	font-weight: $t_font_weight_bold;
+}
+
+.dd,
+.d-content dd {
+	margin-bottom: $d_spacer_smm;
+}

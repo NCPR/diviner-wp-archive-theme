@@ -1,0 +1,19 @@
+
+.diviner-block__feature-post {
+	.loop-item__inner {
+		background-color: $color_white;
+		border: 3px solid $color_grey_light;
+	}
+
+	.loop-item__content {
+		padding: $d_spacer_m;
+
+		@include g-state(medium) {
+			padding: $d_spacer_m $d_spacer_lrg;
+		}
+	}
+
+	.loop-item__title {
+		margin-top: 0;
+	}
+}

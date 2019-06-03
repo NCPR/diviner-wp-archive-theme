@@ -1,0 +1,91 @@
+
+.loop {
+	margin: $d_spacer_m 0 $d_spacer_lrg;
+
+	@include g-state(medium) {
+		margin: $d_spacer_xlrg 0 $d_spacer_xxlrg;
+	}
+
+}
+
+.loop__posts {
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_lrg;
+	}
+
+	/* Case: for cards */
+	.loop--cards &,
+	.loop--diviner_archive_item & {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+.loop-item {
+	@include clearfix;
+
+	margin-bottom: $d_spacer_lrg;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_xlrg;
+	}
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+.loop-item__inner {
+
+	@include g-state(medium) {
+		display: flex;
+	}
+}
+
+.loop-item__content {
+	@include g-state(medium) {
+		padding: $d_spacer_m $d_spacer_lrg;
+	}
+}
+
+.loop-item__title {
+	.d-content & {
+		@include g-state(medium) {
+			margin-top: 0;
+		}
+	}
+}
+
+.loop-item__feature-image {
+	margin-bottom: $d_spacer_sm;
+
+	@include g-state(medium) {
+		width: 33.3%;
+		flex: 0 0 auto;
+		margin-bottom: 0;
+	}
+}
+
+.loop-item__meta {
+	color: $color_grey_dark;
+	margin-bottom: $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_m;
+	}
+}
+
+.loop-item__date {
+	text-transform: uppercase;
+}
+
+.loop__description {
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_lrg;
+	}
+}
+

@@ -1,2 +1,3 @@
 - clean composer.json file to remove wrong keywords
 - review files to make sure theme AND plugins are referenced
+- Upgrade to webpack 4

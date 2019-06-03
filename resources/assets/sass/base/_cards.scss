@@ -1,0 +1,121 @@
+
+.card {
+
+	/* Case: on archive pages and collections */
+	.loop--cards & {
+		margin-bottom: $d_spacer_m;
+
+		@include g-state(small) {
+			flex: 0 0 calc( 50% - ( #{$d_spacer_m} / 2 ) ); // account for margin in 2 up layout
+			margin-right: $d_spacer_m;
+			width: calc( 50% - ( #{$d_spacer_m} / 2 ) );
+
+			&:nth-child(2n) {
+				margin-right: 0;
+			}
+		}
+
+		@include g-state(medium) {
+			flex: 0 0 calc( 33.33% - ( ( #{$d_spacer_m} + #{$d_spacer_m} ) / 3 ) ); // account for margin in 3 up layout
+			margin-right: $d_spacer_m;
+			width: calc( 33.33% - ( ( #{$d_spacer_m} + #{$d_spacer_m} ) / 3 ) );
+
+			&:nth-child(2n) {
+				margin-right: $d_spacer_m;
+			}
+
+			&:nth-child(3n) {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+
+.card__feature-image {
+	margin: 0 0 $d_spacer_xsm;
+	position: relative;
+
+	@include g-state(medium) {
+		margin: 0 0 $d_spacer_sm;
+	}
+
+	.card--type-diviner_archive_item &:after {
+		font-family: $t_font_icons;
+		font-weight: 900;
+		-webkit-font-smoothing: antialiased;
+		display: inline-block;
+		font-style: normal;
+		font-variant: normal;
+		text-rendering: auto;
+		content: "";
+		color: $color_grey_light;
+		bottom: auto;
+		top: 50%;
+		left: 0;
+		line-height: 0;
+		width: 100%;
+		text-align: center;
+		margin-top: 0;
+		margin-left: 0;
+		z-index: 0;
+		margin-bottom: 0;
+		font-size: 300%;
+		position: absolute;
+		opacity: 0.5;
+	}
+
+	.card--type-diviner_archive_item &.card__feature-image--none:after {
+		color: $color_white;
+	}
+
+	.card--type-diviner_archive_item.card--ai-type-div_ai_field_mixed &:after {
+		content: "\f24d";
+	}
+
+	.card--type-diviner_archive_item.card--ai-type-div_ai_field_video &:after {
+		content: "\f04b";
+	}
+
+	.card--type-diviner_archive_item.card--ai-type-div_ai_field_audio &:after {
+		content: "\f028";
+	}
+
+	.card--type-diviner_archive_item.card--ai-type-div_ai_field_document &:after {
+		content: "\f15c";
+	}
+
+	.card__feature-image-anchor:hover &:after,
+	.card__feature-image-anchor:focus &:after {
+		opacity: 0.6;
+	}
+
+}
+
+.card__feature-image--none {
+	background-color: $color_grey_light;
+	height: 0;
+	padding-top: 100%;
+
+	img {
+		position: absolute;
+	}
+}
+
+.card__title {
+	margin: 0 0 $d_spacer_sm;
+	text-align: left;
+
+	@include g-state(medium) {
+		margin: 0 0 $d_spacer_m;
+	}
+}
+
+.card__excerpt {
+	margin: 0 0 $d_spacer_sm;
+
+	@include g-state(medium) {
+		margin: 0 0 $d_spacer_m;
+	}
+}
+

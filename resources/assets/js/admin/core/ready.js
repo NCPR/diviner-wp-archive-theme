@@ -4,18 +4,10 @@
  * @description The core dispatcher for the dom ready event javascript.
  */
 
-import _ from 'lodash';
 
-import { on, ready } from '../../utils/events';
+import { appReady } from '../../utils/events';
 
-/**
- * @function bindEvents
- * @description Bind global event listeners here,
- */
-
-const bindEvents = () => {
-	// on(window, 'resize', _.debounce(resize, 200, false));
-};
+import titleValidation from '../modules/title-validation';
 
 /**
  * @function init
@@ -23,13 +15,11 @@ const bindEvents = () => {
  */
 
 const init = () => {
-	// apply browser classes
-
-	bindEvents();
 
 	// initialize the main scripts
-
-	console.info('Square One BE: Initialized all javascript that targeted document ready.');
+	titleValidation();
+	
+	console.info('Diviner: Initialized all javascript that targeted document ready.');
 };
 
 /**
@@ -38,7 +28,7 @@ const init = () => {
  */
 
 const domReady = () => {
-	ready(init);
+	appReady(init);
 };
 
 export default domReady;

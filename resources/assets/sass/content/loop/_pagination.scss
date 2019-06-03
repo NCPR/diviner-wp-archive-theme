@@ -1,0 +1,22 @@
+
+.pagination {
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-bottom: $d_spacer_lrg;
+	}
+}
+
+.pagination__list {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+.pagination__item {
+	margin: 0 $d_spacer_xsm;
+}
+
+.pagination__item--current {
+	background-color: $color_grey_dark !important;
+}

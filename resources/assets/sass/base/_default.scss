@@ -1,0 +1,8 @@
+.d-content {
+	@include clearfix;
+
+	& > *:last-child {
+		margin-bottom: 0;
+	}
+
+}

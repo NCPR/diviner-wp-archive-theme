@@ -1,9 +1,49 @@
-<article>
-    <h1><?php the_title(); ?></h1>
+<article class="single-item single-item--post">
 
-    <time>
-        <small><?php the_date(); ?></small>
-    </time>
+	<header class="single-item__header">
 
-    <p><?php the_content(); ?></p>
+		<?php
+		do_action('theme/header/before-title');
+		?>
+		<h1 class="single-item__header-title h1 page-title"><?php the_title(); ?></h1>
+		<?php
+		do_action('theme/header/after-title');
+		?>
+
+		<div class="single-item__header-meta">
+			<time class="single-item__header-date">
+				<?php the_time( get_option( 'date_format' ) ); ?>
+			</time>
+			<div class="single-item__header-categories">
+				<?php the_category( ' | ' ); ?>
+			</div>
+			<div class="single-item__header-tags">
+				<?php the_tags(); ?>
+			</div>
+		</div>
+
+	</header>
+
+
+	<div class="single-item__layout">
+
+		<?php
+		do_action('theme/above-content');
+		?>
+
+		<div class="d-content">
+
+			<?php
+			do_action('theme/before-content');
+			?>
+
+			<?php the_content(); ?>
+		</div>
+
+	</div>
+
+	<?php
+	do_action('theme/article-end');
+	?>
+
 </article>

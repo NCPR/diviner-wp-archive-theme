@@ -1,0 +1,165 @@
+
+// -----------------------------------------------------------------------------
+//
+// Embeds
+//
+// -----------------------------------------------------------------------------
+
+// Embeds
+.wp-embed-wrap {
+
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Media: Images
+ * ----------------------------------------------------------------------------- */
+
+img {
+	line-height: 0;
+	width: auto;
+	height: auto;
+	display: block;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Media: Wrapper
+ * ----------------------------------------------------------------------------- */
+
+.wp-image {
+	width: auto !important;
+	max-width: none;
+	margin: 0 auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Media: Image Captions
+ * ----------------------------------------------------------------------------- */
+
+wp-caption {
+	img {
+		margin-bottom: 0;
+	}
+}
+
+.wp-caption-text {
+	max-width: 100%;
+	margin: $d_spacer_sm 0 0;
+	color: $color_grey_dark;
+	font-size: 13px;
+
+	@include g-state(medium) {
+		font-size: 15px;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Media: Alignments
+ * ----------------------------------------------------------------------------- */
+
+.aligncenter,
+.alignnone {
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
+}
+
+.alignleft,
+.alignright {
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		max-width: 30%;
+	}
+
+	/**
+	 * CASE: Left or right aligned captioned images shouldn't be centered inside the container.
+	 */
+	&.wp-image--caption {
+
+		img {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
+// Media Alignments
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignleft {
+	float: left;
+	max-width: 41%;
+	margin-right: $d_spacer_lrg;
+
+	@include g-state(medium) {
+		float: left;
+		max-width: 41%;
+		margin-right: $d_spacer_lrg;
+	}
+}
+
+.alignright {
+	float: right;
+	max-width: 41%;
+	margin-left: $d_spacer_lrg;
+
+	@include g-state(medium) {
+		float: right;
+		max-width: 41%;
+		margin-left: $d_spacer_lrg;
+	}
+}
+
+.alignwide {
+
+	@include g-state(medium) {
+		margin-left: -80px;
+		margin-right: -80px;
+		width: calc(100% + 160px);
+		max-width: calc(100% + 160px);
+	}
+}
+
+// Gutenberg styles
+.alignfull {
+
+	@include g-state(medium) {
+		margin-left: calc( -100vw / 2 + 100% / 2 );
+		margin-right: calc( -100vw / 2 + 100% / 2 );
+		width: 100vw;
+		max-width: 100vw;
+
+		img {
+			width: 100vw;
+		}
+	}
+}
+
+.alignwide {
+	margin-top: $d_spacer_m;
+	margin-bottom: $d_spacer_m;
+
+	@include g-state(medium) {
+		margin-top: $d_spacer_lrg;
+		margin-bottom: $d_spacer_lrg;
+	}
+}
+
+// Blocks
+.wp-block-embed {
+
+}
+
+figure {
+
+	&.aligncenter,
+	&.alignnone {
+		max-width: 100%;
+	}
+}
+

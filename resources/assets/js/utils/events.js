@@ -3,35 +3,26 @@
  * @description Some event functions for use in other modules
  */
 
-import _ from 'lodash';
+import assign from 'lodash/assign';
+
 
 const on = (el, name, handler) => {
 	if (el.addEventListener) {
 		el.addEventListener(name, handler);
-	} else {
-		el.attachEvent(`on${name}`, () => {
-			handler.call(el);
-		});
 	}
 };
 
-const ready = (fn) => {
+const appReady = (readyFn) => {
 	if (document.readyState !== 'loading') {
-		fn();
+		readyFn();
 	} else if (document.addEventListener) {
-		document.addEventListener('DOMContentLoaded', fn);
-	} else {
-		document.attachEvent('onreadystatechange', () => {
-			if (document.readyState !== 'loading') {
-				fn();
-			}
-		});
+		document.addEventListener('DOMContentLoaded', readyFn);
 	}
 };
 
-const trigger = (opts) => {
+const triggerEvent = (opts) => {
 	let event;
-	const options = _.assign({
+	const options = assign({
 		data: {},
 		el: document,
 		event: '',
@@ -53,4 +44,4 @@ const trigger = (opts) => {
 	options.el.dispatchEvent(event);
 };
 
-export { on, ready, trigger };
+export { on, appReady, triggerEvent };

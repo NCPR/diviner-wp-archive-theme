@@ -7,8 +7,9 @@
   "require": {
     "php": ">=7.0",
     "tonik/gin": "dev-develop",
-    "htmlburger/carbon-fields": "^2.2",
-    "pimple/pimple": "^3.2"
+    "htmlburger/carbon-fields": "^3.0",
+    "pimple/pimple": "^3.2",
+    "awps/font-awesome-php": "^4.7"
   },
   "require-dev": {
     "tonik/cli": "dev-develop"

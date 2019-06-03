@@ -18,17 +18,9 @@ class Main {
 		$this->container = $container;
 	}
 
-	public function init() {
-		// var_dump('init asdljjlhds jl adsljad sjlads jla sdjl asdjl adsjl adsjldsalj');
-		//$this->providers();
-	}
-
-	private function providers() {
-		//$this->container->register(new AdminProvider());
-		//$this->container->register(new GeneralProvider());
-		//$this->container->register(new PostTypeProvider());
-	}
-
+	/**
+	 * @return Container $container
+	 */
 	public function container() {
 		return $this->container;
 	}

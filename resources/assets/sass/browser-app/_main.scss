@@ -1,0 +1,21 @@
+
+.a-main {
+	width: 100%;
+	height: auto;
+	min-height: calc(100vh - 200px);
+	padding: 20px;
+}
+
+.a-row--extra-padding {
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	@include g-state( large ) {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+}
+
+.modal--open {
+	overflow: hidden;
+}

@@ -2,59 +2,90 @@
 
 namespace Diviner\Post_Types\Archive_Item;
 
-use function Tonik\Theme\App\config;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
-use Diviner\CarbonFields\Helper;
-use Diviner\CarbonFields\Errors\UndefinedType;
+use Diviner\Post_Types\Diviner_Field\PostMeta;
 
+/**
+ * Class Admin Modifications
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class AdminModifications {
 
 	const DIV_COL_TYPE = 'div_col_type';
 
 	public function hooks() {
-		add_action( 'admin_menu', array( &$this,'register_menu_links') );
-		add_filter( 'admin_body_class', array( &$this,'admin_body_class') );
+		add_action( 'admin_menu', [ $this,'register_menu_links' ] );
+		add_filter( 'admin_body_class', [ $this,'admin_body_class' ] );
 		add_filter( 'manage_edit-diviner_archive_item_columns', [ $this, 'archival_item_columns' ] );
 		add_action( 'manage_diviner_archive_item_posts_custom_column', [ $this, 'manage_diviner_archive_item_posts_custom_column' ], 10, 2 );
 		add_action( 'carbon_fields_register_fields', [ $this, 'active_field_setup' ], 3, 0 );
+		add_action( 'save_post', [ $this, 'save_ai_meta' ], 11, 3 ); // ToDo move this to gutenberg experience
 	}
 
-	function active_field_setup(  ) {
-		$meta_query = array(
-			array(
-				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
-				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			),
-		);
-		$args = array(
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'post_type' => Diviner_Field::NAME,
-			'meta_query' => $meta_query
-		);
-		$posts_ids = get_posts($args);
-		foreach($posts_ids as $post_id) {
-			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
-			$field = Diviner_Field::get_class($field_type);
-			call_user_func(array($field, 'setup'), $post_id);
+	/**
+	 * Copies over the feature image to the thumbnail is there is one
+	 *
+	 * @param int $post_id The post ID.
+	 * @param post $post The post object.
+	 * @param bool $update Whether this is an existing post being updated or not.
+	 */
+	function save_ai_meta( $post_id, $post, $update ) {
+		// only on new creations
+		if (!$update) return;
+		// only for archive singles
+		if (get_post_type($post_id) !== Archive_Item::NAME ) return;
+		$thumb_id = get_post_thumbnail_id($post_id);
+		// only do this when there is no value in the thumbnail already
+		if (empty($thumb_id)) {
+			$feature_photo = carbon_get_post_meta( $post_id, Post_Meta::FIELD_PHOTO );
+			if (!empty($feature_photo)) {
+				set_post_thumbnail( $post_id, $feature_photo );
+			}
 		}
 	}
 
-	function manage_diviner_archive_item_posts_custom_column( $colname, $cptid  ) {
-		if ( $colname == self::DIV_COL_TYPE && !empty( $cptid ) ) {
-			$type = carbon_get_post_meta( $cptid, Post_Meta::FIELD_TYPE );
+	/**
+	 * Runs the setup functions on all active fields
+	 *
+	 */
+	function active_field_setup(  ) {
+		$field_posts_ids = Diviner_Field::get_active_fields();
+		foreach($field_posts_ids as $field_post_id) {
+			$field_type = Diviner_Field::get_field_post_meta($field_post_id, FieldPostMeta::FIELD_TYPE );
+			$field = Diviner_Field::get_class($field_type);
+			if( is_callable( [ $field, 'setup' ] ) ){
+				call_user_func( [ $field, 'setup' ], $field_post_id);
+			}
+		}
+	}
+
+	/**
+	 * Injecting the type value into the type column
+	 *
+	 * @param string $colname
+	 * @param string $id
+	 */
+	function manage_diviner_archive_item_posts_custom_column( $colname, $id  ) {
+		if ( $colname == static::DIV_COL_TYPE && !empty( $id ) ) {
+			$type = carbon_get_post_meta( $id, Post_Meta::FIELD_TYPE );
 			if ( ! empty($type) ){
 				echo Post_Meta::get_type_label_from_id($type);
 			}
 		}
 	}
 
+	/**
+	 * Adding the type column
+	 *
+	 * @param array $columns
+	 * @return array
+	 */
 	function archival_item_columns( $columns ) {
-		$columns[ self::DIV_COL_TYPE ] = "Type";
+		$columns[ static::DIV_COL_TYPE ] = "Type";
 		return $columns;
 	}
-
 
 	/**
 	 * Adds one or more classes to the body tag in the dashboard.
@@ -67,11 +98,18 @@ class AdminModifications {
 		global $pagenow;
 
 		if (!$pagenow || !$post) {
-			return;
+			return $classes;
 		}
 		// what type of class is this
-		$type = carbon_get_the_post_meta( Post_Meta::FIELD_TYPE );
-		$classes .= sprintf( ' archive-item-edit--%s', $type );
+		if ( get_post_type() !== Archive_Item::NAME ) {
+			return $classes;
+		}
+
+		$type = carbon_get_post_meta( get_the_ID(), Post_Meta::FIELD_TYPE );
+		$classes .= ' archive-item-edit';
+		if ( ! empty( $type ) ) {
+			$classes .= sprintf( ' archive-item-edit--%s', $type );
+		}
 
 		return $classes;
 	}
@@ -80,37 +118,37 @@ class AdminModifications {
 
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
-			__('Add New Photo','menu-test'),
-			__('Add New Photo','menu-test'),
-			'manage_options',
+			__('Add New Photo','ncpr-diviner'),
+			__('Add New Photo','ncpr-diviner'),
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=photo'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
-			__('Add New Audio','menu-test'),
-			__('Add New Audio','menu-test'),
-			'manage_options',
+			__('Add New Audio','ncpr-diviner'),
+			__('Add New Audio','ncpr-diviner'),
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=audio'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
-			__('Add New Video','menu-test'),
-			__('Add New Video','menu-test'),
-			'manage_options',
+			__('Add New Video','ncpr-diviner'),
+			__('Add New Video','ncpr-diviner'),
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=video'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
-			__('Add New Document','menu-test'),
-			__('Add New Document','menu-test'),
-			'manage_options',
+			__('Add New Document','ncpr-diviner'),
+			__('Add New Document','ncpr-diviner'),
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=document'
 		);
 		add_submenu_page(
 			'edit.php?post_type=diviner_archive_item',
-			__('Add New Mixed Media','menu-test'),
-			__('Add New Mixed Media','menu-test'),
-			'manage_options',
+			__('Add New Mixed Media','ncpr-diviner'),
+			__('Add New Mixed Media','ncpr-diviner'),
+			'edit_posts',
 			'post-new.php?post_type=diviner_archive_item&type=mixed'
 		);
 

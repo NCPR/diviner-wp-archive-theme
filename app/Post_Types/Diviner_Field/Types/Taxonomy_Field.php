@@ -3,11 +3,15 @@
 
 namespace Diviner\Post_Types\Diviner_Field\Types;
 
-use Diviner\Post_Types\Diviner_Field\Types\FieldType;
-use Carbon_Fields\Field;
+use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
 
+/**
+ * Class Taxonomy Field
+ *
+ * @package Diviner\Post_Types\Diviner_Field\Types
+ */
 class Taxonomy_Field extends FieldType {
 
 	const NAME = 'diviner_taxonomy_field';
@@ -15,18 +19,85 @@ class Taxonomy_Field extends FieldType {
 	const TYPE = 'taxonomy';
 
 	/**
-	 * Outputs nothing because taxonomies are handled like all WP taxonomies
+	 * Get meta box additional info
 	 *
+	 * @param  \stdClass $field Field Class.
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return string
+	 */
+	static public function get_meta_box( $field, $post_id ) {
+
+		if ($post_id <= 0 ) {
+			return parent::get_meta_box($field, $post_id);
+		}
+
+		$taxonomy_name = static::get_taxonomy_name( $post_id );
+		$output = '';
+		$tax_link = sprintf(
+			'edit-tags.php?taxonomy=%s&amp;post_type=%s',
+			$taxonomy_name,
+			Archive_Item::NAME
+		);
+		$field_label_singular = Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
+		if (empty($field_label_singular)) {
+			$output .= parent::get_meta_box($field, $post_id);
+			return $output;
+		}
+		$output .= sprintf(
+			'<p>%s</p>',
+			__( 'This field associates a wordpress taxonomy with your archive items. You may add/edit this taxonomy in the individual archive item edit screens or by clicking the below link.', 'ncpr-diviner' )
+		);
+
+		$label = sprintf(
+			__( 'Add/Edit %s Taxonomy Items', 'ncpr-diviner' ),
+			$field_label_singular
+		);
+		$output .= sprintf(
+			'<p><a href="%s" class="button button-primary">%s</a><br></p>',
+			$tax_link,
+			$label
+		);
+		$output .= parent::get_meta_box($field, $post_id);
+		return $output;
+	}
+
+	/**
+	 * Builds the field and returns it
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @param  string $id Field id
+	 * @param  string $field_label Label
+	 * @param  string $helper field helper text
+	 * @return object
 	 */
 	static public function render( $post_id, $id, $field_label, $helper = '') {
 		return '';
 	}
 
-	static public function setup( $post_id ) {
-		$field_label_singular = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
-		$field_label_plural = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL);
-		$field_slug = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG);
-		$field_tax_type = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE);
+	/**
+	 * Return field value
+	 *
+	 * @param  int $post_id Post Id of archive item.
+	 * @param  string $field_name ID of field to get value of
+	 * @param  int $field_post_id Field Id
+	 * @return string
+	 */
+	static public function get_value( $post_id, $field_name, $field_post_id ) {
+		$taxonomy_name = static::get_taxonomy_name( $field_post_id );
+		// ToDo: link back to the browse screen
+		return get_the_term_list( $post_id, $taxonomy_name, '', ', ' );
+	}
+
+	/**
+	 * Set up the field
+	 *
+	 * @param  int $field_post_id Post Id of field.
+	 */
+	static public function setup( $field_post_id ) {
+		$field_label_singular = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
+		$field_label_plural = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL);
+		$field_slug = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG);
+		$field_tax_type = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE);
 
 		if ( empty( $field_slug ) ) {
 			$field_slug = sanitize_title($field_label_singular);
@@ -35,19 +106,25 @@ class Taxonomy_Field extends FieldType {
 		if ( empty( $field_label_singular ) ) {
 			$field_label_singular = sprintf(
 				'Taxonomy %d',
-				$post_id
+				$field_post_id
 			);
 		}
 
 		if ( empty( $field_label_plural ) ) {
 			$field_label_plural = sprintf(
 				__( 'Taxonomies %d', 'ncpr-diviner' ),
-				$post_id
+				$field_post_id
 			);
 		}
 
+		$menu_label = sprintf(
+			'%s (%s)',
+			$field_label_plural,
+			__( 'Taxonomy Field', 'ncpr-diviner')
+		);
+
 		// Labels
-		$labels = array(
+		$labels = [
 			'name'              => $field_label_plural,
 			'singular_name'     => $field_label_singular,
 			'search_items'      => sprintf( __( 'Search %s', 'ncpr-diviner' ), $field_label_plural ),
@@ -58,30 +135,51 @@ class Taxonomy_Field extends FieldType {
 			'update_item'       => sprintf( __( 'Update %s', 'ncpr-diviner' ), $field_label_singular ),
 			'add_new_item'      => sprintf( __( 'Add %s', 'ncpr-diviner' ), $field_label_singular ),
 			'new_item_name'     => sprintf( __( 'New %s', 'ncpr-diviner' ), $field_label_singular ),
-			'menu_name'         => $field_label_singular,
-		);
+			'menu_name'         => $menu_label,
+		];
+
+		$taxonomy_name = static::get_taxonomy_name( $field_post_id );
 
 		// args
-		$args = array(
+		$args = [
 			'hierarchical'      => ( $field_tax_type === FieldPostMeta::FIELD_TAXONOMY_TYPE_CATEGORY ) ? true : false,
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array(
+			'rewrite'           => [
 				'slug' => $field_slug
-			),
+			],
 			'show_in_rest'      => true,
-		);
-		register_taxonomy( self::get_taxonomy_name( $post_id ), array( Archive_Item::NAME ), $args );
-
+			'rest_base'         => $taxonomy_name,
+			'show_in_menu'      => false
+		];
+		register_taxonomy( $taxonomy_name, [ Archive_Item::NAME ], $args );
 	}
 
 	static public function get_taxonomy_name( $post_id ) {
 		return sprintf(
 			'%s_%s',
-			self::NAME,
+			static::NAME,
 			$post_id
 		);
+	}
+
+	/**
+	 * Return basic blueprint for this field
+	 *
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return array
+	 */
+	static public function get_blueprint( $post_id ) {
+		$blueprint = parent::get_blueprint( $post_id );
+		$additional_vars = [
+			'taxonomy_field_type'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_TYPE),
+			'taxonomy_field_slug'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SLUG),
+			'taxonomy_field_singular_label'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL),
+			'taxonomy_field_plural_label'  => Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_PLURAL_LABEL),
+			'taxonomy_field_name'   => static::get_taxonomy_name( $post_id ),
+		];
+		return array_merge($blueprint, $additional_vars);
 	}
 }

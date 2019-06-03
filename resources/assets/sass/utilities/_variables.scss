@@ -1,4 +1,120 @@
 // Colors
 // =================================================
-$white: #fff;
-$primary: #153FA6;
+
+$color_white: #fff;
+$color_grey_light: #dddddd;
+$color_grey_lighter: #f6f6f6;
+$color_grey: #999999;
+$color_grey_dark: #777777;
+$color_grey_darker: #333333;
+$color_grey_darkerer: #111111;
+$color_blue: #5c69ff;
+$color_black: #000;
+
+$color_primary: $color_grey_dark;
+$color_secondary: $color_grey;
+$color_accent: $color_grey;
+
+$color_links: $color_primary;
+$color_links_hover: $color_black;
+
+$color_headers: $color_grey_darker;
+
+$color_border: $color_grey_light;
+$color_border_focus: $color_blue;
+
+$color_text: $color_grey_darker;
+$color_text_light: $color_grey;
+$color_text_inverse: $color_grey_light;
+
+$color_links_inverse: $color_primary;
+$color_links_inverse_hover: $color_black;
+
+$color_selection_bg: $color_blue;
+$color_selection_text: $color_white;
+
+$color_background: $color_grey_lighter;
+
+
+// Media Queries
+// =================================================
+$mq_xxsmall: 375px;
+$mq_xsmall: 500px;
+$mq_small: 600px;
+$mq_medium: 768px;
+$mq_wpadmin: 783px;
+$mq_full: 960px;
+$mq_large: 1200px;
+$mq_xlarge: 1400px;
+
+
+// Spacers
+// =================================================
+$d_spacer_xsm: 5px;
+$d_spacer_sm: 10px;
+$d_spacer_smm: 15px;
+$d_spacer_m: 20px;
+$d_spacer_lrg: 40px;
+$d_spacer_xlrg: 60px;
+$d_spacer_xxlrg: 80px;
+
+$d_spacer_wpadmin_mobile: 46px;
+$d_spacer_wpadmin_desktop: 32px;
+
+// Grid
+// =================================================
+$g_max_width: 960px;
+$g_gaps_sm: $d_spacer_m;
+$g_gaps_lrg: $d_spacer_m;
+
+
+// Fonts
+// =================================================
+$t_font_sanserif: Helvetica, Arial, sans-serif;
+$t_font_serif: Times New Roman, serif;
+$t_font_helvetica: Helvetica, Arial, serif;
+$t_font_display: $t_font_sanserif;
+$t_font_body: $t_font_serif;
+$t_font_interface: $t_font_sanserif;
+$t_font_icons: 'Font Awesome 5 Free' !important;
+$t_font_headers: $t_font_helvetica;
+
+
+// Font Sizes
+// =================================================
+$t_font_size_sm: 14px;
+$t_font_size_m: 16px;
+$t_font_size_lrg: 18px;
+$t_font_size_xlrg: 22px;
+
+
+// Font Weights
+// =================================================
+$t_font_weight_normal: 400;
+$t_font_weight_light: 300;
+$t_font_weight_semi_bold: 500;
+$t_font_weight_bold: 700;
+
+
+// Line Heights
+// =================================================
+$t_line_height_even: 1;
+$t_line_height_sm: 1.1;
+$t_line_height_m: 1.2;
+$t_line_height_lrg: 1.4;
+$t_line_height_xlrg: 1.6;
+$t_line_height_xxlrg: 1.8;
+
+
+// Forms
+// =================================================
+
+$f_color_border: $color_border;
+$f_color_border_focus: $color_border_focus;
+$f_font_size_mobile: $t_font_size_m;
+
+
+// Transitions
+// =================================================
+
+$t_transition: all 0.15s ease-in-out;;

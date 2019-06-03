@@ -1,55 +1,66 @@
+<?php
+use Diviner\Admin\Customizer;
+use Diviner\Theme\General;
+?>
 <?php get_header(); ?>
-
 <?php
     /**
-     * Functions hooked into `theme/index/header` action.
+     * Functions hooked into `theme/header` action.
      *
-     * @hooked Tonik\Theme\Index\render_header - 10
      */
-    do_action('theme/index/header');
+    do_action('theme/header');
 ?>
 
-<section class="section">
-    <div class="wrapper">
-        <div class="content">
-            <?php if (have_posts()) : ?>
-                <h4>Posts</h4>
+<div class="main__inner">
 
-                <div class="posts">
-                    <?php while (have_posts()) : the_post() ?>
-                        <?php
-                            /**
-                             * Functions hooked into `theme/index/post/thumbnail` action.
-                             *
-                             * @hooked Tonik\Theme\App\Structure\render_post_thumbnail - 10
-                             */
-                            do_action('theme/index/post/thumbnail');
-                        ?>
-                    <?php endwhile; ?>
-                </div>
-            <?php else : ?>
-                <?php
-                    /**
-                     * Functions hooked into `theme/index/content/none` action.
-                     *
-                     * @hooked Tonik\Theme\App\Structure\render_empty_content - 10
-                     */
-                    do_action('theme/index/content/none');
-                ?>
-            <?php endif; ?>
-        </div>
+	<div class="wrapper">
+		<div class="wrapper__inner">
+			<div class="<?php echo General::get_loop_classes(); ?>">
 
-        <?php if (apply_filters('theme/index/sidebar/visibility', true)) : ?>
-            <?php
-                /**
-                 * Functions hooked into `theme/index/sidebar` action.
-                 *
-                 * @hooked Tonik\Theme\App\Structure\render_sidebar - 10
-                 */
-                do_action('theme/index/sidebar');
-            ?>
-        <?php endif; ?>
-    </div>
-</section>
+				<h1 class="h1 <?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?>">
+					<?php echo General::get_page_title(); ?>
+				</h1>
+
+				<?php
+				/**
+				 * Functions hooked into `theme/index/content` action.
+				 *
+				 */
+					do_action('theme/index/under-page-title');
+				?>
+
+				<?php if (have_posts()) : ?>
+
+					<div class="loop__posts">
+						<?php while (have_posts()) : the_post() ?>
+							<?php
+							/**
+							 * Functions hooked into `theme/index/content` action.
+							 *
+							 */
+							do_action('theme/index/content');
+							?>
+						<?php endwhile; ?>
+					</div>
+
+					<?php Diviner\Theme\Pagination::pagination(); ?>
+
+				<?php else : ?>
+					<?php
+					/**
+					 * Functions hooked into `theme/index/content/none` action.
+					 *
+					 * @hooked Tonik\Theme\App\Structure\render_empty_content - 10
+					 */
+					do_action('theme/index/content/none');
+					?>
+				<?php endif; ?>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
 
 <?php get_footer(); ?>

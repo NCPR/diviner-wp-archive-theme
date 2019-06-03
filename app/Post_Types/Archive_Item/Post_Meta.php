@@ -7,17 +7,14 @@ use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 use Diviner\Post_Types\Diviner_Field\Diviner_Field;
 use Diviner\Post_Types\Diviner_Field\PostMeta as FieldPostMeta;
-use Diviner\CarbonFields\Helper;
-use Diviner\CarbonFields\Errors\UndefinedType;
-
-use Diviner\Post_Types\Diviner_Field\PostMeta;
-use Diviner\Post_Types\Diviner_Field\Types\Text_Field;
-use Diviner\Post_Types\Diviner_Field\Types\Date_Field;
-use Diviner\Post_Types\Diviner_Field\Types\Taxonomy_Field;
-use Diviner\Post_Types\Diviner_Field\Types\CPT_Field;
-use Diviner\Post_Types\Diviner_Field\Types\Select_Field;
+use Diviner\Admin\Settings;
 use Diviner\Post_Types\Diviner_Field\Types\Related_Field;
 
+/**
+ * Class Post Meta
+ *
+ * @package Diviner\Post_Types\Archive_Item
+ */
 class Post_Meta {
 
 	const FIELD_TYPE = 'div_ai_field_type';
@@ -28,158 +25,193 @@ class Post_Meta {
 	const FIELD_TYPE_DOCUMENT   = 'div_ai_field_document';
 	const FIELD_TYPE_MIXED      = 'div_ai_field_mixed';
 
+	const CONTAINER_TYPES           = 'div_ai_container_types';
+	const CONTAINER_TYPE_PHOTO      = 'div_ai_container_photo';
+	const CONTAINER_TYPE_VIDEO      = 'div_ai_container_video';
+	const CONTAINER_TYPE_AUDIO      = 'div_ai_container_audio';
+	const CONTAINER_TYPE_DOCUMENT   = 'div_ai_container_document';
+	const CONTAINER_TYPE_MIXED      = 'div_ai_container_mixed';
+
 	const FIELD_TYPE_OPTIONS = [
-		self::FIELD_TYPE_PHOTO  => 'Photo',
-		self::FIELD_TYPE_VIDEO   => 'Video',
-		self::FIELD_TYPE_AUDIO   => 'Audio',
+		self::FIELD_TYPE_PHOTO    => 'Photo',
+		self::FIELD_TYPE_VIDEO    => 'Video',
+		self::FIELD_TYPE_AUDIO    => 'Audio',
 		self::FIELD_TYPE_DOCUMENT => 'Document',
-		self::FIELD_TYPE_MIXED=> 'Mixed media',
+		self::FIELD_TYPE_MIXED    => 'Mixed media',
 	];
 
-	const FIELD_RELATED = 'div_ai_field_related';
-	const FIELD_AUDIO = 'div_ai_field_audio';
-	const FIELD_AUDIO_OEMBED = 'div_ai_field_audio_oembed';
-
-	const FIELD_VIDEO_OEMBED = 'div_ai_field_video_oembed';
-
-	const FIELD_DOCUMENT = 'div_ai_field_document';
-	const FIELD_DATE = 'div_ai_field_date';
+	const FIELD_PHOTO        = 'div_ai_field_feature_photo';
+	const FIELD_RELATED      = 'div_ai_field_related';
+	const FIELD_AUDIO        = 'div_ai_field_feature_audio';
+	const FIELD_AUDIO_OEMBED = 'div_ai_field_audio_feature_oembed';
+	const FIELD_VIDEO_OEMBED = 'div_ai_field_video_feature_oembed';
+	const FIELD_DOCUMENT     = 'div_ai_field_feature_document';
 
 	protected $container;
 
-	static public function get_type_label_from_id($id)
-	{
-		return isset(self::FIELD_TYPE_OPTIONS[$id]) ? self::FIELD_TYPE_OPTIONS[$id] : '';
+	public function hooks() {
+		add_action( 'carbon_fields_register_fields', [ $this, 'add_post_meta' ], 3, 0 );
+	}
+
+	static public function get_type_label_from_id($id) {
+		return isset( static::FIELD_TYPE_OPTIONS[$id] ) ? static::FIELD_TYPE_OPTIONS[$id] : '';
 	}
 
 	public function add_post_meta()
 	{
 		$this->add_permanent_fields();
 		$this->add_dynamic_fields();
-
 	}
 
 	public function add_permanent_fields()
 	{
-		$this->container = Container::make( 'post_meta', 'Type' )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPES,
+			__( 'Type', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
 				$this->get_field_types(),
-			))
+			] )
 			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', 'Audio' )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_PHOTO,
+			__( 'Photo', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
+				$this->get_field_photo()
+			] )
+			->set_priority( 'high' );
+
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_AUDIO,
+			__( 'Audio', 'ncpr-diviner' )
+		)
+			->where( 'post_type', '=', Archive_Item::NAME )
+			->add_fields( [
 				$this->get_field_audio(),
 				$this->get_field_audio_oembed()
-			))
-			->set_priority( 'default' );
+			] )
+			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', 'Video' )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_VIDEO,
+			__( 'Video', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
 				$this->get_field_video_oembed()
-			))
-			->set_priority( 'default' );
+			] )
+			->set_priority( 'high' );
 
-		$this->container = Container::make( 'post_meta', 'Document' )
+		$this->container = Container::make(
+			'post_meta',
+			static::CONTAINER_TYPE_DOCUMENT,
+			__( 'Document', 'ncpr-diviner' )
+		)
 			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( array(
+			->add_fields( [
 				$this->get_field_document()
-			))
-			->set_priority( 'default' );
+			] )
+			->set_priority( 'high' );
 
 	}
 
-	/**
-	 * Adds one or more classes to the body tag in the dashboard.
-	 *
-	 * @param  \WP_Post $post Current field post.
-	 * @return String          Class name.
-	 */
-	public function get_class( $post ) {
-		$field_type = carbon_get_the_post_meta( FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables' );
-		$map = [
-			Text_Field::NAME        => Text_Field::class,
-			Date_Field::NAME        => Date_Field::class,
-		];
-
-		if( !array_key_exists( $field_type, $map ) ){
-			// developer-land exception, let's make it clear
-			throw UndefinedType("{$field_type} is not a valid field type");
+	public function get_field( $cpt_field_id, $type ) {
+		$id = Diviner_Field::get_field_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ID );
+		$label = get_the_title( $cpt_field_id );
+		$helper = Diviner_Field::get_field_post_meta( $cpt_field_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
+		if( is_callable( [ $type,'render' ] ) ){
+			return call_user_func( [ $type, 'render' ], $cpt_field_id, $id, $label, $helper);
 		}
-
-		return $map[$field_type];
-	}
-
-	public function get_field( $post_id, $type ) {
-		$id = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_ID );
-		$label = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_LABEL_TITLE );
-		$helper = carbon_get_post_meta( $post_id, FieldPostMeta::FIELD_ADMIN_HELPER_TEXT);
-		return call_user_func( array($type, 'render'), $post_id, $id, $label, $helper);
+		return '';
 	}
 
 	public function add_dynamic_fields(){
-		$meta_query = array(
-			array(
-				'key'     => Helper::get_real_field_name(FieldPostMeta::FIELD_ACTIVE ),
-				'value'   => FieldPostMeta::FIELD_CHECKBOX_VALUE
-			),
-		);
-		$args = array(
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'post_type' => Diviner_Field::NAME,
-			'meta_query' => $meta_query
-		);
-		$posts_ids = get_posts($args);
+		$cpt_fields_ids = Diviner_Field::get_active_fields();
+		$dynamic_fields = [];
 
-		foreach($posts_ids as $post_id) {
-			$field_type = carbon_get_post_meta($post_id, FieldPostMeta::FIELD_TYPE, 'carbon_fields_container_field_variables');
+		foreach($cpt_fields_ids as $cpt_field_id) {
+			$field_type = Diviner_Field::get_field_post_meta($cpt_field_id, FieldPostMeta::FIELD_TYPE );
 			$type = Diviner_Field::get_class( $field_type );
 			if ( $type ) {
-				$field_rendered = $this->get_field( $post_id,  $type );
+				$field_rendered = $this->get_field( $cpt_field_id,  $type );
 				if ( ! empty( $field_rendered ) ) {
-					$dyn_fields[] = $field_rendered;
+					$dynamic_fields[] = $field_rendered;
 				}
 
 			}
 		}
-		$dyn_fields_container = Container::make( 'post_meta', 'Additional Fields' )
-			->where( 'post_type', '=', Archive_Item::NAME )
-			->add_fields( $dyn_fields )
-			->set_priority( 'default' );
+
+		// add the related field
+		$field = Related_Field::render(
+			0,
+			static::FIELD_RELATED,
+			__( 'Related Archive Items', 'ncpr-diviner' ),
+			__( 'Appears on each archive item single page as a slider. Scroll down for the full list of archive items to choose from.', 'ncpr-diviner' )
+		);
+		$dynamic_fields[] = $field;
+
+		if ( count($dynamic_fields) ) {
+			$dyn_fields_container = Container::make( 'post_meta', __( 'Additional Fields', 'ncpr-diviner' ) )
+				->where( 'post_type', '=', Archive_Item::NAME )
+				->add_fields( $dynamic_fields )
+				->set_priority( 'default' );
+		}
 
 	}
 
 	public function get_field_document()
 	{
-		return Field::make( 'file', self::FIELD_DOCUMENT , 'Any other document not an image or video or audio. Ex: PDF ' );
+		return Field::make(
+			'file',
+			static::FIELD_DOCUMENT ,
+			__( 'Any other document not an image or video or audio. Ex: PDF', 'ncpr-diviner' )
+		);
+
+	}
+
+	public function get_field_photo()
+	{
+		return Field::make(
+			'image',
+			static::FIELD_PHOTO,
+			__( 'Large feature image to appear in single page.', 'ncpr-diviner' )
+		);
 
 	}
 
 	public function get_field_video_oembed()
 	{
-		return Field::make( 'oembed', self::FIELD_VIDEO_OEMBED, 'Any oembed video url' );
+		return Field::make(
+			'oembed',
+			static::FIELD_VIDEO_OEMBED,
+			__( 'Any oembed video url', 'ncpr-diviner' )
+		);
 	}
 
 	public function get_field_audio()
 	{
-		return Field::make( 'file', self::FIELD_AUDIO , 'Any audio file' )
+		return Field::make( 'file', static::FIELD_AUDIO , __( 'Any Audio File', 'ncpr-diviner' ) )
 			->set_type( 'audio' );
 
 	}
 
 	public function get_field_audio_oembed()
 	{
-		return Field::make( 'oembed', self::FIELD_AUDIO_OEMBED, 'Any oembed audio file' );
+		return Field::make( 'oembed', static::FIELD_AUDIO_OEMBED, __( 'Any Oembed Audio File', 'ncpr-diviner' ) );
 	}
 
 	public function get_field_types() {
-		$field = Field::make( 'select', self::FIELD_TYPE, 'Type of Archive Item' )
-			->add_options(self::FIELD_TYPE_OPTIONS)
-			->set_help_text( 'What kind of field is this' );
+		$field = Field::make( 'select', static::FIELD_TYPE, __( 'Type of Archive Item', 'ncpr-diviner' ) )
+			->add_options( static::FIELD_TYPE_OPTIONS )
+			->set_help_text( __( 'What kind of field is this?', 'ncpr-diviner' ) );
 		if( isset( $_GET["type"] ) ) {
 			$field->set_default_value( 'div_ai_field_' . $_GET["type"] );
 		}

@@ -30,24 +30,73 @@ This project is based on the excellent [Tonik Starter Theme](/README_Tonik.md) b
 * Carbon Fields for field management
 * ( Optional ) Elastic search for improved performance
 
+## Development
+
+There are two parts to this development stack. 
+
+1. General theme with JS, CSS and templates
+2. The ReactJS based browse application which appears in the browse template. Located in /browse-app
+
+Each has it's own yarn/npm webpack build system. Eventually, the build systems may be combined with separate entry points and resource chunking.
+
+### General Theme
+
+Run `nvm use` at top level. Run `yarn install` to set up dependencies. `yarn run dev` for development and `yarn run prod` for production. 
+
+JS and SASS files are located in /resources/assets.
+
+
+### Browse App
+
+Run `nvm use` at top level. Run `yarn install` to set up dependencies. `yarn run dev` for development and `yarn run dist` for production. 
+
+To develop this app, you must ensure that the dev JS version is used instead of the production version. 
+
+To do this, set `SCRIPT_DEBUG` to true in the wp-config.php
+
+```
+define( 'SCRIPT_DEBUG', true );
+```
+and then add a MU plugin to set a `browse_js_dev_path`
+
+```
+<?php 
+// mu-plugins/somefile.php
+add_filter( 'browse_js_dev_path', function () {
+	return 'http://localhost:3000/dist/master.js';
+} );
+```
+
+Then you can view the browse page with the dev version. 
+
 ## Roadmap
 
 ### Summer and early Fall of 2018
 
-* Development of Alpha Version based on existing [North Country at Work](http://www.northcountryatwork.org/) code base
-* Elastic search enabled multi facet react front end
-* Admin experience allowing user to activate/deactivate a set of core fields
-* Date field with multi front end display options (year decade or century slider or date range selector)
-* Text field for basic text data
-* Taxonomy fields for any number of things (location, keywords etc)
-* CPT field for related CPT items
+* ~~Development of Alpha Version based on existing [North Country at Work](http://www.northcountryatwork.org/) code base~~
+* Elastic search enabled multi facet react front end (in testing)
+* ~~Admin experience allowing user to activate/deactivate a set of core fields~~
+* ~~Date field with multi front end display options (year decade or century slider or date range selector)~~
+* ~~Text field for basic text data~~
+* ~~Taxonomy fields for any number of things (location, keywords etc)~~
+* ~~CPT field for related CPT items (Advanced Detail Field)~~
+* ~~Select Field~~
 
 ### Late fall 2018
 
-* QA work with NCPR team
-* Refinements and improvements
+* ~~Collections Feature (optional)~~
+* QA work with NCPR team (ongoing)
+* Refinements and improvements (ongoing)
+* ~~Theme Buildout~~
+* ~~Gutenberg Compatible~~
 
-### January 2019
+### Winter 2019 and beyond
 
+* Submission to Wordpress.org as a theme
+* Documentation (ongoing)
 * Release in the wild
 * User testing session 
+* Support adopters
+* Upgrade to webpack 4
+* Add modal window system to the collections display. Set up chunking for the react library
+

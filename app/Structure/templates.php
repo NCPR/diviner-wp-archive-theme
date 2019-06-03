@@ -13,6 +13,8 @@ namespace Tonik\Theme\App\Structure;
 |
 */
 
+// ToDo pull these template calls into classes
+
 use function Tonik\Theme\App\template;
 
 /**
@@ -42,9 +44,27 @@ add_action('theme/index/content/none', 'Tonik\Theme\App\Structure\render_empty_c
  *
  * @see resources/templates/single.tpl.php
  */
-function render_post_content()
-{
-    template(['partials/post/content', get_post_format()]);
+function render_post_content() {
+	if (is_page_template('page-search.php')) {
+		$type = 'search';
+	} else {
+		$type = get_post_type();
+	}
+	$path = sprintf(
+		'partials/%s/content',
+		$type
+	);
+	try {
+		template([
+			$path,
+			get_post_format()
+		]);
+	} catch (\Exception $ex) {
+		template([
+			'partials/post/content',
+			get_post_format()
+		]);
+	}
 }
 add_action('theme/single/content', 'Tonik\Theme\App\Structure\render_post_content');
 
@@ -61,15 +81,3 @@ function render_sidebar()
 }
 add_action('theme/index/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
 add_action('theme/single/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
-
-/**
- * Renders [button] shortcode after homepage content.
- *
- * @uses resources/templates/shortcodes/button.tpl.php
- * @see resources/templates/partials/header.tpl.php
- */
-function render_documentation_button()
-{
-    echo do_shortcode("[button href='https://github.com/tonik/tonik']Checkout documentation →[/button]");
-}
-add_action('theme/header/end', 'Tonik\Theme\App\Structure\render_documentation_button');

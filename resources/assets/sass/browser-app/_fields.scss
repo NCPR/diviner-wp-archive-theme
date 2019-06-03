@@ -1,0 +1,31 @@
+
+.a-field {
+	margin-bottom: $d_spacer_sm;
+
+	/* Date */
+	.a-date-selector {
+		position: absolute;
+		display: none;
+		z-index: 5;
+
+		&.a-date-selector--visible {
+			display: block;
+		}
+
+	}
+
+}
+
+.a-input-date {
+	width: 100%;
+}
+
+.a-input-date--range {
+
+}
+
+.a-field-input--text {
+	input {
+		width: 100%;
+	}
+}
