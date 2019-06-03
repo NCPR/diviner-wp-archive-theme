@@ -1,4 +1,49 @@
 
+
+/*
+
+Accounting for two markup formats
+
+// Case: Default pages
+
+<div class="menu"><ul>
+<li class="page_item page-item-472 page_item_has_children"><a href="http://diviner.localhost/test-page-2/">Another Test Page</a>
+<ul class="children">
+<li class="page_item page-item-1606"><a href="http://diviner.localhost/test-page-2/loreem-ipsum/">Loreem ipsum</a></li>
+<li class="page_item page-item-468"><a href="http://diviner.localhost/test-page-2/test-page/">Test page</a></li>
+</ul>
+</li>
+<li class="page_item page-item-498"><a href="http://diviner.localhost/blog/">Blog</a></li>
+<li class="page_item page-item-1033"><a href="http://diviner.localhost/diviner-browse/">Diviner Browse</a></li>
+<li class="page_item page-item-902 current_page_item"><a href="http://diviner.localhost/" aria-current="page">Diviner Home</a></li>
+<li class="page_item page-item-227"><a href="http://diviner.localhost/kitchen-sink/">Kitchen Sink</a></li>
+<li class="page_item page-item-322"><a href="http://diviner.localhost/kitchen-sink-gut/">Kitchen Sink Gut</a></li>
+<li class="page_item page-item-2"><a href="http://diviner.localhost/sample-page/">Sample Page</a></li>
+<li class="page_item page-item-1043"><a href="http://diviner.localhost/search/">Search</a></li>
+<li class="page_item page-item-1101"><a href="http://diviner.localhost/stories/">Stories</a></li>
+<li class="page_item page-item-1578"><a href="http://diviner.localhost/whhkasd-hksadhksadkhasd/">whhkasd hksadhksadkhasd</a></li>
+</ul></div>
+
+// Case: Associated Wp menu
+
+<div class="menu-menu-1-container"><ul id="menu-menu-1" class="menu"><li id="menu-item-207" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-207"><a href="http://diviner.localhost/" aria-current="page">Home</a></li>
+<li id="menu-item-469" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-469"><a href="http://diviner.localhost/kitchen-sink-gut/">Kitchen Sink Gut</a></li>
+<li id="menu-item-1600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1600"><a href="http://diviner.localhost/diviner-browse/">Diviner Browse</a></li>
+<li id="menu-item-1601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1601"><a href="http://diviner.localhost/blog/">Blog</a></li>
+<li id="menu-item-1609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1609"><a href="http://diviner.localhost/test-page-2/">Another Test Page</a>
+<ul class="sub-menu">
+	<li id="menu-item-1610" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1610"><a href="http://diviner.localhost/test-page-2/loreem-ipsum/">Loreem ipsum</a></li>
+	<li id="menu-item-1611" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1611"><a href="http://diviner.localhost/test-page-2/test-page/">Test page</a></li>
+</ul>
+</li>
+<li id="menu-item-1603" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1603"><a href="http://diviner.localhost/kitchen-sink/">Kitchen Sink</a></li>
+</ul></div>
+
+
+*/
+
+
+
 .primary-menu__wrap {
 	display: none;
 	margin:	60px 0;
@@ -62,14 +107,21 @@
 		padding-top: 0;
 		margin-right: calc(-1 * #{$d_spacer_m});
 
+		ul.menu,
+		.menu > ul {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: flex-end;
+		}
+
 		.menu > ul > li {
 			overflow: visible;
 		}
 
+		ul.menu > li > a,
 		.menu > ul > li > a {
-			padding: 0 10px;
-			height: 30px;
-			line-height: 30px;
+			padding: 5px 10px;
+			line-height: 1.2;
 		}
 
 		.menu > ul > li + li {
@@ -147,10 +199,12 @@
 	}
 }
 
+.page_item_has_children,
 .menu-item-has-children {
 	overflow: visible;
 }
 
+.children,
 .sub-menu {
 	margin-left: $d_spacer_m;
 
@@ -170,11 +224,13 @@
 		opacity: 0;
 		transition: $t_transition;
 
+		.menu .page_item_has_children:hover > &,
 		.menu > .menu-item-has-children:hover > & {
 			display: block;
 			opacity: 1;
 		}
 
+		.menu .page_item_has_children:last-of-type > &,
 		.menu > .menu-item-has-children:last-of-type > & {
 			left: auto;
 			right: 10px;

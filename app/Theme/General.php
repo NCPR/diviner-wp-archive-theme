@@ -566,7 +566,7 @@ class General {
 			);
 		} else {
 			$brand = sprintf(
-				'<h1 class="header__title"><a href="%s" class="header__title-link">%s</a></h1>',
+				'<div class="header__title"><a href="%s" class="header__title-link">%s</a></div>',
 				get_home_url(),
 				get_bloginfo( 'name' )
 			);

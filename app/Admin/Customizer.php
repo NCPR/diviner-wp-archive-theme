@@ -573,11 +573,15 @@ class Customizer {
 					background-color: transparent;
 				}
 
+				.primary-menu .menu .children a,
+				.primary-menu .menu .children a:visited,
 				.primary-menu .menu .sub-menu a,
 				.primary-menu .menu .sub-menu a:visited {
 					color: <?php echo $color_subheader_text_desktop; ?>;
 				}
 
+				.primary-menu .menu .children a:focus,
+				.primary-menu .menu .children a:hover,
 				.primary-menu .menu .sub-menu a:focus,
 				.primary-menu .menu .sub-menu a:hover {
 					color: <?php echo $color_subheader_text_desktop; ?>;
