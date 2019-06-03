@@ -40,7 +40,7 @@ class Title {
 
 		// 404
 		elseif ( is_404() ) {
-			return __( 'Page Not Found', 'ncpr-diviner' );
+			return __( 'Page Not Found (Error 404)', 'ncpr-diviner' );
 		}
 
 		// Singular

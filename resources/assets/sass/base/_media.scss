@@ -92,6 +92,10 @@ wp-caption {
 }
 
 .alignleft {
+	float: left;
+	max-width: 41%;
+	margin-right: $d_spacer_lrg;
+
 	@include g-state(medium) {
 		float: left;
 		max-width: 41%;
@@ -100,6 +104,10 @@ wp-caption {
 }
 
 .alignright {
+	float: right;
+	max-width: 41%;
+	margin-left: $d_spacer_lrg;
+
 	@include g-state(medium) {
 		float: right;
 		max-width: 41%;
@@ -145,5 +153,13 @@ wp-caption {
 // Blocks
 .wp-block-embed {
 
+}
+
+figure {
+
+	&.aligncenter,
+	&.alignnone {
+		max-width: 100%;
+	}
 }
 

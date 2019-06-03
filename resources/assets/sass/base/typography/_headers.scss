@@ -42,5 +42,9 @@ h6,
 .d-content {
 	h1, h2, h3, h4, h5, h6 {
 		margin-top: $d_spacer_m;
+
+		@include g-state(medium) {
+			margin-top: $d_spacer_lrg;
+		}
 	}
 }
