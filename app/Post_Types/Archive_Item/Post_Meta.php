@@ -150,16 +150,13 @@ class Post_Meta {
 		}
 
 		// add the related field
-		$related = carbon_get_theme_option(Settings::FIELD_GENERAL_RELATED_FIELD);
-		if ( $related ) {
-			$field = Related_Field::render(
-				0,
-				static::FIELD_RELATED,
-				__( 'Related Archive Items', 'ncpr-diviner' ),
-				__( 'Appears on each archive item single page as a slider. Scroll down for the full list of archive items to choose from.', 'ncpr-diviner' )
-			);
-			$dynamic_fields[] = $field;
-		}
+		$field = Related_Field::render(
+			0,
+			static::FIELD_RELATED,
+			__( 'Related Archive Items', 'ncpr-diviner' ),
+			__( 'Appears on each archive item single page as a slider. Scroll down for the full list of archive items to choose from.', 'ncpr-diviner' )
+		);
+		$dynamic_fields[] = $field;
 
 		if ( count($dynamic_fields) ) {
 			$dyn_fields_container = Container::make( 'post_meta', __( 'Additional Fields', 'ncpr-diviner' ) )

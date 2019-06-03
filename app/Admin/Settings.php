@@ -23,7 +23,6 @@ class Settings {
 	const FIELD_GENERAL_HELP_PAGE = 'diviner_field_general_help_page';
 	const FIELD_GENERAL_NAV_SEARCH_PAGE = 'diviner_field_general_search_page';
 	const FIELD_GENERAL_FOOTER_COPY = 'diviner_field_general_footer_copy';
-	const FIELD_GENERAL_RELATED_FIELD = 'diviner_field_general_related';
 	const FIELD_GENERAL_LOOP_CARDS_FIELD = 'diviner_field_general_loop_cards';
 	const FIELD_GENERAL_SOCIAL_TWITTER = 'diviner_field_general_social_twitter';
 	const FIELD_GENERAL_SOCIAL_FACEBOOK = 'diviner_field_general_social_facebook';
@@ -128,6 +127,17 @@ class Settings {
 				</a>
 			</p>
 
+			<p>
+				<?php _e( 'To customize the look and feel of your site (logo, fonts and colors), go the theme customizer .', 'ncpr-diviner' ); ?>
+			</p>
+
+			<p>
+				<a href="customize.php" class="button button-primary">
+					<?php _e( 'Customizer', 'ncpr-diviner' ); ?>
+				</a>
+			</p>
+
+
 			<br>
 
 			<hr>
@@ -180,10 +190,12 @@ class Settings {
 			[
 				$this->permissions_field(),
 				$this->browse_modal_field(),
+				$this->get_separator( __( 'Optional Pages', 'ncpr-diviner' ) ),
 				$this->help_page_field(),
 				$this->search_page_field(),
-				$this->related_field(),
+				$this->get_separator( __( 'Blog Display', 'ncpr-diviner' ) ),
 				$this->loop_as_cards_field(),
+				$this->get_separator( __( 'Footer', 'ncpr-diviner' ) ),
 				$this->footer_copy(),
 				$this->get_separator( __( 'Connect Social Media Accounts', 'ncpr-diviner' ) ),
 				$this->social_media_link_twitter(),
@@ -226,11 +238,6 @@ class Settings {
 			->set_default_value( '0' );
 	}
 
-	public function related_field() {
-		return Field::make( 'checkbox', static::FIELD_GENERAL_RELATED_FIELD, __( 'Activate Related Items Field on Archive Items', 'ncpr-diviner' ) )
-			->set_help_text( __( 'Related Items – add related items if you want to be able to manually connect your items to one another. For example, you might choose to link a sculpture to a series of paintings, or a video of a downtown area to pictures of downtown businesses. You add related items ONCE only, and it will work for your entire collection. ', 'ncpr-diviner' ) );
-	}
-
 	public function collection() {
 		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION, __( 'Activate Collections', 'ncpr-diviner' ) )
 			->set_help_text( __( 'Activate collections to take advantage of groups of archive items that can be curated manually.', 'ncpr-diviner' ) )
@@ -241,23 +248,23 @@ class Settings {
 	public function collection_title_singular() {
 		return Field::make( 'text', static::FIELD_GENERAL_COLLECTION_SINGULAR, __( 'Collections Title Singular', 'ncpr-diviner' ) )
 			->set_default_value( 'Collection' )
-			->set_help_text( __( 'Title used to describe collections in interface and loop page','ncpr-diviner' ) )
+			->set_help_text( __( 'Singular title used to describe collections','ncpr-diviner' ) )
 			->set_required( true );
 	}
 
 	public function collection_title_plural() {
 		return Field::make( 'text', static::FIELD_GENERAL_COLLECTION_PLURAL, __( 'Collections Title Plural', 'ncpr-diviner' ) )
 			->set_default_value( 'Collections' )
-			->set_help_text( __( 'Title used to describe collections in interface. Also used in slug','ncpr-diviner' ) );
+			->set_help_text( __( 'Plural title used to describe collections','ncpr-diviner' ) );
 	}
 
 	public function collection_description() {
 		return Field::make( 'rich_text', static::FIELD_GENERAL_COLLECTION_DESCRIPTION, __( 'Collection Description ', 'ncpr-diviner' ) )
-			->set_help_text( __( 'Appears at the top of the collections looop page', 'ncpr-diviner' ) );
+			->set_help_text( __( 'Appears at the top of the collections page', 'ncpr-diviner' ) );
 	}
 
 	public function collection_loop_as_cards_field() {
-		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION_CARDS, __( 'Display collection loop as cards', 'ncpr-diviner' ) )
+		return Field::make( 'checkbox', static::FIELD_GENERAL_COLLECTION_CARDS, __( 'Display collection listing as cards', 'ncpr-diviner' ) )
 			->set_option_value( '1' )
 			->set_default_value( '1' );
 	}

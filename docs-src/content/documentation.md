@@ -66,8 +66,11 @@ Example: _North Country Public Radio is not the owner or holder of copyright for
 
 Choose whether or not you want to **“Activate Modal in browse page on click”, **which causes a pop-up (with a small thumbnail of the archive item plus a few pieces of meta-data) to display in the browse experience when you click on an individual archive item. If _no_t selected, the visitor will be taken directly to the Archive Item single. The point of the pop-up is to allow visitors to look through many archive items without having to leave the browse experience.     2. 
 
-![alt_text](../img/image2.png "image_tooltip")
+\
+{{< figure width="500" src="../img/image2.png" alt="Modal Window" caption="Modal Window in Browse Experience" captionClass="figure-caption text-left" >}}
 
+\
+\
 
 **Set your Help Page.** (Move on if you chose not to create a Help Page). From the drop-down menu, select it. This links that page (which you can fill with whatever information you believe will be helpful to your visitors) with a little link at the top of the  **DIVINER** browse experience.  
 
@@ -77,16 +80,20 @@ Choose whether or not you want to **Activate Related Items Field on Archive Item
 
 Example: _you add a photo of a certain factory to your archive, and you already have other factory-related archive items uploaded - such as an interview with a former worker, and a scan of old advertising. Related items will allow you to link the photo of the factory to the interview and the ad._
 
-**Display blog loop as cards.** Check this box if you want your posts/stories to be displayed as cards instead of in the traditional stacked WordPress manner.
+**Display blog listing as cards.** Check this box if you want your posts/stories to be displayed as cards instead of in the traditional stacked WordPress manner.
 
-**Standard Layout**
+\
 
-![alt_text](../img/image1.png "image_tooltip")
+{{< figure width="500" src="../img/image1.png" alt="Stacked Wordpress Layout" caption="Stacked Wordpress Layout" captionClass="figure-caption text-left" >}}
 
-**Card Layout**
+\
+\
 
-![alt_text](../img/image4.png "image_tooltip")
+{{< figure width="500" src="../img/image4.png" alt="Card Layout" caption="Card Layout" captionClass="figure-caption text-left" >}}
 
+
+\
+\
 
 **Customize your Footer** This is not time-sensitive, and can be done later in set-up if you so choose. This section allows you to customize the footer that appears at the bottom of all pages on your **DIVINER** site. You can add text, copyright statements, etc. in the box called ‘Footer Copy’ and connect up your social media accounts (facebook, instagram, and twitter), which will appear as icons that take you directly to those social media accounts when clicked on. 
 
@@ -105,7 +112,13 @@ Choose to edit Diviner Browse and add a description of what visitors can find in
 
 Choose to edit Diviner Home. 
 
-![alt_text](../img/image3.png "image_tooltip")
+\
+
+{{< figure width="500" src="../img/image3.png" alt="Home Page" caption="Home Page" captionClass="figure-caption text-left" >}}
+
+\
+\
+ 
 
  * Once you’re in the editing experience, click on Preview on the upper right.  This will show you what your current homepage looks like in a new tab, and this is how you can check to see how your choices on the back-end are affecting the look of your home page.
  * Now head on back to the Diviner Home edit page, and get to customizing! You can keep elements you like, get rid of elements you don’t, and add additional elements. The basis of this homepage building experience is WordPress’s 5.0, which includes the Gutenberg Editor experience. For more on the basics of Gutenberg and how to leverage Gutenberg to its full potential, [use this manual](https://wordpress.org/gutenberg/).       
@@ -276,3 +289,4 @@ Please note that these social media links are for links to social media accounts
 
 To the degree that Wordpress has been used for years by sites large and small and because the open-source Wordpress community is so vibrant, there are many plugins which may help to backup data already within the site.
 
+**DIVINER** is more than just a theme in that it sets up the data type for your archive items adn collections. In this way, the data you enter for your archive items is only for use only with the Diviner theme. If ever you deactivate this theme, you will no longer have access to the browse experience or your Archive Items. 

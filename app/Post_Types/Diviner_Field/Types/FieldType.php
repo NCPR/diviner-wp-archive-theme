@@ -107,6 +107,39 @@ abstract class FieldType implements iField {
 	}
 
 	/**
+	 * Get meta box additional info
+	 *
+	 * @param  \stdClass $field Field Class.
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return string
+	 */
+	static public function get_meta_box( $field, $post_id ) {
+		$url = 'https://ncpr.github.io/diviner-wp-archive-theme/documentation/';
+		$link = sprintf(
+			wp_kses(
+				__(
+					'Learn more about this <b>%s</b> field in the <a href="%s">documentation website</a>.',
+					'ncpr-diviner'
+				),
+				[
+					'a' => [
+						'href' => []
+					],
+					'b' => []
+				]
+			),
+			$field::TITLE,
+			esc_url( $url )
+		);
+		return sprintf(
+			'<div class="d-meta-box_info d-meta-box_info--type-%s d-meta-box_info--id-%s">%s</div>',
+			$field::TYPE,
+			$post_id,
+			$link
+		);
+	}
+
+	/**
 	 * Return basic blueprint for this field
 	 *
 	 * @param  int $post_id Post Id of field to set up.

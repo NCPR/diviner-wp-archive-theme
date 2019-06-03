@@ -19,6 +19,49 @@ class Taxonomy_Field extends FieldType {
 	const TYPE = 'taxonomy';
 
 	/**
+	 * Get meta box additional info
+	 *
+	 * @param  \stdClass $field Field Class.
+	 * @param  int $post_id Post Id of field to set up.
+	 * @return string
+	 */
+	static public function get_meta_box( $field, $post_id ) {
+
+		if ($post_id <= 0 ) {
+			return parent::get_meta_box($field, $post_id);
+		}
+
+		$taxonomy_name = static::get_taxonomy_name( $post_id );
+		$output = '';
+		$tax_link = sprintf(
+			'edit-tags.php?taxonomy=%s&amp;post_type=%s',
+			$taxonomy_name,
+			Archive_Item::NAME
+		);
+		$field_label_singular = Diviner_Field::get_field_post_meta( $post_id, FieldPostMeta::FIELD_TAXONOMY_SINGULAR_LABEL);
+		if (empty($field_label_singular)) {
+			$output .= parent::get_meta_box($field, $post_id);
+			return $output;
+		}
+		$output .= sprintf(
+			'<p>%s</p>',
+			__( 'This field associates a wordpress taxonomy with your archive items. You may add/edit this taxonomy in the individual archive item edit screens or by clicking the below link.', 'ncpr-diviner' )
+		);
+
+		$label = sprintf(
+			__( 'Add/Edit %s Taxonomy Items', 'ncpr-diviner' ),
+			$field_label_singular
+		);
+		$output .= sprintf(
+			'<p><a href="%s" class="button button-primary">%s</a><br></p>',
+			$tax_link,
+			$label
+		);
+		$output .= parent::get_meta_box($field, $post_id);
+		return $output;
+	}
+
+	/**
 	 * Builds the field and returns it
 	 *
 	 * @param  int $post_id Post Id of field to set up.
@@ -74,6 +117,12 @@ class Taxonomy_Field extends FieldType {
 			);
 		}
 
+		$menu_label = sprintf(
+			'%s (%s)',
+			$field_label_plural,
+			__( 'Taxonomy Field', 'ncpr-diviner')
+		);
+
 		// Labels
 		$labels = [
 			'name'              => $field_label_plural,
@@ -86,7 +135,7 @@ class Taxonomy_Field extends FieldType {
 			'update_item'       => sprintf( __( 'Update %s', 'ncpr-diviner' ), $field_label_singular ),
 			'add_new_item'      => sprintf( __( 'Add %s', 'ncpr-diviner' ), $field_label_singular ),
 			'new_item_name'     => sprintf( __( 'New %s', 'ncpr-diviner' ), $field_label_singular ),
-			'menu_name'         => $field_label_singular,
+			'menu_name'         => $menu_label,
 		];
 
 		$taxonomy_name = static::get_taxonomy_name( $field_post_id );
@@ -103,9 +152,9 @@ class Taxonomy_Field extends FieldType {
 			],
 			'show_in_rest'      => true,
 			'rest_base'         => $taxonomy_name,
+			'show_in_menu'      => false
 		];
 		register_taxonomy( $taxonomy_name, [ Archive_Item::NAME ], $args );
-
 	}
 
 	static public function get_taxonomy_name( $post_id ) {

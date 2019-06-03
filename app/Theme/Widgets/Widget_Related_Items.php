@@ -52,6 +52,9 @@ class Widget_Related_Items extends Widget {
 	function get_related_cards() {
 		$post_id = get_the_ID();
 		$related_items = carbon_get_post_meta($post_id, ArchiveItemPostMeta::FIELD_RELATED);
+		if (count($related_items) === 0){
+			return [];
+		}
 		$related_ids = array_map(function($related_item) {
 			return $related_item['id'];
 		}, $related_items);
@@ -92,14 +95,10 @@ class Widget_Related_Items extends Widget {
 		if (get_post_type() !== Archive_Item::NAME ) {
 			return false;
 		}
-		$show_related = carbon_get_theme_option(Settings::FIELD_GENERAL_RELATED_FIELD);
-		if (!$show_related) {
-			return false;
-		}
 
 		// display only  if we have related items
 		$related = $this->get_related_cards();
-		if (empty($related)) {
+		if (empty($related) || count($related) === 0 ) {
 			return false;
 		}
 		printf('%s%s%s',

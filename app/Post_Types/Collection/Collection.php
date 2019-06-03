@@ -101,6 +101,7 @@ class Collection {
 			],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
+			'menu_icon'          => 'dashicons-star-filled',
 			'hierarchical'       => false,
 			'menu_position'      => null,
 			'show_in_rest'       => true,
