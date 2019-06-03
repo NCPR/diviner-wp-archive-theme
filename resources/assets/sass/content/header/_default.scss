@@ -7,6 +7,8 @@
 	flex: 0 0 auto;
 	min-height: 70px;
 	position: relative;
+	display: flex;
+	align-items: center;
 
 	h1 {
 		margin-top: 0;
@@ -15,9 +17,10 @@
 	@include g-state(full) {
 		display: flex;
 		justify-content: space-between;
-		height: 100px;
+		min-height: 100px;
 		padding: $d_spacer_sm $d_spacer_m;
 		align-items: center;
+		height: auto;
 	}
 }
 
@@ -29,7 +32,7 @@
 		display: block;
 		flex: 1 1 auto;
 		align-self: center;
-		margin-left: $d_spacer_sm;
+		margin-left: $d_spacer_m;
 		margin-bottom: 0;
 	}
 }
@@ -37,6 +40,16 @@
 .header__title {
 	margin: 0;
 	padding: 0;
+	line-height: 1.1;
+	font-size: 1.4em;
+
+	@include g-state(medium) {
+		font-size: 1.7em;
+	}
+
+	@include g-state(full) {
+		font-size: 2em;
+	}
 
 	a {
 		text-decoration: none;

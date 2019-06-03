@@ -6,16 +6,21 @@
 //
 // -----------------------------------------------------------------------------
 
-ul, ol, dl {
+ul,
+ol,
+dl {
 
 	.d-content & {
 		@include body-text;
+
+		margin-bottom: $d_spacer_smm;
 	}
 
 	.d-content--inverse & {
 		color: $color_text_inverse;
 	}
 }
+
 
 li {
 	.d-content & {
@@ -25,7 +30,6 @@ li {
 
 ul {
 	.d-content & {
-		margin-bottom: 1.6em;
 		list-style: disc outside;
 		padding-left: 2.5em;
 		padding-right: 0;
@@ -39,7 +43,6 @@ ul {
 
 ol {
 	.d-content & {
-		margin-bottom: 1.6em;
 		list-style: none;
 		padding-left: 0.5em;
 		padding-right: 0;
@@ -72,3 +75,26 @@ ol li::before {
 
 }
 
+
+// -----------------------------------------------------------------------------
+//
+// DL
+//
+// -----------------------------------------------------------------------------
+
+
+.dl,
+.d-content dl {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.dt,
+.d-content dt {
+	font-weight: $t_font_weight_bold;
+}
+
+.dd,
+.d-content dd {
+	margin-bottom: $d_spacer_smm;
+}

@@ -100,7 +100,7 @@ class Home_Page {
 		ob_start();
 		?>
 		<!-- wp:paragraph -->
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non posuere nisi. Nullam euismod mi nisi, nec ullamcorper felis rhoncus eu. Vestibulum gravida vehicula ex at mattis. </p>
+		<p>This is just an example home page with for placement only content. It uses a few standard Gutenberg editor blocks and then two custom diviner blocks, the call to action and the related items. Feel free to modify this homepage in any way you see fit or to create your own in Gutenberg</p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:paragraph -->

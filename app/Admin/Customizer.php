@@ -430,6 +430,11 @@ class Customizer {
 			font-family: '<?php echo $header_font_value; ?>' !important;
 		}
 
+		.d-content th,
+		.th {
+			font-family: '<?php echo $header_font_value; ?>' !important;
+		}
+
 		.d-content blockquote {
 			border-left-color: <?php echo $color_accent; ?>;
 		}
@@ -573,11 +578,15 @@ class Customizer {
 					background-color: transparent;
 				}
 
+				.primary-menu .menu .children a,
+				.primary-menu .menu .children a:visited,
 				.primary-menu .menu .sub-menu a,
 				.primary-menu .menu .sub-menu a:visited {
 					color: <?php echo $color_subheader_text_desktop; ?>;
 				}
 
+				.primary-menu .menu .children a:focus,
+				.primary-menu .menu .children a:hover,
 				.primary-menu .menu .sub-menu a:focus,
 				.primary-menu .menu .sub-menu a:hover {
 					color: <?php echo $color_subheader_text_desktop; ?>;

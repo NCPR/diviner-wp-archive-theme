@@ -24,7 +24,7 @@ do_action('theme/header');
 				<div class="single-item__layout">
 
 					<div class="d-content">
-						<p><?php echo __('The page you are looking for no longer exists.'); ?></p>
+						<p><?php echo __('The page you are looking for does not exist.'); ?></p>
 					</div>
 
 					<div class="section">
