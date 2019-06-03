@@ -41,14 +41,14 @@
 	margin: 0;
 	padding: 0;
 	line-height: 1.1;
-	font-size: 1.5em;
+	font-size: 1.4em;
 
 	@include g-state(medium) {
-		font-size: 1.9em;
+		font-size: 1.7em;
 	}
 
 	@include g-state(full) {
-		font-size: 2.1em;
+		font-size: 2em;
 	}
 
 	a {

@@ -430,6 +430,11 @@ class Customizer {
 			font-family: '<?php echo $header_font_value; ?>' !important;
 		}
 
+		.d-content th,
+		.th {
+			font-family: '<?php echo $header_font_value; ?>' !important;
+		}
+
 		.d-content blockquote {
 			border-left-color: <?php echo $color_accent; ?>;
 		}
