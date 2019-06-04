@@ -38,10 +38,10 @@ $row_col2_classes_output = join( ' ', $row_col2_classes);
 
 							<?php if ( $show_col1 ) { ?>
 
-								<div class="<?= $row_col1_classes_output ?>">
+								<div class="<?php echo $row_col1_classes_output; ?>">
 
-									<?= $footer_menu ?>
-									<?= $footer_copy ?>
+									<?php echo $footer_menu; ?>
+									<?php echo $footer_copy; ?>
 
 								</div>
 
@@ -49,9 +49,9 @@ $row_col2_classes_output = join( ' ', $row_col2_classes);
 
 							<?php if ( $show_col2 ) { ?>
 
-								<div class="<?= $row_col2_classes_output ?>">
+								<div class="<?php echo $row_col2_classes_output; ?>">
 
-									<?= $footer_social ?>
+									<?php echo $footer_social; ?>
 
 								</div>
 

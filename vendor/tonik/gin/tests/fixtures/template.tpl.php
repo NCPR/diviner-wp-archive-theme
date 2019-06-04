@@ -1,1 +1,1 @@
-<div><?= $key ?></div>
+<div><?php echo $key; ?></div>

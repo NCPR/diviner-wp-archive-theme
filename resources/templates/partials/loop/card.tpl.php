@@ -39,7 +39,7 @@ $card_classes_output = implode(' ', $card_classes);
 		<?php
 		if ( $display_feature ) {
 		?>
-			<a href="<?php the_permalink(); ?>" class="card__feature-image-anchor" title="<?php esc_attr_e(get_the_title()); ?>">
+			<a href="<?php the_permalink(); ?>" class="card__feature-image-anchor" title="<?php esc_attr(get_the_title()); ?>">
 			<div class="<?php echo $img_classes_output; ?>">
 				<?php
 				Image::image(

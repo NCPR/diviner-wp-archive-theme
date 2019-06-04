@@ -226,8 +226,8 @@ class Diviner_Field {
 			'labels' => [
 				'singular'     => __( 'Diviner Field', 'ncpr-diviner' ),
 				'plural'       => __( 'Diviner Fields', 'ncpr-diviner' ),
-				'slug'         => _x( 'diviner-field', 'post type slug', 'ncpr-diviner' ),
-				'name'         => _x( 'Diviner Fields', 'post type general name', 'ncpr-diviner' ),
+				'slug'         => _x( 'diviner-field', 'diviner field slug label', 'ncpr-diviner' ),
+				'name'         => _x( 'Diviner Fields', 'diviner field general name label', 'ncpr-diviner' ),
 				'add_new_item' => __( 'Add New Diviner Field', 'ncpr-diviner' ),
 				'edit_item'    => __( 'Edit Diviner Field', 'ncpr-diviner' ),
 				'new_item'     => __( 'New Diviner Field', 'ncpr-diviner' ),

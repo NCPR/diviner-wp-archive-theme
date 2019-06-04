@@ -45,7 +45,7 @@ class Collection {
 	 * @return string
 	 */
 	static public function get_default_singular_title() {
-		return _x( 'Collection', 'post type singular name', 'ncpr-diviner' );
+		return _x( 'Collection', 'collection singular name', 'ncpr-diviner' );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Collection {
 	 * @return string
 	 */
 	static public function get_default_plural_title() {
-		return _x( 'Collections', 'post type general name', 'ncpr-diviner' );
+		return _x( 'Collections', 'collection general name', 'ncpr-diviner' );
 	}
 
 	/**

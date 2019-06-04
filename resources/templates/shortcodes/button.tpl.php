@@ -1,3 +1,3 @@
-<a href="<?= $attributes['href'] ?>">
-    <?= $content ?>
+<a href="<?php echo $attributes['href']; ?>">
+    <?php echo $content; ?>
 </a>
