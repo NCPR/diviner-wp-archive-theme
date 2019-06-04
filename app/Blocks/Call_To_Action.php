@@ -128,7 +128,7 @@ class Call_To_Action {
 	 */
 	public function get_icon_field() {
 		$icons = new FontAwesome();
-		$field = Field::make( 'select', static::BLOCK_ICON, __( 'Icon' ) );
+		$field = Field::make( 'select', static::BLOCK_ICON, __( 'Icon', 'ncpr-diviner' ) );
 		$icons_simplified = $icons->getReadableNames();
 		array_unshift(
 			$icons_simplified,
