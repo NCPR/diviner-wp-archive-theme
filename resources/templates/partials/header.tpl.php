@@ -1,15 +1,15 @@
 <header class="header" data-js="header">
 
-	<?= $brand ?>
+	<?php echo $brand; ?>
 
-	<p class="header__lead"><?= $lead ?></p>
+	<p class="header__lead"><?php echo $lead; ?></p>
 
-	<?= $primary_menu ?>
+	<?php echo $primary_menu; ?>
 
 	<button class="header__menu-trigger" data-js="header__menu-trigger">
 		<span class="fas fa-bars" aria-hidden="true"></span>
 		<div class="a11y-hidden">
-			<?= __( 'Toggle Menu', 'ncpr-diviner'); ?>
+			<?php echo __( 'Toggle Menu', 'ncpr-diviner'); ?>
 		</div>
 	</button>
 

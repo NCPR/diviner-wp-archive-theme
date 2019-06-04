@@ -2,10 +2,10 @@
 $slides = !empty($slides) ? $slides : '';
 $swiper_data = !empty($swiper_data) ? $swiper_data : '';
 ?>
-<div class="swiper-container" data-js="swiper" data-swiper-data='<?=$swiper_data ?>'>
+<div class="swiper-container" data-js="swiper" data-swiper-data='<?php echo $swiper_data; ?>'>
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
-		<?=$slides ?>
+		<?echo $slides; ?>
 	</div>
 	<!-- If we need pagination -->
 	<div class="swiper-pagination"></div>

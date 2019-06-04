@@ -37,12 +37,13 @@ img {
  * Media: Image Captions
  * ----------------------------------------------------------------------------- */
 
-wp-caption {
+.wp-caption {
 	img {
 		margin-bottom: 0;
 	}
 }
 
+.gallery-caption,
 .wp-caption-text {
 	max-width: 100%;
 	margin: $d_spacer_sm 0 0;

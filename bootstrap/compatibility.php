@@ -34,7 +34,7 @@ if ( ! (
 	// Die and display alert information, if we are
 	// not on the admin, login or register page.
 	if ( ! tonikgin_is_admin_login_or_register_page() ) {
-		wp_die( __( "Important! Diviner requires <a href='//github.com/tonik/gin'><strong>tonik/gin</strong></a> package. Please, make sure it's installed and active." ) );
+		wp_die( __( "Important! Diviner requires tonik/gin package. Please, make sure it's installed and active.", 'ncpr-diviner' ) );
 	}
 
 	/**
@@ -46,7 +46,7 @@ if ( ! (
 		?>
 		<div class="error notice">
 			<p>
-				<?php _e( "We could not find <a href='//github.com/tonik/gin'><strong>tonik/gin</strong></a> package. You have to install it before using this theme." ); ?>
+				<?php _e( "We could not find the tonik/gin package. You have to install it before using this theme.", 'ncpr-diviner' ); ?>
 			</p>
 		</div>
 		<?php

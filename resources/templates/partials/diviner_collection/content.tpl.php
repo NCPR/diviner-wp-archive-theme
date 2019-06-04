@@ -36,7 +36,7 @@ use function Tonik\Theme\App\template;
 
 	<div class="single-item__block loop loop--cards">
 
-		<h2 class="h2"><?php _e('Archive Items') ?></h2>
+		<h2 class="h2"><?php _e('Archive Items', 'ncpr-diviner' ) ?></h2>
 
 		<?php
 		// the query
@@ -56,7 +56,7 @@ use function Tonik\Theme\App\template;
 			<?php wp_reset_postdata(); ?>
 
 		<?php else : ?>
-			<p><?php esc_html_e( 'Sorry, there are no archive items in ths collection.' ); ?></p>
+			<p><?php _e( 'Sorry, there are no archive items in this collection.', 'ncpr-diviner' ); ?></p>
 		<?php endif; ?>
 
 

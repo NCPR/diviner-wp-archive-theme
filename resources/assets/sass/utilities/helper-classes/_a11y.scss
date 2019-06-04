@@ -3,6 +3,7 @@
 	@include hidden;
 }
 
+.screen-reader-text,
 .a11y-visual-hide {
 	@include visually-hide;
 }

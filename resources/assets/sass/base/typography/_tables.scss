@@ -16,6 +16,7 @@
 	@include g-state(medium) {
 		font-size: $t_font_size_m;
 		table-layout: auto;
+		margin: $d_spacer_mm auto;
 	}
 }
 
