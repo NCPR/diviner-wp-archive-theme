@@ -1,7 +1,0 @@
-{
-    "autoload": {
-        "psr-4": {
-            "Tonik\\Theme\\Rest\\Of\\Name\\": "src/"
-        }
-    }
-}
