@@ -10,22 +10,10 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         'T' => 
         array (
             'Tonik\\Gin\\' => 10,
-            'Tonik\\CLI\\' => 10,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Component\\Finder\\' => 25,
-            'Symfony\\Component\\Filesystem\\' => 29,
-            'Seld\\CliPrompt\\' => 15,
         ),
         'P' => 
         array (
-            'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
-        ),
-        'L' => 
-        array (
-            'League\\CLImate\\' => 15,
         ),
         'D' => 
         array (
@@ -46,33 +34,9 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         array (
             0 => __DIR__ . '/..' . '/tonik/gin/src/Gin',
         ),
-        'Tonik\\CLI\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tonik/cli/src/CLI',
-        ),
-        'Symfony\\Component\\Finder\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/finder',
-        ),
-        'Symfony\\Component\\Filesystem\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/filesystem',
-        ),
-        'Seld\\CliPrompt\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/seld/cli-prompt/src',
-        ),
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'League\\CLImate\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/climate/src',
         ),
         'Diviner\\' => 
         array (
