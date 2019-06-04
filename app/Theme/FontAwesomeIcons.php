@@ -1,8 +1,74 @@
 <?php
 
-namespace Awps;
+namespace Diviner\Theme;
 
-class FontAwesomeStatic {
+/**
+ * Class FontAwesomeIcons
+ *
+ * Functions Theme
+ *
+ * @package Diviner\Theme
+ */
+class FontAwesomeIcons {
+
+	/**
+	 * Readable class name. Ex: fa-video-camera => Video Camera
+	 *
+	 * @return array|bool
+	 */
+	public function getReadableNames() {
+		$the_array = static::data();
+
+		if ( is_array( $the_array ) ) {
+			$temp = array();
+
+			foreach ( $the_array as $class => $unicode ) {
+				$temp[ $class ] = $this->generateName( $class );
+			}
+
+			$the_array = $temp;
+		}
+
+		return $the_array;
+
+	}
+
+	/**
+	 * Generate a readable name from icon class.
+	 *
+	 * @param string $icon_class
+	 *
+	 * @return string
+	 */
+	protected function generateName( $icon_class ) {
+		$icon_class = $this->normalizeIconClass( $icon_class );
+
+		return ucfirst(
+			str_ireplace(
+				array( 'fa-', '-' ),
+				array( '', ' ' ),
+				$icon_class
+			)
+		);
+	}
+
+	/**
+	 * Make sure to have a class that starts with `fa-`.
+	 *
+	 * @param string $icon_class
+	 *
+	 * @return string
+	 */
+	protected function normalizeIconClass( $icon_class ) {
+		$icon_class = trim( $icon_class );
+
+		if ( stripos( $icon_class, 'fa-' ) === false ) {
+			$icon_class = 'fa-' . $icon_class;
+		}
+
+		return $icon_class;
+	}
+
 	public static function data() {
 		return array(
 			'fa-glass'                               => '\f000',
@@ -682,4 +748,5 @@ class FontAwesomeStatic {
 			'fa-meetup'                              => '\f2e0',
 		);
 	}
+
 }

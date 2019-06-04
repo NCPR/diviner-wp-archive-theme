@@ -6,7 +6,7 @@ use Carbon_Fields\Block;
 use Carbon_Fields\Field;
 use Diviner\Theme\Swatches;
 use Diviner\Admin\General;
-use Awps\FontAwesome;
+use Diviner\Theme\FontAwesomeIcons;
 
 /**
  * Call To Action
@@ -127,7 +127,7 @@ class Call_To_Action {
 	 * @return mixed
 	 */
 	public function get_icon_field() {
-		$icons = new FontAwesome();
+		$icons = new FontAwesomeIcons();
 		$field = Field::make( 'select', static::BLOCK_ICON, __( 'Icon', 'ncpr-diviner' ) );
 		$icons_simplified = $icons->getReadableNames();
 		array_unshift(
