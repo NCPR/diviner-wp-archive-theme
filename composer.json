@@ -1,13 +1,12 @@
 {
-  "name": "Diviner Theme",
-  "description": "Based on Tonik, a WordPress Starter Theme ",
-  "keywords": ["tonik", "theme", "gin", "wordpress", "wordpress-starter-theme", "wordpress-theme"],
+  "name": "Diviner Archive Theme",
+  "description": "A clean modern theme based on Tonik and to be used in tandem with diviner archive plugin",
+  "keywords": ["tonik", "theme", "gin", "wordpress", "wordpress-theme"],
   "license": "MIT",
   "type": "wordpress-theme",
   "require": {
     "php": ">=7.0",
     "tonik/gin": "dev-develop",
-    "htmlburger/carbon-fields": "^3.0",
     "pimple/pimple": "^3.2"
   },
   "require-dev": {

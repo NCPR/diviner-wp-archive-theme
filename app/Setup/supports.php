@@ -13,8 +13,6 @@ namespace Tonik\Theme\App\Setup;
 |
 */
 
-use function Tonik\Theme\App\config;
-
 use Diviner\Theme\Swatches;
 
 /**

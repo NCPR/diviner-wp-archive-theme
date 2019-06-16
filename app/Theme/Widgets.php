@@ -24,7 +24,7 @@ class Widgets {
 	}
 
 	function load_widgets() {
-		register_widget( '\Diviner\Theme\Widgets\Widget_Related_Items' );
+
 	}
 
 	function register_sidebars() {

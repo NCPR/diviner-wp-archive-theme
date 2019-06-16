@@ -5,7 +5,7 @@ namespace Diviner\Config;
 /**
  * Class General
  *
- * @package Diviner\CarbonFields
+ * @package Diviner\Config
  */
 class General {
 

@@ -7,9 +7,6 @@ use function Tonik\Theme\App\asset_path;
 
 use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
-use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
-use Diviner\Post_Types\Collection\Collection;
-use Diviner\Admin\Settings;
 
 /**
  * Class General
@@ -66,31 +63,15 @@ class General {
 		add_action( 'wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
 		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ] );
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
-		add_filter( 'upload_mimes', [ $this, 'viewerjs_mime_type_filter' ] );
 
 		add_action( 'theme/header', [ $this, 'render_header' ] );
 		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ] );
 		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
-		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
 		add_action( 'theme/before-content', [$this, 'before_content']);
 		add_action( 'theme/article-end', [ $this, 'theme_comments' ], 7 );
 		add_action( 'theme/article-end', [ $this, 'page_links' ], 4 );
 		add_action( 'theme/article-end', [ $this, 'post_navigation' ], 5 );
 
-	}
-
-	function viewerjs_mime_type_filter($mime_types) {
-		$mime_types['odt'] =  'application/vnd.oasis.opendocument.text';
-		$mime_types['fodt'] = 'application/vnd.oasis.opendocument.text-flat-xml';
-		$mime_types['ott'] =  'application/vnd.oasis.opendocument.text-template';
-		$mime_types['odp'] =  'application/vnd.oasis.opendocument.presentation';
-		$mime_types['fodp'] = 'application/vnd.oasis.opendocument.presentation-flat-xml';
-		$mime_types['otp'] =  'application/vnd.oasis.opendocument.presentation-template';
-		$mime_types['ods'] =  'application/vnd.oasis.opendocument.spreadsheet';
-		$mime_types['fods'] = 'application/vnd.oasis.opendocument.spreadsheet-flat-xml';
-		$mime_types['ots'] =  'application/vnd.oasis.opendocument.spreadsheet-template';
-		$mime_types['pdf'] =  'application/pdf';
-		return $mime_types;
 	}
 
 	/**
@@ -190,23 +171,6 @@ class General {
 			$wp_scripts->add_data('jquery-migrate', 'group', 1);
 		}
 	}
-
-	/**
-	 * Get the theme option and caches it
-	 *
-	 * @param  $id string id for theme option
-	 * @return string
-	 */
-	static public function get_theme_option( $id ) {
-		$cached_value = wp_cache_get( $id );
-		if ( $cached_value ) {
-			return $cached_value;
-		}
-		$uncached_value = carbon_get_theme_option( $id );
-		wp_cache_set( $id, $uncached_value );
-		return $uncached_value;
-	}
-
 
 	/**
 	 * Get Font Value
@@ -441,32 +405,18 @@ class General {
 	static public function should_display_cards( ) {
 		if (is_post_type_archive( [ Archive_Item::NAME ] )) {
 			return true;
-		} else if ( is_post_type_archive( [ Collection::NAME ] ) ) {
-			return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_CARDS);
 		} else {
 			$is_tax = is_tax();
 			if ($is_tax) {
 				$term = get_queried_object();
 				if ( static::is_taxonomy_in_post_type($term, Archive_Item::NAME) ) {
 					return true;
-				} else if ( static::is_taxonomy_in_post_type($term, Collection::NAME) ) {
-					return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_CARDS);
+				} else {
+					return false;
 				}
 			}
 		}
-		return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_LOOP_CARDS_FIELD);;
-	}
-
-	function theme_index_under_page_header() {
-		if ( is_post_type_archive( Collection::NAME ) ) {
-			$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_COLLECTION_DESCRIPTION);
-			if ( !empty( $copy ) ) {
-				printf(
-					'<div class="loop__description"><div class="d-content">%s</div></div>',
-					wpautop( $copy )
-				);
-			}
-		}
+		return false;
 	}
 
 	/**
@@ -581,9 +531,9 @@ class General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	static function the_social_module () {
-		$social_facebook = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_FACEBOOK);
-		$social_instagram = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_INSTAGRAM);
-		$social_twitter = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_TWITTER);
+		$social_facebook = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK );
+		$social_instagram = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM );
+		$social_twitter = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER );
 
 		if ( !empty( $social_facebook ) || !empty( $social_instagram ) || !empty( $social_twitter ) ) {
 			$social_links = [];
@@ -623,7 +573,7 @@ class General {
 	 * @return string
 	 */
 	static function the_footer_copy () {
-		$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_FOOTER_COPY);
+		$copy = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY );
 		if ( !empty( $copy ) ) {
 			return sprintf(
 				'<div class="footer__copy d-content"><p>%s</p></div>',
