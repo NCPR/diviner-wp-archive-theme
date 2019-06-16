@@ -19,10 +19,6 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         array (
             'Diviner\\' => 8,
         ),
-        'C' => 
-        array (
-            'Carbon_Fields\\' => 14,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -37,10 +33,6 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         'Diviner\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
-        ),
-        'Carbon_Fields\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/htmlburger/carbon-fields/core',
         ),
     );
 

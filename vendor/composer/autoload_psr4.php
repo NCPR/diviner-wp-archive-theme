@@ -9,5 +9,4 @@ return array(
     'Tonik\\Gin\\' => array($vendorDir . '/tonik/gin/src/Gin'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Diviner\\' => array($baseDir . '/app'),
-    'Carbon_Fields\\' => array($vendorDir . '/htmlburger/carbon-fields/core'),
 );
