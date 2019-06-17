@@ -87,7 +87,7 @@ class Editor {
 	public function visual_editor_styles_dropdown( $settings ) {
 		$style_formats = [
 			[
-				'title'    => __( 'Button', 'ncpr-diviner' ),
+				'title'    => __( 'Button', 'diviner-archive' ),
 				'selector' => 'button,a',
 				'classes'  => 'btn',
 				'wrapper'  => false,

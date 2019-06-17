@@ -219,9 +219,9 @@ class Pagination {
 			'current'            => $current,
 			'show_all'           => false,
 			'prev_next'          => false,
-			'prev_text'          => __( 'Previous', 'ncpr-diviner' ),
-			'next_text'          => __( 'Next', 'ncpr-diviner' ),
-			'dots_text'          => __( '&hellip;', 'ncpr-diviner' ),
+			'prev_text'          => __( 'Previous', 'diviner-archive' ),
+			'next_text'          => __( 'Next', 'diviner-archive' ),
+			'dots_text'          => __( '&hellip;', 'diviner-archive' ),
 			'end_size'           => 1,
 			'mid_size'           => 2,
 			'add_args'           => array(), // array of query args to add

@@ -30,16 +30,16 @@ class Widgets {
 	function register_sidebars() {
 		register_sidebar([
 			'id'           => static::SIDEBAR_ID_RIGHT,
-			'name'         => __('Sidebar', 'ncpr-diviner'),
-			'description'  => __('Website sidebar', 'ncpr-diviner'),
+			'name'         => __('Sidebar', 'diviner-archive'),
+			'description'  => __('Website sidebar', 'diviner-archive'),
 			'before_title' => '<h5 class="h5">',
 			'after_title'  => '</h5>',
 		]);
 
 		register_sidebar([
 			'id'           => static::SIDEBAR_ID_AFTER_TITLE,
-			'name'         => __('After Single Title', 'ncpr-diviner'),
-			'description'  => __('Displaying after single titles (ex: for social media widgets)', 'ncpr-diviner'),
+			'name'         => __('After Single Title', 'diviner-archive'),
+			'description'  => __('Displaying after single titles (ex: for social media widgets)', 'diviner-archive'),
 			'before_title' => '<span class="a11y-hidden">',
 			'after_title' => '</span>',
 		]);
