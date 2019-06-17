@@ -5,7 +5,7 @@ namespace Diviner\Config;
 /**
  * Class General
  *
- * @package Diviner\CarbonFields
+ * @package Diviner\Config
  */
 class General {
 
@@ -35,6 +35,38 @@ class General {
 	// overridden by CSS
 	const OEMBED_AUDIO_DIMENSIONS_WIDTH = 700;
 	const OEMBED_AUDIO_DIMENSIONS_HEIGHT = 81;
+
+	const FONTS = [
+		'Source Sans Pro:400,700,400i'     => 'Source Sans Pro',
+		'Open Sans:400i,400,700'           => 'Open Sans',
+		'Oswald:400,700'                   => 'Oswald',
+		'Playfair Display:400,700,400i'    => 'Playfair Display',
+		'Montserrat:400,700'               => 'Montserrat',
+		'Raleway:400,700'                  => 'Raleway',
+		'Droid Sans:400,700'               => 'Droid Sans',
+		'Lato:400,700,400i'                => 'Lato',
+		'Arvo:400,700,400i'                => 'Arvo',
+		'Lora:400,700,400i'                => 'Lora',
+		'Merriweather:400,400i,700'        => 'Merriweather',
+		'Oxygen:400,300,700'               => 'Oxygen',
+		'PT Serif:400,700'                 => 'PT Serif',
+		'PT Sans:400,700,400i'             => 'PT Sans',
+		'PT Sans Narrow:400,700'           => 'PT Sans Narrow',
+		'Cabin:400,700,400i'               => 'Cabin',
+		'Josefin Sans:400,700'             => 'Josefin Sans',
+		'Libre Baskerville:400,400i,700'   => 'Libre Baskerville',
+		'Arimo:400,700,400i'               => 'Arimo',
+		'Ubuntu:400,700,400i'              => 'Ubuntu',
+		'Bitter:400,700,400i'              => 'Bitter',
+		'Droid Serif:400,700,400i'         => 'Droid Serif',
+		'Roboto:400,400i,700'              => 'Roboto',
+		'Open Sans Condensed:700,300i,300' => 'Open Sans Condensed',
+		'Roboto Condensed:400i,400,700'    => 'Roboto Condensed',
+		'Roboto Slab:400,700'              => 'Roboto Slab',
+		'Yanone Kaffeesatz:400,700'        => 'Yanone Kaffeesatz',
+		'Noto Sans:400,400i,700'           => 'Noto Sans',
+		'Work Sans:400,700'                => 'Work Sans',
+	];
 
 	static $image_sizes = [
 		self::IMAGE_SIZE_BROWSE_POPUP => [

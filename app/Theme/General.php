@@ -7,9 +7,8 @@ use function Tonik\Theme\App\asset_path;
 
 use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
-use Diviner\Post_Types\Archive_Item\Theme as ArchiveItemTheme;
-use Diviner\Post_Types\Collection\Collection;
-use Diviner\Admin\Settings;
+use Diviner\Config\General as GeneralConfig;
+use Diviner\Theme\Swatches;
 
 /**
  * Class General
@@ -19,38 +18,6 @@ use Diviner\Admin\Settings;
  * @package Diviner\Theme
  */
 class General {
-
-	const FONTS = [
-		'Source Sans Pro:400,700,400i'     => 'Source Sans Pro',
-		'Open Sans:400i,400,700'           => 'Open Sans',
-		'Oswald:400,700'                   => 'Oswald',
-		'Playfair Display:400,700,400i'    => 'Playfair Display',
-		'Montserrat:400,700'               => 'Montserrat',
-		'Raleway:400,700'                  => 'Raleway',
-		'Droid Sans:400,700'               => 'Droid Sans',
-		'Lato:400,700,400i'                => 'Lato',
-		'Arvo:400,700,400i'                => 'Arvo',
-		'Lora:400,700,400i'                => 'Lora',
-		'Merriweather:400,400i,700'        => 'Merriweather',
-		'Oxygen:400,300,700'               => 'Oxygen',
-		'PT Serif:400,700'                 => 'PT Serif',
-		'PT Sans:400,700,400i'             => 'PT Sans',
-		'PT Sans Narrow:400,700'           => 'PT Sans Narrow',
-		'Cabin:400,700,400i'               => 'Cabin',
-		'Josefin Sans:400,700'             => 'Josefin Sans',
-		'Libre Baskerville:400,400i,700'   => 'Libre Baskerville',
-		'Arimo:400,700,400i'               => 'Arimo',
-		'Ubuntu:400,700,400i'              => 'Ubuntu',
-		'Bitter:400,700,400i'              => 'Bitter',
-		'Droid Serif:400,700,400i'         => 'Droid Serif',
-		'Roboto:400,400i,700'              => 'Roboto',
-		'Open Sans Condensed:700,300i,300' => 'Open Sans Condensed',
-		'Roboto Condensed:400i,400,700'    => 'Roboto Condensed',
-		'Roboto Slab:400,700'              => 'Roboto Slab',
-		'Yanone Kaffeesatz:400,700'        => 'Yanone Kaffeesatz',
-		'Noto Sans:400,400i,700'           => 'Noto Sans',
-		'Work Sans:400,700'                => 'Work Sans',
-	];
 
 	const FONTS_DEFAULT_HEADER = 'Oswald:400,700';
 	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400i';
@@ -66,12 +33,10 @@ class General {
 		add_action( 'wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
 		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ] );
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
-		add_filter( 'upload_mimes', [ $this, 'viewerjs_mime_type_filter' ] );
 
 		add_action( 'theme/header', [ $this, 'render_header' ] );
 		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ] );
 		add_action( 'theme/index/content', [ $this, 'theme_index_content' ] );
-		add_action( 'theme/index/under-page-title', [ $this, 'theme_index_under_page_header' ] );
 		add_action( 'theme/before-content', [$this, 'before_content']);
 		add_action( 'theme/article-end', [ $this, 'theme_comments' ], 7 );
 		add_action( 'theme/article-end', [ $this, 'page_links' ], 4 );
@@ -79,18 +44,17 @@ class General {
 
 	}
 
-	function viewerjs_mime_type_filter($mime_types) {
-		$mime_types['odt'] =  'application/vnd.oasis.opendocument.text';
-		$mime_types['fodt'] = 'application/vnd.oasis.opendocument.text-flat-xml';
-		$mime_types['ott'] =  'application/vnd.oasis.opendocument.text-template';
-		$mime_types['odp'] =  'application/vnd.oasis.opendocument.presentation';
-		$mime_types['fodp'] = 'application/vnd.oasis.opendocument.presentation-flat-xml';
-		$mime_types['otp'] =  'application/vnd.oasis.opendocument.presentation-template';
-		$mime_types['ods'] =  'application/vnd.oasis.opendocument.spreadsheet';
-		$mime_types['fods'] = 'application/vnd.oasis.opendocument.spreadsheet-flat-xml';
-		$mime_types['ots'] =  'application/vnd.oasis.opendocument.spreadsheet-template';
-		$mime_types['pdf'] =  'application/pdf';
-		return $mime_types;
+	/**
+	 * Add image sizes
+	 *
+	 * @return void
+	 */
+	function add_image_sizes()
+	{
+		foreach ( GeneralConfig::$image_sizes as $key => $attributes ) {
+			add_image_size( $key, $attributes[ 'width' ], $attributes[ 'height' ], $attributes[ 'crop' ] );
+		}
+
 	}
 
 	/**
@@ -124,7 +88,7 @@ class General {
 		?>
 		<div class="single-item__navigation">
 			<div class="a11y-visual-hide">
-				<?php echo __( 'Article Navigation', 'ncpr-diviner' ); ?>
+				<?php echo __( 'Article Navigation', 'diviner-archive' ); ?>
 			</div>
 			<?php if ( !empty( $prev ) ) { ?>
 				<div class="single-item__navigation-btn single-item__navigation-btn--prev">
@@ -148,7 +112,7 @@ class General {
 	function page_links() {
 		if ( get_post_type() === 'post' ) {
 			echo wp_link_pages( [
-				'before'      => '<div class="page-links"><span class="h5 page-links-title">' . __( 'Pages:', 'ncpr-diviner' ) . '</span>',
+				'before'      => '<div class="page-links"><span class="h5 page-links-title">' . __( 'Pages:', 'diviner-archive' ) . '</span>',
 				'after'       => '</div>',
 				'next_or_number' => 'next',
 				'link_before' => '<span>',
@@ -174,7 +138,7 @@ class General {
 	 * @return void
 	 */
 	function before_content() {
-		edit_post_link( __( 'Edit This Content', 'ncpr-diviner' ), '<div class="edit-link">', '</div>');
+		edit_post_link( __( 'Edit This Content', 'diviner-archive' ), '<div class="edit-link">', '</div>');
 	}
 
 	/**
@@ -192,33 +156,16 @@ class General {
 	}
 
 	/**
-	 * Get the theme option and caches it
-	 *
-	 * @param  $id string id for theme option
-	 * @return string
-	 */
-	static public function get_theme_option( $id ) {
-		$cached_value = wp_cache_get( $id );
-		if ( $cached_value ) {
-			return $cached_value;
-		}
-		$uncached_value = carbon_get_theme_option( $id );
-		wp_cache_set( $id, $uncached_value );
-		return $uncached_value;
-	}
-
-
-	/**
 	 * Get Font Value
 	 *
 	 * @param  string $key
 	 * @return string
 	 */
 	static public function get_font_value_from_key( $key ) {
-		if ( array_key_exists( $key, static::FONTS ) ) {
-			return static::FONTS[$key];
+		if ( array_key_exists( $key, GeneralConfig::FONTS ) ) {
+			return GeneralConfig::FONTS[$key];
 		}
-		return static::FONTS[static::FONTS_DEFAULT_BODY];
+		return GeneralConfig::FONTS[static::FONTS_DEFAULT_BODY];
 	}
 
 	/**
@@ -345,12 +292,91 @@ class General {
 	 */
 	function after_setup_theme() {
 
+		$this->add_image_sizes();
+
 		$this->register_navigation_areas();
+
+		$this->add_theme_supports();
+
+	}
+
+	/**
+	 * Adds various theme supports.
+	 *
+	 * @return void
+	 */
+	function add_theme_supports()
+	{
+
+		add_theme_support( 'automatic-feed-links' );
+
+		// add_theme_support('editor-styles');
+
+		$args = array(
+			'default-image'      => '',
+			'default-text-color' => substr(Customizer::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT, 1 ),
+			'width'              => 1000,
+			'height'             => 250,
+			'flex-width'         => true,
+			'flex-height'        => true,
+		);
+		add_theme_support( 'custom-header', $args );
+
+		$args = array(
+			'default-color' => substr(Customizer::SECTION_THEME_SETTING_COLOR_BODY_BG_DEFAULT, 1 ),
+		);
+		add_theme_support( 'custom-background', $args );
+
+		/**
+		 * Add support for custom logo. Allow for setting
+		 * logo for theme via WordPress customizer.
+		 *
+		 * @see https://developer.wordpress.org/reference/functions/add_theme_support/#custom-logo
+		 */
+		add_theme_support('custom-logo');
+
+		/**
+		 * Add support for head <title> tag. By adding `title-tag` support, we
+		 * declare that this theme does not use a hard-coded <title> tag in
+		 * the document head, and expect WordPress to provide it for us.
+		 *
+		 * @see https://developer.wordpress.org/reference/functions/add_theme_support/#title-tag
+		 */
+		add_theme_support('title-tag');
+
+		/**
+		 * Enable custom color support
+		 *
+		 * @see https://wordpress.org/gutenberg/handbook/designers-developers/developers/components/color-palette/
+		 */
+		add_theme_support( 'editor-color-palette', Swatches::get_colors() );
+
+		/**
+		 * Enable support for Post Thumbnails on posts and pages. Note that you
+		 * can optionally pass a second argument, $args, with an array of
+		 * the Post Types for which you want to enable this feature.
+		 *
+		 * @see https://developer.wordpress.org/reference/functions/add_theme_support/#post-thumbnails
+		 */
+		add_theme_support('post-thumbnails');
+
+		/**
+		 * Switch default core markup for search forms, comment forms, comment
+		 * lists, gallery, and captions to output valid HTML5 markup.
+		 *
+		 * @see https://developer.wordpress.org/reference/functions/add_theme_support/#html5
+		 */
+		add_theme_support('html5', [
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+		]);
 
 		// Theme supports wide images, galleries and videos.
 		add_theme_support( 'align-wide' );
 		add_theme_support( 'responsive-embeds' );
-
 	}
 
 	/**
@@ -360,8 +386,8 @@ class General {
 	 */
 	function register_navigation_areas() {
 		register_nav_menus([
-			'primary' => __('Primary', 'ncpr-diviner'),
-			'footer'  => __('Footer', 'ncpr-diviner'),
+			'primary' => __('Primary', 'diviner-archive'),
+			'footer'  => __('Footer', 'diviner-archive'),
 		]);
 	}
 
@@ -441,32 +467,18 @@ class General {
 	static public function should_display_cards( ) {
 		if (is_post_type_archive( [ Archive_Item::NAME ] )) {
 			return true;
-		} else if ( is_post_type_archive( [ Collection::NAME ] ) ) {
-			return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_CARDS);
 		} else {
 			$is_tax = is_tax();
 			if ($is_tax) {
 				$term = get_queried_object();
 				if ( static::is_taxonomy_in_post_type($term, Archive_Item::NAME) ) {
 					return true;
-				} else if ( static::is_taxonomy_in_post_type($term, Collection::NAME) ) {
-					return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_COLLECTION_CARDS);
+				} else {
+					return false;
 				}
 			}
 		}
-		return (bool) carbon_get_theme_option(Settings::FIELD_GENERAL_LOOP_CARDS_FIELD);;
-	}
-
-	function theme_index_under_page_header() {
-		if ( is_post_type_archive( Collection::NAME ) ) {
-			$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_COLLECTION_DESCRIPTION);
-			if ( !empty( $copy ) ) {
-				printf(
-					'<div class="loop__description"><div class="d-content">%s</div></div>',
-					wpautop( $copy )
-				);
-			}
-		}
+		return false;
 	}
 
 	/**
@@ -519,7 +531,7 @@ class General {
 		}
 		return sprintf(
 			'<div class="footer-menu__wrap"><nav class="footer-menu"><div class="a11y-visual-hide">%s</div>%s</nav></div>',
-			__( 'Footer Navigation', 'ncpr-diviner'),
+			__( 'Footer Navigation', 'diviner-archive'),
 			$menu
 		);
 	}
@@ -531,8 +543,8 @@ class General {
 	static public function the_primary_menu() {
 		return sprintf(
 			'<div class="primary-menu__wrap" data-js="primary-menu__wrap"><nav class="primary-menu"><button class="primary-menu__close" data-js="primary-menu__close"><span class="fa fa-times" aria-hidden="true"></span><span class="a11y-visual-hide">%s</span></button><div class="a11y-visual-hide">%s</div>%s</nav></div>',
-			__( 'Close Navigation', 'ncpr-diviner'),
-			__( 'Primary Navigation', 'ncpr-diviner'),
+			__( 'Close Navigation', 'diviner-archive'),
+			__( 'Primary Navigation', 'diviner-archive'),
 			wp_nav_menu( [
 				'theme_location' => 'primary',
 				'echo' => false,
@@ -581,9 +593,9 @@ class General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	static function the_social_module () {
-		$social_facebook = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_FACEBOOK);
-		$social_instagram = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_INSTAGRAM);
-		$social_twitter = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_SOCIAL_TWITTER);
+		$social_facebook = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK );
+		$social_instagram = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM );
+		$social_twitter = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER );
 
 		if ( !empty( $social_facebook ) || !empty( $social_instagram ) || !empty( $social_twitter ) ) {
 			$social_links = [];
@@ -591,21 +603,21 @@ class General {
 				$social_links[] = sprintf(
 					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-facebook-f"></span></a></li>',
 					esc_attr( $social_facebook ),
-					__( 'Facebook Link', 'ncpr-diviner' )
+					__( 'Facebook Link', 'diviner-archive' )
 				);
 			}
 			if ( !empty( $social_instagram ) ) {
 				$social_links[] = sprintf(
 					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-instagram"></span></a></li>',
 					esc_attr( $social_instagram ),
-					__( 'Instagram Link', 'ncpr-diviner' )
+					__( 'Instagram Link', 'diviner-archive' )
 				);
 			}
 			if ( !empty( $social_twitter ) ) {
 				$social_links[] = sprintf(
 					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-twitter"></span></a></li>',
 					esc_attr( $social_twitter ),
-					__( 'Twitter Link', 'ncpr-diviner' )
+					__( 'Twitter Link', 'diviner-archive' )
 				);
 			}
 			return sprintf(
@@ -623,7 +635,7 @@ class General {
 	 * @return string
 	 */
 	static function the_footer_copy () {
-		$copy = carbon_get_theme_option(\Diviner\Admin\Settings::FIELD_GENERAL_FOOTER_COPY);
+		$copy = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY );
 		if ( !empty( $copy ) ) {
 			return sprintf(
 				'<div class="footer__copy d-content"><p>%s</p></div>',

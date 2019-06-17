@@ -2,7 +2,7 @@
 
 /*
  |------------------------------------------------------------------
- | Bootstraping a Theme
+ | Bootstrap
  |------------------------------------------------------------------
  |
  | This file is responsible for bootstrapping your theme. Autoloads
@@ -13,12 +13,6 @@
  |
  */
 
-/**
- * This is the theme entry point, if we are here then Diviner
- * is being used as a theme.
- */
-define( 'DIVINER_IS_PLUGIN', false );
-define( 'DIVINER_IS_THEME', true );
 
 // Require Composer's autoloading file
 // if it's present in theme directory.

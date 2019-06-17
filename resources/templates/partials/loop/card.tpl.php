@@ -24,10 +24,7 @@ $img_classes_output = implode(' ', $img_classes);
 
 $card_classes = [ 'card' ];
 $card_classes[] = sprintf( 'card--type-%s', get_post_type() );
-if ( get_post_type() === Archive_Item::NAME ) {
-	$archive_item_type = carbon_get_post_meta( get_the_ID(), \Diviner\Post_Types\Archive_Item\Post_Meta::FIELD_TYPE );
-	$card_classes[] = sprintf( 'card--ai-type-%s', $archive_item_type );
-}
+// To Do: Add class per aarchive item type
 $card_classes_output = implode(' ', $card_classes);
 
 ?>

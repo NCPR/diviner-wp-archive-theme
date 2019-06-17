@@ -17,52 +17,52 @@ class Swatches {
 	static function get_colors() {
 		return [
 			[
-				'name'  => __( 'White', 'ncpr-diviner' ),
+				'name'  => __( 'White', 'diviner-archive' ),
 				'slug'  => 'white',
 				'color'	=> '#ffffff'
 			],
 			[
-				'name'  => __( 'Light gray', 'ncpr-diviner' ),
+				'name'  => __( 'Light gray', 'diviner-archive' ),
 				'slug'  => 'light-gray',
 				'color'	=> '#f5f5f5'
 			],
 			[
-				'name'  => __( 'Medium gray', 'ncpr-diviner' ),
+				'name'  => __( 'Medium gray', 'diviner-archive' ),
 				'slug'  => 'medium-gray',
 				'color' => '#999'
 			],
 			[
-				'name'  => __( 'Dark gray', 'ncpr-diviner' ),
+				'name'  => __( 'Dark gray', 'diviner-archive' ),
 				'slug'  => 'dark-gray',
 				'color' => '#333'
 			],
 			[
-				'name'  => __( 'Black', 'ncpr-diviner' ),
+				'name'  => __( 'Black', 'diviner-archive' ),
 				'slug'  => 'black',
 				'color'	=> '#000000'
 			],
 			[
-				'name'  => __( 'Prussian Blue', 'ncpr-diviner' ),
+				'name'  => __( 'Prussian Blue', 'diviner-archive' ),
 				'slug'  => 'prussian-blue',
 				'color'	=> '#0D3B66',
 			],
 			[
-				'name'  => __( 'Oasis Beige', 'ncpr-diviner' ),
+				'name'  => __( 'Oasis Beige', 'diviner-archive' ),
 				'slug'  => 'oasis-beige',
 				'color'	=> '#FAF0CA'
 			],
 			[
-				'name'  => __( 'Oasis', 'ncpr-diviner' ),
+				'name'  => __( 'Oasis', 'diviner-archive' ),
 				'slug'  => 'portica-orange',
 				'color'	=> '#F4D35E'
 			],
 			[
-				'name'  => __( 'Turquoise', 'ncpr-diviner' ),
+				'name'  => __( 'Turquoise', 'diviner-archive' ),
 				'slug'  => 'turquoise',
 				'color'	=> '#41D3BD'
 			],
 			[
-				'name'  => __( 'Tomato', 'ncpr-diviner' ),
+				'name'  => __( 'Tomato', 'diviner-archive' ),
 				'slug'  => 'tomato',
 				'color'	=> '#FE5F55'
 			]

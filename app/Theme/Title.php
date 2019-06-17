@@ -3,7 +3,6 @@
 namespace Diviner\Theme;
 
 use Diviner\Post_Types\Archive_Item\Archive_Item;
-use Diviner\Post_Types\Collection\Collection;
 
 /**
  * Title
@@ -27,7 +26,7 @@ class Title {
 			if ($page_object && !empty( $page_object->post_title ) ) {
 				return get_queried_object()->post_title;
 			} else {
-				return __( 'Blog', 'ncpr-diviner' );
+				return __( 'Blog', 'diviner-archive' );
 			}
 
 		}
@@ -35,12 +34,12 @@ class Title {
 		// Search
 		elseif ( is_search() ) {
 			global $wp_query;
-			return sprintf( __( 'Your search for <strong>%s</strong> returned <strong>%d</strong> results', 'ncpr-diviner' ), esc_attr( get_search_query() ), $wp_query->found_posts );
+			return sprintf( __( 'Your search for <strong>%s</strong> returned <strong>%d</strong> results', 'diviner-archive' ), esc_attr( get_search_query() ), $wp_query->found_posts );
 		}
 
 		// 404
 		elseif ( is_404() ) {
-			return __( 'Page Not Found (Error 404)', 'ncpr-diviner' );
+			return __( 'Page Not Found (Error 404)', 'diviner-archive' );
 		}
 
 		// Singular
@@ -51,25 +50,13 @@ class Title {
 		// Archive Item
 		elseif ( is_post_type_archive( Archive_Item::NAME ) ) {
 			if ( ! have_posts() ) {
-				return __( 'No Archive Items Found', 'ncpr-diviner' );
+				return __( 'No Archive Items Found', 'diviner-archive' );
 			}
-			return __( 'Archive Items', 'ncpr-diviner' );
-		}
-
-		// Collections
-		elseif ( is_post_type_archive( Collection::NAME ) ) {
-			$collections_plural = Collection::get_plural_title();
-			if ( ! have_posts() ) {
-				return sprintf(
-					__( 'No %s Found', 'ncpr-diviner' ),
-					$collections_plural
-				);
-			}
-			return $collections_plural;
+			return __( 'Archive Items', 'diviner-archive' );
 		}
 
 		elseif ( ! have_posts() ) {
-			return __( 'No Posts Found', 'ncpr-diviner' );
+			return __( 'No Posts Found', 'diviner-archive' );
 		}
 
 		// Archives

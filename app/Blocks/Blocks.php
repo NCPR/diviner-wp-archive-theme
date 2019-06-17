@@ -15,8 +15,8 @@ class Blocks {
 	private $_call_to_action;
 
 	public function hooks() {
-		add_action( 'carbon_fields_register_fields', [$this, 'create_blocks'], 0, 0 );
-		add_filter( 'render_block', [ $this, 'render_blocks_adjustments' ], 10, 2 );
+		// add_action( 'carbon_fields_register_fields', [$this, 'create_blocks'], 0, 0 );
+		// add_filter( 'render_block', [ $this, 'render_blocks_adjustments' ], 10, 2 );
 	}
 
 	/**
@@ -30,15 +30,6 @@ class Blocks {
 			remove_filter( 'the_content', 'wpautop' );
 		}
 		return $block_content;
-	}
-
-	/**
-	 * Custom Blocks
-	 */
-	public function create_blocks() {
-		$this->_related = new Recent_Archive_Items();
-		$this->_feature_post = new Feature_Post();
-		$this->_call_to_action= new Call_To_Action();
 	}
 
 }
