@@ -120,16 +120,16 @@ class Customizer {
 				font-family: '<?php echo $body_font_value; ?>' !important;
 			}
 
-			.editor-styles-wrapper .editor-block-list__block h1.editor-rich-text__tinymce,
-			.editor-styles-wrapper .editor-block-list__block h2.editor-rich-text__tinymce,
-			.editor-styles-wrapper .editor-block-list__block h3.editor-rich-text__tinymce,
-			.editor-styles-wrapper .editor-block-list__block h4.editor-rich-text__tinymce,
-			.editor-styles-wrapper .editor-block-list__block h5.editor-rich-text__tinymce,
-			.editor-styles-wrapper .editor-block-list__block h6.editor-rich-text__tinymce {
+			.editor-styles-wrapper .editor-block-list__block h1.block-editor-rich-text__editable,
+			.editor-styles-wrapper .editor-block-list__block h2.block-editor-rich-text__editable,
+			.editor-styles-wrapper .editor-block-list__block h3.block-editor-rich-text__editable,
+			.editor-styles-wrapper .editor-block-list__block h4.block-editor-rich-text__editable,
+			.editor-styles-wrapper .editor-block-list__block h5.block-editor-rich-text__editable,
+			.editor-styles-wrapper .editor-block-list__block h6.block-editor-rich-text__editable {
 				font-family: '<?php echo $header_font_value; ?>' !important;
 			}
 
-			.editor-styles-wrapper .wp-block-cover .editor-rich-text__tinymce {
+			.editor-styles-wrapper .wp-block-cover .block-editor-rich-text__editable {
 				font-family: '<?php echo $header_font_value; ?>' !important;
 			}
 

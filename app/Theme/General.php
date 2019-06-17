@@ -310,6 +310,8 @@ class General {
 
 		add_theme_support( 'automatic-feed-links' );
 
+		// add_theme_support('editor-styles');
+
 		$args = array(
 			'default-image'      => '',
 			'default-text-color' => substr(Customizer::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT, 1 ),
