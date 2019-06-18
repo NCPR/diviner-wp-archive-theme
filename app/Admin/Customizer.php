@@ -210,6 +210,7 @@ class Customizer {
 		// Footer
 		$wp_customize->add_setting(static::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY, [
 			'default' => '',
+			'sanitize_callback' => 'wp_kses_post'
 		]);
 		$wp_customize->add_control(new RichTextArea($wp_customize, static::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY, [
 			'type' => 'textarea',
@@ -220,6 +221,7 @@ class Customizer {
 
 		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK, array(
 			'default' => '',
+			'sanitize_callback' => 'esc_url_raw'
 		) );
 		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK, array(
 			'type' => 'text',
@@ -230,6 +232,7 @@ class Customizer {
 
 		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER, array(
 			'default' => '',
+			'sanitize_callback' => 'esc_url_raw'
 		) );
 		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER, array(
 			'type' => 'text',
@@ -240,6 +243,7 @@ class Customizer {
 
 		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM, array(
 			'default' => '',
+			'sanitize_callback' => 'esc_url_raw'
 		) );
 		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM, array(
 			'type' => 'text',
@@ -287,18 +291,6 @@ class Customizer {
 			__( 'Header Background Color', 'diviner-archive' ),
 			static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT
 		);
-
-		/*
-		$this->setup_color_control(
-			$wp_customize,
-			static::SECTION_THEME_CUSTOMIZATIONS,
-			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT,
-			static::SECTION_THEME_CONTROL_COLOR_HEADER_TEXT,
-			__( 'Header Text Color', 'diviner-archive' ),
-			static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT,
-			__( 'Used for the tagline or site title when there is no logo', 'diviner-archive' )
-		);
-		*/
 
 		$this->setup_color_control(
 			$wp_customize,
