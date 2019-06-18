@@ -226,7 +226,7 @@ class Customizer {
 		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK, array(
 			'type' => 'text',
 			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Facebook Link' ),
+			'label' => __( 'Facebook Link', 'diviner-archive' ),
 			'description' => __( 'Ex: https://www.facebook.com/nytimes/', 'diviner-archive' ),
 		) );
 
@@ -237,7 +237,7 @@ class Customizer {
 		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER, array(
 			'type' => 'text',
 			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Twitter Link' ),
+			'label' => __( 'Twitter Link', 'diviner-archive' ),
 			'description' => __( 'Ex: https://twitter.com/nytimes', 'diviner-archive' ),
 		) );
 
@@ -248,7 +248,7 @@ class Customizer {
 		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM, array(
 			'type' => 'text',
 			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Instagram Link' ),
+			'label' => __( 'Instagram Link', 'diviner-archive' ),
 			'description' => __( 'Ex: https://www.instagram.com/nytimes', 'diviner-archive' ),
 		) );
 
@@ -259,7 +259,7 @@ class Customizer {
 		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE, array(
 			'type' => 'dropdown-pages',
 			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Nav Search Page' ),
+			'label' => __( 'Nav Search Page', 'diviner-archive' ),
 			'description' => __( 'Select a page to link the search icon to in the navigation', 'diviner-archive' ),
 		) );
 	}
