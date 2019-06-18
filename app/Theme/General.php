@@ -33,6 +33,7 @@ class General {
 		add_action( 'wp_default_scripts', [ $this, 'move_jquery_to_the_footer' ] );
 		add_filter( 'excerpt_length', [ $this, 'custom_excerpt_length' ] );
 		add_action( 'after_setup_theme', [ $this, 'after_setup_theme' ] );
+		add_action( 'post_class', [ $this, 'post_class' ], 10, 3 );
 
 		add_action( 'theme/header', [ $this, 'render_header' ] );
 		add_action( 'theme/header/feature-image', [ $this, 'render_header_feature_image' ] );
@@ -42,6 +43,16 @@ class General {
 		add_action( 'theme/article-end', [ $this, 'page_links' ], 4 );
 		add_action( 'theme/article-end', [ $this, 'post_navigation' ], 5 );
 
+	}
+
+
+	/**
+	 * Adds custom class to the array of posts classes.
+	 */
+	function post_class( $classes, $class, $post_id ) {
+		$classes[] = 'single-item';
+		$classes[] = sprintf( 'single-item--%s', get_post_type($post_id) );
+		return $classes;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-<article class="single-item single-item--page">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="single-item__header">
 		<?php
