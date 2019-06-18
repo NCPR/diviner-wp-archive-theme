@@ -17,8 +17,8 @@ class Widgets {
 	const SIDEBAR_ID_RIGHT = 'sidebar_right';
 
 	public function hooks() {
-		add_filter( 'widgets_init', [ $this, 'register_sidebars' ] );
-		add_filter( 'widgets_init', [ $this, 'load_widgets' ] );
+		add_action( 'widgets_init', [ $this, 'register_sidebars' ] );
+		add_action( 'widgets_init', [ $this, 'load_widgets' ] );
 		add_action( 'theme/header/after-title', [$this, 'after_title']);
 		add_action( 'theme/above-content', [$this, 'above_content']);
 	}

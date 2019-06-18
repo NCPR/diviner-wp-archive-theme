@@ -308,9 +308,9 @@ class General {
 	function add_theme_supports()
 	{
 
-		add_theme_support( 'automatic-feed-links' );
+		$GLOBALS['content_width'] = apply_filters( 'diviner_archive_content_width', 920 );
 
-		// add_theme_support('editor-styles');
+		add_theme_support( 'automatic-feed-links' );
 
 		$args = array(
 			'default-image'      => '',
