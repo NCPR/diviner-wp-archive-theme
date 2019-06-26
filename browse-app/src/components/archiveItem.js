@@ -212,10 +212,13 @@ class ArchiveItem extends Component {
 		if (!value) {
 			return;
 		}
-		const date = new Date(value);
-		const dateSimple = format(date, 'MM/DD/YYYY');
 
-		let dateOutput = dateSimple;
+		// Assumes that date is in format MM-DD-YYYY
+		// https://carbonfields.net/docs/fields-date-4/
+		const from = value.split("-");
+		const date = new Date(from[2], from[1] - 1, from[0]);
+		let dateOutput = format(date, 'MM/DD/YYYY');
+
 		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
 			dateOutput = getCentury(date);
 		} else if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_DECADE) {

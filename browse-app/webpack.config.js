@@ -48,7 +48,7 @@ if (DEBUG) {
 		},
 	}));
 	cssloader = ExtractTextPlugin.extract({
-		fallbackLoader: 'style-loader',
+		fallback: 'style-loader',
 		loader: [
 			'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
 			'postcss-loader',
