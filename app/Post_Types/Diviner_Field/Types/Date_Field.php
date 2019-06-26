@@ -75,7 +75,8 @@ class Date_Field extends FieldType  {
 	static public function decorate_query_args ( $args, $sort_args ) {
 		$args[ 'order' ] = ( $sort_args[3] == 'ASC' ) ? 'ASC' : 'DESC';
 		$args[ 'meta_key' ] = Helper::get_real_field_name( $sort_args[2] );
-		$args[ 'orderby' ] = 'meta_value_datetime';
+		$args[ 'meta_type' ] = 'DATE';
+		$args[ 'orderby' ] = 'meta_value';
 		return $args;
 	}
 
