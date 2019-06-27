@@ -1,0 +1,11 @@
+.mejs-audio {
+
+	/* case: exceptions */
+	.mejs-button {
+		button {
+			&:hover	{
+				background-color: transparent;
+			}
+		}
+	}
+}
