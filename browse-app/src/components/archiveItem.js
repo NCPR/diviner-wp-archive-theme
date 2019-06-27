@@ -213,13 +213,14 @@ class ArchiveItem extends Component {
 			return;
 		}
 
-		// Assumes that date is in format MM-DD-YYYY
+		// Assumes that date is in format YYYY-MM-DD
 		// https://docs.carbonfields.net/#/fields/date-time?id=config-methods
 		const from = value.split("-");
-		const year = parseInt(from[2], 10);
+		const year = parseInt(from[0], 10);
 		const month = parseInt(from[1], 10);
-		const day = parseInt(from[0], 10);
+		const day = parseInt(from[2], 10);
 		const date = new Date(year, month, day);
+		console.log(from, year, month-1, day);
 		let dateOutput = format(date, 'MM/DD/YYYY');
 
 		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
