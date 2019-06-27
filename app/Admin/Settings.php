@@ -85,6 +85,13 @@ class Settings {
 
 			<h2><?php _e( 'Diviner Archiving Theme', 'ncpr-diviner' ); ?></h2>
 
+			<h4><?php
+				printf(
+						__( 'Version: %s', 'ncpr-diviner' ),
+					\Diviner\Config\General::VERSION
+					);
+				?></h4>
+
 			<p>
 				<?php _e( 'Thank you for installing the Diviner Archiving Theme. This wordpress theme allows small institutions and media organizations to create a public-facing, custom archive interface for a themed collection of media.', 'ncpr-diviner' ); ?>
 			</p>
