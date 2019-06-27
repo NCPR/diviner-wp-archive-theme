@@ -45,8 +45,21 @@ class Date_Field extends FieldType  {
 	 * @return string
 	 */
 	static public function get_value( $post_id, $field_name, $field_post_id ) {
-		$raw_date = carbon_get_post_meta( $post_id, $field_name );
-		return mysql2date( get_option( 'date_format' ), $raw_date );
+		$raw_date = carbon_get_post_meta( $post_id, $field_name ); // in YYYY-MM-DD
+		// output date based on type
+		$type = Diviner_Field::get_field_post_meta( $field_post_id, FieldPostMeta::FIELD_DATE_TYPE);
+		$date_output = mysql2date( get_option( 'date_format' ), $raw_date );
+		$date_parsed = date_parse($raw_date);
+		$year = $date_parsed['year'];
+		if ($type === FieldPostMeta::FIELD_DATE_TYPE_CENTURY) {
+			// display the century
+			$date_output = floor($year/100)*100;
+		} else if ($type === FieldPostMeta::FIELD_DATE_TYPE_DECADE) {
+			$date_output = floor($year/10)*10;
+		} else if ($type === FieldPostMeta::FIELD_DATE_TYPE_YEAR) {
+			$date_output = $year;
+		}
+		return $date_output;
 	}
 
 	/**
