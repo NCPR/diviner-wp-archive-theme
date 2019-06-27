@@ -9,7 +9,7 @@ namespace Diviner\Config;
  */
 class General {
 
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	const IMAGE_SIZE_BROWSE_POPUP = 'image_size_browse_popup';
 	const IMAGE_SIZE_BROWSE_GRID = 'image_size_browse_grid';

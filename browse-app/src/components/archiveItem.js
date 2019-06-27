@@ -214,9 +214,12 @@ class ArchiveItem extends Component {
 		}
 
 		// Assumes that date is in format MM-DD-YYYY
-		// https://carbonfields.net/docs/fields-date-4/
+		// https://docs.carbonfields.net/#/fields/date-time?id=config-methods
 		const from = value.split("-");
-		const date = new Date(from[2], from[1] - 1, from[0]);
+		const year = parseInt(from[2], 10);
+		const month = parseInt(from[1], 10);
+		const day = parseInt(from[0], 10);
+		const date = new Date(year, month, day);
 		let dateOutput = format(date, 'MM/DD/YYYY');
 
 		if (field[FIELD_DATE_TYPE] === FIELD_DATE_TYPE_CENTURY) {
