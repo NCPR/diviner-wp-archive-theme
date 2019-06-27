@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Tonik\\Gin\\' => array($vendorDir . '/tonik/gin/src/Gin'),
-    'Tonik\\CLI\\' => array($vendorDir . '/tonik/cli/src/CLI'),
     'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),

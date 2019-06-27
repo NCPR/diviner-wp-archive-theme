@@ -12,7 +12,6 @@
     "awps/font-awesome-php": "^4.7"
   },
   "require-dev": {
-    "tonik/cli": "dev-develop"
   },
   "autoload":{
     "psr-4": {
