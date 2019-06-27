@@ -10,7 +10,6 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         'T' => 
         array (
             'Tonik\\Gin\\' => 10,
-            'Tonik\\CLI\\' => 10,
         ),
         'S' => 
         array (
@@ -45,10 +44,6 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         'Tonik\\Gin\\' => 
         array (
             0 => __DIR__ . '/..' . '/tonik/gin/src/Gin',
-        ),
-        'Tonik\\CLI\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tonik/cli/src/CLI',
         ),
         'Symfony\\Component\\Finder\\' => 
         array (
