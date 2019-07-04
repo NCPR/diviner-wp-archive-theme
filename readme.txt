@@ -2,7 +2,8 @@
 Contributors: ncpr, graemehoffman
 Requires at least: 5.0
 Tested up to: 5.2
-Requires PHP: 7
+Requires PHP: 7.0
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +38,10 @@ Colors, Fonts, Logo, Header colors, Footer colors, Body color
 = 0.5 =
 * Initial release
 
+== Upgrade Notice ==
+
+= 0.5 =
+* Initial release. Please install.
 
 == Resources ==
 * https://ncpr.github.io/diviner-wp-archive-theme/
