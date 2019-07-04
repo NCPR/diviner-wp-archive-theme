@@ -52,7 +52,7 @@ class Widgets {
 	}
 
 	function above_content() {
-		if (is_page_template('page-sidebar.php')) {
+		if (is_page_template('template-sidebar.php')) {
 			static::render_sidebar(static::SIDEBAR_ID_RIGHT);
 		}
 	}
