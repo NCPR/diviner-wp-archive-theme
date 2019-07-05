@@ -14,34 +14,6 @@ use Diviner\Config\General;
 class Image {
 
 	public function hooks() {
-		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'custom_post_thumbnail_sizes_attr' ], 10 , 3 );
-	}
-
-	function custom_responsive_image_sizes($sizes, $size) {
-		// blog posts
-		if ( in_array($size, [ General::IMAGE_SIZE_FEATURE_SM, General::IMAGE_SIZE_FEATURE_MD, General::IMAGE_SIZE_FEATURE_LRG ] ) ) {
-			// default to return if condition is not met
-			return '(max-width: 768px) 800w, (max-width: 1024px) 1200w, 2000w';
-		}
-		// default to return if condition is not met
-		return '100vw';
-	}
-
-	/**
-	 * Add custom image sizes attribute to enhance responsive image functionality
-	 * for post thumbnails
-	 *
-	 * @param array $attr Attributes for the image markup.
-	 * @param int   $attachment Image attachment ID.
-	 * @param array $size Registered image size or flat array of height and width dimensions.
-	 * @return string A source size value for use in a post thumbnail 'sizes' attribute.
-	 */
-	function custom_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
-		if ( 'post-thumbnail' === $size ) {
-			is_active_sidebar( 'sidebar-1' ) && $attr['sizes'] = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 984px) 60vw, (max-width: 1362px) 62vw, 840px';
-			! is_active_sidebar( 'sidebar-1' ) && $attr['sizes'] = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 88vw, 1200px';
-		}
-		return $attr;
 	}
 
 
