@@ -361,6 +361,15 @@ class General {
 		add_theme_support('title-tag');
 
 		/**
+		 * Enable support for Post Thumbnails on posts and pages. Note that you
+		 * can optionally pass a second argument, $args, with an array of
+		 * the Post Types for which you want to enable this feature.
+		 *
+		 * @see https://developer.wordpress.org/reference/functions/add_theme_support/#post-thumbnails
+		 */
+		add_theme_support('post-thumbnails');
+
+		/**
 		 * Enable custom color support
 		 *
 		 * @see https://wordpress.org/gutenberg/handbook/designers-developers/developers/components/color-palette/
