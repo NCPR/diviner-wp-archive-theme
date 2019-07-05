@@ -51,6 +51,7 @@ if ( post_password_required() ) {
 				wp_list_comments(
 					array(
 						'avatar_size' => 100,
+						'max_depth'   => 5,
 						'style'       => 'ol',
 						'short_ping'  => true,
 						'reply_text'  => __( 'Reply', 'diviner-archive' ),

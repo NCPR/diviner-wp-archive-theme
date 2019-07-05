@@ -45,7 +45,7 @@ add_action('theme/index/content/none', 'Tonik\Theme\App\Structure\render_empty_c
  * @see resources/templates/single.tpl.php
  */
 function render_post_content() {
-	if (is_page_template('page-search.php')) {
+	if (is_page_template('template-search.php')) {
 		$type = 'search';
 	} else {
 		$type = get_post_type();

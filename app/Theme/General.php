@@ -23,7 +23,6 @@ class General {
 	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400i';
 
 	public function hooks() {
-		add_action( 'wp_head', [ $this, 'awesome_fonts' ], 0, 0 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'google_fonts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'output_color_swatch_styles' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'block_editor_assets' ] );
@@ -185,6 +184,7 @@ class General {
 	 * @return void
 	 */
 	function register_stylesheets() {
+		wp_enqueue_style('fontawesome', asset_path('css/fontawesome.min.css'));
 		wp_enqueue_style('app', asset_path('css/app.css'));
 	}
 
@@ -194,6 +194,11 @@ class General {
 	 * @return void
 	 */
 	function register_scripts() {
+
+		if( is_singular() && comments_open() && ( get_option( 'thread_comments' ) == 1) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
+
 		$version = static::version();
 		wp_enqueue_script('vendor', asset_path('js/vendor.js'), [], $version, false);
 		wp_enqueue_script('app', asset_path('js/app.js'), ['jquery'], $version, true);
@@ -361,15 +366,6 @@ class General {
 		 * @see https://wordpress.org/gutenberg/handbook/designers-developers/developers/components/color-palette/
 		 */
 		add_theme_support( 'editor-color-palette', Swatches::get_colors() );
-
-		/**
-		 * Enable support for Post Thumbnails on posts and pages. Note that you
-		 * can optionally pass a second argument, $args, with an array of
-		 * the Post Types for which you want to enable this feature.
-		 *
-		 * @see https://developer.wordpress.org/reference/functions/add_theme_support/#post-thumbnails
-		 */
-		add_theme_support('post-thumbnails');
 
 		/**
 		 * Switch default core markup for search forms, comment forms, comment
@@ -692,19 +688,6 @@ class General {
 		$body_font_key = !empty($body_font_key) ? $body_font_key : static::FONTS_DEFAULT_BODY;
 		wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. urlencode($header_font_key) );
 		wp_enqueue_style( 'diviner-body-fonts', '//fonts.googleapis.com/css?family='. urlencode($body_font_key) );
-	}
-
-	/**
-	 * Renders awesome fonts
-	 *
-	 */
-	public function awesome_fonts() {
-		?>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" integrity="sha384-aj0h5DVQ8jfwc8DA7JiM+Dysv7z+qYrFYZR+Qd/TwnmpDI6UaB3GJRRTdY8jYGS4" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/regular.css" integrity="sha384-l+NpTtA08hNNeMp0aMBg/cqPh507w3OvQSRoGnHcVoDCS9OtgxqgR7u8mLQv8poF" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/brands.css" integrity="sha384-1KLgFVb/gHrlDGLFPgMbeedi6tQBLcWvyNUN+YKXbD7ZFbjX6BLpMDf0PJ32XJfX" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" integrity="sha384-WK8BzK0mpgOdhCxq86nInFqSWLzR5UAsNg0MGX9aDaIIrFWQ38dGdhwnNCAoXFxL" crossorigin="anonymous">
-		<?php
 	}
 
 }

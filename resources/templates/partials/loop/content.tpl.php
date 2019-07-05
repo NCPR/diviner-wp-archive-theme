@@ -4,7 +4,7 @@ use \Diviner\Theme\Image;
 use \Diviner\Config\General;
 
 ?>
-<article class="loop-item">
+<article class="loop-item <?php if (is_sticky()) { echo 'loop-item--sticky'; } ?>">
 
 	<div class="loop-item__inner">
 

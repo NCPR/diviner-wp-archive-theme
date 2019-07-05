@@ -470,6 +470,16 @@ class Customizer {
 			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
 		}
 
+		.edit-link a {
+			background-color: <?php echo $color_btn_link; ?> !important;
+		}
+
+		.edit-link a:hover,
+		.edit-link a:focus {
+			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+		}
+
+
 		.d-content {
 			font-family: '<?php echo $body_font_value; ?>';
 		}

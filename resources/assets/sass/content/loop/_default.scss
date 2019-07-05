@@ -13,6 +13,7 @@
 
 	@include g-state(medium) {
 		margin-bottom: $d_spacer_lrg;
+
 	}
 
 	/* Case: for cards */
@@ -45,10 +46,25 @@
 }
 
 .loop-item__content {
-	@include g-state(medium) {
-		padding: $d_spacer_m $d_spacer_lrg;
+	.loop-item__feature-image + & {
+		padding-top: $d_spacer_sm;
+
+		@include g-state(medium) {
+			padding: $d_spacer_lrg;
+		}
+	}
+
+	.loop-item--sticky & {
+		background-color: $color_white;
+		padding: $d_spacer_smm;
+
+		@include g-state(medium) {
+			padding: $d_spacer_lrg;
+		}
 	}
 }
+
+
 
 .loop-item__title {
 	.d-content & {
@@ -59,7 +75,7 @@
 }
 
 .loop-item__feature-image {
-	margin-bottom: $d_spacer_sm;
+	margin-bottom: 0;
 
 	@include g-state(medium) {
 		width: 33.3%;

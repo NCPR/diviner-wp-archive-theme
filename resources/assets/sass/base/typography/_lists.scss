@@ -13,6 +13,7 @@ dl {
 	.d-content & {
 		@include body-text;
 
+		clear: both;
 		margin-bottom: $d_spacer_smm;
 	}
 

@@ -44,7 +44,7 @@ class Search_Page {
 			'fields' => 'ids',
 			'post_type' => 'page',
 			'meta_key' => '_wp_page_template',
-			'meta_value' => 'page-search.php'
+			'meta_value' => 'template-search.php'
 		];
 		$current_search_pages = get_posts($args);
 		if ( is_array( $current_search_pages ) && count( $current_search_pages ) > 0 ) {
