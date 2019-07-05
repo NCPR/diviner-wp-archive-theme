@@ -194,6 +194,11 @@ class General {
 	 * @return void
 	 */
 	function register_scripts() {
+
+		if( is_singular() && comments_open() && ( get_option( 'thread_comments' ) == 1) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
+
 		$version = static::version();
 		wp_enqueue_script('vendor', asset_path('js/vendor.js'), [], $version, false);
 		wp_enqueue_script('app', asset_path('js/app.js'), ['jquery'], $version, true);
