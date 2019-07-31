@@ -22,3 +22,4 @@
 		do_action('theme/header/end')
 	?>
 </header>
+<a id="a11y-skip-link-content" tabindex="-1"></a>
