@@ -7,4 +7,5 @@
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
+	<a href="#a11y-skip-link-content" class="a11y-skip-link a11y-visual-hide"><?php echo __( 'Skip to main content', 'diviner-archive'); ?></a>
 		<main id="app" class="main">
