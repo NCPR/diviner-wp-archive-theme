@@ -1,7 +1,7 @@
 <?php
 
-use \Diviner\Theme\Image;
-use \Diviner\Config\General;
+use \Diviner_Archive\Theme\Diviner_Archive_Image;
+use \Diviner_Archive\Config\Diviner_Archive_General;
 
 $thumbnail_id = get_post_thumbnail_id();
 
@@ -15,17 +15,17 @@ $has_caption = !empty($caption);
 ?>
 <div class="subheader">
 	<div class="subheader__image">
-		<?php Image::image(
+		<?php Diviner_Archive_Image::image(
 			get_post_thumbnail_id(),
-			General::IMAGE_SIZE_FEATURE_4x3_MD,
-			General::IMAGE_SIZE_FEATURE_4x3_LRG,
+			Diviner_Archive_General::IMAGE_SIZE_FEATURE_4x3_MD,
+			Diviner_Archive_General::IMAGE_SIZE_FEATURE_4x3_LRG,
 			true,
 			[ 'display-medium-none' ]
 		); ?>
-		<?php Image::image(
+		<?php Diviner_Archive_Image::image(
 			get_post_thumbnail_id(),
-			General::IMAGE_SIZE_FEATURE_SM,
-			General::IMAGE_SIZE_FEATURE_LRG,
+			Diviner_Archive_General::IMAGE_SIZE_FEATURE_SM,
+			Diviner_Archive_General::IMAGE_SIZE_FEATURE_LRG,
 			true,
 			[ 'display-none', 'display-medium-block' ]
 		); ?>

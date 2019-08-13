@@ -8,5 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Tonik\\Gin\\' => array($vendorDir . '/tonik/gin/src/Gin'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
-    'Diviner\\' => array($baseDir . '/app'),
+    'Diviner_Archive\\' => array($baseDir . '/app'),
 );

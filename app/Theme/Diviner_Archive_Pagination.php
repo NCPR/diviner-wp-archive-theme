@@ -1,15 +1,15 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 /**
  * Pagination renderer
  *
  * Based on Mozaik WordPress Theme Boilerplate pagination
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
-class Pagination {
+class Diviner_Archive_Pagination {
 
 	/**
 	 * Print pagination HTML

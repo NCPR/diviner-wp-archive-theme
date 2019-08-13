@@ -1,15 +1,15 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 /**
  * Swatches
  *
  * Functions Theme
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
-class Swatches {
+class Diviner_Archive_Swatches {
 
 	/**
 	 * Retrieve colors

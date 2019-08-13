@@ -1,5 +1,7 @@
 <?php
-use Diviner\Theme\General;
+
+$show_widget_area = !empty( $widget_area_404 );
+
 ?>
 <?php get_header(); ?>
 <?php
@@ -27,10 +29,14 @@ do_action('theme/header');
 						<p><?php echo __( 'The page you are looking for does not exist.', 'diviner-archive' ); ?></p>
 					</div>
 
-					<div class="section">
-						<?php get_search_form(); ?>
-					</div>
-
+					<?php
+					if (!empty($show_widget_area)) {
+						printf(
+								'<div class="section">%s</div>',
+							$widget_area_404
+						);
+					}
+					?>
 
 				</div>
 

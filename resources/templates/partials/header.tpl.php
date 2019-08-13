@@ -17,7 +17,7 @@
 		/**
 		 * Functions hooked into `theme/header/end` action.
 		 *
-		 * @hooked Tonik\Theme\App\Structure\render_documentation_button - 10
+		 * @hooked Diviner_Archive\Structure\render_documentation_button - 10
 		 */
 		do_action('theme/header/end')
 	?>

@@ -1,15 +1,15 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
-use Diviner\Post_Types\Archive_Item\Archive_Item;
+use Diviner_Archive\Post_Types\Archive_Item\Diviner_Archive_Archive_Item;
 
 /**
  * Title
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
-class Title {
+class Diviner_Archive_Title {
 
 	/**
 	 * @return string
@@ -48,7 +48,7 @@ class Title {
 		}
 
 		// Archive Item
-		elseif ( is_post_type_archive( Archive_Item::NAME ) ) {
+		elseif ( is_post_type_archive( Diviner_Archive_Archive_Item::NAME ) ) {
 			if ( ! have_posts() ) {
 				return __( 'No Archive Items Found', 'diviner-archive' );
 			}

@@ -1,16 +1,16 @@
 <?php
 
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 /**
  * OEmbed
  *
  * Functions Theme
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
-class OEmbed{
+class Diviner_Archive_OEmbed{
 
 	/**
 	 * Add wrapper around embeds for admin visual editor styling

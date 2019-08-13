@@ -1,11 +1,11 @@
 <?php
 /**
- * Template Name: Search template
+ * Template Name: One Column Search Template with Search Form
  */
 ?>
 <?php
 
-namespace Tonik\Theme\Page;
+namespace Diviner_Archive\Theme\Page;
 
 /*
 |------------------------------------------------------------------
@@ -18,7 +18,7 @@ namespace Tonik\Theme\Page;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Renders single page.

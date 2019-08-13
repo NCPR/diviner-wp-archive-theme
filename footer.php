@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\Footer;
+namespace Diviner_Archive\Theme\Footer;
 
 /*
 |------------------------------------------------------------------
@@ -12,8 +12,8 @@ namespace Tonik\Theme\Footer;
 |
 */
 
-use function Tonik\Theme\App\template;
-use \Diviner\Theme\General;
+use function Diviner_Archive\Helpers\template;
+use \Diviner_Archive\Theme\Diviner_Archive_General;
 
 /**
  * Renders layout's footer.
@@ -21,7 +21,7 @@ use \Diviner\Theme\General;
  * @see resources/templates/layout/footer.tpl.php
  */
 template('layout/footer', [
-	'footer_menu' => General::the_footer_menu(),
-	'footer_social' => General::the_social_module(),
-	'footer_copy' => General::the_footer_copy(),
+	'footer_menu' => Diviner_Archive_General::get_footer_menu(),
+	'footer_widget_area_1' => Diviner_Archive_General::get_footer_widget_area_1(),
+	'footer_widget_area_2' => Diviner_Archive_General::get_footer_widget_area_2(),
 ]);

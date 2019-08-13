@@ -13,7 +13,7 @@
   },
   "autoload":{
     "psr-4": {
-     "Diviner\\" : "app/"
+     "Diviner_Archive\\" : "app/"
     }
   }
 }

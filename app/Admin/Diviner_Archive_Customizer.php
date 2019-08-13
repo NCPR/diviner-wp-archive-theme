@@ -1,19 +1,18 @@
 <?php
 
-namespace Diviner\Admin;
+namespace Diviner_Archive\Admin;
 
-use Diviner\Theme\General;
-use Diviner\Config\General as ConfigGeneral;
-use Diviner\Admin\Controls\RichTextArea;
+use Diviner_Archive\Theme\Diviner_Archive_General;
+use Diviner_Archive\Config\Diviner_Archive_General as ConfigGeneral;
 
 /**
  * Class Customizer
  *
  * Functions for customizer output and settings
  *
- * @package Diviner\Admin
+ * @package Diviner_Archive\Admin
  */
-class Customizer {
+class Diviner_Archive_Customizer {
 
 	const PIMPLE_CONTAINER_NAME = 'admin.customizer';
 
@@ -74,13 +73,7 @@ class Customizer {
 	const CUSTOMIZER_FONT_CLASSNAME_HEADER = 'diviner-costumizer-font-header';
 	const CUSTOMIZER_FONT_CLASSNAME_BODY = 'diviner-costumizer-font-body';
 
-	const SECTION_THEME_CONTENT_SETTING_FOOTER_BODY = 'diviner_setting_content_footer_copy';
-
-	const SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER = 'diviner_setting_content_social_twitter';
-	const SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK = 'diviner_setting_content_social_facebook';
-	const SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM = 'diviner_setting_content_social_instagram';
-
-	const SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE = 'diviner_setting_content_search_page';
+	const SECTION_THEME_SETTING_SEARCH_PAGE = 'diviner_setting_content_search_page';
 
 
 	public function hooks() {
@@ -94,10 +87,10 @@ class Customizer {
 	}
 
 	public function block_styles() {
-		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::get_font_value_from_key($header_font_key);
-		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::get_font_value_from_key($body_font_key);
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, Diviner_Archive_General::FONTS_DEFAULT_HEADER);
+		$header_font_value = Diviner_Archive_General::get_font_value_from_key($header_font_key);
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, Diviner_Archive_General::FONTS_DEFAULT_BODY);
+		$body_font_value = Diviner_Archive_General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 		?>
@@ -161,7 +154,7 @@ class Customizer {
 
 			.editor-styles-wrapper .wp-block-button .wp-block-button__link:hover,
 			.editor-styles-wrapper .wp-block-button .wp-block-button__link:focus {
-				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+				background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
 			/* Free form classic styles */
@@ -193,75 +186,7 @@ class Customizer {
 
 
 	public function customize_register( $wp_customize ) {
-		$this->add_customize_section_content( $wp_customize );
 		$this->add_customize_section_display( $wp_customize );
-	}
-
-	/**
-	 * Attach the content customizer section
-	 */
-	public function add_customize_section_content ( $wp_customize ) {
-		// Content Section
-		$wp_customize->add_section( static::SECTION_THEME_CONTENT, array(
-			'title'      => __('Diviner Theme Content','diviner-archive'),
-			'priority'   => 30,
-		) );
-
-		// Footer
-		$wp_customize->add_setting(static::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY, [
-			'default' => '',
-			'sanitize_callback' => 'wp_kses_post'
-		]);
-		$wp_customize->add_control(new RichTextArea($wp_customize, static::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY, [
-			'type' => 'textarea',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __('Footer Copy', 'diviner-archive'),
-			'description' => __('Appears in the footer under the navigation', 'diviner-archive'),
-		]));
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK, array(
-			'default' => '',
-			'sanitize_callback' => 'esc_url_raw'
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK, array(
-			'type' => 'text',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Facebook Link', 'diviner-archive' ),
-			'description' => __( 'Ex: https://www.facebook.com/nytimes/', 'diviner-archive' ),
-		) );
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER, array(
-			'default' => '',
-			'sanitize_callback' => 'esc_url_raw'
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER, array(
-			'type' => 'text',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Twitter Link', 'diviner-archive' ),
-			'description' => __( 'Ex: https://twitter.com/nytimes', 'diviner-archive' ),
-		) );
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM, array(
-			'default' => '',
-			'sanitize_callback' => 'esc_url_raw'
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM, array(
-			'type' => 'text',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Instagram Link', 'diviner-archive' ),
-			'description' => __( 'Ex: https://www.instagram.com/nytimes', 'diviner-archive' ),
-		) );
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE, array(
-			'default' => '',
-			'sanitize_callback' => [ $this, 'sanitize_dropdown_pages' ] ,
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE, array(
-			'type' => 'dropdown-pages',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Nav Search Page', 'diviner-archive' ),
-			'description' => __( 'Select a page to link the search icon to in the navigation', 'diviner-archive' ),
-		) );
 	}
 
 	function sanitize_dropdown_pages( $page_id, $setting ) {
@@ -362,10 +287,22 @@ class Customizer {
 			static::SECTION_THEME_SETTING_COLOR_ACCENT,
 			static::SECTION_THEME_CONTROL_COLOR_ACCENT,
 			__( 'Accent Color', 'diviner-archive' ),
-			static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT
+			static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT,
+			__( 'Used for blockquotes and seperator line color', 'diviner-archive' )
 		);
 
 		$this->fonts_sections($wp_customize);
+
+		$wp_customize->add_setting( static::SECTION_THEME_SETTING_SEARCH_PAGE, array(
+			'default' => '',
+			'sanitize_callback' => [ $this, 'sanitize_dropdown_pages' ] ,
+		) );
+		$wp_customize->add_control( static::SECTION_THEME_SETTING_SEARCH_PAGE, array(
+			'type' => 'dropdown-pages',
+			'section' => static::SECTION_THEME_CUSTOMIZATIONS,
+			'label' => __( 'Nav Search Page', 'diviner-archive' ),
+			'description' => __( 'Select a page to link the search icon to in the navigation', 'diviner-archive' ),
+		) );
 
 	}
 
@@ -374,7 +311,7 @@ class Customizer {
 		$font_choices = ConfigGeneral::FONTS;
 		$wp_manager->add_setting( static::SECTION_THEME_SETTING_FONT_HEADER, array(
 				'sanitize_callback' => [$this, 'sanitize_fonts'],
-				'default' => General::FONTS_DEFAULT_HEADER,
+				'default' => Diviner_Archive_General::FONTS_DEFAULT_HEADER,
 				'transport' => 'refresh',
 			)
 		);
@@ -390,7 +327,7 @@ class Customizer {
 
 		$wp_manager->add_setting( static::SECTION_THEME_SETTING_FONT_BODY, array(
 				'sanitize_callback' => [$this, 'sanitize_fonts'],
-				'default' => General::FONTS_DEFAULT_BODY,
+				'default' => Diviner_Archive_General::FONTS_DEFAULT_BODY,
 				'transport' => 'refresh',
 			)
 		);
@@ -422,21 +359,21 @@ class Customizer {
 
 	public function sanitize_fonts( $input ) {
 		$valid = ConfigGeneral::FONTS;
-		return ( array_key_exists( $input, $valid ) ? $input : General::FONTS_DEFAULT_BODY );
+		return ( array_key_exists( $input, $valid ) ? $input : Diviner_Archive_General::FONTS_DEFAULT_BODY );
 	}
 
 	/**
 	 * Output up main customizer css
 	 */
 	static public function get_customize_content_css() {
-		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::get_font_value_from_key($header_font_key);
-		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::get_font_value_from_key($body_font_key);
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, Diviner_Archive_General::FONTS_DEFAULT_HEADER);
+		$header_font_value = Diviner_Archive_General::get_font_value_from_key($header_font_key);
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, Diviner_Archive_General::FONTS_DEFAULT_BODY);
+		$body_font_value = Diviner_Archive_General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 		$color_header_text = sprintf('#%s', get_header_textcolor());
-		$color_header_text_hover = General::is_dark($color_header_text) ? General::luminance( substr($color_header_text, 1), 0.7 ) : General::luminance( substr($color_header_text, 1), -0.7 );
+		$color_header_text_hover = Diviner_Archive_General::is_dark($color_header_text) ? Diviner_Archive_General::luminance( substr($color_header_text, 1), 0.7 ) : Diviner_Archive_General::luminance( substr($color_header_text, 1), -0.7 );
 
 		ob_start();
 		?>
@@ -467,7 +404,7 @@ class Customizer {
 		.main__inner input[type='reset']:focus,
 		.main__inner input[type='submit']:hover,
 		.main__inner input[type='submit']:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+			background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
 		}
 
 		.edit-link a {
@@ -476,17 +413,17 @@ class Customizer {
 
 		.edit-link a:hover,
 		.edit-link a:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+			background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 		}
 
 
 		.d-content {
 			font-family: '<?php echo $body_font_value; ?>';
 		}
-		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
+		.<?php echo Diviner_Archive_Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
 			font-family: '<?php echo $header_font_value; ?>' !important;
 		}
-		.<?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
+		.<?php echo Diviner_Archive_Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
 			font-family: '<?php echo $body_font_value; ?>' !important;
 		}
 		.header__title a,
@@ -519,6 +456,10 @@ class Customizer {
 
 		.main label {
 			font-family: '<?php echo $body_font_value; ?>' !important;
+		}
+
+		.page-links .asdas {
+
 		}
 
 		.d-content h1,
@@ -568,7 +509,7 @@ class Customizer {
 
 		.d-content .wp-block-button .wp-block-button__link:hover,
 		.d-content .wp-block-button .wp-block-button__link:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+			background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 		}
 
 		.d-content .wp-block-separator:not(.is-style-dots) {
@@ -603,13 +544,13 @@ class Customizer {
 
 	public function customize_css()
 	{
-		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::get_font_value_from_key($header_font_key);
-		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::get_font_value_from_key($body_font_key);
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, Diviner_Archive_General::FONTS_DEFAULT_HEADER);
+		$header_font_value = Diviner_Archive_General::get_font_value_from_key($header_font_key);
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, Diviner_Archive_General::FONTS_DEFAULT_BODY);
+		$body_font_value = Diviner_Archive_General::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_header_bg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT );
-		$color_subheader_text_desktop = General::is_dark($color_header_bg) ? $color_header_bg : 'black';
+		$color_subheader_text_desktop = Diviner_Archive_General::is_dark($color_header_bg) ? $color_header_bg : 'black';
 		$color_footer_bbg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER, static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT );
 		$color_footer_text = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT, static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT_DEFAULT);
 		$color_footer_menu = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU, static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_DEFAULT);
@@ -676,7 +617,7 @@ class Customizer {
 
 			.single-item__navigation a:hover,
 			.single-fitem__navigation a:focus {
-				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+				background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
 			@media screen and (min-width: 960px) {
@@ -706,7 +647,7 @@ class Customizer {
 				.primary-menu .menu .children a:hover,
 				.primary-menu .menu .sub-menu a:focus,
 				.primary-menu .menu .sub-menu a:hover {
-					color: <?php echo $color_subheader_text_desktop; ?>;
+					color: <?php echo $color_subheader_text_desktop; ?> !important;
 					text-decoration: underline;
 				}
 			}

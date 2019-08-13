@@ -1,15 +1,15 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 /**
- * Class FontAwesomeIcons
+ * Class Diviner_Archive_FontAwesomeIcons
  *
  * Functions Theme
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
-class FontAwesomeIcons {
+class Diviner_Archive_FontAwesomeIcons {
 
 	/**
 	 * Readable class name. Ex: fa-video-camera => Video Camera

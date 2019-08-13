@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\Searchform;
+namespace Diviner_Archive\Theme\Searchform;
 
 /*
 |------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Tonik\Theme\Searchform;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Renders search form.

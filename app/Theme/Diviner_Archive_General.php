@@ -1,23 +1,24 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
-use function Tonik\Theme\App\template;
-use function Tonik\Theme\App\asset_path;
+use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\asset_path;
 
-use Diviner\Admin\Customizer;
-use Diviner\Post_Types\Archive_Item\Archive_Item;
-use Diviner\Config\General as GeneralConfig;
-use Diviner\Theme\Swatches;
+use Diviner_Archive\Admin\Diviner_Archive_Customizer;
+use Diviner_Archive\Post_Types\Archive_Item\Diviner_Archive_Archive_Item;
+use Diviner_Archive\Config\Diviner_Archive_General as GeneralConfig;
+
+use function Diviner_Archive\Helpers\config;
 
 /**
  * Class General
  *
  * Functions Theme
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
-class General {
+class Diviner_Archive_General {
 
 	const FONTS_DEFAULT_HEADER = 'Oswald:400,700';
 	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400i';
@@ -73,7 +74,7 @@ class General {
 	 * @return void
 	 */
 	function post_navigation() {
-		if ( !is_single() || is_singular( Archive_Item::NAME ) ) {
+		if ( !is_single() || is_singular( Diviner_Archive_Archive_Item::NAME ) ) {
 			return;
 		}
 		$prev = get_previous_post_link(
@@ -120,15 +121,13 @@ class General {
 	 * @return void
 	 */
 	function page_links() {
-		if ( get_post_type() === 'post' ) {
-			echo wp_link_pages( [
-				'before'      => '<div class="page-links"><span class="h5 page-links-title">' . __( 'Pages:', 'diviner-archive' ) . '</span>',
-				'after'       => '</div>',
-				'next_or_number' => 'next',
-				'link_before' => '<span>',
-				'link_after'  => '</span>',
-			] );
-		}
+		wp_link_pages( [
+			'before'      => '<div class="page-links h5"><span class="page-links-title">' . __( 'Pages:', 'diviner-archive' ) . '</span>',
+			'after'       => '</div>',
+			'next_or_number' => 'next',
+			'link_before' => '<span>',
+			'link_after'  => '</span>',
+		] );
 	}
 
 	/**
@@ -184,8 +183,8 @@ class General {
 	 * @return void
 	 */
 	function register_stylesheets() {
-		wp_enqueue_style('fontawesome', asset_path('css/fontawesome.min.css'));
-		wp_enqueue_style('app', asset_path('css/app.css'));
+		wp_enqueue_style('diviner-archive-fontawesome', asset_path('css/fontawesome.min.css'));
+		wp_enqueue_style('diviner-archive-app', asset_path('css/app.min.css'));
 	}
 
 	/**
@@ -200,8 +199,8 @@ class General {
 		}
 
 		$version = static::version();
-		wp_enqueue_script('vendor', asset_path('js/vendor.js'), [], $version, false);
-		wp_enqueue_script('app', asset_path('js/app.js'), ['jquery'], $version, true);
+		wp_enqueue_script('diviner-archive-vendor', asset_path('js/vendor.min.js'), [], $version, false);
+		wp_enqueue_script('diviner-archive-app', asset_path('js/app.min.js'), ['jquery'], $version, true);
 	}
 
 	/**
@@ -252,7 +251,7 @@ class General {
 				$color['slug'],
 				$color['color']
 			);
-		},Swatches::get_colors());
+		},Diviner_Archive_Swatches::get_colors());
 
 		$styles_text = array_map( function( $color ) {
 			return sprintf(
@@ -261,7 +260,7 @@ class General {
 				$color['slug'],
 				$color['color']
 			);
-		},Swatches::get_colors());
+		},Diviner_Archive_Swatches::get_colors());
 
 		$style_tag = sprintf(
 			'<style type="text/css">%s%s</style>',
@@ -308,6 +307,8 @@ class General {
 	 */
 	function after_setup_theme() {
 
+		$this->load_textdomain();
+
 		$this->add_image_sizes();
 
 		$this->register_navigation_areas();
@@ -315,6 +316,19 @@ class General {
 		$this->add_theme_supports();
 
 	}
+
+	/**
+	 * Loads theme textdomain language files.
+	 *
+	 * @return void
+	 */
+	function load_textdomain() {
+		$paths       = config( 'paths' );
+		$directories = config( 'directories' );
+
+		load_theme_textdomain( config( 'textdomain' ), "{$paths['directory']}/{$directories['languages']}" );
+	}
+
 
 	/**
 	 * Adds various theme supports.
@@ -330,7 +344,7 @@ class General {
 
 		$args = array(
 			'default-image'      => '',
-			'default-text-color' => substr(Customizer::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT, 1 ),
+			'default-text-color' => substr(Diviner_Archive_Customizer::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT, 1 ),
 			'width'              => 1000,
 			'height'             => 250,
 			'flex-width'         => true,
@@ -339,7 +353,7 @@ class General {
 		add_theme_support( 'custom-header', $args );
 
 		$args = array(
-			'default-color' => substr(Customizer::SECTION_THEME_SETTING_COLOR_BODY_BG_DEFAULT, 1 ),
+			'default-color' => substr(Diviner_Archive_Customizer::SECTION_THEME_SETTING_COLOR_BODY_BG_DEFAULT, 1 ),
 		);
 		add_theme_support( 'custom-background', $args );
 
@@ -374,7 +388,7 @@ class General {
 		 *
 		 * @see https://wordpress.org/gutenberg/handbook/designers-developers/developers/components/color-palette/
 		 */
-		add_theme_support( 'editor-color-palette', Swatches::get_colors() );
+		add_theme_support( 'editor-color-palette', Diviner_Archive_Swatches::get_colors() );
 
 		/**
 		 * Switch default core markup for search forms, comment forms, comment
@@ -481,13 +495,13 @@ class General {
 	 * @return bool
 	 */
 	static public function should_display_cards( ) {
-		if (is_post_type_archive( [ Archive_Item::NAME ] )) {
+		if (is_post_type_archive( [ Diviner_Archive_Archive_Item::NAME ] )) {
 			return true;
 		} else {
 			$is_tax = is_tax();
 			if ($is_tax) {
 				$term = get_queried_object();
-				if ( static::is_taxonomy_in_post_type($term, Archive_Item::NAME) ) {
+				if ( static::is_taxonomy_in_post_type($term, Diviner_Archive_Archive_Item::NAME) ) {
 					return true;
 				} else {
 					return false;
@@ -535,8 +549,19 @@ class General {
 		]);
 	}
 
+	static public function get_footer_widget_area_1() {
+		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_FOOTER_1);
+	}
 
-	static public function the_footer_menu() {
+	static public function get_footer_widget_area_2() {
+		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_FOOTER_2);
+	}
+
+	static public function get_404_widget_area() {
+		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_404);
+	}
+
+	static public function get_footer_menu() {
 		$menu = wp_nav_menu( [
 			'theme_location' => 'footer',
 			'echo' => false,
@@ -609,9 +634,9 @@ class General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	static function the_social_module () {
-		$social_facebook = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK );
-		$social_instagram = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM );
-		$social_twitter = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER );
+		$social_facebook = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK );
+		$social_instagram = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM );
+		$social_twitter = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER );
 
 		if ( !empty( $social_facebook ) || !empty( $social_instagram ) || !empty( $social_twitter ) ) {
 			$social_links = [];
@@ -651,7 +676,7 @@ class General {
 	 * @return string
 	 */
 	static function the_footer_copy () {
-		$copy = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY );
+		$copy = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY );
 		if ( !empty( $copy ) ) {
 			return sprintf(
 				'<div class="footer__copy d-content"><p>%s</p></div>',
@@ -683,7 +708,7 @@ class General {
 	 * @return string
 	 */
 	static function get_page_title() {
-		$title = new \Diviner\Theme\Title();
+		$title = new \Diviner_Archive\Theme\Diviner_Archive_Title();
 		return $title->get_title();
 	}
 
@@ -691,8 +716,8 @@ class General {
 	 * Retrieve google fonts
 	 */
 	public function google_fonts() {
-		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
-		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_BODY, static::FONTS_DEFAULT_BODY);
+		$header_font_key = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_SETTING_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
+		$body_font_key = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_SETTING_FONT_BODY, static::FONTS_DEFAULT_BODY);
 		$header_font_key = !empty($header_font_key) ? $header_font_key : static::FONTS_DEFAULT_HEADER;
 		$body_font_key = !empty($body_font_key) ? $body_font_key : static::FONTS_DEFAULT_BODY;
 		wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. urlencode($header_font_key) );

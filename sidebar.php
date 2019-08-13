@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\Sidebar;
+namespace Diviner_Archive\Theme\Sidebar;
 
 /*
 |------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Tonik\Theme\Sidebar;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Renders sidebar.

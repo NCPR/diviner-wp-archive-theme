@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\App\Structure;
+namespace Diviner_Archive\Structure;
 
 /*
 |-----------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Tonik\Theme\App\Structure;
 |
 */
 
-use Diviner\Config\General;
+use Diviner_Archive\Config\Diviner_Archive_General;
 
 /**
  * Adds new thumbnails image sizes.
@@ -21,9 +21,9 @@ use Diviner\Config\General;
  */
 function add_image_sizes()
 {
-	foreach ( General::$image_sizes as $key => $attributes ) {
+	foreach ( Diviner_Archive_General::$image_sizes as $key => $attributes ) {
 		add_image_size( $key, $attributes[ 'width' ], $attributes[ 'height' ], $attributes[ 'crop' ] );
 	}
 
 }
-add_action('after_setup_theme', 'Tonik\Theme\App\Structure\add_image_sizes');
+add_action('after_setup_theme', 'Diviner_Archive\Structure\add_image_sizes');

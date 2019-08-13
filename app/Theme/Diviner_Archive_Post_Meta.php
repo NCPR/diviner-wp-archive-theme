@@ -1,6 +1,6 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 
 /**
@@ -8,9 +8,9 @@ namespace Diviner\Theme;
  *
  * Generic Post Meta for Theme (Gutenberg?)
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
-class Post_Meta {
+class Diviner_Archive_Post_Meta {
 
 	const FIELD_SUBHEADER_TEXT = 'div_field_subheader_text';
 
