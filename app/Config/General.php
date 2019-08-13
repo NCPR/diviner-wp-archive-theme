@@ -9,28 +9,28 @@ namespace Diviner_Archive\Config;
  */
 class General {
 
-	const VERSION = '1.0.0';
+	const VERSION = '0.5.3';
 
-	const IMAGE_SIZE_BROWSE_POPUP = 'image_size_browse_popup';
-	const IMAGE_SIZE_BROWSE_GRID = 'image_size_browse_grid';
+	const IMAGE_SIZE_BROWSE_POPUP = 'diviner_archive_image_size_browse_popup';
+	const IMAGE_SIZE_BROWSE_GRID = 'diviner_archive_image_size_browse_grid';
 
-	const IMAGE_SIZE_FEATURE_SM   = 'image_size_feature_sm'; // 5 x 1
-	const IMAGE_SIZE_FEATURE_MD   = 'image_size_feature_md';
-	const IMAGE_SIZE_FEATURE_LRG  = 'image_size_feature_lrg';
+	const IMAGE_SIZE_FEATURE_SM   = 'diviner_archive_image_size_feature_sm'; // 5 x 1
+	const IMAGE_SIZE_FEATURE_MD   = 'diviner_archive_image_size_feature_md';
+	const IMAGE_SIZE_FEATURE_LRG  = 'diviner_archive_image_size_feature_lrg';
 
-	const IMAGE_SIZE_THUMBNAIL_LRG = 'image_size_thumb_lrg';
-	const IMAGE_SIZE_THUMBNAIL_SM = 'image_size_thumb_sm';
+	const IMAGE_SIZE_THUMBNAIL_LRG = 'diviner_archive_image_size_thumb_lrg';
+	const IMAGE_SIZE_THUMBNAIL_SM = 'diviner_archive_image_size_thumb_sm';
 
-	const IMAGE_SIZE_FEATURE_4x3_LRG  = 'image_size_feature_4x3_lrg'; // 4 x 3
-	const IMAGE_SIZE_FEATURE_4x3_MD = 'image_size_feature_4x3_md';
+	const IMAGE_SIZE_FEATURE_4x3_LRG  = 'diviner_archive_image_size_feature_4x3_lrg'; // 4 x 3
+	const IMAGE_SIZE_FEATURE_4x3_MD = 'diviner_archive_image_size_feature_4x3_md';
 
-	const IMAGE_SIZE_CARD_LRG  = 'image_size_card_lrg'; // 16 x 9
-	const IMAGE_SIZE_CARD_MD = 'image_size_card_md';
-	const IMAGE_SIZE_CARD_SM = 'image_size_card_sm';
+	const IMAGE_SIZE_CARD_LRG  = 'diviner_archive_image_size_card_lrg'; // 16 x 9
+	const IMAGE_SIZE_CARD_MD = 'diviner_archive_image_size_card_md';
+	const IMAGE_SIZE_CARD_SM = 'diviner_archive_image_size_card_sm';
 
-	const IMAGE_SIZE_ARCHIVE_SINGLE_LRG  = 'image_size_archive_single_lrg';
-	const IMAGE_SIZE_ARCHIVE_SINGLE_M  = 'image_size_archive_single_m';
-	const IMAGE_SIZE_ARCHIVE_SINGLE_SM  = 'image_size_archive_single_s';
+	const IMAGE_SIZE_ARCHIVE_SINGLE_LRG  = 'diviner_archive_image_size_archive_single_lrg';
+	const IMAGE_SIZE_ARCHIVE_SINGLE_M  = 'diviner_archive_image_size_archive_single_m';
+	const IMAGE_SIZE_ARCHIVE_SINGLE_SM  = 'diviner_archive_image_size_archive_single_s';
 
 	// overridden by CSS
 	const OEMBED_AUDIO_DIMENSIONS_WIDTH = 700;

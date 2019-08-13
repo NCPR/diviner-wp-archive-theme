@@ -90,8 +90,6 @@ return [
 		'Theme/Title.php',
 		'Theme/Widgets.php',
 		'Theme/Pagination.php',
-		'Setup/supports.php',
-		'Setup/language.php',
 		'Structure/theme.php',
 		'Structure/blocks.php',
 		'Structure/templates.php',

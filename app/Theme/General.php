@@ -8,8 +8,8 @@ use function Tonik\Theme\App\asset_path;
 use Diviner_Archive\Admin\Customizer;
 use Diviner_Archive\Post_Types\Archive_Item\Archive_Item;
 use Diviner_Archive\Config\General as GeneralConfig;
-use Diviner_Archive\Theme\Swatches;
-use Diviner_Archive\Theme\Widgets;
+
+use function Tonik\Theme\App\config;
 
 /**
  * Class General
@@ -307,6 +307,8 @@ class General {
 	 */
 	function after_setup_theme() {
 
+		$this->load_textdomain();
+
 		$this->add_image_sizes();
 
 		$this->register_navigation_areas();
@@ -314,6 +316,19 @@ class General {
 		$this->add_theme_supports();
 
 	}
+
+	/**
+	 * Loads theme textdomain language files.
+	 *
+	 * @return void
+	 */
+	function load_textdomain() {
+		$paths       = config( 'paths' );
+		$directories = config( 'directories' );
+
+		load_theme_textdomain( config( 'textdomain' ), "{$paths['directory']}/{$directories['languages']}" );
+	}
+
 
 	/**
 	 * Adds various theme supports.
