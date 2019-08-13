@@ -3,7 +3,7 @@
 namespace Tonik\Theme\App\Structure;
 
 use \Pimple\Container;
-use \Diviner\Blocks\Blocks;
+use \Diviner_Archive\Blocks\Blocks;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
 

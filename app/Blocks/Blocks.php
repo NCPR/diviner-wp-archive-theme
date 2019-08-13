@@ -1,12 +1,12 @@
 <?php
 
-namespace Diviner\Blocks;
+namespace Diviner_Archive\Blocks;
 
 
 /**
  * Blocks stuff
  *
- * @package Diviner\Admin
+ * @package Diviner_Archive\Admin
  */
 class Blocks {
 

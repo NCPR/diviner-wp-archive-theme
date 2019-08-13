@@ -1,7 +1,7 @@
 <?php
 
-use \Diviner\Theme\Image;
-use \Diviner\Config\General;
+use \Diviner_Archive\Theme\Image;
+use \Diviner_Archive\Config\General;
 
 $thumbnail_id = get_post_thumbnail_id();
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
-use Diviner\Config\General;
+use Diviner_Archive\Config\General;
 
 /**
  * Class Image
  *
  * Functions Theme
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
 class Image {
 

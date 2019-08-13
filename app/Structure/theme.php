@@ -3,11 +3,11 @@
 namespace Tonik\Theme\App\Structure;
 
 use \Pimple\Container;
-use \Diviner\Theme\General;
-use \Diviner\Theme\Image;
-use \Diviner\Theme\Search_Page;
-use \Diviner\Theme\Post_Meta;
-use \Diviner\Theme\Widgets;
+use \Diviner_Archive\Theme\General;
+use \Diviner_Archive\Theme\Image;
+use \Diviner_Archive\Theme\Search_Page;
+use \Diviner_Archive\Theme\Post_Meta;
+use \Diviner_Archive\Theme\Widgets;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
 

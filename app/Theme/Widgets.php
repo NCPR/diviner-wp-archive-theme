@@ -1,6 +1,6 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 use function Tonik\Theme\App\template;
 
@@ -9,7 +9,7 @@ use function Tonik\Theme\App\template;
  *
  * Functions Theme
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
 class Widgets {
 

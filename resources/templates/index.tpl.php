@@ -1,6 +1,6 @@
 <?php
-use Diviner\Admin\Customizer;
-use Diviner\Theme\General;
+use Diviner_Archive\Admin\Customizer;
+use Diviner_Archive\Theme\General;
 ?>
 <?php get_header(); ?>
 <?php
@@ -43,7 +43,7 @@ use Diviner\Theme\General;
 						<?php endwhile; ?>
 					</div>
 
-					<?php Diviner\Theme\Pagination::pagination(); ?>
+					<?php Diviner_Archive\Theme\Pagination::pagination(); ?>
 
 				<?php else : ?>
 					<?php

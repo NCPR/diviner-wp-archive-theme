@@ -1,12 +1,12 @@
 <?php
 
-namespace Diviner\Admin;
+namespace Diviner_Archive\Admin;
 
 
 /**
  * General
  *
- * @package Diviner\Admin
+ * @package Diviner_Archive\Admin
  */
 class General {
 

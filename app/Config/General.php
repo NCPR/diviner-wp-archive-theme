@@ -1,11 +1,11 @@
 <?php
 
-namespace Diviner\Config;
+namespace Diviner_Archive\Config;
 
 /**
  * Class General
  *
- * @package Diviner\Config
+ * @package Diviner_Archive\Config
  */
 class General {
 

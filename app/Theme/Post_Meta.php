@@ -1,6 +1,6 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 
 /**
@@ -8,7 +8,7 @@ namespace Diviner\Theme;
  *
  * Generic Post Meta for Theme (Gutenberg?)
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
 class Post_Meta {
 

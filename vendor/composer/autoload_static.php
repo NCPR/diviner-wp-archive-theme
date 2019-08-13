@@ -17,7 +17,7 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         ),
         'D' => 
         array (
-            'Diviner\\' => 8,
+            'Diviner_Archive\\' => 8,
         ),
     );
 
@@ -30,7 +30,7 @@ class ComposerStaticInit9e1380a933d64783bab17a277da85526
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Diviner\\' => 
+        'Diviner_Archive\\' =>
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),

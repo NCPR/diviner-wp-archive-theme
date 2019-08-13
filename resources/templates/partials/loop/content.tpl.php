@@ -1,7 +1,7 @@
 <?php
 
-use \Diviner\Theme\Image;
-use \Diviner\Config\General;
+use \Diviner_Archive\Theme\Image;
+use \Diviner_Archive\Config\General;
 
 ?>
 <article class="loop-item <?php if (is_sticky()) { echo 'loop-item--sticky'; } ?>">

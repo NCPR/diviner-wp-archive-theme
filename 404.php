@@ -13,7 +13,7 @@ namespace Tonik\Theme\NotFound;
 */
 
 use function Tonik\Theme\App\template;
-use \Diviner\Theme\General;
+use \Diviner_Archive\Theme\General;
 
 /**
  * Renders 404 page.

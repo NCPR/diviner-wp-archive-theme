@@ -1,17 +1,16 @@
 <?php
 
-namespace Diviner\Admin;
+namespace Diviner_Archive\Admin;
 
-use Diviner\Theme\General;
-use Diviner\Config\General as ConfigGeneral;
-use Diviner\Admin\Controls\RichTextArea;
+use Diviner_Archive\Theme\General;
+use Diviner_Archive\Config\General as ConfigGeneral;
 
 /**
  * Class Customizer
  *
  * Functions for customizer output and settings
  *
- * @package Diviner\Admin
+ * @package Diviner_Archive\Admin
  */
 class Customizer {
 

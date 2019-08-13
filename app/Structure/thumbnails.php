@@ -12,7 +12,7 @@ namespace Tonik\Theme\App\Structure;
 |
 */
 
-use Diviner\Config\General;
+use Diviner_Archive\Config\General;
 
 /**
  * Adds new thumbnails image sizes.

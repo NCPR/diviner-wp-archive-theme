@@ -1,22 +1,22 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
 use function Tonik\Theme\App\template;
 use function Tonik\Theme\App\asset_path;
 
-use Diviner\Admin\Customizer;
-use Diviner\Post_Types\Archive_Item\Archive_Item;
-use Diviner\Config\General as GeneralConfig;
-use Diviner\Theme\Swatches;
-use Diviner\Theme\Widgets;
+use Diviner_Archive\Admin\Customizer;
+use Diviner_Archive\Post_Types\Archive_Item\Archive_Item;
+use Diviner_Archive\Config\General as GeneralConfig;
+use Diviner_Archive\Theme\Swatches;
+use Diviner_Archive\Theme\Widgets;
 
 /**
  * Class General
  *
  * Functions Theme
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
 class General {
 
@@ -693,7 +693,7 @@ class General {
 	 * @return string
 	 */
 	static function get_page_title() {
-		$title = new \Diviner\Theme\Title();
+		$title = new \Diviner_Archive\Theme\Title();
 		return $title->get_title();
 	}
 

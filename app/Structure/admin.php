@@ -3,9 +3,9 @@
 namespace Tonik\Theme\App\Structure;
 
 use \Pimple\Container;
-use \Diviner\Admin\General;
-use \Diviner\Admin\Customizer;
-use \Diviner\Admin\Editor;
+use \Diviner_Archive\Admin\General;
+use \Diviner_Archive\Admin\Customizer;
+use \Diviner_Archive\Admin\Editor;
 
 $container = \Tonik\Theme\App\Main::instance()->container();
 

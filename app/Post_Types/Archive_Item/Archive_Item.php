@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Diviner\Post_Types\Archive_Item;
+namespace Diviner_Archive\Post_Types\Archive_Item;
 
 /**
  * Class Archive Item
  *
- * @package Diviner\Post_Types\Archive_Item
+ * @package Diviner_Archive\Post_Types\Archive_Item
  */
 class Archive_Item {
 

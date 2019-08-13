@@ -1,11 +1,11 @@
 <?php
 
-namespace Diviner\Admin;
+namespace Diviner_Archive\Admin;
 
 /**
  * Classic Editor stuff
  *
- * @package Diviner\Admin
+ * @package Diviner_Archive\Admin
  */
 class Editor {
 
@@ -30,7 +30,7 @@ class Editor {
 			'diviner-block-editor-styles', // Handle.
 			$css_dir . $editor_css, // Block editor CSS.
 			[], // Dependency to include the CSS after it.
-			\Diviner\Theme\General::version()
+			\Diviner_Archive\Theme\General::version()
 		);
 	}
 

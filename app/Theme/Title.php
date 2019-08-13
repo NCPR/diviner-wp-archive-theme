@@ -1,13 +1,13 @@
 <?php
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
-use Diviner\Post_Types\Archive_Item\Archive_Item;
+use Diviner_Archive\Post_Types\Archive_Item\Archive_Item;
 
 /**
  * Title
  *
- * @package Diviner\Theme
+ * @package Diviner_Archive\Theme
  */
 class Title {
 

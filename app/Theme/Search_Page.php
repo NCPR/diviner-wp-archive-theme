@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Diviner\Theme;
+namespace Diviner_Archive\Theme;
 
-use \Diviner\Admin\Customizer;
+use \Diviner_Archive\Admin\Customizer;
 
 /**
  * Setting up the Browse page at startup
  *
- * @package Diviner\Admin
+ * @package Diviner_Archive\Admin
  */
 class Search_Page {
 

@@ -1,8 +1,8 @@
 <?php
 
-use \Diviner\Theme\Image;
-use \Diviner\Config\General;
-use \Diviner\Post_Types\Archive_Item\Archive_Item;
+use \Diviner_Archive\Theme\Image;
+use \Diviner_Archive\Config\General;
+use \Diviner_Archive\Post_Types\Archive_Item\Archive_Item;
 
 // defaults
 $display_excerpt = isset($display_excerpt) ? $display_excerpt : true;
