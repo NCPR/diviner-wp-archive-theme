@@ -10,8 +10,8 @@
     "editor-styles": [
       "./resources/assets/sass/editor-styles.scss"
     ],
-    "fontawesome.min": [
-      "./resources/assets/sass/fontawesome.min.scss"
+    "fontawesome": [
+      "./resources/assets/sass/fontawesome.scss"
     ],
     "block-editor-styles": [
       "./resources/assets/sass/block-editor-styles.scss"

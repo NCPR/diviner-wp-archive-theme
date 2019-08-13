@@ -25,7 +25,7 @@ class Editor {
 	 */
 	public function block_editor_assets() {
 		$css_dir    = trailingslashit( get_template_directory_uri() ) . 'public/css/';
-		$editor_css = 'block-editor-styles.css';
+		$editor_css = 'block-editor-styles.min.css';
 		wp_enqueue_style(
 			'diviner-block-editor-styles', // Handle.
 			$css_dir . $editor_css, // Block editor CSS.
@@ -39,7 +39,7 @@ class Editor {
 	 */
 	public function visual_editor_styles() {
 		$css_dir    = '/public/css/';
-		$editor_css = 'editor-styles.css';
+		$editor_css = 'editor-styles.min.css';
 		add_editor_style( $css_dir . $editor_css );
 
 	}
