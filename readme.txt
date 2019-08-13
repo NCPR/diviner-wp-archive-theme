@@ -42,7 +42,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see .
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 Diviner Archive WordPress Theme is derived from Tonik Starter WordPress Theme, Copyright 2019 Tonik Labs.
 The Tonik Starter Theme is licensed under the MIT license.
