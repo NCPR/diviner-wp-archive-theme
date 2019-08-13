@@ -87,7 +87,18 @@
 .page-links {
 	display: block;
 	margin-top: $d_spacer_m;
-	margin-bottom: $d_spacer_m;
+	margin-bottom: $d_spacer_mm;
+
+	.page-links-title {
+		margin-right: $d_spacer_xsm;
+	}
+
+}
+
+.post-page-numbers {
+	& + & {
+		margin-left: $d_spacer_xsm;
+	}
 }
 
 
