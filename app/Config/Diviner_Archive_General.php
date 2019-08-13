@@ -9,7 +9,7 @@ namespace Diviner_Archive\Config;
  */
 class Diviner_Archive_General {
 
-	const VERSION = '0.5.3';
+	const VERSION = '0.5.4';
 
 	const IMAGE_SIZE_BROWSE_POPUP = 'diviner_archive_image_size_browse_popup';
 	const IMAGE_SIZE_BROWSE_GRID = 'diviner_archive_image_size_browse_grid';
