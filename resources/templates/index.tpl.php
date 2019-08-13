@@ -1,6 +1,6 @@
 <?php
-use Diviner_Archive\Admin\Customizer;
-use Diviner_Archive\Theme\General;
+use Diviner_Archive\Admin\Diviner_Archive_Customizer;
+use Diviner_Archive\Theme\Diviner_Archive_General;
 ?>
 <?php get_header(); ?>
 <?php
@@ -15,10 +15,10 @@ use Diviner_Archive\Theme\General;
 
 	<div class="wrapper">
 		<div class="wrapper__inner">
-			<div class="<?php echo General::get_loop_classes(); ?>">
+			<div class="<?php echo Diviner_Archive_General::get_loop_classes(); ?>">
 
-				<h1 class="h1 <?php echo Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?>">
-					<?php echo General::get_page_title(); ?>
+				<h1 class="h1 <?php echo Diviner_Archive_Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?>">
+					<?php echo Diviner_Archive_General::get_page_title(); ?>
 				</h1>
 
 				<?php
@@ -43,14 +43,14 @@ use Diviner_Archive\Theme\General;
 						<?php endwhile; ?>
 					</div>
 
-					<?php Diviner_Archive\Theme\Pagination::pagination(); ?>
+					<?php Diviner_Archive\Theme\Diviner_Archive_Pagination::pagination(); ?>
 
 				<?php else : ?>
 					<?php
 					/**
 					 * Functions hooked into `theme/index/content/none` action.
 					 *
-					 * @hooked Tonik\Theme\App\Structure\render_empty_content - 10
+					 * @hooked Diviner_Archive\Structure\render_empty_content - 10
 					 */
 					do_action('theme/index/content/none');
 					?>

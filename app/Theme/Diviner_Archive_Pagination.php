@@ -9,7 +9,7 @@ namespace Diviner_Archive\Theme;
  *
  * @package Diviner_Archive\Theme
  */
-class Pagination {
+class Diviner_Archive_Pagination {
 
 	/**
 	 * Print pagination HTML

@@ -8,7 +8,7 @@ namespace Diviner_Archive\Admin;
  *
  * @package Diviner_Archive\Admin
  */
-class General {
+class Diviner_Archive_General {
 
 	const PIMPLE_CONTAINER_NAME = 'admin.general';
 

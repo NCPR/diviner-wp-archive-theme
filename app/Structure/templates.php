@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\App\Structure;
+namespace Diviner_Archive\Structure;
 
 /*
 |-----------------------------------------------------------
@@ -18,17 +18,6 @@ namespace Tonik\Theme\App\Structure;
 use function Tonik\Theme\App\template;
 
 /**
- * Renders post thumbnail by its formats.
- *
- * @see resources/templates/index.tpl.php
- */
-function render_post_thumbnail()
-{
-    template(['partials/post/thumbnail', get_post_format()]);
-}
-add_action('theme/index/post/thumbnail', 'Tonik\Theme\App\Structure\render_post_thumbnail');
-
-/**
  * Renders empty post content where there is no posts.
  *
  * @see resources/templates/index.tpl.php
@@ -37,7 +26,7 @@ function render_empty_content()
 {
     template(['partials/index/content', 'none']);
 }
-add_action('theme/index/content/none', 'Tonik\Theme\App\Structure\render_empty_content');
+add_action('theme/index/content/none', 'Diviner_Archive\Structure\render_empty_content');
 
 /**
  * Renders post contents by its formats.
@@ -66,7 +55,7 @@ function render_post_content() {
 		]);
 	}
 }
-add_action('theme/single/content', 'Tonik\Theme\App\Structure\render_post_content');
+add_action('theme/single/content', 'Diviner_Archive\Structure\render_post_content');
 
 /**
  * Renders sidebar content.
@@ -79,5 +68,5 @@ function render_sidebar()
 {
     get_sidebar();
 }
-add_action('theme/index/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
-add_action('theme/single/sidebar', 'Tonik\Theme\App\Structure\render_sidebar');
+add_action('theme/index/sidebar', 'Diviner_Archive\Structure\render_sidebar');
+add_action('theme/single/sidebar', 'Diviner_Archive\Structure\render_sidebar');

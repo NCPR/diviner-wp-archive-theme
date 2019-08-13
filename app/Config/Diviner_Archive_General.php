@@ -7,7 +7,7 @@ namespace Diviner_Archive\Config;
  *
  * @package Diviner_Archive\Config
  */
-class General {
+class Diviner_Archive_General {
 
 	const VERSION = '0.5.3';
 

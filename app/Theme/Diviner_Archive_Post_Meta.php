@@ -10,7 +10,7 @@ namespace Diviner_Archive\Theme;
  *
  * @package Diviner_Archive\Theme
  */
-class Post_Meta {
+class Diviner_Archive_Post_Meta {
 
 	const FIELD_SUBHEADER_TEXT = 'div_field_subheader_text';
 

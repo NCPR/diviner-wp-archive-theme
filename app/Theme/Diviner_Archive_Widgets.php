@@ -11,7 +11,7 @@ use function Tonik\Theme\App\template;
  *
  * @package Diviner_Archive\Theme
  */
-class Widgets {
+class Diviner_Archive_Widgets {
 
 	const SIDEBAR_ID_AFTER_TITLE = 'sidebar_after_title';
 	const SIDEBAR_ID_RIGHT = 'sidebar_right';

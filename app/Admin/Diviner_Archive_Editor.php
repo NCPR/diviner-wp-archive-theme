@@ -7,7 +7,7 @@ namespace Diviner_Archive\Admin;
  *
  * @package Diviner_Archive\Admin
  */
-class Editor {
+class Diviner_Archive_Editor {
 
 	const PIMPLE_CONTAINER_NAME = 'admin.classic_editor';
 
@@ -30,7 +30,7 @@ class Editor {
 			'diviner-block-editor-styles', // Handle.
 			$css_dir . $editor_css, // Block editor CSS.
 			[], // Dependency to include the CSS after it.
-			\Diviner_Archive\Theme\General::version()
+			\Diviner_Archive\Theme\Diviner_Archive_General::version()
 		);
 	}
 
@@ -48,7 +48,7 @@ class Editor {
 	 * Visual Editor Custom Styles
 	 */
 	function add_editor_customizer_styles( $mceInit ) {
-		$styles = Customizer::get_customize_content_css();
+		$styles = Diviner_Archive_Customizer::get_customize_content_css();
 		$styles = str_replace(PHP_EOL, '', trim($styles));
 		if ( !isset( $mceInit['content_style'] ) ) {
 			$mceInit['content_style'] = $styles . ' ';

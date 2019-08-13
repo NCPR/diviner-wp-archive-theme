@@ -23,7 +23,7 @@ do_action('theme/header');
 					/**
 					 * Functions hooked into `theme/single/content` action.
 					 *
-					 * @hooked Tonik\Theme\App\Structure\render_post_content - 10
+					 * @hooked Diviner_Archive\Structure\render_post_content - 10
 					 */
 					do_action('theme/single/content');
 					?>

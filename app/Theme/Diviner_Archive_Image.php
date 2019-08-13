@@ -2,7 +2,7 @@
 
 namespace Diviner_Archive\Theme;
 
-use Diviner_Archive\Config\General;
+use Diviner_Archive\Config\Diviner_Archive_General;
 
 /**
  * Class Image
@@ -11,7 +11,7 @@ use Diviner_Archive\Config\General;
  *
  * @package Diviner_Archive\Theme
  */
-class Image {
+class Diviner_Archive_Image {
 
 	public function hooks() {
 	}
@@ -43,7 +43,7 @@ class Image {
 		$img_sizes = wp_calculate_image_sizes( $image_size_src, $img_src, null, $image_id );
 		$img_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
-		if ( in_array($image_size_src, [ General::IMAGE_SIZE_FEATURE_SM, General::IMAGE_SIZE_FEATURE_MD, General::IMAGE_SIZE_FEATURE_LRG ] ) ) { // if feature image
+		if ( in_array($image_size_src, [ Diviner_Archive_General::IMAGE_SIZE_FEATURE_SM, Diviner_Archive_General::IMAGE_SIZE_FEATURE_MD, Diviner_Archive_General::IMAGE_SIZE_FEATURE_LRG ] ) ) { // if feature image
 			$img_sizes = '(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w';
 		}
 

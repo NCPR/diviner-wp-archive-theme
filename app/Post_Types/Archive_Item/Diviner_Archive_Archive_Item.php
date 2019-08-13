@@ -8,7 +8,7 @@ namespace Diviner_Archive\Post_Types\Archive_Item;
  *
  * @package Diviner_Archive\Post_Types\Archive_Item
  */
-class Archive_Item {
+class Diviner_Archive_Archive_Item {
 
 	const NAME = 'diviner_archive_item';
 

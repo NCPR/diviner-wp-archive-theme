@@ -7359,7 +7359,7 @@ Accounting for two markup formats
     margin: 0;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 999999;
     width: 100%;
     height: 100%;
     overflow: auto; }
@@ -7370,11 +7370,6 @@ Accounting for two markup formats
         width: auto;
         height: auto;
         background: transparent; } }
-  .menu--opened.admin-bar .primary-menu__wrap {
-    top: 46px; }
-    @media screen and (min-width: 783px) {
-      .menu--opened.admin-bar .primary-menu__wrap {
-        top: 32px; } }
 
 .primary-menu {
   padding-top: 50px;

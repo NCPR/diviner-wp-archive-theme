@@ -5,9 +5,9 @@ namespace Diviner_Archive\Theme;
 use function Tonik\Theme\App\template;
 use function Tonik\Theme\App\asset_path;
 
-use Diviner_Archive\Admin\Customizer;
-use Diviner_Archive\Post_Types\Archive_Item\Archive_Item;
-use Diviner_Archive\Config\General as GeneralConfig;
+use Diviner_Archive\Admin\Diviner_Archive_Customizer;
+use Diviner_Archive\Post_Types\Archive_Item\Diviner_Archive_Archive_Item;
+use Diviner_Archive\Config\Diviner_Archive_General as GeneralConfig;
 
 use function Tonik\Theme\App\config;
 
@@ -18,7 +18,7 @@ use function Tonik\Theme\App\config;
  *
  * @package Diviner_Archive\Theme
  */
-class General {
+class Diviner_Archive_General {
 
 	const FONTS_DEFAULT_HEADER = 'Oswald:400,700';
 	const FONTS_DEFAULT_BODY = 'Source Sans Pro:400,700,400i';
@@ -74,7 +74,7 @@ class General {
 	 * @return void
 	 */
 	function post_navigation() {
-		if ( !is_single() || is_singular( Archive_Item::NAME ) ) {
+		if ( !is_single() || is_singular( Diviner_Archive_Archive_Item::NAME ) ) {
 			return;
 		}
 		$prev = get_previous_post_link(
@@ -251,7 +251,7 @@ class General {
 				$color['slug'],
 				$color['color']
 			);
-		},Swatches::get_colors());
+		},Diviner_Archive_Swatches::get_colors());
 
 		$styles_text = array_map( function( $color ) {
 			return sprintf(
@@ -260,7 +260,7 @@ class General {
 				$color['slug'],
 				$color['color']
 			);
-		},Swatches::get_colors());
+		},Diviner_Archive_Swatches::get_colors());
 
 		$style_tag = sprintf(
 			'<style type="text/css">%s%s</style>',
@@ -344,7 +344,7 @@ class General {
 
 		$args = array(
 			'default-image'      => '',
-			'default-text-color' => substr(Customizer::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT, 1 ),
+			'default-text-color' => substr(Diviner_Archive_Customizer::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT, 1 ),
 			'width'              => 1000,
 			'height'             => 250,
 			'flex-width'         => true,
@@ -353,7 +353,7 @@ class General {
 		add_theme_support( 'custom-header', $args );
 
 		$args = array(
-			'default-color' => substr(Customizer::SECTION_THEME_SETTING_COLOR_BODY_BG_DEFAULT, 1 ),
+			'default-color' => substr(Diviner_Archive_Customizer::SECTION_THEME_SETTING_COLOR_BODY_BG_DEFAULT, 1 ),
 		);
 		add_theme_support( 'custom-background', $args );
 
@@ -388,7 +388,7 @@ class General {
 		 *
 		 * @see https://wordpress.org/gutenberg/handbook/designers-developers/developers/components/color-palette/
 		 */
-		add_theme_support( 'editor-color-palette', Swatches::get_colors() );
+		add_theme_support( 'editor-color-palette', Diviner_Archive_Swatches::get_colors() );
 
 		/**
 		 * Switch default core markup for search forms, comment forms, comment
@@ -495,13 +495,13 @@ class General {
 	 * @return bool
 	 */
 	static public function should_display_cards( ) {
-		if (is_post_type_archive( [ Archive_Item::NAME ] )) {
+		if (is_post_type_archive( [ Diviner_Archive_Archive_Item::NAME ] )) {
 			return true;
 		} else {
 			$is_tax = is_tax();
 			if ($is_tax) {
 				$term = get_queried_object();
-				if ( static::is_taxonomy_in_post_type($term, Archive_Item::NAME) ) {
+				if ( static::is_taxonomy_in_post_type($term, Diviner_Archive_Archive_Item::NAME) ) {
 					return true;
 				} else {
 					return false;
@@ -550,15 +550,15 @@ class General {
 	}
 
 	static public function get_footer_widget_area_1() {
-		return Widgets::get_sidebar(Widgets::SIDEBAR_ID_FOOTER_1);
+		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_FOOTER_1);
 	}
 
 	static public function get_footer_widget_area_2() {
-		return Widgets::get_sidebar(Widgets::SIDEBAR_ID_FOOTER_2);
+		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_FOOTER_2);
 	}
 
 	static public function get_404_widget_area() {
-		return Widgets::get_sidebar(Widgets::SIDEBAR_ID_404);
+		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_404);
 	}
 
 	static public function get_footer_menu() {
@@ -634,9 +634,9 @@ class General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	static function the_social_module () {
-		$social_facebook = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK );
-		$social_instagram = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM );
-		$social_twitter = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER );
+		$social_facebook = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK );
+		$social_instagram = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM );
+		$social_twitter = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER );
 
 		if ( !empty( $social_facebook ) || !empty( $social_instagram ) || !empty( $social_twitter ) ) {
 			$social_links = [];
@@ -676,7 +676,7 @@ class General {
 	 * @return string
 	 */
 	static function the_footer_copy () {
-		$copy = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY );
+		$copy = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY );
 		if ( !empty( $copy ) ) {
 			return sprintf(
 				'<div class="footer__copy d-content"><p>%s</p></div>',
@@ -708,7 +708,7 @@ class General {
 	 * @return string
 	 */
 	static function get_page_title() {
-		$title = new \Diviner_Archive\Theme\Title();
+		$title = new \Diviner_Archive\Theme\Diviner_Archive_Title();
 		return $title->get_title();
 	}
 
@@ -716,8 +716,8 @@ class General {
 	 * Retrieve google fonts
 	 */
 	public function google_fonts() {
-		$header_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
-		$body_font_key = get_theme_mod(Customizer::SECTION_THEME_SETTING_FONT_BODY, static::FONTS_DEFAULT_BODY);
+		$header_font_key = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_SETTING_FONT_HEADER, static::FONTS_DEFAULT_HEADER);
+		$body_font_key = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_SETTING_FONT_BODY, static::FONTS_DEFAULT_BODY);
 		$header_font_key = !empty($header_font_key) ? $header_font_key : static::FONTS_DEFAULT_HEADER;
 		$body_font_key = !empty($body_font_key) ? $body_font_key : static::FONTS_DEFAULT_BODY;
 		wp_enqueue_style( 'diviner-headings-fonts', '//fonts.googleapis.com/css?family='. urlencode($header_font_key) );

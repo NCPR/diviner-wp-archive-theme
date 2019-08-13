@@ -1,19 +1,19 @@
 <?php
 
-use \Diviner_Archive\Theme\Image;
-use \Diviner_Archive\Config\General;
-use \Diviner_Archive\Post_Types\Archive_Item\Archive_Item;
+use \Diviner_Archive\Theme\Diviner_Archive_Image;
+use \Diviner_Archive\Config\Diviner_Archive_General;
+use \Diviner_Archive\Post_Types\Archive_Item\Diviner_Archive_Archive_Item;
 
 // defaults
 $display_excerpt = isset($display_excerpt) ? $display_excerpt : true;
 $display_feature = isset($display_feature) ? $display_feature : true;
 
-$image_size_src = General::IMAGE_SIZE_CARD_SM;
-$image_size_src_set = General::IMAGE_SIZE_CARD_LRG;
+$image_size_src = Diviner_Archive_General::IMAGE_SIZE_CARD_SM;
+$image_size_src_set = Diviner_Archive_General::IMAGE_SIZE_CARD_LRG;
 
-if ( get_post_type() === Archive_Item::NAME ) {
-	$image_size_src = General::IMAGE_SIZE_BROWSE_GRID;
-	$image_size_src_set = General::IMAGE_SIZE_BROWSE_GRID;
+if ( get_post_type() === Diviner_Archive_Archive_Item::NAME ) {
+	$image_size_src = Diviner_Archive_General::IMAGE_SIZE_BROWSE_GRID;
+	$image_size_src_set = Diviner_Archive_General::IMAGE_SIZE_BROWSE_GRID;
 }
 
 $img_classes = [ 'card__feature-image' ];

@@ -9,7 +9,7 @@ namespace Diviner_Archive\Theme;
  *
  * @package Diviner_Archive\Theme
  */
-class Swatches {
+class Diviner_Archive_Swatches {
 
 	/**
 	 * Retrieve colors

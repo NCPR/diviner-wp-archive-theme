@@ -3,14 +3,14 @@
 
 namespace Diviner_Archive\Theme;
 
-use \Diviner_Archive\Admin\Customizer;
+use \Diviner_Archive\Admin\Diviner_Archive_Customizer;
 
 /**
  * Setting up the Browse page at startup
  *
  * @package Diviner_Archive\Admin
  */
-class Search_Page {
+class Diviner_Archive_Search_Page {
 
 	public function hooks() {
 		add_action( 'theme/header/end', [ $this, 'action_header_end' ]);
@@ -21,7 +21,7 @@ class Search_Page {
 	 *
 	 */
 	public function action_header_end() {
-		$searchpage = get_theme_mod(Customizer::SECTION_THEME_SETTING_SEARCH_PAGE );
+		$searchpage = get_theme_mod(Diviner_Archive_Customizer::SECTION_THEME_SETTING_SEARCH_PAGE );
 		if ( !empty( $searchpage ) ) {
 			printf(
 				'<a class="header__menu-search" href="%s"><span class="fas fa-search" aria-hidden="true"></span><div class="a11y-hidden">%s</div></a>',

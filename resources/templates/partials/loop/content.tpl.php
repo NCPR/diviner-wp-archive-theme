@@ -1,7 +1,7 @@
 <?php
 
-use \Diviner_Archive\Theme\Image;
-use \Diviner_Archive\Config\General;
+use \Diviner_Archive\Theme\Diviner_Archive_Image;
+use \Diviner_Archive\Config\Diviner_Archive_General;
 
 ?>
 <article class="loop-item <?php if (is_sticky()) { echo 'loop-item--sticky'; } ?>">
@@ -14,10 +14,10 @@ use \Diviner_Archive\Config\General;
 			<div class="loop-item__feature-image">
 				<a href="<?php the_permalink(); ?>">
 				<?php
-				Image::image(
+				Diviner_Archive_Image::image(
 					get_post_thumbnail_id(),
-					General::IMAGE_SIZE_THUMBNAIL_SM,
-					General::IMAGE_SIZE_THUMBNAIL_LRG,
+					Diviner_Archive_General::IMAGE_SIZE_THUMBNAIL_SM,
+					Diviner_Archive_General::IMAGE_SIZE_THUMBNAIL_LRG,
 					true
 				);
 				?>
