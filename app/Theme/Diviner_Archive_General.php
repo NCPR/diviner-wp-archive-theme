@@ -2,14 +2,14 @@
 
 namespace Diviner_Archive\Theme;
 
-use function Tonik\Theme\App\template;
-use function Tonik\Theme\App\asset_path;
+use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\asset_path;
 
 use Diviner_Archive\Admin\Diviner_Archive_Customizer;
 use Diviner_Archive\Post_Types\Archive_Item\Diviner_Archive_Archive_Item;
 use Diviner_Archive\Config\Diviner_Archive_General as GeneralConfig;
 
-use function Tonik\Theme\App\config;
+use function Diviner_Archive\Helpers\config;
 
 /**
  * Class General

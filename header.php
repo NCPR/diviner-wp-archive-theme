@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\Header;
+namespace Diviner_Archive\Theme\Header;
 
 /*
 |------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Tonik\Theme\Header;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Renders layout's head.

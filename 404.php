@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\NotFound;
+namespace Diviner_Archive\Theme\NotFound;
 
 /*
 |------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Tonik\Theme\NotFound;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 use \Diviner_Archive\Theme\Diviner_Archive_General;
 
 /**
@@ -21,5 +21,5 @@ use \Diviner_Archive\Theme\Diviner_Archive_General;
  * @see resources/templates/index.tpl.php
  */
 template('404', [
-	'widget_area_404' => General::get_404_widget_area()
+	'widget_area_404' => Diviner_Archive_General::get_404_widget_area()
 ]);

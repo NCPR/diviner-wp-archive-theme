@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\App;
+namespace Diviner_Archive\Helpers;
 
 use Tonik\Gin\Asset\Asset;
 use Tonik\Gin\Foundation\Theme;

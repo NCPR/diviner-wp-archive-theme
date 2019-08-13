@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\Single;
+namespace Diviner_Archive\Theme\Single;
 
 /*
 |------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace Tonik\Theme\Single;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Renders single post.

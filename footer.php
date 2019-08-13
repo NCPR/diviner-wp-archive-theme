@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\Footer;
+namespace Diviner_Archive\Theme\Footer;
 
 /*
 |------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Tonik\Theme\Footer;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 use \Diviner_Archive\Theme\Diviner_Archive_General;
 
 /**

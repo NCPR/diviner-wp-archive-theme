@@ -15,7 +15,7 @@ namespace Diviner_Archive\Structure;
 
 // ToDo pull these template calls into classes
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Renders empty post content where there is no posts.

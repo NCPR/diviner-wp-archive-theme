@@ -9,7 +9,7 @@ use \Diviner_Archive\Theme\Diviner_Archive_Search_Page;
 use \Diviner_Archive\Theme\Diviner_Archive_Post_Meta;
 use \Diviner_Archive\Theme\Diviner_Archive_Widgets;
 
-$container = \Tonik\Theme\App\Main::instance()->container();
+$container = \Diviner_Archive\Main::instance()->container();
 
 $container[ 'theme.general' ] = function ( Container $container ) {
 	return new Diviner_Archive_General();

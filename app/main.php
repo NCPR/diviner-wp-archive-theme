@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\App;
+namespace Diviner_Archive;
 
 use Pimple\Container;
 

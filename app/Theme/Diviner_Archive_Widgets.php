@@ -2,7 +2,7 @@
 
 namespace Diviner_Archive\Theme;
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Class Widgets

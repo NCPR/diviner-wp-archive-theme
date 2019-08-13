@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Theme\Index;
+namespace Diviner_Archive\Theme\Index;
 
 /*
 |------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace Tonik\Theme\Index;
 |
 */
 
-use function Tonik\Theme\App\template;
+use function Diviner_Archive\Helpers\template;
 
 /**
  * Renders index page.
