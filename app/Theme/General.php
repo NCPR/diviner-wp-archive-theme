@@ -9,6 +9,7 @@ use Diviner\Admin\Customizer;
 use Diviner\Post_Types\Archive_Item\Archive_Item;
 use Diviner\Config\General as GeneralConfig;
 use Diviner\Theme\Swatches;
+use Diviner\Theme\Widgets;
 
 /**
  * Class General
@@ -120,15 +121,13 @@ class General {
 	 * @return void
 	 */
 	function page_links() {
-		if ( get_post_type() === 'post' ) {
-			echo wp_link_pages( [
-				'before'      => '<div class="page-links"><span class="h5 page-links-title">' . __( 'Pages:', 'diviner-archive' ) . '</span>',
-				'after'       => '</div>',
-				'next_or_number' => 'next',
-				'link_before' => '<span>',
-				'link_after'  => '</span>',
-			] );
-		}
+		wp_link_pages( [
+			'before'      => '<div class="page-links h5"><span class="page-links-title">' . __( 'Pages:', 'diviner-archive' ) . '</span>',
+			'after'       => '</div>',
+			'next_or_number' => 'next',
+			'link_before' => '<span>',
+			'link_after'  => '</span>',
+		] );
 	}
 
 	/**
@@ -535,8 +534,19 @@ class General {
 		]);
 	}
 
+	static public function get_footer_widget_area_1() {
+		return Widgets::get_sidebar(Widgets::SIDEBAR_ID_FOOTER_1);
+	}
 
-	static public function the_footer_menu() {
+	static public function get_footer_widget_area_2() {
+		return Widgets::get_sidebar(Widgets::SIDEBAR_ID_FOOTER_2);
+	}
+
+	static public function get_404_widget_area() {
+		return Widgets::get_sidebar(Widgets::SIDEBAR_ID_404);
+	}
+
+	static public function get_footer_menu() {
 		$menu = wp_nav_menu( [
 			'theme_location' => 'footer',
 			'echo' => false,

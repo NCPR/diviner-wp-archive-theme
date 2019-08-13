@@ -21,7 +21,7 @@ class Search_Page {
 	 *
 	 */
 	public function action_header_end() {
-		$searchpage = get_theme_mod(Customizer::SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE );
+		$searchpage = get_theme_mod(Customizer::SECTION_THEME_SETTING_SEARCH_PAGE );
 		if ( !empty( $searchpage ) ) {
 			printf(
 				'<a class="header__menu-search" href="%s"><span class="fas fa-search" aria-hidden="true"></span><div class="a11y-hidden">%s</div></a>',

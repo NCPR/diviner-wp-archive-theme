@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Search template
+ * Template Name: One Column Search Template with Search Form
  */
 ?>
 <?php

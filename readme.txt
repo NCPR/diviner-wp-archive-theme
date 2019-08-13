@@ -1,8 +1,8 @@
 === Diviner Archive ===
 Contributors: ncpr, graemehoffman
-Requires at least: 5.0
+Requires at least: 4.6
 Tested up to: 5.2
-Requires PHP: 7.0
+Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,10 @@ Read more at [https://ncpr.github.io/diviner-wp-archive-theme/](https://ncpr.git
 = What is customizable in this theme? =
 
 Colors, Fonts, Logo, Header colors, Footer colors, Body color
+
+= What is the menu depth =
+
+2 levels deep for the main navigation. 1 level deep for footer.
 
 == Changelog ==
 

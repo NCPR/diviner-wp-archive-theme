@@ -74,13 +74,7 @@ class Customizer {
 	const CUSTOMIZER_FONT_CLASSNAME_HEADER = 'diviner-costumizer-font-header';
 	const CUSTOMIZER_FONT_CLASSNAME_BODY = 'diviner-costumizer-font-body';
 
-	const SECTION_THEME_CONTENT_SETTING_FOOTER_BODY = 'diviner_setting_content_footer_copy';
-
-	const SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER = 'diviner_setting_content_social_twitter';
-	const SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK = 'diviner_setting_content_social_facebook';
-	const SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM = 'diviner_setting_content_social_instagram';
-
-	const SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE = 'diviner_setting_content_search_page';
+	const SECTION_THEME_SETTING_SEARCH_PAGE = 'diviner_setting_content_search_page';
 
 
 	public function hooks() {
@@ -193,75 +187,7 @@ class Customizer {
 
 
 	public function customize_register( $wp_customize ) {
-		$this->add_customize_section_content( $wp_customize );
 		$this->add_customize_section_display( $wp_customize );
-	}
-
-	/**
-	 * Attach the content customizer section
-	 */
-	public function add_customize_section_content ( $wp_customize ) {
-		// Content Section
-		$wp_customize->add_section( static::SECTION_THEME_CONTENT, array(
-			'title'      => __('Diviner Theme Content','diviner-archive'),
-			'priority'   => 30,
-		) );
-
-		// Footer
-		$wp_customize->add_setting(static::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY, [
-			'default' => '',
-			'sanitize_callback' => 'wp_kses_post'
-		]);
-		$wp_customize->add_control(new RichTextArea($wp_customize, static::SECTION_THEME_CONTENT_SETTING_FOOTER_BODY, [
-			'type' => 'textarea',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __('Footer Copy', 'diviner-archive'),
-			'description' => __('Appears in the footer under the navigation', 'diviner-archive'),
-		]));
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK, array(
-			'default' => '',
-			'sanitize_callback' => 'esc_url_raw'
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_FACEBOOK, array(
-			'type' => 'text',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Facebook Link', 'diviner-archive' ),
-			'description' => __( 'Ex: https://www.facebook.com/nytimes/', 'diviner-archive' ),
-		) );
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER, array(
-			'default' => '',
-			'sanitize_callback' => 'esc_url_raw'
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_TWITTER, array(
-			'type' => 'text',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Twitter Link', 'diviner-archive' ),
-			'description' => __( 'Ex: https://twitter.com/nytimes', 'diviner-archive' ),
-		) );
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM, array(
-			'default' => '',
-			'sanitize_callback' => 'esc_url_raw'
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SOCIAL_INSTAGRAM, array(
-			'type' => 'text',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Instagram Link', 'diviner-archive' ),
-			'description' => __( 'Ex: https://www.instagram.com/nytimes', 'diviner-archive' ),
-		) );
-
-		$wp_customize->add_setting( static::SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE, array(
-			'default' => '',
-			'sanitize_callback' => [ $this, 'sanitize_dropdown_pages' ] ,
-		) );
-		$wp_customize->add_control( static::SECTION_THEME_CONTENT_SETTING_SEARCH_PAGE, array(
-			'type' => 'dropdown-pages',
-			'section' => static::SECTION_THEME_CONTENT,
-			'label' => __( 'Nav Search Page', 'diviner-archive' ),
-			'description' => __( 'Select a page to link the search icon to in the navigation', 'diviner-archive' ),
-		) );
 	}
 
 	function sanitize_dropdown_pages( $page_id, $setting ) {
@@ -366,6 +292,17 @@ class Customizer {
 		);
 
 		$this->fonts_sections($wp_customize);
+
+		$wp_customize->add_setting( static::SECTION_THEME_SETTING_SEARCH_PAGE, array(
+			'default' => '',
+			'sanitize_callback' => [ $this, 'sanitize_dropdown_pages' ] ,
+		) );
+		$wp_customize->add_control( static::SECTION_THEME_SETTING_SEARCH_PAGE, array(
+			'type' => 'dropdown-pages',
+			'section' => static::SECTION_THEME_CUSTOMIZATIONS,
+			'label' => __( 'Nav Search Page', 'diviner-archive' ),
+			'description' => __( 'Select a page to link the search icon to in the navigation', 'diviner-archive' ),
+		) );
 
 	}
 
@@ -519,6 +456,10 @@ class Customizer {
 
 		.main label {
 			font-family: '<?php echo $body_font_value; ?>' !important;
+		}
+
+		.page-links .asdas {
+
 		}
 
 		.d-content h1,

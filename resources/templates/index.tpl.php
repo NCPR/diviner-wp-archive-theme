@@ -23,7 +23,7 @@ use Diviner\Theme\General;
 
 				<?php
 				/**
-				 * Functions hooked into `theme/index/content` action.
+				 * Functions hooked into `theme/index/under-page-title` action.
 				 *
 				 */
 					do_action('theme/index/under-page-title');

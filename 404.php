@@ -13,10 +13,13 @@ namespace Tonik\Theme\NotFound;
 */
 
 use function Tonik\Theme\App\template;
+use \Diviner\Theme\General;
 
 /**
  * Renders 404 page.
  *
  * @see resources/templates/index.tpl.php
  */
-template('404');
+template('404', [
+	'widget_area_404' => General::get_404_widget_area()
+]);

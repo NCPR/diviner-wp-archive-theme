@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Sidebar template
+ * Template Name: One Column with Sidebar Template
  */
 ?>
 <?php
