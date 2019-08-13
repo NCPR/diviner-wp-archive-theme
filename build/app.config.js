@@ -27,7 +27,6 @@ module.exports = merge({
    * @type {Array}
    */
   assets: {
-  	admin:  "./resources/assets/js/admin.js",
 	app:  "./resources/assets/js/app.js"
   },
 

@@ -34,7 +34,7 @@ $row_col2_classes_output = join( ' ', $row_col2_classes);
 
 							<?php if ( $show_col1 ) { ?>
 
-								<div class="<?php echo $row_col1_classes_output; ?>">
+								<div class="<?php echo esc_attr($row_col1_classes_output); ?>">
 
 									<?php echo $footer_menu; ?>
 									<?php echo $footer_widget_area_1; ?>
@@ -45,7 +45,7 @@ $row_col2_classes_output = join( ' ', $row_col2_classes);
 
 							<?php if ( $show_col2 ) { ?>
 
-								<div class="<?php echo $row_col2_classes_output; ?>">
+								<div class="<?php echo esc_attr($row_col2_classes_output); ?>">
 
 									<?php echo $footer_widget_area_2; ?>
 

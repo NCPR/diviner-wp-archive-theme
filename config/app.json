@@ -7,10 +7,6 @@
     "vendor": [
       "./resources/assets/js/vendor.js"
     ],
-    "admin": [
-      "./resources/assets/sass/admin.scss",
-      "./resources/assets/js/admin.js"
-    ],
     "editor-styles": [
       "./resources/assets/sass/editor-styles.scss"
     ],
