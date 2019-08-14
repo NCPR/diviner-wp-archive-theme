@@ -19,11 +19,11 @@ use Diviner_Archive\Config\Diviner_Archive_General;
  *
  * @return void
  */
-function add_image_sizes()
+function diviner_archive_add_image_sizes()
 {
 	foreach ( Diviner_Archive_General::$image_sizes as $key => $attributes ) {
 		add_image_size( $key, $attributes[ 'width' ], $attributes[ 'height' ], $attributes[ 'crop' ] );
 	}
 
 }
-add_action('after_setup_theme', 'Diviner_Archive\Structure\add_image_sizes');
+add_action('after_setup_theme', 'Diviner_Archive\Structure\diviner_archive_add_image_sizes');

@@ -2,7 +2,7 @@
 
 namespace Diviner_Archive\Theme;
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 
 /**
  * Class Widgets
@@ -100,7 +100,7 @@ class Diviner_Archive_Widgets {
 			$id
 		);
 		try {
-			template($path);
+			diviner_archive_template($path);
 		} catch (\Exception $e) {
 			if ( is_active_sidebar( $id ) ) {
 				$sidebar_class = sprintf(

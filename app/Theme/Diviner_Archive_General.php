@@ -2,14 +2,14 @@
 
 namespace Diviner_Archive\Theme;
 
-use function Diviner_Archive\Helpers\template;
-use function Diviner_Archive\Helpers\asset_path;
+use function Diviner_Archive\Helpers\diviner_archive_template;
+use function Diviner_Archive\Helpers\diviner_archive_asset_path;
 
 use Diviner_Archive\Admin\Diviner_Archive_Customizer;
 use Diviner_Archive\Post_Types\Archive_Item\Diviner_Archive_Archive_Item;
 use Diviner_Archive\Config\Diviner_Archive_General as GeneralConfig;
 
-use function Diviner_Archive\Helpers\config;
+use function Diviner_Archive\Helpers\diviner_archive_config;
 
 /**
  * Class General
@@ -183,8 +183,8 @@ class Diviner_Archive_General {
 	 * @return void
 	 */
 	function register_stylesheets() {
-		wp_enqueue_style('diviner-archive-fontawesome', asset_path('css/fontawesome.min.css'));
-		wp_enqueue_style('diviner-archive-app', asset_path('css/app.min.css'));
+		wp_enqueue_style('diviner-archive-fontawesome', diviner_archive_asset_path('css/fontawesome.min.css'));
+		wp_enqueue_style('diviner-archive-app', diviner_archive_asset_path('css/app.min.css'));
 	}
 
 	/**
@@ -199,8 +199,8 @@ class Diviner_Archive_General {
 		}
 
 		$version = static::version();
-		wp_enqueue_script('diviner-archive-vendor', asset_path('js/vendor.min.js'), [], $version, false);
-		wp_enqueue_script('diviner-archive-app', asset_path('js/app.min.js'), ['jquery'], $version, true);
+		wp_enqueue_script('diviner-archive-vendor', diviner_archive_asset_path('js/vendor.min.js'), [], $version, false);
+		wp_enqueue_script('diviner-archive-app', diviner_archive_asset_path('js/app.min.js'), ['jquery'], $version, true);
 	}
 
 	/**
@@ -323,10 +323,10 @@ class Diviner_Archive_General {
 	 * @return void
 	 */
 	function load_textdomain() {
-		$paths       = config( 'paths' );
-		$directories = config( 'directories' );
+		$paths       = diviner_archive_config( 'paths' );
+		$directories = diviner_archive_config( 'directories' );
 
-		load_theme_textdomain( config( 'textdomain' ), "{$paths['directory']}/{$directories['languages']}" );
+		load_theme_textdomain( diviner_archive_config( 'textdomain' ), "{$paths['directory']}/{$directories['languages']}" );
 	}
 
 
@@ -471,7 +471,7 @@ class Diviner_Archive_General {
 	 */
 	function render_header_feature_image() {
 		if ( is_single() || is_page() && has_post_thumbnail() ) {
-			template('partials/subheader/default', []);
+			diviner_archive_template('partials/subheader/default', []);
 		}
 	}
 
@@ -519,9 +519,9 @@ class Diviner_Archive_General {
 	 */
 	function theme_index_content() {
 		if (static::should_display_cards()) {
-			template('partials/loop/card', []);
+			diviner_archive_template('partials/loop/card', []);
 		} else {
-			template('partials/loop/content', []);
+			diviner_archive_template('partials/loop/content', []);
 		}
 	}
 
@@ -531,7 +531,7 @@ class Diviner_Archive_General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	function render_header() {
-		template('partials/header', [
+		diviner_archive_template('partials/header', [
 			'brand' => static::the_header_brand(),
 			'lead'  => get_bloginfo( 'description' ),
 			'primary_menu' => static::the_primary_menu(),
@@ -544,7 +544,7 @@ class Diviner_Archive_General {
 	 * @see resources/templates/index.tpl.php
 	 */
 	function render_footer() {
-		template('layout/footer', [
+		diviner_archive_template('layout/footer', [
 			'footer_menu' => static::the_footer_menu(),
 		]);
 	}

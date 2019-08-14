@@ -12,11 +12,11 @@ namespace Diviner_Archive\Theme\Sidebar;
 |
 */
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 
 /**
  * Renders sidebar.
  *
  * @see resources/templates/partials/sidebar.tpl.php
  */
-template('partials/sidebar');
+diviner_archive_template('partials/sidebar');

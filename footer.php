@@ -12,7 +12,7 @@ namespace Diviner_Archive\Theme\Footer;
 |
 */
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 use \Diviner_Archive\Theme\Diviner_Archive_General;
 
 /**
@@ -20,7 +20,7 @@ use \Diviner_Archive\Theme\Diviner_Archive_General;
  *
  * @see resources/templates/layout/footer.tpl.php
  */
-template('layout/footer', [
+diviner_archive_template('layout/footer', [
 	'footer_menu' => Diviner_Archive_General::get_footer_menu(),
 	'footer_widget_area_1' => Diviner_Archive_General::get_footer_widget_area_1(),
 	'footer_widget_area_2' => Diviner_Archive_General::get_footer_widget_area_2(),

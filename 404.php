@@ -12,7 +12,7 @@ namespace Diviner_Archive\Theme\NotFound;
 |
 */
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 use \Diviner_Archive\Theme\Diviner_Archive_General;
 
 /**
@@ -20,6 +20,6 @@ use \Diviner_Archive\Theme\Diviner_Archive_General;
  *
  * @see resources/templates/index.tpl.php
  */
-template('404', [
+diviner_archive_template('404', [
 	'widget_area_404' => Diviner_Archive_General::get_404_widget_area()
 ]);

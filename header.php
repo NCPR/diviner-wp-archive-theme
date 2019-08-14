@@ -12,11 +12,11 @@ namespace Diviner_Archive\Theme\Header;
 |
 */
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 
 /**
  * Renders layout's head.
  *
  * @see resources/templates/layout/head.tpl.php
  */
-template('layout/head');
+diviner_archive_template('layout/head');

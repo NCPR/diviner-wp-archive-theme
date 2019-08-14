@@ -15,25 +15,25 @@ namespace Diviner_Archive\Structure;
 
 // ToDo pull these template calls into classes
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 
 /**
  * Renders empty post content where there is no posts.
  *
  * @see resources/templates/index.tpl.php
  */
-function render_empty_content()
+function diviner_archive_render_empty_content()
 {
-    template(['partials/index/content', 'none']);
+    diviner_archive_template(['partials/index/content', 'none']);
 }
-add_action('theme/index/content/none', 'Diviner_Archive\Structure\render_empty_content');
+add_action('theme/index/content/none', 'Diviner_Archive\Structure\diviner_archive_render_empty_content');
 
 /**
  * Renders post contents by its formats.
  *
  * @see resources/templates/single.tpl.php
  */
-function render_post_content() {
+function diviner_archive_render_post_content() {
 	if (is_page_template('template-search.php')) {
 		$type = 'search';
 	} else {
@@ -44,18 +44,18 @@ function render_post_content() {
 		$type
 	);
 	try {
-		template([
+		diviner_archive_template([
 			$path,
 			get_post_format()
 		]);
 	} catch (\Exception $ex) {
-		template([
+		diviner_archive_template([
 			'partials/post/content',
 			get_post_format()
 		]);
 	}
 }
-add_action('theme/single/content', 'Diviner_Archive\Structure\render_post_content');
+add_action('theme/single/content', 'Diviner_Archive\Structure\diviner_archive_render_post_content');
 
 /**
  * Renders sidebar content.
@@ -64,9 +64,9 @@ add_action('theme/single/content', 'Diviner_Archive\Structure\render_post_conten
  * @see resources/templates/index.tpl.php
  * @see resources/templates/single.tpl.php
  */
-function render_sidebar()
+function diviner_archive_render_sidebar()
 {
     get_sidebar();
 }
-add_action('theme/index/sidebar', 'Diviner_Archive\Structure\render_sidebar');
-add_action('theme/single/sidebar', 'Diviner_Archive\Structure\render_sidebar');
+add_action('theme/index/sidebar', 'Diviner_Archive\Structure\diviner_archive_render_sidebar');
+add_action('theme/single/sidebar', 'Diviner_Archive\Structure\diviner_archive_render_sidebar');

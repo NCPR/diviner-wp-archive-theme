@@ -4,7 +4,7 @@ namespace Diviner_Archive;
 
 use Pimple\Container;
 
-class Main {
+class Diviner_Archive_Main {
 
 	protected static $_instance;
 
@@ -28,7 +28,7 @@ class Main {
 	/**
 	 * @param null|\ArrayAccess $container
 	 *
-	 * @return Main
+	 * @return Diviner_Archive_Main
 	 * @throws \Exception
 	 */
 	public static function instance() {
