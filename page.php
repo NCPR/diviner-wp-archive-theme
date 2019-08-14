@@ -13,11 +13,11 @@ namespace Diviner_Archive\Theme\Page;
 |
 */
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 
 /**
  * Renders single page.
  *
  * @see resources/templates/single.tpl.php
  */
-template('single');
+diviner_archive_template('single');

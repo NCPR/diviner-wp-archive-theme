@@ -13,11 +13,11 @@ namespace Diviner_Archive\Theme\Index;
 |
 */
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 
 /**
  * Renders index page.
  *
  * @see resources/templates/partials/comments.tpl.php
  */
-template('partials/comments');
+diviner_archive_template('partials/comments');

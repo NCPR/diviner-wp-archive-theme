@@ -71,7 +71,7 @@ return [
 	|
 	*/
 	'autoload'    => [
-		'main.php',
+		'Diviner_Archive_Main.php',
 		'helpers.php',
 		'Admin/Diviner_Archive_General.php',
 		'Admin/Diviner_Archive_Customizer.php',

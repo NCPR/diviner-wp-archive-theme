@@ -7,7 +7,7 @@ use \Diviner_Archive\Admin\Diviner_Archive_General;
 use \Diviner_Archive\Admin\Diviner_Archive_Customizer;
 use \Diviner_Archive\Admin\Diviner_Archive_Editor;
 
-$container = \Diviner_Archive\Main::instance()->container();
+$container = \Diviner_Archive\Diviner_Archive_Main::instance()->container();
 
 $container[ Diviner_Archive_General::PIMPLE_CONTAINER_NAME ] = function ( Container $container ) {
 	return new Diviner_Archive_General();

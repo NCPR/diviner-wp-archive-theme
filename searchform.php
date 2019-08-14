@@ -12,11 +12,11 @@ namespace Diviner_Archive\Theme\Searchform;
 |
 */
 
-use function Diviner_Archive\Helpers\template;
+use function Diviner_Archive\Helpers\diviner_archive_template;
 
 /**
  * Renders search form.
  *
  * @see resources/templates/partials/searchform.tpl.php
  */
-template('partials/searchform');
+diviner_archive_template('partials/searchform');

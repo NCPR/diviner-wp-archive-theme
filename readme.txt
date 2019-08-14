@@ -16,9 +16,10 @@ Main features include
 * Customizable colors (header, footer, links, backgrounds)
 * Customizable fonts
 * Simple mobile experience
-* Footer permissions statement
-* Basic social links in footer
-* Sidebar template
+* 2 footer widget spaces
+* Single column template with optional sidebar widget area
+* Single column 404 page template with search form
+* Full width feature image display
 
 Intended long term to be a companion to the Diviner Archive plugin which provide archiving tools for cultural institutions with small to mid sized archiving needs.
 

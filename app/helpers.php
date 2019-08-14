@@ -14,7 +14,7 @@ use Tonik\Gin\Template\Template;
  *
  * @return \Tonik\Gin\Foundation\Theme
  */
-function theme($key = null, $parameters = [])
+function diviner_archive_theme($key = null, $parameters = [])
 {
     if (null !== $key) {
         return Theme::getInstance()->get($key, $parameters);
@@ -30,13 +30,13 @@ function theme($key = null, $parameters = [])
  *
  * @return array
  */
-function config($key = null)
+function diviner_archive_config($key = null)
 {
     if (null !== $key) {
-        return theme('config')->get($key);
+        return diviner_archive_theme('config')->get($key);
     }
 
-    return theme('config');
+    return diviner_archive_theme('config');
 }
 
 /**
@@ -47,9 +47,9 @@ function config($key = null)
  *
  * @return void
  */
-function template($file, $data = [])
+function diviner_archive_template($file, $data = [])
 {
-    $template = new Template(config());
+    $template = new Template(diviner_archive_config());
 
     return $template
         ->setFile($file)
@@ -63,9 +63,9 @@ function template($file, $data = [])
  *
  * @return \Tonik\Gin\Asset\Asset
  */
-function asset($file)
+function diviner_archive_asset($file)
 {
-    $asset = new Asset(config());
+    $asset = new Asset(diviner_archive_config());
 
     return $asset->setFile($file);
 }
@@ -77,7 +77,7 @@ function asset($file)
  *
  * @return string
  */
-function asset_path($file)
+function diviner_archive_asset_path($file)
 {
-    return asset($file)->getUri();
+    return diviner_archive_asset($file)->getUri();
 }
