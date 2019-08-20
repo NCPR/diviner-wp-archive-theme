@@ -1,8 +1,8 @@
-<?php
+	<?php
 $slides = !empty($slides) ? $slides : '';
 $swiper_data = !empty($swiper_data) ? $swiper_data : '';
 ?>
-<div class="swiper-container" data-js="swiper" data-swiper-data='<?php echo $swiper_data; ?>'>
+<div class="swiper-container" data-js="swiper" data-swiper-data='<?php echo esc_attr($swiper_data); ?>'>
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<?php echo $slides; ?>

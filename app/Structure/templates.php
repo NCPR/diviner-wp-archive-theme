@@ -51,7 +51,7 @@ function diviner_archive_render_post_content() {
 	} catch (\Exception $ex) {
 		diviner_archive_template([
 			'partials/post/content',
-			get_post_format()
+			[]
 		]);
 	}
 }

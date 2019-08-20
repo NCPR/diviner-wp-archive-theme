@@ -5,7 +5,7 @@
             type="text"
             name="s"
             value="<?php the_search_query(); ?>"
-            placeholder="<?php echo __('Searching for...', 'diviner-archive'); ?>"
+            placeholder="<?php echo esc_attr__('Searching for...', 'diviner-archive'); ?>"
         >
     </label>
 

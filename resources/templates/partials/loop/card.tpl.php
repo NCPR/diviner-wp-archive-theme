@@ -29,7 +29,7 @@ $card_classes_output = implode(' ', $card_classes);
 
 ?>
 
-<article class="<?php echo $card_classes_output; ?>">
+<article class="<?php echo esc_attr($card_classes_output); ?>">
 
 	<div class="card__inner">
 

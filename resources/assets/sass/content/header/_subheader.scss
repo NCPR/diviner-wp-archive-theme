@@ -8,9 +8,11 @@
 }
 
 .subheader__image {
+	display: flex;
+	justify-content: center;
+	background-color: $color_grey_darker;
 
 	img {
-		width: 100%;
 	}
 }
 
