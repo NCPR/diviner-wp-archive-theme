@@ -2,7 +2,7 @@
 
 namespace Diviner\Theme;
 
-use Diviner\Config\General;
+use Diviner\Config\General as ConfigGeneral;
 
 /**
  * Class Image
@@ -19,7 +19,7 @@ class Image {
 
 	function custom_responsive_image_sizes($sizes, $size) {
 		// blog posts
-		if ( in_array($size, [ General::IMAGE_SIZE_FEATURE_SM, General::IMAGE_SIZE_FEATURE_MD, General::IMAGE_SIZE_FEATURE_LRG ] ) ) {
+		if ( in_array($size, [ ConfigGeneral::IMAGE_SIZE_FEATURE_SM, ConfigGeneral::IMAGE_SIZE_FEATURE_MD, ConfigGeneral::IMAGE_SIZE_FEATURE_LRG ] ) ) {
 			// default to return if condition is not met
 			return '(max-width: 768px) 800w, (max-width: 1024px) 1200w, 2000w';
 		}
@@ -71,7 +71,7 @@ class Image {
 		$img_sizes = wp_calculate_image_sizes( $image_size_src, $img_src, null, $image_id );
 		$img_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
-		if ( in_array($image_size_src, [ General::IMAGE_SIZE_FEATURE_SM, General::IMAGE_SIZE_FEATURE_MD, General::IMAGE_SIZE_FEATURE_LRG ] ) ) { // if feature image
+		if ( in_array($image_size_src, [ ConfigGeneral::IMAGE_SIZE_FEATURE_SM, ConfigGeneral::IMAGE_SIZE_FEATURE_MD, ConfigGeneral::IMAGE_SIZE_FEATURE_LRG ] ) ) { // if feature image
 			$img_sizes = '(max-width: 768px) 800w, (max-width: 1024px) 1200w, (min-width: 1025px) 2000w';
 		}
 

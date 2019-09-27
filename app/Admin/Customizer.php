@@ -2,7 +2,7 @@
 
 namespace Diviner\Admin;
 
-use Diviner\Theme\General;
+use Diviner\Theme\General as ThemeGeneral;
 
 /**
  * Class Customizer
@@ -78,10 +78,10 @@ class Customizer {
 	}
 
 	public function block_styles() {
-		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::get_font_value_from_key($header_font_key);
-		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::get_font_value_from_key($body_font_key);
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, ThemeGeneral::FONTS_DEFAULT_HEADER);
+		$header_font_value = ThemeGeneral::get_font_value_from_key($header_font_key);
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, ThemeGeneral::FONTS_DEFAULT_BODY);
+		$body_font_value = ThemeGeneral::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 		?>
@@ -145,7 +145,7 @@ class Customizer {
 
 			.editor-styles-wrapper .wp-block-button .wp-block-button__link:hover,
 			.editor-styles-wrapper .wp-block-button .wp-block-button__link:focus {
-				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+				background-color: <?php echo ThemeGeneral::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
 			/* Free form classic styles */
@@ -278,10 +278,10 @@ class Customizer {
 
 	private function fonts_sections( $wp_manager ) {
 
-		$font_choices = General::FONTS;
+		$font_choices = ThemeGeneral::FONTS;
 		$wp_manager->add_setting( static::SECTION_THEME_SETTING_FONT_HEADER, array(
 				'sanitize_callback' => [$this, 'sanitize_fonts'],
-				'default' => General::FONTS_DEFAULT_HEADER,
+				'default' => ThemeGeneral::FONTS_DEFAULT_HEADER,
 				'transport' => 'refresh',
 			)
 		);
@@ -297,7 +297,7 @@ class Customizer {
 
 		$wp_manager->add_setting( static::SECTION_THEME_SETTING_FONT_BODY, array(
 				'sanitize_callback' => [$this, 'sanitize_fonts'],
-				'default' => General::FONTS_DEFAULT_BODY,
+				'default' => ThemeGeneral::FONTS_DEFAULT_BODY,
 				'transport' => 'refresh',
 			)
 		);
@@ -328,19 +328,19 @@ class Customizer {
 	}
 
 	public function sanitize_fonts( $input ) {
-		$valid = General::FONTS;
-		return ( array_key_exists( $input, $valid ) ? $input : General::FONTS_DEFAULT_BODY );
+		$valid = ThemeGeneral::FONTS;
+		return ( array_key_exists( $input, $valid ) ? $input : ThemeGeneral::FONTS_DEFAULT_BODY );
 	}
 
 	static public function get_customize_content_css() {
-		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::get_font_value_from_key($header_font_key);
-		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::get_font_value_from_key($body_font_key);
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, ThemeGeneral::FONTS_DEFAULT_HEADER);
+		$header_font_value = ThemeGeneral::get_font_value_from_key($header_font_key);
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, ThemeGeneral::FONTS_DEFAULT_BODY);
+		$body_font_value = ThemeGeneral::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_accent = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_ACCENT, static::SECTION_THEME_SETTING_COLOR_ACCENT_DEFAULT);
 		$color_header_text = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT, static::SECTION_THEME_SETTING_COLOR_HEADER_TEXT_DEFAULT);
-		$color_header_text_hover = General::is_dark($color_header_text) ? General::luminance( substr($color_header_text, 1), 0.7 ) : General::luminance( substr($color_header_text, 1), -0.7 );
+		$color_header_text_hover = ThemeGeneral::is_dark($color_header_text) ? ThemeGeneral::luminance( substr($color_header_text, 1), 0.7 ) : ThemeGeneral::luminance( substr($color_header_text, 1), -0.7 );
 
 		ob_start();
 		?>
@@ -371,7 +371,7 @@ class Customizer {
 		.main__inner input[type='reset']:focus,
 		.main__inner input[type='submit']:hover,
 		.main__inner input[type='submit']:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+			background-color: <?php echo ThemeGeneral::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
 		}
 
 		.d-content {
@@ -462,7 +462,7 @@ class Customizer {
 
 		.d-content .wp-block-button .wp-block-button__link:hover,
 		.d-content .wp-block-button .wp-block-button__link:focus {
-			background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+			background-color: <?php echo ThemeGeneral::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 		}
 
 		.d-content .wp-block-separator:not(.is-style-dots) {
@@ -497,13 +497,13 @@ class Customizer {
 
 	public function customize_css()
 	{
-		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, General::FONTS_DEFAULT_HEADER);
-		$header_font_value = General::get_font_value_from_key($header_font_key);
-		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, General::FONTS_DEFAULT_BODY);
-		$body_font_value = General::get_font_value_from_key($body_font_key);
+		$header_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_HEADER, ThemeGeneral::FONTS_DEFAULT_HEADER);
+		$header_font_value = ThemeGeneral::get_font_value_from_key($header_font_key);
+		$body_font_key = get_theme_mod(static::SECTION_THEME_SETTING_FONT_BODY, ThemeGeneral::FONTS_DEFAULT_BODY);
+		$body_font_value = ThemeGeneral::get_font_value_from_key($body_font_key);
 		$color_btn_link = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK, static::SECTION_THEME_SETTING_COLOR_BUTTON_LINK_DEFAULT);
 		$color_header_bg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_HEADER, static::SECTION_THEME_SETTING_COLOR_HEADER_DEFAULT );
-		$color_subheader_text_desktop = General::is_dark($color_header_bg) ? $color_header_bg : 'black';
+		$color_subheader_text_desktop = ThemeGeneral::is_dark($color_header_bg) ? $color_header_bg : 'black';
 		$color_footer_bbg = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER, static::SECTION_THEME_SETTING_COLOR_FOOTER_DEFAULT );
 		$color_footer_text = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT, static::SECTION_THEME_SETTING_COLOR_FOOTER_TEXT_DEFAULT);
 		$color_footer_menu = get_theme_mod(static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU, static::SECTION_THEME_SETTING_COLOR_FOOTER_MENU_DEFAULT);
@@ -559,7 +559,7 @@ class Customizer {
 
 			.single-item__navigation a:hover,
 			.single-fitem__navigation a:focus {
-				background-color: <?php echo General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+				background-color: <?php echo ThemeGeneral::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
 			}
 
 			@media screen and (min-width: 960px) {
