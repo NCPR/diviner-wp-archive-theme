@@ -115,13 +115,13 @@ class Diviner_Archive_Widgets {
 					return;
 				}
 				?>
-				<div class="sidebar <?php echo $sidebar_class; ?>">
+				<aside class="sidebar <?php echo esc_attr( $sidebar_class ); ?>">
 					<div class="sidebar__content">
 						<ul class="sidebar__list">
 							<?php echo($output); ?>
 						</ul>
 					</div>
-				</div>
+				</aside>
 			<?php }
 		}
 	}

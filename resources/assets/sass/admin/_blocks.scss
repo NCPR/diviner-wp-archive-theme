@@ -64,10 +64,25 @@ p.wp-block-paragraph.mce-content-body{
 
 }
 
-.editor-styles-wrapper .wp-block-button .wp-block-button__link {
-	@include button(false);
+.editor-styles-wrapper .wp-block-button {
 
-	width: 100%;
+	.wp-block-button__link {
+		@include button(false);
+
+		width: 100%;
+	}
+
+	&.is-style-outline {
+		.wp-block-button__link {
+			border: 2px solid $color_primary;
+		}
+	}
+
+	&.is-style-squared {
+		.wp-block-button__link {
+			border-radius: 0;
+		}
+	}
 }
 
 .editor-styles-wrapper .editor-post-title__block .editor-post-title__input {

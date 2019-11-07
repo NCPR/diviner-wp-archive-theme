@@ -3,7 +3,7 @@
  * @description JavaScript for vendor libs
  */
 
-import swiper from './swiper';
+// import swiper from './swiper';
 
 /**
  * @function init
@@ -12,7 +12,7 @@ import swiper from './swiper';
 
 const vendor = () => {
 
-	swiper();
+	// swiper();
 
 	console.info('Diviner: Initialized vendor scripts.');
 };

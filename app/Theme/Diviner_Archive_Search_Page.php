@@ -26,7 +26,7 @@ class Diviner_Archive_Search_Page {
 			printf(
 				'<a class="header__menu-search" href="%s"><span class="fas fa-search" aria-hidden="true"></span><div class="a11y-hidden">%s</div></a>',
 				get_permalink( $searchpage ),
-				__( 'Search', 'diviner-archive')
+				esc_html__( 'Search', 'diviner-archive')
 			);
 			?>
 			<?php

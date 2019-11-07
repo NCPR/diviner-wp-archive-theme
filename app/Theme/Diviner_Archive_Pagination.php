@@ -109,7 +109,7 @@ class Diviner_Archive_Pagination {
 	public static function get_element( $tag = 'div', $attrs = array(), $content = '' ) {
 		$html = self::get_sc_element( $tag, $attrs );
 
-		$html .= $content;
+		$html .= esc_html($content);
 
 		$html .= "</$tag>";
 

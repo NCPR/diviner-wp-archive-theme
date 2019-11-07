@@ -42,6 +42,25 @@
 	}
 }
 
+@mixin button-outline ($withStates: true) {
+	background-color: transparent;
+	border: 2px solid $color_primary;
+	color: $color_primary;
+
+	@if $withStates {
+		&:visited {
+			color: $color_primary;
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: transparent;
+			color: $color_secondary;
+			border-color: $color_secondary;
+		}
+	}
+}
+
 @mixin button-small {
 	@include  button;
 
