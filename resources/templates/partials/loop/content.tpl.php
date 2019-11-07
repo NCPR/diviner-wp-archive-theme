@@ -29,7 +29,9 @@ use \Diviner_Archive\Config\Diviner_Archive_General;
 
 		<div class="loop-item__content">
 			<a href="<?php the_permalink(); ?>">
-				<h2 class="loop-item__title h3"><?php the_title(); ?></h2>
+				<h2 class="loop-item__title h3">
+					<?php the_title(); ?>
+				</h2>
 			</a>
 			<?php if (get_post_type() === 'post') { ?>
 			<div class="loop-item__meta">

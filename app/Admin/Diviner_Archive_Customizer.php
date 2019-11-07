@@ -96,7 +96,7 @@ class Diviner_Archive_Customizer {
 		?>
 		<style type="text/css">
 			.edit-post-visual-editor.editor-styles-wrapper {
-				font-family: '<?php echo $body_font_value; ?>';
+				font-family: '<?php echo esc_attr( $body_font_value ); ?>';
 			}
 
 			.editor-post-title__block .editor-post-title__input,
@@ -105,12 +105,12 @@ class Diviner_Archive_Customizer {
 			.editor-post-title h3,
 			.editor-post-title h4,
 			.editor-post-title h5 {
-				font-family: '<?php echo $header_font_value; ?>' !important;
+				font-family: '<?php echo esc_attr( $header_font_value ); ?>' !important;
 			}
 
 			.editor-rich-text,
 			.editor-rich-text p {
-				font-family: '<?php echo $body_font_value; ?>' !important;
+				font-family: '<?php echo esc_attr( $body_font_value ); ?>' !important;
 			}
 
 			.editor-styles-wrapper .editor-block-list__block h1.block-editor-rich-text__editable,
@@ -119,55 +119,68 @@ class Diviner_Archive_Customizer {
 			.editor-styles-wrapper .editor-block-list__block h4.block-editor-rich-text__editable,
 			.editor-styles-wrapper .editor-block-list__block h5.block-editor-rich-text__editable,
 			.editor-styles-wrapper .editor-block-list__block h6.block-editor-rich-text__editable {
-				font-family: '<?php echo $header_font_value; ?>' !important;
+				font-family: '<?php echo esc_attr( $header_font_value ); ?>' !important;
 			}
 
 			.editor-styles-wrapper .wp-block-cover .block-editor-rich-text__editable {
-				font-family: '<?php echo $header_font_value; ?>' !important;
+				font-family: '<?php echo esc_attr( $header_font_value ); ?>' !important;
 			}
 
 			.editor-styles-wrapper .wp-block-separator:not(.is-style-dots) {
-				background-color: <?php echo $color_accent; ?> !important;
-				border-bottom-color: <?php echo $color_accent; ?> !important;
+				background-color: <?php echo esc_attr( $color_accent ); ?> !important;
+				border-bottom-color: <?php echo esc_attr( $color_accent ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {
-				background: <?php echo $color_accent; ?> !important;
+				background: <?php echo esc_attr( $color_accent ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-separator.is-style-dots:before {
-				color: <?php echo $color_accent; ?> !important;
+				color: <?php echo esc_attr( $color_accent ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-quote:not(.is-large):not(.is-style-large) {
-				border-left-color: <?php echo $color_accent; ?> !important;
+				border-left-color: <?php echo esc_attr( $color_accent ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-pullquote {
-				border-top-color: <?php echo $color_accent; ?> !important;
-				border-bottom-color: <?php echo $color_accent; ?> !important;
+				border-top-color: <?php echo esc_attr( $color_accent ); ?> !important;
+				border-bottom-color: <?php echo esc_attr( $color_accent ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-button .wp-block-button__link {
-				background: <?php echo $color_btn_link; ?> !important;
+				background: <?php echo esc_attr( $color_btn_link ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-button .wp-block-button__link:hover,
 			.editor-styles-wrapper .wp-block-button .wp-block-button__link:focus {
-				background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+				background-color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ) ); ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
+				background: transparent !important;
+				color: <?php echo esc_attr( $color_btn_link ); ?> !important;
+				border-color: <?php echo esc_attr( $color_btn_link ); ?> !important;
+			}
+
+			.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link:hover,
+			.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link:focus {
+				background: transparent !important;
+				color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ) ); ?> !important;
+				border-color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ) ); ?> !important;
 			}
 
 			/* Free form classic styles */
 			.editor-styles-wrapper .wp-block-freeform blockquote {
-				border-left-color: <?php echo $color_accent; ?> !important;
+				border-left-color: <?php echo esc_attr( $color_accent ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-freeform .btn {
-				background: <?php echo $color_btn_link; ?> !important;
+				background: <?php echo esc_attr( $color_btn_link ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-freeform hr {
-				background: <?php echo $color_accent; ?> !important;
+				background: <?php echo esc_attr( $color_accent ); ?> !important;
 			}
 
 			.editor-styles-wrapper .wp-block-freeform h1,
@@ -176,7 +189,7 @@ class Diviner_Archive_Customizer {
 			.editor-styles-wrapper .wp-block-freeform h4,
 			.editor-styles-wrapper .wp-block-freeform h5,
 			.editor-styles-wrapper .wp-block-freeform h6 {
-				font-family: '<?php echo $header_font_value; ?>' !important;
+				font-family: '<?php echo esc_attr( $header_font_value ); ?>' !important;
 			}
 
 
@@ -383,7 +396,7 @@ class Diviner_Archive_Customizer {
 		.main input,
 		.main select,
 		.main textarea {
-			font-family: '<?php echo $body_font_value; ?>';
+			font-family: '<?php echo esc_attr( $body_font_value ); ?>';
 		}
 
 		.main__inner button,
@@ -391,7 +404,7 @@ class Diviner_Archive_Customizer {
 		.main__inner input[type='button'],
 		.main__inner input[type='reset'],
 		.main__inner input[type='submit'] {
-			background-color: <?php echo $color_btn_link; ?>;
+			background-color: <?php echo esc_attr( $color_btn_link ); ?>;
 		}
 
 		.main__inner button:hover,
@@ -404,62 +417,58 @@ class Diviner_Archive_Customizer {
 		.main__inner input[type='reset']:focus,
 		.main__inner input[type='submit']:hover,
 		.main__inner input[type='submit']:focus {
-			background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?>;
+			background-color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr( $color_btn_link, 1), -0.2 ) ); ?>;
 		}
 
 		.edit-link a {
-			background-color: <?php echo $color_btn_link; ?> !important;
+			background-color: <?php echo esc_attr( $color_btn_link ); ?> !important;
 		}
 
 		.edit-link a:hover,
 		.edit-link a:focus {
-			background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+			background-color: <?php echo esc_attr(Diviner_Archive_General::luminance( substr( $color_btn_link, 1), -0.2 ) ); ?> !important;
 		}
 
 
 		.d-content {
-			font-family: '<?php echo $body_font_value; ?>';
+			font-family: '<?php echo esc_attr( $body_font_value ); ?>';
 		}
 		.<?php echo Diviner_Archive_Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER; ?> {
-			font-family: '<?php echo $header_font_value; ?>' !important;
+			font-family: '<?php echo esc_attr( $header_font_value ); ?>' !important;
 		}
 		.<?php echo Diviner_Archive_Customizer::CUSTOMIZER_FONT_CLASSNAME_BODY; ?> {
-			font-family: '<?php echo $body_font_value; ?>' !important;
+			font-family: '<?php echo esc_attr( $body_font_value ); ?>' !important;
 		}
 		.header__title a,
 		.header__title a:visited {
-			color: <?php echo $color_header_text ?>;
+			color: <?php echo esc_attr( $color_header_text ); ?>;
 		}
 
 		.header__title a:hover,
 		.header__title a:focus,
 		.header__title a:active {
-			color: <?php echo $color_header_text_hover ?>;
+			color: <?php echo esc_attr( $color_header_text_hover ); ?>;
 		}
 		.header__lead {
-			color: <?php echo $color_header_text ?>;
+			color: <?php echo esc_attr( $color_header_text ); ?>;
 		}
 
 		.main__inner a {
-			color: <?php echo $color_btn_link; ?>;
+			color: <?php echo esc_attr( $color_btn_link ); ?>;
 		}
 
 		input:focus,
 		textarea:focus,
 		select:focus {
-			border-color: <?php echo $color_btn_link; ?> !important;
+			border-color: <?php echo esc_attr( $color_btn_link ); ?> !important;
 		}
 
 		.react-select-container .react-select__control.react-select__control--is-focused {
-			border-color: <?php echo $color_btn_link; ?> !important;
+			border-color: <?php echo esc_attr( $color_btn_link ); ?> !important;
 		}
 
 		.main label {
-			font-family: '<?php echo $body_font_value; ?>' !important;
-		}
-
-		.page-links .asdas {
-
+			font-family: '<?php echo esc_attr( $body_font_value ); ?>' !important;
 		}
 
 		.d-content h1,
@@ -474,67 +483,83 @@ class Diviner_Archive_Customizer {
 		.h5,
 		.d-content h6,
 		.h6 {
-			font-family: '<?php echo $header_font_value; ?>' !important;
+			font-family: '<?php echo esc_attr( $header_font_value ); ?>' !important;
 		}
 
 		.d-content th,
 		.th {
-			font-family: '<?php echo $header_font_value; ?>' !important;
+			font-family: '<?php echo esc_attr( $header_font_value ); ?>' !important;
 		}
 
 		.d-content blockquote {
-			border-left-color: <?php echo $color_accent; ?>;
+			border-left-color: <?php echo esc_attr( $color_accent ); ?>;
 		}
 
 		.d-content blockquote p {
-			font-family: '<?php echo $body_font_value; ?>';
+			font-family: '<?php echo esc_attr( $body_font_value ); ?>';
 		}
 
 		.d-content hr:not(.is-style-dots) {
-			background-color: <?php echo $color_accent; ?> !important;
+			background-color: <?php echo esc_attr( $color_accent ); ?> !important;
 		}
 
 		.footer {
-			font-family: '<?php echo $body_font_value; ?>';
+			font-family: '<?php echo esc_attr( $body_font_value ); ?>';
 		}
 		/* Blocks */
 		.d-content .wp-block-cover .wp-block-cover-text {
-			font-family: '<?php echo $header_font_value; ?>';
+			font-family: '<?php echo esc_attr( $header_font_value ); ?>';
 		}
 
 		.d-content .wp-block-button__link,
 		.d-content .wp-block-button .wp-block-button__link {
-			background-color: <?php echo $color_btn_link; ?> !important;
+			background-color: <?php echo esc_attr( $color_btn_link ); ?> !important;
 		}
 
 		.d-content .wp-block-button .wp-block-button__link:hover,
-		.d-content .wp-block-button .wp-block-button__link:focus {
-			background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+		.d-content .wp-block-button .wp-block-button__link:focus,
+		.d-content .wp-block-button .wp-block-button__link:active {
+			background-color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ) ); ?> !important;
+		}
+
+		.d-content .is-style-outline .wp-block-button__link,
+		.d-content .is-style-outline .wp-block-button .wp-block-button__link {
+			background-color: transparent !important;
+			border-color: <?php echo esc_attr( $color_btn_link ); ?> !important;
+			color: <?php echo esc_attr( $color_btn_link ); ?> !important;
+		}
+
+		.d-content .wp-block-button.is-style-outline .wp-block-button__link:hover,
+		.d-content .wp-block-button.is-style-outline .wp-block-button__link:focus,
+		.d-content .wp-block-button.is-style-outline .wp-block-button__link:active {
+			background-color: transparent !important;
+			border-color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ) ); ?> !important;
+			color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ) ); ?> !important;wp-block-bu
 		}
 
 		.d-content .wp-block-separator:not(.is-style-dots) {
-			background-color: <?php echo $color_accent; ?> !important;
+			background-color: <?php echo esc_attr( $color_accent ); ?> !important;
 		}
 
 		.d-content .wp-block-separator.is-style-dots:before {
-			color: <?php echo $color_accent; ?> !important;
+			color: <?php echo esc_attr( $color_accent ); ?> !important;
 		}
 
 		.d-content .wp-block-separator:not(.is-style-wide):not(.is-style-dots)::before {
-			background: <?php echo $color_accent; ?> !important;
+			background: <?php echo esc_attr( $color_accent ); ?> !important;
 		}
 
 		.d-content .wp-block-quote:not(.is-style-solid-color) {
-			border-left-color: <?php echo $color_accent; ?> !important;
+			border-left-color: <?php echo esc_attr( $color_accent ); ?> !important;
 		}
 
 		.d-content .wp-block-pullquote blockquote {
-			border-top-color: <?php echo $color_accent; ?> !important;
-			border-bottom-color: <?php echo $color_accent; ?> !important;
+			border-top-color: <?php echo esc_attr( $color_accent ); ?> !important;
+			border-bottom-color: <?php echo esc_attr( $color_accent ); ?> !important;
 		}
 
 		.d-content .wp-block-freeform blockquote {
-			border-left-color: <?php echo $color_accent; ?> !important;
+			border-left-color: <?php echo esc_attr( $color_accent ); ?> !important;
 		}
 
 		<?php
@@ -563,61 +588,64 @@ class Diviner_Archive_Customizer {
 		?>
 		<style type="text/css">
 			body .header {
-				background-color: <?php echo $color_header_bg; ?>;
+				background-color: <?php echo esc_attr( $color_header_bg ); ?>;
 				background-size: cover;
 				background-repeat: no-repeat;
 				background-position-x: 50%;
 				background-position-y: 50%;
 				<?php
 				if (!empty($header_bg_image)) {
-					printf('background-image: url(%s);', $header_bg_image);
+					printf(
+							'background-image: url(%s);',
+							esc_attr( $header_bg_image )
+							);
 				}
 				?>
 			}
 
 			.header__menu-trigger span {
-				color: <?php echo $color_navigation; ?> !important;
+				color: <?php echo esc_attr( $color_navigation ); ?> !important;
 			}
 
 			.header__menu-trigger:hover span,
 			.header__menu-trigger:focus span {
-				color: <?php echo $color_navigation_hover; ?> !important;
+				color: <?php echo esc_attr( $color_navigation_hover ); ?> !important;
 			}
 
 			.header__title {
-				font-family: "<?php echo $header_font_value; ?>" !important;
+				font-family: "<?php echo esc_attr( $header_font_value ); ?>" !important;
 			}
 
 			.header__menu-search span {
-				color: <?php echo $color_navigation ?> !important;
+				color: <?php echo esc_attr( $color_navigation ); ?> !important;
 			}
 
 			.header__menu-search:hover span,
 			.header__menu-search:focus span {
-				color: <?php echo $color_navigation_hover ?> !important;
+				color: <?php echo esc_attr( $color_navigation_hover ); ?> !important;
 			}
 
 			.primary-menu__wrap {
-				background-color: <?php echo $color_header_bg; ?>;
+				background-color: <?php echo esc_attr( $color_header_bg ); ?>;
 			}
 
 			.primary-menu .menu a,
 			.primary-menu .menu a:visited {
-				color: <?php echo $color_navigation ?>;
+				color: <?php echo esc_attr( $color_navigation ); ?>;
 			}
 
 			.primary-menu .menu a:hover,
 			.primary-menu .menu a:focus {
-				color: <?php echo $color_navigation_hover ?> !important;
+				color: <?php echo esc_attr( $color_navigation_hover ); ?> !important;
 			}
 
 			.single-item__navigation a {
-				background-color: <?php echo $color_btn_link; ?> !important;
+				background-color: <?php echo esc_attr( $color_btn_link ); ?> !important;
 			}
 
 			.single-item__navigation a:hover,
 			.single-fitem__navigation a:focus {
-				background-color: <?php echo Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ); ?> !important;
+				background-color: <?php echo esc_attr( Diviner_Archive_General::luminance( substr($color_btn_link, 1), -0.2 ) ); ?> !important;
 			}
 
 			@media screen and (min-width: 960px) {
@@ -627,12 +655,12 @@ class Diviner_Archive_Customizer {
 
 				.primary-menu .menu a,
 				.primary-menu .menu a:visited {
-					color: <?php echo $color_navigation ?>;
+					color: <?php echo esc_attr( $color_navigation ); ?>;
 					background-color: transparent;
 				}
 				.primary-menu .menu a:focus,
 				.primary-menu .menu a:hover {
-					color: <?php echo $color_navigation_hover ?>;
+					color: <?php echo esc_attr( $color_navigation_hover ); ?>;
 					background-color: transparent;
 				}
 
@@ -640,53 +668,53 @@ class Diviner_Archive_Customizer {
 				.primary-menu .menu .children a:visited,
 				.primary-menu .menu .sub-menu a,
 				.primary-menu .menu .sub-menu a:visited {
-					color: <?php echo $color_subheader_text_desktop; ?>;
+					color: <?php echo esc_attr( $color_subheader_text_desktop ); ?>;
 				}
 
 				.primary-menu .menu .children a:focus,
 				.primary-menu .menu .children a:hover,
 				.primary-menu .menu .sub-menu a:focus,
 				.primary-menu .menu .sub-menu a:hover {
-					color: <?php echo $color_subheader_text_desktop; ?> !important;
+					color: <?php echo esc_attr( $color_subheader_text_desktop ); ?> !important;
 					text-decoration: underline;
 				}
 			}
 
 			body .footer {
-				color: <?php echo $color_footer_text; ?>;
-				background-color: <?php echo $color_footer_bbg; ?>;
+				color: <?php echo esc_attr( $color_footer_text ); ?>;
+				background-color: <?php echo esc_attr( $color_footer_bbg ); ?>;
 			}
 
 			body .footer p {
-				color: <?php echo $color_footer_text; ?>;
+				color: <?php echo esc_attr( $color_footer_text ); ?>;
 			}
 
 			body .footer a {
-				color: <?php echo $color_footer_menu; ?>;
+				color: <?php echo esc_attr( $color_footer_menu ); ?>;
 			}
 
 			body .footer a:hover,
 			body .footer a:focus {
-				color: <?php echo $color_footer_menu_hover; ?>;
+				color: <?php echo esc_attr( $color_footer_menu_hover ); ?>;
 			}
 
 			.footer .menu a {
-				font-family: "<?php echo $header_font_value; ?>" !important;
-				color: <?php echo $color_footer_menu; ?>;
+				font-family: "<?php echo esc_attr( $header_font_value ); ?>" !important;
+				color: <?php echo esc_attr( $color_footer_menu ); ?>;
 			}
 
 			.footer .menu a,
 			.footer a.social-links_link {
-				color: <?php echo $color_footer_menu; ?>;
-				border-color: <?php echo $color_footer_menu; ?>;
+				color: <?php echo esc_attr( $color_footer_menu ); ?>;
+				border-color: <?php echo esc_attr( $color_footer_menu ); ?>;
 			}
 
 			.footer .menu a:hover,
 			.footer .menu a:focus,
 			.footer a.social-links_link:hover,
 			.footer a.social-links_link:focus {
-				color: <?php echo $color_footer_menu_hover; ?>;
-				border-color: <?php echo $color_footer_menu_hover; ?>;
+				color: <?php echo esc_attr( $color_footer_menu_hover ); ?>;
+				border-color: <?php echo esc_attr( $color_footer_menu_hover ); ?>;
 			}
 
 			.single-item__header .h1,
@@ -695,15 +723,15 @@ class Diviner_Archive_Customizer {
 			.single-item__header .h4,
 			.single-item__header .h5,
 			.single-item__header .h6 {
-				font-family: "<?php echo $header_font_value; ?>";
+				font-family: "<?php echo esc_attr( $header_font_value ); ?>";
 			}
 
 			.primary-menu a {
-				font-family: "<?php echo $header_font_value; ?>" !important;
+				font-family: "<?php echo esc_attr( $header_font_value ); ?>" !important;
 			}
 
 			.footer {
-				font-family: "<?php echo $body_font_value; ?>";
+				font-family: "<?php echo esc_attr( $body_font_value ); ?>";
 			}
 
 			.browse-app h1,
@@ -712,7 +740,7 @@ class Diviner_Archive_Customizer {
 			.browse-app h4,
 			.browse-app h5,
 			.browse-app h6 {
-				font-family: "<?php echo $header_font_value; ?>";
+				font-family: "<?php echo esc_attr( $header_font_value ); ?>";
 			}
 			<?php // get d-content specific
 			echo static::get_customize_content_css(); ?>

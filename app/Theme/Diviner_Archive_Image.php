@@ -106,7 +106,7 @@ class Diviner_Archive_Image {
 			if (isset($size)) {
 				return sprintf(
 					'url(%s)',
-					$size
+					esc_url( $size )
 				);
 			}
 			return null;

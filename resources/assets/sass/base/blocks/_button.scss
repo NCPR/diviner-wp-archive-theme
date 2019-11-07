@@ -5,4 +5,17 @@
 	.wp-block-button__link {
 		@include button;
 	}
+
+	/* Case outline */
+	&.is-style-outline {
+		.wp-block-button__link {
+			@include button-outline;
+		}
+	}
+
+	&.is-style-squared {
+		.wp-block-button__link {
+			border-radius: 0;
+		}
+	}
 }

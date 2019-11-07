@@ -2,14 +2,16 @@
 
 	<?php echo $brand; ?>
 
-	<p class="header__lead"><?php echo $lead; ?></p>
+	<p class="header__lead">
+		<?php echo esc_html( $lead ); ?>
+	</p>
 
 	<?php echo $primary_menu; ?>
 
 	<button class="header__menu-trigger" data-js="header__menu-trigger">
 		<span class="fas fa-bars" aria-hidden="true"></span>
 		<div class="a11y-hidden">
-			<?php echo __( 'Toggle Menu', 'diviner-archive'); ?>
+			<?php echo esc_html__( 'Toggle Menu', 'diviner-archive'); ?>
 		</div>
 	</button>
 

@@ -29,7 +29,7 @@ $card_classes_output = implode(' ', $card_classes);
 
 ?>
 
-<article class="<?php echo esc_attr($card_classes_output); ?>">
+<article class="<?php echo esc_attr( $card_classes_output ); ?>">
 
 	<div class="card__inner">
 
@@ -37,7 +37,7 @@ $card_classes_output = implode(' ', $card_classes);
 		if ( $display_feature ) {
 		?>
 			<a href="<?php the_permalink(); ?>" class="card__feature-image-anchor" title="<?php esc_attr(get_the_title()); ?>">
-			<div class="<?php echo $img_classes_output; ?>">
+			<div class="<?php echo esc_attr( $img_classes_output ); ?>">
 				<?php
 				Image::image(
 					get_post_thumbnail_id(),

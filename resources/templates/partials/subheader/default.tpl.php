@@ -32,7 +32,7 @@ $has_caption = !empty($caption);
 	</div>
 	<?php if ( $has_caption ) { ?>
 		<div class="subheader__image-caption wrapper">
-			<?php echo $caption; ?>
+			<?php echo esc_html( $caption ); ?>
 		</div>
 	<?php } ?>
 </div>

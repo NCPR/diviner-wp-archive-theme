@@ -99,7 +99,7 @@ class Diviner_Archive_General {
 		?>
 		<div class="single-item__navigation">
 			<div class="a11y-visual-hide">
-				<?php echo __( 'Article Navigation', 'diviner-archive' ); ?>
+				<?php echo esc_html__( 'Article Navigation', 'diviner-archive' ); ?>
 			</div>
 			<?php if ( !empty( $prev ) ) { ?>
 				<div class="single-item__navigation-btn single-item__navigation-btn--prev">
@@ -122,7 +122,7 @@ class Diviner_Archive_General {
 	 */
 	function page_links() {
 		wp_link_pages( [
-			'before'      => '<div class="page-links h5"><span class="page-links-title">' . __( 'Pages:', 'diviner-archive' ) . '</span>',
+			'before'      => '<div class="page-links h5"><span class="page-links-title">' . esc_html__( 'Pages:', 'diviner-archive' ) . '</span>',
 			'after'       => '</div>',
 			'next_or_number' => 'next',
 			'link_before' => '<span>',
@@ -248,17 +248,17 @@ class Diviner_Archive_General {
 		$styles_background = array_map( function( $color ) {
 			return sprintf(
 				'.has-%s-background-color { background-color: %s !important; }',
-				$color['slug'],
-				$color['color']
+				esc_attr( $color['slug'] ),
+				esc_attr( $color['color'] )
 			);
 		},Diviner_Archive_Swatches::get_colors());
 
 		$styles_text = array_map( function( $color ) {
 			return sprintf(
 				'.has-%s-color, .has-%s-color p { color: %s !important; }',
-				$color['slug'],
-				$color['slug'],
-				$color['color']
+				esc_attr( $color['slug'] ),
+				esc_attr( $color['slug'] ),
+				esc_attr( $color['color'] )
 			);
 		},Diviner_Archive_Swatches::get_colors());
 
@@ -572,7 +572,7 @@ class Diviner_Archive_General {
 		}
 		return sprintf(
 			'<div class="footer-menu__wrap"><nav class="footer-menu"><div class="a11y-visual-hide">%s</div>%s</nav></div>',
-			__( 'Footer Navigation', 'diviner-archive'),
+			esc_html__( 'Footer Navigation', 'diviner-archive'),
 			$menu
 		);
 	}
@@ -584,8 +584,8 @@ class Diviner_Archive_General {
 	static public function the_primary_menu() {
 		return sprintf(
 			'<div class="primary-menu__wrap" data-js="primary-menu__wrap"><nav class="primary-menu"><button class="primary-menu__close" data-js="primary-menu__close"><span class="fa fa-times" aria-hidden="true"></span><span class="a11y-visual-hide">%s</span></button><div class="a11y-visual-hide">%s</div>%s</nav></div>',
-			__( 'Close Navigation', 'diviner-archive'),
-			__( 'Primary Navigation', 'diviner-archive'),
+			esc_html__( 'Close Navigation', 'diviner-archive'),
+			esc_html__( 'Primary Navigation', 'diviner-archive'),
 			wp_nav_menu( [
 				'theme_location' => 'primary',
 				'echo' => false,
@@ -615,13 +615,13 @@ class Diviner_Archive_General {
 				$size_class,
 				get_home_url(),
 				esc_url( $logo[0] ),
-				get_bloginfo( 'name' )
+				esc_attr( get_bloginfo( 'name' ) )
 			);
 		} else {
 			$brand = sprintf(
 				'<div class="header__title"><a href="%s" class="header__title-link">%s</a></div>',
 				get_home_url(),
-				get_bloginfo( 'name' )
+				esc_attr( get_bloginfo( 'name' ) )
 			);
 		}
 		return $brand;
@@ -643,22 +643,22 @@ class Diviner_Archive_General {
 			if ( !empty( $social_facebook ) ) {
 				$social_links[] = sprintf(
 					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-facebook-f"></span></a></li>',
-					esc_attr( $social_facebook ),
-					__( 'Facebook Link', 'diviner-archive' )
+					esc_url( $social_facebook ),
+					esc_html__( 'Facebook Link', 'diviner-archive' )
 				);
 			}
 			if ( !empty( $social_instagram ) ) {
 				$social_links[] = sprintf(
 					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-instagram"></span></a></li>',
-					esc_attr( $social_instagram ),
-					__( 'Instagram Link', 'diviner-archive' )
+					esc_url( $social_instagram ),
+					esc_html__( 'Instagram Link', 'diviner-archive' )
 				);
 			}
 			if ( !empty( $social_twitter ) ) {
 				$social_links[] = sprintf(
 					'<li class="social-links_item"><a href="%s" class="social-links_link"><div class="a11y-visual-hide">%s</div><span class="fab fa-twitter"></span></a></li>',
-					esc_attr( $social_twitter ),
-					__( 'Twitter Link', 'diviner-archive' )
+					esc_url( $social_twitter ),
+					esc_html__( 'Twitter Link', 'diviner-archive' )
 				);
 			}
 			return sprintf(
@@ -680,7 +680,7 @@ class Diviner_Archive_General {
 		if ( !empty( $copy ) ) {
 			return sprintf(
 				'<div class="footer__copy d-content"><p>%s</p></div>',
-				$copy
+				esc_html( $copy )
 			);
 		}
 		return '';
