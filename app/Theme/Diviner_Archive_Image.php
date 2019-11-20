@@ -16,19 +16,18 @@ class Diviner_Archive_Image {
 	public function hooks() {
 	}
 
-
 	/**
-	 * Get the markup for an image
+	 * Print the markup for an image
 	 * using srcset and sizes
 	 *
 	 * @param int        $image
 	 * @param string     $image_size_src
 	 * @param string     $image_size_srcset
+	 * @param bool       $is_lazy
 	 * @param array      $image_classes
-	 *
-	 * @return string
 	 */
-	public static function get_image( $image, $image_size_src, $image_size_srcset, $is_lazy = false, $image_classes = [] ) {
+	public static function image( $image, $image_size_src, $image_size_srcset = null, $is_lazy = false, $image_classes = [] ) {
+
 		if ( ! wp_attachment_is_image( $image ) ) {
 			return false;
 		}
@@ -52,50 +51,34 @@ class Diviner_Archive_Image {
 		}
 
 		if ( $is_lazy ) {
-			return sprintf(
+			printf(
 				'<img data-src="%s" data-srcset="%s" data-sizes="%s" alt="%s" class="%s">',
 				esc_attr( $img_src ),
 				esc_attr( $img_srcset ),
 				esc_attr( $img_sizes ),
 				esc_attr( $img_alt ),
-				implode(" ",$image_classes)
+				esc_attr( implode(" ",$image_classes) )
+			);
+		} else {
+			printf(
+				'<img src="%s" srcset="%s" sizes="%s" alt="%s" class="%s">',
+				esc_attr( $img_src ),
+				esc_attr( $img_srcset ),
+				esc_attr( $img_sizes ),
+				esc_attr( $img_alt ),
+				esc_attr( implode(" ",$image_classes) )
 			);
 		}
-
-		return sprintf(
-			'<img src="%s" srcset="%s" sizes="%s" alt="%s" class="%s">',
-			esc_attr( $img_src ),
-			esc_attr( $img_srcset ),
-			esc_attr( $img_sizes ),
-			esc_attr( $img_alt ),
-			implode(" ",$image_classes)
-		);
 	}
 
 	/**
-	 * Print the markup for an image
+	 * Print the markup for an image bg
 	 * using srcset and sizes
 	 *
 	 * @param int        $image
-	 * @param string     $image_size_src
-	 * @param string     $image_size_srcset
-	 * @param bool       $is_lazy
-	 * @param array      $image_classes
-	 */
-	public static function image( $image, $image_size_src, $image_size_srcset, $is_lazy = false, $image_classes = [] ) {
-		echo static::get_image( $image, $image_size_src, $image_size_srcset, $is_lazy, $image_classes );
-	}
-
-	/**
-	 * Get the markup for a bg image
-	 * using srcset and sizes (https://github.com/verlok/lazyload)
-	 *
-	 * @param int        $image
 	 * @param array      $image_sizes
-	 *
-	 * @return string
 	 */
-	public static function get_image_bg( $image, $image_sizes ) {
+	public static function image_bg( $image, $image_sizes ) {
 		if ( ! wp_attachment_is_image( $image ) ) {
 			return false;
 		}
@@ -113,22 +96,11 @@ class Diviner_Archive_Image {
 		}, $image_sizes));
 
 		$img_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
-		return sprintf(
+		printf(
 			'<div data-bg="%s" aria-label="%s" class="lazyload" role="img" ></div>',
 			esc_attr( implode( ', ', $sizes ) ),
 			esc_attr( $img_alt )
 		);
-	}
-
-	/**
-	 * Print the markup for an image bg
-	 * using srcset and sizes
-	 *
-	 * @param int        $image
-	 * @param array      $image_sizes
-	 */
-	public static function image_bg( $image, $image_sizes ) {
-		echo static::get_image_bg( $image, $image_sizes );
 	}
 
 }

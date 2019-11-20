@@ -20,6 +20,4 @@ use \Diviner_Archive\Theme\Diviner_Archive_General;
  *
  * @see resources/templates/index.tpl.php
  */
-diviner_archive_template('404', [
-	'widget_area_404' => Diviner_Archive_General::get_404_widget_area()
-]);
+diviner_archive_template('404' );
