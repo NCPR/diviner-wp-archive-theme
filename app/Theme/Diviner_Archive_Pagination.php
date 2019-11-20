@@ -18,8 +18,46 @@ class Diviner_Archive_Pagination {
 	 *
 	 * @param array|string $args
 	 */
-	public static function pagination( $args = '' ) {
-		echo static::get_pagination( $args );
+	public static function pagination( $args = array() ) {
+		$pagination_items = array_filter( self::get_pagination_arr( $args ), function ( $item ) {
+			return false !== $item['text'];
+		});
+
+		if ( empty( $pagination_items ) ) {
+			return '';
+		}
+
+		ob_start();
+		?>
+
+		<nav class="pagination">
+			<ul class="pagination__list">
+				<?php foreach ( $pagination_items as $item ) : ?>
+
+					<li class="pagination__list-item">
+						<?php
+						$classes = 'pagination__item btn';
+						if ( 'page' !== $item['type'] ) {
+							$classes .= " pagination__item--{$item['type']}";
+						}
+
+						$tag = 'span';
+						$attrs = array( 'class' => $classes );
+						if ( false !== $item['link'] && '#' !== $item['link'] ) {
+							$tag = 'a';
+							$attrs['href'] = $item['link'];
+						}
+
+						self::output_element( $tag, $attrs, $item['text'] );
+						?>
+					</li>
+
+				<?php endforeach; ?>
+			</ul>
+		</nav>
+
+		<?php
+		return ob_get_clean();
 	}
 
 
@@ -62,7 +100,7 @@ class Diviner_Archive_Pagination {
 							$attrs['href'] = $item['link'];
 						}
 
-						echo self::get_element( $tag, $attrs, $item['text'] );
+						self::output_element( $tag, $attrs, $item['text'] );
 						?>
 					</li>
 
@@ -84,19 +122,23 @@ class Diviner_Archive_Pagination {
 	 *
 	 * @return string
 	 */
-	public static function get_sc_element( $tag = 'img', $attrs = array() ) {
-		$html = "<$tag";
+	public static function output_sc_element( $tag = 'img', $attrs = array() ) {
+		printf (
+				'<%s',
+			esc_attr( $tag )
+		);
 		foreach ( (array) $attrs as $attr => $value ) {
-			$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
-			$html .= " $attr=\"$value\"";
+			printf (
+				' %s=%s',
+				esc_attr( $attr ),
+				( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value )
+			);
 		}
-		$html .= '>';
-
-		return $html;
+		printf('>' );
 	}
 
 	/**
-	 * Returns an HTML
+	 * Outputs an HTML
 	 * element constructed
 	 * by php
 	 *
@@ -106,8 +148,9 @@ class Diviner_Archive_Pagination {
 	 *
 	 * @return string
 	 */
-	public static function get_element( $tag = 'div', $attrs = array(), $content = '' ) {
-		$html = self::get_sc_element( $tag, $attrs );
+	public static function output_element( $tag = 'div', $attrs = array(), $content = '' ) {
+
+		$html = self::output_sc_element( $tag, $attrs );
 
 		$html .= esc_html($content);
 

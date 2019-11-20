@@ -36,7 +36,8 @@ $theme = Tonik\Gin\Foundation\Theme::getInstance();
  |
  */
 
-$config = require __DIR__ . '/../config/theme-app.php';
+// phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
+$config = require get_template_directory() . '/config/theme-app.php';
 
 $theme->bind('config', function () use ($config) {
     return new Tonik\Gin\Foundation\Config($config);

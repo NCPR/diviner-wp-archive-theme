@@ -48,7 +48,9 @@ class Diviner_Archive_Editor {
 	 * Visual Editor Custom Styles
 	 */
 	function add_editor_customizer_styles( $mceInit ) {
-		$styles = Diviner_Archive_Customizer::get_customize_content_css();
+		ob_start();
+		Diviner_Archive_Customizer::output_customize_content_css();
+		$styles = ob_get_clean();
 		$styles = str_replace(PHP_EOL, '', trim($styles));
 		if ( !isset( $mceInit['content_style'] ) ) {
 			$mceInit['content_style'] = $styles . ' ';

@@ -77,6 +77,7 @@ class Diviner_Archive_General {
 		if ( !is_single() || is_singular( Diviner_Archive_Archive_Item::NAME ) ) {
 			return;
 		}
+		// Theme sniffer requires us to use both get_previous_post_link and previous_post_link or else there's an escaping issue
 		$prev = get_previous_post_link(
 				'%link',
 			sprintf(
@@ -103,12 +104,24 @@ class Diviner_Archive_General {
 			</div>
 			<?php if ( !empty( $prev ) ) { ?>
 				<div class="single-item__navigation-btn single-item__navigation-btn--prev">
-					<?php echo $prev; ?>
+					<?php previous_post_link(
+						'%link',
+						sprintf(
+							'<span class="fa fa-arrow-left" aria-hidden="true"></span> %s',
+							'%title'
+						)
+					); ?>
 				</div>
 			<?php } ?>
 			<?php if ( !empty( $next ) ) { ?>
 				<div class="single-item__navigation-btn single-item__navigation-btn--next">
-					<?php echo $next; ?>
+					<?php next_post_link(
+						'%link',
+						sprintf(
+							'%s <span class="fa fa-arrow-right" aria-hidden="true"></span>',
+							'%title'
+						)
+					); ?>
 				</div>
 			<?php } ?>
 		</div> <!-- end navigation -->
@@ -240,38 +253,23 @@ class Diviner_Archive_General {
 	}
 
 	/**
-	 * Output dynamic color swatches
+	 * Outputs the color swtach styles
 	 *
-	 * @return string   Style tags for block bg colors
 	 */
-	function get_color_swatch_styles() {
-		$styles_background = array_map( function( $color ) {
-			return sprintf(
-				'.has-%s-background-color { background-color: %s !important; }',
-				esc_attr( $color['slug'] ),
-				esc_attr( $color['color'] )
-			);
-		},Diviner_Archive_Swatches::get_colors());
-
-		$styles_text = array_map( function( $color ) {
-			return sprintf(
-				'.has-%s-color, .has-%s-color p { color: %s !important; }',
-				esc_attr( $color['slug'] ),
-				esc_attr( $color['slug'] ),
-				esc_attr( $color['color'] )
-			);
-		},Diviner_Archive_Swatches::get_colors());
-
-		$style_tag = sprintf(
-			'<style type="text/css">%s%s</style>',
-			implode("", $styles_background),
-			implode("", $styles_text)
-		);
-		return $style_tag;
-	}
-
 	function output_color_swatch_styles() {
-		echo $this->get_color_swatch_styles();
+		?>
+		<style type="text/css">
+			<?php
+			foreach ( Diviner_Archive_Swatches::get_colors() as $color ) {
+				?>
+					/* background colors */
+					.has-<?php esc_attr( $color['slug'] ); ?>-background-color { background-color: <?php esc_attr( $color['color'] ); ?> !important; }
+					/* text colors */
+					.has-<?php esc_attr( $color['slug'] ); ?>-color, .has-<?php esc_attr( $color['slug'] ); ?>-color p { color: <?php esc_attr( $color['color'] ); ?> !important; }
+				<?php
+		} ?>
+		</style>
+		<?php
 	}
 
 	/**
@@ -532,48 +530,22 @@ class Diviner_Archive_General {
 	 */
 	function render_header() {
 		diviner_archive_template('partials/header', [
-			'brand' => static::the_header_brand(),
 			'lead'  => get_bloginfo( 'description' ),
-			'primary_menu' => static::the_primary_menu(),
 		]);
 	}
 
-	/**
-	 * Renders index page footer.
-	 *
-	 * @see resources/templates/index.tpl.php
-	 */
-	function render_footer() {
-		diviner_archive_template('layout/footer', [
-			'footer_menu' => static::the_footer_menu(),
-		]);
-	}
-
-	static public function get_footer_widget_area_1() {
-		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_FOOTER_1);
-	}
-
-	static public function get_footer_widget_area_2() {
-		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_FOOTER_2);
-	}
-
-	static public function get_404_widget_area() {
-		return Diviner_Archive_Widgets::get_sidebar(Diviner_Archive_Widgets::SIDEBAR_ID_404);
-	}
-
-	static public function get_footer_menu() {
-		$menu = wp_nav_menu( [
-			'theme_location' => 'footer',
-			'echo' => false,
-			'depth' => 1
-		] );
-		if ( empty( $menu ) ) {
-			return '';
+	static public function output_footer_menu() {
+		if ( !has_nav_menu( 'footer' ) ) {
+			return;
 		}
-		return sprintf(
+		printf(
 			'<div class="footer-menu__wrap"><nav class="footer-menu"><div class="a11y-visual-hide">%s</div>%s</nav></div>',
 			esc_html__( 'Footer Navigation', 'diviner-archive'),
-			$menu
+			wp_nav_menu( [
+				'theme_location' => 'footer',
+				'echo' => false,
+				'depth' => 1
+			] )
 		);
 	}
 
@@ -582,7 +554,7 @@ class Diviner_Archive_General {
 	 *
 	 */
 	static public function the_primary_menu() {
-		return sprintf(
+		printf(
 			'<div class="primary-menu__wrap" data-js="primary-menu__wrap"><nav class="primary-menu"><button class="primary-menu__close" data-js="primary-menu__close"><span class="fa fa-times" aria-hidden="true"></span><span class="a11y-visual-hide">%s</span></button><div class="a11y-visual-hide">%s</div>%s</nav></div>',
 			esc_html__( 'Close Navigation', 'diviner-archive'),
 			esc_html__( 'Primary Navigation', 'diviner-archive'),
@@ -595,9 +567,8 @@ class Diviner_Archive_General {
 	}
 
 	/**
-	 * Gets the header brand
+	 * renders the header brand
 	 *
-	 * @return string
 	 */
 	static public function the_header_brand() {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -610,21 +581,20 @@ class Diviner_Archive_General {
 			$size_class = 'header__logo--portrait';
 		}
 		if ( has_custom_logo() ) {
-			$brand = sprintf(
+			printf(
 				'<div class="header__logo %s"><a href="%s" class="header__logo-link"><img src="%s" title="%s" class="header__logo-img"></a></div>',
-				$size_class,
-				get_home_url(),
+				esc_attr( $size_class ),
+				esc_url( get_home_url() ),
 				esc_url( $logo[0] ),
 				esc_attr( get_bloginfo( 'name' ) )
 			);
 		} else {
-			$brand = sprintf(
+			printf(
 				'<div class="header__title"><a href="%s" class="header__title-link">%s</a></div>',
-				get_home_url(),
+				esc_url( get_home_url() ),
 				esc_attr( get_bloginfo( 'name' ) )
 			);
 		}
-		return $brand;
 	}
 
 	/**
@@ -707,7 +677,7 @@ class Diviner_Archive_General {
 	 *
 	 * @return string
 	 */
-	static function get_page_title() {
+	static function output_page_title() {
 		$title = new \Diviner_Archive\Theme\Diviner_Archive_Title();
 		return $title->get_title();
 	}

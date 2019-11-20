@@ -68,7 +68,7 @@ class Diviner_Archive_Widgets {
 			'id'           => static::SIDEBAR_ID_404,
 			'name'         => __('404 Widget Area', 'diviner-archive'),
 			'description'  => __('Add widgets to the 404 widget area. If empty, nothing appears', 'diviner-archive'),
-			'before_title' => '<div class="a11y-hidden">',
+			'before_title' => '<div class="h3">',
 			'after_title' => '</div>',
 		]);
 
@@ -86,7 +86,7 @@ class Diviner_Archive_Widgets {
 		}
 	}
 
-	static public function get_sidebar($id) {
+	static public function get_sidebar( $id ) {
 		ob_start();
 		static::render_sidebar($id);
 		$output = ob_get_contents();
@@ -94,7 +94,11 @@ class Diviner_Archive_Widgets {
 		return $output;
 	}
 
-	static function render_sidebar($id) {
+	/**
+	 * Renders sidebar
+	 *
+	 */
+	static function render_sidebar( $id ) {
 		$path = sprintf(
 			'partials/sidebar--$s',
 			$id
@@ -107,18 +111,11 @@ class Diviner_Archive_Widgets {
 					'sidebar--%s',
 					esc_attr( $id )
 				);
-				ob_start();
-				dynamic_sidebar( $id );
-				$output = ob_get_contents();
-				ob_end_clean();
-				if (empty($output)) {
-					return;
-				}
 				?>
 				<aside class="sidebar <?php echo esc_attr( $sidebar_class ); ?>">
 					<div class="sidebar__content">
 						<ul class="sidebar__list">
-							<?php echo($output); ?>
+							<?php dynamic_sidebar( $id ); ?>
 						</ul>
 					</div>
 				</aside>

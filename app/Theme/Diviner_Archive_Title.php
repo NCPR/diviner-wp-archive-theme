@@ -35,11 +35,7 @@ class Diviner_Archive_Title {
 		elseif ( is_search() ) {
 			global $wp_query;
 			/* translators: 1: Search term 2: Search returns count */
-			return sprintf(
-				__( 'Your search for <strong>%1$s</strong> returned <strong>%2$d</strong> results', 'diviner-archive' ),
-				esc_attr( get_search_query() ),
-				$wp_query->found_posts
-			);
+			return sprintf(__( 'Your search for <strong>%1$s</strong> returned <strong>%2$d</strong> results', 'diviner-archive' ), esc_attr( get_search_query() ), $wp_query->found_posts );
 		}
 
 		// 404
