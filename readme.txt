@@ -6,7 +6,7 @@ Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Donate link: https://ncpr.org/
+Donate link: https://www.northcountrypublicradio.org/
 
 A wordpress theme with clean modern look and feel and a handful of customization options.
 
