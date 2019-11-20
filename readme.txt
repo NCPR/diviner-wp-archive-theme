@@ -6,6 +6,7 @@ Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://www.northcountrypublicradio.org/
 
 A wordpress theme with clean modern look and feel and a handful of customization options.
 
@@ -78,6 +79,9 @@ Source: https://github.com/aFarkas/lazysizes
 Swiper is licensed under the MIT license. Copyright (c) 2014 Vladimir Kharlampidi
 Source: https://github.com/nolimits4web/swiper
 
+== Screenshots ==
+
+1. Example Page with feature image. Photo by Nicole Y-C on Unsplash
 
 == Frequently Asked Questions ==
 
@@ -91,12 +95,12 @@ Colors, Fonts, Logo, Header colors, Footer colors, Body color
 
 == Changelog ==
 
-= 0.5 =
+= 0.5.8 =
 * Initial release
 
 == Upgrade Notice ==
 
-= 0.5 =
+= 0.5.8 =
 * Initial release. Please install.
 
 == Resources ==

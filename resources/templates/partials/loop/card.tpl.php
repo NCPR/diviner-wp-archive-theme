@@ -61,6 +61,7 @@ $card_classes_output = implode(' ', $card_classes);
 		<?php if ( $display_excerpt ) {
 			printf(
 				'<div class="card__excerpt d-content"><p>%s</p></div>',
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				get_the_excerpt()
 			);
 		} ?>

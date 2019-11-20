@@ -1,12 +1,17 @@
+<?php
+
+use \Diviner_Archive\Theme\Diviner_Archive_General;
+
+?>
 <header class="header" data-js="header">
 
-	<?php echo $brand; ?>
+	<?php Diviner_Archive_General::the_header_brand(); ?>
 
 	<p class="header__lead">
 		<?php echo esc_html( $lead ); ?>
 	</p>
 
-	<?php echo $primary_menu; ?>
+	<?php Diviner_Archive_General::the_primary_menu(); ?>
 
 	<button class="header__menu-trigger" data-js="header__menu-trigger">
 		<span class="fas fa-bars" aria-hidden="true"></span>

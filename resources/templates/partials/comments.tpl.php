@@ -27,11 +27,20 @@ if ( post_password_required() ) {
 			<?php
 			$comments_number = get_comments_number();
 			if ( '1' === $comments_number ) {
-				/* translators: %s: post title */
-				printf( _x( 'One Reply to &ldquo;%s&rdquo;', 'comments title', 'diviner-archive' ), get_the_title() );
+				printf(
+					/* translators: %s: post title */
+					esc_html_x(
+						'One Reply to &ldquo;%s&rdquo;',
+						'comments title',
+						'diviner-archive'
+					),
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					get_the_title()
+				);
 			} else {
 				printf(
 					/* translators: 1: number of comments, 2: post title */
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.I18n.MissingTranslatorsComment
 					_nx(
 						'%1$s Reply to &ldquo;%2$s&rdquo;',
 						'%1$s Replies to &ldquo;%2$s&rdquo;',
@@ -39,7 +48,9 @@ if ( post_password_required() ) {
 						'comments title',
 						'diviner-archive'
 					),
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					number_format_i18n( $comments_number ),
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					get_the_title()
 				);
 			}
@@ -74,7 +85,7 @@ if ( post_password_required() ) {
 	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 		?>
 
-		<p class="comments__none"><?php _e( 'Comments are closed.', 'diviner-archive' ); ?></p>
+		<p class="comments__none"><?php esc_html_e( 'Comments are closed.', 'diviner-archive' ); ?></p>
 		<?php
 	endif;
 
