@@ -23,11 +23,10 @@ class Diviner_Archive_Pagination {
 			return false !== $item['text'];
 		});
 
-		if ( empty( $pagination_items ) ) {
+		if ( empty( $pagination_items ) || count( $pagination_items ) === 0 ) {
 			return '';
 		}
 
-		ob_start();
 		?>
 
 		<nav class="pagination">
@@ -57,7 +56,6 @@ class Diviner_Archive_Pagination {
 		</nav>
 
 		<?php
-		return ob_get_clean();
 	}
 
 
@@ -125,11 +123,11 @@ class Diviner_Archive_Pagination {
 	public static function output_sc_element( $tag = 'img', $attrs = array() ) {
 		printf (
 				'<%s',
-			esc_attr( $tag )
+			$tag
 		);
 		foreach ( (array) $attrs as $attr => $value ) {
 			printf (
-				' %s=%s',
+				' %s="%s"',
 				esc_attr( $attr ),
 				( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value )
 			);
@@ -156,7 +154,7 @@ class Diviner_Archive_Pagination {
 
 		$html .= "</$tag>";
 
-		return $html;
+		echo $html;
 	}
 
 
