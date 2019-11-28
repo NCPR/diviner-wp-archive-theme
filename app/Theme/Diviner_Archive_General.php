@@ -679,7 +679,7 @@ class Diviner_Archive_General {
 	 */
 	static function output_page_title() {
 		$title = new \Diviner_Archive\Theme\Diviner_Archive_Title();
-		return $title->get_title();
+		echo $title->get_title();
 	}
 
 	/**

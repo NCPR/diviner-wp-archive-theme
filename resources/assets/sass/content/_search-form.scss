@@ -1,0 +1,8 @@
+
+.search-form-container {
+	margin: $d_spacer_xsm 0;
+
+	@include g-state(medium) {
+		margin: $d_spacer_lrg 0;
+	}
+}

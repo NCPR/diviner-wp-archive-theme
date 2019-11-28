@@ -31,6 +31,16 @@ use Diviner_Archive\Theme\Diviner_Archive_General;
 
 				<?php if (have_posts()) : ?>
 
+					<?php if ( is_search() ) {
+						?>
+						<div class="search-form-container">
+							<?php
+							get_search_form();
+							?>
+						</div>
+						<?php
+					} ?>
+
 					<div class="loop__posts">
 						<?php while (have_posts()) : the_post() ?>
 							<?php
