@@ -18,7 +18,7 @@ use Diviner_Archive\Theme\Diviner_Archive_General;
 			<div class="<?php echo esc_attr( Diviner_Archive_General::get_loop_classes() ); ?>">
 
 				<h1 class="h1 <?php echo esc_attr( Diviner_Archive_Customizer::CUSTOMIZER_FONT_CLASSNAME_HEADER ); ?>">
-					<?php Diviner_Archive_General::output_page_title(); ?>
+					<?php esc_html( Diviner_Archive_General::get_page_title() ); ?>
 				</h1>
 
 				<?php

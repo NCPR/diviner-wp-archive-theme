@@ -677,9 +677,9 @@ class Diviner_Archive_General {
 	 *
 	 * @return string
 	 */
-	static function output_page_title() {
+	static function get_page_title() {
 		$title = new \Diviner_Archive\Theme\Diviner_Archive_Title();
-		echo $title->get_title();
+		return $title->get_title();
 	}
 
 	/**

@@ -121,10 +121,7 @@ class Diviner_Archive_Pagination {
 	 * @return string
 	 */
 	public static function output_sc_element( $tag = 'img', $attrs = array() ) {
-		printf (
-				'<%s',
-			$tag
-		);
+		printf ( '<%s', esc_attr( $tag ) );
 		foreach ( (array) $attrs as $attr => $value ) {
 			printf (
 				' %s="%s"',
@@ -152,7 +149,7 @@ class Diviner_Archive_Pagination {
 
 		$html .= esc_html($content);
 
-		$html .= "</$tag>";
+		$html .= sprintf('</%s>', esc_attr( $tag ) );
 
 		echo $html;
 	}
