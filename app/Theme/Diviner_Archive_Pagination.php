@@ -151,6 +151,8 @@ class Diviner_Archive_Pagination {
 
 		$html .= sprintf('</%s>', esc_attr( $tag ) );
 
+		// Already escaped above
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $html;
 	}
 
