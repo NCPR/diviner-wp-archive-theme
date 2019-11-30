@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-11-30T06:21:50+01:00\n"
+"POT-Creation-Date: 2019-11-30T06:30:13+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: diviner-archive\n"
@@ -154,17 +154,17 @@ msgstr ""
 msgid "Twitter Link"
 msgstr ""
 
-#: app/Theme/Diviner_Archive_Pagination.php:260
+#: app/Theme/Diviner_Archive_Pagination.php:262
 #: resources/templates/partials/comments.tpl.php:77
 msgid "Previous"
 msgstr ""
 
-#: app/Theme/Diviner_Archive_Pagination.php:261
+#: app/Theme/Diviner_Archive_Pagination.php:263
 #: resources/templates/partials/comments.tpl.php:78
 msgid "Next"
 msgstr ""
 
-#: app/Theme/Diviner_Archive_Pagination.php:262
+#: app/Theme/Diviner_Archive_Pagination.php:264
 msgid "&hellip;"
 msgstr ""
 
