@@ -48,6 +48,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 Diviner Archive WordPress Theme is derived from Tonik Starter WordPress Theme, Copyright 2019 Tonik Labs.
 
+Theme screen shot includes photo from PXHere.com which is under CC0 Public Domain (https://pxhere.com/en/photo/1176210)
+
 Diviner Archive WordPress Theme bundles the following third-party resources:
 
 # Font Awesome Free is free, open source, and GPL friendly. You can use it for
@@ -159,7 +161,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 == Screenshots ==
 
-1. Example Page with feature image. CC0 Public Domain https://pxhere.com/en/photo/1176210
+1. Example Page with feature image.
 
 == Frequently Asked Questions ==
 
