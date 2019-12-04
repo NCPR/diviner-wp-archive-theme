@@ -3,7 +3,7 @@ Contributors: ncpr, graemehoffman
 Requires at least: 4.6
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: trunk
+Stable tag: 0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.northcountrypublicradio.org/
@@ -47,8 +47,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 Diviner Archive WordPress Theme is derived from Tonik Starter WordPress Theme, Copyright 2019 Tonik Labs.
-
-Theme screen shot includes photo from PXHere.com which is under CC0 Public Domain (https://pxhere.com/en/photo/1176210)
 
 Diviner Archive WordPress Theme bundles the following third-party resources:
 
@@ -161,7 +159,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 == Screenshots ==
 
-1. Example Page with feature image.
+1. https://pxhere.com/en/photo/1176210 (http://creativecommons.org/publicdomain/zero/1.0 - CCO)
 
 == Frequently Asked Questions ==
 
@@ -175,12 +173,12 @@ Colors, Fonts, Logo, Header colors, Footer colors, Body color
 
 == Changelog ==
 
-= 0.5.9 =
+= 0.6 =
 * Initial release
 
 == Upgrade Notice ==
 
-= 0.5.9 =
+= 0.6 =
 * Initial release. Please install.
 
 == Resources ==
