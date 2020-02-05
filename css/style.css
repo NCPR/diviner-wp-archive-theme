@@ -63,14 +63,18 @@ a.logo-ncpr {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-color: transparent;
-  background-image: url(../img/NCPRlogo.png);
+  background-image: url(../img/ncpr_new.png);
   text-indent: -9999px;
   overflow: hidden;
-  width: 80px;
-  height: 80px;
+  width: 200px;
+  height: 105px;
   display: block;
 }
 
 .blog-post {
   margin-bottom: 3em;
+}
+
+.navbar-brand__logo {
+  width: 80px;
 }

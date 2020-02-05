@@ -50,9 +50,10 @@ Materials  Do you have a project with more the 100 individual pieces of media (p
       <header class="blog-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="/diviner-wp-archive-theme">
-            <i class="fas fa-star"></i>
+            <img class="navbar-brand__logo" src="../img/logo.png" />
             Diviner
         </a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -76,12 +77,6 @@ Materials  Do you have a project with more the 100 individual pieces of media (p
                 <li class="nav-item ">
                     
                         <a class="nav-link" href="/diviner-wp-archive-theme/documentation">Documentation</a>
-                    
-                </li>
-                
-                <li class="nav-item ">
-                    
-                        <a class="nav-link" href="/diviner-wp-archive-theme/question-answer">Question &amp; Answer</a>
                     
                 </li>
                 
@@ -159,7 +154,7 @@ Materials  Do you have a project with more the 100 individual pieces of media (p
 
 <h3 id="potential-use-cases">Potential Use Cases</h3>
 
-<p><strong>Museums, historical associations, or libraries</strong> who have digitized either their whole collection, or subsets of their collection, and wish to make those digital files (photos, photos of objects, documents, videos) available to the public</p>
+<p><strong>Museums, historical associations, or libraries</strong> who have digitized either their whole collection, or subsets of their collection, and wish to make those digital files (photos, photos of objects, documents, videos) available to the public. <strong>DIVINER</strong> may be considered a simpler Wordpress friendly alternative to Omeka.</p>
 
 <p><strong>Humanities Organizations</strong> who wish to share special projects for which they have amassed a large amount of materials</p>
 
@@ -178,15 +173,43 @@ Materials  Do you have a project with more the 100 individual pieces of media (p
 <p><br />
 </p>
 
-<h3 id="tech-overview">Tech overview</h3>
+<h3 id="technology-ecosystem">Technology Ecosystem</h3>
 
-<p><strong>Diviner Admin</strong></p>
+<p>Currently <strong>Diviner</strong> is comprised of two active projects, a Wordpress plugin and a Wordpress theme.</p>
 
-<p><img src="../img/DivinerAdmin.svg" alt="alt_text" title="image_tooltip" /></p>
+<p><strong>Wordpress Diviner Archive Plugin</strong></p>
 
-<p><strong>Diviner End User</strong></p>
+<p><a href="https://wordpress.org/plugins/diviner-archive/">https://wordpress.org/plugins/diviner-archive/</a></p>
 
-<p><img src="../img/DivinerEndUser.svg" alt="alt_text" title="image_tooltip" /></p>
+<p>The plugin includes all the functionality necessary for building out an archive with multifacet search. The plugin created a archive item custom post type and adds an administrative tool to the Wordpress backend for managing your fields. It also allows you to drop in a shortcde (<code>[diviner_browse_page]</code>) for outputting the real time browse experience. This plugin may be used with any theme.</p>
+
+<p><br />
+</p>
+
+<p><strong>Wordpress Diviner Archive Theme</strong></p>
+
+<p><a href="https://wordpress.org/themes/diviner-archive/">https://wordpress.org/themes/diviner-archive/</a></p>
+
+<p>The responsive theme has several widget areas, two templates, and customizations options for fonts and colors. It works well with the diviner archive plugin or on its own.</p>
+
+<p><br />
+<br />
+Prior to the release of these two active projects available on wordpress.org, a standalone theme was developed to include all the functionality of the above plugin. With features like pre-poluating of browse and home pages, custom blocks, and a widget for displaying select archive items, this theme was a turnkey solution for anyone looking to start an archive project. This standalone theme only exists as tagged releases from github and may not be updated much in the future.</p>
+
+<p><a href="https://github.com/NCPR/diviner-wp-archive-theme/releases/tag/1.0.2">https://github.com/NCPR/diviner-wp-archive-theme/releases/tag/1.0.2</a></p>
+
+<p><br />
+</p>
+
+<h3 id="in-the-wild">In the Wild</h3>
+
+<p>Here&rsquo;s an incomplete list of projects already using Diviner.</p>
+
+<ol>
+<li>Miner Institute: <a href="http://whminerarchives.org/diviner-browse/">http://whminerarchives.org/diviner-browse/</a></li>
+<li>North Country At Work: <a href="https://northcountryatwork.org">https://northcountryatwork.org</a></li>
+<li>Clinton County Historical Association: <a href="http://photos.clintoncountyhistorical.org/diviner-browse/">http://photos.clintoncountyhistorical.org/diviner-browse/</a></li>
+</ol>
 
 
     
@@ -235,8 +258,7 @@ Materials  Do you have a project with more the 100 individual pieces of media (p
         <div class="row">
             <div class="col-md-6">
                 <nav class="text-white my-4">
-                    <p class="w-100">NCPR Copyright 2018</p>
-                    <p class="w-100"><a href="#">Back to top</a></p>
+                    <p class="w-100">NCPR Copyright 2020</p>
                 </nav>
             </div>
 

@@ -4557,7 +4557,7 @@ button.bg-primary:focus {
 	background-color: #072139 !important; }
 
 .bg-secondary {
-	background-color: #d9534f !important; }
+	background-color: #283666 !important; }
 
 a.bg-secondary:hover, a.bg-secondary:focus,
 button.bg-secondary:hover,
@@ -7016,10 +7016,10 @@ a.text-dark:hover, a.text-dark:focus {
 		border-color: #DFD7CA; } }
 
 .bg-primary {
-	background-color: #0D3B66 !important; }
+	background-color: #283666 !important; }
 
 .bg-dark {
-	background-color: #d9534f !important; }
+	background-color: #283666 !important; }
 
 .bg-light {
 	background-color: #F8F5F0 !important; }

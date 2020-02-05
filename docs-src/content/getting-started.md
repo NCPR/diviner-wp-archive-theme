@@ -40,7 +40,7 @@ If you are embedding Oembed video files, you will need transcoding service such 
 
 Although not required, we also recommend that **DIVINER** be used in tandem with ElasticPress and an Elasticsearch server account, such as Searchly. Elasticsearch will cache search returns in the browse page and improve performance in the real-time multifacet search. 
 
-Other plugins may be used with this theme. We recommend a social media plugin to add social media buttons to each article in either the Sidebar or After Single Title widget area. If your managed hosting service does not already provide daily updates, we recommend a plugin to manage scheduled backups.
+Other plugins may be used with **DIVINER**. We recommend a social media plugin to add social media buttons to each article in either the Sidebar or After Single Title widget area. If your managed hosting service does not already provide daily updates, we recommend a plugin to manage scheduled backups.
 
 \
 \
@@ -50,9 +50,10 @@ Other plugins may be used with this theme. We recommend a social media plugin to
 
 1. Install Wordpress by follow the installation instructions of your managed hosting service. Refer to the Wordpress documentation directly for further information: [https://wordpress.org/support/article/how-to-install-wordpress/](https://wordpress.org/support/article/how-to-install-wordpress/)
 2. Set up an admin account for managing your site
-3. Login as your new admin user. Navigate to the Appearance/Themes section and install **DIVINER** Archive Theme. This may be done either directly in the interface via the theme Wordpress theme marketplace (once the theme is available) or as a direct download. Please contact us directly if you do not already have a ZIP of the theme.
-4. Activate the theme and verify that you now see the **DIVINER** and Archive Items menus in the admin interface. 
-5. Activate additional optional plugins
+3. Login as your new admin user. Navigate to the Appearance/Themes section and install **DIVINER** Archive Plugin. 
+4. Activate the plugin and verify that you now see the **DIVINER** and Archive Items menus in the admin interface. You may not start adding fields to your archive items and set up a browse page using the `diviner_browse_page` shortcode.
+5. Optionally you also also decide to install the **DIVINER** Archive Theme. 
+6. Activate additional optional plugins
     1. ElasticPress
         1. Install plugin and activate it
         2. Set up an Elasticsearch service such as searchly

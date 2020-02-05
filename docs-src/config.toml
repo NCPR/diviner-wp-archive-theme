@@ -4,8 +4,6 @@ title = "Diviner"
 publishDir = "../"
 theme = "hugo-bootstrap"
 
-copyright = "NCPR Copyright 2018"
-
 
 [menu]
 
@@ -29,13 +27,6 @@ copyright = "NCPR Copyright 2018"
       pre = "<i class='fa fa-road'></i>"
       url = "documentation"
       weight = -80
-
-  [[menu.main]]
-      identifier = "question-answer"
-      name = "Question & Answer"
-      pre = "<i class='fa fa-road'></i>"
-      url = "question-answer"
-      weight = -70
 
   [[menu.main]]
       identifier = "contact"
