@@ -6,7 +6,7 @@ draft: false
 
 
 
-**DIVINER** is a free and open-source Wordpress theme for small to mid-size institutions with public archiving needs. 
+**DIVINER** is a free and open-source Wordpress plugin for small to mid-size institutions with public archiving needs. 
 
 **DIVINER** 1.0 is a digital platform built for archiving, organizing, and presenting large amounts of photographs, audio, video, and documents - or all four! It’s main selling point is an audience-friendly public interface that encourages personal interaction and engagement. **DIVINER** might be right for _your _organization if you have a collection of humanities materials you would like to share with the public (for example, a collection of 3,000 photographs of a large farm in the early 1900s; or thousands of audio clips and interviews related to immigration in Wisconsin). 
 
@@ -28,7 +28,7 @@ The team applied for an NEH Digital Advancement for the Humanities grant to whit
 
 This is **DIVINER** 1.0. 
 
-We plan to have future releases, and are currently working with organizations, big AND small, from around the United States to populate their own installations of **DIVINER**. Check back soon for examples of how people are using **DIVINER** for their own projects - from historical photo archives to special projects on immigration in the US! 
+We plan to have future releases, and are currently working with organizations, big AND small, from around the United States to populate their own installations of **DIVINER**. 
 
 \
 \
