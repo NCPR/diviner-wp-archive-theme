@@ -6,8 +6,7 @@ draft: false
 
 Ask yourself these questions - if you answer yes to 3 or more of them, DIVINER might be what you’re looking for!
 
-\
-\
+&nbsp;
 
 ### Materials
 
@@ -17,8 +16,7 @@ Ask yourself these questions - if you answer yes to 3 or more of them, DIVINER m
 
 - Can you think of ways to search through your data? 
 
-\
-\
+&nbsp;
 
 ### Tech Needs
 
@@ -26,8 +24,7 @@ Ask yourself these questions - if you answer yes to 3 or more of them, DIVINER m
 
 - Does that person have experience with WordPress. If not, are they willing to learn? Though we outline in detail the steps required to install and configure **DIVINER**, it is not a turn-key solution, and _because_ it is customizable, requires very thoughtful set-up. 
 
-\
-\
+&nbsp;
 
 ### Potential Use Cases
 
@@ -45,8 +42,7 @@ Here are a couple of example **DIVINER** projects:
 *   Repository for federal court cases concerning the topic of imprisoning minors
 *   Audio archive of short nature sounds, to be used by a nature center when they are creating new displays 
 
-\
-\
+&nbsp;
 
 ### Technology Ecosystem
 
@@ -58,8 +54,7 @@ Currently **Diviner** is comprised of two active projects, a Wordpress plugin an
 
 The plugin includes all the functionality necessary for building out an archive with multifacet search. The plugin created a archive item custom post type and adds an administrative tool to the Wordpress backend for managing your fields. It also allows you to drop in a shortcde (`[diviner_browse_page]`) for outputting the real time browse experience. This plugin may be used with any theme.
 
-\
-\
+&nbsp;
 
 **Wordpress Diviner Archive Theme**
 
@@ -67,14 +62,15 @@ The plugin includes all the functionality necessary for building out an archive 
 
 The responsive theme has several widget areas, two templates, and customizations options for fonts and colors. It works well with the diviner archive plugin or on its own. 
 
-\
-\
+&nbsp;
+
+**Standalone Combined Theme**
+
 Prior to the release of these two active projects available on wordpress.org, a standalone theme was developed to include all the functionality of the above plugin. With features like pre-poluating of browse and home pages, custom blocks, and a widget for displaying select archive items, this theme was a turnkey solution for anyone looking to start an archive project. This standalone theme only exists as tagged releases from github and may not be updated much in the future. 
 
 [https://github.com/NCPR/diviner-wp-archive-theme/releases/tag/1.0.2](https://github.com/NCPR/diviner-wp-archive-theme/releases/tag/1.0.2)
 
-\
-\
+&nbsp;
 
 ### In the Wild
 

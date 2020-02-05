@@ -29,11 +29,7 @@ Please feel free to log any issue reports in github.</description>
       
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/documentation/</guid>
       <description>The following instructions provide a how-to in setting up your new archiving site with the DIVINER plugin and (optional) theme. Before proceeding, please make sure DIVINER is a good fit for your project (See: IS DIVINER RIGHT FOR YOU?) and that you&amp;rsquo;ve already installed the plug-in or theme (SEE: GETTING STARTED). What you&amp;rsquo;ll find below is a step-by-step guide to getting set up.
-
-\
-Diviner Lexicon 
-\
- Kitchen Sink: the rendering of all gutenberg elements, called blocks, in the main content area of pages and posts.</description>
+ Diviner Lexicon   Kitchen Sink: the rendering of all gutenberg elements, called blocks, in the main content area of pages and posts.</description>
     </item>
     
     <item>
@@ -53,11 +49,10 @@ Diviner Lexicon
       
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/is-diviner-for-you/</guid>
       <description>Ask yourself these questions - if you answer yes to 3 or more of them, DIVINER might be what you’re looking for!
-
-\
-Materials   Do you have a project with more the 100 individual pieces of media (photo, video, audio)?
+ Materials   Do you have a project with more the 100 individual pieces of media (photo, video, audio)?
   Do you want to share these pieces as an archive with the public?
-  Can you think of ways to search through your data?</description>
+  Can you think of ways to search through your data?
+   Tech Needs   Can you (or someone in your organization or company) devote considerable time to customizing an archive and uploading your media?</description>
     </item>
     
   </channel>

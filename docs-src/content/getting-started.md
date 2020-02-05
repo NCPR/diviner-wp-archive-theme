@@ -12,8 +12,7 @@ We recommend potential users define their project as much as they can before the
 2. CONTENT. What is going IN your **DIVINER** archive? Decide now what you want to put into the archive, because you will design your search mechanisms by which you want to sort through your materials before you upload your materials, not after. 
 3. SEARCHABILITY Think about your materials and how you want your audience to be able to search them. For example, if you have 1000 dog portraits, you may want to filter them by _breed, age of the dog, date taken, size of the dog_, etcetera. Perhaps you have 5,000 audio clips of folk songs. You may want to search by _date recorded, by subject, by singer/group, and by the location from which they originated_. We suggest choosing between five and ten criteria you’d like to be able to search by, though you can certainly do less or more than that! Write them down. Each of these will become a field you have to fill out for each archive item as you enter it. 
 
-\
-\
+&nbsp;
 
 ## Hosting Recommendations
 
@@ -33,8 +32,7 @@ Some of these requirements depend on the needs of your individual project such a
 
 If you are embedding Oembed video files, you will need transcoding service such as Vimeo for stocking those media files. For audio files, **DIVINER** supports either direct uploads to the Wordpres media library or OEmbed from services such as SoundCloud.
 
-\
-\
+&nbsp;
 
 ## Additional Plugins
 
@@ -42,8 +40,7 @@ Although not required, we also recommend that **DIVINER** be used in tandem with
 
 Other plugins may be used with **DIVINER**. We recommend a social media plugin to add social media buttons to each article in either the Sidebar or After Single Title widget area. If your managed hosting service does not already provide daily updates, we recommend a plugin to manage scheduled backups.
 
-\
-\
+&nbsp;
 
 ## Installation
 

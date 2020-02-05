@@ -10,8 +10,7 @@ draft: false
 
 **DIVINER** 1.0 is a digital platform built for archiving, organizing, and presenting large amounts of photographs, audio, video, and documents - or all four! It’s main selling point is an audience-friendly public interface that encourages personal interaction and engagement. **DIVINER** might be right for _your _organization if you have a collection of humanities materials you would like to share with the public (for example, a collection of 3,000 photographs of a large farm in the early 1900s; or thousands of audio clips and interviews related to immigration in Wisconsin). 
 
-\
-\
+&nbsp;
 
 ## About the Creators
 
@@ -21,8 +20,7 @@ After conceiving a people-powered photo history project (North Country at Work, 
 
 The team applied for an NEH Digital Advancement for the Humanities grant to white-label the platform and make it available to other non-profit organizations (like museums, historical associations, and public media organizations). Our first version of the platform, DIVINER 1.0, became available on May 1, 2019. 
 
-\
-\
+&nbsp;
 
 ## Future of the project
 
@@ -30,8 +28,8 @@ This is **DIVINER** 1.0.
 
 We plan to have future releases, and are currently working with organizations, big AND small, from around the United States to populate their own installations of **DIVINER**. 
 
-\
-\
+&nbsp;
+
 
 ## What DIVINER does
 
