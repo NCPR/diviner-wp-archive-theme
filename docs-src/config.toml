@@ -4,7 +4,6 @@ title = "Diviner"
 publishDir = "../"
 theme = "hugo-bootstrap"
 
-
 [menu]
 
   [[menu.main]]
