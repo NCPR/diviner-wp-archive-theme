@@ -1,7 +1,12 @@
+{{ $logo := "img/logo.png" }}
+{{if not .IsHome}}
+{{ $logo = "../img/logo.png" }}
+{{end}}
+
 <header class="blog-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ .Site.BaseURL | relLangURL }}">
-            <img class="navbar-brand__logo" src="../img/logo.png" />
+            <img class="navbar-brand__logo" src="{{ $logo }}" />
             {{ partial "brand" . }}
         </a>
 

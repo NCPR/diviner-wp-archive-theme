@@ -1,8 +1,9 @@
 baseURL = "https://ncpr.github.io/diviner-wp-archive-theme/"
 languageCode = "en-us"
 title = "Diviner"
-publishDir = "../public/"
+publishDir = "../"
 theme = "hugo-bootstrap"
+basePath = "/diviner-wp-archive-theme/"
 
 [menu]
 

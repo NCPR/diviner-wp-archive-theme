@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>What is DIVINER? on Diviner</title>
@@ -30,7 +30,9 @@ Please feel free to log any issue reports in github.</description>
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/documentation/</guid>
       <description>The following instructions provide a how-to in setting up your new archiving site with the DIVINER plugin and (optional) theme. Before proceeding, please make sure DIVINER is a good fit for your project (See: IS DIVINER RIGHT FOR YOU?) and that you&amp;rsquo;ve already installed the plug-in or theme (SEE: GETTING STARTED). What you&amp;rsquo;ll find below is a step-by-step guide to getting set up.
 
+\
 Diviner Lexicon 
+\
  Kitchen Sink: the rendering of all gutenberg elements, called blocks, in the main content area of pages and posts.</description>
     </item>
     
@@ -52,9 +54,10 @@ Diviner Lexicon
       <guid>https://ncpr.github.io/diviner-wp-archive-theme/is-diviner-for-you/</guid>
       <description>Ask yourself these questions - if you answer yes to 3 or more of them, DIVINER might be what you’re looking for!
 
-Materials  Do you have a project with more the 100 individual pieces of media (photo, video, audio)?
- Do you want to share these pieces as an archive with the public?
- Can you think of ways to search through your data?</description>
+\
+Materials   Do you have a project with more the 100 individual pieces of media (photo, video, audio)?
+  Do you want to share these pieces as an archive with the public?
+  Can you think of ways to search through your data?</description>
     </item>
     
   </channel>
